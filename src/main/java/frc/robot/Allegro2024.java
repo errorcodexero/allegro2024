@@ -9,6 +9,8 @@ import org.xero1425.base.controllers.AutoController;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MissingParameterException;
 
+import frc.robot.automodes.AllegroRobotAutoController;
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -27,6 +29,14 @@ public class Allegro2024 extends XeroRobot {
 
   @Override
   protected AutoController createAutoController() throws MissingParameterException, BadParameterTypeException {
-    throw new UnsupportedOperationException("Unimplemented method 'createAutoController'");
+    AutoController ctrl;
+    
+    try {
+      ctrl = new AllegroRobotAutoController(this);
+    } catch (Exception ex) {
+      ctrl = null;
+    }
+
+    return ctrl;
   }
 }
