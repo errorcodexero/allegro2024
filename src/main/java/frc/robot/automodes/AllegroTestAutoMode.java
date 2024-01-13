@@ -8,7 +8,6 @@ import org.xero1425.base.subsystems.swerve.common.SwervePowerAngleAction;
 import org.xero1425.base.subsystems.swerve.common.SwerveSpeedAngleAction;
 import org.xero1425.base.subsystems.swerve.sdsswerve.SDSSwerveDriveSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
-import org.xero1425.misc.BadParameterTypeException;
 
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 

@@ -3,7 +3,6 @@ package org.xero1425.simulator.engine;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.wpi.first.hal.simulation.DriverStationDataJNI;
 import edu.wpi.first.hal.simulation.SimulatorJNI;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.simulation.DriverStationSim;
@@ -15,10 +14,8 @@ import org.xero1425.misc.MessageType;
 public class SimulationEngine {
     public static final String LoggerName = "simulator" ;
     public static final String NetworkTableName = "XeroSim" ;
-    
     private static SimulationEngine the_one_ = null ;
-    
-    private DriverStationDataJNI dssim_ = null ;
+
     private MessageLogger logger_ ;
     private XeroRobot robot_ ;
     private int logger_id_ ;
@@ -128,10 +125,6 @@ public class SimulationEngine {
         }
     }
 
-    public DriverStationDataJNI getDriverStation() {
-        return dssim_ ;
-    }
-
     public void addModel(SimulationModel model) {
         if (model.hasProperty("create_early")) {
             logger_.startMessage(MessageType.Debug, logger_id_) ;
@@ -228,10 +221,6 @@ public class SimulationEngine {
     }
     
     public void initAll(String simfile) {
-        if (dssim_ == null)
-            dssim_ = new DriverStationDataJNI() ;
-
-
         readModelFile("src/sim/robot.json") ;
         readEventsFile("src/sim/sims/" + simfile + ".json") ;
     }
