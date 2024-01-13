@@ -3,6 +3,11 @@ plugins {
     id "edu.wpi.first.GradleRIO" version "2024.1.1"
 }
 
+// Disable deprecation warnings
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-Xlint:-deprecation'
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
