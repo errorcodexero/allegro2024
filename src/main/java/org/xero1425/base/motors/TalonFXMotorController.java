@@ -1,6 +1,16 @@
 package org.xero1425.base.motors;
 
-import com.ctre.phoenix.ErrorCode;
+import com.ctre.phoenix6.StatusCode;
+import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.ControlRequest;
+import com.ctre.phoenix6.controls.Follower;
+import com.ctre.phoenix6.controls.MotionMagicVoltage;
+import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.controls.VelocityVoltage;
+import com.ctre.phoenix6.controls.VoltageOut;
+import com.ctre.phoenix6.hardware.TalonFX;
+import com.revrobotics.CANSparkMax;
 
 /// \file
 /// This file contains the implementation of the CTREMotorController class.  This class
@@ -8,368 +18,250 @@ import com.ctre.phoenix.ErrorCode;
 /// the TalonSRX, and the VictorSPX.
 ///
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.InvertType;
-import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
-import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
-import edu.wpi.first.hal.SimBoolean;
-import edu.wpi.first.hal.SimDevice;
-import edu.wpi.first.hal.SimDouble;
-import edu.wpi.first.wpilibj.RobotBase;
 
 /// \brief This class is MotorController class that supports the TalonFX motors.   This class is a
 /// wrapper for the TalonFX class that provides the interface that meets the requirements of the
 /// MotorController base class.
 public class TalonFXMotorController extends MotorController
 {
-    private final static double TicksPerRevolutionValue = 2048.0 ;
+    private final static int kTicksPerRevolution = 2048 ;
+    private final static String kRobotType = "TalonFX" ;
 
-    private TalonFX controller_ ;                       // The base motor controller object
-    private boolean inverted_ ;                         // If true, the motor is inverted
-    private PidType type_ ;                             // For a PID in the controller, the type of PID (position vs velocity)
+    private TalonFX ctrl_ ;
+    private TalonFXConfiguration cfg_ ;
+    private double current_limit_ ;
+    private double deadband_ ;
+    private NeutralMode neutral_mode_ ;
+    private boolean inverted_ ;
+    private IMotorController leader_ ;
+    private String bus_ ;
 
-    private SimDevice sim_ ;                            // The simulated device during simulation
-    private SimDouble sim_power_ ;                      // The power during a simulation, picked up by the models
-    private SimDouble sim_encoder_ ;                    // The encoder value during a simulation, set by the models
-    private SimBoolean sim_motor_inverted_ ;            // If true, the simulated motor is inverted
-    private SimBoolean sim_neutral_mode_ ;              // THe neutral mode for the simulated motor
-
-    /// \brief the name of the device when simulating
-    public final static String SimDeviceName = "CTREMotorController" ;
-
-    /// \brief the timeout for requests to the
-    private final int ControllerTimeout = 250 ;
-
-    /// \brief Create a new TalonFX Motor Controller.
-    /// \param name the name of this motor
-    /// \param index the CAN address of this motor controller
     public TalonFXMotorController(String name, String bus, int canid, boolean leader) throws MotorRequestFailedException {
         super(name) ;
 
-        inverted_ = false ;
-        type_ = PidType.None ;
+        bus_ = bus ;
+        ctrl_ = new TalonFX(canid, bus_);
+        cfg_ = new TalonFXConfiguration() ;
 
-        if (RobotBase.isSimulation()) {
-            String simname = SimDeviceName ;
-            if (bus.length() > 0) {
-                simname += "-" + bus ;
-            }
-            sim_ = SimDevice.create(simname, canid) ;
+        checkError("TalonFXMotorController - apply configuration", ctrl_.getConfigurator().apply(cfg_));
+        checkError("TalonFXMotorController - optimize bus", ctrl_.optimizeBusUtilization()) ;
+    }
 
-            //
-            // Create a simulated motor that can be accessed by simulation models
-            //
-            sim_power_ = sim_.createDouble(MotorController.SimPowerParamName, SimDevice.Direction.kBidir, 0.0) ;
-            sim_encoder_ = sim_.createDouble(MotorController.SimEncoderParamName, SimDevice.Direction.kBidir, 0.0) ;
-            sim_motor_inverted_ = sim_.createBoolean(MotorController.SimInvertedParamName, SimDevice.Direction.kBidir, false) ;
-            sim_neutral_mode_ = sim_.createBoolean(MotorController.SimNeutralParamName, SimDevice.Direction.kBidir, false) ;
-            sim_.createBoolean(MotorController.SimEncoderStoresTicksParamName, SimDevice.Direction.kBidir, true) ;
-        }
-        else {
-            sim_ = null ;
-            sim_power_ = null ;
-            sim_encoder_ = null ;
-
-            controller_ = new TalonFX(canid, bus) ;
-            controller_.configFactoryDefault() ;
-            
-            controller_.configVoltageCompSaturation(11.0, ControllerTimeout) ;
-            controller_.enableVoltageCompensation(true);
-
-            //
-            // Status frame 1 is default 10ms.  It reports motor output voltage, fault information,
-            // and limit switch information.  This can be slowed way down
-            //
-            if (leader) {
-                controller_.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20, ControllerTimeout) ;
-            }
-            else {
-                controller_.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 255, ControllerTimeout) ;
-            }
-
-            controller_.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20, ControllerTimeout) ;
+    private void checkError(String msg, StatusCode err) throws MotorRequestFailedException {
+        if (err != StatusCode.OK) {
+            throw new MotorRequestFailedException(this, msg, err) ;            
         }
     }
 
-    public void setNeutralDeadband(double value) {
-        if (controller_ != null) {
-            controller_.configNeutralDeadband(value) ;
+    /// \brief Returns the CAN ID of the motor
+    /// \returns the CAN ID of the motor    
+    public int getCanID() throws BadMotorRequestException, MotorRequestFailedException {
+        return ctrl_.getDeviceID() ;
+    }
+
+    /// \brief Returns the name of the CAN bus.  An empty string means roborio
+    /// \return the name of the CAN bus.  An empty string means roborio    
+    public String getBus() throws BadMotorRequestException, MotorRequestFailedException {
+        return bus_ ;
+    }        
+
+    /// \brief Have the current motor follow another motor.
+    /// \param leader if true, the leader is inverted versus normal operation
+    /// \param invert if true, follow the other motor but with the power inverted.    
+    public void follow(IMotorController ctrl, boolean leader, boolean invert) throws BadMotorRequestException, MotorRequestFailedException {
+        if (!TalonFX.class.isInstance(ctrl.getNativeController())) {
+            throw new BadMotorRequestException(this, "cannot follow a motor that is of another type") ;
         }
-    }
+        
+        TalonFX other = (TalonFX)ctrl.getNativeController() ;
+        boolean i = (invert != leader) ;
+        checkError("could not follow another robot", ctrl_.setControl(new Follower(other.getDeviceID(), i))) ;
+    }    
 
-    /// \brief Return the current input voltage to the motor controller
-    /// \returns the current input voltage to the motor controller
-    public double getInputVoltage() throws BadMotorRequestException {
-        return controller_.getBusVoltage() ;
-    }
-
-    /// \brief Return the motor voltage applied to the motor
-    /// \returns the motor voltage applied to the motor
-    public double getAppliedVoltage() throws BadMotorRequestException {
-        return controller_.getMotorOutputVoltage() ;
-    }
-
-    /// \brief Returns true if the motor controller supports PID loops on the controller
-    /// \returns true if the motor controller supports PID loops on the controller
-    public boolean hasPID(PidType type) throws BadMotorRequestException {
+    /// \brief Returns true if the motor encoder has an embedded encoder that can return position
+    /// \returns true if the motor encoder has an embedded encoder that can return position    
+    public boolean hasEncoder() throws BadMotorRequestException, MotorRequestFailedException {
         return true ;
     }
 
-    /// \brief Set the target if running a PID loop on the motor controller
-    /// \param target the target for the PID loop on the motor controller
-    public void setTarget(double target) throws BadMotorRequestException {
-        if (type_ == PidType.None)
-            throw new BadMotorRequestException(this, "calling setTarget() before calling setPID()");
-
-        if (type_ == PidType.Velocity)
-            controller_.set(TalonFXControlMode.Velocity, target) ;
-        else if (type_ == PidType.Position)
-            controller_.set(TalonFXControlMode.Position, target) ;
+    /// \Brief Return the native motor controller for this controller.
+    /// \returns the native motor controller for the motor    
+    public Object getNativeController() {
+        return ctrl_ ;
     }
 
-    /// \brief Set the PID parameters for a PID loop running on the motor controller
-    /// NOTE: The values are relative to ticks per 100ms and then multiplied by 1023
-    /// \param type the type of pid loop (velocity or position)
-    /// \param p the proportional parameter for the PID controller
-    /// \param i the integral parameter for the PID controller
-    /// \param d the derivative parameter for the PID controller
-    /// \param f the feed forward parameter for the PID controller
-    /// \param outmax the maximum output parameter for the PID controller
-    public void setPID(PidType type, double p, double i, double d, double f, double outmax) throws BadMotorRequestException, MotorRequestFailedException {
+    /// \brief Return a human readable string giving the physical motor controller type (e.g. TalonFX, SparkMaxBrushless, etc.)
+    /// \returns a human readable string giving the physical motor controller type
+    public String getType() throws BadMotorRequestException, MotorRequestFailedException {
+        return kRobotType ;
+    }    
 
-        if (sim_ != null) {
-            throw new BadMotorRequestException(this, "cannot use controller PID loops when simulating") ;
-        }
-        else {
-            ErrorCode code ;
+    /// \brief Return the firmware version of the motor controller
+    /// \returns the firmware version of the motor controller        
+    public String getFirmwareVersion() throws BadMotorRequestException, MotorRequestFailedException {
+        int v = ctrl_.
+        return String.valueOf((v >> 8) & 0xff) + "." + String.valueOf(v & 0xff) ;        
+    }    
 
-            code = controller_.config_kP(0, p, ControllerTimeout) ;
-            if (code != ErrorCode.OK)
-                throw new MotorRequestFailedException(this, "CTRE config_kP() call failed during setPID() call. Code: " + code.toString(), code) ;
+    /// \brief Return the number of encoder ticks per revolution for this motor.  If this motor does not
+    /// have an encoder, a BadMotorEquestException is thrown.
+    /// \returns the number of encoder ticks per revolution for this motor.
+    public int ticksPerRevolution() throws BadMotorRequestException, MotorRequestFailedException {
+        return kTicksPerRevolution ;
+    }    
 
-            code = controller_.config_kI(0, i, ControllerTimeout) ;
-            if (code != ErrorCode.OK)
-                throw new MotorRequestFailedException(this, "CTRE config_kI() call failed during setPID() call. Code: " + code.toString(), code) ;
-
-            code = controller_.config_kD(0, d, ControllerTimeout) ;
-            if (code != ErrorCode.OK)
-                throw new MotorRequestFailedException(this, "CTRE config_kD() call failed during setPID() call. Code: " + code.toString(), code) ;
-
-            code = controller_.config_kF(0, f, ControllerTimeout) ;
-            if (code != ErrorCode.OK)
-                throw new MotorRequestFailedException(this, "CTRE config_kF() call failed during setPID() call. Code: " + code.toString(), code) ;
-
-            code = controller_.configClosedLoopPeakOutput(0, outmax, ControllerTimeout) ;
-            if (code != ErrorCode.OK)
-                throw new MotorRequestFailedException(this, "CTRE configClosedLoopPeakOutput() call failed during setPID() call. Code: " + code.toString(), code) ;
-
-            type_ = type ;
-        }
+    /// \brief Set the current limit for the current supplied to the motor
+    /// \param limit the amount of current, in amps,  to the value given
+    public void setCurrentLimit(double limit) throws BadMotorRequestException, MotorRequestFailedException {
+        current_limit_ = limit ;
     }
 
-    /// \brief Stop the PID loop in the motor controller
-    public void stopPID() throws BadMotorRequestException {
-        controller_.set(ControlMode.PercentOutput, 0.0) ;
+    /// \brief Returns the current limit for the current supplied to the motor
+    /// \returns the current limit for the current supplied to the motor
+    public double getCurrentLimit() throws BadMotorRequestException, MotorRequestFailedException {
+        return current_limit_ ;
     }
 
-    /// \brief Set the motor power
-    /// \param percent the motor power to assign to the motor
-    public void set(double percent) {
-        if (sim_ != null) {
-            sim_power_.set(percent) ;
-        }
-        else {
-            controller_.set(ControlMode.PercentOutput, percent) ;
-        }
+    /// \brief set the deadband for the motor.  If any power value is assigned to the motor that is less
+    /// than this value, zero is assumed.
+    /// \param value the deadband value for this motor
+    public void setNeutralDeadband(double value) throws BadMotorRequestException, MotorRequestFailedException {
+        deadband_ = value ;
+    } 
+
+    /// \brief Get the deadband value for the motor
+    /// \returns the deadband value for the motor
+    public double getNeutralDeadband() throws BadMotorRequestException, MotorRequestFailedException {
+        return deadband_ ;
     }
 
-    /// \brief Set the motor to invert the direction of motion
+    /// \brief Set the neutral mode for the motor
+    /// \param mode the neutral mode for the motor
+    public void setNeutralMode(NeutralMode mode) throws BadMotorRequestException, MotorRequestFailedException {
+        neutral_mode_ = mode ;
+    }
+    
+    /// \brief Get the neutral mode for the motor
+    /// \returns the neutral mode for the motor
+    public NeutralMode getNeutralMode() throws BadMotorRequestException, MotorRequestFailedException {
+        return neutral_mode_ ;
+    }
+
+    /// \brief Set the motor to invert the direction of motion 
     /// \param inverted if true invert the direction of motion, otherwise do not
-    public void setInverted(boolean inverted) {
-        if (sim_ != null) {
-            sim_motor_inverted_.set(true) ;
-        }
-        else {
-            controller_.setInverted(inverted);
-        }
+    public void setInverted(boolean inverted) throws BadMotorRequestException , MotorRequestFailedException {
         inverted_ = inverted ;
+        ctrl_.setInverted(inverted_);
     }
 
     /// \brief Returns true if the motor is inverted
     /// \returns true if the motor is inverted
-    public boolean isInverted() {
+    public boolean isInverted()  throws BadMotorRequestException , MotorRequestFailedException {
         return inverted_ ;
     }
 
-    /// \brief Reapplies the inverted status of the motor.  When setInverted() is called, the inverted state of the motor
-    /// is stored and this method reapplies that stored state to the motor controller.  This was put into place because some
-    /// motors setup to follow other motors lost their inverted state when the robot was disabled and re-enabled.
-    // public void reapplyInverted() {
-    //     if (sim_ != null) {
-    //         sim_motor_inverted_.set(inverted_) ;
-    //     }
-    //     else {
-    //         controller_.setInverted(inverted_);
-    //     }
-    // }
-
-    /// \brief Set the neutral mode for the motor
-    /// \param mode the neutral mode for the motor
-    public void setNeutralMode(NeutralMode mode) throws BadMotorRequestException {
-        if (sim_ != null) {
-            switch(mode)
-            {
-                case Coast:
-                    sim_neutral_mode_.set(false) ;
-                    break ;
-
-                case Brake:
-                    sim_neutral_mode_.set(true) ;
-                break ;
-            }
-        }
-        else {
-            switch(mode)
-            {
-                case Coast:
-                    controller_.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Coast);
-                    break ;
-
-                case Brake:
-                    controller_.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Brake);
-                break ;
-            }
-        }
+    /// \brief Return the leader for the current motor.  If the current motor is not following, return null.
+    /// \returns the leader for the current motor.
+    public IMotorController getLeader() {
+        return leader_ ;
     }
 
-    /// \brief Set the current motor to follow another motor.  Note the motors must be compatible with each other for following.
-    /// \param ctrl the other motor to follow
-    /// \param leader if true, the leader if inverted
-    /// \param invert if true, follow the other motor but with the power inverted.
-    /// \throws MotorRequestFailedException if the motors are not compatible for following.
-    public void follow(MotorController ctrl, boolean leader, boolean invert) throws BadMotorRequestException {
-        if (sim_ == null) {
-            // if (invert)
-                // throw new BadMotorRequestException(this, "cannot follow another controller inverted") ;
-
-            try {
-                TalonFXMotorController other = (TalonFXMotorController)ctrl ;
-                controller_.follow(other.controller_) ;
-
-                if (leader != invert)
-                    controller_.setInverted(InvertType.OpposeMaster) ;
-                else
-                    controller_.setInverted(InvertType.FollowMaster);
-            }
-            catch(ClassCastException ex)
-            {
-                throw new BadMotorRequestException(this, "cannot follow a motor that is of another type") ;
-            }
-        }
-    }
-
-    /// \brief Return a human readable string giving the physical motor controller type
-    /// \returns a human readable string giving the physical motor controller type
-    public String getType() {
-        return "TalonFX" ;
-    }
-
-    /// \brief Returns true if the motor encoder has an embedded encoder that can return position
-    /// \returns true if the motor encoder has an embedded encoder that can return position
-    public boolean hasPosition() {
+    /// \brief Returns true if the motor controller supports PID loops on the controller
+    /// \returns true if the motor controller supports PID loops on the controller
+    public boolean hasPID(PidType type) throws BadMotorRequestException , MotorRequestFailedException {
         return true ;
+    }    
+
+    /// \brief Set the PID parameters for a PID loop running on the motor controller
+    /// \param type the type of pid loop (velocity or position)
+    /// \param p the proportional parameter for the PID controller
+    /// \param i the integral parameter for the PID controller
+    /// \param d the derivative parameter for the PID controller
+    /// \param v the velocity feed forward parameter for the PID controller
+    /// \param a the acceleration feed forward parameter for the PID controller
+    /// \param g the gravity feed forward parameter for the PID controller
+    /// \param s the static friction feed forward parameter for the PID controller
+    /// \param outmax the maximum output parameter for the PID controller 
+    public void setPID(PidType type, double p, double i, double d, double v, double a, double g, double s, double outmax) throws BadMotorRequestException , MotorRequestFailedException {
+        Slot0Configs cfg = cfg_.Slot0 ;
+
+        cfg.kP = p ;
+        cfg.kI = i ;
+        cfg.kD = d ;
+        cfg.kV = v ;
+        cfg.kA = a ;
+        cfg.kG = g ;
+        cfg.kS = s ;
+
+        checkError("setPID()", ctrl_.getConfigurator().apply(cfg));
+    }
+
+    /// \brief Set the motor target.  What the target is depends on the mode.
+    /// \param type the type of target to set (position PID, velocity PID, MotionMagic, or percent power)
+    /// \param target the target value, depends on the type    
+    public void set(PidType type, double target) throws BadMotorRequestException, MotorRequestFailedException {
+        ControlRequest req = null ;
+        switch(type) {
+            case None:
+                req = new VoltageOut(target) ;
+                break ;
+            case Position:
+                req = new PositionVoltage(0).withPosition(target / kTicksPerRevolution) ;
+                break ;
+            case Velocity:
+                req = new VelocityVoltage(0).withVelocity(target / kTicksPerRevolution) ;
+                break ;
+            case MotionMagic:
+                req = new MotionMagicVoltage(0).withPosition(target / kTicksPerRevolution) ;
+                break ;
+        }
+
+        checkError("set the target for the motor", ctrl_.setControl(req)) ;
+    }
+
+    /// \brief If value is true, the motor controller will consider position data as important and update
+    /// the data a quickly as possible.
+    public void setPositionImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
+        double freq = (value ? 100 : 1) ;
+        checkError("setPositionImportant error", ctrl_.getPosition().setUpdateFrequency(freq)) ;
     }
     
-    /// \brief Return the velocity of the motor from the PID loop running in the controller
-    /// \returns the velocity of the motor from the PID loop running in the controller
-    public double getVelocity() throws BadMotorRequestException, MotorRequestFailedException {
-        double ret = controller_.getSelectedSensorVelocity() * 10 ;
-        return ret ;
+    /// \brief If value is true, the motor controller will consider velocity data as important and update
+    /// the data a quickly as possible.
+    public void setVelocityImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
+        double freq = (value ? 100 : 1) ;
+        checkError("setPositionImportant error", ctrl_.getVelocity().setUpdateFrequency(freq)) ;
+    }
+    
+    /// \brief If value is true, the motor controller will consider acceleration data as important and update
+    /// the data a quickly as possible.
+    public void setAccelerationImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
+        double freq = (value ? 100 : 1) ;
+        checkError("setPositionImportant error", ctrl_.getAcceleration().setUpdateFrequency(freq)) ;
     }
 
-    /// \brief Returns the position of the motor in motor units.
-    /// \returns the position of the motor in motor units
-    public double getPosition() throws BadMotorRequestException {
-        double ret = 0 ;
-
-        if (sim_ != null) {
-            ret = (int)sim_encoder_.getValue().getDouble() ;
-        }
-        else {
-            TalonFX fx = (TalonFX)controller_ ;
-            ret = fx.getSelectedSensorPosition() ;
-        }
-
-        return ret ;
+    /// \brief Returns the position of the motor in motor units from the motor controller.  If the motor does not
+    /// have an attached encoder, an exception is thrown.
+    /// \returns the position of the motor in encoder ticks
+    public double getPosition() throws BadMotorRequestException, MotorRequestFailedException {
+        return ctrl_.getPosition().getValue() * kTicksPerRevolution ;
+    }
+    
+    /// \brief Return the velocity of the motor if there is PID control in the motor controller.   If the motor does not
+    /// have an attached encoder, an exception is thrown.
+    /// \returns the velocity of the motor in ticks per second
+    public double getVelocity()  throws BadMotorRequestException, MotorRequestFailedException {
+        return ctrl_.getVelocity().getValue() * kTicksPerRevolution ;
     }
 
-    /// \brief Returns the number of ticks per revolution for the motor if it has an embedded encoder
-    /// \returns the number of ticks per revolution for the motor if it has an embedded encoder
-    public double TicksPerRevolution() throws BadMotorRequestException {
-        return TicksPerRevolutionValue ;
+    /// \brief Return the acceleration of the motor if there is PID control in the motor controller.   If the motor does not
+    /// have an attached encoder, an exception is thrown.
+    /// \returns the acceleration of the motor in ticks per second squared
+    public double getAcceleration() throws BadMotorRequestException, MotorRequestFailedException {
+        return ctrl_.getAcceleration().getValue() * kTicksPerRevolution ;
     }
 
-    /// \brief Reset the encoder values to zero
+    /// \brief Reset the encoder values to zero    
     public void resetEncoder() throws BadMotorRequestException {
-        if (sim_ != null) {
-            sim_encoder_.set(0.0) ;
-        }
-        else {
-            TalonFX fx = (TalonFX)controller_ ;
-            fx.setSelectedSensorPosition(0) ;
-        }
-    }
-
-    /// \brief Set the current limit for the current supplied to the motor
-    /// \param limit the amount of current, in amps,  to the value given
-    public void setCurrentLimit(double limit, double free) throws BadMotorRequestException {
-        if (sim_ == null) {
-            TalonFX fx = (TalonFX)controller_ ;
-            SupplyCurrentLimitConfiguration cfg = new SupplyCurrentLimitConfiguration(true, limit, limit, 1) ;
-            fx.configSupplyCurrentLimit(cfg) ;
-        }
-    }
-
-    /// \brief Set the open loop ramp rate for the motor
-    /// \param limit the amount of time for the motor to ramp from no power to full power
-    public void setOpenLoopRampRate(double limit) throws BadMotorRequestException {
-        if (sim_ == null) {
-            TalonFX fx = (TalonFX)controller_ ;
-            fx.configOpenloopRamp(limit, 20) ;
-        }
-    }
-
-    /// \brief Return the firmware version of the motor controller
-    /// \returns the firmware version of the motor controller
-    public String getFirmwareVersion() throws BadMotorRequestException {
-        int v = controller_.getFirmwareVersion() ;
-
-        return String.valueOf((v >> 8) & 0xff) + "." + String.valueOf(v & 0xff) ;
-    }
-
-    /// \brief Set the encoder update frequency.  This configures the rate at which the motor controller
-    /// sends back the CAN status packets that contain encoder information form the motor controller to
-    /// the software running on the RoboRio.
-    /// \param freq the frequency to update the encoder values
-    public void setEncoderUpdateFrequncy(EncoderUpdateFrequency pos, EncoderUpdateFrequency vel) throws BadMotorRequestException {
-        int interval = 255 ;
-
-        if (pos == EncoderUpdateFrequency.Frequent || vel == EncoderUpdateFrequency.Frequent) {
-            interval = 5 ;
-        }
-        else if (pos == EncoderUpdateFrequency.Default || vel == EncoderUpdateFrequency.Default) {
-            interval = 20 ;
-        }
-
-        if (controller_ != null) {
-            controller_.setStatusFramePeriod(StatusFrameEnhanced.Status_21_FeedbackIntegrated, interval) ;
-        }
-    }
-
-    public TalonFX getTalonFX() throws BadMotorRequestException {
-        return controller_ ;
     }
 } ;
