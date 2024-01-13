@@ -7,13 +7,12 @@ package org.xero1425.base.gyro;
 import org.xero1425.misc.XeroMath;
 import edu.wpi.first.hal.SimDevice;
 import edu.wpi.first.hal.SimDevice.Direction;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.hal.SimDouble;
 
 /// \file
 
 /// \brief This class represents the ROMI Gyro on the Romi robot
-public class RomiGyro implements Gyro, XeroGyro {
+public class RomiGyro implements XeroGyro {
   private SimDouble m_simRateX;
   private SimDouble m_simRateY;
   private SimDouble m_simRateZ;
@@ -112,7 +111,6 @@ public class RomiGyro implements Gyro, XeroGyro {
   }
 
   /// \brief close the gyro connection
-  @Override
   public void close() throws Exception {
     if (m_gyroSimDevice != null) {
       m_gyroSimDevice.close();
@@ -121,7 +119,6 @@ public class RomiGyro implements Gyro, XeroGyro {
 
   /// \brief calibrate the gyro, does not do anything for the Romi.  Calbration is
   /// done via the Web Interface to the Romi robot.
-  @Override
   public void calibrate() {
     // no-op
   }
@@ -133,7 +130,6 @@ public class RomiGyro implements Gyro, XeroGyro {
   }
 
   /// \brief return the rate of change of the gyro Z axis
-  @Override
   public double getRate() {
     return getRateZ();
   }
