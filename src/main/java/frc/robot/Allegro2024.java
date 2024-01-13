@@ -24,7 +24,7 @@ public class Allegro2024 extends XeroRobot {
   }
 
   public String getName() {
-    return "swimmy2023";
+    return "allegro2024";
   }
 
   @Override
