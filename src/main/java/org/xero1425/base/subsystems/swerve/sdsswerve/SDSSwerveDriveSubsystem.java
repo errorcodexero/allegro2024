@@ -5,11 +5,11 @@ import org.xero1425.base.motors.MotorFactory;
 import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.swerve.common.SwerveBaseSubsystem;
+import org.xero1425.base.subsystems.swerve.common.SwerveModule;
 import org.xero1425.misc.ISettingsSupplier;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 import org.xero1425.misc.PIDCtrl;
-import org.xero1425.swervelib.SwerveModule;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;

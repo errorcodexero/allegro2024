@@ -1,4 +1,4 @@
-package org.xero1425.swervelib;
+package org.xero1425.base.subsystems.swerve.common;
 
 import org.xero1425.base.motors.MotorFactory;
 import org.xero1425.base.motors.MotorRequestFailedException;
@@ -23,14 +23,17 @@ public class SwerveModule {
     private CANcoderConfiguration absolute_cfg_ ;
 
     public SwerveModule(MotorFactory factory, ISettingsSupplier settings, String name, String id) throws Exception {
-        steer_ = factory.createMotor(name + "-steer", id + "-steer");
-        steer_ = factory.createMotor(name + "-drive", id + "-drive");
+        //
+        // Create the steering motor
+        //
+        steer_ = factory.createMotor(name + "-steer", id + ":motors:steer");
+        drive_ = factory.createMotor(name + "-drive", id + ":motors:drive");
 
-        int encoderId = settings.get(name + "-encoder:canid").getInteger() ;
+        int encoderId = settings.get(id + ":encoder:canid").getInteger() ;
+        double offset = settings.get(id + ":encoder:offset").getDouble() ;        
+
         absolute_encoder_ = new CANcoder(encoderId) ;
         absolute_cfg_ = new CANcoderConfiguration();
-
-        double offset = settings.get(name + "-encoder:offset").getDouble() ;
 
         absolute_cfg_.MagnetSensor.AbsoluteSensorRange = AbsoluteSensorRangeValue.Unsigned_0To1 ;
         absolute_cfg_.MagnetSensor.MagnetOffset = offset;
@@ -38,6 +41,7 @@ public class SwerveModule {
         checkError("SwerveModule constructor()", absolute_encoder_.getConfigurator().apply(absolute_cfg_));
 
         ticksToMeters_ = 1.0 ;
+        ticksToDegrees_ = 1.0 ;
     }
 
     private void checkError(String msg, StatusCode err) throws Exception {

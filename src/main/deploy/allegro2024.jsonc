@@ -1,0 +1,188 @@
+{
+    "system": {
+        "messages": {
+            // Robot framework settings
+            "actions": true,
+            "pathmanager": false,
+            "xerorobot": false,
+            "simulator": false,
+            "limelight-edgar" : false,
+            "oibuttons" : false,
+
+            // Special settings
+            "pathfollowing": false,
+
+            // Subsystem related messages
+            "vision": false,
+            "swerve" : true,
+            "limelight" : false,
+        },
+        "verbose": {
+            "swerve" : true
+        },
+        "plotting": {
+            "enabled" : true,
+            "version" : 3
+        },
+        "pneumatics": {
+            "type": "REVPH",
+            "min-pressure" : 100.0,
+            "max-pressure" : 120.0
+        },
+        "pdp" : {
+            "type" : "rev"
+        }
+    },
+    "subsystems": {
+        "swerve" : {
+            //
+            // This section defines the hardware used by the swerve drive
+            //
+            "hw" : {
+                "gyro" : {
+                    "type" : "navx",
+                    "start-time" : 3.0
+                },
+                "fl" : {
+                    "motors" : {
+                        "steer" : {
+                            "type": "talon-fx",
+                            "canid": 11,
+                            "bus" : "drivebase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "pdp-channel" : 4
+                        },
+                        "drive" : {
+                            "type": "talon-fx",
+                            "canid": 12,
+                            "bus" : "drivebase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "pdp-channel" : 4
+                        }
+                    },
+                    "encoder" : {
+                        "canid" : 13,
+                        "offset": {
+                            "PRACTICE" : 0,
+                            "COMPETITION" : 0
+                        }                        
+                    }
+                },
+                "fr" : {
+                    "motors" : {
+                        "steer" : {
+                            "type": "talon-fx",
+                            "canid": 21,
+                            "bus" : "drivebase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "pdp-channel" : 4
+                        },
+                        "drive" : {
+                            "type": "talon-fx",
+                            "canid": 22,
+                            "bus" : "drivebase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "pdp-channel" : 4
+                        }
+                    },
+                    "encoder" : {
+                        "canid" : 23,
+                        "offset": {
+                            "PRACTICE" : 0,
+                            "COMPETITION" : 0
+                        }                        
+                    }
+                },
+                "bl" : {
+                    "motors" : {
+                        "steer" : {
+                            "type": "talon-fx",
+                            "canid": 41,
+                            "bus" : "drivebase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "pdp-channel" : 4
+                        },
+                        "drive" : {
+                            "type": "talon-fx",
+                            "canid": 42,
+                            "bus" : "drivebase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "pdp-channel" : 4
+                        }
+                    },
+                    "encoder" : {
+                        "canid" : 43,
+                        "offset": {
+                            "PRACTICE" : 0,
+                            "COMPETITION" : 0
+                        }                        
+                    }
+                },
+                "br" : {
+                    "motors" : {
+                        "steer" : {
+                            "type": "talon-fx",
+                            "canid": 31,
+                            "bus" : "drivebase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "pdp-channel" : 4
+                        },
+                        "drive" : {
+                            "type": "talon-fx",
+                            "canid": 32,
+                            "bus" : "drivebase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "pdp-channel" : 4
+                        }
+                    },
+                    "encoder" : {
+                        "canid" : 33,
+                        "offset": {
+                            "PRACTICE" : 0,
+                            "COMPETITION" : 0
+                        }                        
+                    }
+                }                   
+            },
+
+            //
+            // This section descrdibes the physical characteristics of the robot
+            //
+            "physical": {
+                "width": 0.5715, // meters
+                "length": 0.5842, // meters
+                "path" : {
+                    "maxv" : 2.0,
+                    "maxa" : 2.0
+                },
+                "max-angular-speed": 100,
+                "max-angular-accel": 100
+            }          
+        },
+        "allegro2024oi" : {
+            "swerve_gamepad": {
+                "index": 0,
+                "angle": {
+                    "maximum": 180,
+                    "deadband": 0.05
+                },
+                "position": {
+                    "maximum": 4.5,
+                    "deadband": {
+                        "x": 0.1,
+                        "y": 0.1
+                    }
+                },
+                "power": 2.0
+            }            
+        }
+    }    
+}

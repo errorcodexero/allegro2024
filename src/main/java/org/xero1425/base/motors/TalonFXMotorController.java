@@ -35,9 +35,6 @@ public class TalonFXMotorController extends MotorController
 
     private TalonFX ctrl_ ;
     private TalonFXConfiguration cfg_ ;
-    private double current_limit_ ;
-    private double deadband_ ;
-    private NeutralMode neutral_mode_ ;
     private boolean inverted_ ;
     private IMotorController leader_ ;
     private String bus_ ;
@@ -51,6 +48,7 @@ public class TalonFXMotorController extends MotorController
 
         checkError("TalonFXMotorController - apply configuration", ctrl_.getConfigurator().apply(cfg_));
         checkError("TalonFXMotorController - optimize bus", ctrl_.optimizeBusUtilization()) ;
+
     }
 
     private void checkError(String msg, StatusCode err) throws MotorRequestFailedException {
@@ -211,8 +209,6 @@ public class TalonFXMotorController extends MotorController
     /// \brief Set the current limit for the current supplied to the motor
     /// \param limit the amount of current, in amps,  to the value given
     public void setCurrentLimit(double limit) throws BadMotorRequestException, MotorRequestFailedException {
-        current_limit_ = limit ;
-
         CurrentLimitsConfigs cfgs = cfg_.CurrentLimits ;
         cfgs.SupplyCurrentLimit = limit ;
         cfgs.SupplyCurrentLimitEnable = true ;
@@ -224,15 +220,18 @@ public class TalonFXMotorController extends MotorController
     /// \brief Returns the current limit for the current supplied to the motor
     /// \returns the current limit for the current supplied to the motor
     public double getCurrentLimit() throws BadMotorRequestException, MotorRequestFailedException {
-        return current_limit_ ;
+        double ret = Double.MAX_VALUE ;
+
+        if (cfg_.CurrentLimits.SupplyCurrentLimitEnable) {
+            ret = cfg_.CurrentLimits.SupplyCurrentLimit ;
+        }
+        return ret ;
     }
 
     /// \brief set the deadband for the motor.  If any power value is assigned to the motor that is less
     /// than this value, zero is assumed.
     /// \param value the deadband value for this motor
     public void setNeutralDeadband(double value) throws BadMotorRequestException, MotorRequestFailedException {
-        deadband_ = value ;
-
         MotorOutputConfigs cfgs = cfg_.MotorOutput ;
         cfgs.DutyCycleNeutralDeadband = value ;
         checkError("setNeutralDeadband", ctrl_.getConfigurator().apply(cfgs)) ;
@@ -241,14 +240,12 @@ public class TalonFXMotorController extends MotorController
     /// \brief Get the deadband value for the motor
     /// \returns the deadband value for the motor
     public double getNeutralDeadband() throws BadMotorRequestException, MotorRequestFailedException {
-        return deadband_ ;
+        return cfg_.MotorOutput.DutyCycleNeutralDeadband ;
     }
 
     /// \brief Set the neutral mode for the motor
     /// \param mode the neutral mode for the motor
     public void setNeutralMode(NeutralMode mode) throws BadMotorRequestException, MotorRequestFailedException {
-        neutral_mode_ = mode ;
-
         MotorOutputConfigs cfgs = cfg_.MotorOutput ;
         cfgs.NeutralMode = (mode == NeutralMode.Brake) ? NeutralModeValue.Brake : NeutralModeValue.Coast ;
         checkError("setNeutralMode", ctrl_.getConfigurator().apply(cfgs)) ;        
@@ -257,7 +254,12 @@ public class TalonFXMotorController extends MotorController
     /// \brief Get the neutral mode for the motor
     /// \returns the neutral mode for the motor
     public NeutralMode getNeutralMode() throws BadMotorRequestException, MotorRequestFailedException {
-        return neutral_mode_ ;
+        NeutralMode ret = NeutralMode.Coast ;
+
+        if (cfg_.MotorOutput.NeutralMode == NeutralModeValue.Brake) {
+            ret = NeutralMode.Brake ;
+        }
+        return ret ;
     }
 
     /// \brief Set the motor to invert the direction of motion 

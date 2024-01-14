@@ -308,12 +308,12 @@ public class MotorFactory {
         addMotorToFactory(ctrl) ;
 
         logger_.startMessage(MessageType.Info) ;
-        logger_.add("create motor");
-        logger_.add("name", ctrl.getName());
-        logger_.add("bus", ctrl.getBus());
-        logger_.add("id", ctrl.getCanID());
-        logger_.add("type", ctrl.getType());
-        logger_.add("firmware", ctrl.getFirmwareVersion());
+        logger_.add("create motor:");
+        logger_.add("name", ctrl.getName(), true);
+        logger_.add(",").add("bus", ctrl.getBus(), true);
+        logger_.add(",").add("id", ctrl.getCanID());
+        logger_.add(",").add("type", ctrl.getType(), true);
+        logger_.add(",").add("firmware", ctrl.getFirmwareVersion(), true);
         logger_.endMessage();
 
         //
