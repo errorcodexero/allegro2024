@@ -1,14 +1,16 @@
 package org.xero1425.base.subsystems.intake2motor;
 
 import org.xero1425.base.motors.BadMotorRequestException;
+import org.xero1425.base.motors.IMotorController;
 import org.xero1425.base.motors.MotorController;
 import org.xero1425.base.motors.MotorRequestFailedException;
+import org.xero1425.base.motors.IMotorController.PidType;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.misc.SettingsValue;
 
 public class Intake2MotorSubsystem extends MotorEncoderSubsystem {
-    private MotorController spinner_;
+    private IMotorController spinner_;
     private double spinner_power_ ;
 
     public Intake2MotorSubsystem(Subsystem parent, String name) throws Exception {
@@ -22,7 +24,7 @@ public class Intake2MotorSubsystem extends MotorEncoderSubsystem {
 
     public void setSpinnerPower(double p) throws BadMotorRequestException, MotorRequestFailedException {
         spinner_power_ = p ;
-        spinner_.set(p);
+        spinner_.set(PidType.None, p);
     }
 
     @Override

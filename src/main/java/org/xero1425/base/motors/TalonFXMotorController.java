@@ -1,6 +1,11 @@
 package org.xero1425.base.motors;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ctre.phoenix6.StatusCode;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.ControlRequest;
@@ -10,7 +15,7 @@ import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.revrobotics.CANSparkMax;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 /// \file
 /// This file contains the implementation of the CTREMotorController class.  This class
@@ -63,7 +68,99 @@ public class TalonFXMotorController extends MotorController
     /// \return the name of the CAN bus.  An empty string means roborio    
     public String getBus() throws BadMotorRequestException, MotorRequestFailedException {
         return bus_ ;
-    }        
+    }
+
+    /// \brief Return list of faults detected by the motor controller
+    /// \returns list of faults detected by the motor controller
+    public List<String> getFaults() {
+        List<String> results = new ArrayList<String>() ;
+
+        if (ctrl_.getFault_Hardware().getValue()) {
+            results.add("hardware");
+        }
+
+        if (ctrl_.getStickyFault_Hardware().getValue()) {
+            results.add("sticky-hardware");
+        }
+
+        if (ctrl_.getFault_ProcTemp().getValue()) {
+            results.add("proctemp") ;
+        }
+
+        if (ctrl_.getFault_DeviceTemp().getValue()) {
+            results.add("devicetemp") ;
+        }        
+
+        if (ctrl_.getStickyFault_DeviceTemp().getValue()) {
+            results.add("sticky-devicetemp") ;
+        }
+
+        if (ctrl_.getFault_Undervoltage().getValue()) {
+            results.add("undervoltage") ;
+        }     
+        
+        if (ctrl_.getStickyFault_Undervoltage().getValue()) {
+            results.add("sticky-undervoltage") ;
+        }
+
+        if (ctrl_.getFault_BootDuringEnable().getValue()) {
+            results.add("boot-during-enable") ;
+        }     
+        
+        if (ctrl_.getStickyFault_BootDuringEnable().getValue()) {
+            results.add("sticky-boot-during-enable") ;
+        }
+
+        if (ctrl_.getFault_BridgeBrownout().getValue()) {
+            results.add("bridge-brownout") ;
+        }     
+        
+        if (ctrl_.getStickyFault_BridgeBrownout().getValue()) {
+            results.add("sticky-bridge-brownout") ;
+        }        
+
+        if (ctrl_.getFault_RemoteSensorReset().getValue()) {
+            results.add("undervoltage") ;
+        }   
+        
+        if (ctrl_.getStickyFault_RemoteSensorReset().getValue()) {
+            results.add("undervoltage") ;
+        }
+
+        if (ctrl_.getFault_MissingDifferentialFX().getValue()) {
+            results.add("missing-differential-fx") ;
+        }      
+        
+        if (ctrl_.getStickyFault_MissingDifferentialFX().getValue()) {
+            results.add("sticky-missing-differential-fx") ;
+        }
+
+        if (ctrl_.getFault_RemoteSensorPosOverflow().getValue()) {
+            results.add("remote-sensor-pos-overflow") ;
+        }    
+        
+        if (ctrl_.getStickyFault_RemoteSensorPosOverflow().getValue()) {
+            results.add("stick-remote-sensor-pos-overflow") ;
+        }      
+        
+        if (ctrl_.getFault_OverSupplyV().getValue()) {
+            results.add("over-supply") ;
+        }           
+
+        if (ctrl_.getStickyFault_OverSupplyV().getValue()) {
+            results.add("sticky-over-supply") ;
+        }    
+        
+        if (ctrl_.getFault_UnstableSupplyV().getValue()) {
+            results.add("over-supply") ;
+        }          
+
+        if (ctrl_.getStickyFault_UnstableSupplyV().getValue()) {
+            results.add("sticky-over-supply") ;
+        }          
+
+        return results ;
+    }
 
     /// \brief Have the current motor follow another motor.
     /// \param leader if true, the leader is inverted versus normal operation
@@ -73,6 +170,7 @@ public class TalonFXMotorController extends MotorController
             throw new BadMotorRequestException(this, "cannot follow a motor that is of another type") ;
         }
         
+        leader_ = ctrl ;
         TalonFX other = (TalonFX)ctrl.getNativeController() ;
         boolean i = (invert != leader) ;
         checkError("could not follow another robot", ctrl_.setControl(new Follower(other.getDeviceID(), i))) ;
@@ -99,8 +197,7 @@ public class TalonFXMotorController extends MotorController
     /// \brief Return the firmware version of the motor controller
     /// \returns the firmware version of the motor controller        
     public String getFirmwareVersion() throws BadMotorRequestException, MotorRequestFailedException {
-        int v = ctrl_.
-        return String.valueOf((v >> 8) & 0xff) + "." + String.valueOf(v & 0xff) ;        
+        return "0.0.0.0" ;
     }    
 
     /// \brief Return the number of encoder ticks per revolution for this motor.  If this motor does not
@@ -114,6 +211,13 @@ public class TalonFXMotorController extends MotorController
     /// \param limit the amount of current, in amps,  to the value given
     public void setCurrentLimit(double limit) throws BadMotorRequestException, MotorRequestFailedException {
         current_limit_ = limit ;
+
+        CurrentLimitsConfigs cfgs = cfg_.CurrentLimits ;
+        cfgs.SupplyCurrentLimit = limit ;
+        cfgs.SupplyCurrentLimitEnable = true ;
+        cfgs.SupplyCurrentThreshold = limit ;
+        cfgs.SupplyTimeThreshold = 0.1 ;
+        checkError("setCurrentLimit", ctrl_.getConfigurator().apply(cfgs)) ;
     }
 
     /// \brief Returns the current limit for the current supplied to the motor
@@ -127,6 +231,10 @@ public class TalonFXMotorController extends MotorController
     /// \param value the deadband value for this motor
     public void setNeutralDeadband(double value) throws BadMotorRequestException, MotorRequestFailedException {
         deadband_ = value ;
+
+        MotorOutputConfigs cfgs = cfg_.MotorOutput ;
+        cfgs.DutyCycleNeutralDeadband = value ;
+        checkError("setNeutralDeadband", ctrl_.getConfigurator().apply(cfgs)) ;
     } 
 
     /// \brief Get the deadband value for the motor
@@ -139,6 +247,10 @@ public class TalonFXMotorController extends MotorController
     /// \param mode the neutral mode for the motor
     public void setNeutralMode(NeutralMode mode) throws BadMotorRequestException, MotorRequestFailedException {
         neutral_mode_ = mode ;
+
+        MotorOutputConfigs cfgs = cfg_.MotorOutput ;
+        cfgs.NeutralMode = (mode == NeutralMode.Brake) ? NeutralModeValue.Brake : NeutralModeValue.Coast ;
+        checkError("setNeutralMode", ctrl_.getConfigurator().apply(cfgs)) ;        
     }
     
     /// \brief Get the neutral mode for the motor
@@ -263,5 +375,6 @@ public class TalonFXMotorController extends MotorController
 
     /// \brief Reset the encoder values to zero    
     public void resetEncoder() throws BadMotorRequestException {
+        ctrl_.setPosition(0.0) ;
     }
 } ;

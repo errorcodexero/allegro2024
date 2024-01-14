@@ -80,6 +80,8 @@ public abstract class XeroRobot extends TimedRobot {
     // The motor factor for creating new motors
     private MotorFactory motors_ ;
 
+    private byte[] mac_addr_ ;
+
     // The base robot subsystem
     private RobotSubsystem robot_subsystem_ ;
 
@@ -813,6 +815,8 @@ public abstract class XeroRobot extends TimedRobot {
     private void robotLoop(LoopType ltype) {
         double initial_time = getTime() ;
         delta_time_ = initial_time - last_time_ ;
+
+        motors_.robotLoop() ;
 
         if (getCompressor() != null)
             robot_subsystem_.putDashboard("Pressure", DisplayType.Always, getCompressor().getPressure()) ;

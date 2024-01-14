@@ -31,6 +31,21 @@ public class MotorGroupController extends MotorController
         return motors_.get(0).getBus() ;
     }
 
+    public List<String> getFaults() throws BadMotorRequestException, MotorRequestFailedException {
+        ArrayList<String> faults = new ArrayList<String>() ;
+
+        for(IMotorController motor: motors_) {
+            List<String> mfaults = motor.getFaults() ;
+
+            for(String fault: mfaults) {
+                String item = String.valueOf(motor.getCanID()) + ":" + fault ;
+                faults.add(item) ;
+            }
+        }
+
+        return faults ;
+    }
+
     public Object getNativeController() throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;

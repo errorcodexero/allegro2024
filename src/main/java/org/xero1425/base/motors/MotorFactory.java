@@ -30,6 +30,9 @@ import org.xero1425.misc.SettingsValue.SettingsType;
 /// motor controllers
 ///
 public class MotorFactory {
+
+    private static final int kMotorsPerRobotLoop = 4 ;
+    
     private MessageLogger logger_;                                  // The system wide message logger
     private ISettingsSupplier settings_;                            // The system wide settings file
     private Map<String, Map<Integer, IMotorController>> motors_;     // The map of motors
@@ -52,8 +55,34 @@ public class MotorFactory {
         loop_index_ = 0 ;
     }
 
-    public void robotLoop() {
+    private void checkMotor(IMotorController ctrl) {
+        try {
+            List<String> faults = ctrl.getFaults() ;
+            if (faults.size() > 0) {
+            
+            }
+        }
+        catch(Exception ex) {
+            logger_.startMessage(MessageType.Error) ;
+            logger_.add("cannot check motors - errors occured while getting faults") ;
+            logger_.endMessage();
+        }
+    }
 
+    public void robotLoop() {
+        if (motor_list_.size() < kMotorsPerRobotLoop) {
+            for(IMotorController motor : motor_list_) {
+                checkMotor(motor);
+            }
+        }
+        else {
+            for(int i = 0 ; i < kMotorsPerRobotLoop ; i++) {
+                checkMotor(motor_list_.get(loop_index_++)) ;
+                if (loop_index_ == motor_list_.size()) {
+                    loop_index_ = 0 ;
+                }
+            }
+        }
     }
 
     /// \brief This method creates a new motor based on the settings in the settings file.

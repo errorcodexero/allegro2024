@@ -1,9 +1,13 @@
 package org.xero1425.base.motors;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
+import com.revrobotics.CANSparkBase.FaultID;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
@@ -67,6 +71,78 @@ public class SparkMaxMotorController extends MotorController
         }
     }
 
+    /// \brief Return list of faults detected by the motor controller
+    /// \returns list of faults detected by the motor controller
+    public List<String> getFaults() throws BadMotorRequestException, MotorRequestFailedException {
+        ArrayList<String> faults = new ArrayList<String>() ;
+
+        if (ctrl_.getFault(FaultID.kBrownout)) {
+            faults.add("kBrownout") ;
+        }
+
+        if (ctrl_.getFault(FaultID.kOvercurrent)) {
+            faults.add("kOvercurrent") ;
+        }
+
+        if (ctrl_.getFault(FaultID.kIWDTReset)) {
+            faults.add("kIWDTReset") ;
+        }
+
+        if (ctrl_.getFault(FaultID.kMotorFault)) {
+            faults.add("kMotorFault") ;
+        }
+
+        if (ctrl_.getFault(FaultID.kSensorFault)) {
+            faults.add("kSensorFault") ;
+        }    
+        
+        if (ctrl_.getFault(FaultID.kStall)) {
+            faults.add("kStall") ;
+        }    
+        
+        if (ctrl_.getFault(FaultID.kEEPROMCRC)) {
+            faults.add("kEEPROMCRC") ;
+        }    
+        
+        if (ctrl_.getFault(FaultID.kCANTX)) {
+            faults.add("kCANTX") ;
+        }
+       
+        if (ctrl_.getFault(FaultID.kCANRX)) {
+            faults.add("kCANRX") ;
+        }  
+
+        if (ctrl_.getFault(FaultID.kHasReset)) {
+            faults.add("kHasReset") ;
+        }  
+        
+        if (ctrl_.getFault(FaultID.kDRVFault)) {
+            faults.add("kDRVFault") ;
+        }  
+
+        if (ctrl_.getFault(FaultID.kOtherFault)) {
+            faults.add("kOtherFault") ;
+        }  
+
+        if (ctrl_.getFault(FaultID.kSoftLimitFwd)) {
+            faults.add("kSoftLimitFwd") ;
+        }  
+        
+        if (ctrl_.getFault(FaultID.kSoftLimitRev)) {
+            faults.add("kSoftLimitRev") ;
+        }  
+        
+        if (ctrl_.getFault(FaultID.kHardLimitFwd)) {
+            faults.add("kHardLimitFwd") ;
+        }  
+        
+        if (ctrl_.getFault(FaultID.kHardLimitRev)) {
+            faults.add("kHardLimitRev") ;
+        }
+
+        return faults ;
+    }
+
     /// \brief Returns the CAN ID of the motor
     /// \returns the CAN ID of the motor    
     public int getCanID() throws BadMotorRequestException, MotorRequestFailedException {
@@ -87,6 +163,7 @@ public class SparkMaxMotorController extends MotorController
             throw new BadMotorRequestException(this, "cannot follow a motor that is of another type") ;
         }
         
+        leader_ = ctrl ;
         CANSparkMax other = (CANSparkMax)ctrl.getNativeController() ;
         boolean i = (invert != leader) ;
         checkError("could not follow another robot", ctrl_.follow(other, i)) ;

@@ -1,5 +1,7 @@
 package org.xero1425.base.motors;
 
+import java.util.List;
+
 public interface IMotorController {
     /// \brief the type of PID control to run on the motor controller
     public enum PidType {
@@ -30,6 +32,10 @@ public interface IMotorController {
     /// \brief Return a human readable string giving the physical motor controller type (e.g. TalonFX, SparkMaxBrushless, etc.)
     /// \returns a human readable string giving the physical motor controller type
     public String getType() throws BadMotorRequestException, MotorRequestFailedException ;    
+
+    /// \brief Return list of faults detected by the motor controller
+    /// \returns list of faults detected by the motor controller
+    public List<String> getFaults() throws BadMotorRequestException, MotorRequestFailedException ;
 
     /// \Brief Return the native motor controller for this controller.  This is used like
     /// TalonFX fx = (TalonFX)ctrl.getNativeController() ;
