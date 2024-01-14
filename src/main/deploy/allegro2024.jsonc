@@ -243,8 +243,8 @@
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
-                        "PRACTICE" : 0.22272211,
-                        "COMPETITION" : 0.204273400
+                        "PRACTICE" : 0.18566326,
+                        "COMPETITION" : 0
                     },
                     "min": -1.0,
                     "max": 1.0,
@@ -258,8 +258,8 @@
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
-                        "PRACTICE" : 0.222039656,
-                        "COMPETITION" : 0.203025074
+                        "PRACTICE" : 0.184747,
+                        "COMPETITION" : 0
                     },
                     "min": -1.0,
                     "max": 1.0,
@@ -273,8 +273,8 @@
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
-                        "PRACTICE" : 0.22181802,
-                        "COMPETITION" : 0.203998368
+                        "PRACTICE" : 0.186217,
+                        "COMPETITION" : 0
                     },
                     "min": -1.0,
                     "max": 1.0,
@@ -288,8 +288,8 @@
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
-                        "PRACTICE" : 0.222286438,
-                        "COMPETITION" : 0.202208113
+                        "PRACTICE" : 0.183776,
+                        "COMPETITION" : 0
                     },
                     "min": -1.0,
                     "max": 1.0,
@@ -354,19 +354,19 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 0,
+        "which": 2,
         "0": {
-            "angle": 45,
-            "power": 0
+            "angle": 90,
+            "power": 0.2
         },
         "1": {
             "angle": 0.0,
-            "power": 0.2,
-            "duration": 1
+            "power": 0.7,
+            "duration": 5
         },
         "2": {
-            "angle": 0.0,
-            "speed": 0.5
+            "angle": 45.0,
+            "speed": 1.0
         },
         "3": {
             "angle": 0.0,

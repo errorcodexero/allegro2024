@@ -11,6 +11,7 @@ import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.configs.VoltageConfigs;
 import com.ctre.phoenix6.controls.ControlRequest;
+import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.PositionVoltage;
@@ -39,6 +40,8 @@ public class TalonFXMotorController extends MotorController
     private TalonFXConfiguration cfg_ ;
     private IMotorController leader_ ;
     private String bus_ ;
+    private boolean voltage_compensation_enabled_ ;
+    private double nominal_voltage_ ;
 
     public TalonFXMotorController(String name, String bus, int canid, boolean leader) throws MotorRequestFailedException {
         super(name) ;
@@ -336,8 +339,13 @@ public class TalonFXMotorController extends MotorController
     public void set(XeroPidType type, double target) throws BadMotorRequestException, MotorRequestFailedException {
         ControlRequest req = null ;
         switch(type) {
-            case Voltage:
-                req = new VoltageOut(target * 12.0) ;
+            case Power:
+                if (voltage_compensation_enabled_) {
+                    req = new VoltageOut(target * nominal_voltage_) ;
+                }
+                else {
+                    req = new DutyCycleOut(target) ;
+                }
                 break ;
             case Position:
                 req = new PositionVoltage(0).withPosition(target / kTicksPerRevolution) ;
@@ -405,4 +413,24 @@ public class TalonFXMotorController extends MotorController
      public void setPosition(double value) throws BadMotorRequestException, MotorRequestFailedException {
         checkError("setPosition", ctrl_.setPosition(value / kTicksPerRevolution)) ;
      }    
+
+    /// \brief Enable voltage compensation for the given motor
+    /// \param enabled if true voltage compensation is enabled
+    /// \param nominal if enabled is true, this is the nominal voltage for compensation
+    public void enableVoltageCompensation(boolean enabled, double nominal) throws BadMotorRequestException, MotorRequestFailedException {
+        voltage_compensation_enabled_ = enabled ;
+        nominal_voltage_ = nominal ;
+    }
+
+    /// \brief Return the closed loop target
+    /// \returns  the closed loop target
+    public double getClosedLoopTarget() throws BadMotorRequestException, MotorRequestFailedException {
+        return ctrl_.getClosedLoopReference().getValue() ;
+    }
+
+    /// \brief Return the closed loop error
+    /// \returns  the closed loop error
+    public double getClosedLoopError() throws BadMotorRequestException, MotorRequestFailedException {
+        return ctrl_.getClosedLoopError().getValue() ;
+    }
 } ;

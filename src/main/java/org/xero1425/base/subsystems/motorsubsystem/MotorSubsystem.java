@@ -105,7 +105,7 @@ public class MotorSubsystem extends Subsystem
             // The limitPower method can be overridden in a derived class to place limits on the
             // power ever supplied to the motor
             power_ = limitPower(p) ;
-            controller_.set(XeroPidType.Voltage, power_) ;
+            controller_.set(XeroPidType.Power, power_) ;
         }
         catch(BadMotorRequestException|MotorRequestFailedException ex) {
             MessageLogger logger = getRobot().getMessageLogger() ;

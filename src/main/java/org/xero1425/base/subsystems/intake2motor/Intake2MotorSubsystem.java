@@ -23,7 +23,7 @@ public class Intake2MotorSubsystem extends MotorEncoderSubsystem {
 
     public void setSpinnerPower(double p) throws BadMotorRequestException, MotorRequestFailedException {
         spinner_power_ = p ;
-        spinner_.set(XeroPidType.Voltage, p);
+        spinner_.set(XeroPidType.Power, p);
     }
 
     @Override

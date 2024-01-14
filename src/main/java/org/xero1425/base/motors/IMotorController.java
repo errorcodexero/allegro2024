@@ -5,7 +5,7 @@ import java.util.List;
 public interface IMotorController {
     /// \brief the type of PID control to run on the motor controller
     public enum XeroPidType {
-        Voltage,                    ///< No PID type has been set
+        Power,                    ///< No PID type has been set
         Position,                   ///< Position PID control
         Velocity,                   ///< Velocity PID control
         MotionMagic,                ///< Motion Magic
@@ -149,6 +149,11 @@ public interface IMotorController {
     public void setMotionMagicParams(double v, double a, double j) throws BadMotorRequestException, MotorRequestFailedException;
 
     /// \brief Set the motor target.  What the target is depends on the mode.
+    /// If the type is XeroPidType.Power, the target is a value from -1 to 1.0.
+    /// If the type is XeroPidType.Position, the target is a value in encoder ticks
+    /// If the type is XeroPidType.Velocity, the target is a value in encoder ticks/second
+    /// If the type is XeroPidType.MotionMagic, the target is a value in encoder ticks
+    /// Note, MotionMagic is only available on CTRE based (TalonFX) controllers.
     /// \param type the type of target to set (position PID, velocity PID, MotionMagic, or percent power)
     /// \param target the target value, depends on the type
     public void set(XeroPidType type, double target) throws BadMotorRequestException, MotorRequestFailedException ;
@@ -175,5 +180,16 @@ public interface IMotorController {
     /// \returns the acceleration of the motor in ticks per second squared
     public double getAcceleration()  throws BadMotorRequestException, MotorRequestFailedException ;
 
+    /// \brief Enable voltage compensation for the given motor
+    /// \param enabled if true voltage compensation is enabled
+    /// \param nominal if enabled is true, this is the nominal voltage for compensation
+    public void enableVoltageCompensation(boolean enabled, double nominal) throws BadMotorRequestException, MotorRequestFailedException ;
 
+    /// \brief Return the closed loop target
+    /// \returns  the closed loop target
+    public double getClosedLoopTarget() throws BadMotorRequestException, MotorRequestFailedException ;
+
+    /// \brief Return the closed loop error
+    /// \returns  the closed loop error
+    public double getClosedLoopError() throws BadMotorRequestException, MotorRequestFailedException ;    
 }

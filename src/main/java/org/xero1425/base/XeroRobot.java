@@ -815,8 +815,6 @@ public abstract class XeroRobot extends TimedRobot {
         double initial_time = getTime() ;
         delta_time_ = initial_time - last_time_ ;
 
-        // motors_.robotLoop() ;
-
         if (getCompressor() != null)
             robot_subsystem_.putDashboard("Pressure", DisplayType.Always, getCompressor().getPressure()) ;
 

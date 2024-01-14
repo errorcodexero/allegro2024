@@ -99,6 +99,12 @@ public class MotorGroupController extends MotorController
         }
     }
 
+    public void enableVoltageCompensation(boolean enabled, double nominal)  throws BadMotorRequestException, MotorRequestFailedException {
+        for(IMotorController ctrl : motors_) {
+            ctrl.enableVoltageCompensation(enabled, nominal) ;
+        }
+    }    
+
     public double getNeutralDeadband() throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
@@ -323,5 +329,24 @@ public class MotorGroupController extends MotorController
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
         motors_.get(0).setAccelerationImportant(value);             
+    }
+
+
+    /// \brief Return the closed loop target
+    /// \returns  the closed loop target
+    public double getClosedLoopTarget() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).getClosedLoopTarget() ;
+    }
+
+    /// \brief Return the closed loop error
+    /// \returns  the closed loop error
+    public double getClosedLoopError() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).getClosedLoopError() ;
     }
 } ;

@@ -171,7 +171,7 @@ public class MotorEncoderVelocityMCAction extends MotorAction {
         super.cancel() ;
 
         try {
-            getSubsystem().getMotorController().set(XeroPidType.Voltage, 0.0);
+            getSubsystem().getMotorController().set(XeroPidType.Power, 0.0);
         }
         catch(Exception ex) {
         }

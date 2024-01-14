@@ -36,6 +36,7 @@ public class SparkMaxMotorController extends MotorController
     private double current_limit_ ;
     private boolean pos_important_ ;
     private boolean vel_important_ ;
+    private double target_ ;
 
     public SparkMaxMotorController(String name, int canid, boolean brushless, boolean leader) throws MotorRequestFailedException {
         super(name) ;
@@ -65,6 +66,8 @@ public class SparkMaxMotorController extends MotorController
         pos_important_ = false ;
         vel_important_ = false ;
         current_limit_ = Double.MAX_VALUE ;
+
+        target_ = 0.0 ;
     }
 
     private void checkError(String msg, REVLibError err) throws MotorRequestFailedException {
@@ -302,12 +305,13 @@ public class SparkMaxMotorController extends MotorController
     /// \param type the type of target to set (position PID, velocity PID, MotionMagic, or percent power)
     /// \param target the target value, depends on the type    
     public void set(XeroPidType type, double target) throws BadMotorRequestException, MotorRequestFailedException {
-        if (mtype_ == MotorType.kBrushless && type != XeroPidType.Voltage) {
+        if (mtype_ == MotorType.kBrushless && type != XeroPidType.Power) {
             throw new BadMotorRequestException(this, "brushed motor does not support PID") ;
         }
 
+        target_ = target ;
         switch(type) {
-            case Voltage:
+            case Power:
                 checkError("could not set voltage", pid_.setReference(target, CANSparkMax.ControlType.kVoltage)) ;
                 break ;            
             case Position:
@@ -398,4 +402,24 @@ public class SparkMaxMotorController extends MotorController
 
         checkError("setPosition", encoder_.setPosition(value)) ;
     }        
+
+    /// \brief Enable voltage compensation for the given motor
+    /// \param enabled if true voltage compensation is enabled
+    /// \param nominal if enabled is true, this is the nominal voltage for compensation
+    public void enableVoltageCompensation(boolean enabled, double nominal) throws BadMotorRequestException, MotorRequestFailedException {
+        ctrl_.enableVoltageCompensation(nominal);
+    }
+
+
+    /// \brief Return the closed loop target
+    /// \returns  the closed loop target
+    public double getClosedLoopTarget() throws BadMotorRequestException, MotorRequestFailedException {
+        return target_ ;
+    }
+
+    /// \brief Return the closed loop error
+    /// \returns  the closed loop error
+    public double getClosedLoopError() throws BadMotorRequestException, MotorRequestFailedException {
+        throw new BadMotorRequestException(this, "the SparkMax does not support returning closed loop error") ;
+    }    
 } ;

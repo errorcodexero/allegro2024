@@ -356,8 +356,8 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
         right_power_ = right ;
 
         try {
-            left_motors_.set(XeroPidType.Voltage, left_power_) ;
-            right_motors_.set(XeroPidType.Voltage, right_power_) ;
+            left_motors_.set(XeroPidType.Power, left_power_) ;
+            right_motors_.set(XeroPidType.Power, right_power_) ;
         }
         catch(BadMotorRequestException|MotorRequestFailedException ex) {
             logger.startMessage(MessageType.Error) ;

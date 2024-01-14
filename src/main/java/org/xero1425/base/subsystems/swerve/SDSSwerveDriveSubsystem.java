@@ -2,13 +2,13 @@ package org.xero1425.base.subsystems.swerve;
 
 import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.motors.BadMotorRequestException;
-import org.xero1425.base.motors.MotorFactory;
 import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.motors.IMotorController.XeroNeutralMode;
 import org.xero1425.base.subsystems.Subsystem;
-import org.xero1425.misc.ISettingsSupplier;
+import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
+import org.xero1425.misc.MissingParameterException;
 import org.xero1425.misc.PIDCtrl;
 
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -28,14 +28,19 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         Chassis
     } ;
 
-    private final SwerveModule fl_ ;
-    private final SwerveModule fr_ ;
-    private final SwerveModule bl_ ;
-    private final SwerveModule br_ ;
+    private class Module {
+        public final SwerveModule hw ;
+        public final PIDCtrl pid ;
+
+        public Module(SwerveModule module, PIDCtrl pidctrl) {
+            this.hw = module ;
+            this.pid = pidctrl ;
+        }
+    }
+
+    private Module[] modules_ = new Module[4] ;
 
     private XeroTimer module_sync_timer_ ;
-
-    private PIDCtrl[] pid_ctrls_ ;
 
     private ChassisSpeeds chassis_speed_ ;
     private boolean disabled_init_ ;
@@ -44,6 +49,8 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
     private double [] speeds_ ;
     private double [] powers_ ;
     private double [] angles_ ;
+
+    private int module_pos_ = 0 ;
 
     private boolean module_encoders_inited_ ;
     
@@ -56,25 +63,13 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         powers_ = new double[4] ;
         angles_ = new double[4] ;
 
-        ShuffleboardLayout lay ;
-        String basename = "subsystems:" + name + ":hw:" ;
-        MotorFactory factory = parent.getRobot().getMotorFactory() ;
-        ISettingsSupplier settings = parent.getRobot().getSettingsSupplier() ;
         SwerveModuleConfig cfg = SwerveModuleConfig.MK4I_L3 ;
         ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drivetrain");
 
-        lay = shuffleboardTab.getLayout("FLModule", BuiltInLayouts.kList).withSize(2, 3).withPosition(0, 0) ;
-        fl_ = new SwerveModule(factory, settings, cfg, lay, "swerve-fl", basename + "fl");
-
-        lay = shuffleboardTab.getLayout("FRModule", BuiltInLayouts.kList).withSize(2, 3).withPosition(2, 0) ;        
-        fr_ = new SwerveModule(factory, settings, cfg, lay, "swerve-fr", basename + "fr");
-
-        lay = shuffleboardTab.getLayout("BLModule", BuiltInLayouts.kList).withSize(2, 3).withPosition(4, 0) ;
-                
-        bl_ = new SwerveModule(factory, settings, cfg, lay, "swerve-bl", basename + "bl");        
-
-        lay = shuffleboardTab.getLayout("BRModule", BuiltInLayouts.kList).withSize(2, 3).withPosition(6, 0) ;        
-        br_ = new SwerveModule(factory, settings, cfg, lay, "swerve-br", basename + "br");
+        modules_[FL] = createModule(cfg, "fl", shuffleboardTab) ;
+        modules_[FR] = createModule(cfg, "fr", shuffleboardTab) ;
+        modules_[BL] = createModule(cfg, "bl", shuffleboardTab) ;
+        modules_[BR] = createModule(cfg, "br", shuffleboardTab) ;
 
         createOdometry();
 
@@ -83,24 +78,39 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         module_encoders_inited_ = false ;
     }
 
+    private Module createModule(SwerveModuleConfig cfg, String which, ShuffleboardTab tab) throws Exception {
+        String basename = "subsystems:" + getName() + ":hw:" ;
+
+        ShuffleboardLayout lay = tab.getLayout(which, BuiltInLayouts.kList).withSize(2, 3).withPosition(module_pos_, 0) ;
+        module_pos_ += 2 ;
+        SwerveModule hw = new SwerveModule(this, cfg, lay, which, basename + which);
+        PIDCtrl pid = createPIDCtrl(which) ;
+        return new Module(hw, pid) ;
+    }
+
+    private PIDCtrl createPIDCtrl(String name) throws MissingParameterException, BadParameterTypeException {
+        String pidname = "subsystems:" + getName() + ":pids:" + name ;
+        return new PIDCtrl(getRobot().getSettingsSupplier(), pidname, false) ;
+    }    
+
     public SwerveModuleState getModuleState(int which) throws BadMotorRequestException, MotorRequestFailedException {
         SwerveModuleState st = null ;
 
         switch(which) {
             case FL:
-                st = new SwerveModuleState(fl_.getDriveVelocity(), new Rotation2d(fl_.getStateAngle())) ;
+                st = new SwerveModuleState(modules_[FL].hw.getDriveVelocity(), new Rotation2d(modules_[FL].hw.getStateAngle())) ;
                 break ;
 
             case FR:
-                st = new SwerveModuleState(fr_.getDriveVelocity(), new Rotation2d(fr_.getStateAngle())) ;
+                st = new SwerveModuleState(modules_[FR].hw.getDriveVelocity(), new Rotation2d(modules_[FR].hw.getStateAngle())) ;
                 break ;
                 
             case BL:
-                st = new SwerveModuleState(bl_.getDriveVelocity(), new Rotation2d(bl_.getStateAngle())) ;
+                st = new SwerveModuleState(modules_[BL].hw.getDriveVelocity(), new Rotation2d(modules_[BL].hw.getStateAngle())) ;
                 break ;
                 
             case BR:
-                st = new SwerveModuleState(br_.getDriveVelocity(), new Rotation2d(br_.getStateAngle())) ;
+                st = new SwerveModuleState(modules_[BR].hw.getDriveVelocity(), new Rotation2d(modules_[BR].hw.getStateAngle())) ;
                 break ;
         }
 
@@ -113,19 +123,19 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         try {
             switch(which) {
                 case FL:
-                    st = new SwerveModulePosition(fl_.getDistance(), new Rotation2d(fl_.getStateAngle())) ;
+                    st = new SwerveModulePosition(modules_[FL].hw.getDistance(), new Rotation2d(modules_[FL].hw.getStateAngle())) ;
                     break ;
 
                 case FR:
-                    st = new SwerveModulePosition(fr_.getDistance(), new Rotation2d(fr_.getStateAngle())) ;
+                    st = new SwerveModulePosition(modules_[FR].hw.getDistance(), new Rotation2d(modules_[FR].hw.getStateAngle())) ;
                     break ;
                     
                 case BL:
-                    st = new SwerveModulePosition(bl_.getDistance(), new Rotation2d(bl_.getStateAngle())) ;
+                    st = new SwerveModulePosition(modules_[BL].hw.getDistance(), new Rotation2d(modules_[BL].hw.getStateAngle())) ;
                     break ;
                     
                 case BR:
-                    st = new SwerveModulePosition(br_.getDistance(), new Rotation2d(br_.getStateAngle())) ;
+                    st = new SwerveModulePosition(modules_[BR].hw.getDistance(), new Rotation2d(modules_[BR].hw.getStateAngle())) ;
                     break ;
             }
         }
@@ -155,7 +165,6 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         mode_ = Mode.Chassis ;
     }
 
-
     @Override
     public void setRawTargets(boolean power, double [] angles, double [] speeds_powers)  {
         angles_ = angles.clone() ;
@@ -175,25 +184,25 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         super.computeMyState();
 
         if (!module_encoders_inited_ && module_sync_timer_.isExpired()) {
-            fl_.synchronizeEncoders();
-            fr_.synchronizeEncoders();
-            bl_.synchronizeEncoders();
-            br_.synchronizeEncoders();  
+            modules_[FL].hw.synchronizeEncoders();
+            modules_[FR].hw.synchronizeEncoders();
+            modules_[BL].hw.synchronizeEncoders();
+            modules_[BR].hw.synchronizeEncoders();  
             
             module_encoders_inited_ = true ;
         }
 
         if (getRobot().isDisabled()) {
             if (!disabled_init_) {
-                fl_.setNeutralMode(XeroNeutralMode.Coast);
-                fl_.setNeutralMode(XeroNeutralMode.Coast);
-                fl_.setNeutralMode(XeroNeutralMode.Coast);
-                fl_.setNeutralMode(XeroNeutralMode.Coast);                                    
+                modules_[FL].hw.setNeutralMode(XeroNeutralMode.Coast);
+                modules_[FL].hw.setNeutralMode(XeroNeutralMode.Coast);
+                modules_[FL].hw.setNeutralMode(XeroNeutralMode.Coast);
+                modules_[FL].hw.setNeutralMode(XeroNeutralMode.Coast);                                    
 
-                fl_.set(0.0, fl_.getStateAngle());
-                fr_.set(0.0, fr_.getStateAngle());
-                bl_.set(0.0, bl_.getStateAngle());
-                br_.set(0.0, br_.getStateAngle());
+                modules_[FL].hw.set(0.0, modules_[FL].hw.getStateAngle());
+                modules_[FR].hw.set(0.0, modules_[FR].hw.getStateAngle());
+                modules_[BL].hw.set(0.0, modules_[BL].hw.getStateAngle());
+                modules_[BR].hw.set(0.0, modules_[BR].hw.getStateAngle());
 
                 disabled_init_ = true ;
             }
@@ -237,17 +246,17 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
         if (mode_ == Mode.Chassis || mode_ == Mode.RawSpeed)
         {
-            powers_[FL] = pid_ctrls_[FL].getOutput(speeds_[FL], getModuleState(FL).speedMetersPerSecond, getRobot().getDeltaTime()) ;
-            powers_[FR] = pid_ctrls_[FR].getOutput(speeds_[FR], getModuleState(FR).speedMetersPerSecond, getRobot().getDeltaTime()) ;
-            powers_[BL] = pid_ctrls_[BL].getOutput(speeds_[BL], getModuleState(BL).speedMetersPerSecond, getRobot().getDeltaTime()) ;
-            powers_[BR] = pid_ctrls_[BR].getOutput(speeds_[BR], getModuleState(BR).speedMetersPerSecond, getRobot().getDeltaTime()) ;
+            powers_[FL] = modules_[FL].pid.getOutput(speeds_[FL], getModuleState(FL).speedMetersPerSecond, getRobot().getDeltaTime()) ;
+            powers_[FR] = modules_[FR].pid.getOutput(speeds_[FR], getModuleState(FR).speedMetersPerSecond, getRobot().getDeltaTime()) ;
+            powers_[BL] = modules_[BL].pid.getOutput(speeds_[BL], getModuleState(BL).speedMetersPerSecond, getRobot().getDeltaTime()) ;
+            powers_[BR] = modules_[BR].pid.getOutput(speeds_[BR], getModuleState(BR).speedMetersPerSecond, getRobot().getDeltaTime()) ;
         }
 
         if (module_encoders_inited_) {
-            fl_.set(powers_[FL], Math.toRadians(angles_[FL])) ;
-            fr_.set(powers_[FR], Math.toRadians(angles_[FR])) ;
-            bl_.set(powers_[BL], Math.toRadians(angles_[BL])) ;
-            br_.set(powers_[BR], Math.toRadians(angles_[BR])) ;
+            modules_[FL].hw.set(powers_[FL], Math.toRadians(angles_[FL])) ;
+            modules_[FR].hw.set(powers_[FR], Math.toRadians(angles_[FR])) ;
+            modules_[BL].hw.set(powers_[BL], Math.toRadians(angles_[BL])) ;
+            modules_[BR].hw.set(powers_[BR], Math.toRadians(angles_[BR])) ;
         }
         else {
             MessageLogger logger = getRobot().getMessageLogger();

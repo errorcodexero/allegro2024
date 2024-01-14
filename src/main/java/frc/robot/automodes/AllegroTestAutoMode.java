@@ -35,8 +35,7 @@ public class AllegroTestAutoMode extends TestAutoMode {
             case 1:
                 // Set the steering motor to the angle given, and the drive motor to the power
                 // given. Run until the duration has expired
-                addSubActionPair(swerve, new SwervePowerAngleAction(swerve, getDouble("angle"), getDouble("power"),
-                        getDouble("duration")), true);
+                addSubActionPair(swerve, new SwervePowerAngleAction(swerve, getDouble("angle"), getDouble("power"), getDouble("duration")), true);
                 break;
 
             case 2:
@@ -45,8 +44,7 @@ public class AllegroTestAutoMode extends TestAutoMode {
                 // stop the plot after the default plot interval (four seconds). Since speed is
                 // given, the PID controller will try to
                 // maintain the target speed
-                addSubActionPair(swerve, new SwerveSpeedAngleAction(swerve, getDouble("angle"), getDouble("speed")),
-                        true);
+                addSubActionPair(swerve, new SwerveSpeedAngleAction(swerve, getDouble("angle"), getDouble("speed")), true);
                 break;
 
             case 3:
@@ -54,8 +52,7 @@ public class AllegroTestAutoMode extends TestAutoMode {
                 // given. Run until the duration has expired.
                 // Since speed is given, the PID controller will try to maintain the target
                 // speed
-                addSubActionPair(swerve, new SwerveSpeedAngleAction(swerve, getDouble("angle"), getDouble("speed"),
-                        getDouble("duration")), true);
+                addSubActionPair(swerve, new SwerveSpeedAngleAction(swerve, getDouble("angle"), getDouble("speed"), getDouble("duration")), true);
                 break;
 
             case 4:

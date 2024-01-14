@@ -1,10 +1,9 @@
 package org.xero1425.base.subsystems.swerve;
 
-import org.xero1425.base.motors.MotorFactory;
 import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.motors.IMotorController.XeroNeutralMode;
 import org.xero1425.base.motors.IMotorController.XeroPidType;
-import org.xero1425.misc.ISettingsSupplier;
+import org.xero1425.base.subsystems.Subsystem;
 
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
@@ -19,6 +18,7 @@ import org.xero1425.base.motors.IMotorController;
 
 public class SwerveModule {
     private String name_ ;
+    private Subsystem subsys_ ;
     private double ticksToMeters_ ;
     private double ticksToRadians_ ;
     private IMotorController steer_ ;
@@ -27,19 +27,22 @@ public class SwerveModule {
     private CANcoderConfiguration absolute_cfg_ ;
     private double target_angle_ ;
 
-    public SwerveModule(MotorFactory factory, ISettingsSupplier settings, SwerveModuleConfig cfg, ShuffleboardContainer container, String name, String id) throws Exception {
+    static String[] plot_values_ = new String[] { "a" };
+
+    public SwerveModule(Subsystem subsys, SwerveModuleConfig cfg, ShuffleboardContainer container, String name, String id) throws Exception {
         //
         // Create and initialize the steering motor
         //
         name_ = name ;
-        steer_ = factory.createMotor(name + "-steer", id + ":motors:steer");
+        subsys_ = subsys ;
+        steer_ = subsys_.getRobot().getMotorFactory().createMotor(name + "-steer", id + ":motors:steer");
         steer_.setInverted(cfg.steer_inverted);
         steer_.setNeutralMode(XeroNeutralMode.Brake);
         steer_.resetEncoder();
         ticksToRadians_ = 2.0 * Math.PI / steer_.ticksPerRevolution() * cfg.steer_reduction ;
-        double p = settings.get(id + ":motors:steer:p").getDouble() ;
-        double i = settings.get(id + ":motors:steer:i").getDouble() ;
-        double d = settings.get(id + ":motors:steer:d").getDouble() ;
+        double p = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:p").getDouble() ;
+        double i = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:i").getDouble() ;
+        double d = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:d").getDouble() ;
         steer_.setPID(XeroPidType.Position, p, i, d, 0, 0, 0, 0, 0.1);
         steer_.setPositionImportant(true);
         target_angle_ = 0.0 ;
@@ -47,7 +50,7 @@ public class SwerveModule {
         //
         // Create and initialize the drive motor
         //
-        drive_ = factory.createMotor(name + "-drive", id + ":motors:drive");
+        drive_ = subsys_.getRobot().getMotorFactory().createMotor(name + "-drive", id + ":motors:drive");
         drive_.setInverted(cfg.drive_inverted);
         drive_.resetEncoder();
         ticksToMeters_ = Math.PI * cfg.wheel_diameter * cfg.drive_reduction / drive_.ticksPerRevolution() ;
@@ -57,9 +60,9 @@ public class SwerveModule {
         //
         // Create and initialize the absolute cancoder encoder
         //
-        int encoderId = settings.get(id + ":encoder:canid").getInteger() ;
-        String bus = settings.get(id + ":encoder:bus").getString() ;
-        double offset = settings.get(id + ":encoder:offset").getDouble() ;        
+        int encoderId = subsys_.getRobot().getSettingsSupplier().get(id + ":encoder:canid").getInteger() ;
+        String bus = subsys_.getRobot().getSettingsSupplier().get(id + ":encoder:bus").getString() ;
+        double offset = subsys_.getRobot().getSettingsSupplier().get(id + ":encoder:offset").getDouble() ;        
 
         absolute_encoder_ = new CANcoder(encoderId, bus);
         absolute_cfg_ = new CANcoderConfiguration();
@@ -171,7 +174,7 @@ public class SwerveModule {
 
         target_angle_ = angle ;
         steer_.set(XeroPidType.Position, angle / ticksToRadians_);
-        drive_.set(XeroPidType.Voltage, voltage) ;
+        drive_.set(XeroPidType.Power, voltage) ;
     }
 
     /// \brief Return the absolute encoder angle in radians
