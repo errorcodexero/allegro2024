@@ -106,7 +106,7 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
         return vision_.getCurrentPose() ;
     }
 
-    public void resetPose(boolean inverted) {
+    public void resetPose(boolean inverted) throws BadMotorRequestException, MotorRequestFailedException {
         boolean reset = false ;
         if (vision_ != null && vision_enabled_ && vision_.hasTargets()) {
             Pose2d vpose = vision_.getCurrentPose();
@@ -194,11 +194,11 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
     // for the modules.
     public abstract void setRawTargets(boolean power, double [] angles, double [] speeds_powers) ;
 
-    public abstract SwerveModuleState getModuleState(int which) ;
+    public abstract SwerveModuleState getModuleState(int which) throws BadMotorRequestException, MotorRequestFailedException ;
 
-    public abstract SwerveModulePosition getModulePosition(int which) ;
+    public abstract SwerveModulePosition getModulePosition(int which) throws BadMotorRequestException, MotorRequestFailedException;
 
-    public abstract SwerveModuleState getModuleTarget(int which) ;
+    public abstract SwerveModuleState getModuleTarget(int which) throws BadMotorRequestException, MotorRequestFailedException;
 
     public void stop() throws BadMotorRequestException, MotorRequestFailedException {
         setRawTargets(false, powers_, angles_);
@@ -259,7 +259,7 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
         return estimator_.getEstimatedPosition() ;
     }
 
-    public void setPose(Pose2d pose) {
+    public void setPose(Pose2d pose) throws BadMotorRequestException, MotorRequestFailedException {
         Rotation2d rot = Rotation2d.fromDegrees(gyro().getYaw()) ;
         
         SwerveModulePosition [] poss = new SwerveModulePosition[4] ;
@@ -360,25 +360,29 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
         
         putData(getRobot().getTime() - plotstart_) ;
 
-        putData(getModuleTarget(FL).angle.getDegrees()) ;
-        putData(getModuleState(FL).angle.getDegrees()) ;
-        putData(getModuleTarget(FL).speedMetersPerSecond) ;
-        putData(getModuleState(FL).speedMetersPerSecond) ;
+        try {
+            putData(getModuleTarget(FL).angle.getDegrees()) ;
+            putData(getModuleState(FL).angle.getDegrees()) ;
+            putData(getModuleTarget(FL).speedMetersPerSecond) ;
+            putData(getModuleState(FL).speedMetersPerSecond) ;
 
-        putData(getModuleTarget(FR).angle.getDegrees()) ;
-        putData(getModuleState(FR).angle.getDegrees()) ;
-        putData(getModuleTarget(FR).speedMetersPerSecond) ;
-        putData(getModuleState(FR).speedMetersPerSecond) ;
+            putData(getModuleTarget(FR).angle.getDegrees()) ;
+            putData(getModuleState(FR).angle.getDegrees()) ;
+            putData(getModuleTarget(FR).speedMetersPerSecond) ;
+            putData(getModuleState(FR).speedMetersPerSecond) ;
 
-        putData(getModuleTarget(BL).angle.getDegrees()) ;
-        putData(getModuleState(BL).angle.getDegrees()) ;
-        putData(getModuleTarget(BL).speedMetersPerSecond) ;
-        putData(getModuleState(BL).speedMetersPerSecond) ;
-        
-        putData(getModuleTarget(BR).angle.getDegrees()) ;
-        putData(getModuleState(BR).angle.getDegrees()) ;
-        putData(getModuleTarget(BR).speedMetersPerSecond) ;
-        putData(getModuleState(BR).speedMetersPerSecond) ;
+            putData(getModuleTarget(BL).angle.getDegrees()) ;
+            putData(getModuleState(BL).angle.getDegrees()) ;
+            putData(getModuleTarget(BL).speedMetersPerSecond) ;
+            putData(getModuleState(BL).speedMetersPerSecond) ;
+            
+            putData(getModuleTarget(BR).angle.getDegrees()) ;
+            putData(getModuleState(BR).angle.getDegrees()) ;
+            putData(getModuleTarget(BR).speedMetersPerSecond) ;
+            putData(getModuleState(BR).speedMetersPerSecond) ;
+        }
+        catch(Exception ex) {
+        }
 
         addPlotData(plotid_, plotdata_);
     }

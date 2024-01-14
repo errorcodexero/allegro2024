@@ -6,6 +6,8 @@ import org.xero1425.base.subsystems.swerve.common.SwerveBaseSubsystem;
 import org.xero1425.base.subsystems.swerve.common.SwerveDriveChassisSpeedAction;
 import org.xero1425.base.subsystems.swerve.common.SwerveDriveXPatternAction;
 import org.xero1425.misc.BadParameterTypeException;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 import org.xero1425.misc.MissingParameterException;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -128,7 +130,14 @@ public class SwerveDriveGamepad extends Gamepad {
                 if (invert_ && DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red) {
                     invert = true ;
                 }
-                db.resetPose(invert);
+                try {
+                    db.resetPose(invert);
+                }
+                catch(Exception ex) {
+                    MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+                    logger.startMessage(MessageType.Error).add("exeception thrown in swerve resetPose - " + ex.getMessage()).endMessage();
+                    logger.logStackTrace(ex.getStackTrace());
+                }
             }
         }
 

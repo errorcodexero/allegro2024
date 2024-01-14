@@ -1,26 +1,20 @@
 package org.xero1425.base.subsystems.swerve.sdsswerve;
 
-import org.xero1425.swervelib.Mk4ModuleConfiguration;
-import org.xero1425.swervelib.Mk4iSwerveModuleHelper;
-import org.xero1425.swervelib.SDSModuleGlobalConfig;
-import org.xero1425.swervelib.SwerveModule;
-import org.xero1425.base.misc.XeroTimer;
+import org.xero1425.base.motors.BadMotorRequestException;
+import org.xero1425.base.motors.MotorFactory;
+import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.swerve.common.SwerveBaseSubsystem;
-import org.xero1425.misc.BadParameterTypeException;
+import org.xero1425.misc.ISettingsSupplier;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
-import org.xero1425.misc.MissingParameterException;
 import org.xero1425.misc.PIDCtrl;
+import org.xero1425.swervelib.SwerveModule;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
@@ -29,8 +23,6 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         RawSpeed,
         Chassis
     } ;
-
-    private Mk4iSwerveModuleHelper.GearRatio ratio_ ;
 
     private final SwerveModule fl_ ;
     private final SwerveModule fr_ ;
@@ -49,112 +41,24 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
     private double nominal_voltage_ ;
 
     private boolean module_encoders_inited_ ;
-    private XeroTimer module_init_timer_ ;
     
     public SDSSwerveDriveSubsystem(Subsystem parent, String name) throws Exception {
         super(parent, name) ;
-
-        ShuffleboardLayout lay ;
-        int drive, steer, encoder ;
-        double offset ;
-        Mk4ModuleConfiguration config = new Mk4ModuleConfiguration() ;
-
-        String bus = getSettingsValue("hw:bus").getString() ;
-        SDSModuleGlobalConfig.setCanBus(bus) ;
 
         speeds_ = new double[4] ;
         powers_ = new double[4] ;
         angles_ = new double[4] ;
 
-        pid_ctrls_ = new PIDCtrl[4] ;
-        pid_ctrls_[FL] = createPIDCtrl("fl") ;
-        pid_ctrls_[FR] = createPIDCtrl("fr") ;
-        pid_ctrls_[BL] = createPIDCtrl("bl") ;
-        pid_ctrls_[BR] = createPIDCtrl("br") ;
-
-        if (isSettingDefined("electrical:drive-current-limit")) {
-            config.setDriveCurrentLimit(getSettingsValue("electrical:drive-current-limit").getDouble()) ;
-        }
-
-        if (isSettingDefined("electrical:steer-current-limit")) {
-            config.setSteerCurrentLimit(getSettingsValue("electrical:steer-current-limit").getDouble()) ;
-        }
-
-        if (isSettingDefined("electrical:nominal-voltage")) {
-            nominal_voltage_ = getSettingsValue("electrical:nominal-voltage").getDouble() ;
-            config.setNominalVoltage(nominal_voltage_) ;
-        }
-        else {
-            nominal_voltage_ = 12.0 ;
-        }
-
-        String ratiostr = getSettingsValue("hw:gear-ratio").getString() ;
-        ratio_ = Mk4iSwerveModuleHelper.GearRatio.L3 ;
-
-        if (ratiostr.equals("L2")) {
-            ratio_ = Mk4iSwerveModuleHelper.GearRatio.L2 ;
-        }
-        else if (ratiostr.equals("L1")) {
-            ratio_ = Mk4iSwerveModuleHelper.GearRatio.L1 ;
-        }
-
-        ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drivetrain");
-
-        lay = shuffleboardTab.getLayout("FLModule", BuiltInLayouts.kList).withSize(2, 4).withPosition(0, 0) ;
-        drive = getSettingsValue("hw:fl:drive:canid").getInteger() ;
-        steer = getSettingsValue("hw:fl:steer:canid").getInteger() ;
-        encoder = getSettingsValue("hw:fl:encoder:canid").getInteger() ;
-        offset = Math.toRadians(getSettingsValue("hw:fl:encoder:offset").getDouble()) ;
-
-        if (isVerbose())
-            fl_ = Mk4iSwerveModuleHelper.createFalcon500(lay, config, ratio_, drive, steer, encoder, offset) ;
-        else
-            fl_ = Mk4iSwerveModuleHelper.createFalcon500(config, ratio_, drive, steer, encoder, offset) ;
-
-        lay = shuffleboardTab.getLayout("FRModule", BuiltInLayouts.kList).withSize(2, 4).withPosition(0, 0) ;
-        drive = getSettingsValue("hw:fr:drive:canid").getInteger() ;
-        steer = getSettingsValue("hw:fr:steer:canid").getInteger() ;
-        encoder = getSettingsValue("hw:fr:encoder:canid").getInteger() ;
-        offset = Math.toRadians(getSettingsValue("hw:fr:encoder:offset").getDouble()) ;
-
-        if (isVerbose())
-            fr_ = Mk4iSwerveModuleHelper.createFalcon500(lay, config, ratio_, drive, steer, encoder, offset) ;
-        else
-            fr_ = Mk4iSwerveModuleHelper.createFalcon500(config, ratio_, drive, steer, encoder, offset) ;
-
-        lay = shuffleboardTab.getLayout("BLModule", BuiltInLayouts.kList).withSize(2, 4).withPosition(0, 0) ;
-        drive = getSettingsValue("hw:bl:drive:canid").getInteger() ;
-        steer = getSettingsValue("hw:bl:steer:canid").getInteger() ;
-        encoder = getSettingsValue("hw:bl:encoder:canid").getInteger() ;
-        offset = Math.toRadians(getSettingsValue("hw:bl:encoder:offset").getDouble()) ;
-        if (isVerbose())
-            bl_ = Mk4iSwerveModuleHelper.createFalcon500(lay, config, ratio_, drive, steer, encoder, offset) ;
-        else
-            bl_ = Mk4iSwerveModuleHelper.createFalcon500(config, ratio_, drive, steer, encoder, offset) ;        
-
-        lay = shuffleboardTab.getLayout("BRModule", BuiltInLayouts.kList).withSize(2, 4).withPosition(0, 0) ;
-        drive = getSettingsValue("hw:br:drive:canid").getInteger() ;
-        steer = getSettingsValue("hw:br:steer:canid").getInteger() ;
-        encoder = getSettingsValue("hw:br:encoder:canid").getInteger() ;
-        offset = Math.toRadians(getSettingsValue("hw:br:encoder:offset").getDouble()) ;
-        if (isVerbose())
-            br_ = Mk4iSwerveModuleHelper.createFalcon500(lay, config, ratio_, drive, steer, encoder, offset) ;
-        else
-            br_ = Mk4iSwerveModuleHelper.createFalcon500(config, ratio_, drive, steer, encoder, offset) ;        
-
-        createOdometry(); 
-
-        module_init_timer_ = new XeroTimer(parent.getRobot(), "swerve-init", 15.0);
-        module_encoders_inited_ = true ;
-        module_init_timer_.start() ;
+        String basename = "subsystems:" + name + ":hw:" ;
+        MotorFactory factory = parent.getRobot().getMotorFactory() ;
+        ISettingsSupplier settings = parent.getRobot().getSettingsSupplier() ;
+        fl_ = new SwerveModule(factory, settings, "swerve-fl", basename + "fl");
+        fr_ = new SwerveModule(factory, settings, "swerve-fr", basename + "fr");
+        bl_ = new SwerveModule(factory, settings, "swerve-bl", basename + "bl");        
+        br_ = new SwerveModule(factory, settings, "swerve-br", basename + "br");
     }
 
-    private PIDCtrl createPIDCtrl(String name) throws MissingParameterException, BadParameterTypeException {
-        String pidname = "subsystems:" + getName() + ":pids:" + name ;
-        return new PIDCtrl(getRobot().getSettingsSupplier(), pidname, false) ;
-    }
-
-    public SwerveModuleState getModuleState(int which) {
+    public SwerveModuleState getModuleState(int which) throws BadMotorRequestException, MotorRequestFailedException {
         SwerveModuleState st = null ;
 
         switch(which) {
@@ -181,22 +85,29 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
     public SwerveModulePosition getModulePosition(int which) {
         SwerveModulePosition st = null ;
 
-        switch(which) {
-            case FL:
-                st = new SwerveModulePosition(fl_.getDistance(), new Rotation2d(fl_.getSteerAngle())) ;
-                break ;
+        try {
+            switch(which) {
+                case FL:
+                    st = new SwerveModulePosition(fl_.getDistance(), new Rotation2d(fl_.getSteerAngle())) ;
+                    break ;
 
-            case FR:
-                st = new SwerveModulePosition(fr_.getDistance(), new Rotation2d(fr_.getSteerAngle())) ;
-                break ;
-                
-            case BL:
-                st = new SwerveModulePosition(bl_.getDistance(), new Rotation2d(bl_.getSteerAngle())) ;
-                break ;
-                
-            case BR:
-                st = new SwerveModulePosition(br_.getDistance(), new Rotation2d(br_.getSteerAngle())) ;
-                break ;
+                case FR:
+                    st = new SwerveModulePosition(fr_.getDistance(), new Rotation2d(fr_.getSteerAngle())) ;
+                    break ;
+                    
+                case BL:
+                    st = new SwerveModulePosition(bl_.getDistance(), new Rotation2d(bl_.getSteerAngle())) ;
+                    break ;
+                    
+                case BR:
+                    st = new SwerveModulePosition(br_.getDistance(), new Rotation2d(br_.getSteerAngle())) ;
+                    break ;
+            }
+        }
+        catch(Exception ex) {
+            MessageLogger logger = getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Error).add("exception thrown by SDSSwerveDriveSubsystem.getModulePosition - " + ex.getMessage()).endMessage();
+            logger.logStackTrace(ex.getStackTrace());
         }
 
         return st ;
@@ -237,25 +148,11 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
     public void computeMyState() throws Exception {
         super.computeMyState();
 
-        // fl_.heartBeat(getRobot().getMessageLogger(), "FL");
-        // fr_.heartBeat(getRobot().getMessageLogger(), "FR");
-        // bl_.heartBeat(getRobot().getMessageLogger(), "BL");
-        // br_.heartBeat(getRobot().getMessageLogger(), "BR");
-
-        if (module_init_timer_.isExpired() && !module_encoders_inited_) {
-            fl_.synchronizeEncoders(getRobot().getMessageLogger(), "FL");
-            fr_.synchronizeEncoders(getRobot().getMessageLogger(), "FR");
-            bl_.synchronizeEncoders(getRobot().getMessageLogger(), "BL");
-            br_.synchronizeEncoders(getRobot().getMessageLogger(), "BR");
-
-            module_encoders_inited_ = true ;
-        }
-
         if (getRobot().isDisabled()) {
-            fl_.set(0.0, 0.0);
-            fr_.set(0.0, 0.0);
-            bl_.set(0.0, 0.0);
-            br_.set(0.0, 0.0);
+            fl_.set(0.0, fl_.getSteerAngle());
+            fr_.set(0.0, fr_.getSteerAngle());
+            bl_.set(0.0, bl_.getSteerAngle());
+            br_.set(0.0, br_.getSteerAngle());
         }
     }
 

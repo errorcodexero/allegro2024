@@ -2,7 +2,6 @@ package org.xero1425.base.subsystems.intake2motor;
 
 import org.xero1425.base.motors.BadMotorRequestException;
 import org.xero1425.base.motors.IMotorController;
-import org.xero1425.base.motors.MotorController;
 import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.motors.IMotorController.PidType;
 import org.xero1425.base.subsystems.Subsystem;

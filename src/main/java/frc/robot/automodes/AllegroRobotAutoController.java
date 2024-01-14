@@ -9,14 +9,14 @@ import org.xero1425.misc.MissingParameterException;
 
 public class AllegroRobotAutoController extends AutoController {
 
-    private AllegroTestAutoMode test_mode_;
+    // private AllegroTestAutoMode test_mode_;
 
     public AllegroRobotAutoController(XeroRobot robot)
             throws MissingParameterException, BadParameterTypeException {
         super(robot, "AllegroRobotAutoController");
 
         try {
-            test_mode_ = new AllegroTestAutoMode(this);
+            // test_mode_ = new AllegroTestAutoMode(this);
 
         } catch(Exception e) {
             MessageLogger logger = robot.getMessageLogger() ;
