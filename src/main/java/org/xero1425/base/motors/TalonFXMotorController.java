@@ -245,19 +245,19 @@ public class TalonFXMotorController extends MotorController
 
     /// \brief Set the neutral mode for the motor
     /// \param mode the neutral mode for the motor
-    public void setNeutralMode(NeutralMode mode) throws BadMotorRequestException, MotorRequestFailedException {
+    public void setNeutralMode(XeroNeutralMode mode) throws BadMotorRequestException, MotorRequestFailedException {
         MotorOutputConfigs cfgs = cfg_.MotorOutput ;
-        cfgs.NeutralMode = (mode == NeutralMode.Brake) ? NeutralModeValue.Brake : NeutralModeValue.Coast ;
+        cfgs.NeutralMode = (mode == XeroNeutralMode.Brake) ? NeutralModeValue.Brake : NeutralModeValue.Coast ;
         checkError("setNeutralMode", ctrl_.getConfigurator().apply(cfgs)) ;        
     }
     
     /// \brief Get the neutral mode for the motor
     /// \returns the neutral mode for the motor
-    public NeutralMode getNeutralMode() throws BadMotorRequestException, MotorRequestFailedException {
-        NeutralMode ret = NeutralMode.Coast ;
+    public XeroNeutralMode getNeutralMode() throws BadMotorRequestException, MotorRequestFailedException {
+        XeroNeutralMode ret = XeroNeutralMode.Coast ;
 
         if (cfg_.MotorOutput.NeutralMode == NeutralModeValue.Brake) {
-            ret = NeutralMode.Brake ;
+            ret = XeroNeutralMode.Brake ;
         }
         return ret ;
     }
@@ -395,7 +395,13 @@ public class TalonFXMotorController extends MotorController
     }
 
     /// \brief Reset the encoder values to zero    
-    public void resetEncoder() throws BadMotorRequestException {
-        ctrl_.setPosition(0.0) ;
+    public void resetEncoder() throws BadMotorRequestException, MotorRequestFailedException {
+        checkError("resetEncoder" ,ctrl_.setPosition(0.0)) ;
     }
+
+     /// \brief Set the encoder to a specific value in ticks
+     /// \param pos the new value for the encoder in ticks
+     public void setPosition(int value) throws BadMotorRequestException, MotorRequestFailedException {
+        checkError("setPosition" ,ctrl_.setPosition(value)) ;
+     }    
 } ;

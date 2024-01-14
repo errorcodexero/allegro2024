@@ -15,7 +15,7 @@
             // Subsystem related messages
             "vision": false,
             "swerve" : true,
-            "limelight" : false,
+            "limelight" : false
         },
         "verbose": {
             "swerve" : true
@@ -48,22 +48,26 @@
                         "steer" : {
                             "type": "talon-fx",
                             "canid": 11,
-                            "bus" : "drivebase",
+                            "bus" : "DriveBase",
                             "inverted" : false,
                             "neutral-mode": "brake",
-                            "pdp-channel" : 4
+                            "current-limit" : 20.0,
+                            "p" : 0.2,
+                            "i" : 0.0,
+                            "d" : 0.1
                         },
                         "drive" : {
                             "type": "talon-fx",
                             "canid": 12,
-                            "bus" : "drivebase",
+                            "bus" : "DriveBase",
                             "inverted" : false,
                             "neutral-mode": "brake",
-                            "pdp-channel" : 4
+                            "current-limit" : 80.0
                         }
                     },
                     "encoder" : {
                         "canid" : 13,
+                        "bus" : "DriveBase",                        
                         "offset": {
                             "PRACTICE" : 0,
                             "COMPETITION" : 0
@@ -75,22 +79,26 @@
                         "steer" : {
                             "type": "talon-fx",
                             "canid": 21,
-                            "bus" : "drivebase",
+                            "bus" : "DriveBase",
                             "inverted" : false,
                             "neutral-mode": "brake",
-                            "pdp-channel" : 4
+                            "current-limit" : 20.0,
+                            "p" : 0.2,
+                            "i" : 0.0,
+                            "d" : 0.1
                         },
                         "drive" : {
                             "type": "talon-fx",
                             "canid": 22,
-                            "bus" : "drivebase",
+                            "bus" : "DriveBase",
                             "inverted" : false,
                             "neutral-mode": "brake",
-                            "pdp-channel" : 4
+                            "current-limit" : 80.0
                         }
                     },
                     "encoder" : {
                         "canid" : 23,
+                        "bus" : "DriveBase",                        
                         "offset": {
                             "PRACTICE" : 0,
                             "COMPETITION" : 0
@@ -102,22 +110,27 @@
                         "steer" : {
                             "type": "talon-fx",
                             "canid": 41,
-                            "bus" : "drivebase",
+                            "bus" : "DriveBase",
                             "inverted" : false,
                             "neutral-mode": "brake",
-                            "pdp-channel" : 4
+                            "pdp-channel" : 4,
+                            "current-limit" : 20.0,
+                            "p" : 0.2,
+                            "i" : 0.0,
+                            "d" : 0.1
                         },
                         "drive" : {
                             "type": "talon-fx",
                             "canid": 42,
-                            "bus" : "drivebase",
+                            "bus" : "DriveBase",
                             "inverted" : false,
                             "neutral-mode": "brake",
-                            "pdp-channel" : 4
+                            "current-limit" : 80.0
                         }
                     },
                     "encoder" : {
                         "canid" : 43,
+                        "bus" : "DriveBase",                        
                         "offset": {
                             "PRACTICE" : 0,
                             "COMPETITION" : 0
@@ -129,22 +142,26 @@
                         "steer" : {
                             "type": "talon-fx",
                             "canid": 31,
-                            "bus" : "drivebase",
+                            "bus" : "DriveBase",
                             "inverted" : false,
                             "neutral-mode": "brake",
-                            "pdp-channel" : 4
+                            "current-limit" : 20.0,
+                            "p" : 0.2,
+                            "i" : 0.0,
+                            "d" : 0.1
                         },
                         "drive" : {
                             "type": "talon-fx",
                             "canid": 32,
-                            "bus" : "drivebase",
+                            "bus" : "DriveBase",
                             "inverted" : false,
                             "neutral-mode": "brake",
-                            "pdp-channel" : 4
+                            "current-limit" : 80.0
                         }
                     },
                     "encoder" : {
                         "canid" : 33,
+                        "bus" : "DriveBase",                        
                         "offset": {
                             "PRACTICE" : 0,
                             "COMPETITION" : 0

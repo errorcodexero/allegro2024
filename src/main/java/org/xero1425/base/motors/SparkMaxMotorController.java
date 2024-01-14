@@ -31,7 +31,7 @@ public class SparkMaxMotorController extends MotorController
     private MotorType mtype_ ;
     private boolean inverted_ ;
     private IMotorController leader_ ;
-    private NeutralMode neutral_mode_ ;
+    private XeroNeutralMode neutral_mode_ ;
     private double deadband_ ;
     private double current_limit_ ;
     private boolean pos_important_ ;
@@ -233,14 +233,14 @@ public class SparkMaxMotorController extends MotorController
 
     /// \brief Set the neutral mode for the motor
     /// \param mode the neutral mode for the motor
-    public void setNeutralMode(NeutralMode mode) throws BadMotorRequestException, MotorRequestFailedException {
+    public void setNeutralMode(XeroNeutralMode mode) throws BadMotorRequestException, MotorRequestFailedException {
         neutral_mode_ = mode ;
-        ctrl_.setIdleMode((mode == NeutralMode.Brake) ? IdleMode.kBrake : IdleMode.kCoast);
+        ctrl_.setIdleMode((mode == XeroNeutralMode.Brake) ? IdleMode.kBrake : IdleMode.kCoast);
     }
     
     /// \brief Get the neutral mode for the motor
     /// \returns the neutral mode for the motor
-    public NeutralMode getNeutralMode() throws BadMotorRequestException, MotorRequestFailedException {
+    public XeroNeutralMode getNeutralMode() throws BadMotorRequestException, MotorRequestFailedException {
         return neutral_mode_ ;
     }
 
@@ -383,10 +383,19 @@ public class SparkMaxMotorController extends MotorController
     }
 
     /// \brief Reset the encoder values to zero    
-    public void resetEncoder() throws BadMotorRequestException {
+    public void resetEncoder() throws BadMotorRequestException, MotorRequestFailedException {
         if (mtype_ == MotorType.kBrushless)
             throw new BadMotorRequestException(this, "brushed motor does not support resetEncoder()") ;
 
-        encoder_.setPosition(0.0) ;
+        checkError("resetEncoder", encoder_.setPosition(0.0)) ;
     }
+
+     /// \brief Set the encoder to a specific value in ticks
+     /// \param pos the new value for the encoder in ticks
+     public void setPosition(int value) throws BadMotorRequestException, MotorRequestFailedException {
+        if (mtype_ == MotorType.kBrushless)
+            throw new BadMotorRequestException(this, "brushed motor does not support resetEncoder()") ;
+
+        checkError("setPosition", encoder_.setPosition(value)) ;
+    }        
 } ;

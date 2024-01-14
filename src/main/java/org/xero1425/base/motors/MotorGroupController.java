@@ -20,6 +20,15 @@ public class MotorGroupController extends MotorController
         motors_ = new ArrayList<IMotorController>() ;
     }
 
+     /// \brief Set the encoder to a specific value in ticks
+     /// \param pos the new value for the encoder in ticks
+     public void setPosition(int value) throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        motors_.get(0).setPosition(value) ;
+     }    
+
     public void setMotionMagicParams(double v, double a, double j) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
@@ -182,7 +191,7 @@ public class MotorGroupController extends MotorController
 
     /// \brief Set the neutral mode for the motor
     /// \param mode the neutral mode for the motor      
-    public void setNeutralMode(NeutralMode mode) throws BadMotorRequestException, MotorRequestFailedException {
+    public void setNeutralMode(XeroNeutralMode mode) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
@@ -190,7 +199,7 @@ public class MotorGroupController extends MotorController
             ctrl.setNeutralMode(mode);
     }
 
-    public NeutralMode getNeutralMode() throws BadMotorRequestException, MotorRequestFailedException {
+    public XeroNeutralMode getNeutralMode() throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 

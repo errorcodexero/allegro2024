@@ -12,7 +12,7 @@ public interface IMotorController {
     }
 
     /// \brief the mode to apply when zero power is applied to the motor
-    public enum NeutralMode { 
+    public enum XeroNeutralMode { 
         Coast,              ///< Coast mode
         Brake               ///< Brake mode
     } ;
@@ -66,11 +66,11 @@ public interface IMotorController {
 
     /// \brief Set the neutral mode for the motor
     /// \param mode the neutral mode for the motor
-    public void setNeutralMode(NeutralMode coast) throws BadMotorRequestException, MotorRequestFailedException ;  
+    public void setNeutralMode(XeroNeutralMode coast) throws BadMotorRequestException, MotorRequestFailedException ;  
     
     /// \brief Get the neutral mode for the motor
     /// \returns the neutral mode for the motor
-    public NeutralMode getNeutralMode() throws BadMotorRequestException, MotorRequestFailedException ;
+    public XeroNeutralMode getNeutralMode() throws BadMotorRequestException, MotorRequestFailedException ;
 
     /// \brief Set the current limit for the current supplied to the motor
     /// \param limit the amount of current, in amps,  to the value given
@@ -149,6 +149,10 @@ public interface IMotorController {
 
     /// \brief Reset the encoder values to zero
     public void resetEncoder() throws BadMotorRequestException, MotorRequestFailedException ;
+
+     /// \brief Set the encoder to a specific value in ticks
+     /// \param pos the new value for the encoder in ticks
+     public void setPosition(int pos) throws BadMotorRequestException, MotorRequestFailedException ;
 
     /// \brief Returns the position of the motor in motor units from the motor controller.  If the motor does not
     /// have an attached encoder, an exception is thrown.

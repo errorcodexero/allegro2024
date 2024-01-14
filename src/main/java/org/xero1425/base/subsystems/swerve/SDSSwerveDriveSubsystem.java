@@ -6,6 +6,7 @@ import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.swerve.common.SwerveBaseSubsystem;
 import org.xero1425.base.subsystems.swerve.common.SwerveModule;
+import org.xero1425.base.subsystems.swerve.common.SwerveModuleConfig;
 import org.xero1425.misc.ISettingsSupplier;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
@@ -15,6 +16,10 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
@@ -49,13 +54,27 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         powers_ = new double[4] ;
         angles_ = new double[4] ;
 
+        ShuffleboardLayout lay ;
         String basename = "subsystems:" + name + ":hw:" ;
         MotorFactory factory = parent.getRobot().getMotorFactory() ;
         ISettingsSupplier settings = parent.getRobot().getSettingsSupplier() ;
-        fl_ = new SwerveModule(factory, settings, "swerve-fl", basename + "fl");
-        fr_ = new SwerveModule(factory, settings, "swerve-fr", basename + "fr");
-        bl_ = new SwerveModule(factory, settings, "swerve-bl", basename + "bl");        
-        br_ = new SwerveModule(factory, settings, "swerve-br", basename + "br");
+        SwerveModuleConfig cfg = SwerveModuleConfig.MK4I_L3 ;
+        ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drivetrain");
+
+        lay = shuffleboardTab.getLayout("FLModule", BuiltInLayouts.kList).withSize(2, 3).withPosition(0, 0) ;
+        fl_ = new SwerveModule(factory, settings, cfg, lay, "swerve-fl", basename + "fl");
+
+        lay = shuffleboardTab.getLayout("FRModule", BuiltInLayouts.kList).withSize(2, 3).withPosition(2, 0) ;        
+        fr_ = new SwerveModule(factory, settings, cfg, lay, "swerve-fr", basename + "fr");
+
+        lay = shuffleboardTab.getLayout("BLModule", BuiltInLayouts.kList).withSize(2, 3).withPosition(4, 0) ;
+                
+        bl_ = new SwerveModule(factory, settings, cfg, lay, "swerve-bl", basename + "bl");        
+
+        lay = shuffleboardTab.getLayout("BRModule", BuiltInLayouts.kList).withSize(2, 3).withPosition(6, 0) ;        
+        br_ = new SwerveModule(factory, settings, cfg, lay, "swerve-br", basename + "br");
+
+        createOdometry();
     }
 
     public SwerveModuleState getModuleState(int which) throws BadMotorRequestException, MotorRequestFailedException {
@@ -63,19 +82,19 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
         switch(which) {
             case FL:
-                st = new SwerveModuleState(fl_.getDriveVelocity(), new Rotation2d(fl_.getSteerAngle())) ;
+                st = new SwerveModuleState(fl_.getDriveVelocity(), new Rotation2d(fl_.getStateAngle())) ;
                 break ;
 
             case FR:
-                st = new SwerveModuleState(fr_.getDriveVelocity(), new Rotation2d(fr_.getSteerAngle())) ;
+                st = new SwerveModuleState(fr_.getDriveVelocity(), new Rotation2d(fr_.getStateAngle())) ;
                 break ;
                 
             case BL:
-                st = new SwerveModuleState(bl_.getDriveVelocity(), new Rotation2d(bl_.getSteerAngle())) ;
+                st = new SwerveModuleState(bl_.getDriveVelocity(), new Rotation2d(bl_.getStateAngle())) ;
                 break ;
                 
             case BR:
-                st = new SwerveModuleState(br_.getDriveVelocity(), new Rotation2d(br_.getSteerAngle())) ;
+                st = new SwerveModuleState(br_.getDriveVelocity(), new Rotation2d(br_.getStateAngle())) ;
                 break ;
         }
 
@@ -88,19 +107,19 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         try {
             switch(which) {
                 case FL:
-                    st = new SwerveModulePosition(fl_.getDistance(), new Rotation2d(fl_.getSteerAngle())) ;
+                    st = new SwerveModulePosition(fl_.getDistance(), new Rotation2d(fl_.getStateAngle())) ;
                     break ;
 
                 case FR:
-                    st = new SwerveModulePosition(fr_.getDistance(), new Rotation2d(fr_.getSteerAngle())) ;
+                    st = new SwerveModulePosition(fr_.getDistance(), new Rotation2d(fr_.getStateAngle())) ;
                     break ;
                     
                 case BL:
-                    st = new SwerveModulePosition(bl_.getDistance(), new Rotation2d(bl_.getSteerAngle())) ;
+                    st = new SwerveModulePosition(bl_.getDistance(), new Rotation2d(bl_.getStateAngle())) ;
                     break ;
                     
                 case BR:
-                    st = new SwerveModulePosition(br_.getDistance(), new Rotation2d(br_.getSteerAngle())) ;
+                    st = new SwerveModulePosition(br_.getDistance(), new Rotation2d(br_.getStateAngle())) ;
                     break ;
             }
         }
@@ -149,10 +168,10 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         super.computeMyState();
 
         if (getRobot().isDisabled()) {
-            fl_.set(0.0, fl_.getSteerAngle());
-            fr_.set(0.0, fr_.getSteerAngle());
-            bl_.set(0.0, bl_.getSteerAngle());
-            br_.set(0.0, br_.getSteerAngle());
+            fl_.set(0.0, fl_.getStateAngle());
+            fr_.set(0.0, fr_.getStateAngle());
+            bl_.set(0.0, bl_.getStateAngle());
+            br_.set(0.0, br_.getStateAngle());
         }
     }
 
@@ -201,15 +220,6 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
             fr_.set(powers_[FR] * nominal_voltage_, Math.toRadians(angles_[FR])) ;
             bl_.set(powers_[BL] * nominal_voltage_, Math.toRadians(angles_[BL])) ;
             br_.set(powers_[BR] * nominal_voltage_, Math.toRadians(angles_[BR])) ;
-
-            // MessageLogger logger = getRobot().getMessageLogger();
-            // logger.startMessage(MessageType.Info);
-            // logger.add("swerve driving: ") ;
-            // logger.add("fl", angles_[FL]);
-            // logger.add("fr", angles_[FR]);
-            // logger.add("bl", angles_[BL]);
-            // logger.add("br", angles_[BR]);
-            // logger.endMessage();
         }
         else {
             MessageLogger logger = getRobot().getMessageLogger();

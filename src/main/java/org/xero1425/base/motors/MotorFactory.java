@@ -115,7 +115,7 @@ public class MotorFactory {
                 // The first motor in this group (id = '1') will be the leader, and the remaining motors in the group
                 // will follow the leader.
                 //
-                IMotorController.NeutralMode groupmode = getNeutralMode(id);
+                IMotorController.XeroNeutralMode groupmode = getNeutralMode(id);
                 boolean leaderInverted = false ;
                 int currentIndex = 1;
                 MotorGroupController group = new MotorGroupController(name);
@@ -319,7 +319,7 @@ public class MotorFactory {
         //
         // Set the motor neutral type
         //
-        MotorController.NeutralMode nm = getNeutralMode(id);
+        MotorController.XeroNeutralMode nm = getNeutralMode(id);
         if (nm != null)
             ctrl.setNeutralMode(nm);
 
@@ -393,7 +393,7 @@ public class MotorFactory {
     //
     // Get the neutral mode from the JSON object that describes the motor (or motor group)
     //
-    private IMotorController.NeutralMode getNeutralMode(String id) throws BadParameterTypeException {
+    private IMotorController.XeroNeutralMode getNeutralMode(String id) throws BadParameterTypeException {
         SettingsValue v ;
         String pname = id + ":neutral-mode" ;
         
@@ -407,14 +407,14 @@ public class MotorFactory {
             throw new BadParameterTypeException(SettingsType.String, v.getType()) ;
         }
 
-        MotorController.NeutralMode mode ;
+        MotorController.XeroNeutralMode mode ;
         if (v.getString().equals(BrakeMode))
         {
-            mode = MotorController.NeutralMode.Brake ;
+            mode = MotorController.XeroNeutralMode.Brake ;
         }
         else if (v.getString().equals(CoastMode))
         {
-            mode = MotorController.NeutralMode.Coast ;
+            mode = MotorController.XeroNeutralMode.Coast ;
         }
         else 
         {

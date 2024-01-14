@@ -44,9 +44,9 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
     private double left_inches_per_tick_ ;
     private double right_inches_per_tick_ ;
     private double total_angle_ ;
-    private MotorController.NeutralMode automode_neutral_ ;
-    private MotorController.NeutralMode teleop_neutral_ ;
-    private MotorController.NeutralMode disabled_neutral_ ;
+    private MotorController.XeroNeutralMode automode_neutral_ ;
+    private MotorController.XeroNeutralMode teleop_neutral_ ;
+    private MotorController.XeroNeutralMode disabled_neutral_ ;
 
     private Speedometer left_linear_ ;
     private Speedometer right_linear_ ;
@@ -95,9 +95,9 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
         left_linear_ = new Speedometer("left", linearsamples, false);
         right_linear_ = new Speedometer("right", linearsamples, false);
 
-        automode_neutral_ = MotorController.NeutralMode.Brake;
-        teleop_neutral_ = MotorController.NeutralMode.Brake;
-        disabled_neutral_ = MotorController.NeutralMode.Coast;
+        automode_neutral_ = MotorController.XeroNeutralMode.Brake;
+        teleop_neutral_ = MotorController.XeroNeutralMode.Brake;
+        disabled_neutral_ = MotorController.XeroNeutralMode.Coast;
 
         attachHardware();
 
