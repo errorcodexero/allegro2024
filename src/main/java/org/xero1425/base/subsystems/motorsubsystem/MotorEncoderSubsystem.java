@@ -3,7 +3,7 @@ package org.xero1425.base.subsystems.motorsubsystem;
 import org.xero1425.base.XeroRobot;
 import org.xero1425.base.motors.BadMotorRequestException;
 import org.xero1425.base.motors.MotorRequestFailedException;
-import org.xero1425.base.motors.MotorController.PidType;
+import org.xero1425.base.motors.IMotorController.PidType;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
@@ -256,10 +256,20 @@ public class MotorEncoderSubsystem extends MotorSubsystem
 
     public double getTotalCurrent() {
         double total = 0.0 ;
-        int [] channels = getMotorController().getPDPChannels() ;
 
-        for(int i = 0 ; i < channels.length ; i++) {
-            total += getRobot().getCurrent(channels[i]);
+        try {
+            int [] channels = getMotorController().getPDPChannels() ;
+
+            for(int i = 0 ; i < channels.length ; i++) {
+                total += getRobot().getCurrent(channels[i]);
+            }
+        }
+        catch(Exception ex) {
+            MessageLogger logger = getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Error).add("exception thrown in getTotalCurrent - " + ex.getMessage()).endMessage();
+            logger.logStackTrace(ex.getStackTrace());
+
+            total = -1.0 ;
         }
 
         return total ;

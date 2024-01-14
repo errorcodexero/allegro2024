@@ -1,9 +1,10 @@
 package org.xero1425.base.subsystems.motorsubsystem;
 
 import org.xero1425.base.motors.BadMotorRequestException;
+import org.xero1425.base.motors.IMotorController;
 import org.xero1425.base.motors.MotorRequestFailedException;
+import org.xero1425.base.motors.IMotorController.PidType;
 import org.xero1425.base.subsystems.Subsystem;
-import org.xero1425.base.motors.MotorController;
 import org.xero1425.base.motors.MotorGroupController;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
@@ -21,7 +22,7 @@ public class MotorSubsystem extends Subsystem
     private static final double epsilon = 1e-3 ;
 
     // The motor controller
-    private MotorController controller_ ;
+    private IMotorController controller_ ;
 
     // The current power applied to the motor
     private double power_ ;
@@ -86,8 +87,8 @@ public class MotorSubsystem extends Subsystem
     /// controller, the first motor (the leader) in the group is returned.  It is guarenteed that a
     /// real motor controller is returned.
     /// \returns the motor controller object for this subsystem.
-    public MotorController getMotorController() {
-        MotorController ret = controller_ ;
+    public IMotorController getMotorController() {
+        IMotorController ret = controller_ ;
 
         if (controller_ instanceof MotorGroupController) {
             MotorGroupController group = (MotorGroupController)controller_ ;
@@ -104,7 +105,7 @@ public class MotorSubsystem extends Subsystem
             // The limitPower method can be overridden in a derived class to place limits on the
             // power ever supplied to the motor
             power_ = limitPower(p) ;
-            controller_.set(power_) ;
+            controller_.set(PidType.Voltage, power_) ;
         }
         catch(BadMotorRequestException|MotorRequestFailedException ex) {
             MessageLogger logger = getRobot().getMessageLogger() ;

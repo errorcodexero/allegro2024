@@ -20,6 +20,13 @@ public class MotorGroupController extends MotorController
         motors_ = new ArrayList<IMotorController>() ;
     }
 
+    public void setMotionMagicParams(double v, double a, double j) throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        motors_.get(0).setMotionMagicParams(v, a, j) ;
+    }
+
     public int getCanID() throws BadMotorRequestException, MotorRequestFailedException {
         throw new BadMotorRequestException(this, "cannot get CAN ID for motor group") ;
     }

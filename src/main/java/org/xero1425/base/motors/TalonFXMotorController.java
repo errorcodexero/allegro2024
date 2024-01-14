@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -306,7 +307,25 @@ public class TalonFXMotorController extends MotorController
         cfg.kS = s ;
 
         checkError("setPID()", ctrl_.getConfigurator().apply(cfg));
+
+        MotorOutputConfigs mo = cfg_.MotorOutput ;
+        mo.PeakForwardDutyCycle = outmax ;
+        mo.PeakReverseDutyCycle = -outmax ;
+        checkError("setPID()", ctrl_.getConfigurator().apply(mo));
     }
+
+    /// \brief Set the parameters for motion magic
+    /// \param v the max velocity for the motion
+    /// \param a the max acceleration for the motion
+    /// \param j the max jerk for the motion
+    public void setMotionMagicParams(double v, double a, double j) throws BadMotorRequestException, MotorRequestFailedException {
+        MotionMagicConfigs cfg = cfg_.MotionMagic ;
+        cfg.MotionMagicAcceleration = a ;
+        cfg.MotionMagicCruiseVelocity = v ;
+        cfg.MotionMagicJerk = j ;
+
+        checkError("setMotionMagicParams()", ctrl_.getConfigurator().apply(cfg));
+    }        
 
     /// \brief Set the motor target.  What the target is depends on the mode.
     /// \param type the type of target to set (position PID, velocity PID, MotionMagic, or percent power)
@@ -314,7 +333,7 @@ public class TalonFXMotorController extends MotorController
     public void set(PidType type, double target) throws BadMotorRequestException, MotorRequestFailedException {
         ControlRequest req = null ;
         switch(type) {
-            case None:
+            case Voltage:
                 req = new VoltageOut(target) ;
                 break ;
             case Position:

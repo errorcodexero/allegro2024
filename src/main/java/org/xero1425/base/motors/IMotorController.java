@@ -5,7 +5,7 @@ import java.util.List;
 public interface IMotorController {
     /// \brief the type of PID control to run on the motor controller
     public enum PidType {
-        None,                       ///< No PID type has been set
+        Voltage,                    ///< No PID type has been set
         Position,                   ///< Position PID control
         Velocity,                   ///< Velocity PID control
         MotionMagic,                ///< Motion Magic
@@ -134,7 +134,13 @@ public interface IMotorController {
     /// \param g the gravity feed forward parameter for the PID controller
     /// \param s the static friction feed forward parameter for the PID controller
     /// \param outmax the maximum output parameter for the PID controller 
-    public void setPID(PidType type, double p, double i, double d, double v, double a, double g, double s, double outmax) throws BadMotorRequestException , MotorRequestFailedException ;    
+    public void setPID(PidType type, double p, double i, double d, double v, double a, double g, double s, double outmax) throws BadMotorRequestException , MotorRequestFailedException ; 
+
+    /// \brief Set the parameters for motion magic
+    /// \param v the max velocity for the motion
+    /// \param a the max acceleration for the motion
+    /// \param j the max jerk for the motion
+    public void setMotionMagicParams(double v, double a, double j) throws BadMotorRequestException, MotorRequestFailedException;
 
     /// \brief Set the motor target.  What the target is depends on the mode.
     /// \param type the type of target to set (position PID, velocity PID, MotionMagic, or percent power)

@@ -19,6 +19,8 @@ import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 /// MotorController base class.  This class supports both brushless and brushed motors.
 public class SparkMaxMotorController extends MotorController
 {
+    static public final String SimDeviceNameBrushed = "SparkMaxBrushed" ;
+    static public final String SimDeviceNameBrushless = "SparkMax" ;
     static final int kTicksPerRevolution = 42 ;
     static final String kRobotType = "SparkMaxBrushless" ;
 
@@ -288,16 +290,24 @@ public class SparkMaxMotorController extends MotorController
         checkError("could not set PID controller OUTMAX value", pid_.setOutputRange(-outmax, outmax));
     }
 
+    /// \brief Set the parameters for motion magic
+    /// \param v the max velocity for the motion
+    /// \param a the max acceleration for the motion
+    /// \param j the max jerk for the motion
+    public void setMotionMagicParams(double v, double a, double j) throws BadMotorRequestException, MotorRequestFailedException {
+        throw new BadMotorRequestException(this, "the SparkMaxMotorController does not support motion magic") ;        
+    }    
+
     /// \brief Set the motor target.  What the target is depends on the mode.
     /// \param type the type of target to set (position PID, velocity PID, MotionMagic, or percent power)
     /// \param target the target value, depends on the type    
     public void set(PidType type, double target) throws BadMotorRequestException, MotorRequestFailedException {
-        if (mtype_ == MotorType.kBrushless && type != PidType.None) {
+        if (mtype_ == MotorType.kBrushless && type != PidType.Voltage) {
             throw new BadMotorRequestException(this, "brushed motor does not support PID") ;
         }
 
         switch(type) {
-            case None:
+            case Voltage:
                 checkError("could not set voltage", pid_.setReference(target, CANSparkMax.ControlType.kVoltage)) ;
                 break ;            
             case Position:
