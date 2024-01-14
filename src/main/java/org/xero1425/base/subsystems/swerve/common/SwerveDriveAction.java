@@ -48,16 +48,16 @@ public abstract class SwerveDriveAction extends Action {
         double phi = getSubsystem().getPHI() ;
 
         switch(which) {
-            case XeroSwerveDriveSubsystem.FL:
+            case SwerveBaseSubsystem.FL:
                 angle = 180 - phi ;
                 break ;
-            case XeroSwerveDriveSubsystem.FR:
+            case SwerveBaseSubsystem.FR:
                 angle = phi ;
                 break ;
-            case XeroSwerveDriveSubsystem.BL:
+            case SwerveBaseSubsystem.BL:
                 angle = -180 + phi ;
                 break ;
-            case XeroSwerveDriveSubsystem.BR:
+            case SwerveBaseSubsystem.BR:
                 angle = -phi ;
                 break ;                                                
         }

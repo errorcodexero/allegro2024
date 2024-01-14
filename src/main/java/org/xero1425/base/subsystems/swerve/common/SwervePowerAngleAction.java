@@ -1,8 +1,6 @@
 package org.xero1425.base.subsystems.swerve.common;
 
 import org.xero1425.base.misc.XeroTimer;
-import org.xero1425.base.subsystems.swerve.xeroswerve.XeroSwerveDriveSubsystem;
-
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 
 /// \file
@@ -53,10 +51,10 @@ public class SwervePowerAngleAction extends SwerveDriveAction {
         super(subsys) ;
 
         angles_ = new double[4] ;
-        angles_[XeroSwerveDriveSubsystem.FL] = angle ;
-        angles_[XeroSwerveDriveSubsystem.BL] = angle ;
-        angles_[XeroSwerveDriveSubsystem.FR] = angle ;
-        angles_[XeroSwerveDriveSubsystem.BR] = angle ;
+        angles_[SwerveBaseSubsystem.FL] = angle ;
+        angles_[SwerveBaseSubsystem.BL] = angle ;
+        angles_[SwerveBaseSubsystem.FR] = angle ;
+        angles_[SwerveBaseSubsystem.BR] = angle ;
 
         speeds_ = new double[4] ;
         for(int i = 0 ; i < 4 ; i++) 
