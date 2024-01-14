@@ -2,19 +2,18 @@ package frc.robot.automodes;
 
 import org.xero1425.base.controllers.AutoController;
 import org.xero1425.base.controllers.TestAutoMode;
-import org.xero1425.base.subsystems.swerve.common.SwerveAlignDriveBaseAction;
-import org.xero1425.base.subsystems.swerve.common.SwerveHolonomicPathFollower;
-import org.xero1425.base.subsystems.swerve.common.SwervePowerAngleAction;
-import org.xero1425.base.subsystems.swerve.common.SwerveSpeedAngleAction;
-import org.xero1425.base.subsystems.swerve.sdsswerve.SDSSwerveDriveSubsystem;
+import org.xero1425.base.subsystems.swerve.SDSSwerveDriveSubsystem;
+import org.xero1425.base.subsystems.swerve.SwerveAlignDriveBaseAction;
+import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollower;
+import org.xero1425.base.subsystems.swerve.SwervePowerAngleAction;
+import org.xero1425.base.subsystems.swerve.SwerveSpeedAngleAction;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
 
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class AllegroTestAutoMode extends TestAutoMode {
 
-    public AllegroTestAutoMode(AutoController ctrl)
-            throws Exception {
+    public AllegroTestAutoMode(AutoController ctrl) throws Exception {
         super(ctrl, "Allegro-Test-Mode");
 
         AllegroRobot2024 robotsubsystem = (AllegroRobot2024) ctrl.getRobot().getRobotSubsystem();
@@ -30,8 +29,7 @@ public class AllegroTestAutoMode extends TestAutoMode {
                 // Set the steering motor to the angle given, and the drive motor to the power
                 // given. Run indefintely. Action will
                 // stop the plot after the default plot interval (four seconds)
-                addSubActionPair(swerve, new SwervePowerAngleAction(swerve, getDouble("angle"), getDouble("power")),
-                        true);
+                addSubActionPair(swerve, new SwervePowerAngleAction(swerve, getDouble("angle"), getDouble("power")), true);
                 break;
 
             case 1:

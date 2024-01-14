@@ -3,7 +3,7 @@ package org.xero1425.base.subsystems.motorsubsystem;
 import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.motors.BadMotorRequestException;
 import org.xero1425.base.motors.MotorRequestFailedException;
-import org.xero1425.base.motors.IMotorController.PidType;
+import org.xero1425.base.motors.IMotorController.XeroPidType;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.ISettingsSupplier;
 import org.xero1425.misc.MissingParameterException;
@@ -106,7 +106,7 @@ public class MotorEncoderVelocityMCAction extends MotorAction {
         //
         MotorEncoderSubsystem sub = (MotorEncoderSubsystem)getSubsystem() ;
         double ticks = sub.getEncoder().mapVelocityToMotor(target) ;
-        getSubsystem().getMotorController().set(PidType.Velocity, ticks) ;
+        getSubsystem().getMotorController().set(XeroPidType.Velocity, ticks) ;
     }
 
     /// \brief Returns the current target
@@ -140,7 +140,7 @@ public class MotorEncoderVelocityMCAction extends MotorAction {
         double g = getSubsystem().getSettingsValue(name_ + ":kg").getDouble() ;
         double outmax = getSubsystem().getSettingsValue(name_ + ":outmax").getDouble() ;
 
-        getSubsystem().getMotorController().setPID(PidType.Velocity, p, i, d, v, a, g, s, outmax) ;
+        getSubsystem().getMotorController().setPID(XeroPidType.Velocity, p, i, d, v, a, g, s, outmax) ;
         setTarget(target_);
     }
 
@@ -171,7 +171,7 @@ public class MotorEncoderVelocityMCAction extends MotorAction {
         super.cancel() ;
 
         try {
-            getSubsystem().getMotorController().set(PidType.Voltage, 0.0);
+            getSubsystem().getMotorController().set(XeroPidType.Voltage, 0.0);
         }
         catch(Exception ex) {
         }

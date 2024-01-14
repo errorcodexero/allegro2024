@@ -265,8 +265,8 @@ public class SparkMaxMotorController extends MotorController
 
     /// \brief Returns true if the motor controller supports PID loops on the controller
     /// \returns true if the motor controller supports PID loops on the controller
-    public boolean hasPID(PidType type) throws BadMotorRequestException , MotorRequestFailedException {
-        if (type == PidType.MotionMagic)
+    public boolean hasPID(XeroPidType type) throws BadMotorRequestException , MotorRequestFailedException {
+        if (type == XeroPidType.MotionMagic)
             return false ;
 
         return true ;
@@ -282,7 +282,7 @@ public class SparkMaxMotorController extends MotorController
     /// \param g the gravity feed forward parameter for the PID controller
     /// \param s the static friction feed forward parameter for the PID controller
     /// \param outmax the maximum output parameter for the PID controller 
-    public void setPID(PidType type, double p, double i, double d, double v, double a, double g, double s, double outmax) throws BadMotorRequestException , MotorRequestFailedException {
+    public void setPID(XeroPidType type, double p, double i, double d, double v, double a, double g, double s, double outmax) throws BadMotorRequestException , MotorRequestFailedException {
         checkError("could not set PID controller P value", pid_.setP(p));
         checkError("could not set PID controller I value", pid_.setI(i));
         checkError("could not set PID controller D value", pid_.setD(d));
@@ -301,8 +301,8 @@ public class SparkMaxMotorController extends MotorController
     /// \brief Set the motor target.  What the target is depends on the mode.
     /// \param type the type of target to set (position PID, velocity PID, MotionMagic, or percent power)
     /// \param target the target value, depends on the type    
-    public void set(PidType type, double target) throws BadMotorRequestException, MotorRequestFailedException {
-        if (mtype_ == MotorType.kBrushless && type != PidType.Voltage) {
+    public void set(XeroPidType type, double target) throws BadMotorRequestException, MotorRequestFailedException {
+        if (mtype_ == MotorType.kBrushless && type != XeroPidType.Voltage) {
             throw new BadMotorRequestException(this, "brushed motor does not support PID") ;
         }
 
@@ -392,7 +392,7 @@ public class SparkMaxMotorController extends MotorController
 
      /// \brief Set the encoder to a specific value in ticks
      /// \param pos the new value for the encoder in ticks
-     public void setPosition(int value) throws BadMotorRequestException, MotorRequestFailedException {
+     public void setPosition(double value) throws BadMotorRequestException, MotorRequestFailedException {
         if (mtype_ == MotorType.kBrushless)
             throw new BadMotorRequestException(this, "brushed motor does not support resetEncoder()") ;
 

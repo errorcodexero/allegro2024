@@ -3,7 +3,7 @@ package org.xero1425.base.subsystems.motorsubsystem;
 import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.motors.BadMotorRequestException;
 import org.xero1425.base.motors.MotorRequestFailedException;
-import org.xero1425.base.motors.IMotorController.PidType;
+import org.xero1425.base.motors.IMotorController.XeroPidType;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
@@ -88,7 +88,7 @@ public class MotorEncoderMotionMagicAction extends MotorAction {
     public void start() throws Exception {
         super.start() ;
 
-        getSubsystem().getMotorController().setPID(PidType.MotionMagic, kp_, ki_, kd_, kv_, ka_, kg_, ks_, 1.0);
+        getSubsystem().getMotorController().setPID(XeroPidType.MotionMagic, kp_, ki_, kd_, kv_, ka_, kg_, ks_, 1.0);
         getSubsystem().getMotorController().setMotionMagicParams(maxv_, maxa_, jerk_) ;
 
         start_ = getSubsystem().getRobot().getTime() ;
@@ -165,7 +165,7 @@ public class MotorEncoderMotionMagicAction extends MotorAction {
     private void tryStart() throws BadMotorRequestException, MotorRequestFailedException {
         if (state_ == State.Waiting) {
             MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem() ;
-            me.getMotorController().set(PidType.MotionMagic, target_);
+            me.getMotorController().set(XeroPidType.MotionMagic, target_);
             state_ = State.Running ;
 
             MessageLogger logger = me.getRobot().getMessageLogger();

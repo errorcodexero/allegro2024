@@ -2,7 +2,7 @@ package frc.robot.subsystems.toplevel;
 
 import org.xero1425.base.XeroRobot;
 import org.xero1425.base.subsystems.RobotSubsystem;
-import org.xero1425.base.subsystems.swerve.sdsswerve.SDSSwerveDriveSubsystem;
+import org.xero1425.base.subsystems.swerve.SDSSwerveDriveSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
 
 import frc.robot.subsystems.oi.Allegro2024OISubsystem;

@@ -1,12 +1,11 @@
-package org.xero1425.base.subsystems.swerve.sdsswerve;
+package org.xero1425.base.subsystems.swerve;
 
+import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.motors.BadMotorRequestException;
 import org.xero1425.base.motors.MotorFactory;
 import org.xero1425.base.motors.MotorRequestFailedException;
+import org.xero1425.base.motors.IMotorController.XeroNeutralMode;
 import org.xero1425.base.subsystems.Subsystem;
-import org.xero1425.base.subsystems.swerve.common.SwerveBaseSubsystem;
-import org.xero1425.base.subsystems.swerve.common.SwerveModule;
-import org.xero1425.base.subsystems.swerve.common.SwerveModuleConfig;
 import org.xero1425.misc.ISettingsSupplier;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
@@ -34,21 +33,24 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
     private final SwerveModule bl_ ;
     private final SwerveModule br_ ;
 
+    private XeroTimer module_sync_timer_ ;
+
     private PIDCtrl[] pid_ctrls_ ;
 
     private ChassisSpeeds chassis_speed_ ;
+    private boolean disabled_init_ ;
 
     private Mode mode_ ;
     private double [] speeds_ ;
     private double [] powers_ ;
     private double [] angles_ ;
 
-    private double nominal_voltage_ ;
-
     private boolean module_encoders_inited_ ;
     
     public SDSSwerveDriveSubsystem(Subsystem parent, String name) throws Exception {
         super(parent, name) ;
+
+        disabled_init_ = false ;
 
         speeds_ = new double[4] ;
         powers_ = new double[4] ;
@@ -75,6 +77,10 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         br_ = new SwerveModule(factory, settings, cfg, lay, "swerve-br", basename + "br");
 
         createOdometry();
+
+        module_sync_timer_ = new XeroTimer(getRobot(), "module-sync-timer", 5.0) ;
+        module_sync_timer_.start();
+        module_encoders_inited_ = false ;
     }
 
     public SwerveModuleState getModuleState(int which) throws BadMotorRequestException, MotorRequestFailedException {
@@ -153,6 +159,7 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
     @Override
     public void setRawTargets(boolean power, double [] angles, double [] speeds_powers)  {
         angles_ = angles.clone() ;
+
         if (power) {
             mode_ = Mode.RawPower ;
             powers_ = speeds_powers.clone() ;
@@ -167,11 +174,32 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
     public void computeMyState() throws Exception {
         super.computeMyState();
 
+        if (!module_encoders_inited_ && module_sync_timer_.isExpired()) {
+            fl_.synchronizeEncoders();
+            fr_.synchronizeEncoders();
+            bl_.synchronizeEncoders();
+            br_.synchronizeEncoders();  
+            
+            module_encoders_inited_ = true ;
+        }
+
         if (getRobot().isDisabled()) {
-            fl_.set(0.0, fl_.getStateAngle());
-            fr_.set(0.0, fr_.getStateAngle());
-            bl_.set(0.0, bl_.getStateAngle());
-            br_.set(0.0, br_.getStateAngle());
+            if (!disabled_init_) {
+                fl_.setNeutralMode(XeroNeutralMode.Coast);
+                fl_.setNeutralMode(XeroNeutralMode.Coast);
+                fl_.setNeutralMode(XeroNeutralMode.Coast);
+                fl_.setNeutralMode(XeroNeutralMode.Coast);                                    
+
+                fl_.set(0.0, fl_.getStateAngle());
+                fr_.set(0.0, fr_.getStateAngle());
+                bl_.set(0.0, bl_.getStateAngle());
+                br_.set(0.0, br_.getStateAngle());
+
+                disabled_init_ = true ;
+            }
+        }
+        else {
+            disabled_init_ = false ;
         }
     }
 
@@ -216,10 +244,10 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         }
 
         if (module_encoders_inited_) {
-            fl_.set(powers_[FL] * nominal_voltage_, Math.toRadians(angles_[FL])) ;
-            fr_.set(powers_[FR] * nominal_voltage_, Math.toRadians(angles_[FR])) ;
-            bl_.set(powers_[BL] * nominal_voltage_, Math.toRadians(angles_[BL])) ;
-            br_.set(powers_[BR] * nominal_voltage_, Math.toRadians(angles_[BR])) ;
+            fl_.set(powers_[FL], Math.toRadians(angles_[FL])) ;
+            fr_.set(powers_[FR], Math.toRadians(angles_[FR])) ;
+            bl_.set(powers_[BL], Math.toRadians(angles_[BL])) ;
+            br_.set(powers_[BR], Math.toRadians(angles_[BR])) ;
         }
         else {
             MessageLogger logger = getRobot().getMessageLogger();

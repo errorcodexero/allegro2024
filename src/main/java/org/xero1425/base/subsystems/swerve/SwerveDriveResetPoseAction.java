@@ -1,4 +1,4 @@
-package org.xero1425.base.subsystems.swerve.common;
+package org.xero1425.base.subsystems.swerve;
 
 public class SwerveDriveResetPoseAction extends SwerveDriveAction {
     public SwerveDriveResetPoseAction(SwerveBaseSubsystem sub) {

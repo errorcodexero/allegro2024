@@ -749,7 +749,7 @@ public abstract class XeroRobot extends TimedRobot {
     /// address of the ethernet port on the RoboRio to a specific MAC address provided by the method getParcticeBotMacAddress().
     /// \returns true if the current robot is the practice bot
     protected boolean isPracticeBot() {
-        return RobotController.getSerialNumber() == getPracticeSerialNumber() ;
+        return RobotController.getSerialNumber().equals(getPracticeSerialNumber()) ;
     }
 
     /// \brief Abtract method to create the automode controller, must be overridden by the derived class
@@ -815,7 +815,7 @@ public abstract class XeroRobot extends TimedRobot {
         double initial_time = getTime() ;
         delta_time_ = initial_time - last_time_ ;
 
-        motors_.robotLoop() ;
+        // motors_.robotLoop() ;
 
         if (getCompressor() != null)
             robot_subsystem_.putDashboard("Pressure", DisplayType.Always, getCompressor().getPressure()) ;
@@ -926,7 +926,7 @@ public abstract class XeroRobot extends TimedRobot {
         logger_.add("    Alliance: ").add(str).endMessage();
 
         logger_.startMessage(MessageType.Info) ;
-        logger_.add("    Location: ").add(DriverStation.getLocation()).endMessage();
+        logger_.add("    Location: ").add(DriverStation.getLocation().getAsInt()).endMessage();
 
         logger_.startMessage(MessageType.Info) ;
         logger_.add("    GameData: '").add(game_data_).add("'").endMessage();

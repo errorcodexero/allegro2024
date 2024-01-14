@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IMotorController {
     /// \brief the type of PID control to run on the motor controller
-    public enum PidType {
+    public enum XeroPidType {
         Voltage,                    ///< No PID type has been set
         Position,                   ///< Position PID control
         Velocity,                   ///< Velocity PID control
@@ -16,6 +16,12 @@ public interface IMotorController {
         Coast,              ///< Coast mode
         Brake               ///< Brake mode
     } ;
+
+    /// \brief the direction of the motor for positive values
+    public enum XeroDirection {
+        Clockwise,
+        CounterClockwise
+    };
 
     /// \brief Returns the user assigned name of the motor controller
     /// \returns the user assigned name of the motor controller
@@ -122,7 +128,7 @@ public interface IMotorController {
 
     /// \brief Returns true if the motor controller supports PID loops on the controller
     /// \returns true if the motor controller supports PID loops on the controller
-    public boolean hasPID(PidType type) throws BadMotorRequestException , MotorRequestFailedException ;
+    public boolean hasPID(XeroPidType type) throws BadMotorRequestException , MotorRequestFailedException ;
 
     /// \brief Set the PID parameters for a PID loop running on the motor controller
     /// \param type the type of pid loop (velocity or position)
@@ -134,7 +140,7 @@ public interface IMotorController {
     /// \param g the gravity feed forward parameter for the PID controller
     /// \param s the static friction feed forward parameter for the PID controller
     /// \param outmax the maximum output parameter for the PID controller 
-    public void setPID(PidType type, double p, double i, double d, double v, double a, double g, double s, double outmax) throws BadMotorRequestException , MotorRequestFailedException ; 
+    public void setPID(XeroPidType type, double p, double i, double d, double v, double a, double g, double s, double outmax) throws BadMotorRequestException , MotorRequestFailedException ; 
 
     /// \brief Set the parameters for motion magic
     /// \param v the max velocity for the motion
@@ -145,14 +151,14 @@ public interface IMotorController {
     /// \brief Set the motor target.  What the target is depends on the mode.
     /// \param type the type of target to set (position PID, velocity PID, MotionMagic, or percent power)
     /// \param target the target value, depends on the type
-    public void set(PidType type, double target) throws BadMotorRequestException, MotorRequestFailedException ;
+    public void set(XeroPidType type, double target) throws BadMotorRequestException, MotorRequestFailedException ;
 
     /// \brief Reset the encoder values to zero
     public void resetEncoder() throws BadMotorRequestException, MotorRequestFailedException ;
 
      /// \brief Set the encoder to a specific value in ticks
      /// \param pos the new value for the encoder in ticks
-     public void setPosition(int pos) throws BadMotorRequestException, MotorRequestFailedException ;
+     public void setPosition(double pos) throws BadMotorRequestException, MotorRequestFailedException ;
 
     /// \brief Returns the position of the motor in motor units from the motor controller.  If the motor does not
     /// have an attached encoder, an exception is thrown.

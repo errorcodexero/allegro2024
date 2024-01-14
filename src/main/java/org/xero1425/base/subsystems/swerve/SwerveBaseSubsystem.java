@@ -1,4 +1,4 @@
-package org.xero1425.base.subsystems.swerve.common;
+package org.xero1425.base.subsystems.swerve;
 
 import java.util.ArrayList;
 import java.util.List;

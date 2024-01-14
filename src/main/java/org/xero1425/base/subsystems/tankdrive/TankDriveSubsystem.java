@@ -12,7 +12,7 @@ import org.xero1425.base.motors.BadMotorRequestException;
 import org.xero1425.base.motors.IMotorController;
 import org.xero1425.base.motors.MotorController;
 import org.xero1425.base.motors.MotorRequestFailedException;
-import org.xero1425.base.motors.IMotorController.PidType;
+import org.xero1425.base.motors.IMotorController.XeroPidType;
 import org.xero1425.base.subsystems.DriveBaseSubsystem;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.misc.BadParameterTypeException;
@@ -356,8 +356,8 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
         right_power_ = right ;
 
         try {
-            left_motors_.set(PidType.Voltage, left_power_) ;
-            right_motors_.set(PidType.Voltage, right_power_) ;
+            left_motors_.set(XeroPidType.Voltage, left_power_) ;
+            right_motors_.set(XeroPidType.Voltage, right_power_) ;
         }
         catch(BadMotorRequestException|MotorRequestFailedException ex) {
             logger.startMessage(MessageType.Error) ;

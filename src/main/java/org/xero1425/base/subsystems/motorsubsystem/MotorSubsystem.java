@@ -3,7 +3,7 @@ package org.xero1425.base.subsystems.motorsubsystem;
 import org.xero1425.base.motors.BadMotorRequestException;
 import org.xero1425.base.motors.IMotorController;
 import org.xero1425.base.motors.MotorRequestFailedException;
-import org.xero1425.base.motors.IMotorController.PidType;
+import org.xero1425.base.motors.IMotorController.XeroPidType;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.motors.MotorGroupController;
 import org.xero1425.misc.MessageLogger;
@@ -105,7 +105,7 @@ public class MotorSubsystem extends Subsystem
             // The limitPower method can be overridden in a derived class to place limits on the
             // power ever supplied to the motor
             power_ = limitPower(p) ;
-            controller_.set(PidType.Voltage, power_) ;
+            controller_.set(XeroPidType.Voltage, power_) ;
         }
         catch(BadMotorRequestException|MotorRequestFailedException ex) {
             MessageLogger logger = getRobot().getMessageLogger() ;

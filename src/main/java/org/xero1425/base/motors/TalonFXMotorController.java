@@ -9,6 +9,7 @@ import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.configs.VoltageConfigs;
 import com.ctre.phoenix6.controls.ControlRequest;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
@@ -16,6 +17,7 @@ import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 /// \file
@@ -35,7 +37,6 @@ public class TalonFXMotorController extends MotorController
 
     private TalonFX ctrl_ ;
     private TalonFXConfiguration cfg_ ;
-    private boolean inverted_ ;
     private IMotorController leader_ ;
     private String bus_ ;
 
@@ -265,14 +266,15 @@ public class TalonFXMotorController extends MotorController
     /// \brief Set the motor to invert the direction of motion 
     /// \param inverted if true invert the direction of motion, otherwise do not
     public void setInverted(boolean inverted) throws BadMotorRequestException , MotorRequestFailedException {
-        inverted_ = inverted ;
-        ctrl_.setInverted(inverted_);
+        MotorOutputConfigs cfgs = cfg_.MotorOutput ;
+        cfgs.Inverted = (inverted ? InvertedValue.CounterClockwise_Positive : InvertedValue.Clockwise_Positive) ;
+        checkError("setInverted", ctrl_.getConfigurator().apply(cfgs)) ;  
     }
 
     /// \brief Returns true if the motor is inverted
     /// \returns true if the motor is inverted
     public boolean isInverted()  throws BadMotorRequestException , MotorRequestFailedException {
-        return inverted_ ;
+        return cfg_.MotorOutput.Inverted == InvertedValue.CounterClockwise_Positive ;
     }
 
     /// \brief Return the leader for the current motor.  If the current motor is not following, return null.
@@ -283,7 +285,7 @@ public class TalonFXMotorController extends MotorController
 
     /// \brief Returns true if the motor controller supports PID loops on the controller
     /// \returns true if the motor controller supports PID loops on the controller
-    public boolean hasPID(PidType type) throws BadMotorRequestException , MotorRequestFailedException {
+    public boolean hasPID(XeroPidType type) throws BadMotorRequestException , MotorRequestFailedException {
         return true ;
     }    
 
@@ -297,7 +299,7 @@ public class TalonFXMotorController extends MotorController
     /// \param g the gravity feed forward parameter for the PID controller
     /// \param s the static friction feed forward parameter for the PID controller
     /// \param outmax the maximum output parameter for the PID controller 
-    public void setPID(PidType type, double p, double i, double d, double v, double a, double g, double s, double outmax) throws BadMotorRequestException , MotorRequestFailedException {
+    public void setPID(XeroPidType type, double p, double i, double d, double v, double a, double g, double s, double outmax) throws BadMotorRequestException , MotorRequestFailedException {
         Slot0Configs cfg = cfg_.Slot0 ;
 
         cfg.kP = p ;
@@ -307,12 +309,11 @@ public class TalonFXMotorController extends MotorController
         cfg.kA = a ;
         cfg.kG = g ;
         cfg.kS = s ;
-
         checkError("setPID()", ctrl_.getConfigurator().apply(cfg));
 
-        MotorOutputConfigs mo = cfg_.MotorOutput ;
-        mo.PeakForwardDutyCycle = outmax ;
-        mo.PeakReverseDutyCycle = -outmax ;
+        VoltageConfigs mo = cfg_.Voltage ;
+        mo.PeakForwardVoltage = outmax * 12.0 ;
+        mo.PeakReverseVoltage = -outmax * 12.0 ;
         checkError("setPID()", ctrl_.getConfigurator().apply(mo));
     }
 
@@ -332,11 +333,11 @@ public class TalonFXMotorController extends MotorController
     /// \brief Set the motor target.  What the target is depends on the mode.
     /// \param type the type of target to set (position PID, velocity PID, MotionMagic, or percent power)
     /// \param target the target value, depends on the type    
-    public void set(PidType type, double target) throws BadMotorRequestException, MotorRequestFailedException {
+    public void set(XeroPidType type, double target) throws BadMotorRequestException, MotorRequestFailedException {
         ControlRequest req = null ;
         switch(type) {
             case Voltage:
-                req = new VoltageOut(target) ;
+                req = new VoltageOut(target * 12.0) ;
                 break ;
             case Position:
                 req = new PositionVoltage(0).withPosition(target / kTicksPerRevolution) ;
@@ -349,14 +350,14 @@ public class TalonFXMotorController extends MotorController
                 break ;
         }
 
-        checkError("set the target for the motor", ctrl_.setControl(req)) ;
+        checkError("set()", ctrl_.setControl(req)) ;
     }
 
     /// \brief If value is true, the motor controller will consider position data as important and update
     /// the data a quickly as possible.
     public void setPositionImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
         double freq = (value ? 100 : 1) ;
-        checkError("setPositionImportant error", ctrl_.getPosition().setUpdateFrequency(freq)) ;
+        checkError("setPositionImportant()", ctrl_.getPosition().setUpdateFrequency(freq)) ;
     }
     
     /// \brief If value is true, the motor controller will consider velocity data as important and update
@@ -401,7 +402,7 @@ public class TalonFXMotorController extends MotorController
 
      /// \brief Set the encoder to a specific value in ticks
      /// \param pos the new value for the encoder in ticks
-     public void setPosition(int value) throws BadMotorRequestException, MotorRequestFailedException {
-        checkError("setPosition" ,ctrl_.setPosition(value)) ;
+     public void setPosition(double value) throws BadMotorRequestException, MotorRequestFailedException {
+        checkError("setPosition", ctrl_.setPosition(value / kTicksPerRevolution)) ;
      }    
 } ;
