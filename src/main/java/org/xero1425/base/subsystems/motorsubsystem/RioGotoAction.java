@@ -58,7 +58,7 @@ import org.xero1425.misc.XeroMath;
 ///     }
 ///
 /// 
-public class MotorEncoderGotoAction extends MotorAction {
+public class RioGotoAction extends MotorAction {
 
     
     /// The difference between the current position and the target position below which we consider
@@ -105,7 +105,7 @@ public class MotorEncoderGotoAction extends MotorAction {
     /// \param sub the MotorEncoderSubsystem subsystem for the action    
     /// \param target the target position
     /// \param addhold if true, add a hold action when the goto action is complete
-    public MotorEncoderGotoAction(MotorEncoderSubsystem sub, double target, boolean addhold)
+    public RioGotoAction(MotorEncoderSubsystem sub, double target, boolean addhold)
             throws Exception {
         super(sub) ;
 
@@ -125,7 +125,7 @@ public class MotorEncoderGotoAction extends MotorAction {
     /// \param sub the MotorEncoderSubsystem subsystem for the action
     /// \param target a string that names the settings value in the settings file that contains the target value 
     /// \param addhold if true, add a hold action when the goto action is complete    
-    public MotorEncoderGotoAction(MotorEncoderSubsystem sub, String target, boolean addhold)
+    public RioGotoAction(MotorEncoderSubsystem sub, String target, boolean addhold)
             throws Exception {
         super(sub) ;
 
@@ -145,7 +145,7 @@ public class MotorEncoderGotoAction extends MotorAction {
     /// \param sub the MotorEncoderSubsystem subsystem for the action    
     /// \param target the target position
     /// \param addhold if true, add a hold action when the goto action is complete
-    public MotorEncoderGotoAction(MotorEncoderSubsystem sub, double target, TrapezoidalProfileConfig c, boolean addhold)
+    public RioGotoAction(MotorEncoderSubsystem sub, double target, TrapezoidalProfileConfig c, boolean addhold)
             throws Exception {
         super(sub) ;
 
@@ -164,7 +164,7 @@ public class MotorEncoderGotoAction extends MotorAction {
     /// \param sub the MotorEncoderSubsystem subsystem for the action
     /// \param target a string that names the settings value in the settings file that contains the target value 
     /// \param addhold if true, add a hold action when the goto action is complete    
-    public MotorEncoderGotoAction(MotorEncoderSubsystem sub, String target, TrapezoidalProfileConfig c, boolean addhold)
+    public RioGotoAction(MotorEncoderSubsystem sub, String target, TrapezoidalProfileConfig c, boolean addhold)
             throws Exception {
         super(sub) ;
 
@@ -179,11 +179,11 @@ public class MotorEncoderGotoAction extends MotorAction {
         plot_id_ = sub.initPlot(sub.getName() + "-" + toString(0)) ;        
     }    
 
-        /// \brief Create the action
+    /// \brief Create the action
     /// \param sub the MotorEncoderSubsystem subsystem for the action    
     /// \param target the target position
     /// \param addhold if true, add a hold action when the goto action is complete
-    public MotorEncoderGotoAction(MotorEncoderSubsystem sub, double target, SCurveConfig c, boolean addhold)
+    public RioGotoAction(MotorEncoderSubsystem sub, double target, SCurveConfig c, boolean addhold)
             throws Exception {
         super(sub) ;
 
@@ -202,7 +202,7 @@ public class MotorEncoderGotoAction extends MotorAction {
     /// \param sub the MotorEncoderSubsystem subsystem for the action
     /// \param target a string that names the settings value in the settings file that contains the target value 
     /// \param addhold if true, add a hold action when the goto action is complete    
-    public MotorEncoderGotoAction(MotorEncoderSubsystem sub, String target, SCurveConfig c, boolean addhold)
+    public RioGotoAction(MotorEncoderSubsystem sub, String target, SCurveConfig c, boolean addhold)
             throws Exception {
         super(sub) ;
 
@@ -307,7 +307,7 @@ public class MotorEncoderGotoAction extends MotorAction {
         {
             double target = use_actual_ ? sub.getPosition() : target_ ;
             target = target_ ;
-            sub.setDefaultAction(new MotorEncoderHoldAction(sub, target)) ;
+            sub.setDefaultAction(new RioHoldAction(sub, target)) ;
         }
         else
             sub.setDefaultAction(null) ;

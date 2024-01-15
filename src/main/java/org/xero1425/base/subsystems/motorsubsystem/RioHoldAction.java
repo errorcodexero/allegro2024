@@ -27,7 +27,7 @@ import org.xero1425.misc.PIDCtrl;
 ///          }
 ///     }
 ///
-public class MotorEncoderHoldAction extends MotorAction {
+public class RioHoldAction extends MotorAction {
 
     /// If true, an explicit hold position target was provided in the constructuro
     private boolean has_explicit_target_ ;
@@ -40,7 +40,7 @@ public class MotorEncoderHoldAction extends MotorAction {
 
     /// \brief Create the action that holds the motor at the position found when the action is started.
     /// \param subsystem the MotorEncoderSubsystem for the action
-    public MotorEncoderHoldAction(MotorEncoderSubsystem subsystem)
+    public RioHoldAction(MotorEncoderSubsystem subsystem)
             throws MissingParameterException, BadParameterTypeException {
         super(subsystem);
         has_explicit_target_ = false;
@@ -53,7 +53,7 @@ public class MotorEncoderHoldAction extends MotorAction {
     /// \brief Create the action that holds the motor at an explicit position
     /// \param subsystem the MotorEncoderSubsystem for the action    
     /// \param target the target for the motor
-    public MotorEncoderHoldAction(MotorEncoderSubsystem subsystem, double target)
+    public RioHoldAction(MotorEncoderSubsystem subsystem, double target)
             throws MissingParameterException, BadParameterTypeException {
         super(subsystem);
         has_explicit_target_ = true;
@@ -66,7 +66,7 @@ public class MotorEncoderHoldAction extends MotorAction {
     /// \brief Create the action that holds the motor at an explicit position
     /// \param subsystem the MotorEncoderSubsystem for the action    
     /// \param target a string giving the name of a setting from the settings file with the target    
-    public MotorEncoderHoldAction(MotorEncoderSubsystem subsystem, String target)
+    public RioHoldAction(MotorEncoderSubsystem subsystem, String target)
             throws BadParameterTypeException, MissingParameterException {
         super(subsystem) ;
         has_explicit_target_ = true ;
@@ -79,7 +79,7 @@ public class MotorEncoderHoldAction extends MotorAction {
     /// \brief Create the action that holds the motor at an explicit position
     /// \param subsystem the MotorEncoderSubsystem for the action    
     /// \param target a string giving the name of a setting from the settings file with the target    
-    public MotorEncoderHoldAction(MotorEncoderSubsystem subsystem, String pidname, String target)
+    public RioHoldAction(MotorEncoderSubsystem subsystem, String pidname, String target)
             throws BadParameterTypeException, MissingParameterException {
         super(subsystem) ;
         has_explicit_target_ = true ;
@@ -133,5 +133,4 @@ public class MotorEncoderHoldAction extends MotorAction {
         ret += ", target=" + Double.toString(target_) ;
         return ret ;
     }
-
 } ;

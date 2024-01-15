@@ -7,7 +7,7 @@ import org.xero1425.base.motors.IMotorController.XeroPidType;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
-public class MotorEncoderMotionMagicAction extends MotorAction {
+public class MCMotionMagicAction extends MotorAction {
 
     private double SetDoneDelay = 0.0 ;
 
@@ -46,7 +46,7 @@ public class MotorEncoderMotionMagicAction extends MotorAction {
     private double maxa_ ;
     private double jerk_ ;
 
-    public MotorEncoderMotionMagicAction(MotorEncoderSubsystem sub, double target, double maxa, double maxv, HoldType holdtype) throws Exception {
+    public MCMotionMagicAction(MotorEncoderSubsystem sub, double target, double maxa, double maxv, HoldType holdtype) throws Exception {
         super(sub);
 
         target_ = target ;

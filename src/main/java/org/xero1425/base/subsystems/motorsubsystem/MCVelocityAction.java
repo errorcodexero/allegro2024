@@ -11,7 +11,7 @@ import org.xero1425.misc.MissingParameterException;
 /// \file
 
 /// \brief This action causes a MotorEncoderSubsystem to maintain a constant velocity.
-public class MotorEncoderVelocityMCAction extends MotorAction {   
+public class MCVelocityAction extends MotorAction {   
 
     // An index used to ensure individual instances of this action produce separate plots
     private static int which_ = 1 ;
@@ -44,7 +44,7 @@ public class MotorEncoderVelocityMCAction extends MotorAction {
     /// \param sub the target MotorEncoderSubsystem
     /// \param name the name of the action, for entries from the settings file
     /// \param target the traget velocity
-    public MotorEncoderVelocityMCAction(MotorEncoderSubsystem sub, String name, double target)
+    public MCVelocityAction(MotorEncoderSubsystem sub, String name, double target)
             throws MissingParameterException, BadParameterTypeException, BadMotorRequestException, MotorRequestFailedException {
 
         super(sub);
@@ -68,7 +68,7 @@ public class MotorEncoderVelocityMCAction extends MotorAction {
     /// \brief Create a new MotorEncoderVelocityAction
     /// \param sub the target MotorEncoderSubsystem
     /// \param target a string with the name of the target velocity in settings file
-    public MotorEncoderVelocityMCAction(MotorEncoderSubsystem sub, String name, String target) throws BadParameterTypeException, MissingParameterException, BadMotorRequestException, MotorRequestFailedException {
+    public MCVelocityAction(MotorEncoderSubsystem sub, String name, String target) throws BadParameterTypeException, MissingParameterException, BadMotorRequestException, MotorRequestFailedException {
         super(sub) ;
 
         ISettingsSupplier settings = sub.getRobot().getSettingsSupplier() ;

@@ -2,7 +2,7 @@ package org.xero1425.base.subsystems.motorsubsystem;
 
 import org.xero1425.misc.PIDCtrl;
 
-public class MotorEncoderTrackPositionAction extends MotorAction {
+public class RioTrackPositionAction extends MotorAction {
     
     // The target position
     private double target_ ;
@@ -29,7 +29,7 @@ public class MotorEncoderTrackPositionAction extends MotorAction {
     /// \param sub the MotorEncoderSubsystem subsystem for the action    
     /// \param target the target position
     /// \param addhold if true, add a hold action when the goto action is complete
-    public MotorEncoderTrackPositionAction(MotorEncoderSubsystem sub, String name, double target) throws Exception {
+    public RioTrackPositionAction(MotorEncoderSubsystem sub, String name, double target) throws Exception {
         super(sub) ;
 
         if (!(sub instanceof MotorEncoderSubsystem))
@@ -67,14 +67,6 @@ public class MotorEncoderTrackPositionAction extends MotorAction {
     }
 
     private double checkTarget(double t) {
-        // MotorEncoderSubsystem sub = (MotorEncoderSubsystem)getSubsystem() ;
-
-        // if (t < sub.getMinPos())
-        //     t = sub.getMinPos() ;
-
-        // if (t > sub.getMaxPos())
-        //     t = sub.getMaxPos() ;
-
         return t ;
     }
 

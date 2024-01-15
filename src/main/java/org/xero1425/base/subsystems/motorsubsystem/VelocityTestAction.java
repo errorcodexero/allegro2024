@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 
 public class VelocityTestAction extends MotorAction {
     private SimpleWidget widget_ ;
-    private MotorEncoderVelocityMCAction action_ ;
+    private MCVelocityAction action_ ;
     private double current_ ;
 
     public VelocityTestAction(MotorEncoderSubsystem sub) throws MissingParameterException, BadParameterTypeException, BadMotorRequestException {
@@ -19,7 +19,7 @@ public class VelocityTestAction extends MotorAction {
 
         current_ = 0.0 ;
         try {
-            action_ = new MotorEncoderVelocityMCAction(sub, "testvelaction", current_) ;
+            action_ = new MCVelocityAction(sub, "testvelaction", current_) ;
         }
         catch(Exception ex) {
             action_ = null ;
