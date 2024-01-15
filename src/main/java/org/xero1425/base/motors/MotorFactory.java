@@ -1,7 +1,9 @@
 package org.xero1425.base.motors;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.ISettingsSupplier;
@@ -18,7 +20,7 @@ import org.xero1425.misc.SettingsValue.SettingsType;
 
 /// \brief A motor factory for the robot.
 /// The motor factory creates motors based on entries in the settings file.  The
-/// returned motors are high level motor classes (MotorController) that hides the
+/// returned motors are high level motor classes (IMotorController) that hides the
 /// actual type of motor being used.  Groups of motors that operate in parallel, 
 /// like multiple motors on a single side of the drivebase, are returned as a single
 /// MotorController object that manages the motors as a group.  For FRC motor controllers
@@ -28,9 +30,14 @@ import org.xero1425.misc.SettingsValue.SettingsType;
 /// motor controllers
 ///
 public class MotorFactory {
-    private MessageLogger logger_;                              // The system wide message logger
-    private ISettingsSupplier settings_;                        // The system wide settings file
-    private Map<String, Map<Integer, MotorController>> motors_;              // The map of motors
+
+    private static final int kMotorsPerRobotLoop = 4 ;
+    
+    private MessageLogger logger_;                                  // The system wide message logger
+    private ISettingsSupplier settings_;                            // The system wide settings file
+    private Map<String, Map<Integer, IMotorController>> motors_;     // The map of motors
+    private List<IMotorController> motor_list_ ;
+    private int loop_index_ ;
 
     private static final String BrakeMode = "brake" ;
     private static final String CoastMode = "coast" ;
@@ -41,16 +48,48 @@ public class MotorFactory {
     public MotorFactory(MessageLogger logger, ISettingsSupplier settings) {
         logger_ = logger;
         settings_ = settings;
-        motors_ = new HashMap<String, Map<Integer, MotorController>>();
-        motors_.put("", new HashMap<Integer, MotorController>()) ;
+        motors_ = new HashMap<String, Map<Integer, IMotorController>>();
+        motors_.put("", new HashMap<Integer, IMotorController>()) ;
+
+        motor_list_ = new ArrayList<IMotorController>() ;
+        loop_index_ = 0 ;
+    }
+
+    private void checkMotor(IMotorController ctrl) {
+        try {
+            List<String> faults = ctrl.getFaults() ;
+            if (faults.size() > 0) {
+            
+            }
+        }
+        catch(Exception ex) {
+            logger_.startMessage(MessageType.Error) ;
+            logger_.add("cannot check motors - errors occured while getting faults") ;
+            logger_.endMessage();
+        }
+    }
+
+    public void robotLoop() {
+        if (motor_list_.size() < kMotorsPerRobotLoop) {
+            for(IMotorController motor : motor_list_) {
+                checkMotor(motor);
+            }
+        }
+        else {
+            for(int i = 0 ; i < kMotorsPerRobotLoop ; i++) {
+                checkMotor(motor_list_.get(loop_index_++)) ;
+                if (loop_index_ == motor_list_.size()) {
+                    loop_index_ = 0 ;
+                }
+            }
+        }
     }
 
     /// \brief This method creates a new motor based on the settings in the settings file.
-    ///
     /// \param name the base name of the motor
     /// \param id the ID of the motor in the settings file
-    public MotorController createMotor(String name, String id) {
-        MotorController ret = null;
+    public IMotorController createMotor(String name, String id) {
+        IMotorController ret = null;
         try {
             String typechk = id + ":type" ;
 
@@ -76,7 +115,7 @@ public class MotorFactory {
                 // The first motor in this group (id = '1') will be the leader, and the remaining motors in the group
                 // will follow the leader.
                 //
-                MotorController.NeutralMode groupmode = getNeutralMode(id);
+                IMotorController.XeroNeutralMode groupmode = getNeutralMode(id);
                 boolean leaderInverted = false ;
                 int currentIndex = 1;
                 MotorGroupController group = new MotorGroupController(name);
@@ -100,7 +139,7 @@ public class MotorFactory {
                     // with the name given by 'name' there will be a set of child nodes numbered from 1 - N if there are
                     // N motors in the group.  This creates the Nth motor given by currentIndex.
                     //
-                    MotorController single = createSingleMotor(name + ":" + Integer.toString(currentIndex), motorid, (currentIndex == 1));
+                    IMotorController single = createSingleMotor(name + ":" + Integer.toString(currentIndex), motorid, (currentIndex == 1));
                     if (single != null) {    
                         logger_.startMessage(MessageType.Info).add("created: ").add(motorid).endMessage();
                         if (groupmode != null) {
@@ -175,11 +214,11 @@ public class MotorFactory {
         logger_.endMessage();
     }
 
-    private MotorController getMotorController(String bus, int canid) {
-        MotorController ret = null ;
+    private IMotorController getMotorController(String bus, int canid) {
+        IMotorController ret = null ;
 
         if (motors_.containsKey(bus)) {
-            Map<Integer, MotorController> map = motors_.get(bus) ;
+            Map<Integer, IMotorController> map = motors_.get(bus) ;
             ret = map.get(canid) ;
         }
 
@@ -189,7 +228,7 @@ public class MotorFactory {
     //
     // Create a single motor from the settings in the settings file
     //
-    private MotorController createSingleMotor(String name, String id, boolean leader) throws BadParameterTypeException, BadMotorRequestException, MotorRequestFailedException {
+    private IMotorController createSingleMotor(String name, String id, boolean leader) throws BadParameterTypeException, BadMotorRequestException, MotorRequestFailedException {
             
         String typeparam = id + ":type";                // This parameter holds the type of the motor
         String canparam = id + ":canid";                // This parameter holds the CAN id of the motor
@@ -228,7 +267,7 @@ public class MotorFactory {
         String bus = settings_.getOrNull(busparam).getString() ;
         int canid = settings_.getOrNull(canparam).getInteger();
 
-        MotorController dup = getMotorController(bus, canid) ;
+        IMotorController dup = getMotorController(bus, canid) ;
         if (dup != null) {
             //
             // There is already a motor with this CAN id.  Signal an error.
@@ -255,9 +294,7 @@ public class MotorFactory {
         //
         // Create the motor controller object based on its type
         //
-        if (type.equals("romi")) {
-            ctrl = new RomiMotorController(name, canid);
-        } else if (type.equals("talon-fx")) {
+        if (type.equals("talon-fx")) {
             ctrl = new TalonFXMotorController(name, bus, canid, leader);
         } else if (type.equals("sparkmax-brushless")) {
             ctrl = new SparkMaxMotorController(name, canid, true, leader);
@@ -268,17 +305,27 @@ public class MotorFactory {
             return null;
         }
 
+        addMotorToFactory(ctrl) ;
+
+        logger_.startMessage(MessageType.Info) ;
+        logger_.add("create motor:");
+        logger_.add("name", ctrl.getName(), true);
+        logger_.add(",").add("bus", ctrl.getBus(), true);
+        logger_.add(",").add("id", ctrl.getCanID());
+        logger_.add(",").add("type", ctrl.getType(), true);
+        logger_.add(",").add("firmware", ctrl.getFirmwareVersion(), true);
+        logger_.endMessage();
+
         //
         // Set the motor neutral type
         //
-        MotorController.NeutralMode nm = getNeutralMode(id);
+        MotorController.XeroNeutralMode nm = getNeutralMode(id);
         if (nm != null)
             ctrl.setNeutralMode(nm);
 
-        double freelimit = getFreeCurrentLimit(id);
-        double stalllimit = getStallCurrentLimit(id) ;
-        if (!Double.isInfinite(freelimit) && !Double.isInfinite(stalllimit)) {
-            ctrl.setCurrentLimit(freelimit, stalllimit);
+        double limit = getCurrentLimit(id);
+        if (!Double.isInfinite(limit) && !Double.isInfinite(limit)) {
+            ctrl.setCurrentLimit(limit);
         }      
 
         int channel = getPDPChannel(id) ;
@@ -286,6 +333,25 @@ public class MotorFactory {
             ctrl.setPDPChannel(channel);
 
         return ctrl ;
+    }
+
+    private void addMotorToFactory(IMotorController ctrl) {
+        Map<Integer, IMotorController> list ;
+
+        try {
+            if (!motors_.containsKey(ctrl.getBus())) {
+                list = new HashMap<Integer, IMotorController>() ;
+                motors_.put(ctrl.getBus(), list) ;
+            } else {
+                list = motors_.get(ctrl.getBus());
+            }
+
+            list.put(ctrl.getCanID(), ctrl);
+        }
+        catch(Exception ex) {
+        }
+
+        motor_list_.add(ctrl) ;
     }
 
     private int getPDPChannel(String id) throws BadParameterTypeException {
@@ -306,26 +372,8 @@ public class MotorFactory {
         return ret;
     }
 
-    private double getFreeCurrentLimit(String id) throws BadParameterTypeException {
-        String pname = id + ":free-current-limit";
-        SettingsValue v = settings_.getOrNull(pname);
-        double ret = Double.POSITIVE_INFINITY ;
-
-        if (v != null) {
-            if (!v.isDouble() && !v.isInteger()) {
-                logger_.startMessage(MessageType.Error).add("parameter '").add(pname).add("'") ;
-                logger_.add(" - does not have a double or integer type") ;
-                throw new BadParameterTypeException(SettingsType.String, v.getType()) ;
-            }
-
-            ret = v.getDouble();
-        }
-
-        return ret;
-    }
-
-    private double getStallCurrentLimit(String id) throws BadParameterTypeException {
-        String pname = id + ":stall-current-limit";
+    private double getCurrentLimit(String id) throws BadParameterTypeException {
+        String pname = id + ":current-limit";
         SettingsValue v = settings_.getOrNull(pname);
         double ret = Double.POSITIVE_INFINITY ;
 
@@ -345,7 +393,7 @@ public class MotorFactory {
     //
     // Get the neutral mode from the JSON object that describes the motor (or motor group)
     //
-    private MotorController.NeutralMode getNeutralMode(String id) throws BadParameterTypeException {
+    private IMotorController.XeroNeutralMode getNeutralMode(String id) throws BadParameterTypeException {
         SettingsValue v ;
         String pname = id + ":neutral-mode" ;
         
@@ -359,14 +407,14 @@ public class MotorFactory {
             throw new BadParameterTypeException(SettingsType.String, v.getType()) ;
         }
 
-        MotorController.NeutralMode mode ;
+        MotorController.XeroNeutralMode mode ;
         if (v.getString().equals(BrakeMode))
         {
-            mode = MotorController.NeutralMode.Brake ;
+            mode = MotorController.XeroNeutralMode.Brake ;
         }
         else if (v.getString().equals(CoastMode))
         {
-            mode = MotorController.NeutralMode.Coast ;
+            mode = MotorController.XeroNeutralMode.Coast ;
         }
         else 
         {

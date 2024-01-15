@@ -5,7 +5,8 @@ import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Encoder;
 import org.xero1425.base.XeroRobot;
 import org.xero1425.base.motors.BadMotorRequestException;
-import org.xero1425.base.motors.MotorController;
+import org.xero1425.base.motors.IMotorController;
+import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.EncoderMapper;
 import org.xero1425.misc.ISettingsSupplier;
@@ -29,7 +30,7 @@ public class XeroEncoder {
     private double quad_b_ ;
 
     // If the encoder is part of a brushless motor, this is the motor
-    private MotorController motor_ ;
+    private IMotorController motor_ ;
 
     // If the encoder is an analog encoder
     private AnalogInput analog_ ;
@@ -48,9 +49,9 @@ public class XeroEncoder {
     /// \param cname the name of the encoder
     /// \param angular if true, the real world units are angles that range from -180 to 180
     /// \param ctrl if non-null the motor that contains the encoder
-    public XeroEncoder(XeroRobot robot, String cname, boolean angular, MotorController ctrl)
+    public XeroEncoder(XeroRobot robot, String cname, boolean angular, IMotorController ctrl)
             throws BadParameterTypeException, MissingParameterException, EncoderConfigException,
-            BadMotorRequestException {
+            BadMotorRequestException, MotorRequestFailedException {
         createEncoder(robot, cname, ctrl);
     }
 
@@ -200,9 +201,9 @@ public class XeroEncoder {
         quad_b_ = pos ;
     }
 
-    private void createEncoder(XeroRobot robot, String cname, MotorController ctrl)
+    private void createEncoder(XeroRobot robot, String cname, IMotorController ctrl)
             throws BadParameterTypeException, MissingParameterException, EncoderConfigException,
-            BadMotorRequestException {
+            BadMotorRequestException, MotorRequestFailedException {
 
         ISettingsSupplier settings = robot.getSettingsSupplier() ;                
         String type = settings.get(cname + ":type").getString() ;
@@ -227,14 +228,14 @@ public class XeroEncoder {
             throw new EncoderConfigException("motor '" + cname + "' - must define a QUAD, PWM, MOTOR, or ANALOG encoder");
     }
 
-    private void createMotorEncoder(XeroRobot robot, String cname, MotorController ctrl)
+    private void createMotorEncoder(XeroRobot robot, String cname, IMotorController ctrl)
                 throws BadParameterTypeException, MissingParameterException, EncoderConfigException,
-                BadMotorRequestException {
+                BadMotorRequestException, MotorRequestFailedException {
 
         ISettingsSupplier settings = robot.getSettingsSupplier() ;                    
 
         motor_ = ctrl ;
-        if (!motor_.hasPosition())
+        if (!motor_.hasEncoder())
             throw new EncoderConfigException("motor '" + cname + "' - motor does not have internal encoder");
     
         quad_m_ = settings.get(cname + ":m").getDouble() ;

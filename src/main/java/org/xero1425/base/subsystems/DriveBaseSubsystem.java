@@ -3,6 +3,8 @@ package org.xero1425.base.subsystems;
 import org.xero1425.base.gyro.NavxGyro;
 import org.xero1425.base.gyro.RomiGyro;
 import org.xero1425.base.gyro.XeroGyro;
+import org.xero1425.base.motors.BadMotorRequestException;
+import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 import org.xero1425.misc.XeroPathSegment;
@@ -79,7 +81,7 @@ public abstract class DriveBaseSubsystem extends Subsystem {
     }
 
     public abstract Pose2d getPose() ;
-    public abstract void setPose(Pose2d p) ;
+    public abstract void setPose(Pose2d p) throws BadMotorRequestException, MotorRequestFailedException ;
 
     public abstract double getVelocity() ;
     public abstract double getRotationalVelocity() ;

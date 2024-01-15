@@ -1,6 +1,6 @@
 package org.xero1425.base.subsystems.intake2motor;
 
-import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderGotoAction;
+import org.xero1425.base.subsystems.motorsubsystem.RioGotoAction;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
@@ -13,7 +13,7 @@ import org.xero1425.misc.MessageType;
 // arm, then nothing is required.  However if you are running the spinner in reverse
 // while raising the intake arm, then when this action is done
 //
-public class IntakePositionPowerAction extends MotorEncoderGotoAction {
+public class IntakePositionPowerAction extends RioGotoAction {
     private Intake2MotorSubsystem sub_ ;
     private double collect_power_ ;
     private boolean stop_spinner_when_done_ ;

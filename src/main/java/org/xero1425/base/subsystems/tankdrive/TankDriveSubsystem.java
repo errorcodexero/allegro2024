@@ -9,9 +9,10 @@ import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 
 import org.xero1425.base.LoopType;
 import org.xero1425.base.motors.BadMotorRequestException;
+import org.xero1425.base.motors.IMotorController;
 import org.xero1425.base.motors.MotorController;
 import org.xero1425.base.motors.MotorRequestFailedException;
-import org.xero1425.base.motors.MotorController.EncoderUpdateFrequency;
+import org.xero1425.base.motors.IMotorController.XeroPidType;
 import org.xero1425.base.subsystems.DriveBaseSubsystem;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.misc.BadParameterTypeException;
@@ -43,9 +44,9 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
     private double left_inches_per_tick_ ;
     private double right_inches_per_tick_ ;
     private double total_angle_ ;
-    private MotorController.NeutralMode automode_neutral_ ;
-    private MotorController.NeutralMode teleop_neutral_ ;
-    private MotorController.NeutralMode disabled_neutral_ ;
+    private MotorController.XeroNeutralMode automode_neutral_ ;
+    private MotorController.XeroNeutralMode teleop_neutral_ ;
+    private MotorController.XeroNeutralMode disabled_neutral_ ;
 
     private Speedometer left_linear_ ;
     private Speedometer right_linear_ ;
@@ -53,11 +54,8 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
     private double rotational_velocity_ ;
     private Pose2d last_pose_ ;
 
-    private double teleop_ramp_rate_ ;
-    private double auto_ramp_rate_ ;
-
-    private MotorController left_motors_ ;
-    private MotorController right_motors_ ;
+    private IMotorController left_motors_ ;
+    private IMotorController right_motors_ ;
     private Encoder left_encoder_ ;
     private Encoder right_encoder_ ;
 
@@ -97,24 +95,13 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
         left_linear_ = new Speedometer("left", linearsamples, false);
         right_linear_ = new Speedometer("right", linearsamples, false);
 
-        automode_neutral_ = MotorController.NeutralMode.Brake;
-        teleop_neutral_ = MotorController.NeutralMode.Brake;
-        disabled_neutral_ = MotorController.NeutralMode.Coast;
-
-        teleop_ramp_rate_ = 0.0 ;
-        auto_ramp_rate_ = 0.0 ;
+        automode_neutral_ = MotorController.XeroNeutralMode.Brake;
+        teleop_neutral_ = MotorController.XeroNeutralMode.Brake;
+        disabled_neutral_ = MotorController.XeroNeutralMode.Coast;
 
         attachHardware();
 
         last_pose_ = new Pose2d() ;
-    }
-
-    /// \brief set the open loop ramp rate for the tank drive motors
-    /// \param teleop the ramp rate for teleop mode
-    /// \param auto the ramp rate for auto mode
-    public void setOpenLoopRampRates(double teleop, double auto) {
-        teleop_ramp_rate_ = teleop ;
-        auto_ramp_rate_ = auto ;
     }
 
     /// \brief sets the recording flag for the drive base.  
@@ -251,34 +238,22 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
             case Autonomous:
                 left_motors_.setNeutralMode(automode_neutral_);
                 right_motors_.setNeutralMode(automode_neutral_);
-                left_motors_.setEncoderUpdateFrequncy(EncoderUpdateFrequency.Frequent, EncoderUpdateFrequency.Infrequent);
-                right_motors_.setEncoderUpdateFrequncy(EncoderUpdateFrequency.Frequent, EncoderUpdateFrequency.Infrequent);
-                left_motors_.setOpenLoopRampRate(auto_ramp_rate_) ;
-                right_motors_.setOpenLoopRampRate(auto_ramp_rate_) ;    
                 break;
 
             case Teleop:
                 left_motors_.setNeutralMode(teleop_neutral_);
                 right_motors_.setNeutralMode(teleop_neutral_);
-                left_motors_.setEncoderUpdateFrequncy(EncoderUpdateFrequency.Infrequent, EncoderUpdateFrequency.Infrequent);
-                right_motors_.setEncoderUpdateFrequncy(EncoderUpdateFrequency.Infrequent, EncoderUpdateFrequency.Infrequent);
-                left_motors_.setOpenLoopRampRate(teleop_ramp_rate_) ;
-                right_motors_.setOpenLoopRampRate(teleop_ramp_rate_) ;
                 break;
 
             case Test:
                 left_motors_.setNeutralMode(disabled_neutral_);
                 right_motors_.setNeutralMode(disabled_neutral_);
-                left_motors_.setEncoderUpdateFrequncy(EncoderUpdateFrequency.Infrequent, EncoderUpdateFrequency.Infrequent);
-                right_motors_.setEncoderUpdateFrequncy(EncoderUpdateFrequency.Infrequent, EncoderUpdateFrequency.Infrequent);
                 break;
 
             case Disabled:
             case None:
                 left_motors_.setNeutralMode(disabled_neutral_);
                 right_motors_.setNeutralMode(disabled_neutral_);      
-                left_motors_.setEncoderUpdateFrequncy(EncoderUpdateFrequency.Infrequent, EncoderUpdateFrequency.Infrequent);
-                right_motors_.setEncoderUpdateFrequncy(EncoderUpdateFrequency.Infrequent, EncoderUpdateFrequency.Infrequent) ;
                 break ;
             }
         } catch (Exception ex) {
@@ -293,7 +268,7 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
             left_motors_.resetEncoder();
             right_motors_.resetEncoder();
         }
-        catch(BadMotorRequestException ex) {
+        catch(Exception ex) {
             MessageLogger logger = getRobot().getMessageLogger() ;
             logger.startMessage(MessageType.Error) ;
             logger.add("error occurred setting the tank drive pose - " + ex.getMessage()) ;
@@ -316,7 +291,7 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
         MessageLogger logger = getRobot().getMessageLogger() ;
 
         try {
-            if (left_motors_.hasPosition() && right_motors_.hasPosition()) {
+            if (left_motors_.hasEncoder() && right_motors_.hasEncoder()) {
                 ticks_left_ = (int)left_motors_.getPosition();
                 ticks_right_ = (int)right_motors_.getPosition();
             }
@@ -381,8 +356,8 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
         right_power_ = right ;
 
         try {
-            left_motors_.set(left_power_) ;
-            right_motors_.set(right_power_) ;
+            left_motors_.set(XeroPidType.Power, left_power_) ;
+            right_motors_.set(XeroPidType.Power, right_power_) ;
         }
         catch(BadMotorRequestException|MotorRequestFailedException ex) {
             logger.startMessage(MessageType.Error) ;
@@ -390,7 +365,7 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
         }
     }
 
-    private void attachHardware() throws BadMotorRequestException, MissingParameterException, BadParameterTypeException {
+    private void attachHardware() throws BadMotorRequestException, MissingParameterException, BadParameterTypeException, MotorRequestFailedException {
         MessageLogger logger = getRobot().getMessageLogger() ;
 
         left_motors_ = getRobot().getMotorFactory().createMotor("TankDriveLeft", "subsystems:" + getName() + ":hw:left:motors") ;
@@ -398,8 +373,8 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
 
         if (isSettingDefined(CurrentLimitName)) {
             double limit = getSettingsValue(CurrentLimitName).getDouble() ;
-            left_motors_.setCurrentLimit(limit, limit) ;
-            right_motors_.setCurrentLimit(limit, limit);
+            left_motors_.setCurrentLimit(limit) ;
+            right_motors_.setCurrentLimit(limit);
 
             logger.startMessage(MessageType.Info) ;
             logger.add("TankDrive: motors current limited to " + limit + " Amps") ;
@@ -417,7 +392,7 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
         }
 
 
-        if (!left_motors_.hasPosition() || !right_motors_.hasPosition()) {
+        if (!left_motors_.hasEncoder() || !right_motors_.hasEncoder()) {
             int p1, p2 ;
 
             p1 = getSettingsValue("hw:left:encoders:1").getInteger() ;
@@ -436,12 +411,9 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
             logger.endMessage();
         }
 
-        if (left_motors_.hasPosition() && right_motors_.hasPosition()) {
+        if (left_motors_.hasEncoder() && right_motors_.hasEncoder()) {
             left_motors_.resetEncoder(); 
             right_motors_.resetEncoder();
-            
-            left_motors_.setEncoderUpdateFrequncy(EncoderUpdateFrequency.Frequent, EncoderUpdateFrequency.Infrequent);
-            right_motors_.setEncoderUpdateFrequncy(EncoderUpdateFrequency.Frequent, EncoderUpdateFrequency.Infrequent);
         }
     }
 }

@@ -1,0 +1,392 @@
+{
+    "system": {
+        "messages": {
+            // Robot framework settings
+            "actions": true,
+            "pathmanager": false,
+            "xerorobot": false,
+            "simulator": false,
+            "limelight-edgar" : false,
+            "oibuttons" : false,
+
+            // Special settings
+            "pathfollowing": false,
+
+            // Subsystem related messages
+            "vision": false,
+            "swerve" : true,
+            "limelight" : false
+        },
+        "verbose": {
+            "swerve" : true
+        },
+        "plotting": {
+            "enabled" : true,
+            "version" : 3
+        },
+        "pneumatics": {
+            "type": "REVPH",
+            "min-pressure" : 100.0,
+            "max-pressure" : 120.0
+        },
+        "pdp" : {
+            "type" : "rev"
+        }
+    },
+    "subsystems": {
+        "swerve" : {
+            //
+            // This section defines the hardware used by the swerve drive
+            //
+            "hw" : {
+                "modules" : {
+                    "type" : "MK4I",
+                    "ratio" : "L3"
+                },
+                "gyro" : {
+                    "type" : "navx",
+                    "start-time" : 3.0
+                },
+                "fl" : {
+                    "motors" : {
+                        "steer" : {
+                            "type": "talon-fx",
+                            "canid": 11,
+                            "bus" : "DriveBase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "current-limit" : 20.0,
+                            "p" : 4.804692,
+                            "i" : 0.0,
+                            "d" : 0.002402
+                        },
+                        "drive" : {
+                            "type": "talon-fx",
+                            "canid": 12,
+                            "bus" : "DriveBase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "current-limit" : 80.0
+                        }
+                    },
+                    "encoder" : {
+                        "canid" : 13,
+                        "bus" : "DriveBase",
+                        "offset": {
+                            "PRACTICE" : -221.5,
+                            "COMPETITION" : 0.0
+                        }                        
+                    }
+                },
+                "fr" : {
+                    "motors" : {
+                        "steer" : {
+                            "type": "talon-fx",
+                            "canid": 21,
+                            "bus" : "DriveBase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "current-limit" : 20.0,
+                            "p" : 4.804692,
+                            "i" : 0.0,
+                            "d" : 0.0024021
+                        },
+                        "drive" : {
+                            "type": "talon-fx",
+                            "canid": 22,
+                            "bus" : "DriveBase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "current-limit" : 80.0
+                        }
+                    },
+                    "encoder" : {
+                        "canid" : 23,
+                        "bus" : "DriveBase",                        
+                        "offset": {
+                            "PRACTICE" : -147.6,
+                            "COMPETITION" : 0
+                        }                        
+                    }
+                },
+                "bl" : {
+                    "motors" : {
+                        "steer" : {
+                            "type": "talon-fx",
+                            "canid": 41,
+                            "bus" : "DriveBase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "pdp-channel" : 4,
+                            "current-limit" : 20.0,
+                            "p" : 4.804692,
+                            "i" : 0.0,
+                            "d" : 0.002402
+                        },
+                        "drive" : {
+                            "type": "talon-fx",
+                            "canid": 42,
+                            "bus" : "DriveBase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "current-limit" : 80.0
+                        }
+                    },
+                    "encoder" : {
+                        "canid" : 43,
+                        "bus" : "DriveBase",                        
+                        "offset": {
+                            "PRACTICE" : -127.0,
+                            "COMPETITION" : 0
+                        }                        
+                    }
+                },
+                "br" : {
+                    "motors" : {
+                        "steer" : {
+                            "type": "talon-fx",
+                            "canid": 31,
+                            "bus" : "DriveBase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "current-limit" : 20.0,
+                            "p" : 4.804692,
+                            "i" : 0.0,
+                            "d" : 0.002402
+                        },
+                        "drive" : {
+                            "type": "talon-fx",
+                            "canid": 32,
+                            "bus" : "DriveBase",
+                            "inverted" : false,
+                            "neutral-mode": "brake",
+                            "current-limit" : 80.0
+                        }
+                    },
+                    "encoder" : {
+                        "canid" : 33,
+                        "bus" : "DriveBase",                        
+                        "offset": {
+                            "PRACTICE" : -320.4,
+                            "COMPETITION" : 0
+                        }                        
+                    }
+                }                   
+            },
+
+            //
+            // This section descrdibes the physical characteristics of the robot
+            //
+            "physical": {
+                "width": 0.5715, // meters
+                "length": 0.5842, // meters
+                "path" : {
+                    "maxv" : 2.0,
+                    "maxa" : 2.0
+                },
+                "max-angular-speed": 100,
+                "max-angular-accel": 100
+            },
+            
+            //
+            // This section describes how the vision integration with the drive base behaves
+            //            
+            "estimator" : {
+                "advanced-rejection" : false,                   // If true, the advanced rejection of vision samples is used, see the code for more details
+                "vision-reject-threshold" : 100.0,              // Reject vision samples that are more than this distance from the current robot pose
+                "single-threshold" : 2.0,                       // When we see a single target, and we are greater than this distance, use the single-far std devs
+                                                                // Otherwise use the single-near std devs
+                "multi-threshold" : 2.0,                        // When we see multiple targets, and we are greater than this distance, use the multi-far std devs
+                                                                // Otherwise use the multi-near std devs
+                "single-tag-ignore-reject-threshold" : 2.0,     // If we see a single tag and the pose from the tag is greater than the vision-reject-threshold from the
+                                                                // current robot pose, we normally reject the vision sample.  However, if the distance to the tag is
+                                                                // within this distance, we apply it anyway assuming that the odometry is just way off.
+
+                "odometry" : {                                  // The std devs for the odometry
+                    "x" : 0.9,
+                    "y" : 0.9,
+                    "heading" : 0.9
+                },
+                //
+                // Jack in the bot - Odometry (0.02, 0.02, 0.02), Vision (0.1, 0.1, 0.01).
+                //
+                "vision" : {
+                    "single-far" : {
+                        "x" : 9.0,
+                        "y" : 9.0,
+                        "heading" : 9.0
+                    },
+                    "single-near" : {
+                        "x" : 0.1,
+                        "y" : 0.1,
+                        "heading" : 0.1
+                    },
+                    "multi-far" : {
+                        "x" : 0.1,
+                        "y" : 0.1,
+                        "heading" : 0.1
+                    },
+                    "multi-near" : {
+                        "x" : 0.1,
+                        "y" : 0.1,
+                        "heading" : 0.1
+                    }
+                }
+            },       
+            
+            //
+            // This section is the pid controller for the low level modules, specifically the module velocity since the
+            // angle is managed in the motor controller and initialize by the low level code.
+            //            
+            "pids": {
+                "fl": {
+                    "kp":  {
+                        "PRACTICE" : 0.0,
+                        "COMPETITION" : 0.0
+                    },
+                    "ki": 0.0,
+                    "kd": 0.0,
+                    "kf" : {
+                        "PRACTICE" : 0.18566326,
+                        "COMPETITION" : 0
+                    },
+                    "min": -1.0,
+                    "max": 1.0,
+                    "imax": 0.0
+                },
+                "fr": {
+                    "kp":  {
+                        "PRACTICE" : 0.0,
+                        "COMPETITION" : 0.0
+                    },
+                    "ki": 0.0,
+                    "kd": 0.0,
+                    "kf" : {
+                        "PRACTICE" : 0.184747,
+                        "COMPETITION" : 0
+                    },
+                    "min": -1.0,
+                    "max": 1.0,
+                    "imax": 0.0
+                },
+                "bl": {
+                    "kp":  {
+                        "PRACTICE" : 0.0,
+                        "COMPETITION" : 0.0
+                    },
+                    "ki": 0.0,
+                    "kd": 0.0,
+                    "kf" : {
+                        "PRACTICE" : 0.186217,
+                        "COMPETITION" : 0
+                    },
+                    "min": -1.0,
+                    "max": 1.0,
+                    "imax": 0.0
+                },
+                "br": {
+                    "kp":  {
+                        "PRACTICE" : 0.0,
+                        "COMPETITION" : 0.0
+                    },
+                    "ki": 0.0,
+                    "kd": 0.0,
+                    "kf" : {
+                        "PRACTICE" : 0.183776,
+                        "COMPETITION" : 0
+                    },
+                    "min": -1.0,
+                    "max": 1.0,
+                    "imax": 0.0
+                }
+            }            
+        },
+        "allegro2024oi" : {
+            "swerve_gamepad": {
+                "index": 0,
+                "angle": {
+                    "maximum": 180,
+                    "deadband": 0.05
+                },
+                "position": {
+                    "maximum": 4.5,
+                    "deadband": {
+                        "x": 0.1,
+                        "y": 0.1
+                    }
+                },
+                "power": 2.0
+            }            
+        },
+        "testmode": {
+            "enabled": true,
+            "which": 0,
+            "0": {
+                "angle": 45,
+                "power": 0.0
+            },
+            "1": {
+                "angle": 0.0,
+                "power": 0.2,
+                "duration": 1
+            },
+            "2": {
+                "angle": 0.0,
+                "speed": 0.5
+            },
+            "3": {
+                "angle": 0.0,
+                "speed": 1.0,
+                "duration": 3.0
+            },
+            "4": {
+                "name": "Edge1Blue-Path1"
+            },
+            "5": {
+                "angle": 0.0,
+                "power": 0.7,
+                "duration": 2
+            },
+            "7" : {
+                "name" : "Middle1Blue-Path1"
+            },
+            "10" : {
+                "power" : 0.2,
+                "duration" : 1.0
+            }
+        }        
+    },
+    "testmode" : {
+        "enabled": true,
+        "which": 1,
+        "0": {
+            "angle": 90,
+            "power": 0.2
+        },
+        "1": {
+            "angle": 0.0,
+            "power": 0.3,
+            "duration": 3
+        },
+        "2": {
+            "angle": 45.0,
+            "speed": 1.0
+        },
+        "3": {
+            "angle": 0.0,
+            "speed": 1.0,
+            "duration": 3.0
+        },
+        "4": {
+            "name": "Edge1Blue-Path1"
+        },
+        "5": {
+            "angle": 0.0,
+            "power": 0.7,
+            "duration": 2
+        },
+        "7" : {
+            "name" : "Middle1Blue-Path1"
+        }        
+    }
+}

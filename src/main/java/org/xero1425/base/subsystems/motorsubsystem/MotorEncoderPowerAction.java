@@ -105,5 +105,4 @@ public class MotorEncoderPowerAction extends MotorPowerAction
 
         return ret ;
     }
-
 }

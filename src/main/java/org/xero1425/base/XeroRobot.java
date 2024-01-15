@@ -152,6 +152,7 @@ public abstract class XeroRobot extends TimedRobot {
         logger_id_ = logger_.registerSubsystem(LoggerName) ;
         logger_.startMessage(MessageType.Info).add("============================================================").endMessage();
         logger_.startMessage(MessageType.Info).add("robot code starting").endMessage();
+        logger_.startMessage(MessageType.Info).add("SerialNumber", RobotController.getSerialNumber(), true).endMessage();
         logger_.startMessage(MessageType.Info).add("enableMessageLogger time", getTime() - start).endMessage();
         logger_.startMessage(MessageType.Info).add("============================================================").endMessage();
 
@@ -748,7 +749,7 @@ public abstract class XeroRobot extends TimedRobot {
     /// address of the ethernet port on the RoboRio to a specific MAC address provided by the method getParcticeBotMacAddress().
     /// \returns true if the current robot is the practice bot
     protected boolean isPracticeBot() {
-        return RobotController.getSerialNumber() == getPracticeSerialNumber() ;
+        return RobotController.getSerialNumber().equals(getPracticeSerialNumber()) ;
     }
 
     /// \brief Abtract method to create the automode controller, must be overridden by the derived class
@@ -923,7 +924,7 @@ public abstract class XeroRobot extends TimedRobot {
         logger_.add("    Alliance: ").add(str).endMessage();
 
         logger_.startMessage(MessageType.Info) ;
-        logger_.add("    Location: ").add(DriverStation.getLocation()).endMessage();
+        logger_.add("    Location: ").add(DriverStation.getLocation().getAsInt()).endMessage();
 
         logger_.startMessage(MessageType.Info) ;
         logger_.add("    GameData: '").add(game_data_).add("'").endMessage();

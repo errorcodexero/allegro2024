@@ -8,8 +8,10 @@ import org.xero1425.base.XeroRobot;
 import org.xero1425.base.controllers.AutoController;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MissingParameterException;
+import org.xero1425.misc.SimArgs;
 
 import frc.robot.automodes.AllegroRobotAutoController;
+import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -23,9 +25,27 @@ public class Allegro2024 extends XeroRobot {
     super(0.02);
   }
 
+  public String getPracticeSerialNumber() {
+    return "032238BC" ;
+  }
+
   public String getName() {
     return "allegro2024";
   }
+
+  public String getSimulationFileName() {
+      String ret = SimArgs.InputFileName;
+      if (ret != null)
+          return ret;
+
+      return "init";
+  }
+
+  @Override
+  protected void hardwareInit() throws Exception {    
+    AllegroRobot2024 robot = new AllegroRobot2024(this);
+    setRobotSubsystem(robot);
+  }  
 
   @Override
   protected AutoController createAutoController() throws MissingParameterException, BadParameterTypeException {

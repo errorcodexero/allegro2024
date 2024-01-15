@@ -474,17 +474,25 @@ public final class MessageLogger
     /// \param name the name to add
     /// \param value the value to add
     /// \returns the MessageLogger object    
-    public MessageLogger add(final String name, final String value) {
+    public MessageLogger add(final String name, final String value, boolean quotes) {
         final ThreadData per = getPerThreadData();
         if (per.enabled_&& per.in_message_) {
             per.message_.append(" ") ;
             per.message_.append(name) ;
             per.message_.append(" = ") ;
+            if (quotes)
+                per.message_.append("'");
             per.message_.append(value) ;
+            if (quotes)
+                per.message_.append("'");            
         }
 
         return this;        
-    }       
+    }     
+    
+    public MessageLogger add(final String name, final String value) {    
+        return add(name, value, false) ;
+    }
 
     public MessageLogger add(final String name, final Pose2d pose) {
         final ThreadData per = getPerThreadData();
