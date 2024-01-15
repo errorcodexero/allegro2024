@@ -1,6 +1,5 @@
 package org.xero1425.base.subsystems.swerve;
 
-import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.motors.BadMotorRequestException;
 import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.motors.IMotorController.XeroNeutralMode;
@@ -59,7 +58,12 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         powers_ = new double[4] ;
         angles_ = new double[4] ;
 
-        SwerveModuleConfig cfg = SwerveModuleConfig.MK4I_L3 ;
+        String mtype = getSettingsValue("hw:modules:type").getString() ;
+        String mratio = getSettingsValue("hw:modules:ratio").getString() ;
+        SwerveModuleConfig cfg = getConfiguration(mtype, mratio) ;
+        if (cfg == null) {
+            throw new Exception("Swerve module: type = '" + mtype + "', ratio = '" + mratio + "' not supported") ;
+        }
         ShuffleboardTab shuffleboardTab = Shuffleboard.getTab("Drivetrain");
 
         modules_[FL] = createModule(cfg, "fl", shuffleboardTab) ;
@@ -68,6 +72,24 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         modules_[BR] = createModule(cfg, "br", shuffleboardTab) ;
 
         createOdometry();
+    }
+
+    SwerveModuleConfig getConfiguration(String mtype, String mratio) {
+        SwerveModuleConfig cfg = null ;
+
+        if (mtype.toLowerCase().equals("mk4i")) {
+            if (mratio.toLowerCase().equals("l3")) {
+                cfg = SwerveModuleConfig.MK4I_L3 ;
+            }
+            else if (mratio.toLowerCase().equals("l2")) {
+                cfg = SwerveModuleConfig.MK4I_L2 ;
+            }     
+            else if (mratio.toLowerCase().equals("l1")) {
+                cfg = SwerveModuleConfig.MK4I_L1 ;
+            }                      
+        }
+
+        return cfg ;
     }
 
     private Module createModule(SwerveModuleConfig cfg, String which, ShuffleboardTab tab) throws Exception {
