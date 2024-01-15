@@ -40,8 +40,6 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
     private Module[] modules_ = new Module[4] ;
 
-    private XeroTimer module_sync_timer_ ;
-
     private ChassisSpeeds chassis_speed_ ;
     private boolean disabled_init_ ;
 
@@ -52,8 +50,6 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
     private int module_pos_ = 0 ;
 
-    private boolean module_encoders_inited_ ;
-    
     public SDSSwerveDriveSubsystem(Subsystem parent, String name) throws Exception {
         super(parent, name) ;
 
@@ -72,10 +68,6 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         modules_[BR] = createModule(cfg, "br", shuffleboardTab) ;
 
         createOdometry();
-
-        module_sync_timer_ = new XeroTimer(getRobot(), "module-sync-timer", 5.0) ;
-        module_sync_timer_.start();
-        module_encoders_inited_ = false ;
     }
 
     private Module createModule(SwerveModuleConfig cfg, String which, ShuffleboardTab tab) throws Exception {
@@ -183,14 +175,16 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
     public void computeMyState() throws Exception {
         super.computeMyState();
 
-        if (!module_encoders_inited_ && module_sync_timer_.isExpired()) {
-            modules_[FL].hw.synchronizeEncoders();
-            modules_[FR].hw.synchronizeEncoders();
-            modules_[BL].hw.synchronizeEncoders();
-            modules_[BR].hw.synchronizeEncoders();  
-            
-            module_encoders_inited_ = true ;
-        }
+        //
+        // Note: These lines will on perform a syncronization on a module if it has
+        //       not been synchronized.  The modules should have been sync'ed when they
+        //       were created.  This is just an out in case an error occurred during the
+        //       sync process during creation.
+        //
+        modules_[FL].hw.synchronizeEncoders(false);
+        modules_[FR].hw.synchronizeEncoders(false);
+        modules_[BL].hw.synchronizeEncoders(false);
+        modules_[BR].hw.synchronizeEncoders(false);                        
 
         if (getRobot().isDisabled()) {
             if (!disabled_init_) {
@@ -210,6 +204,11 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         else {
             disabled_init_ = false ;
         }
+    }
+
+    private boolean allModulesSynchronized() {
+        return modules_[FL].hw.isEncoderSynchronized() && modules_[FR].hw.isEncoderSynchronized() &&
+                modules_[BL].hw.isEncoderSynchronized() && modules_[BR].hw.isEncoderSynchronized() ;
     }
 
     @Override
@@ -252,7 +251,7 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
             powers_[BR] = modules_[BR].pid.getOutput(speeds_[BR], getModuleState(BR).speedMetersPerSecond, getRobot().getDeltaTime()) ;
         }
 
-        if (module_encoders_inited_) {
+        if (allModulesSynchronized()) {
             modules_[FL].hw.set(powers_[FL], Math.toRadians(angles_[FL])) ;
             modules_[FR].hw.set(powers_[FR], Math.toRadians(angles_[FR])) ;
             modules_[BL].hw.set(powers_[BL], Math.toRadians(angles_[BL])) ;

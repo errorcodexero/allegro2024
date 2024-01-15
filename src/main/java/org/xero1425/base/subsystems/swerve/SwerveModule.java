@@ -6,6 +6,7 @@ import org.xero1425.base.motors.IMotorController.XeroPidType;
 import org.xero1425.base.subsystems.Subsystem;
 
 import com.ctre.phoenix6.StatusCode;
+import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
@@ -26,6 +27,7 @@ public class SwerveModule {
     private CANcoder absolute_encoder_ ;
     private CANcoderConfiguration absolute_cfg_ ;
     private double target_angle_ ;
+    private boolean synchronized_ ;
 
     static String[] plot_values_ = new String[] { "a" };
 
@@ -35,6 +37,7 @@ public class SwerveModule {
         //
         name_ = name ;
         subsys_ = subsys ;
+        synchronized_ = false ;
         steer_ = subsys_.getRobot().getMotorFactory().createMotor(name + "-steer", id + ":motors:steer");
         steer_.setInverted(cfg.steer_inverted);
         steer_.setNeutralMode(XeroNeutralMode.Brake);
@@ -72,7 +75,12 @@ public class SwerveModule {
         absolute_cfg_.MagnetSensor.SensorDirection = SensorDirectionValue.CounterClockwise_Positive ;
         checkError("SwerveModule constructor()", absolute_encoder_.getConfigurator().apply(absolute_cfg_));
 
+        synchronizeEncoders(true);
         addDashBoardEntries(container);
+    }
+
+    public boolean isEncoderSynchronized() {
+        return synchronized_ ;
     }
 
     public void setNeutralMode(IMotorController.XeroNeutralMode mode) {
@@ -109,19 +117,8 @@ public class SwerveModule {
             return ret;
         }) ;
 
-        container.addNumber("Steer Angle Raw", () -> {
-            double ret = 0 ;
-            try {
-                ret = steer_.getPosition() ;
-            } catch (Exception e) {
-                ret = Double.MAX_VALUE ;
-            }
-            return ret;
-        }) ;        
-
         container.addNumber("Target Angle", () -> Math.toDegrees(getTargetAngle())) ;
         container.addNumber("Absolute Encoder Degrees", () -> Math.toDegrees(getAbsoluteEncoderAngle())) ;
-        container.addNumber("Absolute Encoder Raw", () -> absolute_encoder_.getAbsolutePosition().getValue()) ;
     }
 
     public double getDriveVelocity() throws BadMotorRequestException, MotorRequestFailedException {
@@ -185,10 +182,15 @@ public class SwerveModule {
     }
 
 
-    public void synchronizeEncoders() throws BadMotorRequestException, MotorRequestFailedException {
-        double encoder = getAbsoluteEncoderAngle() ;
-        double value = (encoder/ ticksToRadians_);
-        steer_.setPosition(value) ;
+    public void synchronizeEncoders(boolean force) throws BadMotorRequestException, MotorRequestFailedException {
+        if (!synchronized_ || force) {
+            StatusSignal<Double> val = absolute_encoder_.getPosition().waitForUpdate(0.2);
+            if (val.getStatus() == StatusCode.OK) {
+                double value = (val.getValue() * 2.0 * Math.PI) / ticksToRadians_;
+                steer_.setPosition(value) ;
+                synchronized_ = true ;
+            }
+        }
     }
 
     private void checkError(String msg, StatusCode err) throws Exception {
