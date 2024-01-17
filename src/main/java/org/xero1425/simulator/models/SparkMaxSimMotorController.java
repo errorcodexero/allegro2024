@@ -1,7 +1,6 @@
 package org.xero1425.simulator.models;
 
 import org.xero1425.simulator.engine.SimulationEngine;
-import com.revrobotics.CANSparkMax;
 
 import org.xero1425.base.motors.IMotorController;
 import org.xero1425.base.motors.SparkMaxMotorController;
@@ -22,7 +21,7 @@ public class SparkMaxSimMotorController implements ISimMotorController {
         }
 
         IMotorController ctrl = engine.getRobot().getMotorFactory().getMotorController(bus, canid) ;
-        if (!(ctrl.getNativeController() instanceof CANSparkMax)) {
+        if (!(ctrl instanceof SparkMaxMotorController)) {
             throw new Exception("motor on bus '" + bus + "', can id " + canid + " is not a CANSparkMax motor");
         }
 

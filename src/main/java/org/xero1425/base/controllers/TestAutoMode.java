@@ -70,6 +70,14 @@ public class TestAutoMode extends AutoMode {
         return which_;
     }
 
+    public boolean hasParameter(String name) {
+        if (!parameters_.containsKey(which_))
+            return false ;
+
+        Map<String, SettingsValue> params = parameters_.get(which_) ;
+        return params.containsKey(name) ;
+    }
+
     /// \brief Returns the double value of a given parameter from the settings file test mode settings
     /// \returns the name value from the settings file    
     protected double getDouble(String name) throws Exception {

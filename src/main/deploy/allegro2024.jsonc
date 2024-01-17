@@ -34,6 +34,32 @@
         }
     },
     "subsystems": {
+        "intake" : {
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
+                    "bus" : "",
+                    "canid" : 1,
+                    "inverted" : false,
+                    "neutral-mode": "brake",
+                    "current-limit" : 20.0
+                },
+                "encoder": {
+                    "type": "motor",
+                    "m": 1,
+                    "b": 0,
+                    "units" : "ticks"
+                },
+                "spinner" : {
+                    "type" : "sparkmax-brushless",
+                    "bus" : "",
+                    "canid" : 2,
+                    "inverted" : false,
+                    "neutral-mode": "brake",
+                    "current-limit" : 20.0
+                }
+            }
+        },
         "swerve" : {
             //
             // This section defines the hardware used by the swerve drive
@@ -361,21 +387,35 @@
         "which": 3,
         "0": {
             "angle": 90,
-            "power": 0.2
+            "power": 0.2,
+            "duration": 3.0         // optional, if missing will run forever
         },
         "1": {
-            "angle": 0.0,
-            "power": 0.3,
-            "duration": 3
-        },
-        "2": {
             "angle": 45.0,
-            "speed": 1.0
+            "speed": 1.0,
+            "duration" : 3.0        // optional, if missing will run forever
         },
-        "3": {
-            "angle": 45.0,
-            "speed": 2.0,
-            "duration": 3.0
+        "2" : {
+            "duration" : 3.0,
+            "angle-fl" : 45.0,
+            "angle-fr" : 135.0,
+            "angle-bl" : 225.0,
+            "angle-br" : 315.0,
+            "power-fl" : 0.2,
+            "power-fr" : 0.4,
+            "power-bl" : 0.6,
+            "power-br" : 0.8
+        },
+        "3" : {
+            "duration" : 3.0,            
+            "angle-fl" : 45.0,
+            "angle-fr" : 135.0,
+            "angle-bl" : 225.0,
+            "angle-br" : 315.0,
+            "speed-fl" : 1.0,
+            "speed-fr" : 1.5,
+            "speed-bl" : 2.0,
+            "speed-br" : 2.5   
         },
         "4": {
             "name": "Edge1Blue-Path1"
