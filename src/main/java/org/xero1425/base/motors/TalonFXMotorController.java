@@ -47,12 +47,12 @@ public class TalonFXMotorController extends MotorController
         super(name) ;
 
         bus_ = bus ;
+
         ctrl_ = new TalonFX(canid, bus_);
         cfg_ = new TalonFXConfiguration() ;
 
         checkError("TalonFXMotorController - apply configuration", ctrl_.getConfigurator().apply(cfg_));
         checkError("TalonFXMotorController - optimize bus", ctrl_.optimizeBusUtilization()) ;
-
     }
 
     private void checkError(String msg, StatusCode err) throws MotorRequestFailedException {

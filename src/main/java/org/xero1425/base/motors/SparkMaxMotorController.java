@@ -12,6 +12,8 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 
+import edu.wpi.first.wpilibj.RobotBase;
+
 /// \file
 
 /// \brief This class is MotorController class that supports the SparkMax motor controller.   This class is a 
@@ -19,6 +21,51 @@ import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 /// MotorController base class.  This class supports both brushless and brushed motors.
 public class SparkMaxMotorController extends MotorController
 {
+    public class SimState {
+        private double voltage_ ;
+        private double position_ ;
+        private double velocity_ ;
+
+        private boolean inverted_ ;
+
+        public SimState() {
+            voltage_ = 0.0 ;
+            inverted_ = false ;
+        }
+
+        public double getMotorVoltage() {
+            return voltage_ ;
+        }
+
+        public void setMotorVoltage(double v) {
+            voltage_ = v ;
+        }
+
+        public void setInterved(boolean i) {
+            inverted_ = i ;
+        }
+
+        public boolean getInverted() {
+            return inverted_ ;
+        }
+
+        public double getPosition() {
+            return position_ ;
+        }
+
+        public void setPosition(double v) {
+            position_ = v ;
+        }
+
+        public double getVelocity() {
+            return velocity_ ;
+        }
+
+        public void setVelocity(double v) {
+            velocity_ = v ;
+        }
+    }
+
     static public final String SimDeviceNameBrushed = "SparkMaxBrushed" ;
     static public final String SimDeviceNameBrushless = "SparkMax" ;
     static final int kTicksPerRevolution = 42 ;
@@ -38,36 +85,45 @@ public class SparkMaxMotorController extends MotorController
     private boolean vel_important_ ;
     private double target_ ;
 
+    private SimState simstate_ ;
+
     public SparkMaxMotorController(String name, int canid, boolean brushless, boolean leader) throws MotorRequestFailedException {
         super(name) ;
 
         canid_ = canid ;
+        inverted_ = false ;
+        pos_important_ = false ;
+        vel_important_ = false ;
+        current_limit_ = Double.MAX_VALUE ;
+        target_ = 0.0 ;
 
         if (brushless) {
             mtype_ = MotorType.kBrushless;
         }
         else {
             mtype_ = MotorType.kBrushed ;
+        }        
+
+        if (RobotBase.isSimulation()) {
+            simstate_ = new SimState() ;
         }
+        else {
+            ctrl_ = new CANSparkMax(canid, mtype_);
+            checkError("restoreFactoryDefaults - restoreFactoryDefaults", ctrl_.restoreFactoryDefaults());
 
-        ctrl_ = new CANSparkMax(canid, mtype_);
-        ctrl_.restoreFactoryDefaults() ;
+            pid_ = ctrl_.getPIDController() ;
+            encoder_ = ctrl_.getEncoder() ;      
+            
+            // Output the position in ticks
+            checkError("constructor - setPositionConversionFactor", encoder_.setPositionConversionFactor(kTicksPerRevolution)) ;
 
-        pid_ = ctrl_.getPIDController() ;
-        encoder_ = ctrl_.getEncoder() ;
+            // Output velocity in ticks per second
+            checkError("constructor - setVelocityConversionFactor", encoder_.setVelocityConversionFactor(kTicksPerRevolution / 60.0)) ;
+        }
+    }
 
-        // Output the position in ticks
-        checkError("constructor", encoder_.setPositionConversionFactor(kTicksPerRevolution)) ;
-
-        // Output velocity in ticks per second
-        encoder_.setVelocityConversionFactor(kTicksPerRevolution / 60.0) ;
-
-        inverted_ = false ;
-        pos_important_ = false ;
-        vel_important_ = false ;
-        current_limit_ = Double.MAX_VALUE ;
-
-        target_ = 0.0 ;
+    public SimState getSimState() {
+        return simstate_ ;
     }
 
     private void checkError(String msg, REVLibError err) throws MotorRequestFailedException {
@@ -81,68 +137,70 @@ public class SparkMaxMotorController extends MotorController
     public List<String> getFaults() throws BadMotorRequestException, MotorRequestFailedException {
         ArrayList<String> faults = new ArrayList<String>() ;
 
-        if (ctrl_.getFault(FaultID.kBrownout)) {
-            faults.add("kBrownout") ;
-        }
+        if (simstate_ == null) {
+            if (ctrl_.getFault(FaultID.kBrownout)) {
+                faults.add("kBrownout") ;
+            }
 
-        if (ctrl_.getFault(FaultID.kOvercurrent)) {
-            faults.add("kOvercurrent") ;
-        }
+            if (ctrl_.getFault(FaultID.kOvercurrent)) {
+                faults.add("kOvercurrent") ;
+            }
 
-        if (ctrl_.getFault(FaultID.kIWDTReset)) {
-            faults.add("kIWDTReset") ;
-        }
+            if (ctrl_.getFault(FaultID.kIWDTReset)) {
+                faults.add("kIWDTReset") ;
+            }
 
-        if (ctrl_.getFault(FaultID.kMotorFault)) {
-            faults.add("kMotorFault") ;
-        }
+            if (ctrl_.getFault(FaultID.kMotorFault)) {
+                faults.add("kMotorFault") ;
+            }
 
-        if (ctrl_.getFault(FaultID.kSensorFault)) {
-            faults.add("kSensorFault") ;
-        }    
+            if (ctrl_.getFault(FaultID.kSensorFault)) {
+                faults.add("kSensorFault") ;
+            }    
+            
+            if (ctrl_.getFault(FaultID.kStall)) {
+                faults.add("kStall") ;
+            }    
+            
+            if (ctrl_.getFault(FaultID.kEEPROMCRC)) {
+                faults.add("kEEPROMCRC") ;
+            }    
+            
+            if (ctrl_.getFault(FaultID.kCANTX)) {
+                faults.add("kCANTX") ;
+            }
         
-        if (ctrl_.getFault(FaultID.kStall)) {
-            faults.add("kStall") ;
-        }    
-        
-        if (ctrl_.getFault(FaultID.kEEPROMCRC)) {
-            faults.add("kEEPROMCRC") ;
-        }    
-        
-        if (ctrl_.getFault(FaultID.kCANTX)) {
-            faults.add("kCANTX") ;
-        }
-       
-        if (ctrl_.getFault(FaultID.kCANRX)) {
-            faults.add("kCANRX") ;
-        }  
+            if (ctrl_.getFault(FaultID.kCANRX)) {
+                faults.add("kCANRX") ;
+            }  
 
-        if (ctrl_.getFault(FaultID.kHasReset)) {
-            faults.add("kHasReset") ;
-        }  
-        
-        if (ctrl_.getFault(FaultID.kDRVFault)) {
-            faults.add("kDRVFault") ;
-        }  
+            if (ctrl_.getFault(FaultID.kHasReset)) {
+                faults.add("kHasReset") ;
+            }  
+            
+            if (ctrl_.getFault(FaultID.kDRVFault)) {
+                faults.add("kDRVFault") ;
+            }  
 
-        if (ctrl_.getFault(FaultID.kOtherFault)) {
-            faults.add("kOtherFault") ;
-        }  
+            if (ctrl_.getFault(FaultID.kOtherFault)) {
+                faults.add("kOtherFault") ;
+            }  
 
-        if (ctrl_.getFault(FaultID.kSoftLimitFwd)) {
-            faults.add("kSoftLimitFwd") ;
-        }  
-        
-        if (ctrl_.getFault(FaultID.kSoftLimitRev)) {
-            faults.add("kSoftLimitRev") ;
-        }  
-        
-        if (ctrl_.getFault(FaultID.kHardLimitFwd)) {
-            faults.add("kHardLimitFwd") ;
-        }  
-        
-        if (ctrl_.getFault(FaultID.kHardLimitRev)) {
-            faults.add("kHardLimitRev") ;
+            if (ctrl_.getFault(FaultID.kSoftLimitFwd)) {
+                faults.add("kSoftLimitFwd") ;
+            }  
+            
+            if (ctrl_.getFault(FaultID.kSoftLimitRev)) {
+                faults.add("kSoftLimitRev") ;
+            }  
+            
+            if (ctrl_.getFault(FaultID.kHardLimitFwd)) {
+                faults.add("kHardLimitFwd") ;
+            }  
+            
+            if (ctrl_.getFault(FaultID.kHardLimitRev)) {
+                faults.add("kHardLimitRev") ;
+            }
         }
 
         return faults ;
@@ -164,20 +222,23 @@ public class SparkMaxMotorController extends MotorController
     /// \param leader if true, the leader is inverted versus normal operation
     /// \param invert if true, follow the other motor but with the power inverted.    
     public void follow(IMotorController ctrl, boolean leader, boolean invert) throws BadMotorRequestException, MotorRequestFailedException {
-        if (!CANSparkMax.class.isInstance(ctrl.getNativeController())) {
-            throw new BadMotorRequestException(this, "cannot follow a motor that is of another type") ;
-        }
-        
         leader_ = ctrl ;
-        CANSparkMax other = (CANSparkMax)ctrl.getNativeController() ;
-        boolean i = (invert != leader) ;
-        checkError("could not follow another robot", ctrl_.follow(other, i)) ;
+
+        if (simstate_ == null) {
+            if (!CANSparkMax.class.isInstance(ctrl.getNativeController())) {
+                throw new BadMotorRequestException(this, "cannot follow a motor that is of another type") ;
+            }
+
+            CANSparkMax other = (CANSparkMax)ctrl.getNativeController() ;
+            boolean i = (invert != leader) ;
+            checkError("could not follow another robot", ctrl_.follow(other, i)) ;
+        }
     }    
 
     /// \brief Returns true if the motor encoder has an embedded encoder that can return position
     /// \returns true if the motor encoder has an embedded encoder that can return position    
     public boolean hasEncoder() throws BadMotorRequestException, MotorRequestFailedException {
-        return mtype_ == MotorType.kBrushed ;
+        return mtype_ == MotorType.kBrushless ;
     }
 
     /// \Brief Return the native motor controller for this controller.
@@ -195,10 +256,15 @@ public class SparkMaxMotorController extends MotorController
     /// \brief Return the firmware version of the motor controller
     /// \returns the firmware version of the motor controller        
     public String getFirmwareVersion() throws BadMotorRequestException, MotorRequestFailedException {
-        int v = ctrl_.getFirmwareVersion() ;
+        String ret = "42.42.42.42" ;
 
-        return String.valueOf((v >> 24) & 0xff) + "." + String.valueOf((v >> 16) & 0xff) + "." + 
-                String.valueOf((v >> 8) & 0xff) + "." + String.valueOf(v & 0xff) ;
+        if (simstate_ == null) {
+            int v = ctrl_.getFirmwareVersion() ;
+            ret = String.valueOf((v >> 24) & 0xff) + "." + String.valueOf((v >> 16) & 0xff) + "." + 
+                    String.valueOf((v >> 8) & 0xff) + "." + String.valueOf(v & 0xff) ;
+        }
+
+        return ret;
     }    
 
     /// \brief Return the number of encoder ticks per revolution for this motor.  If this motor does not
@@ -212,7 +278,10 @@ public class SparkMaxMotorController extends MotorController
     /// \param limit the amount of current, in amps,  to the value given
     public void setCurrentLimit(double limit) throws BadMotorRequestException, MotorRequestFailedException {
         current_limit_ = limit ;
-        checkError("could not set current limit", ctrl_.setSmartCurrentLimit((int)limit)) ;
+
+        if (simstate_ == null) {
+            checkError("could not set current limit", ctrl_.setSmartCurrentLimit((int)limit)) ;
+        }
     }
 
     /// \brief Returns the current limit for the current supplied to the motor
@@ -222,10 +291,12 @@ public class SparkMaxMotorController extends MotorController
     }
 
     /// \brief set the deadband for the motor.  If any power value is assigned to the motor that is less
-    /// than this value, zero is assumed.
+    /// than this value, zero is assumed.  This is not supported for NEO motors
     /// \param value the deadband value for this motor
     public void setNeutralDeadband(double value) throws BadMotorRequestException, MotorRequestFailedException {
         deadband_ = value ;
+
+        throw new BadMotorRequestException(this, "setNeutralDeadband is not supported for SparkMax controllers") ;
     } 
 
     /// \brief Get the deadband value for the motor
@@ -238,7 +309,10 @@ public class SparkMaxMotorController extends MotorController
     /// \param mode the neutral mode for the motor
     public void setNeutralMode(XeroNeutralMode mode) throws BadMotorRequestException, MotorRequestFailedException {
         neutral_mode_ = mode ;
-        ctrl_.setIdleMode((mode == XeroNeutralMode.Brake) ? IdleMode.kBrake : IdleMode.kCoast);
+
+        if (simstate_ == null) {
+            ctrl_.setIdleMode((mode == XeroNeutralMode.Brake) ? IdleMode.kBrake : IdleMode.kCoast);
+        }
     }
     
     /// \brief Get the neutral mode for the motor
@@ -251,7 +325,13 @@ public class SparkMaxMotorController extends MotorController
     /// \param inverted if true invert the direction of motion, otherwise do not
     public void setInverted(boolean inverted) throws BadMotorRequestException , MotorRequestFailedException {
         inverted_ = inverted ;
-        ctrl_.setInverted(inverted_);
+
+        if (simstate_ != null) {
+            simstate_.setInterved(inverted) ;
+        }
+        else {
+            ctrl_.setInverted(inverted_);
+        }
     }
 
     /// \brief Returns true if the motor is inverted
@@ -286,11 +366,16 @@ public class SparkMaxMotorController extends MotorController
     /// \param s the static friction feed forward parameter for the PID controller
     /// \param outmax the maximum output parameter for the PID controller 
     public void setPID(XeroPidType type, double p, double i, double d, double v, double a, double g, double s, double outmax) throws BadMotorRequestException , MotorRequestFailedException {
-        checkError("could not set PID controller P value", pid_.setP(p));
-        checkError("could not set PID controller I value", pid_.setI(i));
-        checkError("could not set PID controller D value", pid_.setD(d));
-        checkError("could not set PID controller V value", pid_.setFF(v));
-        checkError("could not set PID controller OUTMAX value", pid_.setOutputRange(-outmax, outmax));
+        if (simstate_ != null) {
+            checkError("could not set PID controller P value", pid_.setP(p));
+            checkError("could not set PID controller I value", pid_.setI(i));
+            checkError("could not set PID controller D value", pid_.setD(d));
+            checkError("could not set PID controller V value", pid_.setFF(v));
+            checkError("could not set PID controller OUTMAX value", pid_.setOutputRange(-outmax, outmax));
+        }
+        else {
+            throw new BadMotorRequestException(this, "setPID is not supported for SparkMax when simulating") ;
+        }
     }
 
     /// \brief Set the parameters for motion magic
@@ -309,28 +394,41 @@ public class SparkMaxMotorController extends MotorController
             throw new BadMotorRequestException(this, "brushed motor does not support PID") ;
         }
 
-        target_ = target ;
-        switch(type) {
-            case Power:
-                checkError("could not set voltage", pid_.setReference(target, CANSparkMax.ControlType.kVoltage)) ;
-                break ;            
-            case Position:
-                checkError("could not set position", pid_.setReference(target, CANSparkMax.ControlType.kPosition)) ;
-                break ;            
-            case Velocity:
-                checkError("could not set velocity", pid_.setReference(target, CANSparkMax.ControlType.kVelocity)) ;
-                break ;            
-            case MotionMagic:
-                throw new BadMotorRequestException(this, "the SparkMaxMotorController does not support motion magic") ;
+        target_ = target ;        
+        if (simstate_ != null) {
+            if (type == XeroPidType.Power) {
+                this.simstate_.setMotorVoltage(target * 12.0) ;
+            }
+            else {
+                throw new BadMotorRequestException(this, "this control type not supported in simulation mode");
+            }
+        }
+        else {
+            switch(type) {
+                case Power:
+                    checkError("could not set voltage", pid_.setReference(target * 12.0, CANSparkMax.ControlType.kVoltage)) ;
+                    break ;            
+                case Position:
+                    checkError("could not set position", pid_.setReference(target, CANSparkMax.ControlType.kPosition)) ;
+                    break ;            
+                case Velocity:
+                    checkError("could not set velocity", pid_.setReference(target, CANSparkMax.ControlType.kVelocity)) ;
+                    break ;            
+                case MotionMagic:
+                    throw new BadMotorRequestException(this, "the SparkMaxMotorController does not support motion magic") ;
+            }
         }
     }
 
     private void updateStatusFreqs() throws MotorRequestFailedException {
-        int k1Period = (pos_important_ ? 10 : 500) ; 
-        int k2Period = (vel_important_ ? 10 : 500) ;
 
-        checkError("could not set status frame frequency",ctrl_.setPeriodicFramePeriod(PeriodicFrame.kStatus1, k1Period)) ;
-        checkError("could not set status frame frequency",ctrl_.setPeriodicFramePeriod(PeriodicFrame.kStatus2, k2Period)) ;
+        if (simstate_ == null) {
+            int k1Period = (pos_important_ ? 10 : 500) ; 
+            int k2Period = (vel_important_ ? 10 : 500) ;
+
+            checkError("could not set status frame frequency",ctrl_.setPeriodicFramePeriod(PeriodicFrame.kStatus1, k1Period)) ;
+            checkError("could not set status frame frequency",ctrl_.setPeriodicFramePeriod(PeriodicFrame.kStatus2, k2Period)) ;
+        }
     }
 
     /// \brief If value is true, the motor controller will consider position data as important and update
@@ -363,20 +461,38 @@ public class SparkMaxMotorController extends MotorController
     /// have an attached encoder, an exception is thrown.
     /// \returns the position of the motor in encoder ticks
     public double getPosition() throws BadMotorRequestException, MotorRequestFailedException {
+        double ret = 0.0 ;
+
         if (mtype_ == MotorType.kBrushless)
             throw new BadMotorRequestException(this, "brushed motor does not support position") ;
 
-        return encoder_.getPosition() ;
+        if (simstate_ != null) {
+            ret = simstate_.getPosition() ;
+        }
+        else {      
+            ret = encoder_.getPosition() ;
+        }
+
+        return ret;
     }
     
     /// \brief Return the velocity of the motor if there is PID control in the motor controller.   If the motor does not
     /// have an attached encoder, an exception is thrown.
     /// \returns the velocity of the motor in ticks per second
     public double getVelocity()  throws BadMotorRequestException, MotorRequestFailedException {
+        double ret = 0.0 ;
+
         if (mtype_ == MotorType.kBrushless)
             throw new BadMotorRequestException(this, "brushed motor does not support velocity") ;
 
-        return encoder_.getVelocity() ;
+        if(simstate_ != null) {
+            ret = simstate_.getVelocity() ;
+        }
+        else {
+            ret = encoder_.getVelocity() ;
+        }
+
+        return ret;
     }
 
     /// \brief Return the acceleration of the motor if there is PID control in the motor controller.   If the motor does not
@@ -391,7 +507,12 @@ public class SparkMaxMotorController extends MotorController
         if (mtype_ == MotorType.kBrushless)
             throw new BadMotorRequestException(this, "brushed motor does not support resetEncoder()") ;
 
-        checkError("resetEncoder", encoder_.setPosition(0.0)) ;
+        if (simstate_ == null) {
+            checkError("resetEncoder", encoder_.setPosition(0.0)) ;
+        }
+        else {
+            simstate_.setPosition(0);
+        }
     }
 
      /// \brief Set the encoder to a specific value in ticks
@@ -400,14 +521,21 @@ public class SparkMaxMotorController extends MotorController
         if (mtype_ == MotorType.kBrushless)
             throw new BadMotorRequestException(this, "brushed motor does not support resetEncoder()") ;
 
-        checkError("setPosition", encoder_.setPosition(value)) ;
+        if (simstate_ == null) {
+            checkError("setPosition", encoder_.setPosition(value)) ;
+        }
+        else {
+            simstate_.setPosition(value);
+        }
     }        
 
     /// \brief Enable voltage compensation for the given motor
     /// \param enabled if true voltage compensation is enabled
     /// \param nominal if enabled is true, this is the nominal voltage for compensation
     public void enableVoltageCompensation(boolean enabled, double nominal) throws BadMotorRequestException, MotorRequestFailedException {
-        ctrl_.enableVoltageCompensation(nominal);
+        if (simstate_ == null) {
+            ctrl_.enableVoltageCompensation(nominal);
+        }
     }
 
 

@@ -214,7 +214,7 @@ public class MotorFactory {
         logger_.endMessage();
     }
 
-    private IMotorController getMotorController(String bus, int canid) {
+    public IMotorController getMotorController(String bus, int canid) {
         IMotorController ret = null ;
 
         if (motors_.containsKey(bus)) {

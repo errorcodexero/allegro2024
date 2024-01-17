@@ -1,0 +1,50 @@
+{
+    "models" : 
+    [
+        {
+            "model" : "navx",
+            "instance" : "1"
+        },
+        {
+            "model" : "fms",
+            "instance" : "1",
+            "props" : {
+                "start" : 1.0,
+                "autonomous" : 15.0,
+                "create_early" : true                
+            }            
+        },
+        {
+            "model" : "limelight",
+            "instance" : "1",
+            "props" : {
+            }
+        },
+        {
+            "model": "drivergamepad",
+            "instance": "1",
+            "props": {
+                "index": 0,
+                "axes": 6,
+                "buttons": 10,
+                "povs": 1,
+                "create_early": true
+            }
+        },
+        {
+            "model" : "intake",
+            "instance" : "1",
+            "props" : {
+                "updown:type" : "talon-fx",
+                "updown:bus" : "",
+                "updown:canid" : 1,
+                "updown:ticks_per_second_per_volt" : 82,
+
+                "rotate:type" : "sparkmax",
+                "rotate:bus" : "",
+                "rotate:canid" : 2,
+                "rotate:ticks_per_second_per_volt" :  84
+            }
+        }        
+    ]
+}

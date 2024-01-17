@@ -44,7 +44,7 @@ public class FMSModel extends SimulationModel {
         closing_time_ = 0.0 ;        
     }
 
-    public boolean create() {
+    public boolean create(SimulationEngine engine) {
         state_ = FMSState.Initializing ;
 
         if (hasProperty("autonomous")) {

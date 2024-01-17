@@ -9,6 +9,8 @@ import org.xero1425.base.controllers.AutoController;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MissingParameterException;
 import org.xero1425.misc.SimArgs;
+import org.xero1425.simulator.engine.ModelFactory;
+import org.xero1425.simulator.engine.SimulationEngine;
 
 import frc.robot.automodes.AllegroRobotAutoController;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
@@ -32,6 +34,11 @@ public class Allegro2024 extends XeroRobot {
   public String getName() {
     return "allegro2024";
   }
+
+  protected void addRobotSimulationModels() {
+    ModelFactory factory = SimulationEngine.getInstance().getModelFactory();
+    factory.registerModel("intake", "frc.models.IntakeModel");
+  }    
 
   public String getSimulationFileName() {
       String ret = SimArgs.InputFileName;

@@ -7,6 +7,9 @@ import java.util.Set;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 import org.xero1425.misc.SettingsValue;
+import org.xero1425.simulator.models.ISimMotorController;
+import org.xero1425.simulator.models.SparkMaxSimMotorController;
+import org.xero1425.simulator.models.TalonFXSimMotorController;
 
 public abstract class SimulationModel {
     
@@ -50,7 +53,7 @@ public abstract class SimulationModel {
         return instance_ ;
     }
 
-    public abstract boolean create() ;
+    public abstract boolean create(SimulationEngine engine) throws Exception ;
     public abstract void run(double dt) ;
     public abstract boolean processEvent(String name, SettingsValue value) ;
     public void startCycle()  {
@@ -177,4 +180,23 @@ public abstract class SimulationModel {
         return value.getString() ;
     }    
 
+    protected ISimMotorController createSimulatedMotor(SimulationEngine engine, String name, double ticksPerVoltPerSecond) throws Exception {
+        ISimMotorController ret = null ;
+
+        String type = getStringProperty(name + ":type") ;
+        String bus = getStringProperty(name + ":bus") ;
+        int canid = getIntProperty(name + ":canid") ;
+
+        if (type.equals("talon-fx")) {
+            ret = new TalonFXSimMotorController(engine, bus, canid, ticksPerVoltPerSecond) ;
+        }
+        else if (type.equals("sparkmax")) {
+            ret = new SparkMaxSimMotorController(engine, bus, canid, ticksPerVoltPerSecond);
+        }
+        else {
+            throw new Exception("unrecognized type of simulated motor '" + type + "'");
+        }
+
+        return ret ;
+    }
 }

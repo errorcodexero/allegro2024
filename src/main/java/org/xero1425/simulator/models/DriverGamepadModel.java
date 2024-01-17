@@ -19,7 +19,7 @@ public class DriverGamepadModel extends SimulationModel {
         super(engine, model, inst);
     }
 
-    public boolean create() {
+    public boolean create(SimulationEngine engine) {
         int count = 0;
 
         if (hasProperty("index")) {

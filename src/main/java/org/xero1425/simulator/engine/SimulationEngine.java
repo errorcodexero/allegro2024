@@ -112,7 +112,7 @@ public class SimulationEngine {
                 logger_.add("late model creation - model ").addQuoted(model.getModelName()) ;
                 logger_.add(" instance ").addQuoted(model.getInstanceName()).endMessage();   
                 try {             
-                    model.create() ;
+                    model.create(this) ;
                 }
                 catch(Exception ex) {
                     logger_.startMessage(MessageType.Error) ;
@@ -120,6 +120,7 @@ public class SimulationEngine {
                     logger_.add(", instance ").addQuoted(model.getInstanceName()) ;
                     logger_.add(" - failed creation ").addQuoted(ex.getMessage()) ;
                     logger_.endMessage();
+                    logger_.logStackTrace(ex.getStackTrace());
                 }
             }
         }
@@ -130,7 +131,16 @@ public class SimulationEngine {
             logger_.startMessage(MessageType.Debug, logger_id_) ;
             logger_.add("create model early call, model ").addQuoted(model.getModelName()) ;
             logger_.add(" instance ").addQuoted(model.getInstanceName()).endMessage();
-            model.create() ;
+            try {
+                model.create(this) ;
+            }
+            catch(Exception ex) {
+                logger_.startMessage(MessageType.Error, logger_id_) ;
+                logger_.add("exception thrown creating model ").addQuoted(model.getModelName()) ;
+                logger_.add(" instance ").addQuoted(model.getInstanceName()).add(" - " + ex.getMessage()).endMessage();
+                logger_.logStackTrace(ex.getStackTrace());
+            }
+
         }
         active_models_.add(model) ;
         DriverStationSim.notifyNewData();

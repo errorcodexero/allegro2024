@@ -29,7 +29,7 @@ public class LimeLightModel extends SimulationModel {
         retro_ = "[]" ;
     }
 
-    public boolean create() {
+    public boolean create(SimulationEngine engine) {
         setCreated();
         return true;
     }
