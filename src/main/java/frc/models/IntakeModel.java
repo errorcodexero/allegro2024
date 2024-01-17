@@ -23,6 +23,8 @@ public class IntakeModel extends SimulationModel {
         ticksPerVoltPerSecond = getDoubleProperty("rotate:ticks_per_second_per_volt") ;
         rotate_ = createSimulatedMotor(engine, "rotate", ticksPerVoltPerSecond);
 
+        setCreated();
+
         return false;
     }
 
