@@ -2,18 +2,11 @@ package frc.robot.automodes;
 
 import org.xero1425.base.controllers.AutoController;
 import org.xero1425.base.controllers.SwerveTestAutoMode;
-import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
-
-import frc.robot.subsystems.intake.IntakeSubsystem;
-import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
     public AllegroTestAutoMode(AutoController ctrl) throws Exception {
         super(ctrl, "Allegro-Test-Mode");
-
-        AllegroRobot2024 robotsubsystem = (AllegroRobot2024) ctrl.getRobot().getRobotSubsystem();
-        IntakeSubsystem intake = robotsubsystem.getIntakeSubsystem();
 
         if (createTest()) {
             //
@@ -57,5 +50,4 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 break ; 
         }
     }
-
 }
