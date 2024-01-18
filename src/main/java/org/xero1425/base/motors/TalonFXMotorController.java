@@ -2,6 +2,7 @@ package org.xero1425.base.motors;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -33,6 +34,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 /// MotorController base class.
 public class TalonFXMotorController extends MotorController
 {
+    private final int kApplyTries = 5 ;
     private final static int kTicksPerRevolution = 2048 ;
     private final static String kRobotType = "TalonFX" ;
 
@@ -51,13 +53,19 @@ public class TalonFXMotorController extends MotorController
         ctrl_ = new TalonFX(canid, bus_);
         cfg_ = new TalonFXConfiguration() ;
 
-        checkError("TalonFXMotorController - apply configuration", ctrl_.getConfigurator().apply(cfg_));
-        checkError("TalonFXMotorController - optimize bus", ctrl_.optimizeBusUtilization()) ;
+        checkError("TalonFXMotorController - apply configuration", () -> ctrl_.getConfigurator().apply(cfg_));
+        checkError("TalonFXMotorController - optimize bus", () -> ctrl_.optimizeBusUtilization()) ;
     }
 
-    private void checkError(String msg, StatusCode err) throws MotorRequestFailedException {
-        if (err != StatusCode.OK) {
-            throw new MotorRequestFailedException(this, msg, err) ;            
+    private void checkError(String msg, Supplier<StatusCode> toApply) throws MotorRequestFailedException {
+        StatusCode code = StatusCode.StatusCodeNotInitialized ;
+        int tries = kApplyTries ;
+        do {
+            code = toApply.get() ;
+        } while (!code.isOK() && --tries > 0)  ;
+
+        if (!code.isOK()) {
+            throw new MotorRequestFailedException(this, msg, code) ;
         }
     }
 
@@ -176,7 +184,7 @@ public class TalonFXMotorController extends MotorController
         leader_ = ctrl ;
         TalonFX other = (TalonFX)ctrl.getNativeController() ;
         boolean i = (invert != leader) ;
-        checkError("could not follow another robot", ctrl_.setControl(new Follower(other.getDeviceID(), i))) ;
+        checkError("could not follow another robot", () -> ctrl_.setControl(new Follower(other.getDeviceID(), i))) ;
     }    
 
     /// \brief Returns true if the motor encoder has an embedded encoder that can return position
@@ -218,7 +226,7 @@ public class TalonFXMotorController extends MotorController
         cfgs.SupplyCurrentLimitEnable = true ;
         cfgs.SupplyCurrentThreshold = limit ;
         cfgs.SupplyTimeThreshold = 0.1 ;
-        checkError("setCurrentLimit", ctrl_.getConfigurator().apply(cfgs)) ;
+        checkError("setCurrentLimit", () -> ctrl_.getConfigurator().apply(cfgs)) ;
     }
 
     /// \brief Returns the current limit for the current supplied to the motor
@@ -238,7 +246,7 @@ public class TalonFXMotorController extends MotorController
     public void setNeutralDeadband(double value) throws BadMotorRequestException, MotorRequestFailedException {
         MotorOutputConfigs cfgs = cfg_.MotorOutput ;
         cfgs.DutyCycleNeutralDeadband = value ;
-        checkError("setNeutralDeadband", ctrl_.getConfigurator().apply(cfgs)) ;
+        checkError("setNeutralDeadband", () -> ctrl_.getConfigurator().apply(cfgs)) ;
     } 
 
     /// \brief Get the deadband value for the motor
@@ -252,7 +260,7 @@ public class TalonFXMotorController extends MotorController
     public void setNeutralMode(XeroNeutralMode mode) throws BadMotorRequestException, MotorRequestFailedException {
         MotorOutputConfigs cfgs = cfg_.MotorOutput ;
         cfgs.NeutralMode = (mode == XeroNeutralMode.Brake) ? NeutralModeValue.Brake : NeutralModeValue.Coast ;
-        checkError("setNeutralMode", ctrl_.getConfigurator().apply(cfgs)) ;        
+        checkError("setNeutralMode", () -> ctrl_.getConfigurator().apply(cfgs)) ;        
     }
     
     /// \brief Get the neutral mode for the motor
@@ -271,7 +279,7 @@ public class TalonFXMotorController extends MotorController
     public void setInverted(boolean inverted) throws BadMotorRequestException , MotorRequestFailedException {
         MotorOutputConfigs cfgs = cfg_.MotorOutput ;
         cfgs.Inverted = (inverted ? InvertedValue.CounterClockwise_Positive : InvertedValue.Clockwise_Positive) ;
-        checkError("setInverted", ctrl_.getConfigurator().apply(cfgs)) ;  
+        checkError("setInverted", () -> ctrl_.getConfigurator().apply(cfgs)) ;  
     }
 
     /// \brief Returns true if the motor is inverted
@@ -312,12 +320,12 @@ public class TalonFXMotorController extends MotorController
         cfg.kA = a ;
         cfg.kG = g ;
         cfg.kS = s ;
-        checkError("setPID()", ctrl_.getConfigurator().apply(cfg));
+        checkError("setPID()", () -> ctrl_.getConfigurator().apply(cfg));
 
         VoltageConfigs mo = cfg_.Voltage ;
         mo.PeakForwardVoltage = outmax * 12.0 ;
         mo.PeakReverseVoltage = -outmax * 12.0 ;
-        checkError("setPID()", ctrl_.getConfigurator().apply(mo));
+        checkError("setPID()", () -> ctrl_.getConfigurator().apply(mo));
     }
 
     /// \brief Set the parameters for motion magic
@@ -330,7 +338,7 @@ public class TalonFXMotorController extends MotorController
         cfg.MotionMagicCruiseVelocity = v ;
         cfg.MotionMagicJerk = j ;
 
-        checkError("setMotionMagicParams()", ctrl_.getConfigurator().apply(cfg));
+        checkError("setMotionMagicParams()", () -> ctrl_.getConfigurator().apply(cfg));
     }        
 
     /// \brief Set the motor target.  What the target is depends on the mode.
@@ -358,34 +366,35 @@ public class TalonFXMotorController extends MotorController
                 break ;
         }
 
-        checkError("set()", ctrl_.setControl(req)) ;
+        final ControlRequest freq = req ;
+        checkError("set()", () -> ctrl_.setControl(freq)) ;
     }
 
     /// \brief If value is true, the motor controller will consider position data as important and update
     /// the data a quickly as possible.
     public void setPositionImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
-        double freq = (value ? 100 : 1) ;
-        checkError("setPositionImportant()", ctrl_.getPosition().setUpdateFrequency(freq)) ;
+        final double freq = (value ? 100 : 1) ;
+        checkError("setPositionImportant()", () -> ctrl_.getPosition().setUpdateFrequency(freq)) ;
     }
     
     /// \brief If value is true, the motor controller will consider velocity data as important and update
     /// the data a quickly as possible.
     public void setVelocityImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
-        double freq = (value ? 100 : 1) ;
-        checkError("setPositionImportant error", ctrl_.getVelocity().setUpdateFrequency(freq)) ;
+        final double freq = (value ? 100 : 1) ;
+        checkError("setPositionImportant error", () -> ctrl_.getVelocity().setUpdateFrequency(freq)) ;
     }
     
     /// \brief If value is true, the motor controller will consider acceleration data as important and update
     /// the data a quickly as possible.
     public void setAccelerationImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
-        double freq = (value ? 100 : 1) ;
-        checkError("setPositionImportant error", ctrl_.getAcceleration().setUpdateFrequency(freq)) ;
+        final double freq = (value ? 100 : 1) ;
+        checkError("setPositionImportant error", () -> ctrl_.getAcceleration().setUpdateFrequency(freq)) ;
     }
 
     /// \brief Returns the position of the motor in motor units from the motor controller.  If the motor does not
     /// have an attached encoder, an exception is thrown.
     /// \returns the position of the motor in encoder ticks
-    public double getPosition() throws BadMotorRequestException, MotorRequestFailedException {
+    public double getPosition() throws BadMotorRequestException, MotorRequestFailedException {          
         return ctrl_.getPosition().getValue() * kTicksPerRevolution ;
     }
     
@@ -405,13 +414,13 @@ public class TalonFXMotorController extends MotorController
 
     /// \brief Reset the encoder values to zero    
     public void resetEncoder() throws BadMotorRequestException, MotorRequestFailedException {
-        checkError("resetEncoder" ,ctrl_.setPosition(0.0)) ;
+        checkError("resetEncoder", () -> ctrl_.setPosition(0.0)) ;
     }
 
      /// \brief Set the encoder to a specific value in ticks
      /// \param pos the new value for the encoder in ticks
      public void setPosition(double value) throws BadMotorRequestException, MotorRequestFailedException {
-        checkError("setPosition", ctrl_.setPosition(value / kTicksPerRevolution)) ;
+        checkError("setPosition", () -> ctrl_.setPosition(value / kTicksPerRevolution)) ;
      }    
 
     /// \brief Enable voltage compensation for the given motor

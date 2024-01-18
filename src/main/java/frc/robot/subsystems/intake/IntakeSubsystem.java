@@ -20,6 +20,8 @@ public class IntakeSubsystem extends MotorEncoderSubsystem {
 
         spinner_power_ = 0.0 ;
         spinner_.set(XeroPidType.Power, 0.0) ;
+
+        getMotorController().enableVoltageCompensation(true, 11.0);
     }
 
     public void setSpinnerPower(double power) throws BadMotorRequestException, MotorRequestFailedException {

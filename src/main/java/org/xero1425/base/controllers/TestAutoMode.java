@@ -66,7 +66,7 @@ public class TestAutoMode extends AutoMode {
 
     /// \brief Returns the number of the test to run
     /// \returns the number of the test to run.
-    protected int getTestNumber() {
+    public int getTestNumber() {
         return which_;
     }
 

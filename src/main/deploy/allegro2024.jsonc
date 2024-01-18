@@ -384,7 +384,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 3,
+        "which": 10,
         "0": {
             "angle": 90,
             "power": 0.2,
@@ -419,6 +419,13 @@
         },
         "4": {
             "name": "Edge1Blue-Path1"
+        },
+        "10" : {
+            //
+            // Apply the given power to the intake up/down motor for the given duration
+            //
+            "power" : 0.1,
+            "duration" : 3.0
         }
     }
 }

@@ -45,6 +45,7 @@ import org.xero1425.base.controllers.BaseController;
 import org.xero1425.base.controllers.AutoController;
 import org.xero1425.base.controllers.AutoMode;
 import org.xero1425.base.controllers.TeleopController;
+import org.xero1425.base.controllers.TestAutoMode;
 import org.xero1425.base.controllers.TestController ;
 
 /// \file
@@ -900,7 +901,7 @@ public abstract class XeroRobot extends TimedRobot {
     }
 
     public boolean shutdownDebug() {
-        return DriverStation.isFMSAttached() || DriverStation.getLocation().orElse(0) == 3 ;
+        return DriverStation.isFMSAttached() || DriverStation.getLocation().getAsInt() == 3 ;
     }
 
     private void logAutoModeState() {
@@ -913,6 +914,11 @@ public abstract class XeroRobot extends TimedRobot {
         logger_.startMessage(MessageType.Info) ;
         logger_.add("    Automode Name: ").add(auto_controller_.getAutoModeName()).endMessage();
 
+        if (auto_controller_.getAutoMode() instanceof TestAutoMode) {
+            TestAutoMode tm = (TestAutoMode)auto_controller_.getAutoMode() ;
+            logger_.startMessage(MessageType.Info) ;
+            logger_.add("    TestMode: ").add(tm.getTestNumber()).endMessage(); ;
+        }
 
         String str = "undefined" ;
         if (DriverStation.getAlliance().isEmpty()) {}

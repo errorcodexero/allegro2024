@@ -82,8 +82,9 @@ public class MotorEncoderPowerAction extends MotorPowerAction
         data[5] = ((MotorEncoderSubsystem)(getSubsystem())).getEncoderRawCount() ;
         getSubsystem().addPlotData(plot_id_, data);
         
-        if (isDone())
+        if (isDone()) {
             getSubsystem().endPlot(plot_id_) ;
+        }
     }
 
     /// \brief Cancel the action, settings the power to zero

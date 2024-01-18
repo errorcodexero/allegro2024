@@ -9,8 +9,7 @@
             "model" : "fms",
             "instance" : "1",
             "props" : {
-                "start" : 1.0,
-                "autonomous" : 15.0,
+                "alliance" : "blue1",
                 "create_early" : true                
             }            
         },
@@ -38,12 +37,16 @@
                 "updown:type" : "talon-fx",
                 "updown:bus" : "",
                 "updown:canid" : 1,
-                "updown:ticks_per_second_per_volt" : 82,
+                "updown:count" : 1,
+                "updown:gearing" : 1.0,
+                "updown:moment" : 0.001,
 
                 "rotate:type" : "sparkmax",
                 "rotate:bus" : "",
                 "rotate:canid" : 2,
-                "rotate:ticks_per_second_per_volt" :  84
+                "rotate:count" : 1,
+                "rotate:gearing" : 1.0,
+                "rotate:moment" : 0.001
             }
         }        
     ]

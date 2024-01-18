@@ -78,6 +78,9 @@ public class MotorEncoderSubsystem extends MotorSubsystem
     public MotorEncoderSubsystem(Subsystem parent, String name, boolean angle) throws Exception {
         super(parent, name) ;
 
+        getMotorController().setPositionImportant(true);
+        getMotorController().setVelocityImportant(true);
+
         speedometer_ = new Speedometer(name, 2, angle) ;
         angular_ = angle ;
 

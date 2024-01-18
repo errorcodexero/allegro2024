@@ -141,18 +141,20 @@ public class SwerveDriveGamepad extends Gamepad {
             }
         }
 
-        if (isButtonSequencePressed(drivebase_x_buttons_)) {
-            if (db_.getAction() != x_action_) {
-                db_.setAction(x_action_);
+        if (action_ != null) {
+            if (isButtonSequencePressed(drivebase_x_buttons_)) {
+                if (db_.getAction() != x_action_) {
+                    db_.setAction(x_action_);
+                }
+                action_.update(new ChassisSpeeds());
+                holding_x_ = true ;
             }
-            action_.update(new ChassisSpeeds());
-            holding_x_ = true ;
-        }
-        else {
-            if (db_.getAction() != action_ && getSubsystem().getRobot().isTeleop()) {
-                db_.setAction(action_);
+            else {
+                if (db_.getAction() != action_ && getSubsystem().getRobot().isTeleop()) {
+                    db_.setAction(action_);
+                }
+                holding_x_ = false ;
             }
-            holding_x_ = false ;
         }
     }
 

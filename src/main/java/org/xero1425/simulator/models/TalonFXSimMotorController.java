@@ -1,52 +1,55 @@
 package org.xero1425.simulator.models;
 
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.sim.ChassisReference;
 import com.ctre.phoenix6.sim.TalonFXSimState;
 
-import org.xero1425.base.motors.IMotorController;
-import org.xero1425.simulator.engine.SimulationEngine;
+import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 
+import org.xero1425.base.motors.IMotorController;
+import org.xero1425.base.motors.TalonFXMotorController;
+import org.xero1425.simulator.engine.SimulationEngine;
 
 public class TalonFXSimMotorController implements ISimMotorController {
     private final static double kTicksPerRev = 2048 ;
 
-    private TalonFX motor_ ;
-    private double revs_ ;
-    private double velocity_ ;
-    private double acceleration_ ;
+    private TalonFXMotorController motor_ ;
+    private DCMotor dcmotor_ ;
+    private DCMotorSim sim_ ;
 
-    private double last_revs_ ;
-    private double last_velocity_ ;
-    private double ticks_per_volt_per_second_ ;
-
-    public TalonFXSimMotorController(SimulationEngine engine, String bus, int canid, double ticksPerVoltPerSecond) throws Exception {
+    public TalonFXSimMotorController(SimulationEngine engine, String bus, int canid, int count, double gearing, double moment) throws Exception {
         IMotorController ctrl = engine.getRobot().getMotorFactory().getMotorController(bus, canid) ;
         if (!(ctrl.getNativeController() instanceof TalonFX)) {
             throw new Exception("motor on bus '" + bus + "', can id " + canid + " is not a TalonFX V6 motor");
         }
 
-        ticks_per_volt_per_second_ = ticksPerVoltPerSecond ;
-        motor_ = (TalonFX)ctrl.getNativeController() ;
+        motor_ = (TalonFXMotorController)ctrl ;
+        getState().Orientation = ChassisReference.Clockwise_Positive ;
+
+        dcmotor_ = DCMotor.getFalcon500(count) ;
+        sim_ = new DCMotorSim(dcmotor_, gearing, moment) ;
     }
 
     @Override
     public void run(double dt) {
-        TalonFXSimState state = motor_.getSimState() ;
+        TalonFXSimState state = getState() ;
+        state.setSupplyVoltage(RobotController.getBatteryVoltage());
+        
+        sim_.setInputVoltage(state.getMotorVoltage());
+        sim_.update(dt) ;
 
-        revs_ += (ticks_per_volt_per_second_ * state.getMotorVoltage() * dt) / kTicksPerRev ;
-        velocity_ = (revs_ - last_revs_) / dt ;
-        acceleration_ = (velocity_ - last_velocity_) / dt ;
-
-        last_revs_ = revs_ ;
-        last_velocity_ = velocity_ ;
-
-        state.setRawRotorPosition(revs_) ;
-        state.setRotorVelocity(velocity_);
-        state.setRotorAcceleration(acceleration_);
+        state.setRawRotorPosition(sim_.getAngularPositionRotations()) ;
+        state.setRotorVelocity(sim_.getAngularVelocityRPM() * 60.0) ;
     }
 
     @Override
     public double ticksPerRev() {
-        return 2048 ;
+        return kTicksPerRev ;
+    }
+
+    private TalonFXSimState getState() {
+        return ((TalonFX)motor_.getNativeController()).getSimState() ;
     }
 }

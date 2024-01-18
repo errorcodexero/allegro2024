@@ -15,13 +15,9 @@ public class IntakeModel extends SimulationModel {
 
     @Override
     public boolean create(SimulationEngine engine) throws Exception {
-        double ticksPerVoltPerSecond ;
         
-        ticksPerVoltPerSecond = getDoubleProperty("updown:ticks_per_second_per_volt") ;
-        up_down_ = createSimulatedMotor(engine, "updown", ticksPerVoltPerSecond);
-
-        ticksPerVoltPerSecond = getDoubleProperty("rotate:ticks_per_second_per_volt") ;
-        rotate_ = createSimulatedMotor(engine, "rotate", ticksPerVoltPerSecond);
+        up_down_ = createSimulatedMotor(engine, "updown");
+        rotate_ = createSimulatedMotor(engine, "rotate");
 
         setCreated();
 

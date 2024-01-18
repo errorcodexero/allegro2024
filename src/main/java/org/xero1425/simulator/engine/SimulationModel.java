@@ -180,18 +180,21 @@ public abstract class SimulationModel {
         return value.getString() ;
     }    
 
-    protected ISimMotorController createSimulatedMotor(SimulationEngine engine, String name, double ticksPerVoltPerSecond) throws Exception {
+    protected ISimMotorController createSimulatedMotor(SimulationEngine engine, String name) throws Exception {
         ISimMotorController ret = null ;
 
         String type = getStringProperty(name + ":type") ;
         String bus = getStringProperty(name + ":bus") ;
         int canid = getIntProperty(name + ":canid") ;
+        int count = getIntProperty(name + ":count") ;
+        double gearing = getDoubleProperty(name + ":gearing");
+        double moment = getDoubleProperty(name + ":moment");
 
         if (type.equals("talon-fx")) {
-            ret = new TalonFXSimMotorController(engine, bus, canid, ticksPerVoltPerSecond) ;
+            ret = new TalonFXSimMotorController(engine, bus, canid, count, gearing, moment) ;
         }
         else if (type.equals("sparkmax")) {
-            ret = new SparkMaxSimMotorController(engine, bus, canid, ticksPerVoltPerSecond);
+            ret = new SparkMaxSimMotorController(engine, bus, canid, count, gearing, moment) ;
         }
         else {
             throw new Exception("unrecognized type of simulated motor '" + type + "'");
