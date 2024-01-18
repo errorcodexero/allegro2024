@@ -70,6 +70,17 @@ public class FMSModel extends SimulationModel {
             teleop_time_ = getDoublePropertyWithDefault("test", null, test_time_) ;
         }
 
+        boolean attached = false ;
+        
+        try {
+            if (hasProperty("fms")) {
+                attached = getBooleanProperty("fms") ;
+            }
+        }
+        catch(Exception ex) {
+        }
+        DriverStationSim.setFmsAttached(attached);
+
         if (hasProperty("alliance")) {
             AllianceStationID id = AllianceStationID.Red1 ;
             SettingsValue v = getProperty("alliance") ;
@@ -278,23 +289,6 @@ public class FMSModel extends SimulationModel {
         return ret ;
     }
 
-    private double getDoublePropertyWithDefault(final String name, SettingsValue v, double ret) {
-
-        try {
-            if (v == null)
-                v = getProperty(name) ;
-            ret = v.getDouble();
-        } catch (final BadParameterTypeException e) {
-            final MessageLogger logger = getEngine().getMessageLogger() ;
-            logger.startMessage(MessageType.Error) ;
-            logger.add("event: model ").addQuoted(getModelName());
-            logger.add(" instance ").addQuoted(getInstanceName());
-            logger.add(" event name ").addQuoted(name);
-            logger.add(" value is not a double").endMessage();
-        }
-
-        return ret ;
-    }
 
     private void enableRobot(boolean enable) {
         DriverStationSim.setEnabled(enable);

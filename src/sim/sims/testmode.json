@@ -19,20 +19,6 @@
                     }
                 }
             ]
-        },
-        {
-            "time" : 5.0,
-            "events" :
-            [
-                {
-                    "model" : "fms",
-                    "instance" : "1",
-                    "values" : 
-                    {
-                        "fms" : true
-                    }
-                }
-            ]
-        }        
+        }       
     ]
 }

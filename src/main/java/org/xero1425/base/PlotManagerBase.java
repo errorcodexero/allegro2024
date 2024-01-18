@@ -39,9 +39,6 @@ public abstract class PlotManagerBase {
                 ret = true ;
             }
         }
-        else {
-            System.out.println("me") ;
-        }
 
         return ret;
     }

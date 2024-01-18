@@ -10,7 +10,8 @@
             "instance" : "1",
             "props" : {
                 "alliance" : "blue1",
-                "create_early" : true                
+                "fms" : false,
+                "create_early" : true
             }            
         },
         {
