@@ -14,7 +14,7 @@
                         "start" : 0,
                         "autonomous" : 5.0,
                         "between" : 0.0,
-                        "teleop" : 10000.0,
+                        "teleop" : 0.0,
                         "fms" : false
                     }
                 }
