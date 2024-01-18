@@ -900,7 +900,7 @@ public abstract class XeroRobot extends TimedRobot {
     }
 
     public boolean shutdownDebug() {
-        return DriverStation.isFMSAttached() || DriverStation.getLocation().orElse(0) == 3 ;
+        return DriverStation.isFMSAttached() || DriverStation.getLocation().getAsInt() == 3 ;
     }
 
     private void logAutoModeState() {
