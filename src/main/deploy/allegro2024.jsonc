@@ -144,8 +144,13 @@
                     "ratio" : "L3"
                 },
                 "gyro" : {
-                    "type" : "navx",
-                    "start-time" : 3.0
+                    "start-time" : 3.0,
+
+                    // "type" : "navx",
+                    "type" : "pigeon2",
+                    "bus" : "DriveBase",
+                    "canid" : 51,
+
                 },
                 "fl" : {
                     "motors" : {
