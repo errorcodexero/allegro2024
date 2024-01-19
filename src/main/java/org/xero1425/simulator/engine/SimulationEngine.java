@@ -23,8 +23,6 @@ public class SimulationEngine {
     private ModelManager models_ ;
     private EventsManager events_ ;
 
-    private double delta_t_ ;
-
     private List<SimulationModel> active_models_ ;
     private int failed_count_ ;
     private int passed_count_ ;    
@@ -41,7 +39,6 @@ public class SimulationEngine {
 
         failed_count_ = 0 ;
         passed_count_ = 0 ;
-        delta_t_ = robot.getPeriod() / 2 ;
     }
 
     static public SimulationEngine getInstance() {
@@ -150,21 +147,17 @@ public class SimulationEngine {
     // This is the amount of time to run forward to have the simulation
     // models catch up with the simulation
     //
-    public void run(double t) {
-        double sofar = 0 ;
+    public void run(double dt) {
         SimulatorJNI.pauseTiming();
-        for(SimulationModel model : active_models_)
-            model.startCycle();
 
-        while (sofar < t) {
-            double dt = t - sofar ;
-            if (dt > delta_t_)
-                dt = delta_t_ ;
-            processEvents() ;           
-            runModels(dt) ;
-            DriverStationSim.notifyNewData() ;
-            sofar += dt ;
+        for(SimulationModel model : active_models_) {
+            model.startCycle();
         }
+
+        processEvents() ;
+        runModels(dt) ;
+        DriverStationSim.notifyNewData() ;
+
         for(SimulationModel model : active_models_)
             model.endCycle();        
 
@@ -234,5 +227,4 @@ public class SimulationEngine {
         readModelFile("src/sim/robot.json") ;
         readEventsFile("src/sim/sims/" + simfile + ".json") ;
     }
-
 }

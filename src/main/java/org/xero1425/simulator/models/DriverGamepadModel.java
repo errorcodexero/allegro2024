@@ -123,9 +123,6 @@ public class DriverGamepadModel extends SimulationModel {
             DriverStationDataJNI.setJoystickPOVs((byte) index_, povs_);
         }
 
-
-        DriverStationSim.notifyNewData();
-
         setCreated();
         return true ;
     }

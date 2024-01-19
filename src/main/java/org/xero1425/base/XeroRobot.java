@@ -657,7 +657,7 @@ public abstract class XeroRobot extends TimedRobot {
         if (isSimulation()) {
             SimulationEngine engine = SimulationEngine.getInstance() ;
             if (engine != null)
-                engine.run(getTime()) ;
+                engine.run(getDeltaTime());
         }
 
         last_time_ = initial_time;
@@ -839,7 +839,7 @@ public abstract class XeroRobot extends TimedRobot {
         if (isSimulation()) {
             SimulationEngine engine = SimulationEngine.getInstance() ;
             if (engine != null) {
-                 engine.run(delta_time_) ;
+                 engine.run(getDeltaTime()) ;
             }
         }
 

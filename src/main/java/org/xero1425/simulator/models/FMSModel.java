@@ -4,9 +4,6 @@ import edu.wpi.first.hal.AllianceStationID;
 import edu.wpi.first.wpilibj.simulation.DriverStationSim;
 
 import org.xero1425.simulator.engine.SimulationModel;
-
-import com.ctre.phoenix6.unmanaged.Unmanaged;
-
 import org.xero1425.simulator.engine.SimulationEngine;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MessageLogger;
@@ -292,11 +289,8 @@ public class FMSModel extends SimulationModel {
 
     private void enableRobot(boolean enable) {
         DriverStationSim.setEnabled(enable);
-        DriverStationSim.notifyNewData();
-
         if (enable) {
-            Unmanaged.feedEnable(100000);
+            com.ctre.phoenix6.unmanaged.Unmanaged.feedEnable(100000);
         }
     }
-
 }
