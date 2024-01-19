@@ -123,7 +123,7 @@ public class XeroEncoder {
         return result;
     }
 
-    public double mapMotorToVelocity(double value) {
+    public double mapMotorToPhysical(double value) {
         double result = 0.0 ;
 
         if (motor_ != null) {
@@ -142,7 +142,7 @@ public class XeroEncoder {
         return result ;
     }
 
-    public double mapVelocityToMotor(double value) {
+    public double mapPhysicalToMotor(double value) {
         double result = 0.0 ;
 
         if (motor_ != null) {

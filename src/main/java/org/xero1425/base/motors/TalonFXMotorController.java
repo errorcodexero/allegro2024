@@ -1,8 +1,12 @@
 package org.xero1425.base.motors;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+
+import org.xero1425.base.XeroRobot;
 
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -413,7 +417,7 @@ public class TalonFXMotorController extends MotorController
                 break ;                
         }
         final double tfreq = freq ;        
-        checkError("setPositionImportant error", () -> ctrl_.getVelocity().setUpdateFrequency(tfreq)) ;
+        checkError("setVelocityImportant error", () -> ctrl_.getVelocity().setUpdateFrequency(tfreq)) ;
     }
     
     /// \brief If value is true, the motor controller will consider acceleration data as important and update
@@ -436,7 +440,7 @@ public class TalonFXMotorController extends MotorController
                 break ;
         }
         final double tfreq = freq ;        
-        checkError("setPositionImportant error", () -> ctrl_.getAcceleration().setUpdateFrequency(tfreq)) ;
+        checkError("setAccelerationImportant error", () -> ctrl_.getAcceleration().setUpdateFrequency(tfreq)) ;
     }
 
     /// \brief Returns the position of the motor in motor units from the motor controller.  If the motor does not

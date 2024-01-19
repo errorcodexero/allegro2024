@@ -1,5 +1,6 @@
 package org.xero1425.simulator.models;
 
+import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.sim.ChassisReference;
 import com.ctre.phoenix6.sim.TalonFXSimState;
@@ -19,7 +20,6 @@ public class TalonFXSimMotorController extends SimMotorController {
     private DCMotor dcmotor_ ;
     private DCMotorSim sim_ ;
 
-
     public TalonFXSimMotorController(SimulationEngine engine, String bus, int canid, int count, double gearing, double moment) throws Exception {
         super(engine, bus, canid);
 
@@ -32,7 +32,6 @@ public class TalonFXSimMotorController extends SimMotorController {
         sim_ = new DCMotorSim(dcmotor_, gearing, moment) ;        
 
         motor_ = (TalonFXMotorController)ctrl ;
-        getState().Orientation = ChassisReference.Clockwise_Positive ;
         getState().setRawRotorPosition(sim_.getAngularPositionRotations()) ;
         getState().setRotorVelocity(sim_.getAngularVelocityRPM() * 60.0) ;      
     }
@@ -40,6 +39,7 @@ public class TalonFXSimMotorController extends SimMotorController {
     @Override
     public void run(double dt) {
         TalonFXSimState state = getState() ;
+        state.Orientation = ChassisReference.CounterClockwise_Positive ;
         state.setSupplyVoltage(RobotController.getBatteryVoltage());
         
         sim_.setInputVoltage(state.getMotorVoltage());
@@ -47,8 +47,16 @@ public class TalonFXSimMotorController extends SimMotorController {
 
         double pos = sim_.getAngularPositionRotations() ;
         double vel = sim_.getAngularVelocityRPM() * 60.0 ;
-        state.setRawRotorPosition(pos) ;
-        state.setRotorVelocity(vel) ;
+
+        StatusCode code = state.setRawRotorPosition(pos) ;
+        if (!code.isOK()) {
+            System.out.println("error code is " + code.toString()) ;
+        }
+
+        code = state.setRotorVelocity(vel) ;
+        if (!code.isOK()) {
+            System.out.println("error code is " + code.toString()) ;
+        }
 
         addPlotData(pos, vel) ;
     }

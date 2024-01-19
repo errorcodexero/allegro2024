@@ -134,11 +134,14 @@ public abstract class XeroRobot extends TimedRobot {
 
     private static final String PDPPropertyName = "system:pdp:type" ;
 
+    public static XeroRobot theOne ;
+
     /// \brief Create a new XeroRobot robot
     /// \param period the robot loop timing (generally 20 ms)
     public XeroRobot(final double period) {
         super(period);
 
+        theOne = this ;
         double start ;
 
         // Generate the paths to the various important places (logfile directory, settings file, path follow paths directoryh, etc.)

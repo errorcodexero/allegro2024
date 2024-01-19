@@ -105,7 +105,7 @@ public class MCVelocityAction extends MotorAction {
         // we must as the subsystem to translate the units from robot units to motor controller units.
         //
         MotorEncoderSubsystem sub = (MotorEncoderSubsystem)getSubsystem() ;
-        double ticks = sub.getEncoder().mapVelocityToMotor(target) ;
+        double ticks = sub.getEncoder().mapPhysicalToMotor(target) ;
         getSubsystem().getMotorController().set(XeroPidType.Velocity, ticks) ;
     }
 

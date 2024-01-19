@@ -35,7 +35,8 @@ public class MotorEncoderSubsystem extends MotorSubsystem
         ImportantType veltype = getImportantType("velocity-important") ;
 
         getMotorController().setPositionImportant(postype) ;
-        getMotorController().setVelocityImportant(veltype) ;        
+        getMotorController().setVelocityImportant(veltype) ;
+        getMotorController().setAccelerationImportant(ImportantType.Off);
 
         String encname = "subsystems:" + name + ":hw:encoder" ;
         encoder_ = new XeroEncoder(parent.getRobot(), encname, angular, getMotorController()) ;        
@@ -99,7 +100,7 @@ public class MotorEncoderSubsystem extends MotorSubsystem
         double ret = 0.0 ;
 
         try {
-            ret = getMotorController().getPosition();
+            ret = encoder_.mapMotorToPhysical(getMotorController().getPosition());
         }
         catch(Exception ex) {
             MessageLogger logger = getRobot().getMessageLogger() ;
@@ -111,17 +112,13 @@ public class MotorEncoderSubsystem extends MotorSubsystem
         return ret;
     }
     
-    public double velocityToController(double vel) {
-        return encoder_.mapVelocityToMotor(vel) ;
-    }
-
     /// \brief Returns the velocity of the motor output, as measured by the speedometer
     /// \returns the velocity of the motor output, as measured by the speedometer    
     public double getVelocity() {
         double ret = 0.0 ;
 
         try {
-            ret = encoder_.mapMotorToVelocity(getMotorController().getVelocity()) ;
+            ret = encoder_.mapMotorToPhysical(getMotorController().getVelocity()) ;
         }
         catch(Exception ex) {
             MessageLogger logger = getRobot().getMessageLogger() ;
