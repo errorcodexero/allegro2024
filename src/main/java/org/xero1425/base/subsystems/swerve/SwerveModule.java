@@ -47,7 +47,8 @@ public class SwerveModule {
         double i = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:i").getDouble() ;
         double d = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:d").getDouble() ;
         steer_.setPID(XeroPidType.Position, p, i, d, 0, 0, 0, 0, 0.1);
-        steer_.setPositionImportant(true);
+        steer_.setPositionImportant(IMotorController.ImportantType.Low);
+        steer_.setVelocityImportant(IMotorController.ImportantType.Low);
         target_angle_ = 0.0 ;
 
         //
@@ -57,8 +58,8 @@ public class SwerveModule {
         drive_.setInverted(cfg.drive_inverted);
         drive_.resetEncoder();
         ticksToMeters_ = Math.PI * cfg.wheel_diameter * cfg.drive_reduction / drive_.ticksPerRevolution() ;
-        drive_.setVelocityImportant(true);
-        drive_.setPositionImportant(true);
+        drive_.setVelocityImportant(IMotorController.ImportantType.High);
+        drive_.setPositionImportant(IMotorController.ImportantType.High);
 
         //
         // Create and initialize the absolute cancoder encoder

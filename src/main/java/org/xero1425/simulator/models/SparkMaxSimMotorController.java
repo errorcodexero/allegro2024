@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import org.xero1425.base.motors.IMotorController;
 import org.xero1425.base.motors.SparkMaxMotorController;
 
-public class SparkMaxSimMotorController implements ISimMotorController {
+public class SparkMaxSimMotorController extends SimMotorController {
     private static final double kTicksPerRev = 42 ;
     private SparkMaxMotorController motor_ ;
     private DCMotor dcmotor_ ;
@@ -16,6 +16,8 @@ public class SparkMaxSimMotorController implements ISimMotorController {
     
     
     public SparkMaxSimMotorController(SimulationEngine engine, String bus, int canid, int count, double moment, double gearning) throws Exception {
+        super(engine, bus, canid) ;
+
         if (!bus.isEmpty()) {
             throw new Exception("SparkMax controllers must have an empty bus");
         }
@@ -36,8 +38,12 @@ public class SparkMaxSimMotorController implements ISimMotorController {
 
         sim_.setInputVoltage(state.getMotorVoltage());
 
-        state.setPosition(sim_.getAngularPositionRotations() * kTicksPerRev);
-        state.setVelocity(sim_.getAngularVelocityRPM() * 60.0 * kTicksPerRev);
+        double pos = sim_.getAngularPositionRotations() * kTicksPerRev ;
+        double vel = sim_.getAngularVelocityRPM() * 60.0 * kTicksPerRev ;
+        state.setPosition(pos) ;
+        state.setVelocity(vel) ;
+
+        addPlotData(pos, vel) ;
     }
 
     @Override

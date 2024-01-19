@@ -6,8 +6,11 @@ import org.xero1425.simulator.engine.SimulationModel;
 import org.xero1425.simulator.models.ISimMotorController;
 
 public class IntakeModel extends SimulationModel {
-    ISimMotorController up_down_ ;
-    ISimMotorController rotate_ ;
+    ISimMotorController spinner_ ;
+    ISimMotorController updown_ ;
+    ISimMotorController feeder_ ;
+    ISimMotorController shooter_ ;
+    ISimMotorController tilt_ ;
     
     public IntakeModel(SimulationEngine engine, String model, String inst) {
         super(engine, model, inst) ;
@@ -16,8 +19,11 @@ public class IntakeModel extends SimulationModel {
     @Override
     public boolean create(SimulationEngine engine) throws Exception {
         
-        up_down_ = createSimulatedMotor(engine, "updown");
-        rotate_ = createSimulatedMotor(engine, "rotate");
+        spinner_ = createSimulatedMotor(engine, "spinner");        
+        updown_ = createSimulatedMotor(engine, "updown");
+        feeder_ = createSimulatedMotor(engine, "feeder");
+        shooter_ = createSimulatedMotor(engine, "shooter");
+        tilt_ = createSimulatedMotor(engine, "tilt");                
 
         setCreated();
 
@@ -31,7 +37,10 @@ public class IntakeModel extends SimulationModel {
 
     @Override
     public void run(double dt) {
-        up_down_.run(dt) ;
-        rotate_.run(dt) ;
+        spinner_.run(dt) ;
+        updown_.run(dt) ;
+        feeder_.run(dt) ;
+        shooter_.run(dt) ;
+        tilt_.run(dt) ;
     }    
 }

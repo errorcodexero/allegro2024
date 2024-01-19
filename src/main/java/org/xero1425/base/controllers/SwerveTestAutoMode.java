@@ -44,7 +44,7 @@ public class SwerveTestAutoMode extends TestAutoMode {
 
             case 1:
                 if (hasParameter("duration")) {            
-                    addSubActionPair(swerve, new SwerveSpeedAngleAction(swerve, getDouble("angle"), getDouble("speed")), true);
+                    addSubActionPair(swerve, new SwerveSpeedAngleAction(swerve, getDouble("angle"), getDouble("speed"), getDouble("duration")), true);
                 }
                 else {
                     addSubActionPair(swerve, new SwerveSpeedAngleAction(swerve, getDouble("angle"), getDouble("speed"), getDouble("duration")), true);

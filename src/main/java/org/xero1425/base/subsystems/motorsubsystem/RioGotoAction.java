@@ -97,7 +97,6 @@ public class RioGotoAction extends MotorAction {
         "time (sec)", 
         "tpos (%%units%%)", "apos (%%units%%)", 
         "tvel (%%units%%/s)", "avel (%%units%%/s)", 
-        "tacc (%%units%%/s/s)", "aacc (%%units%%/s/s)",
         "out (volts)", "current (amps)"
     } ;
 
@@ -268,10 +267,8 @@ public class RioGotoAction extends MotorAction {
             data[2] = position ;
             data[3] = targetVel ;
             data[4] = sub.getVelocity() ;
-            data[5] = targetAcc;
-            data[6] = sub.getAcceleration();
-            data[7] = out ;
-            data[8] = sub.getTotalCurrent();
+            data[5] = out ;
+            data[6] = sub.getTotalCurrent();
             sub.addPlotData(plot_id_, data);
         }
     }

@@ -34,7 +34,9 @@
         }
     },
     "subsystems": {
-        "intake" : {
+        "spinner" : {
+            "position-important" : "High",
+            "velocity-important" : "High",
             "hw" : {
                 "motors" : {
                     "type" : "talon-fx",
@@ -49,17 +51,89 @@
                     "m": 1,
                     "b": 0,
                     "units" : "ticks"
-                },
-                "spinner" : {
-                    "type" : "sparkmax-brushless",
+                }
+            }
+        },
+        "updown" : {
+            "position-important" : "Off",
+            "velocity-important" : "Off",            
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
                     "bus" : "",
                     "canid" : 2,
                     "inverted" : false,
                     "neutral-mode": "brake",
                     "current-limit" : 20.0
+                },
+                "encoder": {
+                    "type": "motor",
+                    "m": 1,
+                    "b": 0,
+                    "units" : "ticks"
                 }
             }
         },
+        "feeder" : {
+            "position-important" : "Off",
+            "velocity-important" : "Off",            
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
+                    "bus" : "",
+                    "canid" : 3,
+                    "inverted" : false,
+                    "neutral-mode": "brake",
+                    "current-limit" : 20.0
+                },
+                "encoder": {
+                    "type": "motor",
+                    "m": 1,
+                    "b": 0,
+                    "units" : "ticks"
+                }
+            }
+        },
+        "shooter" : {
+            "position-important" : "Off",
+            "velocity-important" : "Off",            
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
+                    "bus" : "",
+                    "canid" : 4,
+                    "inverted" : false,
+                    "neutral-mode": "brake",
+                    "current-limit" : 20.0
+                },
+                "encoder": {
+                    "type": "motor",
+                    "m": 1,
+                    "b": 0,
+                    "units" : "ticks"
+                }
+            }
+        },
+        "tilt" : {
+            "position-important" : "Off",
+            "velocity-important" : "Off",
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
+                    "bus" : "",
+                    "canid" : 5,
+                    "inverted" : false,
+                    "neutral-mode": "brake",
+                    "current-limit" : 20.0
+                },
+                "encoder": {
+                    "type": "motor",
+                    "m": 1,
+                    "b": 0,
+                    "units" : "ticks"
+                }
+            }
+        },    
         "swerve" : {
             //
             // This section defines the hardware used by the swerve drive

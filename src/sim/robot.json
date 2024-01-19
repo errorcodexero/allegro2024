@@ -35,19 +35,40 @@
             "model" : "intake",
             "instance" : "1",
             "props" : {
+                "spinner:type" : "talon-fx",
+                "spinner:bus" : "",
+                "spinner:canid" : 1,
+                "spinner:count" : 1,
+                "spinner:gearing" : 1.0,
+                "spinner:moment" : 0.001,
+
                 "updown:type" : "talon-fx",
                 "updown:bus" : "",
-                "updown:canid" : 1,
+                "updown:canid" : 2,
                 "updown:count" : 1,
                 "updown:gearing" : 1.0,
                 "updown:moment" : 0.001,
 
-                "rotate:type" : "sparkmax",
-                "rotate:bus" : "",
-                "rotate:canid" : 2,
-                "rotate:count" : 1,
-                "rotate:gearing" : 1.0,
-                "rotate:moment" : 0.001
+                "feeder:type" : "talon-fx",
+                "feeder:bus" : "",
+                "feeder:canid" : 2,
+                "feeder:count" : 1,
+                "feeder:gearing" : 1.0,
+                "feeder:moment" : 0.001,
+                
+                "shooter:type" : "talon-fx",
+                "shooter:bus" : "",
+                "shooter:canid" : 2,
+                "shooter:count" : 1,
+                "shooter:gearing" : 1.0,
+                "shooter:moment" : 0.001,
+
+                "tilt:type" : "talon-fx",
+                "tilt:bus" : "",
+                "tilt:canid" : 2,
+                "tilt:count" : 1,
+                "tilt:gearing" : 1.0,
+                "tilt:moment" : 0.001
             }
         }        
     ]

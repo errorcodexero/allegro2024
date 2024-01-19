@@ -12,24 +12,29 @@ import org.xero1425.base.motors.IMotorController;
 import org.xero1425.base.motors.TalonFXMotorController;
 import org.xero1425.simulator.engine.SimulationEngine;
 
-public class TalonFXSimMotorController implements ISimMotorController {
+public class TalonFXSimMotorController extends SimMotorController {
     private final static double kTicksPerRev = 2048 ;
 
     private TalonFXMotorController motor_ ;
     private DCMotor dcmotor_ ;
     private DCMotorSim sim_ ;
 
+
     public TalonFXSimMotorController(SimulationEngine engine, String bus, int canid, int count, double gearing, double moment) throws Exception {
+        super(engine, bus, canid);
+
         IMotorController ctrl = engine.getRobot().getMotorFactory().getMotorController(bus, canid) ;
         if (!(ctrl.getNativeController() instanceof TalonFX)) {
             throw new Exception("motor on bus '" + bus + "', can id " + canid + " is not a TalonFX V6 motor");
         }
 
+        dcmotor_ = DCMotor.getFalcon500(count) ;
+        sim_ = new DCMotorSim(dcmotor_, gearing, moment) ;        
+
         motor_ = (TalonFXMotorController)ctrl ;
         getState().Orientation = ChassisReference.Clockwise_Positive ;
-
-        dcmotor_ = DCMotor.getFalcon500(count) ;
-        sim_ = new DCMotorSim(dcmotor_, gearing, moment) ;
+        getState().setRawRotorPosition(sim_.getAngularPositionRotations()) ;
+        getState().setRotorVelocity(sim_.getAngularVelocityRPM() * 60.0) ;      
     }
 
     @Override
@@ -40,8 +45,12 @@ public class TalonFXSimMotorController implements ISimMotorController {
         sim_.setInputVoltage(state.getMotorVoltage());
         sim_.update(dt) ;
 
-        state.setRawRotorPosition(sim_.getAngularPositionRotations()) ;
-        state.setRotorVelocity(sim_.getAngularVelocityRPM() * 60.0) ;
+        double pos = sim_.getAngularPositionRotations() ;
+        double vel = sim_.getAngularVelocityRPM() * 60.0 ;
+        state.setRawRotorPosition(pos) ;
+        state.setRotorVelocity(vel) ;
+
+        addPlotData(pos, vel) ;
     }
 
     @Override

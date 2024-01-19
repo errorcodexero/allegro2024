@@ -372,23 +372,71 @@ public class TalonFXMotorController extends MotorController
 
     /// \brief If value is true, the motor controller will consider position data as important and update
     /// the data a quickly as possible.
-    public void setPositionImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
-        final double freq = (value ? 100 : 1) ;
-        checkError("setPositionImportant()", () -> ctrl_.getPosition().setUpdateFrequency(freq)) ;
+    public void setPositionImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
+        double freq = 0.0 ;
+
+        switch(value) {
+            case Off:
+                freq = 0.0 ;
+                break ;
+            case Low:
+                freq = 4.0 ;
+                break ;
+            case High:
+                freq = 100;
+                break; 
+            case Invalid:
+                freq = 1.0 ;
+                break ;                  
+        }
+        final double tfreq = freq ;
+        checkError("setPositionImportant()", () -> ctrl_.getPosition().setUpdateFrequency(tfreq)) ;
     }
     
     /// \brief If value is true, the motor controller will consider velocity data as important and update
     /// the data a quickly as possible.
-    public void setVelocityImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
-        final double freq = (value ? 100 : 1) ;
-        checkError("setPositionImportant error", () -> ctrl_.getVelocity().setUpdateFrequency(freq)) ;
+    public void setVelocityImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
+        double freq = 0.0 ;
+
+        switch(value) {
+            case Off:
+                freq = 0.0 ;
+                break ;
+            case Low:
+                freq = 4.0 ;
+                break ;
+            case High:
+                freq = 100;
+                break; 
+            case Invalid:
+                freq = 1.0 ;
+                break ;                
+        }
+        final double tfreq = freq ;        
+        checkError("setPositionImportant error", () -> ctrl_.getVelocity().setUpdateFrequency(tfreq)) ;
     }
     
     /// \brief If value is true, the motor controller will consider acceleration data as important and update
     /// the data a quickly as possible.
-    public void setAccelerationImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
-        final double freq = (value ? 100 : 1) ;
-        checkError("setPositionImportant error", () -> ctrl_.getAcceleration().setUpdateFrequency(freq)) ;
+    public void setAccelerationImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
+        double freq = 0.0 ;
+
+        switch(value) {
+            case Off:
+                freq = 0.0 ;
+                break ;
+            case Low:
+                freq = 4.0 ;
+                break ;
+            case High:
+                freq = 100;
+                break; 
+            case Invalid:
+                freq = 1.0 ;
+                break ;
+        }
+        final double tfreq = freq ;        
+        checkError("setPositionImportant error", () -> ctrl_.getAcceleration().setUpdateFrequency(tfreq)) ;
     }
 
     /// \brief Returns the position of the motor in motor units from the motor controller.  If the motor does not

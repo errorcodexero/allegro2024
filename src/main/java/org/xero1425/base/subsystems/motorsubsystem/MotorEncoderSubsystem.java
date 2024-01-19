@@ -1,93 +1,44 @@
 package org.xero1425.base.subsystems.motorsubsystem;
 
-import org.xero1425.base.XeroRobot;
-import org.xero1425.base.motors.BadMotorRequestException;
-import org.xero1425.base.motors.MotorRequestFailedException;
+import org.xero1425.base.motors.IMotorController.ImportantType;
 import org.xero1425.base.motors.IMotorController.XeroPidType;
 import org.xero1425.base.subsystems.Subsystem;
+import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
-import org.xero1425.misc.Speedometer;
+import org.xero1425.misc.MissingParameterException;
 
 /// \file
 
 /// \brief A subsystem that includes a single motor, or group of motors mechanically coupled and an encoder for closed loop control
 public class MotorEncoderSubsystem extends MotorSubsystem
 {
-    // The speedometer measuring the speed of the motor output
-    private Speedometer speedometer_ ;
-
     // The encoder attached to the motor output
     private XeroEncoder encoder_ ;
 
     // If true, the measured output is angular
     private boolean angular_ ;
 
-    // If true, use the velocity from the motor controller
-    private boolean use_ctrl_velocity_ ;
-
     private double max_value_ ;
     private double min_value_ ;
 
-    private boolean dump_currents_ ;
-
-
-    /// \brief Create the subsystem
-    /// \param parent the owning subsystem
-    /// \param name the name of this subsystem
-    /// \param angle if true, the measured output is angular
-    /// \param velconv the velocity conversion if using the velocity from the motor controller
-    public MotorEncoderSubsystem(Subsystem parent, String name, boolean angle, boolean usectrlvel) throws Exception {
-        super(parent, name) ;
-
-        speedometer_ = new Speedometer(name, 2, angle) ;
-        angular_ = angle ;
-
-        use_ctrl_velocity_ = false ;
-
-        String encname = "subsystems:" + name + ":hw:encoder" ;
-        encoder_ = new XeroEncoder(parent.getRobot(), encname, angle, getMotorController()) ;
-
-        if (usectrlvel && !XeroRobot.isSimulation()) {
-            if (!encoder_.isMotorEncoder()) {
-                String msg = "motor '" + name + "', you can only use the velocity from the motor if the encoder is in the motor" ;
-                throw new Exception(msg) ;
-            }
-
-            use_ctrl_velocity_ = true ;
-        }
-
-        if (isSettingDefined("maxpos"))
-            max_value_ = getSettingsValue("maxpos").getDouble() ;
-        else
-            max_value_ = Double.MAX_VALUE ;
-
-        if (isSettingDefined("minpos"))
-            min_value_ = getSettingsValue("minpos").getDouble() ;
-        else
-            min_value_ = -Double.MAX_VALUE ;
-
-        dump_currents_ = false ;
+    public MotorEncoderSubsystem(Subsystem parent, String name, boolean angular) throws Exception {
+        this(parent, name, angular, 2) ;
     }
 
-
-    /// \brief Create the subsystem
-    /// \param parent the owning subsystem
-    /// \param name the name of this subsystem
-    /// \param angle if true, the measured output is angular
-    public MotorEncoderSubsystem(Subsystem parent, String name, boolean angle) throws Exception {
+    public MotorEncoderSubsystem(Subsystem parent, String name, boolean angular, int samples) throws Exception {
         super(parent, name) ;
 
-        getMotorController().setPositionImportant(true);
-        getMotorController().setVelocityImportant(true);
+        angular_ = angular ;
 
-        speedometer_ = new Speedometer(name, 2, angle) ;
-        angular_ = angle ;
+        ImportantType postype = getImportantType("position-important") ;
+        ImportantType veltype = getImportantType("velocity-important") ;
+
+        getMotorController().setPositionImportant(postype) ;
+        getMotorController().setVelocityImportant(veltype) ;        
 
         String encname = "subsystems:" + name + ":hw:encoder" ;
-        encoder_ = new XeroEncoder(parent.getRobot(), encname, angle, getMotorController()) ;
-
-        use_ctrl_velocity_ = false ;
+        encoder_ = new XeroEncoder(parent.getRobot(), encname, angular, getMotorController()) ;        
 
         if (isSettingDefined("maxpos"))
             max_value_ = getSettingsValue("maxpos").getDouble() ;
@@ -97,66 +48,16 @@ public class MotorEncoderSubsystem extends MotorSubsystem
         if (isSettingDefined("minpos"))
             min_value_ = getSettingsValue("minpos").getDouble() ;
         else
-            min_value_ = -Double.MAX_VALUE ;
-
-        dump_currents_ = false ;            
-    }    
-
-    /// \brief Create the subsystem
-    /// \param parent the owning subsystem
-    /// \param name the name of this subsystem
-    /// \param angle if true, the measured output is angular
-    /// \param samples the number of samples to average for output position and velocity
-    public MotorEncoderSubsystem(Subsystem parent, String name, boolean angle, int samples, boolean usectrlvel) throws Exception {
-        super(parent, name) ;
-
-        speedometer_ = new Speedometer(name, samples, angle) ;
-        angular_ = angle ;
-
-        String encname = "subsystems:" + name + ":hw:encoder" ;
-        encoder_ = new XeroEncoder(parent.getRobot(), encname, angle, getMotorController()) ;
-
-        if (usectrlvel && !XeroRobot.isSimulation()) {
-            use_ctrl_velocity_ = true ;
-        }
-
-        if (isSettingDefined("maxpos"))
-            max_value_ = getSettingsValue("maxpos").getDouble() ;
-        else
-            max_value_ = Double.MAX_VALUE ;
-
-        if (isSettingDefined("minpos"))
-            min_value_ = getSettingsValue("minpos").getDouble() ;
-        else
-            min_value_ = -Double.MAX_VALUE ;        
-     
-        dump_currents_ = false ;            
+            min_value_ = -Double.MAX_VALUE ;    
     }
 
-    /// \brief Create the subsystem
-    /// \param parent the owning subsystem
-    /// \param name the name of this subsystem
-    /// \param angle if true, the measured output is angular
-    /// \param samples the number of samples to average for output position and velocity
-    public MotorEncoderSubsystem(Subsystem parent, String name, boolean angle, int samples) throws Exception {
-        super(parent, name) ;
-
-        speedometer_ = new Speedometer(name, samples, angle) ;
-        angular_ = angle ;
-
-        String encname = "subsystems:" + name + ":hw:encoder" ;
-        encoder_ = new XeroEncoder(parent.getRobot(), encname, angle, getMotorController()) ;
-
-        use_ctrl_velocity_ = false ;
-        dump_currents_ = false ;        
+    private ImportantType getImportantType(String name) throws BadParameterTypeException, MissingParameterException {
+        String impstr = getSettingsValue(name).getString() ;
+        return ImportantType.valueOf(impstr);
     }
 
     public XeroEncoder getEncoder() {
         return encoder_ ;
-    }
-
-    public void setDumpCurrents(boolean b) {
-        dump_currents_ = b ;
     }
 
     public String getUnits() {
@@ -195,7 +96,19 @@ public class MotorEncoderSubsystem extends MotorSubsystem
     /// \brief Returns the position of the motor output, as measured by the speedometer
     /// \returns the position of the motor output, as measured by the speedometer
     public double getPosition() {
-        return speedometer_.getDistance() ;
+        double ret = 0.0 ;
+
+        try {
+            ret = getMotorController().getPosition();
+        }
+        catch(Exception ex) {
+            MessageLogger logger = getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Error).add("getPosition() threw an exception") ;
+            logger.add("subsystem name", getName()).endMessage();
+            logger.logStackTrace(ex.getStackTrace());
+        }
+
+        return ret;
     }
     
     public double velocityToController(double vel) {
@@ -207,29 +120,15 @@ public class MotorEncoderSubsystem extends MotorSubsystem
     public double getVelocity() {
         double ret = 0.0 ;
 
-        if (use_ctrl_velocity_) {
-            try {
-                ret = encoder_.mapMotorToVelocity(getMotorController().getVelocity()) ;
-            } catch (BadMotorRequestException | MotorRequestFailedException e) {
-                ret = 0.0 ;
-            }
+        try {
+            ret = encoder_.mapMotorToVelocity(getMotorController().getVelocity()) ;
         }
-        else {
-            ret = speedometer_.getVelocity() ;
+        catch(Exception ex) {
+            MessageLogger logger = getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Error).add("getVelocity() threw an exception") ;
+            logger.add("subsystem name", getName()).endMessage();
+            logger.logStackTrace(ex.getStackTrace());
         }
-
-        return ret ;
-    }
-
-    /// \brief Returns the acceleration of the motor output, as measured by the speedometer
-    /// \returns the acceleration of the motor output, as measured by the speedometer     
-    public double getAcceleration() {
-        double ret = 0.0 ;
-
-        if (!use_ctrl_velocity_) {
-            ret = speedometer_.getAcceleration() ;
-        }
-
         return ret ;
     }
 
@@ -287,28 +186,6 @@ public class MotorEncoderSubsystem extends MotorSubsystem
 
         double pos = encoder_.getPosition() ;
 
-        speedometer_.update(getRobot().getDeltaTime(), pos) ;
-
-        MessageLogger logger = getRobot().getMessageLogger()  ;
-        logger.startMessage(MessageType.Debug, getLoggerID()) ;
-        logger.add(getName()) ;
-        logger.add("power", getPower()) ;
-        logger.add("pos", pos, "%.0f") ;
-        logger.add("velocity", speedometer_.getVelocity(), "%.0f");
-        logger.add("accel", speedometer_.getAcceleration(), "%.0f") ;
-        logger.add("ticks", getEncoderRawCount()) ;
-        logger.endMessage();
-
-        putDashboard(getName() + "-position", DisplayType.Verbose, pos);
-        putDashboard("raw", DisplayType.Verbose, encoder_.getRawCount());
-
-        if (dump_currents_) {
-            double current = getTotalCurrent() ;
-
-            logger.startMessage(MessageType.Info) ;
-            logger.add(getName()) ;
-            logger.add("current", current) ;
-            logger.endMessage();
-        }
+        putDashboard(getName() + "-pos", DisplayType.Verbose, pos);
     }
 }

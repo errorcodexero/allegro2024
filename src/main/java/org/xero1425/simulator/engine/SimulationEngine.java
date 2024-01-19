@@ -41,7 +41,7 @@ public class SimulationEngine {
 
         failed_count_ = 0 ;
         passed_count_ = 0 ;
-        delta_t_ = robot.getPeriod() / 10 ;
+        delta_t_ = robot.getPeriod() / 2 ;
     }
 
     static public SimulationEngine getInstance() {

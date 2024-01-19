@@ -81,8 +81,8 @@ public class SparkMaxMotorController extends MotorController
     private XeroNeutralMode neutral_mode_ ;
     private double deadband_ ;
     private double current_limit_ ;
-    private boolean pos_important_ ;
-    private boolean vel_important_ ;
+    private ImportantType pos_important_ ;
+    private ImportantType vel_important_ ;
     private double target_ ;
 
     private SimState simstate_ ;
@@ -92,8 +92,8 @@ public class SparkMaxMotorController extends MotorController
 
         canid_ = canid ;
         inverted_ = false ;
-        pos_important_ = false ;
-        vel_important_ = false ;
+        pos_important_ = ImportantType.Off ;
+        vel_important_ = ImportantType.Off ;
         current_limit_ = Double.MAX_VALUE ;
         target_ = 0.0 ;
 
@@ -420,11 +420,36 @@ public class SparkMaxMotorController extends MotorController
         }
     }
 
+    private int importantValueToMS(ImportantType value) {
+        int period = 5000 ;
+
+        switch(value) {
+            case Off:
+                period = 5000 ;
+                break ;
+
+            case Low:
+                period = 500 ;
+                break ;
+
+            case High:
+                period = 10;
+                break ;
+
+            case Invalid:
+                period = 5000 ;
+                break;
+        }
+
+        return period ;
+    }
+
     private void updateStatusFreqs() throws MotorRequestFailedException {
 
         if (simstate_ == null) {
-            int k1Period = (pos_important_ ? 10 : 500) ; 
-            int k2Period = (vel_important_ ? 10 : 500) ;
+
+            int k1Period = importantValueToMS(pos_important_) ;
+            int k2Period = importantValueToMS(vel_important_);
 
             checkError("could not set status frame frequency",ctrl_.setPeriodicFramePeriod(PeriodicFrame.kStatus1, k1Period)) ;
             checkError("could not set status frame frequency",ctrl_.setPeriodicFramePeriod(PeriodicFrame.kStatus2, k2Period)) ;
@@ -433,27 +458,27 @@ public class SparkMaxMotorController extends MotorController
 
     /// \brief If value is true, the motor controller will consider position data as important and update
     /// the data a quickly as possible.
-    public void setPositionImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
+    public void setPositionImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
         if (mtype_ == MotorType.kBrushless)
             throw new BadMotorRequestException(this, "brushed motor does not support position") ;
 
-        pos_important_ = true ;
+        pos_important_ = value ;
         updateStatusFreqs() ;
     }
     
     /// \brief If value is true, the motor controller will consider velocity data as important and update
     /// the data a quickly as possible.
-    public void setVelocityImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
+    public void setVelocityImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
         if (mtype_ == MotorType.kBrushless)
             throw new BadMotorRequestException(this, "brushed motor does not support velocity") ;
 
-        vel_important_ = true ;
+        vel_important_ = value ;
         updateStatusFreqs() ;
     }
     
     /// \brief If value is true, the motor controller will consider acceleration data as important and update
     /// the data a quickly as possible.
-    public void setAccelerationImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
+    public void setAccelerationImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
         throw new BadMotorRequestException(this, "the SparkMaxMotorController does not support acceleration") ;       
     }
 
