@@ -1,10 +1,11 @@
-package frc.robot.subsystems.intake;
+package frc.robot.subsystems.intakeshooter;
 
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.misc.SettingsValue;
 
 public class IntakeShooterSubsystem extends Subsystem {
+
     private MotorEncoderSubsystem spinner_ ;
     private MotorEncoderSubsystem updown_ ; 
     private MotorEncoderSubsystem feeder_ ;

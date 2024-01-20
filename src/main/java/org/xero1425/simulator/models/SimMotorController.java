@@ -3,7 +3,7 @@ package org.xero1425.simulator.models;
 import org.xero1425.simulator.engine.SimulationEngine;
 
 public abstract class SimMotorController implements ISimMotorController {
-    final static boolean kPlotMotorSims = true ;
+    final static boolean kPlotMotorSims = false ;
 
     private SimulationEngine engine_ ;
     private int plot_id_ ;

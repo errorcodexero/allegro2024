@@ -4,7 +4,7 @@ import org.xero1425.base.controllers.AutoController;
 import org.xero1425.base.controllers.SwerveTestAutoMode;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 
-import frc.robot.subsystems.intake.IntakeShooterSubsystem;
+import frc.robot.subsystems.intakeshooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class AllegroTestAutoMode extends SwerveTestAutoMode {

@@ -18,11 +18,11 @@ public class IntakeShooterModel extends SimulationModel {
 
     @Override
     public boolean create(SimulationEngine engine) throws Exception {        
-        spinner_ = createSimulatedMotor(engine, "spinner");        
+        spinner_ = createSimulatedMotor(engine, "spinner");
         updown_ = createSimulatedMotor(engine, "updown");
         feeder_ = createSimulatedMotor(engine, "feeder");
         shooter_ = createSimulatedMotor(engine, "shooter");
-        tilt_ = createSimulatedMotor(engine, "tilt");                
+        tilt_ = createSimulatedMotor(engine, "tilt");
 
         setCreated();
 
@@ -41,5 +41,5 @@ public class IntakeShooterModel extends SimulationModel {
         feeder_.run(dt) ;
         shooter_.run(dt) ;
         tilt_.run(dt) ;
-    }    
+    }
 }

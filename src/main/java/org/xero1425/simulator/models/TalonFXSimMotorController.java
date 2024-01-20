@@ -18,6 +18,7 @@ public class TalonFXSimMotorController extends SimMotorController {
     private TalonFXMotorController motor_ ;
     private DCMotor dcmotor_ ;
     private DCMotorSim sim_ ;
+    private double gearing_ ;
 
     public TalonFXSimMotorController(SimulationEngine engine, String bus, int canid, int count, double gearing, double moment) throws Exception {
         super(engine, bus, canid);
@@ -28,7 +29,8 @@ public class TalonFXSimMotorController extends SimMotorController {
         }
 
         dcmotor_ = DCMotor.getFalcon500(count) ;
-        sim_ = new DCMotorSim(dcmotor_, gearing, moment) ;      
+        sim_ = new DCMotorSim(dcmotor_, gearing, moment) ; 
+        gearing_ = gearing ;     
         
         motor_ = (TalonFXMotorController)ctrl ;            
         getState().Orientation = ChassisReference.Clockwise_Positive ;
@@ -42,8 +44,8 @@ public class TalonFXSimMotorController extends SimMotorController {
         sim_.setInputVoltage(state.getMotorVoltage());
         sim_.update(dt) ;
 
-        double pos = sim_.getAngularPositionRotations() ;
-        double vel = sim_.getAngularVelocityRPM() / 60.0 ;
+        double pos = sim_.getAngularPositionRotations() * gearing_ ;
+        double vel = sim_.getAngularVelocityRPM() / 60.0 * gearing_ ;
 
         state.setRawRotorPosition(pos) ;
         state.setRotorVelocity(vel) ;

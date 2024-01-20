@@ -13,7 +13,7 @@ public class SparkMaxSimMotorController extends SimMotorController {
     private SparkMaxMotorController motor_ ;
     private DCMotor dcmotor_ ;
     private DCMotorSim sim_ ;
-    
+    private double gearing_ ;
     
     public SparkMaxSimMotorController(SimulationEngine engine, String bus, int canid, int count, double moment, double gearning) throws Exception {
         super(engine, bus, canid) ;
@@ -38,8 +38,8 @@ public class SparkMaxSimMotorController extends SimMotorController {
 
         sim_.setInputVoltage(state.getMotorVoltage());
 
-        double pos = sim_.getAngularPositionRotations() * kTicksPerRev ;
-        double vel = sim_.getAngularVelocityRPM() * 60.0 * kTicksPerRev ;
+        double pos = sim_.getAngularPositionRotations() * kTicksPerRev * gearing_ ;
+        double vel = sim_.getAngularVelocityRPM() * 60.0 * kTicksPerRev * gearing_ ;
         state.setPosition(pos) ;
         state.setVelocity(vel) ;
 
