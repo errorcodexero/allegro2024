@@ -30,14 +30,10 @@ import org.xero1425.misc.SettingsValue.SettingsType;
 /// motor controllers
 ///
 public class MotorFactory {
-
-    private static final int kMotorsPerRobotLoop = 4 ;
-    
     private MessageLogger logger_;                                  // The system wide message logger
     private ISettingsSupplier settings_;                            // The system wide settings file
     private Map<String, Map<Integer, IMotorController>> motors_;     // The map of motors
     private List<IMotorController> motor_list_ ;
-    private int loop_index_ ;
 
     private static final String BrakeMode = "brake" ;
     private static final String CoastMode = "coast" ;
@@ -52,36 +48,11 @@ public class MotorFactory {
         motors_.put("", new HashMap<Integer, IMotorController>()) ;
 
         motor_list_ = new ArrayList<IMotorController>() ;
-        loop_index_ = 0 ;
     }
 
-    private void checkMotor(IMotorController ctrl) {
-        try {
-            List<String> faults = ctrl.getFaults() ;
-            if (faults.size() > 0) {
-            
-            }
-        }
-        catch(Exception ex) {
-            logger_.startMessage(MessageType.Error) ;
-            logger_.add("cannot check motors - errors occured while getting faults") ;
-            logger_.endMessage();
-        }
-    }
-
-    public void robotLoop() {
-        if (motor_list_.size() < kMotorsPerRobotLoop) {
-            for(IMotorController motor : motor_list_) {
-                checkMotor(motor);
-            }
-        }
-        else {
-            for(int i = 0 ; i < kMotorsPerRobotLoop ; i++) {
-                checkMotor(motor_list_.get(loop_index_++)) ;
-                if (loop_index_ == motor_list_.size()) {
-                    loop_index_ = 0 ;
-                }
-            }
+    public void run(double now) {
+        for(IMotorController motor : motor_list_) {
+            motor.run(now);
         }
     }
 

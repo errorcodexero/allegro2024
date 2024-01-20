@@ -503,7 +503,7 @@
             //
             // Apply the given power to the intake up/down motor for the given duration
             //
-            "power" : 0.1,
+            "power" : 0.5,
             "duration" : 3.0
         }
     }

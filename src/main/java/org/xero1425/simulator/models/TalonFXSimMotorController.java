@@ -1,6 +1,5 @@
 package org.xero1425.simulator.models;
 
-import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.sim.ChassisReference;
 import com.ctre.phoenix6.sim.TalonFXSimState;
@@ -32,33 +31,24 @@ public class TalonFXSimMotorController extends SimMotorController {
         sim_ = new DCMotorSim(dcmotor_, gearing, moment) ;        
 
         motor_ = (TalonFXMotorController)ctrl ;
-        getState().setRawRotorPosition(sim_.getAngularPositionRotations()) ;
-        getState().setRotorVelocity(sim_.getAngularVelocityRPM() * 60.0) ;      
+        getState().Orientation = ChassisReference.Clockwise_Positive ;
     }
 
     @Override
     public void run(double dt) {
         TalonFXSimState state = getState() ;
-        state.Orientation = ChassisReference.CounterClockwise_Positive ;
-        state.setSupplyVoltage(RobotController.getBatteryVoltage());
         
+        state.setSupplyVoltage(RobotController.getBatteryVoltage());
         sim_.setInputVoltage(state.getMotorVoltage());
         sim_.update(dt) ;
 
         double pos = sim_.getAngularPositionRotations() ;
         double vel = sim_.getAngularVelocityRPM() * 60.0 ;
 
-        StatusCode code = state.setRawRotorPosition(pos) ;
-        if (!code.isOK()) {
-            System.out.println("error code is " + code.toString()) ;
-        }
-
-        code = state.setRotorVelocity(vel) ;
-        if (!code.isOK()) {
-            System.out.println("error code is " + code.toString()) ;
-        }
-
-        addPlotData(pos, vel) ;
+        state.setRawRotorPosition(pos) ;
+        state.setRotorVelocity(vel) ;
+        
+        addPlotData(RobotController.getBatteryVoltage(), state.getMotorVoltage(), pos, vel) ;
     }
 
     @Override

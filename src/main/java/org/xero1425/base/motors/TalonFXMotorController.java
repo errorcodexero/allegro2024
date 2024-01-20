@@ -1,13 +1,8 @@
 package org.xero1425.base.motors;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
-
-import org.xero1425.base.XeroRobot;
-
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
@@ -18,8 +13,11 @@ import com.ctre.phoenix6.configs.VoltageConfigs;
 import com.ctre.phoenix6.controls.ControlRequest;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.Follower;
+import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
+import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -48,6 +46,10 @@ public class TalonFXMotorController extends MotorController
     private String bus_ ;
     private boolean voltage_compensation_enabled_ ;
     private double nominal_voltage_ ;
+    private boolean open_loop_ ;
+    private double open_loop_velocity_ ;
+    private double last_pos_ ;
+    private double last_time_ ;
 
     public TalonFXMotorController(String name, String bus, int canid, boolean leader) throws MotorRequestFailedException {
         super(name) ;
@@ -56,6 +58,7 @@ public class TalonFXMotorController extends MotorController
 
         ctrl_ = new TalonFX(canid, bus_);
         cfg_ = new TalonFXConfiguration() ;
+        open_loop_ = true ;
 
         checkError("TalonFXMotorController - apply configuration", () -> ctrl_.getConfigurator().apply(cfg_));
         checkError("TalonFXMotorController - optimize bus", () -> ctrl_.optimizeBusUtilization()) ;
@@ -358,15 +361,34 @@ public class TalonFXMotorController extends MotorController
                 else {
                     req = new DutyCycleOut(target) ;
                 }
+                open_loop_ = true ;
                 break ;
             case Position:
-                req = new PositionVoltage(0).withPosition(target / kTicksPerRevolution) ;
+                if (voltage_compensation_enabled_) {
+                    req = new PositionVoltage(target / kTicksPerRevolution) ;
+                }
+                else {
+                    req = new PositionDutyCycle(target / kTicksPerRevolution) ;
+                }
+                open_loop_ = false ;
                 break ;
             case Velocity:
-                req = new VelocityVoltage(0).withVelocity(target / kTicksPerRevolution) ;
+            if (voltage_compensation_enabled_) {
+                    req = new VelocityVoltage(target / kTicksPerRevolution) ;
+                }
+                else {
+                    req = new VelocityDutyCycle(target / kTicksPerRevolution) ;
+                }
+                open_loop_ = false ;        
                 break ;
             case MotionMagic:
-                req = new MotionMagicVoltage(0).withPosition(target / kTicksPerRevolution) ;
+                if (voltage_compensation_enabled_) {
+                    req = new MotionMagicVoltage(target / kTicksPerRevolution) ;
+                }
+                else {
+                    req = new MotionMagicDutyCycle(target / kTicksPerRevolution) ;
+                }
+                open_loop_ = false ;                
                 break ;
         }
 
@@ -453,8 +475,25 @@ public class TalonFXMotorController extends MotorController
     /// \brief Return the velocity of the motor if there is PID control in the motor controller.   If the motor does not
     /// have an attached encoder, an exception is thrown.
     /// \returns the velocity of the motor in ticks per second
-    public double getVelocity()  throws BadMotorRequestException, MotorRequestFailedException {
-        return ctrl_.getVelocity().getValue() * kTicksPerRevolution ;
+    public double getVelocity() throws BadMotorRequestException, MotorRequestFailedException {
+        double ret = 0.0 ;
+
+        if (open_loop_) {
+            ret = open_loop_velocity_ ;
+        }
+        else {
+            ret = ctrl_.getVelocity().getValue() * kTicksPerRevolution ;
+        }
+
+        return ret;
+    }
+
+    /// \brief Called every robot loop for the motor to perform work    
+    public void run(double now) {
+        double pos = ctrl_.getPosition().getValue() ;
+        open_loop_velocity_ = (pos - last_pos_) / (now - last_time_) ;
+        last_pos_ = pos ;
+        last_time_ = now ;
     }
 
     /// \brief Return the acceleration of the motor if there is PID control in the motor controller.   If the motor does not

@@ -43,7 +43,7 @@ public class SparkMaxSimMotorController extends SimMotorController {
         state.setPosition(pos) ;
         state.setVelocity(vel) ;
 
-        addPlotData(pos, vel) ;
+        addPlotData(12.0, state.getMotorVoltage(), pos, vel) ;
     }
 
     @Override

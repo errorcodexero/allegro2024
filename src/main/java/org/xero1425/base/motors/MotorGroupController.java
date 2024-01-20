@@ -20,6 +20,12 @@ public class MotorGroupController extends MotorController
         motors_ = new ArrayList<IMotorController>() ;
     }
 
+    public void run(double now) {
+        for(IMotorController motor: motors_) {
+            motor.run(now) ;
+        }        
+    }
+
      /// \brief Set the encoder to a specific value in ticks
      /// \param pos the new value for the encoder in ticks
      public void setPosition(double value) throws BadMotorRequestException, MotorRequestFailedException {

@@ -37,6 +37,7 @@ public class MotorEncoderSubsystem extends MotorSubsystem
         getMotorController().setPositionImportant(postype) ;
         getMotorController().setVelocityImportant(veltype) ;
         getMotorController().setAccelerationImportant(ImportantType.Off);
+        // getMotorController().enableVoltageCompensation(true, 11.0);
 
         String encname = "subsystems:" + name + ":hw:encoder" ;
         encoder_ = new XeroEncoder(parent.getRobot(), encname, angular, getMotorController()) ;        

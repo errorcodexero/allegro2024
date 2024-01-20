@@ -839,6 +839,10 @@ public abstract class XeroRobot extends TimedRobot {
         logger_.add("delta", delta_time_) ;
         logger_.endMessage() ;
 
+        if (ltype != LoopType.Disabled) {
+            motors_.run(getTime()) ;
+        }
+
         if (isSimulation()) {
             SimulationEngine engine = SimulationEngine.getInstance() ;
             if (engine != null) {
