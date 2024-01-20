@@ -485,6 +485,8 @@ public class TalonFXMotorController extends MotorController
             ret = ctrl_.getVelocity().getValue() * kTicksPerRevolution ;
         }
 
+        ret = ctrl_.getVelocity().getValue() * kTicksPerRevolution ;
+
         return ret;
     }
 

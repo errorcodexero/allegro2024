@@ -41,6 +41,9 @@ public class SwerveDriveGamepad extends Gamepad {
     private SwerveButton[] reset_buttons_ ;
     private SwerveButton[] drivebase_x_buttons_;
     private boolean holding_x_;
+    private boolean holding_angle_ ;
+    private double holding_angle_value_ ;
+    private double rotation_p_value_ ;
 
     public SwerveDriveGamepad(OISubsystem oi, int index, SwerveBaseSubsystem drive_) throws Exception {
         super(oi, "swerve_gamepad", index);
@@ -57,6 +60,7 @@ public class SwerveDriveGamepad extends Gamepad {
         reset_buttons_ = null ;
         drivebase_x_buttons_ = null;
         holding_x_ = false ;
+        holding_angle_ = false ;
     }
 
     public void invert(boolean inv) {
@@ -77,6 +81,8 @@ public class SwerveDriveGamepad extends Gamepad {
 
     @Override
     public void createStaticActions() throws BadParameterTypeException, MissingParameterException {
+        rotation_p_value_ = getSubsystem().getSettingsValue("swerve_gamepad:angle:p").getDouble() ;
+
         deadband_pos_x_ = getSubsystem().getSettingsValue("swerve_gamepad:position:deadband:x").getDouble() ;
         deadband_pos_y_ = getSubsystem().getSettingsValue("swerve_gamepad:position:deadband:y").getDouble() ;
         deadband_rotate_ = getSubsystem().getSettingsValue("swerve_gamepad:angle:deadband").getDouble() ;
@@ -191,6 +197,36 @@ public class SwerveDriveGamepad extends Gamepad {
             lyscaled *= 0.25 ;
             rxscaled *= 0.25 ;
         }
+
+        if (rxscaled < deadband_rotate_) {
+            //
+            // The rotation stick is set to zero, so we want to maintain the current angle.
+            //
+            if (!holding_angle_) {
+                //
+                // This is the first robot loop with the rotation stick at zero.  Setup the mode to
+                // hold the angle and remember the current robot angle.
+                //
+                holding_angle_ = true ;
+                holding_angle_value_ = db_.getHeading().getDegrees() ;
+            }
+            else {
+                //
+                // This is how far we have drifted from the desired angle
+                //
+                double angerr = db_.getHeading().getDegrees() - holding_angle_value_ ;
+
+                //
+                // Now scale the drift angle by a factor to create a rotational velocity that
+                // will rotate us back to our desired heading
+                //
+                rxscaled = rotation_p_value_ * angerr ;
+            }
+        }
+        else {
+            holding_angle_ = false ;
+        }
+
 
         //
         // The rotational velocity is given by rxscaled

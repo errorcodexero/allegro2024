@@ -32,7 +32,7 @@
             }
         },
         {
-            "model" : "intake",
+            "model" : "intake-shooter",
             "instance" : "1",
             "props" : {
                 "spinner:type" : "talon-fx",
