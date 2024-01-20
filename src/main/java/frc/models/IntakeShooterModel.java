@@ -17,8 +17,7 @@ public class IntakeShooterModel extends SimulationModel {
     }
 
     @Override
-    public boolean create(SimulationEngine engine) throws Exception {
-        
+    public boolean create(SimulationEngine engine) throws Exception {        
         spinner_ = createSimulatedMotor(engine, "spinner");        
         updown_ = createSimulatedMotor(engine, "updown");
         feeder_ = createSimulatedMotor(engine, "feeder");

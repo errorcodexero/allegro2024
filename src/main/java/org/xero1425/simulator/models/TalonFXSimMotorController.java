@@ -28,9 +28,9 @@ public class TalonFXSimMotorController extends SimMotorController {
         }
 
         dcmotor_ = DCMotor.getFalcon500(count) ;
-        sim_ = new DCMotorSim(dcmotor_, gearing, moment) ;        
-
-        motor_ = (TalonFXMotorController)ctrl ;
+        sim_ = new DCMotorSim(dcmotor_, gearing, moment) ;      
+        
+        motor_ = (TalonFXMotorController)ctrl ;            
         getState().Orientation = ChassisReference.Clockwise_Positive ;
     }
 
@@ -43,7 +43,7 @@ public class TalonFXSimMotorController extends SimMotorController {
         sim_.update(dt) ;
 
         double pos = sim_.getAngularPositionRotations() ;
-        double vel = sim_.getAngularVelocityRPM() * 60.0 ;
+        double vel = sim_.getAngularVelocityRPM() / 60.0 ;
 
         state.setRawRotorPosition(pos) ;
         state.setRotorVelocity(vel) ;

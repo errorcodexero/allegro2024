@@ -51,21 +51,21 @@
 
                 "feeder:type" : "talon-fx",
                 "feeder:bus" : "",
-                "feeder:canid" : 2,
+                "feeder:canid" : 3,
                 "feeder:count" : 1,
                 "feeder:gearing" : 1.0,
                 "feeder:moment" : 0.001,
                 
                 "shooter:type" : "talon-fx",
                 "shooter:bus" : "",
-                "shooter:canid" : 2,
+                "shooter:canid" : 4,
                 "shooter:count" : 1,
                 "shooter:gearing" : 1.0,
                 "shooter:moment" : 0.001,
 
                 "tilt:type" : "talon-fx",
                 "tilt:bus" : "",
-                "tilt:canid" : 2,
+                "tilt:canid" : 5,
                 "tilt:count" : 1,
                 "tilt:gearing" : 1.0,
                 "tilt:moment" : 0.001
