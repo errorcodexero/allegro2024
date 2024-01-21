@@ -38,7 +38,7 @@ public class MCVelocityAction extends MotorAction {
     private XeroTimer plot_timer_ ;
 
     // The columns to plot
-    private static String [] columns_ = { "time", "target (u)", "actual (u)"}  ;
+    private static String [] columns_ = { "time", "target (%%posunits%%)", "actual (%%posunits%%)"}  ;
 
     /// \brief Create a new MotorEncoderVelocityAction
     /// \param sub the target MotorEncoderSubsystem
@@ -70,6 +70,8 @@ public class MCVelocityAction extends MotorAction {
     /// \param target a string with the name of the target velocity in settings file
     public MCVelocityAction(MotorEncoderSubsystem sub, String name, String target) throws BadParameterTypeException, MissingParameterException, BadMotorRequestException, MotorRequestFailedException {
         super(sub) ;
+
+        name_ = name ;
 
         ISettingsSupplier settings = sub.getRobot().getSettingsSupplier() ;
         String pidname = "subsystems:" + sub.getName() + ":" + name_ ;
@@ -188,7 +190,7 @@ public class MCVelocityAction extends MotorAction {
     public String toString(int indent) {
         String ret = null ;
 
-        ret = prefix(indent) + "MotorEncoderVelocityAction, " + getSubsystem().getName() + ", " +  Double.toString(target_) ;
+        ret = prefix(indent) + "MCVelocityAction, " + getSubsystem().getName() + ", " +  Double.toString(target_) ;
         return ret ;
     }
 }

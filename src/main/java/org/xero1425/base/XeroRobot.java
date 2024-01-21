@@ -924,7 +924,7 @@ public abstract class XeroRobot extends TimedRobot {
         if (auto_controller_.getAutoMode() instanceof TestAutoMode) {
             TestAutoMode tm = (TestAutoMode)auto_controller_.getAutoMode() ;
             logger_.startMessage(MessageType.Info) ;
-            logger_.add("    TestMode: ").add(tm.getTestNumber()).add(" parameters: ").add(tm.getParameters()).endMessage(); ;
+            logger_.add("    TestMode: ").add(tm.getTestNumber()).add(", mode parameters: ").add(tm.getParameters()).endMessage(); ;
         }
 
         String str = "undefined" ;

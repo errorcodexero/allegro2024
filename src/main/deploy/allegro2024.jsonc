@@ -37,6 +37,9 @@
         "spinner" : {
             "position-important" : "High",
             "velocity-important" : "High",
+            "velocities" : {
+                "collect" : 50
+            },
             "hw" : {
                 "motors" : {
                     "type" : "talon-fx",
@@ -47,16 +50,35 @@
                     "current-limit" : 20.0
                 },
                 "encoder": {
+                    //
+                    // Units are revolutions.  Velocities are revs per second.
+                    //
                     "type": "motor",
-                    "m": 1,
+                    "m": 0.029296875,
                     "b": 0,
-                    "units" : "ticks"
+                    "posunits" : "REV",
+                    "velunits" : "RPM",
+                    "accunits" : "RPM/sec"
                 }
-            }
+            },
+            "collect" : {
+                "kp" : 1.0,
+                "ki" : 0.0,
+                "kd" : 0.0,
+                "kv" : 0.0,
+                "ka" : 0.0,
+                "kg" : 0.0,
+                "ks" : 0.0,
+                "outmax" : 0.0
+            }            
         },
         "updown" : {
             "position-important" : "Off",
-            "velocity-important" : "Off",            
+            "velocity-important" : "Off",
+            "positions" : {
+                "collect" : 17000,
+                "stow" : 0
+            },
             "hw" : {
                 "motors" : {
                     "type" : "talon-fx",
@@ -70,8 +92,20 @@
                     "type": "motor",
                     "m": 1,
                     "b": 0,
-                    "units" : "ticks"
+                    "posunits" : "ticks",
+                    "velunits" : "ticks/s",
+                    "accunits" : "ticks/s/s"
                 }
+            },
+            "collect" : {
+                "kp" : 1.0,
+                "ki" : 0.0,
+                "kd" : 0.0,
+                "kv" : 0.0,
+                "ka" : 0.0,
+                "kg" : 0.0,
+                "ks" : 0.0,
+                "outmax" : 0.0
             }
         },
         "feeder" : {
@@ -88,9 +122,11 @@
                 },
                 "encoder": {
                     "type": "motor",
-                    "m": 1,
+                    "m": 0.029296875,
                     "b": 0,
-                    "units" : "ticks"
+                    "posunits" : "ticks",
+                    "velunits" : "ticks/s",
+                    "accunits" : "ticks/s/s"
                 }
             }
         },
@@ -108,15 +144,20 @@
                 },
                 "encoder": {
                     "type": "motor",
-                    "m": 1,
+                    "m": 0.029296875,
                     "b": 0,
-                    "units" : "ticks"
+                    "posunits" : "ticks",
+                    "velunits" : "ticks/s",
+                    "accunits" : "ticks/s/s"
                 }
             }
         },
         "tilt" : {
             "position-important" : "Off",
             "velocity-important" : "Off",
+            "positions" : {
+                "collect" : 30
+            },
             "hw" : {
                 "motors" : {
                     "type" : "talon-fx",
@@ -127,12 +168,27 @@
                     "current-limit" : 20.0
                 },
                 "encoder": {
+                    //
+                    // Degrees (assuming a 1:1 gear ratio)
+                    //
                     "type": "motor",
-                    "m": 1,
+                    "m": 0.17578125,
                     "b": 0,
-                    "units" : "ticks"
+                    "posunits" : "ticks",
+                    "velunits" : "ticks/s",
+                    "accunits" : "ticks/s/s"
                 }
-            }
+            },
+            "collect" : {
+                "kp" : 1.0,
+                "ki" : 0.0,
+                "kd" : 0.0,
+                "kv" : 0.0,
+                "ka" : 0.0,
+                "kg" : 0.0,
+                "ks" : 0.0,
+                "outmax" : 0.0
+            }            
         },    
         "swerve" : {
             //
@@ -426,7 +482,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 10,
+        "which": 12,
         "0": {
             "angle": 90,
             "power": 0.2,
@@ -466,8 +522,72 @@
             //
             // Apply the given power to the intake up/down motor for the given duration
             //
+            "power" : 0.1,
+            "duration" : 4.0
+        },
+        "11" : {
+            //
+            // Use the motor control PID to run the spinner at the velocity given
+            //
+            "velocity" : 50
+        },
+        "12" : {
+            //
+            // Step the power 0.1, 0.3, 0.5, 0.7, 0.9
+            //
+            "duration" : 2.0
+        },
+        "20" : {
+            //
+            // Apply the given power to the intake spinner motor for the given duration
+            //
             "power" : 0.2,
-            "duration" : 3.0
+            "duration" : 1.0
+        },
+        "21" : {
+            //
+            // Use the motor control PID to run the spinner at the velocity given
+            //
+            "position" : 50
+        },
+        "30" : {
+            //
+            // Apply the given power to the intake spinner motor for the given duration
+            //
+            "power" : 0.2,
+            "duration" : 1.0
+        },
+        "31" : {
+            //
+            // Use the motor control PID to run the spinner at the velocity given
+            //
+            "position" : 30
+        },   
+        "40" : {
+            //
+            // Apply the given power to the intake up/down motor for the given duration
+            //
+            "power" : 0.2,
+            "duration" : 1.0
+        },
+        "41" : {
+            //
+            // Use the motor control PID to run the spinner at the velocity given
+            //
+            "velocity" : 50
+        }, 
+        "50" : {
+            //
+            // Apply the given power to the intake up/down motor for the given duration
+            //
+            "power" : 0.2,
+            "duration" : 1.0
+        },
+        "51" : {
+            //
+            // Use the motor control PID to run the spinner at the velocity given
+            //
+            "velocity" : 50
         }
     }
 }

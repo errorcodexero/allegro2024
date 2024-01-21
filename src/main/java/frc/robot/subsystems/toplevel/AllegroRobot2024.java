@@ -11,7 +11,7 @@ import frc.robot.subsystems.protointake.ProtoTypeIntakeSubsystem;
 
 public class AllegroRobot2024 extends RobotSubsystem {
 
-    private final static boolean kUsePrototypeIntake = true ;
+    private final static boolean kUsePrototypeIntake = false ;
 
     private SDSSwerveDriveSubsystem db_;
     private Allegro2024OISubsystem oi_;

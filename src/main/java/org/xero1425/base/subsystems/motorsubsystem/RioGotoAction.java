@@ -59,7 +59,6 @@ import org.xero1425.misc.XeroMath;
 ///
 /// 
 public class RioGotoAction extends MotorAction {
-
     
     /// The difference between the current position and the target position below which we consider
     /// the goal being met.
@@ -95,8 +94,8 @@ public class RioGotoAction extends MotorAction {
     private String [] plot_columns_ = 
     { 
         "time (sec)", 
-        "tpos (%%units%%)", "apos (%%units%%)", 
-        "tvel (%%units%%/s)", "avel (%%units%%/s)", 
+        "tpos (%%posunits%%)", "apos (%%posunits%%)", 
+        "tvel (%%velunits%%/s)", "avel (%%velunits%%/s)", 
         "out (volts)", "current (amps)"
     } ;
 

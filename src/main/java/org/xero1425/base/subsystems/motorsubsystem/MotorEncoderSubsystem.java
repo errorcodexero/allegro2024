@@ -62,7 +62,7 @@ public class MotorEncoderSubsystem extends MotorSubsystem
         return encoder_ ;
     }
 
-    public String getUnits() {
+    public String[] getUnits() {
         return encoder_.getUnits();
     }
     

@@ -20,10 +20,9 @@ public class MotorEncoderPowerAction extends MotorPowerAction
     // The columns to plot
     private String[] plot_columns_ = { 
         "time (s)",
-        "pos (%%units%%)",
-        "vel (%%units%%/s)",
+        "pos (%%posunits%%)",
+        "vel (%%velunits%%/s)",
         "out (v)",
-        "encoder (ticks)" 
     } ;
 
     /// \brief Create the MotorEncoderPowerAction that applies a fixed power value then is done
@@ -52,7 +51,7 @@ public class MotorEncoderPowerAction extends MotorPowerAction
     /// \param duration the amount of time to apply the power  
     public MotorEncoderPowerAction(MotorEncoderSubsystem motor, double power, double duration) {
         super(motor, power, duration);
-        plot_id_ = motor.initPlot(toString()) ;
+        plot_id_ = motor.initPlot(toString(0)) ;
         data_ = new Double[plot_columns_.length] ;
     }
 
@@ -65,7 +64,7 @@ public class MotorEncoderPowerAction extends MotorPowerAction
             throws BadParameterTypeException, MissingParameterException {
 
         super(motor, power, duration);
-        plot_id_ = motor.initPlot(toString()) ;
+        plot_id_ = motor.initPlot(toString(0)) ;
         data_ = new Double[plot_columns_.length] ;        
     }
 
@@ -76,7 +75,7 @@ public class MotorEncoderPowerAction extends MotorPowerAction
 
         start_ = getSubsystem().getRobot().getTime() ;
         MotorEncoderSubsystem sub = (MotorEncoderSubsystem)getSubsystem();
-        getSubsystem().startPlot(plot_id_, convertUnits(plot_columns_, sub.getUnits()));
+        getSubsystem().startPlot(plot_id_, convertUnits(plot_columns_, sub.getUnits())) ;
     }
 
     /// \brief Called each robot loop.  Calls the base class to perform the action and then
@@ -89,7 +88,6 @@ public class MotorEncoderPowerAction extends MotorPowerAction
         data_[1] = ((MotorEncoderSubsystem)(getSubsystem())).getPosition() ;
         data_[2] = ((MotorEncoderSubsystem)(getSubsystem())).getVelocity() ;
         data_[3] = getSubsystem().getPower() ;
-        data_[4] = ((MotorEncoderSubsystem)(getSubsystem())).getEncoderRawCount() ;
         getSubsystem().addPlotData(plot_id_, data_);
         
         if (isDone()) {
@@ -107,13 +105,13 @@ public class MotorEncoderPowerAction extends MotorPowerAction
     /// \brief Returnsa human readable string describing the action
     /// \returns a human readable string describing the action
     @Override
-    public String toString() {
+    public String toString(int indent) {
         String ret ;
 
         ret = "MotorEncoderPowerAction " + getSubsystem().getName() ;
         if (isTimed())
             ret += " " + getPower() + " " + getDuration() ;
 
-        return ret ;
+        return spaces(indent) + ret ;
     }
 }
