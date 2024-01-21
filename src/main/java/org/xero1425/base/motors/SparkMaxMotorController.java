@@ -122,9 +122,6 @@ public class SparkMaxMotorController extends MotorController
         }
     }
 
-    public void run(double now) {
-    }
-
     public SimState getSimState() {
         return simstate_ ;
     }

@@ -34,9 +34,6 @@ public interface IMotorController {
     /// \returns the user assigned name of the motor controller
     public String getName() ;
 
-    /// \brief Called every robot loop for the motor to perform work
-    public void run(double now) ;
-
     /// \brief Returns the CAN ID of the motor
     /// \returns the CAN ID of the motor
     public int getCanID() throws BadMotorRequestException, MotorRequestFailedException ;

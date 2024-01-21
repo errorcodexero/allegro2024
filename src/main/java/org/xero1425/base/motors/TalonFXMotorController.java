@@ -46,10 +46,6 @@ public class TalonFXMotorController extends MotorController
     private String bus_ ;
     private boolean voltage_compensation_enabled_ ;
     private double nominal_voltage_ ;
-    private boolean open_loop_ ;
-    private double open_loop_velocity_ ;
-    private double last_pos_ ;
-    private double last_time_ ;
 
     public TalonFXMotorController(String name, String bus, int canid, boolean leader) throws MotorRequestFailedException {
         super(name) ;
@@ -58,7 +54,6 @@ public class TalonFXMotorController extends MotorController
 
         ctrl_ = new TalonFX(canid, bus_);
         cfg_ = new TalonFXConfiguration() ;
-        open_loop_ = true ;
 
         checkError("TalonFXMotorController - apply configuration", () -> ctrl_.getConfigurator().apply(cfg_));
         checkError("TalonFXMotorController - optimize bus", () -> ctrl_.optimizeBusUtilization()) ;
@@ -361,7 +356,6 @@ public class TalonFXMotorController extends MotorController
                 else {
                     req = new DutyCycleOut(target) ;
                 }
-                open_loop_ = true ;
                 break ;
             case Position:
                 if (voltage_compensation_enabled_) {
@@ -370,7 +364,6 @@ public class TalonFXMotorController extends MotorController
                 else {
                     req = new PositionDutyCycle(target / kTicksPerRevolution) ;
                 }
-                open_loop_ = false ;
                 break ;
             case Velocity:
             if (voltage_compensation_enabled_) {
@@ -379,7 +372,6 @@ public class TalonFXMotorController extends MotorController
                 else {
                     req = new VelocityDutyCycle(target / kTicksPerRevolution) ;
                 }
-                open_loop_ = false ;        
                 break ;
             case MotionMagic:
                 if (voltage_compensation_enabled_) {
@@ -388,7 +380,6 @@ public class TalonFXMotorController extends MotorController
                 else {
                     req = new MotionMagicDutyCycle(target / kTicksPerRevolution) ;
                 }
-                open_loop_ = false ;                
                 break ;
         }
 
@@ -478,24 +469,9 @@ public class TalonFXMotorController extends MotorController
     public double getVelocity() throws BadMotorRequestException, MotorRequestFailedException {
         double ret = 0.0 ;
 
-        if (open_loop_) {
-            ret = open_loop_velocity_ ;
-        }
-        else {
-            ret = ctrl_.getVelocity().getValue() * kTicksPerRevolution ;
-        }
-
         ret = ctrl_.getVelocity().getValue() * kTicksPerRevolution ;
 
         return ret;
-    }
-
-    /// \brief Called every robot loop for the motor to perform work    
-    public void run(double now) {
-        double pos = ctrl_.getPosition().getValue() ;
-        open_loop_velocity_ = (pos - last_pos_) / (now - last_time_) ;
-        last_pos_ = pos ;
-        last_time_ = now ;
     }
 
     /// \brief Return the acceleration of the motor if there is PID control in the motor controller.   If the motor does not

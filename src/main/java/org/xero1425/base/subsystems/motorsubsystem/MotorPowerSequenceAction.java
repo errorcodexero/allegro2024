@@ -29,7 +29,7 @@ public class MotorPowerSequenceAction extends MotorAction {
     private String[] plot_columns_ = { 
         "time (s)",
         "pos (%%posunits%%)",
-        "vel (%%velunits%%/s)",
+        "vel (%%velunits%%)",
         "out (v)",
         "encoder (ticks)" 
     } ;    

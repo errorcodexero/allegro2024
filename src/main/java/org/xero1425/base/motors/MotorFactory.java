@@ -50,12 +50,6 @@ public class MotorFactory {
         motor_list_ = new ArrayList<IMotorController>() ;
     }
 
-    public void run(double now) {
-        for(IMotorController motor : motor_list_) {
-            motor.run(now);
-        }
-    }
-
     /// \brief This method creates a new motor based on the settings in the settings file.
     /// \param name the base name of the motor
     /// \param id the ID of the motor in the settings file
