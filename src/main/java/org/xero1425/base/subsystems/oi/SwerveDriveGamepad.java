@@ -49,11 +49,11 @@ public class SwerveDriveGamepad extends Gamepad {
         super(oi, "swerve_gamepad", index);
 
         if (DriverStation.getStickPOVCount(getIndex()) == 0) {
-            throw new Exception("invalid gamepad for TankDriveGamepad");
+            throw new Exception("invalid gamepad for SwerveGamepad");
         }
 
         if (DriverStation.getStickAxisCount(getIndex()) <= AxisNumber.RIGHTX.value) {
-            throw new Exception("invalid gamepad for TankDriveGamepad");
+            throw new Exception("invalid gamepad for SwerveGamepad");
         }
 
         db_ = drive_;
@@ -175,19 +175,14 @@ public class SwerveDriveGamepad extends Gamepad {
         // For Y axis, forward is -1, back is +1
 
         try {
-            ly = DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTY.value) ;
-            lx = DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTX.value) ;
+            ly = -DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTY.value) ;
+            lx = -DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTX.value) ;
             rx = -DriverStation.getStickAxis(getIndex(), AxisNumber.RIGHTX.value) ;
         }
         catch(Exception ex) {
             return ;
         }
-
-        if (invert_ && DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red) {
-            ly = -ly ;
-            lx = -lx ;
-        }
-
+        
         double lyscaled = mapJoyStick(ly, pos_maximum_, deadband_pos_y_, power_) ;
         double lxscaled = mapJoyStick(lx, pos_maximum_, deadband_pos_x_, power_) ;
         double rxscaled = mapJoyStick(rx, angle_maximum_, deadband_rotate_, power_) ;
@@ -198,7 +193,7 @@ public class SwerveDriveGamepad extends Gamepad {
             rxscaled *= 0.25 ;
         }
 
-        if (rxscaled < deadband_rotate_) {
+        if (rxscaled < deadband_rotate_ && (Math.abs(lxscaled) > deadband_pos_x_ || Math.abs(lyscaled) > deadband_pos_y_)) {
             //
             // The rotation stick is set to zero, so we want to maintain the current angle.
             //
@@ -226,7 +221,6 @@ public class SwerveDriveGamepad extends Gamepad {
         else {
             holding_angle_ = false ;
         }
-
 
         //
         // The rotational velocity is given by rxscaled

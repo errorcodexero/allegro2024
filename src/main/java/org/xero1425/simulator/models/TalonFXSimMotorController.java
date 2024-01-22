@@ -41,6 +41,7 @@ public class TalonFXSimMotorController extends SimMotorController {
         TalonFXSimState state = getState() ;
         
         state.setSupplyVoltage(RobotController.getBatteryVoltage());
+        System.out.println(state.getMotorVoltage());
         sim_.setInputVoltage(state.getMotorVoltage());
         sim_.update(dt) ;
 

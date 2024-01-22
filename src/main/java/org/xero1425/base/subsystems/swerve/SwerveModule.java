@@ -42,13 +42,14 @@ public class SwerveModule {
         steer_.setInverted(cfg.steer_inverted);
         steer_.setNeutralMode(XeroNeutralMode.Brake);
         steer_.resetEncoder();
+        steer_.enableVoltageCompensation(true, 11.0);
         ticksToRadians_ = 2.0 * Math.PI / steer_.ticksPerRevolution() * cfg.steer_reduction ;
         double p = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:p").getDouble() ;
         double i = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:i").getDouble() ;
         double d = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:d").getDouble() ;
         steer_.setPID(XeroPidType.Position, p, i, d, 0, 0, 0, 0, 0.1);
-        steer_.setPositionImportant(IMotorController.ImportantType.Low);
-        steer_.setVelocityImportant(IMotorController.ImportantType.Low);
+        steer_.setPositionImportant(IMotorController.ImportantType.High);
+        steer_.setVelocityImportant(IMotorController.ImportantType.High);
         target_angle_ = 0.0 ;
 
         //
@@ -57,6 +58,7 @@ public class SwerveModule {
         drive_ = subsys_.getRobot().getMotorFactory().createMotor(name + "-drive", id + ":motors:drive");
         drive_.setInverted(cfg.drive_inverted);
         drive_.resetEncoder();
+        drive_.enableVoltageCompensation(true, 11.0);
         ticksToMeters_ = Math.PI * cfg.wheel_diameter * cfg.drive_reduction / drive_.ticksPerRevolution() ;
         drive_.setVelocityImportant(IMotorController.ImportantType.High);
         drive_.setPositionImportant(IMotorController.ImportantType.High);
@@ -146,19 +148,20 @@ public class SwerveModule {
     }
 
     public void set(double voltage, double angle) throws BadMotorRequestException, MotorRequestFailedException {
+
         angle %= 2.0 * Math.PI ;
         if (angle < 0.0) {
             angle += 2.0 * Math.PI ;
-        }
+        }    
 
-        double diff = angle - getTargetAngle() ;
+        double diff = angle - getStateAngle() ;
         if (diff >= Math.PI) {
             angle -= 2.0 * Math.PI ;
         }
         else if (diff < -Math.PI) {
             angle += 2.0 * Math.PI ;
         }
-        diff = angle - getTargetAngle() ;
+        diff = angle - getStateAngle() ;          
 
         if (diff > Math.PI / 2.0 || diff < -Math.PI / 2.0) {
             angle += Math.PI ;

@@ -13,6 +13,8 @@ import org.xero1425.misc.MissingParameterException;
 /// \brief This action causes a MotorEncoderSubsystem to maintain a constant velocity.
 public class MCVelocityAction extends MotorAction {   
 
+    private final static double kDefaultPlotDuration = 5.0 ;
+
     // An index used to ensure individual instances of this action produce separate plots
     private static int which_ = 1 ;
 
@@ -37,8 +39,16 @@ public class MCVelocityAction extends MotorAction {
     // The timer for the plot
     private XeroTimer plot_timer_ ;
 
+    // Data for each loop of the plot
+    private Double data_[] ;
+
     // The columns to plot
-    private static String [] columns_ = { "time", "target (%%posunits%%)", "actual (%%posunits%%)"}  ;
+    private static String [] columns_ = { 
+        "time", 
+        "target (%%velunits%%)", 
+        "actual (%%velunits%%)", 
+        "error (%%velunits%%)" 
+    } ;
 
     /// \brief Create a new MotorEncoderVelocityAction
     /// \param sub the target MotorEncoderSubsystem
@@ -57,33 +67,20 @@ public class MCVelocityAction extends MotorAction {
         String pidname = "subsystems:" + sub.getName() + ":" + name_ ;
 
         plot_id_ = sub.initPlot(toString(0) + "-" + String.valueOf(which_++)) ;     
-        plot_duration_ = 10.0 ;
+        plot_duration_ = kDefaultPlotDuration ;
 
         if (settings.isDefined(pidname + ":plot-duration")) {
             plot_duration_ = settings.get(pidname + ":plot-duration").getDouble() ;
         }
         plot_timer_ = new XeroTimer(sub.getRobot(), "velocity-action-plot", plot_duration_) ;
+        data_ = new Double[columns_.length] ;
     }
 
     /// \brief Create a new MotorEncoderVelocityAction
     /// \param sub the target MotorEncoderSubsystem
     /// \param target a string with the name of the target velocity in settings file
     public MCVelocityAction(MotorEncoderSubsystem sub, String name, String target) throws BadParameterTypeException, MissingParameterException, BadMotorRequestException, MotorRequestFailedException {
-        super(sub) ;
-
-        name_ = name ;
-
-        ISettingsSupplier settings = sub.getRobot().getSettingsSupplier() ;
-        String pidname = "subsystems:" + sub.getName() + ":" + name_ ;
-
-        target_ = getSubsystem().getSettingsValue(target).getDouble() ;
-
-        plot_id_ = sub.initPlot(toString(0) + "-" + String.valueOf(which_++)) ;   
-        plot_duration_ = 10.0 ;
-        if (settings.isDefined(pidname + ":plot-duration")) {
-            plot_duration_ = settings.get(pidname + ":plot-duration").getDouble() ;
-        }
-        plot_timer_ = new XeroTimer(sub.getRobot(), "velocity-action-plot", plot_duration_) ;        
+        this(sub, name, sub.getSettingsValue(target).getDouble()) ;
     }
 
     public double getError() {
@@ -123,9 +120,11 @@ public class MCVelocityAction extends MotorAction {
         super.start() ;
 
         if (plot_id_ != -1) {
-            getSubsystem().startPlot(plot_id_, columns_) ;
+            MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem() ;
+            getSubsystem().startPlot(plot_id_, convertUnits(columns_, me.getUnits())) ;
             plot_timer_.start() ;
         }
+        plot_timer_.start() ;
 
         start_ = getSubsystem().getRobot().getTime() ;
 
@@ -152,13 +151,14 @@ public class MCVelocityAction extends MotorAction {
         super.run() ;
 
         MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem() ;
+        error_ = target_ - me.getVelocity() ;
 
         if (plot_id_ != -1) {
-            Double[] data = new Double[columns_.length] ;
-            data[0] = getSubsystem().getRobot().getTime() - start_ ;
-            data[1] = target_ ;
-            data[2] = me.getVelocity() ;
-            getSubsystem().addPlotData(plot_id_, data);
+            data_[0] = getSubsystem().getRobot().getTime() - start_ ;
+            data_[1] = target_ ;
+            data_[2] = me.getVelocity() ;
+            data_[3] = error_ ;
+            getSubsystem().addPlotData(plot_id_, data_);
 
             if (plot_timer_.isExpired()) {
                 getSubsystem().endPlot(plot_id_) ;

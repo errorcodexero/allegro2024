@@ -36,7 +36,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 /// MotorController base class.
 public class TalonFXMotorController extends MotorController
 {
-    private final int kApplyTries = 5 ;
+    private final static int kApplyTries = 5 ;
     private final static int kTicksPerRevolution = 2048 ;
     private final static String kRobotType = "TalonFX" ;
 
@@ -366,7 +366,7 @@ public class TalonFXMotorController extends MotorController
                 }
                 break ;
             case Velocity:
-            if (voltage_compensation_enabled_) {
+                if (voltage_compensation_enabled_) {
                     req = new VelocityVoltage(target / kTicksPerRevolution) ;
                 }
                 else {

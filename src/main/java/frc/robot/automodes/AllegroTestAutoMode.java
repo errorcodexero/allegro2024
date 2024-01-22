@@ -36,6 +36,10 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             // 
             // Spinner tests
             // 
+
+            //
+            // Basic test to just apply power - test to see that it is working
+            //
             case 10:
                 if (intake != null && intake.spinner() != null) {
                     addSubActionPair(intake.spinner(), new MotorEncoderPowerAction(intake.spinner(), getDouble("power"), getDouble("duration")), true) ;
@@ -44,18 +48,20 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 11:
                 if (intake != null && intake.spinner() != null) {
-                    addSubActionPair(intake.spinner(), new MCVelocityAction(intake.spinner(), "collect", getDouble("velocity")), true);
-                }
-                break ;
-
-            case 12:
-                if (intake != null && intake.spinner() != null) {
                     double duration = getDouble("duration") ;
                     double [] times = new double[] { duration, duration, duration, duration, duration } ;
                     double [] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9} ;
                     addSubActionPair(intake.spinner(), new MotorPowerSequenceAction(intake.spinner(), times, powers), true) ;
                 }
+                break ;                
+
+            case 12:
+                if (intake != null && intake.spinner() != null) {
+                    addSubActionPair(intake.spinner(), new MCVelocityAction(intake.spinner(), "collect", getDouble("velocity")), true);
+                }
                 break ;
+
+
 
             //
             // updown tests

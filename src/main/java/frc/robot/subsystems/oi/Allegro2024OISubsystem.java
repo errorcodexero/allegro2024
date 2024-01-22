@@ -12,7 +12,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
     private final static SwerveDriveGamepad.SwerveButton[] xActionButtons = { SwerveDriveGamepad.SwerveButton.LBack } ;
 
     public Allegro2024OISubsystem(Subsystem parent, DriveBaseSubsystem db) {
-        super (parent,"allegro2024oi",GamePadType.Swerve, db, true, true);
+        super (parent,"allegro2024oi",GamePadType.Swerve, db, true, false);
     }
 
     @Override

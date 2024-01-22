@@ -34,6 +34,110 @@
         }
     },
     "subsystems": {
+        // bottom roller
+        "m1" : {
+            "position-important" : "High",
+            "velocity-important" : "High",
+            "velocities" : {
+                "collect" : 50
+            },
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
+                    "bus" : "",
+                    "canid" : 1,
+                    "inverted" : false,
+                    "neutral-mode": "brake",
+                    "current-limit" : 20.0
+                },
+                "encoder": {
+                    //
+                    // Units are revolutions.  Velocities are revs per second.
+                    //
+                    "type": "motor",
+                    "m": 0.029296875,
+                    "b": 0,
+                    "posunits" : "REV",
+                    "velunits" : "RPM",
+                    "accunits" : "RPM/sec"
+                }
+            },
+            "collect" : {
+                "kp" : 0.2,
+                "ki" : 0.0,
+                "kd" : 0.0,
+                "kv" : 0.000170057,
+                "ka" : 0.0,
+                "kg" : 0.0,
+                "ks" : 0.0,
+                "outmax" : 0.0
+            }            
+        },    
+        // top roller
+        "m2" : {
+            "position-important" : "High",
+            "velocity-important" : "High",
+            "velocities" : {
+                "collect" : 50
+            },
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
+                    "bus" : "",
+                    "canid" : 2,
+                    "inverted" : false,
+                    "neutral-mode": "brake",
+                    "current-limit" : 20.0
+                },
+                "encoder": {
+                    //
+                    // Units are revolutions.  Velocities are revs per second.
+                    //
+                    "type": "motor",
+                    "m": 0.029296875,
+                    "b": 0,
+                    "posunits" : "REV",
+                    "velunits" : "RPM",
+                    "accunits" : "RPM/sec"
+                }
+            },
+            "collect" : {
+                "kp" : 0.2,
+                "ki" : 0.0,
+                "kd" : 0.0,
+                "kv" : 0.000170057,
+                "ka" : 0.0,
+                "kg" : 0.0,
+                "ks" : 0.0,
+                "outmax" : 0.0
+            }            
+        },    
+        //feeder
+        "m3" : {
+            "position-important" : "High",
+            "velocity-important" : "High",
+            "hw" : {
+                "motors" : {
+                    "type" : "sparkmax-brushless",
+                    "bus" : "",
+                    "canid" : 3,
+                    "inverted" : false,
+                    "neutral-mode": "brake",
+                    "current-limit" : 20.0
+                },
+                "encoder": {
+                    //
+                    // Units are revolutions.  Velocities are revs per second.
+                    //
+                    "type": "motor",
+                    "m": 0.029296875,
+                    "b": 0,
+                    "posunits" : "REV",
+                    "velunits" : "RPM",
+                    "accunits" : "RPM/sec"
+                }
+            }           
+        },                    
         "spinner" : {
             "position-important" : "High",
             "velocity-important" : "High",
@@ -62,10 +166,10 @@
                 }
             },
             "collect" : {
-                "kp" : 1.0,
+                "kp" : 0.2,
                 "ki" : 0.0,
                 "kd" : 0.0,
-                "kv" : 0.0,
+                "kv" : 0.000170057,
                 "ka" : 0.0,
                 "kg" : 0.0,
                 "ks" : 0.0,
@@ -202,7 +306,7 @@
                 "gyro" : {
                     "start-time" : 3.0,
 
-                    // "type" : "navx",
+                    // "type" : "navx"
                     "type" : "pigeon2",
                     "bus" : "DriveBase",
                     "canid" : 51
@@ -482,11 +586,11 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 12,
+        "which": 0,
         "0": {
-            "angle": 90,
-            "power": 0.2,
-            "duration": 3.0         // optional, if missing will run forever
+            "angle": 45,
+            "power": 0.1,
+            "duration": 6.0         // optional, if missing will run forever
         },
         "1": {
             "angle": 45.0,
@@ -527,15 +631,15 @@
         },
         "11" : {
             //
-            // Use the motor control PID to run the spinner at the velocity given
-            //
-            "velocity" : 50
-        },
-        "12" : {
-            //
             // Step the power 0.1, 0.3, 0.5, 0.7, 0.9
             //
             "duration" : 2.0
+        },        
+        "12" : {
+            //
+            // Use the motor control PID to run the spinner at the velocity given
+            //
+            "velocity" : 50
         },
         "20" : {
             //

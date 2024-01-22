@@ -119,7 +119,8 @@ public class MotorEncoderSubsystem extends MotorSubsystem
         double ret = 0.0 ;
 
         try {
-            ret = encoder_.mapMotorToPhysical(getMotorController().getVelocity()) ;
+            ret = getMotorController().getVelocity() ;
+            ret = encoder_.mapMotorToPhysical(ret) ;
         }
         catch(Exception ex) {
             MessageLogger logger = getRobot().getMessageLogger() ;

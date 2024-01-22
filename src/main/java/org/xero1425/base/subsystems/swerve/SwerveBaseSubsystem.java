@@ -124,6 +124,7 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
                 setPose(new Pose2d());
             }
         }
+
     }
 
     public void enableVision(boolean enable) {

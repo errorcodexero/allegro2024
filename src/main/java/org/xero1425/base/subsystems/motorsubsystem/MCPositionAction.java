@@ -76,13 +76,14 @@ public class MCPositionAction extends MotorAction {
         // We are using a control loop in the motor controller, get the parameters from the
         // settings file
         //
-        double p = getSubsystem().getSettingsValue(name_ + ":kp").getDouble() ;
-        double i = getSubsystem().getSettingsValue(name_ + ":ki").getDouble() ;
-        double d = getSubsystem().getSettingsValue(name_ + ":kd").getDouble() ;
-        double v = getSubsystem().getSettingsValue(name_ + ":kv").getDouble() ;
-        double a = getSubsystem().getSettingsValue(name_ + ":ka").getDouble() ;
-        double s = getSubsystem().getSettingsValue(name_ + ":ks").getDouble() ;
-        double g = getSubsystem().getSettingsValue(name_ + ":kg").getDouble() ;
+        XeroEncoder enc = ((MotorEncoderSubsystem)getSubsystem()).getEncoder() ;
+        double p = enc.mapPhysicalToMotor(getSubsystem().getSettingsValue(name_ + ":kp").getDouble()) ;
+        double i = enc.mapPhysicalToMotor(getSubsystem().getSettingsValue(name_ + ":ki").getDouble()) ;
+        double d = enc.mapPhysicalToMotor(getSubsystem().getSettingsValue(name_ + ":kd").getDouble()) ;
+        double v = enc.mapPhysicalToMotor(getSubsystem().getSettingsValue(name_ + ":kv").getDouble()) ;
+        double a = enc.mapPhysicalToMotor(getSubsystem().getSettingsValue(name_ + ":ka").getDouble()) ;
+        double s = enc.mapPhysicalToMotor(getSubsystem().getSettingsValue(name_ + ":ks").getDouble()) ;
+        double g = enc.mapPhysicalToMotor(getSubsystem().getSettingsValue(name_ + ":kg").getDouble()) ;
         double outmax = getSubsystem().getSettingsValue(name_ + ":outmax").getDouble() ;
 
         getSubsystem().getMotorController().setPID(XeroPidType.Velocity, p, i, d, v, a, g, s, outmax) ;
