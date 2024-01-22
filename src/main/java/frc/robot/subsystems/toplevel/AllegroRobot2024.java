@@ -5,6 +5,7 @@ import org.xero1425.base.subsystems.RobotSubsystem;
 import org.xero1425.base.subsystems.swerve.SDSSwerveDriveSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
 
+import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.subsystems.intakeshooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.oi.Allegro2024OISubsystem;
 import frc.robot.subsystems.protointake.ProtoTypeIntakeSubsystem;
@@ -31,7 +32,7 @@ public class AllegroRobot2024 extends RobotSubsystem {
         ll_ = new LimeLightSubsystem(this, "limelight");
         addChild(ll_);
 
-        if (kUsePrototypeIntake) {
+        if (kUsePrototypeIntake && !RobotBase.isSimulation()) {
             proto_intake_ = new ProtoTypeIntakeSubsystem(this) ;
             addChild(proto_intake_) ;
         }

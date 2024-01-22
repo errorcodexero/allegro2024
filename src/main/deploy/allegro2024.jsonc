@@ -590,7 +590,7 @@
         "0": {
             "angle": 45,
             "power": 0.1,
-            "duration": 6.0         // optional, if missing will run forever
+            "duration": 3.0         // optional, if missing will run forever
         },
         "1": {
             "angle": 45.0,

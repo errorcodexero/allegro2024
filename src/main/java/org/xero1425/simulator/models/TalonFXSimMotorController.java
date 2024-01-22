@@ -19,6 +19,8 @@ public class TalonFXSimMotorController extends SimMotorController {
     private DCMotor dcmotor_ ;
     private DCMotorSim sim_ ;
     private double gearing_ ;
+    private String bus_ ;
+    private int canid_ ;
 
     public TalonFXSimMotorController(SimulationEngine engine, String bus, int canid, int count, double gearing, double moment) throws Exception {
         super(engine, bus, canid);
@@ -27,6 +29,9 @@ public class TalonFXSimMotorController extends SimMotorController {
         if (!(ctrl.getNativeController() instanceof TalonFX)) {
             throw new Exception("motor on bus '" + bus + "', can id " + canid + " is not a TalonFX V6 motor");
         }
+
+        bus_ = bus ;
+        canid_ = canid ;
 
         dcmotor_ = DCMotor.getFalcon500(count) ;
         sim_ = new DCMotorSim(dcmotor_, gearing, moment) ; 
@@ -41,7 +46,7 @@ public class TalonFXSimMotorController extends SimMotorController {
         TalonFXSimState state = getState() ;
         
         state.setSupplyVoltage(RobotController.getBatteryVoltage());
-        System.out.println(state.getMotorVoltage());
+
         sim_.setInputVoltage(state.getMotorVoltage());
         sim_.update(dt) ;
 

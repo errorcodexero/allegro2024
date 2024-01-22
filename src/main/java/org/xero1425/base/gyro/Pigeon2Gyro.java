@@ -21,6 +21,10 @@ public class Pigeon2Gyro implements XeroGyro {
         checkError("setCofiguration", () -> gyro_.getConfigurator().apply(cfg_)) ;
     }
 
+    public Pigeon2 getPigeon2() {
+        return gyro_ ;
+    }
+
     /// \brief Returns true if the NavX is connected
     /// \returns true if the NavX is connected, othewise false
     public boolean isConnected() {

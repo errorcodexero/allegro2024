@@ -60,6 +60,10 @@ public abstract class DriveBaseSubsystem extends Subsystem {
         putDashboard("robot-heading", DisplayType.Always, getPose().getRotation().getDegrees());
     }
 
+    public XeroGyro getGyro() {
+        return gyro_ ;
+    }
+
     public double getYaw() {
         return gyro_.getYaw() ;
     }

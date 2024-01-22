@@ -70,6 +70,88 @@
                 "tilt:gearing" : 1.0,
                 "tilt:moment" : 0.000183064
             }
-        }        
+        },
+        {
+            "model" : "sds-swerve-db",
+            "instance" : "1",
+            "props" : {
+            }
+        },
+        {
+            "model" : "sds-swerve-module",
+            "instance" : "fl",
+            "props" : {
+                "steer:type" : "talon-fx",
+                "steer:bus" : "DriveBase",
+                "steer:canid" : 11,
+                "steer:count" : 1,
+                "steer:gearing" : 0.046666667,
+                "steer:moment" : 0.00036613,
+
+                "drive:type" : "talon-fx",
+                "drive:bus" : "DriveBase",
+                "drive:canid" : 12,
+                "drive:count" : 1,
+                "drive:gearing" : 0.122807018,
+                "drive:moment" : 0.00036613                
+            }
+        },
+        {
+            "model" : "sds-swerve-module",
+            "instance" : "fr",
+            "props" : {
+                "steer:type" : "talon-fx",
+                "steer:bus" : "DriveBase",
+                "steer:canid" : 21,
+                "steer:count" : 1,
+                "steer:gearing" : 0.046666667,
+                "steer:moment" : 0.00036613,
+
+                "drive:type" : "talon-fx",
+                "drive:bus" : "DriveBase",
+                "drive:canid" : 22,
+                "drive:count" : 1,
+                "drive:gearing" : 0.122807018,
+                "drive:moment" : 0.00036613     
+            }
+        },
+        {
+            "model" : "sds-swerve-module",
+            "instance" : "bl",
+            "props" : {
+                "steer:type" : "talon-fx",
+                "steer:bus" : "DriveBase",
+                "steer:canid" : 41,
+                "steer:count" : 1,
+                "steer:gearing" : 0.046666667,
+                "steer:moment" : 0.00036613,
+
+                "drive:type" : "talon-fx",
+                "drive:bus" : "DriveBase",
+                "drive:canid" : 42,
+                "drive:count" : 1,
+                "drive:gearing" : 0.122807018,
+                "drive:moment" : 0.00036613     
+            }
+        },
+        {
+            "model" : "sds-swerve-module",
+            "instance" : "br",
+            "props" : {
+                "steer:type" : "talon-fx",
+                "steer:bus" : "DriveBase",
+                "steer:canid" : 31,
+                "steer:count" : 1,
+                "steer:gearing" : 0.046666667,
+                "steer:moment" : 0.00036613,
+
+                "drive:type" : "talon-fx",
+                "drive:bus" : "DriveBase",
+                "drive:canid" : 32,
+                "drive:count" : 1,
+                "drive:gearing" : 0.122807018,
+                "drive:moment" : 0.00036613     
+            }
+        }
     ]
 }

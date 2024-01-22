@@ -46,6 +46,10 @@ public class TalonFXMotorController extends MotorController
     private String bus_ ;
     private boolean voltage_compensation_enabled_ ;
     private double nominal_voltage_ ;
+    private int major_ ;
+    private int minor_ ;
+    private int bugfix_ ;
+    private int build_ ;
 
     public TalonFXMotorController(String name, String bus, int canid, boolean leader) throws MotorRequestFailedException {
         super(name) ;
@@ -54,6 +58,11 @@ public class TalonFXMotorController extends MotorController
 
         ctrl_ = new TalonFX(canid, bus_);
         cfg_ = new TalonFXConfiguration() ;
+
+        major_ = -1 ;
+        minor_ = -1 ;
+        bugfix_ = -1 ;
+        build_ = -1 ;
 
         checkError("TalonFXMotorController - apply configuration", () -> ctrl_.getConfigurator().apply(cfg_));
         checkError("TalonFXMotorController - optimize bus", () -> ctrl_.optimizeBusUtilization()) ;
@@ -210,7 +219,23 @@ public class TalonFXMotorController extends MotorController
     /// \brief Return the firmware version of the motor controller
     /// \returns the firmware version of the motor controller        
     public String getFirmwareVersion() throws BadMotorRequestException, MotorRequestFailedException {
-        return "0.0.0.0" ;
+        if (major_ == -1) {
+            major_ = ctrl_.getVersionMajor().waitForUpdate(0.1).getValue() ;
+        }
+
+        if (minor_ == -1) {
+            minor_ = ctrl_.getVersionMinor().waitForUpdate(0.1).getValue() ;
+        }
+        
+        if (bugfix_ == -1) {
+            bugfix_ = ctrl_.getVersionBugfix().waitForUpdate(0.1).getValue() ;
+        }
+        
+        if (build_ == -1) {
+            build_ = ctrl_.getVersionBuild().waitForUpdate(0.1).getValue() ;
+        }        
+
+        return major_ + "." + minor_ + "." + bugfix_ + "." + build_ ;
     }    
 
     /// \brief Return the number of encoder ticks per revolution for this motor.  If this motor does not

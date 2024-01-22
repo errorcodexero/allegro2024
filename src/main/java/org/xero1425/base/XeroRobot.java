@@ -148,7 +148,7 @@ public abstract class XeroRobot extends TimedRobot {
         robot_paths_ = new RobotPaths(RobotBase.isSimulation(), getName());
 
         loop_type_history_ = new ArrayList<LoopType>() ;
-        loop_type_history_.add(LoopType.None);
+        loop_type_history_.add(LoopType.Initialization);
 
         // Setup the mesasge logger to log messages
         start = getTime() ;

@@ -14,5 +14,7 @@ public class BuiltInModels {
         factory.registerModel("tankdrive", "org.xero1425.simulator.models.TankDriveModel");
         factory.registerModel("swervedrive", "org.xero1425.simulator.models.SwerveDriveModel");
         factory.registerModel("motor-encoder", "org.xero1425.simulator.models.MotorEncoderSubsystemModel");
+        factory.registerModel("sds-swerve-db", "org.xero1425.simulator.models.SDSSwerveDriveModel");
+        factory.registerModel("sds-swerve-module", "org.xero1425.simulator.models.SDSSwerveModuleModel");
     }
 }

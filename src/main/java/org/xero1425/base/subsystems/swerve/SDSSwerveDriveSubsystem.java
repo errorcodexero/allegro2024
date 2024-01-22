@@ -74,6 +74,30 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         createOdometry();
     }
 
+    @Override
+    public void postHWInit() {
+        try {
+            //
+            // We do this here instead of in the constructor so that the
+            // simulation model has had a chance to run for the swerve modules and have
+            // initialized the cancoder to the right value
+            //
+            modules_[FL].hw.synchronizeEncoders(true);
+            modules_[FR].hw.synchronizeEncoders(true);
+            modules_[BL].hw.synchronizeEncoders(true);
+            modules_[BR].hw.synchronizeEncoders(true);            
+        }
+        catch(Exception ex) {
+            MessageLogger logger = getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Error).add("exception thrown while synchronizing angle in swerve modules").endMessage();
+            logger.logStackTrace(ex.getStackTrace());
+        }
+    }
+
+    public SwerveModule getModule(int which) {
+        return modules_[which].hw ;
+    }
+
     SwerveModuleConfig getConfiguration(String mtype, String mratio) {
         SwerveModuleConfig cfg = null ;
 

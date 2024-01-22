@@ -12,6 +12,8 @@ import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 
+import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardContainer;
 
 import org.xero1425.base.motors.BadMotorRequestException;
@@ -68,7 +70,14 @@ public class SwerveModule {
         //
         int encoderId = subsys_.getRobot().getSettingsSupplier().get(id + ":encoder:canid").getInteger() ;
         String bus = subsys_.getRobot().getSettingsSupplier().get(id + ":encoder:bus").getString() ;
-        double offset = subsys_.getRobot().getSettingsSupplier().get(id + ":encoder:offset").getDouble() ;        
+        double offset ;       
+
+        if (RobotBase.isSimulation()) {
+            offset = 90.0 ;
+        }
+        else {
+            offset = subsys_.getRobot().getSettingsSupplier().get(id + ":encoder:offset").getDouble() ;  
+        }
 
         absolute_encoder_ = new CANcoder(encoderId, bus);
         absolute_cfg_ = new CANcoderConfiguration();
@@ -78,8 +87,14 @@ public class SwerveModule {
         absolute_cfg_.MagnetSensor.SensorDirection = SensorDirectionValue.CounterClockwise_Positive ;
         checkError("SwerveModule constructor()", absolute_encoder_.getConfigurator().apply(absolute_cfg_));
 
-        synchronizeEncoders(true);
+        if (RobotBase.isSimulation()) {
+            Timer.delay(0.1) ;
+        }
         addDashBoardEntries(container);
+    }
+
+    public CANcoder getCANCoder() {
+        return absolute_encoder_ ;
     }
 
     public boolean isEncoderSynchronized() {
@@ -134,12 +149,14 @@ public class SwerveModule {
 
     public double getStateAngle() throws BadMotorRequestException, MotorRequestFailedException {
         double ticks = steer_.getPosition() ;
+
         double angle = ticks * ticksToRadians_ ;
         angle %= 2.0 * Math.PI ;
         if (angle < 0.0) {
             angle += 2.0 * Math.PI ;
         }
-
+        
+        System.out.println(getName() + " " + ticks + " " + angle) ;
         return angle ;
     }    
 
@@ -184,7 +201,6 @@ public class SwerveModule {
         double v = absolute_encoder_.getAbsolutePosition().getValue() ;
         return v * 2.0 * Math.PI ;
     }
-
 
     public void synchronizeEncoders(boolean force) throws BadMotorRequestException, MotorRequestFailedException {
         if (!synchronized_ || force) {
