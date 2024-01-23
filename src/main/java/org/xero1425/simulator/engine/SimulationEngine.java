@@ -176,7 +176,7 @@ public class SimulationEngine {
         return robot_.getTime() ;
     }
 
-    public SimulationModel findModel(String model, String inst) {
+    public SimulationModel getModelByNameInst(String model, String inst) {
         for(SimulationModel m: active_models_) {
             if (m.getModelName().equals(model) && m.getInstanceName().equals(inst))
                 return m ;

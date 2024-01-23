@@ -21,17 +21,20 @@ public class TalonFXSimMotorController extends SimMotorController {
     private double gearing_ ;
     private String bus_ ;
     private int canid_ ;
+    private double voltage_ ;
+    private double velocity_ ;
+    private double position_ ;
 
     public TalonFXSimMotorController(SimulationEngine engine, String bus, int canid, int count, double gearing, double moment) throws Exception {
         super(engine, bus, canid);
 
+        bus_ = bus ;
+        canid_ = canid ;        
+
         IMotorController ctrl = engine.getRobot().getMotorFactory().getMotorController(bus, canid) ;
         if (!(ctrl.getNativeController() instanceof TalonFX)) {
-            throw new Exception("motor on bus '" + bus + "', can id " + canid + " is not a TalonFX V6 motor");
+            throw new Exception("motor on bus '" + bus_ + "', can id " + canid_ + " is not a TalonFX V6 motor");
         }
-
-        bus_ = bus ;
-        canid_ = canid ;
 
         dcmotor_ = DCMotor.getFalcon500(count) ;
         sim_ = new DCMotorSim(dcmotor_, gearing, moment) ; 
@@ -47,21 +50,37 @@ public class TalonFXSimMotorController extends SimMotorController {
         
         state.setSupplyVoltage(RobotController.getBatteryVoltage());
 
-        sim_.setInputVoltage(state.getMotorVoltage());
+        voltage_ = state.getMotorVoltage() ;
+        sim_.setInputVoltage(voltage_);
         sim_.update(dt) ;
 
-        double pos = sim_.getAngularPositionRotations() * gearing_ ;
-        double vel = sim_.getAngularVelocityRPM() / 60.0 * gearing_ ;
+        position_ = sim_.getAngularPositionRotations() * gearing_ ;
+        velocity_ = sim_.getAngularVelocityRPM() / 60.0 * gearing_ ;
 
-        state.setRawRotorPosition(pos) ;
-        state.setRotorVelocity(vel) ;
+        state.setRawRotorPosition(position_) ;
+        state.setRotorVelocity(velocity_) ;
         
-        addPlotData(RobotController.getBatteryVoltage(), state.getMotorVoltage(), pos, vel) ;
+        addPlotData(RobotController.getBatteryVoltage(), state.getMotorVoltage(), position_, velocity_) ;
     }
 
     @Override
     public double ticksPerRev() {
         return kTicksPerRev ;
+    }
+
+    @Override
+    public double voltage() {
+        return voltage_ ;
+    }
+
+    @Override
+    public double position() {
+        return position_ ;
+    }
+
+    @Override
+    public double velocity() {
+        return velocity_ ;
     }
 
     private TalonFXSimState getState() {

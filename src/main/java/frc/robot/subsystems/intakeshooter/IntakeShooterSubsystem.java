@@ -4,13 +4,17 @@ import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.misc.SettingsValue;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+
 public class IntakeShooterSubsystem extends Subsystem {
 
     private MotorEncoderSubsystem spinner_ ;
     private MotorEncoderSubsystem updown_ ; 
     private MotorEncoderSubsystem feeder_ ;
-    private MotorEncoderSubsystem shooter_ ;
+    private MotorEncoderSubsystem shooter1_ ;
+    private MotorEncoderSubsystem shooter2_ ;
     private MotorEncoderSubsystem tilt_ ;
+    private DigitalInput note_sensor_ ;
 
     public IntakeShooterSubsystem(Subsystem parent) throws Exception {
         super(parent, "intake-shooter") ;
@@ -42,8 +46,20 @@ public class IntakeShooterSubsystem extends Subsystem {
         //
         // Spins the shooter wheels used to shoot the game
         //
-        shooter_ = new MotorEncoderSubsystem(this, "shooter", false) ;
-        addChild(shooter_) ;
+        shooter1_ = new MotorEncoderSubsystem(this, "shooter1", false) ;
+        addChild(shooter1_) ;
+        shooter2_ = new MotorEncoderSubsystem(this, "shooter2", false) ;
+        addChild(shooter2_) ;        
+
+        //
+        // The sensor for detecting the note
+        //
+        int channel = getSettingsValue("hw:note-sensor").getInteger() ;
+        note_sensor_ = new DigitalInput(channel) ;
+    }
+
+    public boolean isNotePresent() {
+        return note_sensor_.get() ;
     }
 
     public MotorEncoderSubsystem spinner() {
@@ -62,9 +78,13 @@ public class IntakeShooterSubsystem extends Subsystem {
         return tilt_ ;
     }    
 
-    public MotorEncoderSubsystem shooter() {
-        return shooter_ ;
+    public MotorEncoderSubsystem shooter1() {
+        return shooter1_ ;
     }
+
+    public MotorEncoderSubsystem shooter2() {
+        return shooter2_ ;
+    }    
 
     @Override
     public SettingsValue getProperty(String name) {
@@ -73,9 +93,12 @@ public class IntakeShooterSubsystem extends Subsystem {
         if (name.equals("spinner-velocity")) {
             v = new SettingsValue(spinner_.getVelocity()) ;
         }
-        else if (name.equals("shooter-velocity")) {
-            v = new SettingsValue(shooter_.getVelocity());
+        else if (name.equals("shooter1-velocity")) {
+            v = new SettingsValue(shooter1_.getVelocity());
         }
+        else if (name.equals("shooter2-velocity")) {
+            v = new SettingsValue(shooter2_.getVelocity());
+        }        
         else if (name.equals("feeder-velocity")) {
             v = new SettingsValue(feeder_.getVelocity());
         }

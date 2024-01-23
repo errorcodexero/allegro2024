@@ -57,7 +57,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 12:
                 if (intake != null && intake.spinner() != null) {
-                    addSubActionPair(intake.spinner(), new MCVelocityAction(intake.spinner(), "collect", getDouble("velocity")), true);
+                    addSubActionPair(intake.spinner(), new MCVelocityAction(intake.spinner(), "pids:velocity", getDouble("velocity")), true);
                 }
                 break ;
 
@@ -104,7 +104,16 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 41:
                 if (intake != null && intake.feeder() != null) {
-                    addSubActionPair(intake.feeder(), new MCVelocityAction(intake.feeder(), "collect", getDouble("velocity")), true);
+                    double duration = getDouble("duration") ;
+                    double [] times = new double[] { duration, duration, duration, duration, duration } ;
+                    double [] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9} ;
+                    addSubActionPair(intake.feeder(), new MotorPowerSequenceAction(intake.feeder(), times, powers), true) ;
+                }
+                break ;                  
+
+            case 42:
+                if (intake != null && intake.feeder() != null) {
+                    addSubActionPair(intake.feeder(), new MCVelocityAction(intake.feeder(), "pids:velocity", getDouble("velocity")), true);
                 }
                 break ;                
 
@@ -112,16 +121,28 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             // shooter tests
             //
             case 50:
-                if (intake != null && intake.shooter() != null) {
-                    addSubActionPair(intake.shooter(), new MotorEncoderPowerAction(intake.shooter(), getDouble("power"), getDouble("duration")), true) ;
+                if (intake != null && intake.shooter1() != null) {
+                    addSubActionPair(intake.shooter1(), new MotorEncoderPowerAction(intake.shooter1(), getDouble("power"), getDouble("duration")), true) ;
                 }
                 break ;  
 
             case 51:
-                if (intake != null && intake.shooter() != null) {
-                    addSubActionPair(intake.shooter(), new MCVelocityAction(intake.shooter(), "shoot", getDouble("velocity")), true);
+                if (intake != null && intake.shooter1() != null) {
+                    addSubActionPair(intake.shooter1(), new MCVelocityAction(intake.shooter1(), "shoot", getDouble("velocity")), true);
                 }
-                break ;                   
+                break ;  
+                
+            case 52:
+                if (intake != null && intake.shooter2() != null) {
+                    addSubActionPair(intake.shooter2(), new MotorEncoderPowerAction(intake.shooter2(), getDouble("power"), getDouble("duration")), true) ;
+                }
+                break ;  
+
+            case 53:
+                if (intake != null && intake.shooter2() != null) {
+                    addSubActionPair(intake.shooter2(), new MCVelocityAction(intake.shooter2(), "shoot", getDouble("velocity")), true);
+                }
+                break ;                  
 
             //
             // complete intake-shooter tests

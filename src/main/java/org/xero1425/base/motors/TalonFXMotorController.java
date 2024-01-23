@@ -339,13 +339,13 @@ public class TalonFXMotorController extends MotorController
     public void setPID(XeroPidType type, double p, double i, double d, double v, double a, double g, double s, double outmax) throws BadMotorRequestException , MotorRequestFailedException {
         Slot0Configs cfg = cfg_.Slot0 ;
 
-        cfg.kP = p ;
-        cfg.kI = i ;
-        cfg.kD = d ;
-        cfg.kV = v ;
-        cfg.kA = a ;
-        cfg.kG = g ;
-        cfg.kS = s ;
+        cfg.kP = p * kTicksPerRevolution ;
+        cfg.kI = i * kTicksPerRevolution ;
+        cfg.kD = d * kTicksPerRevolution ;
+        cfg.kV = v * kTicksPerRevolution ;
+        cfg.kA = a * kTicksPerRevolution ;
+        cfg.kG = g * kTicksPerRevolution ;
+        cfg.kS = s * kTicksPerRevolution ;
         checkError("setPID()", () -> ctrl_.getConfigurator().apply(cfg));
 
         VoltageConfigs mo = cfg_.Voltage ;

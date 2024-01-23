@@ -9,7 +9,8 @@ public class IntakeShooterModel extends SimulationModel {
     ISimMotorController spinner_ ;
     ISimMotorController updown_ ;
     ISimMotorController feeder_ ;
-    ISimMotorController shooter_ ;
+    ISimMotorController shooter1_ ;
+    ISimMotorController shooter2_ ;    
     ISimMotorController tilt_ ;
     
     public IntakeShooterModel(SimulationEngine engine, String model, String inst) {
@@ -21,7 +22,8 @@ public class IntakeShooterModel extends SimulationModel {
         spinner_ = createSimulatedMotor(engine, "spinner");
         updown_ = createSimulatedMotor(engine, "updown");
         feeder_ = createSimulatedMotor(engine, "feeder");
-        shooter_ = createSimulatedMotor(engine, "shooter");
+        shooter1_ = createSimulatedMotor(engine, "shooter1");
+        shooter2_ = createSimulatedMotor(engine, "shooter2");
         tilt_ = createSimulatedMotor(engine, "tilt");
 
         setCreated();
@@ -39,7 +41,8 @@ public class IntakeShooterModel extends SimulationModel {
         spinner_.run(dt) ;
         updown_.run(dt) ;
         feeder_.run(dt) ;
-        shooter_.run(dt) ;
+        shooter1_.run(dt) ;
+        shooter2_.run(dt) ;        
         tilt_.run(dt) ;
     }
 }

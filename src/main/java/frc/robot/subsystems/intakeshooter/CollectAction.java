@@ -54,6 +54,11 @@ public class CollectAction extends Action {
         super.run() ;
     }
 
+    @Override
+    public void cancel() {
+        
+    }
+
     public String toString(int indent) {
         return spaces(indent) + "CollectAction" ;
     }

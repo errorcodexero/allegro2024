@@ -124,25 +124,24 @@ public class MCVelocityAction extends MotorAction {
             getSubsystem().startPlot(plot_id_, convertUnits(columns_, me.getUnits())) ;
             plot_timer_.start() ;
         }
-        plot_timer_.start() ;
-
         start_ = getSubsystem().getRobot().getTime() ;
 
         //
         // We are using a control loop in the motor controller, get the parameters from the
         // settings file
         //
-        double p = getSubsystem().getSettingsValue(name_ + ":kp").getDouble() ;
-        double i = getSubsystem().getSettingsValue(name_ + ":ki").getDouble() ;
-        double d = getSubsystem().getSettingsValue(name_ + ":kd").getDouble() ;
-        double v = getSubsystem().getSettingsValue(name_ + ":kv").getDouble() ;
-        double a = getSubsystem().getSettingsValue(name_ + ":ka").getDouble() ;
-        double s = getSubsystem().getSettingsValue(name_ + ":ks").getDouble() ;
-        double g = getSubsystem().getSettingsValue(name_ + ":kg").getDouble() ;
+        XeroEncoder enc = ((MotorEncoderSubsystem)getSubsystem()).getEncoder() ;
+        double p = getSubsystem().getSettingsValue(name_ + ":kp").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double i = getSubsystem().getSettingsValue(name_ + ":ki").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double d = getSubsystem().getSettingsValue(name_ + ":kd").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double v = getSubsystem().getSettingsValue(name_ + ":kv").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double a = getSubsystem().getSettingsValue(name_ + ":ka").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double s = getSubsystem().getSettingsValue(name_ + ":ks").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double g = getSubsystem().getSettingsValue(name_ + ":kg").getDouble() / enc.mapPhysicalToMotor(1) ;
         double outmax = getSubsystem().getSettingsValue(name_ + ":outmax").getDouble() ;
 
         getSubsystem().getMotorController().setPID(XeroPidType.Velocity, p, i, d, v, a, g, s, outmax) ;
-        setTarget(target_);
+        setTarget(target_) ;
     }
 
     /// \brief Process the velocity action once per robot loop, adjusting the power as needed

@@ -33,7 +33,12 @@
             "type" : "rev"
         }
     },
-    "subsystems": {              
+    "subsystems": {
+        "intake-shooter": {
+            "hw" : {
+                "note-sensor" : 1
+            }
+        },
         "spinner" : {
             "hw" : {
                 "motors" : {
@@ -46,33 +51,33 @@
                 },
                 "encoder": {
                     //
-                    // Units are revolutions.  Velocities are revs per second.
+                    // Units are revolutions
                     //
                     "type": "motor",
-                    "m": 0.029296875,
+                    "m": 0.000488281,
                     "b": 0,
-                    "posunits" : "REV",
-                    "velunits" : "RPM",
-                    "accunits" : "RPM/sec"
+                    "posunits" : "rev",
+                    "velunits" : "rev/s",
+                    "accunits" : "rev/s/s"
                 }
             },            
             "props" : {
                 "position-important" : "Low",
-                "velocity-important" : "Low"
+                "velocity-important" : "High"
             },
             "targets" : {
                 "collect" : 50
             },
             "pids" : {
                 "velocity" : {
-                    "kp" : 0.2,
+                    "kp" : 0.0,
                     "ki" : 0.0,
                     "kd" : 0.0,
-                    "kv" : 0.000170057,
+                    "kv" : 0.112236985,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
-                    "outmax" : 0.0
+                    "outmax" : 12.0
                 }
             }            
         },
@@ -146,7 +151,7 @@
                 "velocity-important" : "Low"
             },
             "targets" : {
-                "collect" : 50,
+                "collect" : 50
             },
             "pids" : {
                 "velocity" : {
@@ -581,7 +586,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 0,
+        "which": 12,
         "0": {
             "angle": 45,
             "power": 0.1,
@@ -634,7 +639,7 @@
             //
             // Use the motor control PID to run the spinner at the velocity given
             //
-            "velocity" : 50
+            "velocity" : 66
         },
         "20" : {
             //
@@ -670,6 +675,12 @@
             "duration" : 1.0
         },
         "41" : {
+            //
+            // Step the power 0.1, 0.3, 0.5, 0.7, 0.9
+            //
+            "duration" : 2.0
+        },           
+        "42" : {
             //
             // Use the motor control PID to run the spinner at the velocity given
             //

@@ -50,4 +50,20 @@ public class SparkMaxSimMotorController extends SimMotorController {
     public double ticksPerRev() {
         return kTicksPerRev ;
     }
+
+    @Override
+    public double voltage() {
+        SparkMaxMotorController.SimState state = motor_.getSimState() ;
+        return state.getMotorVoltage() ;        
+    }
+
+    @Override
+    public double position() {
+        return sim_.getAngularPositionRotations() * kTicksPerRev * gearing_ ;
+    }    
+
+    @Override
+    public double velocity() {
+        return sim_.getAngularVelocityRPM() * 60.0 * kTicksPerRev * gearing_ ;    
+    }       
 } ;
