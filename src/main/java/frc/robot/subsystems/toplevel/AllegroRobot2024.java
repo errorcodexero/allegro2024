@@ -8,17 +8,13 @@ import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.subsystems.intakeshooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.oi.Allegro2024OISubsystem;
-import frc.robot.subsystems.protointake.ProtoTypeIntakeSubsystem;
 
 public class AllegroRobot2024 extends RobotSubsystem {
-
-    private final static boolean kUsePrototypeIntake = true ;
 
     private SDSSwerveDriveSubsystem db_;
     private Allegro2024OISubsystem oi_;
     private LimeLightSubsystem ll_;
-    private IntakeShooterSubsystem intake_ ;
-    private ProtoTypeIntakeSubsystem proto_intake_ ;
+    private IntakeShooterSubsystem intake_shooter_ ;
 
     public AllegroRobot2024(XeroRobot robot) throws Exception {
         super(robot, "Allegro2024RobotSubsystem");
@@ -32,14 +28,8 @@ public class AllegroRobot2024 extends RobotSubsystem {
         ll_ = new LimeLightSubsystem(this, "limelight");
         addChild(ll_);
 
-        if (kUsePrototypeIntake && !RobotBase.isSimulation()) {
-            proto_intake_ = new ProtoTypeIntakeSubsystem(this) ;
-            addChild(proto_intake_) ;
-        }
-        else {
-            intake_ = new IntakeShooterSubsystem(this);
-            addChild(intake_);
-        }
+        intake_shooter_ = new IntakeShooterSubsystem(this);
+        addChild(intake_shooter_);
     }
 
     public SDSSwerveDriveSubsystem getSwerve() {
@@ -55,6 +45,6 @@ public class AllegroRobot2024 extends RobotSubsystem {
     }
 
     public IntakeShooterSubsystem getIntakeShooterSubsystem() {
-        return intake_ ;
+        return intake_shooter_ ;
     }
 }

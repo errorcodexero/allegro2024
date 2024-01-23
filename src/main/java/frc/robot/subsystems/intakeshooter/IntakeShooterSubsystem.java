@@ -15,20 +15,35 @@ public class IntakeShooterSubsystem extends Subsystem {
     public IntakeShooterSubsystem(Subsystem parent) throws Exception {
         super(parent, "intake-shooter") ;
 
+        //
+        // Spins the wheels at the entry to the intake
+        //
         spinner_ = new MotorEncoderSubsystem(this, "spinner", false) ;
         addChild(spinner_) ;
 
+        //
+        // Spins feeder wheels that receive the note from the spinner wheels
+        //
+        feeder_ = new MotorEncoderSubsystem(this, "feeder", false);
+        addChild(feeder_) ;        
+
+        //
+        // Rotates the pivot arm that contains the intake/shooter assembly up and down
+        //
         updown_ = new MotorEncoderSubsystem(this, "updown", false) ;
         addChild(updown_) ;
 
-        feeder_ = new MotorEncoderSubsystem(this, "feeder", false);
-        addChild(feeder_) ;
+        //
+        // Tilts the shooter/intake mechanism on top of the pivot arm
+        //
+        tilt_ = new MotorEncoderSubsystem(this, "tilt", false) ;
+        addChild(tilt_);        
 
+        //
+        // Spins the shooter wheels used to shoot the game
+        //
         shooter_ = new MotorEncoderSubsystem(this, "shooter", false) ;
         addChild(shooter_) ;
-
-        tilt_ = new MotorEncoderSubsystem(this, "tilt", false) ;
-        addChild(tilt_);
     }
 
     public MotorEncoderSubsystem spinner() {
@@ -57,6 +72,18 @@ public class IntakeShooterSubsystem extends Subsystem {
 
         if (name.equals("spinner-velocity")) {
             v = new SettingsValue(spinner_.getVelocity()) ;
+        }
+        else if (name.equals("shooter-velocity")) {
+            v = new SettingsValue(shooter_.getVelocity());
+        }
+        else if (name.equals("feeder-velocity")) {
+            v = new SettingsValue(feeder_.getVelocity());
+        }
+        else if (name.equals("updown-position")) {
+            v = new SettingsValue(updown_.getPosition());
+        }
+        else if (name.equals("tilt")) {
+            v = new SettingsValue(tilt_.getPosition());
         }
 
         return v ;

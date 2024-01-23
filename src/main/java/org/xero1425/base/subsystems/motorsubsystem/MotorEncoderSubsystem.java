@@ -31,8 +31,8 @@ public class MotorEncoderSubsystem extends MotorSubsystem
 
         angular_ = angular ;
 
-        ImportantType postype = getImportantType("position-important") ;
-        ImportantType veltype = getImportantType("velocity-important") ;
+        ImportantType postype = getImportantType("props:position-important") ;
+        ImportantType veltype = getImportantType("props:velocity-important") ;
 
         getMotorController().setPositionImportant(postype) ;
         getMotorController().setVelocityImportant(veltype) ;

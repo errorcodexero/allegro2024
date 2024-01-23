@@ -1,0 +1,8 @@
+CollectAction
+-------------
+Arguments: none
+
+Move the tilt 
+
+MoveToShootPosition
+-------------------
