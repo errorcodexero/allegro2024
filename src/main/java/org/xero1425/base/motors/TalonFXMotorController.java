@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 import com.ctre.phoenix6.StatusCode;
+import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
@@ -219,21 +220,19 @@ public class TalonFXMotorController extends MotorController
     /// \brief Return the firmware version of the motor controller
     /// \returns the firmware version of the motor controller        
     public String getFirmwareVersion() throws BadMotorRequestException, MotorRequestFailedException {
+        StatusSignal<Integer> sig ;
+        
         if (major_ == -1) {
-            major_ = ctrl_.getVersionMajor().waitForUpdate(0.1).getValue() ;
-        }
+            sig = ctrl_.getVersion() ;
+            sig.setUpdateFrequency(1000) ;
+            int value = sig.waitForUpdate(0.1).getValue() ;
+            sig.setUpdateFrequency(0) ;
 
-        if (minor_ == -1) {
-            minor_ = ctrl_.getVersionMinor().waitForUpdate(0.1).getValue() ;
+            major_ = (value >> 24) & 0xff ;
+            minor_ = (value >> 16) & 0xff ;
+            bugfix_ = (value >> 8) & 0xff ;
+            build_ = (value >> 0) & 0xff ;
         }
-        
-        if (bugfix_ == -1) {
-            bugfix_ = ctrl_.getVersionBugfix().waitForUpdate(0.1).getValue() ;
-        }
-        
-        if (build_ == -1) {
-            build_ = ctrl_.getVersionBuild().waitForUpdate(0.1).getValue() ;
-        }        
 
         return major_ + "." + minor_ + "." + bugfix_ + "." + build_ ;
     }    

@@ -193,7 +193,7 @@ public class SwerveDriveGamepad extends Gamepad {
             rxscaled *= 0.25 ;
         }
 
-        if (rxscaled < deadband_rotate_ && (Math.abs(lxscaled) > deadband_pos_x_ || Math.abs(lyscaled) > deadband_pos_y_)) {
+        if (Math.abs(rxscaled) < deadband_rotate_ && (Math.abs(lxscaled) > deadband_pos_x_ || Math.abs(lyscaled) > deadband_pos_y_)) {
             //
             // The rotation stick is set to zero, so we want to maintain the current angle.
             //

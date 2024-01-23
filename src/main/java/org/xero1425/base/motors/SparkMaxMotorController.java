@@ -114,14 +114,12 @@ public class SparkMaxMotorController extends MotorController
             checkError("restoreFactoryDefaults - restoreFactoryDefaults", () -> ctrl_.restoreFactoryDefaults());
 
             pid_ = ctrl_.getPIDController() ;
-            encoder_ = ctrl_.getEncoder() ;      
+            encoder_ = ctrl_.getEncoder() ;
             
             // Output the position in ticks
-            // Throws an exception
             checkError("constructor - setPositionConversionFactor", () -> encoder_.setPositionConversionFactor(kTicksPerRevolution)) ;
 
             // Output velocity in ticks per second
-            // Throws an exception
             checkError("constructor - setVelocityConversionFactor", () -> encoder_.setVelocityConversionFactor(kTicksPerRevolution / 60.0)) ;
         }
     }

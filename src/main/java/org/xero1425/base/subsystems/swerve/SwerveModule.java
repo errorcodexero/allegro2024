@@ -155,8 +155,6 @@ public class SwerveModule {
         if (angle < 0.0) {
             angle += 2.0 * Math.PI ;
         }
-        
-        System.out.println(getName() + " " + ticks + " " + angle) ;
         return angle ;
     }    
 
