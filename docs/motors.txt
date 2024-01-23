@@ -1,0 +1,23 @@
+
+Name                    Bus         ID          Manage                  Purpose
+--------------------------------------------------------------------------------------------------------
+Spinner                 Rio         1           velocity                spinner at the entry of the intake
+Feeder                  Rio         3           velocity                takes the note from the spinner and moves up into the platform
+                                                                        holds it there until it moves the note into the shooter wheels
+Shooter1                Rio         4           velocity                shoots the note to the speaker
+Shooter2                Rio         5           velocity                shoots the note to the speaker
+UpDown                  Rio         2           position (angular)      moves the whole mechanism down to the floor to intake and up into the robot to shoot
+IntakeTilt              Rio         6           position (angular)      tilts the intake/shooter platform to aim the shot
+Elevator                Rio         50          position (linear)       raises and lowers the elevator
+Hooks                   Rio         51          position (linear)       raises and lowers the hooks on the elevator
+Pivot Arm               Rio         52          position (angular)      pivots the arm on top of the elevator
+Manipulator             Rio         53          velocity                collects or deposits note on top of pivot arm
+ManipulatorTilt         Rio         54          position (angular)      pivots the manipulator on top of the pivot arm
+SwerveFL Steer          DriveBase   11          position (angular)      rotates the swerve module drive wheel
+SwerveFL Drive          DriveBase   12          velocity                drive the swerve module wheel
+SwerveFR Steer          DriveBase   21          position (angular)      rotates the swerve module drive wheel
+SwerveFR Drive          DriveBase   22          velocity                drive the swerve module wheel
+SwerveBL Steer          DriveBase   41          position (angular)      rotates the swerve module drive wheel
+SwerveBL Drive          DriveBase   42          velocity                drive the swerve module wheel
+SwerveBR Steer          DriveBase   31          position (angular)      rotates the swerve module drive wheel
+SwerveBR Drive          DriveBase   32          velocity                drive the swerve module wheel
