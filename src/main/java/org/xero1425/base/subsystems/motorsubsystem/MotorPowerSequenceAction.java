@@ -17,6 +17,23 @@ public class MotorPowerSequenceAction extends MotorAction {
     // The current time within the current index_
     private double index_time_;
 
+    // The start time for a timed action
+    private double start_ ;
+
+    // The plot ID for the action
+    private int plot_id_ ;
+
+    private Double data_[] ;
+
+    // The columns to plot
+    private String[] plot_columns_ = { 
+        "time (s)",
+        "pos (%%posunits%%)",
+        "vel (%%velunits%%)",
+        "out (v)",
+        "encoder (ticks)" 
+    } ;    
+
     /// \brief Create a new MotorPowerSequenceAction
     /// \param sub the MotorPower subsystem this action is for
     /// \param times the set of times, must match the powers size below
@@ -30,6 +47,9 @@ public class MotorPowerSequenceAction extends MotorAction {
 
         if (times_.length == 0 || powers_.length == 0 || times_.length != powers_.length)
             throw new Exception("invalid arguments to Conveyor action");
+
+        plot_id_ = sub.initPlot(toString(0)) ;
+        data_ = new Double[plot_columns_.length] ;            
     }
 
     /// \brief Start the action
@@ -39,6 +59,10 @@ public class MotorPowerSequenceAction extends MotorAction {
 
         index_ = 0;
         setupCurrentIndex();
+
+        start_ = getSubsystem().getRobot().getTime() ;
+        MotorEncoderSubsystem sub = (MotorEncoderSubsystem)getSubsystem();
+        getSubsystem().startPlot(plot_id_, convertUnits(plot_columns_, sub.getUnits()));        
     }
 
     /// \brief run the action.  If the current power has expired, it moves to the next power in the
@@ -47,9 +71,17 @@ public class MotorPowerSequenceAction extends MotorAction {
     public void run() throws Exception {
         super.run();
 
+        data_[0] = getSubsystem().getRobot().getTime() - start_ ;
+        data_[1] = ((MotorEncoderSubsystem)(getSubsystem())).getPosition() ;
+        data_[2] = ((MotorEncoderSubsystem)(getSubsystem())).getVelocity() ;
+        data_[3] = getSubsystem().getPower() ;
+        data_[4] = ((MotorEncoderSubsystem)(getSubsystem())).getEncoderRawCount() ;
+        getSubsystem().addPlotData(plot_id_, data_);        
+
         if (getSubsystem().getRobot().getTime() - index_time_ > times_[index_]) {
             index_++;
             if (index_ == times_.length) {
+                getSubsystem().endPlot(plot_id_) ;                
                 setDone();
             } else {
                 setupCurrentIndex();
@@ -64,6 +96,8 @@ public class MotorPowerSequenceAction extends MotorAction {
 
         index_ = times_.length;
         getSubsystem().setPower(0.0);
+
+        getSubsystem().endPlot(plot_id_) ;        
     }
 
     /// \brief Returns a human readable string representing the action

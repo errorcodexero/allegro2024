@@ -1,8 +1,6 @@
 package org.xero1425.simulator.models;
 
 import edu.wpi.first.hal.simulation.DriverStationDataJNI;
-import edu.wpi.first.wpilibj.simulation.DriverStationSim;
-
 import org.xero1425.simulator.engine.SimulationModel;
 import org.xero1425.simulator.engine.SimulationEngine;
 import org.xero1425.misc.BadParameterTypeException;
@@ -122,9 +120,6 @@ public class DriverGamepadModel extends SimulationModel {
 
             DriverStationDataJNI.setJoystickPOVs((byte) index_, povs_);
         }
-
-
-        DriverStationSim.notifyNewData();
 
         setCreated();
         return true ;

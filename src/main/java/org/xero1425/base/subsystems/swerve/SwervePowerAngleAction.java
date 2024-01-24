@@ -86,25 +86,26 @@ public class SwervePowerAngleAction extends SwerveDriveAction {
     }
 
     @Override
-    public void run() {
-
+    public void run() throws Exception {
+        super.run() ;
+        
         getSubsystem().newPlotData();
-
-        if (action_timer_ == null && plot_timer_.isExpired()) {
-            //
-            // The action will run forever, we will stop the plot after the DefaultPlotInterval
-            //
-            getSubsystem().endSwervePlot();
-        }
 
         if (action_timer_ != null && action_timer_.isExpired()) {
             //
             // If the action has a duration, we stop the action and the plot after the duration has
             // expired
             //
-            getSubsystem().endSwervePlot();
+            if (plot_timer_ != null) {
+                getSubsystem().endSwervePlot();
+            }
             getSubsystem().drive(new ChassisSpeeds()) ;
             setDone() ;
+        }
+
+        if (plot_timer_.isExpired()) {
+            getSubsystem().endSwervePlot();
+            plot_timer_ = null ;            
         }
     }
 

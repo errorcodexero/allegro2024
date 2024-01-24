@@ -23,12 +23,13 @@ public abstract class MotorAction extends Action
         return motor_subsystem_;
     }
 
-    protected String[] convertUnits(String[] columns, String units) {
+    protected String[] convertUnits(String[] columns, String[] units) {
         String[] ret = new String[columns.length];
 
         for(int i = 0 ; i < columns.length ; i++) {
-            String fixed = columns[i].replace("%%units%%", units) ;
-            ret[i] = fixed ;
+            String fixed = columns[i].replace("%%posunits%%", units[0]) ;
+            fixed = fixed.replace("%%velunits%%", units[1]) ;
+            ret[i] = fixed.replace("%%accunits%%", units[2]) ;                        
         }
 
         return ret;

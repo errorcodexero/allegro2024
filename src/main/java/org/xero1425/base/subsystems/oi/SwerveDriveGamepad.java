@@ -41,22 +41,26 @@ public class SwerveDriveGamepad extends Gamepad {
     private SwerveButton[] reset_buttons_ ;
     private SwerveButton[] drivebase_x_buttons_;
     private boolean holding_x_;
+    private boolean holding_angle_ ;
+    private double holding_angle_value_ ;
+    private double rotation_p_value_ ;
 
     public SwerveDriveGamepad(OISubsystem oi, int index, SwerveBaseSubsystem drive_) throws Exception {
         super(oi, "swerve_gamepad", index);
 
         if (DriverStation.getStickPOVCount(getIndex()) == 0) {
-            throw new Exception("invalid gamepad for TankDriveGamepad");
+            throw new Exception("invalid gamepad for SwerveGamepad");
         }
 
         if (DriverStation.getStickAxisCount(getIndex()) <= AxisNumber.RIGHTX.value) {
-            throw new Exception("invalid gamepad for TankDriveGamepad");
+            throw new Exception("invalid gamepad for SwerveGamepad");
         }
 
         db_ = drive_;
         reset_buttons_ = null ;
         drivebase_x_buttons_ = null;
         holding_x_ = false ;
+        holding_angle_ = false ;
     }
 
     public void invert(boolean inv) {
@@ -77,6 +81,8 @@ public class SwerveDriveGamepad extends Gamepad {
 
     @Override
     public void createStaticActions() throws BadParameterTypeException, MissingParameterException {
+        rotation_p_value_ = getSubsystem().getSettingsValue("swerve_gamepad:angle:p").getDouble() ;
+
         deadband_pos_x_ = getSubsystem().getSettingsValue("swerve_gamepad:position:deadband:x").getDouble() ;
         deadband_pos_y_ = getSubsystem().getSettingsValue("swerve_gamepad:position:deadband:y").getDouble() ;
         deadband_rotate_ = getSubsystem().getSettingsValue("swerve_gamepad:angle:deadband").getDouble() ;
@@ -90,6 +96,9 @@ public class SwerveDriveGamepad extends Gamepad {
 
     private boolean isButtonSequencePressed(SwerveButton[] buttons) {
         boolean ret = true ;
+
+        if (buttons == null)
+            return false ;
 
         if (buttons != null && buttons.length > 0) {
             for(SwerveButton button : buttons) {
@@ -141,18 +150,20 @@ public class SwerveDriveGamepad extends Gamepad {
             }
         }
 
-        if (isButtonSequencePressed(drivebase_x_buttons_)) {
-            if (db_.getAction() != x_action_) {
-                db_.setAction(x_action_);
+        if (action_ != null) {
+            if (isButtonSequencePressed(drivebase_x_buttons_)) {
+                if (db_.getAction() != x_action_) {
+                    db_.setAction(x_action_);
+                }
+                action_.update(new ChassisSpeeds());
+                holding_x_ = true ;
             }
-            action_.update(new ChassisSpeeds());
-            holding_x_ = true ;
-        }
-        else {
-            if (db_.getAction() != action_ && getSubsystem().getRobot().isTeleop()) {
-                db_.setAction(action_);
+            else {
+                if (db_.getAction() != action_ && getSubsystem().getRobot().isTeleop()) {
+                    db_.setAction(action_);
+                }
+                holding_x_ = false ;
             }
-            holding_x_ = false ;
         }
     }
 
@@ -167,19 +178,14 @@ public class SwerveDriveGamepad extends Gamepad {
         // For Y axis, forward is -1, back is +1
 
         try {
-            ly = DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTY.value) ;
-            lx = DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTX.value) ;
+            ly = -DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTY.value) ;
+            lx = -DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTX.value) ;
             rx = -DriverStation.getStickAxis(getIndex(), AxisNumber.RIGHTX.value) ;
         }
         catch(Exception ex) {
             return ;
         }
-
-        if (invert_ && DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red) {
-            ly = -ly ;
-            lx = -lx ;
-        }
-
+        
         double lyscaled = mapJoyStick(ly, pos_maximum_, deadband_pos_y_, power_) ;
         double lxscaled = mapJoyStick(lx, pos_maximum_, deadband_pos_x_, power_) ;
         double rxscaled = mapJoyStick(rx, angle_maximum_, deadband_rotate_, power_) ;
@@ -188,6 +194,35 @@ public class SwerveDriveGamepad extends Gamepad {
             lxscaled *= 0.25 ;
             lyscaled *= 0.25 ;
             rxscaled *= 0.25 ;
+        }
+
+        if (Math.abs(rxscaled) < deadband_rotate_ && (Math.abs(lxscaled) > deadband_pos_x_ || Math.abs(lyscaled) > deadband_pos_y_)) {
+            //
+            // The rotation stick is set to zero, so we want to maintain the current angle.
+            //
+            if (!holding_angle_) {
+                //
+                // This is the first robot loop with the rotation stick at zero.  Setup the mode to
+                // hold the angle and remember the current robot angle.
+                //
+                holding_angle_ = true ;
+                holding_angle_value_ = db_.getHeading().getDegrees() ;
+            }
+            else {
+                //
+                // This is how far we have drifted from the desired angle
+                //
+                double angerr = db_.getHeading().getDegrees() - holding_angle_value_ ;
+
+                //
+                // Now scale the drift angle by a factor to create a rotational velocity that
+                // will rotate us back to our desired heading
+                //
+                rxscaled = rotation_p_value_ * angerr ;
+            }
+        }
+        else {
+            holding_angle_ = false ;
         }
 
         //

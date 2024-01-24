@@ -23,7 +23,7 @@ public class RioTrackPositionAction extends MotorAction {
     private int plot_id_ ;
 
     // The columns to plot
-    private String [] columns_ = { "time", "target(%%units%%)", "actual(%%units%%)", "error", "power"}  ;
+    private String [] columns_ = { "time", "target(%%posunits%%)", "actual(%%posunits%%)", "error", "power"}  ;
 
     /// \brief Create the action
     /// \param sub the MotorEncoderSubsystem subsystem for the action    

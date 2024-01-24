@@ -67,6 +67,17 @@ public class FMSModel extends SimulationModel {
             teleop_time_ = getDoublePropertyWithDefault("test", null, test_time_) ;
         }
 
+        boolean attached = false ;
+        
+        try {
+            if (hasProperty("fms")) {
+                attached = getBooleanProperty("fms") ;
+            }
+        }
+        catch(Exception ex) {
+        }
+        DriverStationSim.setFmsAttached(attached);
+
         if (hasProperty("alliance")) {
             AllianceStationID id = AllianceStationID.Red1 ;
             SettingsValue v = getProperty("alliance") ;
@@ -103,7 +114,7 @@ public class FMSModel extends SimulationModel {
             case Initializing:
                 DriverStationSim.setTest(false);
                 DriverStationSim.setAutonomous(false);
-                DriverStationSim.setEnabled(false);
+                enableRobot(false);
                 period_start_time_ = getRobotTime() ;
                 state_ = FMSState.Start ;
                 break ;
@@ -114,19 +125,19 @@ public class FMSModel extends SimulationModel {
                     if (test_time_ > 0.0) {
                         DriverStationSim.setTest(true);
                         DriverStationSim.setAutonomous(false);
-                        DriverStationSim.setEnabled(true);
+                        enableRobot(true);
                         state_ = FMSState.Test ;
                     } else {
                         if (auto_time_ > 0.0) {
                             DriverStationSim.setAutonomous(true);
                             DriverStationSim.setTest(false);
-                            DriverStationSim.setEnabled(true);
+                            enableRobot(true);
                             state_ = FMSState.Auto ;                        
                         }
                         else {
                             DriverStationSim.setAutonomous(false);
                             DriverStationSim.setTest(false);
-                            DriverStationSim.setEnabled(true);
+                            enableRobot(true);
                             state_ = FMSState.Teleop ;                            
                         }
                     }
@@ -138,7 +149,7 @@ public class FMSModel extends SimulationModel {
                 if (elapsed >= test_time_) 
                 {
                     DriverStationSim.setTest(false);
-                    DriverStationSim.setEnabled(false);
+                    enableRobot(false);
                     state_ = FMSState.BetweenTestAuto ;
                     period_start_time_ = getRobotTime() ;
                 }
@@ -150,12 +161,12 @@ public class FMSModel extends SimulationModel {
                     if (auto_time_ > 0.0) {
                         DriverStationSim.setAutonomous(true);
                         DriverStationSim.setTest(false);
-                        DriverStationSim.setEnabled(true);
+                        enableRobot(true);
                         state_ = FMSState.Auto ;
                     } else {
                         DriverStationSim.setAutonomous(false);
                         DriverStationSim.setTest(false);
-                        DriverStationSim.setEnabled(true);
+                        enableRobot(true);
                         state_ = FMSState.Teleop ;                             
                     }
                     period_start_time_ = getRobotTime() ;
@@ -166,7 +177,7 @@ public class FMSModel extends SimulationModel {
                 if (elapsed >= auto_time_)
                 {
                     DriverStationSim.setAutonomous(false);
-                    DriverStationSim.setEnabled(false);
+                    enableRobot(false);
                     state_ = FMSState.BetweenAutoTeleop ;
                     period_start_time_ = getRobotTime() ;
                 }            
@@ -177,7 +188,7 @@ public class FMSModel extends SimulationModel {
                 {
                     DriverStationSim.setAutonomous(false);
                     DriverStationSim.setTest(false);
-                    DriverStationSim.setEnabled(true);
+                    enableRobot(true);
                     state_ = FMSState.Teleop ;
                     period_start_time_ = getRobotTime() ;
                 }              
@@ -188,7 +199,7 @@ public class FMSModel extends SimulationModel {
                 {
                     DriverStationSim.setAutonomous(false);
                     DriverStationSim.setTest(false);                    
-                    DriverStationSim.setEnabled(false);
+                    enableRobot(false);
                     state_ = FMSState.Closing ;
                     period_start_time_ = getRobotTime() ;
                 }               
@@ -275,22 +286,11 @@ public class FMSModel extends SimulationModel {
         return ret ;
     }
 
-    private double getDoublePropertyWithDefault(final String name, SettingsValue v, double ret) {
 
-        try {
-            if (v == null)
-                v = getProperty(name) ;
-            ret = v.getDouble();
-        } catch (final BadParameterTypeException e) {
-            final MessageLogger logger = getEngine().getMessageLogger() ;
-            logger.startMessage(MessageType.Error) ;
-            logger.add("event: model ").addQuoted(getModelName());
-            logger.add(" instance ").addQuoted(getInstanceName());
-            logger.add(" event name ").addQuoted(name);
-            logger.add(" value is not a double").endMessage();
+    private void enableRobot(boolean enable) {
+        DriverStationSim.setEnabled(enable);
+        if (enable) {
+            com.ctre.phoenix6.unmanaged.Unmanaged.feedEnable(100000);
         }
-
-        return ret ;
     }
-
 }

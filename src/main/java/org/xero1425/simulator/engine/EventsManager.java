@@ -194,7 +194,7 @@ public class EventsManager {
                 continue ;                  
             }
 
-            SimulationModel model = engine_.findModel((String)mobj, (String)iobj) ;
+            SimulationModel model = engine_.getModelByNameInst((String)mobj, (String)iobj) ;
             if (model == null) {
                 logger.startMessage(MessageType.Warning) ;
                 logger.add("events at index ").add(i).add(" does not have simulation model with model ") ;

@@ -13,6 +13,8 @@ import org.xero1425.misc.MissingParameterException;
 /// \brief This action causes a MotorEncoderSubsystem to maintain a constant velocity.
 public class MCVelocityAction extends MotorAction {   
 
+    private final static double kDefaultPlotDuration = 5.0 ;
+
     // An index used to ensure individual instances of this action produce separate plots
     private static int which_ = 1 ;
 
@@ -25,11 +27,11 @@ public class MCVelocityAction extends MotorAction {
     // The start time for the action
     private double start_ ;
 
+    // The name of the action
+    private String name_ ;    
+
     // The plot ID for the action
     private int plot_id_ ;
-
-    // The name of the action
-    private String name_ ;
 
     // The duration of the plot request
     private double plot_duration_ ;
@@ -37,8 +39,16 @@ public class MCVelocityAction extends MotorAction {
     // The timer for the plot
     private XeroTimer plot_timer_ ;
 
+    // Data for each loop of the plot
+    private Double data_[] ;
+
     // The columns to plot
-    private static String [] columns_ = { "time", "target (u)", "actual (u)"}  ;
+    private static String [] columns_ = { 
+        "time", 
+        "target (%%velunits%%)", 
+        "actual (%%velunits%%)", 
+        "error (%%velunits%%)" 
+    } ;
 
     /// \brief Create a new MotorEncoderVelocityAction
     /// \param sub the target MotorEncoderSubsystem
@@ -57,31 +67,20 @@ public class MCVelocityAction extends MotorAction {
         String pidname = "subsystems:" + sub.getName() + ":" + name_ ;
 
         plot_id_ = sub.initPlot(toString(0) + "-" + String.valueOf(which_++)) ;     
-        plot_duration_ = 10.0 ;
+        plot_duration_ = kDefaultPlotDuration ;
 
         if (settings.isDefined(pidname + ":plot-duration")) {
             plot_duration_ = settings.get(pidname + ":plot-duration").getDouble() ;
         }
         plot_timer_ = new XeroTimer(sub.getRobot(), "velocity-action-plot", plot_duration_) ;
+        data_ = new Double[columns_.length] ;
     }
 
     /// \brief Create a new MotorEncoderVelocityAction
     /// \param sub the target MotorEncoderSubsystem
     /// \param target a string with the name of the target velocity in settings file
     public MCVelocityAction(MotorEncoderSubsystem sub, String name, String target) throws BadParameterTypeException, MissingParameterException, BadMotorRequestException, MotorRequestFailedException {
-        super(sub) ;
-
-        ISettingsSupplier settings = sub.getRobot().getSettingsSupplier() ;
-        String pidname = "subsystems:" + sub.getName() + ":" + name_ ;
-
-        target_ = getSubsystem().getSettingsValue(target).getDouble() ;
-
-        plot_id_ = sub.initPlot(toString(0) + "-" + String.valueOf(which_++)) ;   
-        plot_duration_ = 10.0 ;
-        if (settings.isDefined(pidname + ":plot-duration")) {
-            plot_duration_ = settings.get(pidname + ":plot-duration").getDouble() ;
-        }
-        plot_timer_ = new XeroTimer(sub.getRobot(), "velocity-action-plot", plot_duration_) ;        
+        this(sub, name, sub.getSettingsValue(target).getDouble()) ;
     }
 
     public double getError() {
@@ -105,7 +104,7 @@ public class MCVelocityAction extends MotorAction {
         // we must as the subsystem to translate the units from robot units to motor controller units.
         //
         MotorEncoderSubsystem sub = (MotorEncoderSubsystem)getSubsystem() ;
-        double ticks = sub.getEncoder().mapVelocityToMotor(target) ;
+        double ticks = sub.getEncoder().mapPhysicalToMotor(target) ;
         getSubsystem().getMotorController().set(XeroPidType.Velocity, ticks) ;
     }
 
@@ -121,27 +120,28 @@ public class MCVelocityAction extends MotorAction {
         super.start() ;
 
         if (plot_id_ != -1) {
-            getSubsystem().startPlot(plot_id_, columns_) ;
+            MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem() ;
+            getSubsystem().startPlot(plot_id_, convertUnits(columns_, me.getUnits())) ;
             plot_timer_.start() ;
         }
-
         start_ = getSubsystem().getRobot().getTime() ;
 
         //
         // We are using a control loop in the motor controller, get the parameters from the
         // settings file
         //
-        double p = getSubsystem().getSettingsValue(name_ + ":kp").getDouble() ;
-        double i = getSubsystem().getSettingsValue(name_ + ":ki").getDouble() ;
-        double d = getSubsystem().getSettingsValue(name_ + ":kd").getDouble() ;
-        double v = getSubsystem().getSettingsValue(name_ + ":kv").getDouble() ;
-        double a = getSubsystem().getSettingsValue(name_ + ":ka").getDouble() ;
-        double s = getSubsystem().getSettingsValue(name_ + ":ks").getDouble() ;
-        double g = getSubsystem().getSettingsValue(name_ + ":kg").getDouble() ;
+        XeroEncoder enc = ((MotorEncoderSubsystem)getSubsystem()).getEncoder() ;
+        double p = getSubsystem().getSettingsValue(name_ + ":kp").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double i = getSubsystem().getSettingsValue(name_ + ":ki").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double d = getSubsystem().getSettingsValue(name_ + ":kd").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double v = getSubsystem().getSettingsValue(name_ + ":kv").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double a = getSubsystem().getSettingsValue(name_ + ":ka").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double s = getSubsystem().getSettingsValue(name_ + ":ks").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double g = getSubsystem().getSettingsValue(name_ + ":kg").getDouble() / enc.mapPhysicalToMotor(1) ;
         double outmax = getSubsystem().getSettingsValue(name_ + ":outmax").getDouble() ;
 
         getSubsystem().getMotorController().setPID(XeroPidType.Velocity, p, i, d, v, a, g, s, outmax) ;
-        setTarget(target_);
+        setTarget(target_) ;
     }
 
     /// \brief Process the velocity action once per robot loop, adjusting the power as needed
@@ -150,13 +150,14 @@ public class MCVelocityAction extends MotorAction {
         super.run() ;
 
         MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem() ;
+        error_ = target_ - me.getVelocity() ;
 
         if (plot_id_ != -1) {
-            Double[] data = new Double[columns_.length] ;
-            data[0] = getSubsystem().getRobot().getTime() - start_ ;
-            data[1] = target_ ;
-            data[2] = me.getVelocity() ;
-            getSubsystem().addPlotData(plot_id_, data);
+            data_[0] = getSubsystem().getRobot().getTime() - start_ ;
+            data_[1] = target_ ;
+            data_[2] = me.getVelocity() ;
+            data_[3] = error_ ;
+            getSubsystem().addPlotData(plot_id_, data_);
 
             if (plot_timer_.isExpired()) {
                 getSubsystem().endPlot(plot_id_) ;
@@ -188,7 +189,7 @@ public class MCVelocityAction extends MotorAction {
     public String toString(int indent) {
         String ret = null ;
 
-        ret = prefix(indent) + "MotorEncoderVelocityAction, " + getSubsystem().getName() + ", " +  Double.toString(target_) ;
+        ret = prefix(indent) + "MCVelocityAction, " + getSubsystem().getName() + ", " +  Double.toString(target_) ;
         return ret ;
     }
 }

@@ -44,8 +44,12 @@
                     "ratio" : "L3"
                 },
                 "gyro" : {
-                    "type" : "navx",
-                    "start-time" : 3.0
+                    "start-time" : 3.0,
+
+                    // "type" : "navx"
+                    "type" : "pigeon2",
+                    "bus" : "DriveBase",
+                    "canid" : 51
                 },
                 "fl" : {
                     "motors" : {
@@ -305,6 +309,8 @@
             "swerve_gamepad": {
                 "index": 0,
                 "angle": {
+
+                    "p" : 1.0,
                     "maximum": 180,
                     "deadband": 0.05
                 },
@@ -317,52 +323,15 @@
                 },
                 "power": 2.0
             }            
-        },
-        "testmode": {
-            "enabled": true,
-            "which": 0,
-            "0": {
-                "angle": 45,
-                "power": 0.0
-            },
-            "1": {
-                "angle": 0.0,
-                "power": 0.2,
-                "duration": 1
-            },
-            "2": {
-                "angle": 0.0,
-                "speed": 0.5
-            },
-            "3": {
-                "angle": 0.0,
-                "speed": 1.0,
-                "duration": 3.0
-            },
-            "4": {
-                "name": "Edge1Blue-Path1"
-            },
-            "5": {
-                "angle": 0.0,
-                "power": 0.7,
-                "duration": 2
-            },
-            "7" : {
-                "name" : "Middle1Blue-Path1"
-            },
-            "10" : {
-                "power" : 0.2,
-                "duration" : 1.0
-            }
-        }        
+        }    
     },
     "testmode" : {
         "enabled": true,
-        "which": 3,
+        "which": 0,
         "0": {
-            "angle": 90,
-            "power": 0.2,
-            "duration": 3.0         // optional, if missing will run forever
+            "angle": 45,
+            "power": 0.1,
+            "duration": 300.0         // optional, if missing will run forever
         },
         "1": {
             "angle": 45.0,

@@ -251,7 +251,7 @@ public class TankDriveSubsystem extends DriveBaseSubsystem {
                 break;
 
             case Disabled:
-            case None:
+            case Initialization:
                 left_motors_.setNeutralMode(disabled_neutral_);
                 right_motors_.setNeutralMode(disabled_neutral_);      
                 break ;
