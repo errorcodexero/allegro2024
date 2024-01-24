@@ -142,30 +142,30 @@
                     // Units are revolutions.  Velocities are revs per second.
                     //
                     "type": "motor",
-                    "m": 0.029296875,
+                    "m": 0.000488281,
                     "b": 0,
-                    "posunits" : "REV",
-                    "velunits" : "RPM",
-                    "accunits" : "RPM/sec"
+                    "posunits" : "rev",
+                    "velunits" : "rev/s",
+                    "accunits" : "rev/s/s"
                 }
             },            
             "props" : {
-                "position-important" : "Low",
-                "velocity-important" : "Low"
+                "position-important" : "High",
+                "velocity-important" : "High"
             },
             "targets" : {
-                "collect" : 50
+                "collect" : 30
             },
             "pids" : {
                 "velocity" : {
-                    "kp" : 1.0,
+                    "kp" : 0.03,
                     "ki" : 0.0,
                     "kd" : 0.0,
-                    "kv" : 0.0,
+                    "kv" : 0.112236985,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
-                    "outmax" : 0.0
+                    "outmax" : 12.0
                 }
             }            
         },
@@ -589,7 +589,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 22,
+        "which": 42,
         "0": {
             "angle": 45,
             "power": 0.1,
@@ -695,7 +695,7 @@
             //
             // Use the motor control PID to run the spinner at the velocity given
             //
-            "velocity" : 50
+            "velocity" : 30
         }, 
         "50" : {
             //

@@ -41,6 +41,8 @@ public class SDSSwerveDriveModel extends SimulationModel {
             throw new Exception("SDSSwerveDriveModel required a Pigeon 2 gyro");
         }
         imu_ = ((Pigeon2Gyro)gyro).getPigeon2() ;
+
+        setCreated();
         
         return true ;
     }
