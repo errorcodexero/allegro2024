@@ -12,6 +12,8 @@ import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 
+import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardContainer;
 
 import org.xero1425.base.motors.BadMotorRequestException;
@@ -42,12 +44,14 @@ public class SwerveModule {
         steer_.setInverted(cfg.steer_inverted);
         steer_.setNeutralMode(XeroNeutralMode.Brake);
         steer_.resetEncoder();
+        steer_.enableVoltageCompensation(true, 11.0);
         ticksToRadians_ = 2.0 * Math.PI / steer_.ticksPerRevolution() * cfg.steer_reduction ;
         double p = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:p").getDouble() ;
         double i = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:i").getDouble() ;
         double d = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:d").getDouble() ;
         steer_.setPID(XeroPidType.Position, p, i, d, 0, 0, 0, 0, 0.1);
-        steer_.setPositionImportant(true);
+        steer_.setPositionImportant(IMotorController.ImportantType.High);
+        steer_.setVelocityImportant(IMotorController.ImportantType.High);
         target_angle_ = 0.0 ;
 
         //
@@ -56,16 +60,24 @@ public class SwerveModule {
         drive_ = subsys_.getRobot().getMotorFactory().createMotor(name + "-drive", id + ":motors:drive");
         drive_.setInverted(cfg.drive_inverted);
         drive_.resetEncoder();
+        drive_.enableVoltageCompensation(true, 11.0);
         ticksToMeters_ = Math.PI * cfg.wheel_diameter * cfg.drive_reduction / drive_.ticksPerRevolution() ;
-        drive_.setVelocityImportant(true);
-        drive_.setPositionImportant(true);
+        drive_.setVelocityImportant(IMotorController.ImportantType.High);
+        drive_.setPositionImportant(IMotorController.ImportantType.High);
 
         //
         // Create and initialize the absolute cancoder encoder
         //
         int encoderId = subsys_.getRobot().getSettingsSupplier().get(id + ":encoder:canid").getInteger() ;
         String bus = subsys_.getRobot().getSettingsSupplier().get(id + ":encoder:bus").getString() ;
-        double offset = subsys_.getRobot().getSettingsSupplier().get(id + ":encoder:offset").getDouble() ;        
+        double offset ;       
+
+        if (RobotBase.isSimulation()) {
+            offset = 90.0 ;
+        }
+        else {
+            offset = subsys_.getRobot().getSettingsSupplier().get(id + ":encoder:offset").getDouble() ;  
+        }
 
         absolute_encoder_ = new CANcoder(encoderId, bus);
         absolute_cfg_ = new CANcoderConfiguration();
@@ -75,8 +87,14 @@ public class SwerveModule {
         absolute_cfg_.MagnetSensor.SensorDirection = SensorDirectionValue.CounterClockwise_Positive ;
         checkError("SwerveModule constructor()", absolute_encoder_.getConfigurator().apply(absolute_cfg_));
 
-        synchronizeEncoders(true);
+        if (RobotBase.isSimulation()) {
+            Timer.delay(0.1) ;
+        }
         addDashBoardEntries(container);
+    }
+
+    public CANcoder getCANCoder() {
+        return absolute_encoder_ ;
     }
 
     public boolean isEncoderSynchronized() {
@@ -131,6 +149,7 @@ public class SwerveModule {
 
     public double getStateAngle() throws BadMotorRequestException, MotorRequestFailedException {
         double ticks = steer_.getPosition() ;
+
         double angle = ticks * ticksToRadians_ ;
         angle %= 2.0 * Math.PI ;
         if (angle < 0.0) {
@@ -145,19 +164,20 @@ public class SwerveModule {
     }
 
     public void set(double voltage, double angle) throws BadMotorRequestException, MotorRequestFailedException {
+
         angle %= 2.0 * Math.PI ;
         if (angle < 0.0) {
             angle += 2.0 * Math.PI ;
-        }
+        }    
 
-        double diff = angle - getTargetAngle() ;
+        double diff = angle - getStateAngle() ;
         if (diff >= Math.PI) {
             angle -= 2.0 * Math.PI ;
         }
         else if (diff < -Math.PI) {
             angle += 2.0 * Math.PI ;
         }
-        diff = angle - getTargetAngle() ;
+        diff = angle - getStateAngle() ;          
 
         if (diff > Math.PI / 2.0 || diff < -Math.PI / 2.0) {
             angle += Math.PI ;

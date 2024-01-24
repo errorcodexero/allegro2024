@@ -23,6 +23,13 @@ public interface IMotorController {
         CounterClockwise
     };
 
+    public enum ImportantType {
+        Invalid,
+        Off,                            // No data is necessary
+        Low,                            // Once per second
+        High;                           // Once per robot loop
+    }
+
     /// \brief Returns the user assigned name of the motor controller
     /// \returns the user assigned name of the motor controller
     public String getName() ;
@@ -107,15 +114,15 @@ public interface IMotorController {
 
     /// \brief If value is true, the motor controller will consider position data as important and update
     /// the data a quickly as possible.
-    public void setPositionImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException ;
+    public void setPositionImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException ;
     
     /// \brief If value is true, the motor controller will consider velocity data as important and update
     /// the data a quickly as possible.
-    public void setVelocityImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException ;
+    public void setVelocityImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException ;
     
     /// \brief If value is true, the motor controller will consider acceleration data as important and update
     /// the data a quickly as possible.
-    public void setAccelerationImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException ;
+    public void setAccelerationImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException ;
 
     /// \brief Have the current motor follow another motor.
     /// \param leader if true, the leader is inverted versus normal operation

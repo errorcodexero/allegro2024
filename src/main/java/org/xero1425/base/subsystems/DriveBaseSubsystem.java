@@ -1,6 +1,7 @@
 package org.xero1425.base.subsystems;
 
 import org.xero1425.base.gyro.NavxGyro;
+import org.xero1425.base.gyro.Pigeon2Gyro;
 import org.xero1425.base.gyro.RomiGyro;
 import org.xero1425.base.gyro.XeroGyro;
 import org.xero1425.base.motors.BadMotorRequestException;
@@ -28,6 +29,11 @@ public abstract class DriveBaseSubsystem extends Subsystem {
         } else if (gyrotype.equals("LSM6DS33")) {
             gyro_ = new RomiGyro();
         }
+        else if (gyrotype.equals("pigeon2")) {
+            String bus = getSettingsValue("hw:gyro:bus").getString() ;
+            int canid = getSettingsValue("hw:gyro:canid").getInteger() ;
+            gyro_ = new Pigeon2Gyro(bus, canid) ;
+        }
         else {
             String msg = "the gyro type '" + gyrotype + "' is not valid.  Only 'navx' and 'LSM6D33' are supported" ;
             throw new Exception(msg) ;
@@ -52,6 +58,10 @@ public abstract class DriveBaseSubsystem extends Subsystem {
     public void computeMyState() throws Exception  {
         putDashboard("gyro-heading", DisplayType.Always, gyro_.getYaw());
         putDashboard("robot-heading", DisplayType.Always, getPose().getRotation().getDegrees());
+    }
+
+    public XeroGyro getGyro() {
+        return gyro_ ;
     }
 
     public double getYaw() {

@@ -45,6 +45,7 @@ import org.xero1425.base.controllers.BaseController;
 import org.xero1425.base.controllers.AutoController;
 import org.xero1425.base.controllers.AutoMode;
 import org.xero1425.base.controllers.TeleopController;
+import org.xero1425.base.controllers.TestAutoMode;
 import org.xero1425.base.controllers.TestController ;
 
 /// \file
@@ -133,18 +134,21 @@ public abstract class XeroRobot extends TimedRobot {
 
     private static final String PDPPropertyName = "system:pdp:type" ;
 
+    public static XeroRobot theOne ;
+
     /// \brief Create a new XeroRobot robot
     /// \param period the robot loop timing (generally 20 ms)
     public XeroRobot(final double period) {
         super(period);
 
+        theOne = this ;
         double start ;
 
         // Generate the paths to the various important places (logfile directory, settings file, path follow paths directoryh, etc.)
         robot_paths_ = new RobotPaths(RobotBase.isSimulation(), getName());
 
         loop_type_history_ = new ArrayList<LoopType>() ;
-        loop_type_history_.add(LoopType.None);
+        loop_type_history_.add(LoopType.Initialization);
 
         // Setup the mesasge logger to log messages
         start = getTime() ;
@@ -656,7 +660,7 @@ public abstract class XeroRobot extends TimedRobot {
         if (isSimulation()) {
             SimulationEngine engine = SimulationEngine.getInstance() ;
             if (engine != null)
-                engine.run(getTime()) ;
+                engine.run(getDeltaTime());
         }
 
         last_time_ = initial_time;
@@ -838,7 +842,7 @@ public abstract class XeroRobot extends TimedRobot {
         if (isSimulation()) {
             SimulationEngine engine = SimulationEngine.getInstance() ;
             if (engine != null) {
-                 engine.run(delta_time_) ;
+                 engine.run(getDeltaTime()) ;
             }
         }
 
@@ -913,6 +917,11 @@ public abstract class XeroRobot extends TimedRobot {
         logger_.startMessage(MessageType.Info) ;
         logger_.add("    Automode Name: ").add(auto_controller_.getAutoModeName()).endMessage();
 
+        if (auto_controller_.getAutoMode() instanceof TestAutoMode) {
+            TestAutoMode tm = (TestAutoMode)auto_controller_.getAutoMode() ;
+            logger_.startMessage(MessageType.Info) ;
+            logger_.add("    TestMode: ").add(tm.getTestNumber()).add(", mode parameters: ").add(tm.getParameters()).endMessage(); ;
+        }
 
         String str = "undefined" ;
         if (DriverStation.getAlliance().isEmpty()) {}

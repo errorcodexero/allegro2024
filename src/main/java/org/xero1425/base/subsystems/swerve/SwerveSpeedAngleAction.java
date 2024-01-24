@@ -15,7 +15,6 @@ public class SwerveSpeedAngleAction extends SwerveDriveAction {
     private double [] angles_ ;
     private double [] speeds_ ;
     private double duration_ ;
-    private double start_time_ ;
 
     private XeroTimer plot_timer_ ;
 
@@ -38,7 +37,8 @@ public class SwerveSpeedAngleAction extends SwerveDriveAction {
         speeds_ = speeds.clone() ;
         duration_ = duration ;
 
-        plot_timer_ = new XeroTimer(subsys.getRobot(), "SwerveAngleVelocityAction-plot-timer", 4) ;
+        if (!Double.isNaN(duration_))
+            plot_timer_ = new XeroTimer(subsys.getRobot(), "SwerveAngleVelocityAction-plot-timer", duration) ;
     }
 
     public SwerveSpeedAngleAction(SwerveBaseSubsystem subsys, double angle, double speed) throws Exception {
@@ -60,7 +60,8 @@ public class SwerveSpeedAngleAction extends SwerveDriveAction {
 
         duration_ = duration ;
 
-        plot_timer_ = new XeroTimer(subsys.getRobot(), "SwerveAngleVelocityAction-plot-timer", 4) ;
+        if (!Double.isNaN(duration_))
+            plot_timer_ = new XeroTimer(subsys.getRobot(), "SwerveAngleVelocityAction-plot-timer", duration_) ;
     }
 
     void updateTargets(double[] angles, double[] speeds) {
@@ -74,11 +75,11 @@ public class SwerveSpeedAngleAction extends SwerveDriveAction {
     public void start() throws Exception {
         super.start() ;
 
-        plot_timer_.start();
+        if (!Double.isNaN(duration_)) {
+            plot_timer_.start();
+        }
         getSubsystem().startSwervePlot("swerve");
         getSubsystem().setRawTargets(false, angles_, speeds_);
-
-        start_time_ = getSubsystem().getRobot().getTime() ;
     }
 
     @Override
@@ -86,12 +87,9 @@ public class SwerveSpeedAngleAction extends SwerveDriveAction {
 
         getSubsystem().newPlotData();
 
-        if (!Double.isFinite(duration_) && plot_timer_.isExpired()) {
+        if (!Double.isNaN(duration_) && plot_timer_.isExpired()) {
             getSubsystem().endSwervePlot();
-        }
-
-        if (Double.isFinite(duration_) && getSubsystem().getRobot().getTime() - start_time_ > duration_) {
-            getSubsystem().endSwervePlot();
+            getSubsystem().drive(new ChassisSpeeds());
             setDone() ;
         }
     }

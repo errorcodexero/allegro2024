@@ -306,7 +306,7 @@ public class MotorGroupController extends MotorController
 
     /// \brief If value is true, the motor controller will consider position data as important and update
     /// the data a quickly as possible.
-    public void setPositionImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
+    public void setPositionImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
@@ -315,7 +315,7 @@ public class MotorGroupController extends MotorController
     
     /// \brief If value is true, the motor controller will consider velocity data as important and update
     /// the data a quickly as possible.
-    public void setVelocityImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
+    public void setVelocityImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
@@ -324,7 +324,7 @@ public class MotorGroupController extends MotorController
     
     /// \brief If value is true, the motor controller will consider acceleration data as important and update
     /// the data a quickly as possible.
-    public void setAccelerationImportant(boolean value) throws BadMotorRequestException, MotorRequestFailedException {
+    public void setAccelerationImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 

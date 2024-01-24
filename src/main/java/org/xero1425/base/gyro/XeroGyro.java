@@ -20,14 +20,4 @@ public interface XeroGyro {
     /// \brief Returns the total angle for the NavX
     /// \returns the total angle for the NavX     
     public double getAngle() ;
-
-    public double getGyroX() ;
-    public double getGyroY() ;
-    public double getGyroZ() ;
-    
-    public double getAccelX() ;
-    public double getAccelY() ;
-    public double getAccelZ() ;
-
-    // public void reset() ;
 }

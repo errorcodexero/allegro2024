@@ -37,7 +37,7 @@ public class Allegro2024 extends XeroRobot {
 
   protected void addRobotSimulationModels() {
     ModelFactory factory = SimulationEngine.getInstance().getModelFactory();
-    factory.registerModel("intake", "frc.models.IntakeModel");
+    factory.registerModel("intake-shooter", "frc.models.IntakeShooterModel");
   }    
 
   public String getSimulationFileName() {
@@ -45,7 +45,7 @@ public class Allegro2024 extends XeroRobot {
       if (ret != null)
           return ret;
 
-      return "init";
+      return "testmode";
   }
 
   @Override
