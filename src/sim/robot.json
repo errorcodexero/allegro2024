@@ -47,7 +47,7 @@
                 "updown:canid" : 2,
                 "updown:count" : 1,
                 "updown:gearing" : 1.0,
-                "updown:moment" :  0.000183064, 
+                "updown:moment" :  0.001349695365, 
 
                 "feeder:type" : "talon-fx",
                 "feeder:bus" : "",
@@ -82,7 +82,6 @@
             "model" : "sds-swerve-db",
             "instance" : "1",
             "props" : {
-                "module-model" : ""
             }
         },
         {

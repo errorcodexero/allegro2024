@@ -1,177 +1,141 @@
 package org.xero1425.base.subsystems.motorsubsystem;
 
-import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.motors.BadMotorRequestException;
 import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.motors.IMotorController.XeroPidType;
-import org.xero1425.misc.MessageLogger;
-import org.xero1425.misc.MessageType;
 
 public class MCMotionMagicAction extends MotorAction {
 
-    private double SetDoneDelay = 0.0 ;
+    // The plot ID for the action
+    private int plot_id_ ;
 
-    private enum State {
-        Waiting,
-        Running,
-        Delaying,
-        Complete
-    }
+    // Data for each loop of the plot
+    private Double data_[] ;
 
-    private static final double NearEndpoint = 3000 ;
-    private static final double EndVelocity = 1500 ;
-
-    public enum HoldType
-    {
-        None,
-        AtCurrentPosition,
-        AtTargetPosition
-    } ;
+    // The columns to plot
+    private static String [] columns_ = { 
+        "time", 
+        "target (%%posunits%%)", 
+        "actual (%%posunits%%)",
+        "velocity (%%velunits%%)",
+        "error (percent)"
+    } ;    
 
     private double start_ ;
     private double target_ ;
-    private HoldType hold_ ;
-    private State state_ ;
-    private double start_pos_ ;
-    private XeroTimer delay_timer_ ;
+    private double pos_percent_threshold_ ;
+    private double vel_threshold_ ;
+    private String name_ ;
 
-    private double kp_ ;
-    private double ki_ ;
-    private double kd_ ;
-    private double kv_ ;
-    private double ka_ ;
-    private double ks_ ;
-    private double kg_ ;
-    private double maxv_ ;
-    private double maxa_ ;
-    private double jerk_ ;
+    private static int which_ = 0 ;
 
-    public MCMotionMagicAction(MotorEncoderSubsystem sub, double target, double maxa, double maxv, HoldType holdtype) throws Exception {
+    public MCMotionMagicAction(MotorEncoderSubsystem sub, String name, double target, double pospercent, double vel) throws Exception {
         super(sub);
 
         target_ = target ;
-        hold_ = holdtype ;
-        maxa_ = maxa ;
-        maxv_ = maxv ;
+        name_ = name ;
 
-        kp_ = sub.getSettingsValue("magic:kp").getDouble() ;
-        ki_ = sub.getSettingsValue("magic:ki").getDouble() ;
-        kd_ = sub.getSettingsValue("magic:kd").getDouble() ;
-        kv_ = sub.getSettingsValue("magic:kv").getDouble() ;
-        ka_ = sub.getSettingsValue("magic:ka").getDouble() ;
-        ks_ = sub.getSettingsValue("magic:ks").getDouble() ;
-        kg_ = sub.getSettingsValue("magic:kg").getDouble() ;
+        pos_percent_threshold_ = pospercent ;
+        vel_threshold_ = vel ;
 
-        maxv_ = sub.getSettingsValue("magic:maxv").getDouble() ;
-        maxa_ = sub.getSettingsValue("magic:maxa").getDouble() ;
-        jerk_ = sub.getSettingsValue("magic:jerk").getDouble() ;                
-    }
-
-    public double getDistance() {
-        MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem();
-        return Math.abs(me.getPosition() - start_pos_) ;
-    }
-
-    public boolean isWaiting() {
-        return state_ == State.Waiting ;
-    }
-
-    public boolean isRunning() {
-        return state_ == State.Running ;
-    }
-
-    public boolean isComplete() {
-        return state_ == State.Complete ;
+        plot_id_ = sub.initPlot(toString(0) + "-" + String.valueOf(which_++)) ;     
+        data_ = new Double[columns_.length] ;
     }
 
     @Override
     public void start() throws Exception {
         super.start() ;
 
-        getSubsystem().getMotorController().setPID(XeroPidType.MotionMagic, kp_, ki_, kd_, kv_, ka_, kg_, ks_, 1.0);
-        getSubsystem().getMotorController().setMotionMagicParams(maxv_, maxa_, jerk_) ;
-
+        if (plot_id_ != -1) {
+            MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem() ;
+            getSubsystem().startPlot(plot_id_, convertUnits(columns_, me.getUnits())) ;
+        }
         start_ = getSubsystem().getRobot().getTime() ;
-        state_ = State.Waiting ;
-        tryStart() ;
+
+        //
+        // We are using a control loop in the motor controller, get the parameters from the
+        // settings file
+        //
+        XeroEncoder enc = ((MotorEncoderSubsystem)getSubsystem()).getEncoder() ;
+        double p = getSubsystem().getSettingsValue(name_ + ":kp").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double i = getSubsystem().getSettingsValue(name_ + ":ki").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double d = getSubsystem().getSettingsValue(name_ + ":kd").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double v = getSubsystem().getSettingsValue(name_ + ":kv").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double a = getSubsystem().getSettingsValue(name_ + ":ka").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double s = getSubsystem().getSettingsValue(name_ + ":ks").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double g = getSubsystem().getSettingsValue(name_ + ":kg").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double outmax = getSubsystem().getSettingsValue(name_ + ":outmax").getDouble() ;
+        getSubsystem().getMotorController().setPID(XeroPidType.MotionMagic, p, i, d, v, a, g, s, outmax);
+
+        double maxv = getSubsystem().getSettingsValue(name_ + ":maxv").getDouble() * enc.mapPhysicalToMotor(1) ;
+        double maxa = getSubsystem().getSettingsValue(name_ + ":maxa").getDouble() * enc.mapPhysicalToMotor(1) ;
+        double jerk = getSubsystem().getSettingsValue(name_ + ":jerk").getDouble() * enc.mapPhysicalToMotor(1) ;
+        getSubsystem().getMotorController().setMotionMagicParams(maxv, maxa, jerk) ;
+
+        setTarget(target_) ;
     }
+
+    /// \brief Update the target velocity to a new velocity
+    /// \param target the target velocity desired
+    public void setTarget(double target) throws BadMotorRequestException, MotorRequestFailedException {
+        //
+        // If we are running the loop in the motor controller, commuincate the new target to the
+        // motor controller.  Since the motor controller does not run its PID loop in robot units,
+        // we must as the subsystem to translate the units from robot units to motor controller units.
+        //
+        MotorEncoderSubsystem sub = (MotorEncoderSubsystem)getSubsystem() ;
+        double ticks = sub.getEncoder().mapPhysicalToMotor(target) ;
+        getSubsystem().getMotorController().set(XeroPidType.MotionMagic, ticks) ;
+    }    
 
     @Override
     public void run() throws Exception  {
         super.run() ;
 
-        MessageLogger logger = getSubsystem().getRobot().getMessageLogger();
-        State old = state_ ;
-
-        tryStart();
-
         MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem();
-        double mcvel = me.getMotorController().getVelocity() ;
-        double delta = Math.abs(target_ - me.getPosition()) ;
 
-        if (state_ == State.Running) {
-            logger.startMessage(MessageType.Debug, getSubsystem().getLoggerID()) ;
-            logger.add("MotionMagic Pos") ;
-            logger.add("time", getSubsystem().getRobot().getTime() - start_);
-            logger.add("target", target_, "%.0f");
-            logger.add("actual", me.getPosition(), "%.0f") ;
-            logger.add("velocity", mcvel, "%.0f") ;
-            logger.add("delta", delta, "%.0f") ;
-            logger.add("state", state_.toString()) ;
-            logger.endMessage();
+        double pos = me.getPosition() ;
+        double vel = me.getVelocity() ;
+        double error = Math.abs(pos - target_) ;
+
+        if (plot_id_ != -1) {
+            data_[0] = getSubsystem().getRobot().getTime() - start_ ;
+            data_[1] = target_ ;
+            data_[2] = pos ;
+            data_[3] = vel ;
+            data_[4] = error ;
+            getSubsystem().addPlotData(plot_id_, data_);
         }
 
-        if (state_ == State.Delaying && delay_timer_.isExpired())
-        {
-            state_ = State.Complete ;
+        if (error < pos_percent_threshold_ && Math.abs(vel) < vel_threshold_) {
+            getSubsystem().endPlot(plot_id_);
             setDone() ;
         }
-        else if (state_ == State.Running && delta < NearEndpoint && Math.abs(mcvel) < EndVelocity) {
-            state_ = State.Complete ;
-            // logger.startMessage(MessageType.Info) ;
-            // logger.add("Motion magic duration ") ;
-            // logger.add(getSubsystem().getRobot().getTime() - start_) ;
-            // logger.add("delta", delta) ;
-            // logger.endMessage();
-
-            if (SetDoneDelay > 0.0) 
-            {
-                state_ = State.Delaying ;
-                delay_timer_ = new XeroTimer(getSubsystem().getRobot(), "delaytimer", SetDoneDelay);
-                delay_timer_.start() ;
-            }
-            else 
-            {
-                setDone() ;
-            }
-        }
-
-        if (state_ != old) {
-            logger.startMessage(MessageType.Info) ;
-            logger.add("Motion Magic: ").add(old.toString()).add(" -> ").add(state_.toString()).endMessage();
-        }
     }
+    
+    /// \brief Cancel the velocity action, settings the power of the motor to zero
+    @Override
+    public void cancel() {
+        super.cancel() ;
+
+        try {
+            getSubsystem().getMotorController().set(XeroPidType.Power, 0.0);
+        }
+        catch(Exception ex) {
+        }
+
+        getSubsystem().setPower(0.0);
+        if (plot_id_ != -1)
+            getSubsystem().endPlot(plot_id_) ;
+    }    
 
     @Override
     public String toString(int indent) {
         String ret ;
 
         ret = spaces(indent) + "MotorEncoderMotionMagicAction (" + getSubsystem().getName() + ")";
-        ret += " target=" + target_ + ", hold=" + hold_.toString();
+        ret += " target=" + target_ ;
 
         return ret ;
-    }
-
-    private void tryStart() throws BadMotorRequestException, MotorRequestFailedException {
-        if (state_ == State.Waiting) {
-            MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem() ;
-            me.getMotorController().set(XeroPidType.MotionMagic, target_);
-            state_ = State.Running ;
-
-            MessageLogger logger = me.getRobot().getMessageLogger();
-            logger.startMessage(MessageType.Info) ;
-            logger.add("MotionMagic: ").add("accel", maxa_, "%.0f").add("velocity", maxv_, "%.0f").add("jerk", jerk_, "%0.f")
-                    .add("target", target_, "%.0f").endMessage() ;
-        }
     }
 }

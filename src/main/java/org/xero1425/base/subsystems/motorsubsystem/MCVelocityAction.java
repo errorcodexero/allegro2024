@@ -27,11 +27,11 @@ public class MCVelocityAction extends MotorAction {
     // The start time for the action
     private double start_ ;
 
+    // The name of the action
+    private String name_ ;    
+
     // The plot ID for the action
     private int plot_id_ ;
-
-    // The name of the action
-    private String name_ ;
 
     // The duration of the plot request
     private double plot_duration_ ;

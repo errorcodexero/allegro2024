@@ -360,9 +360,9 @@ public class TalonFXMotorController extends MotorController
     /// \param j the max jerk for the motion
     public void setMotionMagicParams(double v, double a, double j) throws BadMotorRequestException, MotorRequestFailedException {
         MotionMagicConfigs cfg = cfg_.MotionMagic ;
-        cfg.MotionMagicAcceleration = a ;
-        cfg.MotionMagicCruiseVelocity = v ;
-        cfg.MotionMagicJerk = j ;
+        cfg.MotionMagicAcceleration = a / kTicksPerRevolution;
+        cfg.MotionMagicCruiseVelocity = v  / kTicksPerRevolution;
+        cfg.MotionMagicJerk = j / kTicksPerRevolution;
 
         checkError("setMotionMagicParams()", () -> ctrl_.getConfigurator().apply(cfg));
     }        
