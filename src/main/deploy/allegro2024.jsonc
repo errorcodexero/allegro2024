@@ -34,6 +34,226 @@
         }
     },
     "subsystems": {
+        "elevator" : {
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
+                    "bus" : "",
+                    "canId" : 6,
+                    "inverted" : false,
+                    "neutral-mode" : "brake",
+                    "current-limit" : 20.0
+                },
+                "encoder" : {
+                    "type" : "motor",
+                    "m" : 0.17578125,
+                    "b" : 0,
+                    "posunits" : "rev",
+                    "velunits" : "rev/s",
+                    "accunits" : "rev/s/s"
+                }
+            },
+            "props" : {
+                "position-important" : "high",
+                "velocity-important" : "high"
+            },
+            "targets" : {
+                "stow": 0,
+                "transfer" : 0,
+                "ampprep" : 10,
+                "trapprep" : 15
+            },
+            "pids" : {
+                "position" : {
+                    "kp" : 0.0035,
+                    "ki" : 0.0,
+                    "kd" : 0.004,
+                    "kv" : 0.000312,
+                    "ka" : 0.0,
+                    "kg" : 0.0, 
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 2,
+                    "maxa" : 4.0,
+                    "jerk" : 0.0
+                }
+            }
+        },
+        "arm" : {
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
+                    "bus" : "",
+                    "canId" : 7,
+                    "inverted" : false,
+                    "neutral-mode" : "brake",
+                    "current-limit" : 20.0
+                },
+                "encoder" : {
+                    "type" : "motor",
+                    "m" : 0.17578125,
+                    "b" : 0,
+                    "posunits" : "deg",
+                    "velunits" : "deg/s",
+                    "accunits" : "deg/s/s"
+                }
+            },
+            "props" : {
+                "position-important" : "high",
+                "velocity-important" : "high"
+            },
+            "targets" : {
+                "stow": 0,
+                "transfer" : 60,
+                "placeAmp" : 225,
+                "placeTrap" : 135
+            },
+            "pids" : {
+                "position" : {
+                    "kp" : 0.0035,
+                    "ki" : 0.0,
+                    "kd" : 0.004,
+                    "kv" : 0.000312,
+                    "ka" : 0.0,
+                    "kg" : 0.0, 
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 270.0,
+                    "maxa" : 270.0,
+                    "jerk" : 0.0
+                }
+            }
+        },
+        "wrist" : {
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
+                    "bus" : "",
+                    "canId" : 8,
+                    "inverted" : false,
+                    "neutral-mode" : "brake",
+                    "current-limit" : 20.0
+                },
+                "encoder" : {
+                    "type" : "motor",
+                    "m" : 0.17578125,
+                    "b" : 0,
+                    "posunits" : "deg",
+                    "velunits" : "deg/s",
+                    "accunits" : "deg/s/s"
+                }
+            },
+            "props" : {
+                "position-important" : "high",
+                "velocity-important" : "high"
+            },
+            "targets" : {
+                
+            },
+            "pids" : {
+                "position" : {
+                    "kp" : 0.0035,
+                    "ki" : 0.0,
+                    "kd" : 0.004,
+                    "kv" : 0.000312,
+                    "ka" : 0.0,
+                    "kg" : 0.0, 
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 270.0,
+                    "maxa" : 270.0,
+                    "jerk" : 0.0
+                }
+            }
+        },
+        "manipulator" : {
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
+                    "bus" : "",
+                    "canId" : 9,
+                    "inverted" : false,
+                    "neutral-mode" : "brake",
+                    "current-limit" : 20.0
+                },
+                "encoder" : {
+                    "type" : "motor",
+                    "m" : 0.17578125,
+                    "b" : 0,
+                    "posunits" : "rev",
+                    "velunits" : "rev/s",
+                    "accunits" : "rev/s/s"
+                }
+            },
+            "props" : {
+                "position-important" : "high",
+                "velocity-important" : "high"
+            },
+            "targets" : {
+                "place" : 10,
+                "eject" : 10
+            },
+            "pids" : {
+                "position" : {
+                    "kp" : 0.0035,
+                    "ki" : 0.0,
+                    "kd" : 0.004,
+                    "kv" : 0.000312,
+                    "ka" : 0.0,
+                    "kg" : 0.0, 
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 5,
+                    "maxa" : 7.5,
+                    "jerk" : 0.0
+                }
+            }
+        },
+        "climber" : {
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
+                    "bus" : "",
+                    "canId" : 10,
+                    "inverted" : false,
+                    "neutral-mode" : "brake",
+                    "current-limit" : 20.0
+                },
+                "encoder" : {
+                    "type" : "motor",
+                    "m" : 0.17578125,
+                    "b" : 0,
+                    "posunits" : "revolutions",
+                    "velunits" : "revolutions/s",
+                    "accunits" : "revolutions/s/s"
+                }
+            },
+            "props" : {
+                "position-important" : "high",
+                "velocity-important" : "high"
+            },
+            "targets" : {
+                "climbprep" : 10.0,
+                "climb" : 0.0,
+                "climbdown" : 10.0,
+                "stow" : 0.0
+            },
+            "pids" : {
+                "position" : {
+                    "kp" : 0.0035,
+                    "ki" : 0.0,
+                    "kd" : 0.004,
+                    "kv" : 0.000312,
+                    "ka" : 0.0,
+                    "kg" : 0.0, 
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 2,
+                    "maxa" : 4,
+                    "jerk" : 0.0
+                }
+            }
+        },
         "swerve" : {
             //
             // This section defines the hardware used by the swerve drive
