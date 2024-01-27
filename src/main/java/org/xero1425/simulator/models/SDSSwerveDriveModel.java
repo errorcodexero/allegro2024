@@ -53,8 +53,8 @@ public class SDSSwerveDriveModel extends SimulationModel {
             getModuleModels() ;
         }
 
-        // imu_.getSimState().setSupplyVoltage(RobotController.getBatteryVoltage()) ;
-        // imu_.setYaw(0.0) ;
+        imu_.getSimState().setSupplyVoltage(RobotController.getBatteryVoltage()) ;
+        imu_.setYaw(0.0) ;
     }    
     
     @Override
