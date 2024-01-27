@@ -72,23 +72,23 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 60:
-                if (amptrap != null && amptrap.elevator() != null) {
-                    addSubActionPair(amptrap.elevator(), new MotorEncoderPowerAction(amptrap.elevator(), getDouble("power"), getDouble("duration")), true) ;
+                if (amptrap != null && amptrap.getElevator() != null) {
+                    addSubActionPair(amptrap.getElevator(), new MotorEncoderPowerAction(amptrap.getElevator(), getDouble("power"), getDouble("duration")), true) ;
                 }
                 break ;
 
             case 11:
-                if (amptrap != null && amptrap.elevator() != null) {
+                if (amptrap != null && amptrap.getElevator() != null) {
                     double duration = getDouble("duration") ;
                     double [] times = new double[] { duration, duration, duration, duration, duration } ;
                     double [] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9} ;
-                    addSubActionPair(amptrap.elevator(), new MotorPowerSequenceAction(amptrap.elevator(), times, powers), true) ;
+                    addSubActionPair(amptrap.getElevator(), new MotorPowerSequenceAction(amptrap.getElevator(), times, powers), true) ;
                 }
                 break ;                
 
             case 12:
-                if (amptrap != null && amptrap.elevator() != null) {
-                    addSubActionPair(amptrap.elevator(), new MCVelocityAction(amptrap.elevator(), "pids:velocity", getDouble("velocity")), true);
+                if (amptrap != null && amptrap.getElevator() != null) {
+                    addSubActionPair(amptrap.getElevator(), new MCVelocityAction(amptrap.getElevator(), "pids:velocity", getDouble("velocity")), true);
                 }
                 break ;   
                 
