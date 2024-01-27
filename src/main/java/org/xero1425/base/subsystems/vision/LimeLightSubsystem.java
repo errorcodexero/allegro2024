@@ -25,9 +25,15 @@ public class LimeLightSubsystem extends Subsystem implements IVisionLocalization
     public final static String LedModeKeyName = "ledMode" ;
     public final static String PipelineKeyName = "pipeline" ;
 
-    public final static boolean TestTagZHeight = true ;
-    public final static boolean TestHeadingVersusDB = true ;
+    public class DistanceAngle {
+        public double distance ;
+        public double angle ;
 
+        public DistanceAngle(double d, double a) {
+            distance = d ;
+            angle = a ;
+        }
+    }
 
     public class Retro {
         public Translation2d pts[] ;
@@ -428,13 +434,15 @@ public class LimeLightSubsystem extends Subsystem implements IVisionLocalization
         retroComputeMyState();
     }
 
-    public double distantToTag(int id) {
-        double ret = Double.MAX_VALUE ;
+    public DistanceAngle getDistanceAngleToTag(int id) {
+        DistanceAngle ret = null ;
 
         if (fuds_ != null) {
             for(int i = 0 ; i < fuds_.length ; i++) {
                 if (fuds_[i].id == id) {
-                    ret = fuds_[i].targetToRobot.getTranslation().getNorm();
+                    Pose2d p2d = fuds_[i].targetToRobot.toPose2d() ;
+                    ret = new DistanceAngle(p2d.getTranslation().getNorm(), p2d.getRotation().getDegrees());
+                    break ;
                 }
             }
         }

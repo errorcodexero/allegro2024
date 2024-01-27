@@ -23,20 +23,24 @@ public class MCMotionMagicAction extends MotorAction {
 
     private double start_ ;
     private double target_ ;
-    private double pos_percent_threshold_ ;
+    private double pos_threshold_ ;
     private double vel_threshold_ ;
     private String name_ ;
 
     private static int which_ = 0 ;
 
-    public MCMotionMagicAction(MotorEncoderSubsystem sub, String name, double target, double pospercent, double vel) throws Exception {
+    public MCMotionMagicAction(MotorEncoderSubsystem sub, String name, String target, double posthresh, double velthresh) throws Exception {
+        this(sub, name, sub.getSettingsValue(target).getDouble(), posthresh, velthresh) ;
+    }    
+
+    public MCMotionMagicAction(MotorEncoderSubsystem sub, String name, double target, double posthresh, double velthresh) throws Exception {
         super(sub);
 
         target_ = target ;
         name_ = name ;
 
-        pos_percent_threshold_ = pospercent ;
-        vel_threshold_ = vel ;
+        pos_threshold_ = posthresh ;
+        vel_threshold_ = velthresh ;
 
         plot_id_ = sub.initPlot(toString(0) + "-" + String.valueOf(which_++)) ;     
         data_ = new Double[columns_.length] ;
@@ -107,7 +111,7 @@ public class MCMotionMagicAction extends MotorAction {
             getSubsystem().addPlotData(plot_id_, data_);
         }
 
-        if (error < pos_percent_threshold_ && Math.abs(vel) < vel_threshold_) {
+        if (error < pos_threshold_ && Math.abs(vel) < vel_threshold_) {
             getSubsystem().endPlot(plot_id_);
             setDone() ;
         }
