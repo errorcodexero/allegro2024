@@ -17,11 +17,11 @@ public class AmpTrapSubsystem extends Subsystem{
         //elevator_.getMotorController().setCurrentLimit(20.0);
         addChild(elevator_);
 
-        arm_ = new MotorEncoderSubsystem(this, "arm", false);
+        arm_ = new MotorEncoderSubsystem(this, "arm", true);
         //arm_.getMotorController().setCurrentLimit(20.0);
         addChild(arm_);
 
-        wrist_ = new MotorEncoderSubsystem(this, "wrist", false);
+        wrist_ = new MotorEncoderSubsystem(this, "wrist", true);
         //wrist_.getMotorController().setCurrentLimit(20.0);
         addChild(wrist_);
 
