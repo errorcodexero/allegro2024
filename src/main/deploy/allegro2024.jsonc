@@ -39,6 +39,9 @@
                 "note-sensor" : {
                     "io" : 1,
                     "inverted" : false
+                },
+                "tilt-sensor" : {
+                    "io" : 50
                 }
             },
             "actions" : {
@@ -49,6 +52,12 @@
                     "tilt-margin" : 2.0,
                     "shoot-margin" : 10,
                     "angle-margin" : 2.0
+                },
+                "eject" : {
+                    "duration" : 3.0
+                },
+                "transfer" : {
+                    "duration" : 3.0
                 }
             }
         },
@@ -123,7 +132,9 @@
             },
             "targets" : {
                 "collect" : 25,
-                "stow" : 90
+                "stow" : 90,
+                "shoot" : 90,
+                "eject" : 25
             },
             "pids" : {
                 "position" : {
@@ -325,7 +336,9 @@
             },        
             "targets" : {
                 "collect" : 30,
-                "stow" : 0
+                "stow" : 0,
+                "shoot" : 0,
+                "eject" : 0
             },
             "pids" : {
                 "position" : {
@@ -386,7 +399,7 @@
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-                    "canid" : 6,
+                    "canid" : 51,
                     "inverted" : false,
                     "neutral-mode": "brake",
                     "current-limit" : 20.0
@@ -432,7 +445,7 @@
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-                    "canid" : 7,
+                    "canid" : 52,
                     "inverted" : false,
                     "neutral-mode": "brake",
                     "current-limit" : 20.0
@@ -478,7 +491,7 @@
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-                    "canid" : 8,
+                    "canid" : 53,
                     "inverted" : false,
                     "neutral-mode": "brake",
                     "current-limit" : 20.0
@@ -524,7 +537,7 @@
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-                    "canid" : 9,
+                    "canid" : 54,
                     "inverted" : false,
                     "neutral-mode": "brake",
                     "current-limit" : 20.0
@@ -570,7 +583,7 @@
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-                    "canid" : 10,
+                    "canid" : 55,
                     "inverted" : false,
                     "neutral-mode": "brake",
                     "current-limit" : 20.0
