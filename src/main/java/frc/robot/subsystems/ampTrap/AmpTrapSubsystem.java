@@ -14,23 +14,23 @@ public class AmpTrapSubsystem extends Subsystem{
         super(parent, "ampTrap");
 
         elevator_ = new MotorEncoderSubsystem(this, "elevator", false);
-        elevator_.getMotorController().setCurrentLimit(20.0);
+        //elevator_.getMotorController().setCurrentLimit(20.0);
         addChild(elevator_);
 
         arm_ = new MotorEncoderSubsystem(this, "arm", false);
-        arm_.getMotorController().setCurrentLimit(20.0);
+        //arm_.getMotorController().setCurrentLimit(20.0);
         addChild(arm_);
 
         wrist_ = new MotorEncoderSubsystem(this, "wrist", false);
-        wrist_.getMotorController().setCurrentLimit(20.0);
+        //wrist_.getMotorController().setCurrentLimit(20.0);
         addChild(wrist_);
 
         manipulator_ = new MotorEncoderSubsystem(this, "manipulator", false);
-        manipulator_.getMotorController().setCurrentLimit(20.0);
+        //manipulator_.getMotorController().setCurrentLimit(20.0);
         addChild(manipulator_);
 
         climber_ = new MotorEncoderSubsystem(this, "climber", false);
-        climber_.getMotorController().setCurrentLimit(20.0);
+        //climber_.getMotorController().setCurrentLimit(20.0);
         addChild(climber_);
     }
 
