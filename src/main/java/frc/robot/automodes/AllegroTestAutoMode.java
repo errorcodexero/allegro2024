@@ -77,7 +77,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 }
                 break ;
 
-            case 11:
+            case 61:
                 if (amptrap != null && amptrap.elevator() != null) {
                     double duration = getDouble("duration") ;
                     double [] times = new double[] { duration, duration, duration, duration, duration } ;
@@ -86,7 +86,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 }
                 break ;                
 
-            case 12:
+            case 62:
                 if (amptrap != null && amptrap.elevator() != null) {
                     addSubActionPair(amptrap.elevator(), new MCVelocityAction(amptrap.elevator(), "pids:velocity", getDouble("velocity")), true);
                 }
