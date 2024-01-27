@@ -13,13 +13,13 @@ public class IntakeShooterSubsystem extends Subsystem{
     public IntakeShooterSubsystem(Subsystem parent) throws Exception {
         super(parent, "intakeShooter");
 
-        updown_ = new MotorEncoderSubsystem(this,"intake-updown", false);
+        updown_ = new MotorEncoderSubsystem(this,"intake-updown", true);
         addChild(updown_);
 
         feeder_ = new MotorEncoderSubsystem(this,"intake-feeder", false);
         addChild(feeder_);
 
-        tilt_ = new MotorEncoderSubsystem(this,"intake-tilt", false);
+        tilt_ = new MotorEncoderSubsystem(this,"intake-tilt", true);
         addChild(tilt_);
 
         shooter1_ = new MotorEncoderSubsystem(this,"intake-shooter1", false);
