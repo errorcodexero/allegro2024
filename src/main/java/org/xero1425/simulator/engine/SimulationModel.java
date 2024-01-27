@@ -4,9 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 import org.xero1425.misc.SettingsValue;
+import org.xero1425.simulator.models.ISimMotorController;
+import org.xero1425.simulator.models.SparkMaxSimMotorController;
+import org.xero1425.simulator.models.TalonFXSimMotorController;
 
 public abstract class SimulationModel {
     
@@ -50,7 +54,7 @@ public abstract class SimulationModel {
         return instance_ ;
     }
 
-    public abstract boolean create() ;
+    public abstract boolean create(SimulationEngine engine) throws Exception ;
     public abstract void run(double dt) ;
     public abstract boolean processEvent(String name, SettingsValue value) ;
     public void startCycle()  {
@@ -120,6 +124,31 @@ public abstract class SimulationModel {
         return value.getInteger() ;
     }
 
+    protected boolean getBooleanProperty(String name) throws Exception {
+        MessageLogger logger = getEngine().getMessageLogger() ;
+
+        if (!hasProperty(name)) {
+            logger.startMessage(MessageType.Error);
+            logger.add("event: model ").addQuoted(getModelName());
+            logger.add(" instance ").addQuoted(getInstanceName());
+            logger.add(" is missing required property").addQuoted(name);
+            logger.endMessage();
+            throw new Exception("getBooleanProperty failed") ;
+        }
+
+        SettingsValue value = getProperty(name) ;
+        if (!value.isBoolean()) {
+            logger.startMessage(MessageType.Error);
+            logger.add("event: model ").addQuoted(getModelName());
+            logger.add(" instance ").addQuoted(getInstanceName());
+            logger.add(" property ").addQuoted(name).add(" is not a boolean");
+            logger.endMessage();   
+            throw new Exception("getBooleanProperty failed") ;         
+        }
+
+        return value.getBoolean() ;
+    }    
+
     protected double getDoubleProperty(String name) throws Exception {
         double ret = Double.NaN ;
         MessageLogger logger = getEngine().getMessageLogger() ;
@@ -152,6 +181,24 @@ public abstract class SimulationModel {
         return ret ;
     }
 
+    protected double getDoublePropertyWithDefault(final String name, SettingsValue v, double ret) {
+
+        try {
+            if (v == null)
+                v = getProperty(name) ;
+            ret = v.getDouble();
+        } catch (final BadParameterTypeException e) {
+            final MessageLogger logger = getEngine().getMessageLogger() ;
+            logger.startMessage(MessageType.Error) ;
+            logger.add("event: model ").addQuoted(getModelName());
+            logger.add(" instance ").addQuoted(getInstanceName());
+            logger.add(" event name ").addQuoted(name);
+            logger.add(" value is not a double").endMessage();
+        }
+
+        return ret ;
+    }    
+
     protected String getStringProperty(String name) throws Exception {
         MessageLogger logger = getEngine().getMessageLogger() ;
 
@@ -177,4 +224,26 @@ public abstract class SimulationModel {
         return value.getString() ;
     }    
 
+    protected ISimMotorController createSimulatedMotor(SimulationEngine engine, String name) throws Exception {
+        ISimMotorController ret = null ;
+
+        String type = getStringProperty(name + ":type") ;
+        String bus = getStringProperty(name + ":bus") ;
+        int canid = getIntProperty(name + ":canid") ;
+        int count = getIntProperty(name + ":count") ;
+        double gearing = getDoubleProperty(name + ":gearing");
+        double moment = getDoubleProperty(name + ":moment");
+
+        if (type.equals("talon-fx")) {
+            ret = new TalonFXSimMotorController(engine, bus, canid, count, gearing, moment) ;
+        }
+        else if (type.equals("sparkmax")) {
+            ret = new SparkMaxSimMotorController(engine, bus, canid, count, gearing, moment) ;
+        }
+        else {
+            throw new Exception("unrecognized type of simulated motor '" + type + "'");
+        }
+
+        return ret ;
+    }
 }

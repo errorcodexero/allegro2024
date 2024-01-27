@@ -20,7 +20,7 @@ public class NavXModel extends SimulationModel {
     public void deviceCreated(String name, int handle) {
     }
 
-    public boolean create() {
+    public boolean create(SimulationEngine engine) {
         sim_dev_handle_ = SimDeviceDataJNI.getSimDeviceHandle(YawDeviceName) ;
         sim_dev_yaw_handle_ = SimDeviceDataJNI.getSimValueHandle(sim_dev_handle_, YawValueName) ;
         setYaw(0.0) ;

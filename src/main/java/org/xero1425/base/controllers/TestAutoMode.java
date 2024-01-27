@@ -66,8 +66,32 @@ public class TestAutoMode extends AutoMode {
 
     /// \brief Returns the number of the test to run
     /// \returns the number of the test to run.
-    protected int getTestNumber() {
+    public int getTestNumber() {
         return which_;
+    }
+
+    public String getParameters() {
+        String ret = "" ;
+
+        if (parameters_.containsKey(which_)) {
+            Map<String, SettingsValue> params = parameters_.get(which_) ;
+            for(String param : params.keySet()) {
+                if (ret.length() > 0) {
+                    ret += ", " ;
+                }
+                ret += param + "=" + params.get(param).toString() ;
+            }
+        }
+
+        return ret;
+    }
+
+    public boolean hasParameter(String name) {
+        if (!parameters_.containsKey(which_))
+            return false ;
+
+        Map<String, SettingsValue> params = parameters_.get(which_) ;
+        return params.containsKey(name) ;
     }
 
     /// \brief Returns the double value of a given parameter from the settings file test mode settings

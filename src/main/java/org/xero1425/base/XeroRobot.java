@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
+import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -45,6 +46,7 @@ import org.xero1425.base.controllers.BaseController;
 import org.xero1425.base.controllers.AutoController;
 import org.xero1425.base.controllers.AutoMode;
 import org.xero1425.base.controllers.TeleopController;
+import org.xero1425.base.controllers.TestAutoMode;
 import org.xero1425.base.controllers.TestController ;
 
 /// \file
@@ -117,10 +119,8 @@ public abstract class XeroRobot extends TimedRobot {
     // The type of pneumatics on the robot
     private PneumaticsModuleType pneumatics_type_ ;
 
+    // The PDP object to get information about currents
     private PowerDistribution pdp_ ;
-
-    // Server for dispalying the status of the robot
-    // private StatusServer server_ ;
 
     // The april tag layout for this field
     private AprilTagFieldLayout layout_ ;
@@ -133,18 +133,21 @@ public abstract class XeroRobot extends TimedRobot {
 
     private static final String PDPPropertyName = "system:pdp:type" ;
 
+    public static XeroRobot theOne ;
+
     /// \brief Create a new XeroRobot robot
     /// \param period the robot loop timing (generally 20 ms)
     public XeroRobot(final double period) {
         super(period);
 
+        theOne = this ;
         double start ;
 
         // Generate the paths to the various important places (logfile directory, settings file, path follow paths directoryh, etc.)
         robot_paths_ = new RobotPaths(RobotBase.isSimulation(), getName());
 
         loop_type_history_ = new ArrayList<LoopType>() ;
-        loop_type_history_.add(LoopType.None);
+        loop_type_history_.add(LoopType.Initialization);
 
         // Setup the mesasge logger to log messages
         start = getTime() ;
@@ -152,6 +155,7 @@ public abstract class XeroRobot extends TimedRobot {
         logger_id_ = logger_.registerSubsystem(LoggerName) ;
         logger_.startMessage(MessageType.Info).add("============================================================").endMessage();
         logger_.startMessage(MessageType.Info).add("robot code starting").endMessage();
+        logger_.startMessage(MessageType.Info).add("SerialNumber", RobotController.getSerialNumber(), true).endMessage();
         logger_.startMessage(MessageType.Info).add("enableMessageLogger time", getTime() - start).endMessage();
         logger_.startMessage(MessageType.Info).add("============================================================").endMessage();
 
@@ -223,13 +227,7 @@ public abstract class XeroRobot extends TimedRobot {
 
         automode_ = -1;
 
-        // try {
-        //     server_ = new StatusServer(9001) ;
-        //     server_.start() ;
-        // }
-        // catch(IOException ex) {
-
-        // }
+        layout_ = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField() ;
     }
 
     public RobotPaths getRobotFileSystemPaths() {
@@ -655,7 +653,7 @@ public abstract class XeroRobot extends TimedRobot {
         if (isSimulation()) {
             SimulationEngine engine = SimulationEngine.getInstance() ;
             if (engine != null)
-                engine.run(getTime()) ;
+                engine.run(getDeltaTime());
         }
 
         last_time_ = initial_time;
@@ -748,7 +746,7 @@ public abstract class XeroRobot extends TimedRobot {
     /// address of the ethernet port on the RoboRio to a specific MAC address provided by the method getParcticeBotMacAddress().
     /// \returns true if the current robot is the practice bot
     protected boolean isPracticeBot() {
-        return RobotController.getSerialNumber() == getPracticeSerialNumber() ;
+        return RobotController.getSerialNumber().equals(getPracticeSerialNumber()) ;
     }
 
     /// \brief Abtract method to create the automode controller, must be overridden by the derived class
@@ -837,7 +835,7 @@ public abstract class XeroRobot extends TimedRobot {
         if (isSimulation()) {
             SimulationEngine engine = SimulationEngine.getInstance() ;
             if (engine != null) {
-                engine.run(delta_time_) ;
+                 engine.run(getDeltaTime()) ;
             }
         }
 
@@ -883,23 +881,12 @@ public abstract class XeroRobot extends TimedRobot {
     }
 
     public AprilTagFieldLayout getAprilTags() {
-        if (layout_ == null) {
-            String path = robot_paths_.deployDirectory() + "/AprilTags.json" ;
-        
-            try {
-              layout_ = new AprilTagFieldLayout(path) ;
-            }
-            catch (IOException ex) {
-                logger_.startMessage(MessageType.Error).add("cannot load april tag file '" + path + "' - " + ex.getMessage()).endMessage();
-                layout_ = null ;
-            }
-        }
 
         return layout_ ;
     }
 
     public boolean shutdownDebug() {
-        return DriverStation.isFMSAttached() || DriverStation.getLocation().orElse(0) == 3 ;
+        return DriverStation.isFMSAttached() || DriverStation.getLocation().getAsInt() == 3 ;
     }
 
     private void logAutoModeState() {
@@ -912,6 +899,11 @@ public abstract class XeroRobot extends TimedRobot {
         logger_.startMessage(MessageType.Info) ;
         logger_.add("    Automode Name: ").add(auto_controller_.getAutoModeName()).endMessage();
 
+        if (auto_controller_.getAutoMode() instanceof TestAutoMode) {
+            TestAutoMode tm = (TestAutoMode)auto_controller_.getAutoMode() ;
+            logger_.startMessage(MessageType.Info) ;
+            logger_.add("    TestMode: ").add(tm.getTestNumber()).add(", mode parameters: ").add(tm.getParameters()).endMessage(); ;
+        }
 
         String str = "undefined" ;
         if (DriverStation.getAlliance().isEmpty()) {}
@@ -923,7 +915,7 @@ public abstract class XeroRobot extends TimedRobot {
         logger_.add("    Alliance: ").add(str).endMessage();
 
         logger_.startMessage(MessageType.Info) ;
-        logger_.add("    Location: ").add(DriverStation.getLocation()).endMessage();
+        logger_.add("    Location: ").add(DriverStation.getLocation().getAsInt()).endMessage();
 
         logger_.startMessage(MessageType.Info) ;
         logger_.add("    GameData: '").add(game_data_).add("'").endMessage();

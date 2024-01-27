@@ -1,124 +1,39 @@
 package org.xero1425.simulator.models;
 
-import edu.wpi.first.hal.HALValue;
-import edu.wpi.first.hal.SimDeviceJNI;
-import edu.wpi.first.hal.simulation.SimDeviceDataJNI;
-import org.xero1425.simulator.engine.SimulationModel;
-import org.xero1425.base.motors.MotorController;
-import org.xero1425.base.motors.SparkMaxMotorController;
-import org.xero1425.misc.BadParameterTypeException;
-import org.xero1425.misc.SettingsValue;
+import org.xero1425.simulator.engine.SimulationEngine;
 
-public class SimMotorController {
-    
-    String name_ ;
-    int handle_ ;
-    private SimulationModel model_ ;
-    private int count_ ;
-    private int index_ ;
-    private int ticks_per_rev_ ;
-    
-    public SimMotorController(SimulationModel model, String name) {
-        model_ = model;
-        name_ = name ;
-        ticks_per_rev_ = -1 ;
-    }
+public abstract class SimMotorController implements ISimMotorController {
+    final static boolean kPlotMotorSims = false ;
 
-    public int ticksPerRev() {
-        return ticks_per_rev_ ;
-    }
+    private SimulationEngine engine_ ;
+    private int plot_id_ ;
+    private Double [] data_ ;
 
-    public int getIndex() {
-        return index_ ;
-    }
+    private static String [] plot_cols_ = { "time (s)", "battery (v)", "motor (v)", "pos (rot)", "vel (rps)" } ;
 
-    public int getCount() {
-        return count_ ;
-    }
+    protected SimMotorController(SimulationEngine engine, String bus, int canid) {
+        engine_ = engine ;
 
-    public double getPower() {
-        int vhandle = SimDeviceDataJNI.getSimValueHandle(handle_, MotorController.SimPowerParamName) ;
-        HALValue v = SimDeviceJNI.getSimValue(vhandle) ;
-        if (v.getType() != HALValue.kDouble)
-            return 0.0 ;
-
-        return v.getDouble() ;
-    }
-
-    public void setEncoder(double v) {
-        int vhandle = SimDeviceDataJNI.getSimValueHandle(handle_, MotorController.SimEncoderParamName) ;
-        SimDeviceJNI.setSimValueDouble(vhandle, v);
-    }
-
-    public boolean usesTicks() {
-        int vhandle = SimDeviceDataJNI.getSimValueHandle(handle_, MotorController.SimEncoderStoresTicksParamName) ;
-        return SimDeviceJNI.getSimValue(vhandle).getBoolean() ;
-    }
-
-    public boolean createMotor() {
-        handle_ = -1 ;
-        if (createSingleMotor(name_ + ":motor")) {
-            count_ = 1;
-            return true;
-        }
-
-        int i = 1;
-        while (true) {
-            String mname = name_ + ":motor:" + i;
-            if (!createSingleMotor(mname)) {
-                if (i == 0)
-                    return false;
-
-                count_ = i;
-                return true;
-            }
-
-            i++;
+        if (kPlotMotorSims) {
+            String busname = (bus.length() > 0) ? bus : "<EMPTY>" ;
+            data_= new Double[plot_cols_.length] ;
+            plot_id_ = engine.getRobot().getPlotManager().initPlot("talon-" + busname + "-" + canid) ;
+            engine.getRobot().getPlotManager().startPlot(plot_id_, plot_cols_);
         }
     }
 
-    private boolean createSingleMotor(String name) {
-
-        if (!model_.hasProperty(name + ":index") || !model_.hasProperty(name + ":type"))
-            return false;
-
-        SettingsValue indexval = model_.getProperty(name + ":index");
-        SettingsValue typeval = model_.getProperty(name + ":type");
-
-        if (!indexval.isInteger())
-            return false;
-
-        if (!typeval.isString())
-            return false;
-
-        try {
-            index_ = indexval.getInteger();
-        } catch (BadParameterTypeException e) {
+    public void addPlotData(double bvolts, double mvolts, double pos, double vel) {
+        if (kPlotMotorSims) {
+            data_[0] = engine_.getRobot().getTime() ;
+            data_[1] = bvolts ;
+            data_[2] = mvolts ;
+            data_[3] = pos ;
+            data_[4] = vel ;
+            engine_.getRobot().getPlotManager().addPlotData(plot_id_, data_);
         }
-
-        String t = null ;
-        try {
-            t = typeval.getString();
-        } catch (BadParameterTypeException e) {
-        }
-
-        if (t.equals("sparkmax-brushed")) {
-            if (handle_ == -1)
-                handle_ = SimDeviceDataJNI.getSimDeviceHandle(SparkMaxMotorController.SimDeviceNameBrushed + "[" + index_ + "]") ;
-        }
-        else if (t.equals("sparkmax-brushless")) {
-            if (handle_ == -1)
-                handle_ = SimDeviceDataJNI.getSimDeviceHandle(SparkMaxMotorController.SimDeviceNameBrushless + "[" + index_ + "]") ;            
-            
-                ticks_per_rev_ = 42 ;
-        }        
-        else {
-            return false ;
-        }
-
-        if (handle_ == 0)
-            return false ;
-        
-        return true ;        
     }
-} ;
+
+    protected SimulationEngine getEngine() {
+        return engine_ ;
+    }
+}

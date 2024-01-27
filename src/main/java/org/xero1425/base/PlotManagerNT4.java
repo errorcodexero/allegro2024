@@ -159,8 +159,6 @@ public class PlotManagerNT4 extends PlotManagerBase
 
         NetworkTableInstance inst = NetworkTableInstance.getDefault() ;
         inst.flush();        
-
-        System.out.println("PlotManager: addPlotData: count " + p.count_) ;
     }
 
     public void endPlot(int id)

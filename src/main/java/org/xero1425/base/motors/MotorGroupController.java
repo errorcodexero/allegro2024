@@ -1,9 +1,6 @@
 package org.xero1425.base.motors ;
 
 import java.util.List ;
-
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
 import java.util.ArrayList ;
 
 /// \file
@@ -14,42 +11,123 @@ import java.util.ArrayList ;
 public class MotorGroupController extends MotorController
 { 
     // The set of motors that are grouped
-    private List<MotorController> motors_ ;
+    private List<IMotorController> motors_ ;
 
     /// \brief Create a new MotorGroupController
     /// \param name the name of the group
     public MotorGroupController(String name) {
         super(name) ;
-        motors_ = new ArrayList<MotorController>() ;
+        motors_ = new ArrayList<IMotorController>() ;
     }
 
-    public int[] getPDPChannels() {
+     /// \brief Set the encoder to a specific value in ticks
+     /// \param pos the new value for the encoder in ticks
+     public void setPosition(double value) throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        motors_.get(0).setPosition(value) ;
+     }    
+
+    public void setMotionMagicParams(double v, double a, double j) throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        motors_.get(0).setMotionMagicParams(v, a, j) ;
+    }
+
+    public int getCanID() throws BadMotorRequestException, MotorRequestFailedException {
+        throw new BadMotorRequestException(this, "cannot get CAN ID for motor group") ;
+    }
+
+    public String getBus() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).getBus() ;
+    }
+
+    public List<String> getFaults() throws BadMotorRequestException, MotorRequestFailedException {
+        ArrayList<String> faults = new ArrayList<String>() ;
+
+        for(IMotorController motor: motors_) {
+            List<String> mfaults = motor.getFaults() ;
+
+            for(String fault: mfaults) {
+                String item = String.valueOf(motor.getCanID()) + ":" + fault ;
+                faults.add(item) ;
+            }
+        }
+
+        return faults ;
+    }
+
+    public Object getNativeController() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).getNativeController() ;
+    } 
+
+    public int[] getPDPChannels() throws BadMotorRequestException, MotorRequestFailedException {
         int [] channels = new int[motors_.size()] ;
         for(int i = 0 ; i < motors_.size() ; i++) {
-            channels[i] = motors_.get(i).getPDPChannel() ;
+            int [] c = motors_.get(i).getPDPChannels() ;
+            if (c.length != 1) {
+                throw new BadMotorRequestException(this, "invalid MotorGroupController - internal error - includes something that is not a single motor") ;
+            }
+            channels[i] = c[0] ;
         }
 
         return channels ;
     }
 
+    public IMotorController getLeader() {
+        return null ;
+    }
+
     /// \brief Return a specific motor from the group.  This is used for debugging issues.
     /// \param index the index of the motor to retreive
     /// \returns a specific motor controller from the group
-    public MotorController getMotor(int index) {
+    public IMotorController getMotor(int index) {
         return motors_.get(index) ;
     }
 
     public void setNeutralDeadband(double value) throws BadMotorRequestException, MotorRequestFailedException {
-        for(MotorController ctrl : motors_) {
+        for(IMotorController ctrl : motors_) {
             ctrl.setNeutralDeadband(value);
         }
+    }
+
+    public void enableVoltageCompensation(boolean enabled, double nominal)  throws BadMotorRequestException, MotorRequestFailedException {
+        for(IMotorController ctrl : motors_) {
+            ctrl.enableVoltageCompensation(enabled, nominal) ;
+        }
+    }    
+
+    public double getNeutralDeadband() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).getNeutralDeadband() ;
+    }    
+
+    public int ticksPerRevolution() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).ticksPerRevolution() ;
+    }       
+
+    public void follow(IMotorController ctrl, boolean leader, boolean inverted) throws BadMotorRequestException, MotorRequestFailedException {
+        throw new BadMotorRequestException(this, "a motor group cannot follow another motor") ;
     }
 
     /// \brief Add a new motor to the group
     /// \param ctrl the motor to add to the group
     /// \param leader if true, the leader is inverted
     /// \param inverted if true, the new motor is inverted with respect to the first motor
-    public void addFollowerMotor(MotorController ctrl, boolean leader, boolean inverted) throws BadMotorRequestException, MotorRequestFailedException {
+    public void addFollowerMotor(IMotorController ctrl, boolean leader, boolean inverted) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() > 0 && !motors_.get(0).getType().equals(ctrl.getType()))
             throw new BadMotorRequestException(this, "cannot add motor to group with existing motors unless the are the same type") ;
 
@@ -59,56 +137,30 @@ public class MotorGroupController extends MotorController
             ctrl.follow(motors_.get(0), leader, inverted) ;
     }
 
-    public void addLeaderMotor(MotorController ctrl) throws BadMotorRequestException, MotorRequestFailedException {
+    public void addLeaderMotor(IMotorController ctrl) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() > 0 && !motors_.get(0).getType().equals(ctrl.getType()))
             throw new BadMotorRequestException(this, "cannot add motor to group with existing motors unless the are the same type") ;
 
         motors_.add(ctrl) ;
     }    
 
-    /// \brief Return the velocity of the motor when the PID loops is being run in the controller
-    /// \retruns the velocity of the motor group.
-    public double getVelocity() throws BadMotorRequestException, MotorRequestFailedException {
-        if (motors_.size() == 0)
-            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
-
-        return motors_.get(0).getVelocity() ;
-    }
-
-    /// \brief Return the current input voltage to the motor controller
-    /// \returns the current input voltage to the motor controller    
-    public double getInputVoltage() throws BadMotorRequestException, MotorRequestFailedException {
-        if (motors_.size() == 0)
-            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
-
-        return motors_.get(0).getInputVoltage() ;
-    }    
-
-    /// \brief Return the motor voltage applied to the motor
-    /// \returns the motor voltage applied to the motor        
-    public double getAppliedVoltage() throws BadMotorRequestException {
-        if (motors_.size() == 0)
-            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
-
-        return motors_.get(0).getAppliedVoltage() ;
-    }
-
     /// \brief Returns true if the motor controller supports PID loops on the controller
     /// \returns true if the motor controller supports PID loops on the controller    
-    public boolean hasPID(PidType type) throws BadMotorRequestException, MotorRequestFailedException {
+    public boolean hasPID(XeroPidType type) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
         return motors_.get(0).hasPID(type) ;
     }
 
-    /// \brief Set the target if running a PID loop on the motor controller
-    /// \param target the target for the PID loop on the motor controller       
-    public void setTarget(double target) throws BadMotorRequestException, MotorRequestFailedException {
+    /// \brief Set the motor target.  What the target is depends on the mode.
+    /// \param type the type of target to set (position PID, velocity PID, MotionMagic, or percent power)
+    /// \param target the target value, depends on the type    
+    public void set(IMotorController.XeroPidType type, double target) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
-        motors_.get(0).setTarget(target);
+        motors_.get(0).set(type, target);
     }
 
     /// \brief Set the PID parameters for a PID loop running on the motor controller
@@ -116,39 +168,22 @@ public class MotorGroupController extends MotorController
     /// \param p the proportional parameter for the PID controller
     /// \param i the integral parameter for the PID controller
     /// \param d the derivative parameter for the PID controller
-    /// \param f the feed forward parameter for the PID controller
-    /// \param outmax the maximum output parameter for the PID controller     
-    public void setPID(PidType type, double p, double i, double d, double f, double outmax) throws BadMotorRequestException, MotorRequestFailedException {
+    /// \param v the velocity feed forward parameter for the PID controller
+    /// \param a the acceleration feed forward parameter for the PID controller
+    /// \param g the gravity feed forward parameter for the PID controller
+    /// \param s the static friction feed forward parameter for the PID controller
+    /// \param outmax the maximum output parameter for the PID controller 
+    public void setPID(XeroPidType type, double p, double i, double d, double v, double a, double g, double s, double outmax) throws BadMotorRequestException , MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
-        motors_.get(0).setPID(type, p, i, d, f, outmax) ;
-    }
-
-    /// \brief Stop the PID loop in the motor controller     
-    public void stopPID() throws BadMotorRequestException, MotorRequestFailedException {
-        if (motors_.size() == 0)
-            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
-
-        motors_.get(0).stopPID() ;
-    }
-
-    /// \brief Set the motor power
-    /// \param percent the motor power to assign to the motor      
-    public void set(double percent) throws BadMotorRequestException, MotorRequestFailedException {
-        if (motors_.size() == 0)
-            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
-
-        motors_.get(0).set(percent) ;
+        motors_.get(0).setPID(type, p, i, d, v, a, g, s, outmax) ;
     }
 
     /// \brief Set the motor to invert the direction of motion 
     /// \param inverted if true invert the direction of motion, otherwise do not     
     public void setInverted(boolean inverted)  throws BadMotorRequestException, MotorRequestFailedException {
-        if (motors_.size() == 0)
-            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
-            
-        motors_.get(0).setInverted(inverted);
+        throw new BadMotorRequestException(this, "for groups the inverted state for motors can only be set via the settings file") ;
     }
 
     /// \brief Returns true if the motor is inverted
@@ -160,24 +195,22 @@ public class MotorGroupController extends MotorController
         return motors_.get(0).isInverted() ;
     }
 
-    /// \brief Reapplies the inverted status of the motor.  When setInverted() is called, the inverted state of the motor
-    /// is stored and this method reapplies that stored state to the motor controller.  This was put into place because some
-    /// motors setup to follow other motors lost their inverted state when the robot was disabled and re-enabled.    
-    // public void reapplyInverted()  throws BadMotorRequestException, MotorRequestFailedException {
-    //     if (motors_.size() == 0)
-    //         throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;    
-    //     motors_.get(0).reapplyInverted();        
-    // }
-
     /// \brief Set the neutral mode for the motor
     /// \param mode the neutral mode for the motor      
-    public void setNeutralMode(NeutralMode mode) throws BadMotorRequestException, MotorRequestFailedException {
+    public void setNeutralMode(XeroNeutralMode mode) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
-        for(MotorController ctrl : motors_)
+        for(IMotorController ctrl : motors_)
             ctrl.setNeutralMode(mode);
     }
+
+    public XeroNeutralMode getNeutralMode() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).getNeutralMode() ;
+    } 
 
     /// \brief Set the current motor to follow another motor.  Note a MotorGroupController cannot follow anything else.
     /// \param ctrl the other motor to follow
@@ -199,23 +232,37 @@ public class MotorGroupController extends MotorController
 
     /// \brief Returns true if the motor encoder has an embedded encoder that can return position
     /// \returns true if the motor encoder has an embedded encoder that can return position      
-    public boolean hasPosition() throws BadMotorRequestException{
+    public boolean hasEncoder() throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
-        return motors_.get(0).hasPosition() ;
+        return motors_.get(0).hasEncoder() ;
     }
 
     /// \brief Returns the position of the motor in motor units.
-    public double getPosition() throws BadMotorRequestException {
+    public double getPosition() throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
         return motors_.get(0).getPosition() ;  
     }
 
+    public double getVelocity() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).getVelocity() ;  
+    }    
+
+    public double getAcceleration() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).getAcceleration() ;  
+    }      
+
     /// \brief Reset the encoder values to zero      
-    public void resetEncoder() throws BadMotorRequestException {
+    public void resetEncoder() throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
@@ -224,27 +271,24 @@ public class MotorGroupController extends MotorController
 
     /// \brief Set the current limit for the current supplied to the motor
     /// \param limit the amount of current, in amps,  to the value given   
-    public void setCurrentLimit(double free, double stall) throws BadMotorRequestException {
+    public void setCurrentLimit(double limit) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
                     
-        for(MotorController ctrl : motors_)
-            ctrl.setCurrentLimit(free, stall);
+        for(IMotorController ctrl : motors_)
+            ctrl.setCurrentLimit(limit);
     }      
 
-    /// \brief Set the open loop ramp rate for the motor
-    /// \param limit the amount of time for the motor to ramp from no power to full power       
-    public void setOpenLoopRampRate(double limit) throws BadMotorRequestException {
+    public double getCurrentLimit() throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
-                    
-        for(MotorController ctrl : motors_)
-            ctrl.setOpenLoopRampRate(limit);
-    }   
+
+        return motors_.get(0).getCurrentLimit() ;
+    }      
 
     /// \brief Return the firmware version of the motor controller
     /// \returns the firmware version of the motor controller       
-    public String getFirmwareVersion() throws BadMotorRequestException {
+    public String getFirmwareVersion() throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
@@ -260,28 +304,49 @@ public class MotorGroupController extends MotorController
         return result.toString() ;
     }
 
-    /// \brief Set the encoder update frequency.  This configures the rate at which the motor controller
-    /// sends back the CAN status packets that contain encoder information form the motor controller to 
-    /// the software running on the RoboRio.
-    /// \param freq the frequency to update the encoder values        
-    public void setEncoderUpdateFrequncy(EncoderUpdateFrequency pos, EncoderUpdateFrequency vel) throws BadMotorRequestException {
+    /// \brief If value is true, the motor controller will consider position data as important and update
+    /// the data a quickly as possible.
+    public void setPositionImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
-        int which = 0 ;
-        for(MotorController ctrl : motors_)
-        {
-            if (which == 0)
-                ctrl.setEncoderUpdateFrequncy(pos, vel);
-            else
-                ctrl.setEncoderUpdateFrequncy(EncoderUpdateFrequency.Infrequent, EncoderUpdateFrequency.Infrequent) ;
-        }
+        motors_.get(0).setPositionImportant(value);
+    }
+    
+    /// \brief If value is true, the motor controller will consider velocity data as important and update
+    /// the data a quickly as possible.
+    public void setVelocityImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        motors_.get(0).setVelocityImportant(value);            
+    }
+    
+    /// \brief If value is true, the motor controller will consider acceleration data as important and update
+    /// the data a quickly as possible.
+    public void setAccelerationImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        motors_.get(0).setAccelerationImportant(value);             
     }
 
-    public TalonFX getTalonFX() throws BadMotorRequestException {
+
+    /// \brief Return the closed loop target
+    /// \returns  the closed loop target
+    public double getClosedLoopTarget() throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
-        return motors_.get(0).getTalonFX() ;
+        return motors_.get(0).getClosedLoopTarget() ;
+    }
+
+    /// \brief Return the closed loop error
+    /// \returns  the closed loop error
+    public double getClosedLoopError() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).getClosedLoopError() ;
     }
 } ;

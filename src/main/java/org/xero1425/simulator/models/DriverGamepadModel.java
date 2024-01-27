@@ -1,8 +1,6 @@
 package org.xero1425.simulator.models;
 
 import edu.wpi.first.hal.simulation.DriverStationDataJNI;
-import edu.wpi.first.wpilibj.simulation.DriverStationSim;
-
 import org.xero1425.simulator.engine.SimulationModel;
 import org.xero1425.simulator.engine.SimulationEngine;
 import org.xero1425.misc.BadParameterTypeException;
@@ -19,7 +17,7 @@ public class DriverGamepadModel extends SimulationModel {
         super(engine, model, inst);
     }
 
-    public boolean create() {
+    public boolean create(SimulationEngine engine) {
         int count = 0;
 
         if (hasProperty("index")) {
@@ -122,9 +120,6 @@ public class DriverGamepadModel extends SimulationModel {
 
             DriverStationDataJNI.setJoystickPOVs((byte) index_, povs_);
         }
-
-
-        DriverStationSim.notifyNewData();
 
         setCreated();
         return true ;

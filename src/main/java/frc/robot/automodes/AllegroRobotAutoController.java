@@ -1,7 +1,10 @@
 package frc.robot.automodes;
 
+import java.util.List;
+
 import org.xero1425.base.XeroRobot;
 import org.xero1425.base.controllers.AutoController;
+import org.xero1425.base.controllers.AutoMode;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
@@ -10,7 +13,7 @@ import org.xero1425.misc.MissingParameterException;
 public class AllegroRobotAutoController extends AutoController {
 
     private AllegroTestAutoMode test_mode_;
-
+    
     public AllegroRobotAutoController(XeroRobot robot)
             throws MissingParameterException, BadParameterTypeException {
         super(robot, "AllegroRobotAutoController");
@@ -25,5 +28,24 @@ public class AllegroRobotAutoController extends AutoController {
             robot.logStackTrace(e.getStackTrace());                                              
         }
     }
-    
+
+    public void updateAutoMode(int mode, String gamedata) {
+
+        AutoMode modeobj = null ;
+
+        if (isTestMode()) {
+            modeobj = test_mode_ ;
+        }
+        else {
+            List<AutoMode> automodes = getAllAutomodes() ;
+            if (mode >= 0 && mode < automodes.size()) {
+
+                modeobj = automodes.get(mode) ;
+            }
+        }
+
+        if (getAutoMode() != modeobj) {
+            setAutoMode(modeobj) ;
+        }
+    }
 }

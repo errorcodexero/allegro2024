@@ -1,0 +1,164 @@
+{
+    "models" : 
+    [
+        {
+            "model" : "navx",
+            "instance" : "1"
+        },
+        {
+            "model" : "fms",
+            "instance" : "1",
+            "props" : {
+                "alliance" : "blue1",
+                "fms" : false,
+                "create_early" : true
+            }            
+        },
+        {
+            "model" : "limelight",
+            "instance" : "1",
+            "props" : {
+            }
+        },
+        {
+            "model": "drivergamepad",
+            "instance": "1",
+            "props": {
+                "index": 0,
+                "axes": 6,
+                "buttons": 10,
+                "povs": 1,
+                "create_early": true
+            }
+        },
+        {
+            "model" : "intake-shooter",
+            "instance" : "1",
+            "props" : {
+                "spinner:type" : "talon-fx",
+                "spinner:bus" : "",
+                "spinner:canid" : 1,
+                "spinner:count" : 1,
+                "spinner:gearing" : 1.0,
+                "spinner:moment" : 0.000183064,
+
+                "updown:type" : "talon-fx",
+                "updown:bus" : "",
+                "updown:canid" : 2,
+                "updown:count" : 1,
+                "updown:gearing" : 1.0,
+                "updown:moment" :  0.001349695365, 
+
+                "feeder:type" : "talon-fx",
+                "feeder:bus" : "",
+                "feeder:canid" : 3,
+                "feeder:count" : 1,
+                "feeder:gearing" : 1.0,
+                "feeder:moment" : 0.000183064,
+                
+                "shooter1:type" : "talon-fx",
+                "shooter1:bus" : "",
+                "shooter1:canid" : 4,
+                "shooter1:count" : 1,
+                "shooter1:gearing" : 1.0,
+                "shooter1:moment" : 0.00036613,
+
+                "shooter2:type" : "talon-fx",
+                "shooter2:bus" : "",
+                "shooter2:canid" : 4,
+                "shooter2:count" : 1,
+                "shooter2:gearing" : 1.0,
+                "shooter2:moment" : 0.00036613,                
+
+                "tilt:type" : "talon-fx",
+                "tilt:bus" : "",
+                "tilt:canid" : 6,
+                "tilt:count" : 1,
+                "tilt:gearing" : 1.0,
+                "tilt:moment" : 0.000183064
+            }
+        },
+        {
+            "model" : "sds-swerve-db",
+            "instance" : "1",
+            "props" : {
+            }
+        },
+        {
+            "model" : "sds-swerve-module",
+            "instance" : "fl",
+            "props" : {
+                "steer:type" : "talon-fx",
+                "steer:bus" : "DriveBase",
+                "steer:canid" : 11,
+                "steer:count" : 1,
+                "steer:gearing" : 0.046666667,
+                "steer:moment" : 0.000036613,
+
+                "drive:type" : "talon-fx",
+                "drive:bus" : "DriveBase",
+                "drive:canid" : 12,
+                "drive:count" : 1,
+                "drive:gearing" : 0.122807018,
+                "drive:moment" : 0.000036613                
+            }
+        },
+        {
+            "model" : "sds-swerve-module",
+            "instance" : "fr",
+            "props" : {
+                "steer:type" : "talon-fx",
+                "steer:bus" : "DriveBase",
+                "steer:canid" : 21,
+                "steer:count" : 1,
+                "steer:gearing" : 0.046666667,
+                "steer:moment" : 0.000036613,
+
+                "drive:type" : "talon-fx",
+                "drive:bus" : "DriveBase",
+                "drive:canid" : 22,
+                "drive:count" : 1,
+                "drive:gearing" : 0.122807018,
+                "drive:moment" : 0.000036613     
+            }
+        },
+        {
+            "model" : "sds-swerve-module",
+            "instance" : "bl",
+            "props" : {
+                "steer:type" : "talon-fx",
+                "steer:bus" : "DriveBase",
+                "steer:canid" : 41,
+                "steer:count" : 1,
+                "steer:gearing" : 0.046666667,
+                "steer:moment" : 0.000036613,
+
+                "drive:type" : "talon-fx",
+                "drive:bus" : "DriveBase",
+                "drive:canid" : 42,
+                "drive:count" : 1,
+                "drive:gearing" : 0.122807018,
+                "drive:moment" : 0.000036613     
+            }
+        },
+        {
+            "model" : "sds-swerve-module",
+            "instance" : "br",
+            "props" : {
+                "steer:type" : "talon-fx",
+                "steer:bus" : "DriveBase",
+                "steer:canid" : 31,
+                "steer:count" : 1,
+                "steer:gearing" : 0.046666667,
+                "steer:moment" : 0.000036613,
+
+                "drive:type" : "talon-fx",
+                "drive:bus" : "DriveBase",
+                "drive:canid" : 32,
+                "drive:count" : 1,
+                "drive:gearing" : 0.122807018,
+                "drive:moment" : 0.000036613     
+            }
+        }
+    ]
+}

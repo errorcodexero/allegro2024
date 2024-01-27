@@ -58,7 +58,7 @@ public class SimulationModelEvent extends SimulationEvent {
             logger.endMessage();
         }
         else {
-            SimulationModel model = engine.findModel(model_, instance_) ;
+            SimulationModel model = engine.getModelByNameInst(model_, instance_) ;
             if (model != null)
                 model.processEvent(name_, value_) ;
             else {
