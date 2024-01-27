@@ -48,17 +48,10 @@
                 "updown:count" : 1,
                 "updown:gearing" : 1.0,
                 "updown:moment" :  0.001349695365, 
-
-                "feeder:type" : "talon-fx",
-                "feeder:bus" : "",
-                "feeder:canid" : 3,
-                "feeder:count" : 1,
-                "feeder:gearing" : 1.0,
-                "feeder:moment" : 0.000183064,
                 
                 "shooter1:type" : "talon-fx",
                 "shooter1:bus" : "",
-                "shooter1:canid" : 4,
+                "shooter1:canid" : 3,
                 "shooter1:count" : 1,
                 "shooter1:gearing" : 1.0,
                 "shooter1:moment" : 0.00036613,
@@ -72,12 +65,52 @@
 
                 "tilt:type" : "talon-fx",
                 "tilt:bus" : "",
-                "tilt:canid" : 6,
+                "tilt:canid" : 5,
                 "tilt:count" : 1,
                 "tilt:gearing" : 1.0,
                 "tilt:moment" : 0.000183064
             }
         },
+        {
+            "model" : "amp-trap",
+            "instance" : "1",
+            "props" : {
+                "elevator:type" : "talon-fx",
+                "elevator:bus" : "",
+                "elevator:canid" : 6,
+                "elevator:count" : 1,
+                "elevator:gearing" : 1.0,
+                "elevator:moment" : 0.000183064,
+
+                "arm:type" : "talon-fx",
+                "arm:bus" : "",
+                "arm:canid" : 7,
+                "arm:count" : 1,
+                "arm:gearing" : 1.0,
+                "arm:moment" :  0.001349695365, 
+
+                "wrist:type" : "talon-fx",
+                "wrist:bus" : "",
+                "wrist:canid" : 8,
+                "wrist:count" : 1,
+                "wrist:gearing" : 1.0,
+                "wrist:moment" : 0.000183064,
+                
+                "manipulator:type" : "talon-fx",
+                "manipulator:bus" : "",
+                "manipulator:canid" : 9,
+                "manipulator:count" : 1,
+                "manipulator:gearing" : 1.0,
+                "manipulator:moment" : 0.00036613,
+
+                "climber:type" : "talon-fx",
+                "climber:bus" : "",
+                "climber:canid" : 10,
+                "climber:count" : 1,
+                "climber:gearing" : 1.0,
+                "climber:moment" : 0.000183064
+            }
+        },        
         {
             "model" : "sds-swerve-db",
             "instance" : "1",

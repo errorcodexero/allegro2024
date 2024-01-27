@@ -16,7 +16,6 @@ public class SwervePowerAngleAction extends SwerveDriveAction {
     private double [] angles_ ;
     private double [] speeds_ ;
 
-    private XeroTimer plot_timer_ ;
     private XeroTimer action_timer_ ;
 
     public SwervePowerAngleAction(SwerveBaseSubsystem subsys, double [] angles, double [] speeds) throws Exception {
@@ -39,8 +38,6 @@ public class SwervePowerAngleAction extends SwerveDriveAction {
 
         if (Double.isFinite(duration))
             action_timer_ = new XeroTimer(subsys.getRobot(), "SwervePowerAngleAction-action", duration) ;
-
-        plot_timer_ = new XeroTimer(subsys.getRobot(), "SwerveAngleVelocityAction-timer", DefaultPlotInterval) ;
     }
 
     public SwervePowerAngleAction(SwerveBaseSubsystem subsys, double angle, double speed) throws Exception {
@@ -62,8 +59,6 @@ public class SwervePowerAngleAction extends SwerveDriveAction {
 
         if (Double.isFinite(duration))
             action_timer_ = new XeroTimer(subsys.getRobot(), "SwervePowerAngleAction-action", duration) ;
-
-        plot_timer_ = new XeroTimer(subsys.getRobot(), "SwerveAngleVelocityAction-plot-timer", 4) ;
     }
 
     void updateTargets(double[] angles, double[] speeds) {
@@ -77,11 +72,12 @@ public class SwervePowerAngleAction extends SwerveDriveAction {
     public void start() throws Exception {
         super.start() ;
 
-        plot_timer_.start();
-        if (action_timer_ != null)
+        if (action_timer_ != null) {
             action_timer_.start() ;
+            getSubsystem().startSwervePlot("swerve");            
+        }
 
-        getSubsystem().startSwervePlot("swerve");
+
         getSubsystem().setRawTargets(true, angles_, speeds_);
     }
 
@@ -96,16 +92,9 @@ public class SwervePowerAngleAction extends SwerveDriveAction {
             // If the action has a duration, we stop the action and the plot after the duration has
             // expired
             //
-            if (plot_timer_ != null) {
-                getSubsystem().endSwervePlot();
-            }
+            getSubsystem().endSwervePlot();
             getSubsystem().drive(new ChassisSpeeds()) ;
             setDone() ;
-        }
-
-        if (plot_timer_.isExpired()) {
-            getSubsystem().endSwervePlot();
-            plot_timer_ = null ;            
         }
     }
 

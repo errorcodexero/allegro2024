@@ -54,8 +54,17 @@ public class MotorEncoderSubsystem extends MotorSubsystem
     }
 
     private ImportantType getImportantType(String name) throws BadParameterTypeException, MissingParameterException {
+        ImportantType ret = ImportantType.Invalid ;
+
         String impstr = getSettingsValue(name).getString() ;
-        return ImportantType.valueOf(impstr);
+        if (impstr.toLowerCase().equals("high"))
+            ret = ImportantType.High ;
+        else if (impstr.toLowerCase().equals("low"))
+            ret = ImportantType.Low ;
+        else if (impstr.toLowerCase().equals("off"))
+            ret = ImportantType.Off ;
+
+        return ret;
     }
 
     public XeroEncoder getEncoder() {
