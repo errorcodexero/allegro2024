@@ -155,6 +155,7 @@ public class SwerveModule {
         if (angle < 0.0) {
             angle += 2.0 * Math.PI ;
         }
+
         return angle ;
     }    
 
@@ -199,6 +200,7 @@ public class SwerveModule {
         double v = absolute_encoder_.getAbsolutePosition().getValue() ;
         return v * 2.0 * Math.PI ;
     }
+
 
     public void synchronizeEncoders(boolean force) throws BadMotorRequestException, MotorRequestFailedException {
         if (!synchronized_ || force) {

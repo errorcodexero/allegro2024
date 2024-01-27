@@ -8,28 +8,25 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 public class IntakeShooterSubsystem extends Subsystem {
 
-    private MotorEncoderSubsystem spinner_ ;
+    private MotorEncoderSubsystem spinner_feeder_ ;
     private MotorEncoderSubsystem updown_ ; 
-    private MotorEncoderSubsystem feeder_ ;
     private MotorEncoderSubsystem shooter1_ ;
     private MotorEncoderSubsystem shooter2_ ;
     private MotorEncoderSubsystem tilt_ ;
     private DigitalInput note_sensor_ ;
+    private boolean note_present_ ;
+    private boolean note_inverted_ ;
 
     public IntakeShooterSubsystem(Subsystem parent) throws Exception {
         super(parent, "intake-shooter") ;
 
+        note_present_ = false ;
+
         //
         // Spins the wheels at the entry to the intake
         //
-        spinner_ = new MotorEncoderSubsystem(this, "spinner", false) ;
-        addChild(spinner_) ;
-
-        //
-        // Spins feeder wheels that receive the note from the spinner wheels
-        //
-        feeder_ = new MotorEncoderSubsystem(this, "feeder", false);
-        addChild(feeder_) ;        
+        spinner_feeder_ = new MotorEncoderSubsystem(this, "spinner-feeder", false) ;
+        addChild(spinner_feeder_) ;
 
         //
         // Rotates the pivot arm that contains the intake/shooter assembly up and down
@@ -54,24 +51,21 @@ public class IntakeShooterSubsystem extends Subsystem {
         //
         // The sensor for detecting the note
         //
-        int channel = getSettingsValue("hw:note-sensor").getInteger() ;
+        int channel = getSettingsValue("hw:note-sensor:io").getInteger() ;
         note_sensor_ = new DigitalInput(channel) ;
+        note_inverted_ = getSettingsValue("hw:note-sensor:inverted").getBoolean() ;
     }
 
     public boolean isNotePresent() {
-        return note_sensor_.get() ;
+        return note_present_ ;
     }
 
-    public MotorEncoderSubsystem spinner() {
-        return spinner_ ;
+    public MotorEncoderSubsystem spinner_feeder() {
+        return spinner_feeder_ ;
     }
 
     public MotorEncoderSubsystem updown() {
         return updown_;
-    }
-
-    public MotorEncoderSubsystem feeder() {
-        return feeder_ ;
     }
 
     public MotorEncoderSubsystem tilt() {
@@ -84,14 +78,20 @@ public class IntakeShooterSubsystem extends Subsystem {
 
     public MotorEncoderSubsystem shooter2() {
         return shooter2_ ;
-    }    
+    }
+
+    @Override
+    public void computeMyState() {
+        note_present_ = note_sensor_.get() ^ note_inverted_ ;
+        putDashboard("note", DisplayType.Always, note_present_);
+    }
 
     @Override
     public SettingsValue getProperty(String name) {
         SettingsValue v = null ;
 
-        if (name.equals("spinner-velocity")) {
-            v = new SettingsValue(spinner_.getVelocity()) ;
+        if (name.equals("spinner-feeder-velocity")) {
+            v = new SettingsValue(spinner_feeder_.getVelocity()) ;
         }
         else if (name.equals("shooter1-velocity")) {
             v = new SettingsValue(shooter1_.getVelocity());
@@ -99,9 +99,6 @@ public class IntakeShooterSubsystem extends Subsystem {
         else if (name.equals("shooter2-velocity")) {
             v = new SettingsValue(shooter2_.getVelocity());
         }        
-        else if (name.equals("feeder-velocity")) {
-            v = new SettingsValue(feeder_.getVelocity());
-        }
         else if (name.equals("updown-position")) {
             v = new SettingsValue(updown_.getPosition());
         }

@@ -1,0 +1,39 @@
+
+{
+    "stimulus" :
+    [
+        {
+            "time" : 0.0,
+            "events" :
+            [
+                {
+                    "model" : "fms",
+                    "instance" : "1",
+                    "values" : 
+                    {
+                        "start" : 0,
+                        "autonomous" : 20.0,
+                        "between" : 0.0,
+                        "teleop" : 120.0,
+                        "fms" : false
+                    }
+                }
+            ]
+        },
+        {
+            "time" : 10.0,
+            "events" : 
+            [
+                {
+                    "model" : "intake-shooter",
+                    "instance" : "1",
+                    "values" : 
+                    {
+                        "comment" : "note arrives in intake/shooter subsystem",
+                        "note-present" : true
+                    }
+                }
+            ]
+        }
+    ]
+}

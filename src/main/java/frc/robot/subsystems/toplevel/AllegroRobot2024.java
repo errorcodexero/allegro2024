@@ -4,8 +4,11 @@ import org.xero1425.base.XeroRobot;
 import org.xero1425.base.subsystems.RobotSubsystem;
 import org.xero1425.base.subsystems.swerve.SDSSwerveDriveSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
+
+import frc.robot.subsystems.elevatorpivot.ElevatorPivotSubsystem;
 import frc.robot.subsystems.intakeshooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.oi.Allegro2024OISubsystem;
+import frc.robot.subsystems.targettracker.TargetTracker;
 
 public class AllegroRobot2024 extends RobotSubsystem {
 
@@ -13,6 +16,8 @@ public class AllegroRobot2024 extends RobotSubsystem {
     private Allegro2024OISubsystem oi_;
     private LimeLightSubsystem ll_;
     private IntakeShooterSubsystem intake_shooter_ ;
+    private ElevatorPivotSubsystem elevetor_pivot_ ;
+    private TargetTracker tt_ ;
 
     public AllegroRobot2024(XeroRobot robot) throws Exception {
         super(robot, "Allegro2024RobotSubsystem");
@@ -28,6 +33,12 @@ public class AllegroRobot2024 extends RobotSubsystem {
 
         intake_shooter_ = new IntakeShooterSubsystem(this);
         addChild(intake_shooter_);
+
+        elevetor_pivot_ = new ElevatorPivotSubsystem(this) ;
+        addChild(elevetor_pivot_) ;
+
+        tt_ = new TargetTracker(this, db_, ll_) ;
+        addChild(tt_) ;
     }
 
     public SDSSwerveDriveSubsystem getSwerve() {
@@ -44,5 +55,13 @@ public class AllegroRobot2024 extends RobotSubsystem {
 
     public IntakeShooterSubsystem getIntakeShooterSubsystem() {
         return intake_shooter_ ;
+    }
+
+    public ElevatorPivotSubsystem getElevatorPivotSubsystem() {
+        return elevetor_pivot_ ;
+    }
+
+    public TargetTracker getTargetTracker() {
+        return tt_ ;
     }
 }

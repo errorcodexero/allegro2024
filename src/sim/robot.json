@@ -35,6 +35,8 @@
             "model" : "intake-shooter",
             "instance" : "1",
             "props" : {
+                "note-sensor" : 1,
+
                 "spinner:type" : "talon-fx",
                 "spinner:bus" : "",
                 "spinner:canid" : 1,

@@ -59,6 +59,9 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
     private Pose2d last_pose_ ;
     private boolean vision_enabled_ ;
 
+    private boolean sw_rotation_control_ ;
+    private double sw_rotation_angle_ ;
+
     private MinMaxData velocity_ ;
     private MinMaxData rotational_velocity_ ;
    
@@ -69,6 +72,9 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
 
     public SwerveBaseSubsystem(Subsystem parent, String name) throws Exception {
         super(parent, name) ;
+
+        sw_rotation_control_ = false ;
+        sw_rotation_angle_ = 0.0 ;
 
         angles_ = new double[4] ;
         powers_ = new double[4] ;
@@ -102,6 +108,14 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
         last_pose_ = new Pose2d() ;
     }
 
+    public void setRotationAngle(double angle) {
+        sw_rotation_angle_ = angle ;
+    }
+
+    public void setRotationSWController(boolean enable) {
+        sw_rotation_control_ = enable ;
+    }
+
     public Pose2d getVisionPose() {
         return vision_.getCurrentPose() ;
     }
@@ -124,7 +138,6 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
                 setPose(new Pose2d());
             }
         }
-
     }
 
     public void enableVision(boolean enable) {
