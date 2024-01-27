@@ -2,11 +2,7 @@ package frc.robot.subsystems.intakeshooter;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.misc.XeroTimer;
-import org.xero1425.base.motors.BadMotorRequestException;
-import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
-import org.xero1425.misc.BadParameterTypeException;
-import org.xero1425.misc.MissingParameterException;
 
 public class TransferNoteAction extends Action {
     private IntakeShooterSubsystem sub_ ;

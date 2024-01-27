@@ -16,7 +16,7 @@ public class AllegroRobot2024 extends RobotSubsystem {
     private Allegro2024OISubsystem oi_;
     private LimeLightSubsystem ll_;
     private IntakeShooterSubsystem intake_shooter_ ;
-    private ElevatorPivotSubsystem elevetor_pivot_ ;
+    private ElevatorPivotSubsystem elevator_pivot_ ;
     private TargetTracker tt_ ;
 
     public AllegroRobot2024(XeroRobot robot) throws Exception {
@@ -34,8 +34,8 @@ public class AllegroRobot2024 extends RobotSubsystem {
         intake_shooter_ = new IntakeShooterSubsystem(this);
         addChild(intake_shooter_);
 
-        elevetor_pivot_ = new ElevatorPivotSubsystem(this) ;
-        addChild(elevetor_pivot_) ;
+        elevator_pivot_ = new ElevatorPivotSubsystem(this) ;
+        addChild(elevator_pivot_) ;
 
         tt_ = new TargetTracker(this, db_, ll_) ;
         addChild(tt_) ;
@@ -58,7 +58,7 @@ public class AllegroRobot2024 extends RobotSubsystem {
     }
 
     public ElevatorPivotSubsystem getElevatorPivotSubsystem() {
-        return elevetor_pivot_ ;
+        return elevator_pivot_ ;
     }
 
     public TargetTracker getTargetTracker() {

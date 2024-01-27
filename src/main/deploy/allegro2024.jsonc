@@ -41,7 +41,9 @@
                     "inverted" : false
                 },
                 "tilt-sensor" : {
-                    "io" : 50
+                    "io" : 50,
+                    "robotv" : 0,
+                    "encoderv" : 0
                 }
             },
             "actions" : {
@@ -916,7 +918,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 62,
+        "which": 11,
         "0": {
             "angle": 45,
             "power": 0.1,

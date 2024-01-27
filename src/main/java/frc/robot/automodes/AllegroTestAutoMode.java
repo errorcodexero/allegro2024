@@ -46,7 +46,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //////////////////////////////////////////////////////////////////////////////////////
 
             // 
-            // Spinner tests
+            // Spinner/Feeder tests
             // 
 
             //
