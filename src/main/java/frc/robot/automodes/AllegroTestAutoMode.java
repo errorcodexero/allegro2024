@@ -1,5 +1,6 @@
 package frc.robot.automodes;
 
+import org.xero1425.base.actions.DelayAction;
 import org.xero1425.base.controllers.AutoController;
 import org.xero1425.base.controllers.SwerveTestAutoMode;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
@@ -9,8 +10,15 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
 
 import frc.robot.subsystems.intakeshooter.StartCollectAction;
+import frc.robot.subsystems.intakeshooter.StopCollectAction;
+import frc.robot.subsystems.intakeshooter.StowAction;
+import frc.robot.subsystems.intakeshooter.TransferNoteAction;
+import frc.robot.subsystems.intakeshooter.TurtleAction;
 import frc.robot.subsystems.targettracker.TargetTracker;
+import frc.robot.subsystems.intakeshooter.EjectAction;
 import frc.robot.subsystems.intakeshooter.IntakeShooterSubsystem;
+import frc.robot.subsystems.intakeshooter.PrepareToShootAction;
+import frc.robot.subsystems.intakeshooter.PrepareTransferNoteAction;
 import frc.robot.subsystems.intakeshooter.ShootAction;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
@@ -136,39 +144,46 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             case 60:
                 if (intake != null) {
-                    addSubActionPair(intake, new StartCollectAction(intake), true) ;
+                    addSubActionPair(intake, new StartCollectAction(intake), false) ;
+                    addAction(new DelayAction(getAutoController().getRobot(), 5.0));
+                    addSubActionPair(intake, new StopCollectAction(intake), true) ;
+                }
+                break ;
+
+            case 61:
+                if (intake != null) {
+                    addSubActionPair(intake, new PrepareToShootAction(intake), true);
+                    addAction(new DelayAction(getAutoController().getRobot(), 5.0));
+                    addSubActionPair(intake, new ShootAction(intake, tt), true);                    
                 }
                 break ;
 
             case 62:
                 if (intake != null) {
-                    addSubActionPair(intake, new ShootAction(intake, tt), true);
+                    addSubActionPair(intake, new PrepareTransferNoteAction(intake), true);
+                    addAction(new DelayAction(getAutoController().getRobot(), 5.0));
+                    addSubActionPair(intake, new TransferNoteAction(intake), true);
+
                 }
                 break ;
 
-            //
-            // Elevator tests
-            //
-            case 70:
-                break ;
-
-            //
-            // Pivot tests
-            //
-            case 80:
-                break ;
-
-            //
-            // Manipulator tests
-            //
-            case 90:
-                break ; 
-
-            //
-            // complete elevator-pivot-manipulator tests
-            //
-            case 100:
-                break;
+            case 63:
+                if (intake != null) {
+                    addSubActionPair(intake, new EjectAction(intake), true);
+                }
+                break ;      
+                
+            case 64:
+                if (intake != null) {
+                    addSubActionPair(intake, new StowAction(intake), true);
+                }
+                break ;       
+                
+            case 65:
+                if (intake != null) {
+                    addSubActionPair(intake, new TurtleAction(intake), true);
+                }
+                break ;                      
         }
     }
 }
