@@ -6,6 +6,9 @@ import org.xero1425.simulator.engine.SimulationModel;
 import org.xero1425.simulator.models.ISimMotorController;
 
 public class IntakeShooterModel extends SimulationModel {
+    final private static String bus = "" ;
+    final private static int [] RequiredMotors = new int[] { 1, 2, 3, 4, 5} ;
+
     ISimMotorController spinner_ ;
     ISimMotorController updown_ ;
     ISimMotorController feeder_ ;
@@ -19,36 +22,23 @@ public class IntakeShooterModel extends SimulationModel {
 
     @Override
     public boolean create(SimulationEngine engine) throws Exception {
-        final String bus = "" ;
-        boolean exists = true ;
-
-        for(int i = 1 ; i <= 6 ; i++) {
-            //
-            // This is a hard coded check to ensure the motors with CAN ids 1 - 6
-            // exist.  This is assumed to be the motors for the shooter/intake subsystem.  If any
-            // of them do not exists, then the assocaited modelsa are not created.
-            //
-            if (engine.getRobot().getMotorFactory().getMotorController(bus, 1) == null) {
-                exists = false ;
-                break ;
-            }
+        if (!hasCANMotors(bus, RequiredMotors)) {
+            return false ;
         }
 
-        if (exists) {
-            //
-            // Create the models for the motors
-            //
-            spinner_ = createSimulatedMotor(engine, "spinner");
-            updown_ = createSimulatedMotor(engine, "updown");
-            feeder_ = createSimulatedMotor(engine, "feeder");
-            shooter1_ = createSimulatedMotor(engine, "shooter1");
-            shooter2_ = createSimulatedMotor(engine, "shooter2");
-            tilt_ = createSimulatedMotor(engine, "tilt");
-        }
+        //
+        // Create the models for the motors
+        //
+        spinner_ = createSimulatedMotor(engine, "spinner");
+        updown_ = createSimulatedMotor(engine, "updown");
+        feeder_ = createSimulatedMotor(engine, "feeder");
+        shooter1_ = createSimulatedMotor(engine, "shooter1");
+        shooter2_ = createSimulatedMotor(engine, "shooter2");
+        tilt_ = createSimulatedMotor(engine, "tilt");
 
         setCreated();
 
-        return false;
+        return true;
     }
 
     @Override
