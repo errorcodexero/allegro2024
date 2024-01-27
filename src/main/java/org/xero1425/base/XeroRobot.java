@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
+import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -118,10 +119,8 @@ public abstract class XeroRobot extends TimedRobot {
     // The type of pneumatics on the robot
     private PneumaticsModuleType pneumatics_type_ ;
 
+    // The PDP object to get information about currents
     private PowerDistribution pdp_ ;
-
-    // Server for dispalying the status of the robot
-    // private StatusServer server_ ;
 
     // The april tag layout for this field
     private AprilTagFieldLayout layout_ ;
@@ -228,13 +227,7 @@ public abstract class XeroRobot extends TimedRobot {
 
         automode_ = -1;
 
-        // try {
-        //     server_ = new StatusServer(9001) ;
-        //     server_.start() ;
-        // }
-        // catch(IOException ex) {
-
-        // }
+        layout_ = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField() ;
     }
 
     public RobotPaths getRobotFileSystemPaths() {
@@ -888,17 +881,6 @@ public abstract class XeroRobot extends TimedRobot {
     }
 
     public AprilTagFieldLayout getAprilTags() {
-        if (layout_ == null) {
-            String path = robot_paths_.deployDirectory() + "/AprilTags.json" ;
-        
-            try {
-              layout_ = new AprilTagFieldLayout(path) ;
-            }
-            catch (IOException ex) {
-                logger_.startMessage(MessageType.Error).add("cannot load april tag file '" + path + "' - " + ex.getMessage()).endMessage();
-                layout_ = null ;
-            }
-        }
 
         return layout_ ;
     }
