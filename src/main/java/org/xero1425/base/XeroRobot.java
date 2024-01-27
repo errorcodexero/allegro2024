@@ -1001,7 +1001,7 @@ public abstract class XeroRobot extends TimedRobot {
             dest = new MessageDestinationFile(logfile) ;
         }
         else {
-            dest = new MessageDestinationThumbFile(robot_paths_.logFileDirectory(), 250);
+            dest = new MessageDestinationThumbFile(robot_paths_.logFileDirectory(), 250, RobotBase.isSimulation());
         }
         logger_.addDestination(dest);
         enableMessages();
