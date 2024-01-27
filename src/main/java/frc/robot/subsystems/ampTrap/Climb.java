@@ -6,11 +6,25 @@ import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 
 public class Climb extends Action{
     private AmpTrapSubsystem sub_;
-    private MCMotionMagicAction climb;
+    private MCMotionMagicAction climb_;
     public Climb(AmpTrapSubsystem sub) throws Exception{
         super(sub.getRobot().getMessageLogger());
         sub_ = sub;
-        climb = new MCMotionMagicAction(sub.climber(), "climber", 20, 0.5, 1);
+        climb_ = new MCMotionMagicAction(sub.climber(), "climb", "climb", 0.5, 1);
+    }
+
+    @Override
+    public void start() throws Exception{
+        super.start();
+        sub_.climber().setAction(climb_);
+    }
+
+    @Override
+    public void run() throws Exception{
+        super.run();
+        if(climb_.isDone()){
+            setDone();
+        }
     }
 
     @Override
