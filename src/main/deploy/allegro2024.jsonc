@@ -171,7 +171,7 @@
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-                    "canId" : 6,
+                    "canId" : 9,
                     "inverted" : false,
                     "neutral-mode" : "brake",
                     "current-limit" : 20.0
@@ -205,6 +205,51 @@
                     "outmax" : 12.0,
                     "maxv" : 5,
                     "maxa" : 7.5,
+                    "jerk" : 0.0
+                }
+            }
+        },
+        "climber" : {
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
+                    "bus" : "",
+                    "canId" : 10,
+                    "inverted" : false,
+                    "neutral-mode" : "brake",
+                    "current-limit" : 20.0
+                },
+                "encoder" : {
+                    "type" : "motor",
+                    "m" : 0.17578125,
+                    "b" : 0,
+                    "posunits" : "revolutions",
+                    "velunits" : "revolutions/s",
+                    "accunits" : "revolutions/s/s"
+                }
+            },
+            "props" : {
+                "position-important" : "high",
+                "velocity-important" : "high"
+            },
+            "targets" : {
+                "climbprep" : 10.0,
+                "climb" : 0.0,
+                "climbdown" : 10.0,
+                "stow" : 0.0
+            },
+            "pids" : {
+                "position" : {
+                    "kp" : 0.0035,
+                    "ki" : 0.0,
+                    "kd" : 0.004,
+                    "kv" : 0.000312,
+                    "ka" : 0.0,
+                    "kg" : 0.0, 
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 1,
+                    "maxa" : 4,
                     "jerk" : 0.0
                 }
             }
