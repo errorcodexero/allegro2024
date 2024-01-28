@@ -27,10 +27,19 @@ public class MessageDestinationThumbFile implements MessageDestination
     /// \brief create a new object that logs messages to a thumb drive
     /// \param bdir the base directory for log files (e.g. /u) ;
     /// \param timeout a timeout for trying to open a file in the base directory given
-    public MessageDestinationThumbFile(final String bdir, final long timeout) {
+    public MessageDestinationThumbFile(final String bdir, final long timeout, boolean create) {
         int index = 1;
         valid_ = false;
         final long startms = new Date().getTime();
+
+        if (create) {
+            final File f = new File(bdir);
+            if (!f.exists()) {
+                if (!f.mkdirs()) {
+                    return ;
+                }
+            }
+        }
 
         while (true) {
             final long now = new Date().getTime();

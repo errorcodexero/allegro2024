@@ -7,6 +7,7 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
 
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
+import frc.robot.subsystems.ampTrap.AmpTrapSubsystem;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class AllegroTestAutoMode extends SwerveTestAutoMode {
@@ -16,6 +17,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
         AllegroRobot2024 robot = (AllegroRobot2024)ctrl.getRobot().getRobotSubsystem() ;
         IntakeShooterSubsystem intakeshooter = robot.getIntakeShooter();
+        AmpTrapSubsystem amptrap = robot.getAmpTrap() ;
 
         if (createTest()) {
             //
@@ -50,6 +52,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                     addSubActionPair(intakeshooter.getFeeder(), new MCVelocityAction(intakeshooter.getFeeder(), "pids:velocity", getDouble("velocity")), true);
                 }
                 break; 
+
             /////////////////////////////////////////////////////////////////////////
             //
             // Updown tests
@@ -75,6 +78,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                     addSubActionPair(intakeshooter.getUpDown(), new MCVelocityAction(intakeshooter.getUpDown(), "pids:velocity", getDouble("velocity")), true);
                 }
                 break; 
+
             /////////////////////////////////////////////////////////////////////////
             //
             // Shooter1 tests
@@ -100,6 +104,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                     addSubActionPair(intakeshooter.getShooter1(), new MCVelocityAction(intakeshooter.getShooter1(), "pids:velocity", getDouble("velocity")), true);
                 }
                 break; 
+
             /////////////////////////////////////////////////////////////////////////
             //
             // Shooter2 tests
@@ -125,6 +130,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                     addSubActionPair(intakeshooter.getShooter2(), new MCVelocityAction(intakeshooter.getShooter2(), "pids:velocity", getDouble("velocity")), true);
                 }
                 break;
+
             /////////////////////////////////////////////////////////////////////////
             //
             // Tilt tests
@@ -149,8 +155,73 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 if (intakeshooter != null && intakeshooter.getTilt() != null) {
                     addSubActionPair(intakeshooter.getTilt(), new MCVelocityAction(intakeshooter.getTilt(), "pids:velocity", getDouble("velocity")), true);
                 }
-                break;
+                break;  
+                
+            /////////////////////////////////////////////////////////////////////////
+            //
+            // Elevator tests
+            //
+            /////////////////////////////////////////////////////////////////////////
+            case 60:
+                if (amptrap != null && amptrap.getElevator() != null) {
+                    addSubActionPair(amptrap.getElevator(), new MotorEncoderPowerAction(amptrap.getElevator(), getDouble("power"), getDouble("duration")), true) ;
+                }
+                break ;
 
+            case 61:
+                if (amptrap != null && amptrap.getElevator() != null) {
+                    double duration = getDouble("duration") ;
+                    double [] times = new double[] { duration, duration, duration, duration, duration } ;
+                    double [] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9} ;
+                    addSubActionPair(amptrap.getElevator(), new MotorPowerSequenceAction(amptrap.getElevator(), times, powers), true) ;
+                }
+                break ;                
+
+            case 62:
+                if (amptrap != null && amptrap.getElevator() != null) {
+                    addSubActionPair(amptrap.getElevator(), new MCVelocityAction(amptrap.getElevator(), "pids:velocity", getDouble("velocity")), true);
+                }
+                break ;   
+                
+            /////////////////////////////////////////////////////////////////////////
+            //
+            // Arm tests
+            //
+            /////////////////////////////////////////////////////////////////////////
+            case 70:
+                break;          
+                
+            /////////////////////////////////////////////////////////////////////////
+            //
+            // Wrists tests
+            //
+            /////////////////////////////////////////////////////////////////////////
+            case 80:
+                break;                 
+
+            /////////////////////////////////////////////////////////////////////////
+            //
+            // Manipulator tests
+            //
+            /////////////////////////////////////////////////////////////////////////
+            case 90:
+                break;    
+                
+            /////////////////////////////////////////////////////////////////////////
+            //
+            // Intake-Shooter tests
+            //
+            /////////////////////////////////////////////////////////////////////////
+            case 100:
+                break;                  
+
+            /////////////////////////////////////////////////////////////////////////
+            //
+            // Amp-Trap tests
+            //
+            /////////////////////////////////////////////////////////////////////////
+            case 120:
+                break;                 
         }
     }
 }

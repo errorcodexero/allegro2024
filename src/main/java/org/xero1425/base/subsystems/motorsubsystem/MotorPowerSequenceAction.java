@@ -114,7 +114,7 @@ public class MotorPowerSequenceAction extends MotorAction {
             bld.append(Double.toString(powers_[i])) ;
             bld.append(')') ;
         }
-        return "MotorPowerSequenceAction " + bld.toString() ;
+        return spaces(indent) + "MotorPowerSequenceAction " + bld.toString() ;
     }
 
     private void setupCurrentIndex() {
