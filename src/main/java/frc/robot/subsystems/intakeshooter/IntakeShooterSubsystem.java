@@ -20,6 +20,7 @@ public class IntakeShooterSubsystem extends Subsystem {
 
     private EncoderMapper mapper_ ;
     private CANcoder cancoder_ ;
+
     private MotorEncoderSubsystem spinner_feeder_ ;
     private MotorEncoderSubsystem updown_ ; 
     private MotorEncoderSubsystem shooter1_ ;
@@ -28,6 +29,7 @@ public class IntakeShooterSubsystem extends Subsystem {
     private DigitalInput note_sensor_ ;
     private boolean note_present_ ;
     private boolean note_inverted_ ;
+    
     private boolean tilt_inited_ ;
 
     public IntakeShooterSubsystem(Subsystem parent) throws Exception {

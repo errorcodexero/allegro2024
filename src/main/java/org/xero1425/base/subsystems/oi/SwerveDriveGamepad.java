@@ -97,6 +97,9 @@ public class SwerveDriveGamepad extends Gamepad {
     private boolean isButtonSequencePressed(SwerveButton[] buttons) {
         boolean ret = true ;
 
+        if (buttons == null)
+            return false ;
+
         if (buttons != null && buttons.length > 0) {
             for(SwerveButton button : buttons) {
                 boolean bstate = false ;

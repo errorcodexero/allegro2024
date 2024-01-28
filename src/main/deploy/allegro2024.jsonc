@@ -401,7 +401,7 @@
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-                    "canid" : 51,
+                    "canid" : 61,
                     "inverted" : false,
                     "neutral-mode": "brake",
                     "current-limit" : 20.0
