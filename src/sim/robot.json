@@ -35,12 +35,12 @@
             "model" : "intake-shooter",
             "instance" : "1",
             "props" : {
-                "spinner:type" : "talon-fx",
-                "spinner:bus" : "",
-                "spinner:canid" : 1,
-                "spinner:count" : 1,
-                "spinner:gearing" : 1.0,
-                "spinner:moment" : 0.000183064,
+                "feeder:type" : "talon-fx",
+                "feeder:bus" : "",
+                "feeder:canid" : 1,
+                "feeder:count" : 1,
+                "feeder:gearing" : 1.0,
+                "feeder:moment" : 0.000183064,
 
                 "updown:type" : "talon-fx",
                 "updown:bus" : "",
