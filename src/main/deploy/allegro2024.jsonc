@@ -323,6 +323,185 @@
                 },
                 "power": 2.0
             }            
+        },
+        "intakeshooter" : {
+            "updown" : {
+                "hw" : {
+                    "motors" : {
+                        "type" : "talon-fx",
+                        "bus" : "",
+                        "canid" : "1",
+                        "inverted" : false,
+                        "neutral-mode" : "brake",
+                        "current-limit" : 20.0
+                    },
+                    "encoder": {
+                        //
+                        // Units are degrees
+                        //
+                        "type" : "motor",
+                        "m": 0.17578125, 
+                        "b" : 0,
+                        "posunits" : "deg",
+                        "velunits" : "deg/s",
+                        "accunits" : "deg/s/s"
+                    },
+                    "props" : {
+                        "position-important" : "High",
+                        "velocity-important" : "High"
+                    },
+                    "targets" : {
+                        "collect" : 25,
+                        "stow" : 90,
+                        "shoot" : 90,
+                        "eject" : 25
+                    },
+                    "pids" : {
+                        "position" : {
+                            "kp" : 0.0035,
+                            "ki" : 0.0,
+                            "kd" : 0.004,
+                            "kv" : 0.000312,
+                            "ka" : 0.0,
+                            "kg" : 0.0,
+                            "ks" : 0.0,
+                            "outmax" : 12.0,
+                            "maxv" : 80,
+                            "maxa" : 80,
+                            "jerk" : 0.0
+                        }
+                    }
+                }
+            },
+            "feeder" : {
+                "hw" : {
+                    "motors" : {
+                        "type" : "talon-fx",
+                        "bus" : "",
+                        "canid" : "2",
+                        "inverted" : false,
+                        "neutral-mode" : "brake",
+                        "current-limit" : 20.0
+                    },
+                    "encoder": {
+                        //
+                        // Units are degrees
+                        //
+                        "type" : "motor",
+                        "m": 0.17578125,             
+                        "b" : 0,
+                        "posunits" : "deg",
+                        "velunits" : "deg/s",
+                        "accunits" : "deg/s/s"
+                    },
+                    "props" : {
+                        "position-important" : "High",
+                        "velocity-important" : "High"
+                    }
+                }
+            },
+            "tilt" : {
+                "hw" : {
+                    "motors" : {
+                        "type" : "talon-fx",
+                        "bus" : "",
+                        "canid" : "3",
+                        "inverted" : false,
+                        "neutral-mode" : "brake",
+                        "current-limit" : 20.0
+                    },
+                    "encoder": {
+                        //
+                        // Units are degrees
+                        //
+                        "type" : "motor",
+                        "m": 0.17578125,          
+                        "b" : 0,
+                        "posunits" : "deg",
+                        "velunits" : "deg/s",
+                        "accunits" : "deg/s/s"
+                    },
+                    "props" : {
+                        "position-important" : "High",
+                        "velocity-important" : "High"
+                    },
+                    "targets" : {
+                        "collect" : 25,
+                        "stow" : 90,
+                        "shoot" : 90,
+                        "eject" : 25
+                    },
+                    "pids" : {
+                        "position" : {
+                            "kp" : 0.0035,
+                            "ki" : 0.0,
+                            "kd" : 0.004,
+                            "kv" : 0.000312,
+                            "ka" : 0.0,
+                            "kg" : 0.0,
+                            "ks" : 0.0,
+                            "outmax" : 12.0,
+                            "maxv" : 80,
+                            "maxa" : 80,
+                            "jerk" : 0.0
+                        }
+                    }
+                }
+            },
+            "shooter1" : {
+                "hw" : {
+                    "motors" : {
+                        "type" : "talon-fx",
+                        "bus" : "",
+                        "canid" : "4",
+                        "inverted" : false,
+                        "neutral-mode" : "brake",
+                        "current-limit" : 20.0
+                    },
+                    "encoder": {
+                        //
+                        // Units are degrees
+                        //
+                        "type" : "motor",
+                        "m": 0.17578125,             
+                        "b" : 0,
+                        "posunits" : "deg",
+                        "velunits" : "deg/s",
+                        "accunits" : "deg/s/s"
+                    },
+                    "props" : {
+                        "position-important" : "High",
+                        "velocity-important" : "High"
+                    }
+                }
+            },
+            "shooter2" : {
+                "hw" : {
+                    "motors" : {
+                        "type" : "talon-fx",
+                        "bus" : "",
+                        "canid" : "5",
+                        "inverted" : false,
+                        "neutral-mode" : "brake",
+                        "current-limit" : 20.0
+                    },
+                    "encoder": {
+                        //
+                        // Units are degrees
+                        //
+                        "type" : "motor",
+                        "m": 0.17578125,             
+                        "b" : 0,
+                        "posunits" : "deg",
+                        "velunits" : "deg/s",
+                        "accunits" : "deg/s/s"
+                    },
+                    "props" : {
+                        "position-important" : "High",
+                        "velocity-important" : "High"
+                    }
+                }
+            }
         }    
     },
     "testmode" : {
