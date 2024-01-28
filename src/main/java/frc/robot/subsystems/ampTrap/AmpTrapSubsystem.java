@@ -36,23 +36,23 @@ public class AmpTrapSubsystem extends Subsystem{
         addChild(climber_);
     }
 
-    public MotorEncoderSubsystem elevator(){
+    public MotorEncoderSubsystem getElevator(){
         return elevator_;
     }
 
-    public MotorEncoderSubsystem arm(){
+    public MotorEncoderSubsystem getArm(){
         return arm_;
     }
 
-    public MotorEncoderSubsystem wrist(){
+    public MotorEncoderSubsystem getWrist(){
         return wrist_;
     }
 
-    public MotorEncoderSubsystem manipulator(){
+    public MotorEncoderSubsystem getManipulator(){
         return manipulator_;
     }
 
-    public MotorEncoderSubsystem climber(){
+    public MotorEncoderSubsystem getClimber(){
         return climber_;
     }
 
