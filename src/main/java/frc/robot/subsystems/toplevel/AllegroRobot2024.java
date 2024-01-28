@@ -51,6 +51,7 @@ public class AllegroRobot2024 extends RobotSubsystem {
 
     public IntakeShooterSubsystem getIntakeShooter() {
         return is_;
+    }
 
     public AmpTrapSubsystem getAmpTrap(){
         return at_;
