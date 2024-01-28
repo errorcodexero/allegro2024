@@ -34,58 +34,11 @@
         }
     },
     "subsystems": {
-<<<<<<< HEAD
-        "intake-shooter": {
-            "hw" : {
-                "note-sensor" : {
-                    "io" : 1,
-                    "inverted" : false
-                },
-                "tilt-sensor" : {
-                    "io" : 50,
-                    "robotv" : 0,
-                    "encoderv" : 0
-                }
-            },
-            "actions" : {
-                "collect" : {
-                    "tilt-threshold" : 15.0
-                },
-                "shoot" : {
-                    "tilt-margin" : 2.0,
-                    "shoot-margin" : 10,
-                    "angle-margin" : 2.0
-                },
-                "eject" : {
-                    "duration" : 3.0
-                },
-                "transfer" : {
-                    "duration" : 3.0
-                }
-            }
-        },
-        "spinner-feeder" : {
-=======
         "elevator" : {
->>>>>>> main
             "hw" : {
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-<<<<<<< HEAD
-                    "canid" : 1,
-                    "inverted" : false,
-                    "neutral-mode": "brake",
-                    "current-limit" : 20.0
-                },
-                "encoder": {
-                    //
-                    // Units are revolutions
-                    //
-                    "type": "motor",
-                    "m": 0.000488281,           // = 1 / 2048
-                    "b": 0,
-=======
                     "canid" : 6,
                     "inverted" : false,
                     "neutral-mode" : "brake",
@@ -95,66 +48,10 @@
                     "type" : "motor",
                     "m" : 0.17578125,               // TODO: This is a guess, need to get real value from design
                     "b" : 0,
->>>>>>> main
                     "posunits" : "rev",
                     "velunits" : "rev/s",
                     "accunits" : "rev/s/s"
                 }
-<<<<<<< HEAD
-            },            
-            "props" : {
-                "position-important" : "High",
-                "velocity-important" : "High"
-            },
-            "targets" : {
-                "collect" : 50,
-                "shoot" : 50
-            },
-            "pids" : {
-                "velocity" : {
-                    "kp" : 0.0,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kv" : 0.112236985,
-                    "ka" : 0.0,
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 12.0
-                }
-            }            
-        },
-        "updown" : {
-            "hw" : {
-                "motors" : {
-                    "type" : "talon-fx",
-                    "bus" : "",
-                    "canid" : 2,
-                    "inverted" : false,
-                    "neutral-mode": "brake",
-                    "current-limit" : 20.0
-                },
-                "encoder": {
-                    //
-                    // Units are degrees
-                    //
-                    "type": "motor",
-                    "m": 0.17578125,            // Assumes a 1 - 1 gear ratio for now
-                    "b": 0,
-                    "posunits" : "deg",
-                    "velunits" : "deg/s",
-                    "accunits" : "deg/s/s"
-                }
-            },            
-            "props" : {
-                "position-important" : "High",
-                "velocity-important" : "High"
-            },
-            "targets" : {
-                "collect" : 25,
-                "stow" : 90,
-                "shoot" : 90,
-                "eject" : 25
-=======
             },
             "props" : {
                 "position-important" : "high",
@@ -165,7 +62,6 @@
                 "transfer" : 0,
                 "ampprep" : 10,
                 "trapprep" : 15
->>>>>>> main
             },
             "pids" : {
                 "position" : {
@@ -174,272 +70,20 @@
                     "kd" : 0.004,
                     "kv" : 0.000312,
                     "ka" : 0.0,
-<<<<<<< HEAD
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 12.0,
-                    "maxv" : 80,
-                    "maxa" : 80,
-=======
                     "kg" : 0.0, 
                     "ks" : 0.0,
                     "outmax" : 12.0,
                     "maxv" : 2,
                     "maxa" : 4.0,
->>>>>>> main
                     "jerk" : 0.0
                 }
             }
         },
-<<<<<<< HEAD
-        "shooter1" : {
-=======
         "arm" : {
->>>>>>> main
             "hw" : {
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-<<<<<<< HEAD
-                    "canid" : 3,
-                    "inverted" : false,
-                    "neutral-mode": "brake",
-                    "current-limit" : 20.0
-                },
-                "encoder": {
-                    //
-                    // Units are revolutions.  Velocities are revs per second.
-                    //
-                    "type": "motor",
-                    "m": 0.029296875,
-                    "b": 0,
-                    "posunits" : "REV",
-                    "velunits" : "RPM",
-                    "accunits" : "RPM/sec"
-                }
-            },            
-            "props" : {
-                "position-important" : "High",
-                "velocity-important" : "High"
-            },
-            "targets" : {
-                "shoot" : 3500
-            },
-            "pids" : {
-                "velocity" : {
-                    "kp" : 1.0,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kv" : 0.0,
-                    "ka" : 0.0,
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 0.0
-                }
-            },
-            "parameters" : {
-                "velocity-pwl" : {
-                    "1" : {
-                        "x" : 42.5,
-                        "y" : 3200
-                    },
-                    "2" : {
-                        "x" : 68.4,
-                        "y" : 3400
-                    },
-                    "3" : {
-                        "x" : 92,
-                        "y" : 3500
-                    },
-                    "4" : {
-                        "x" : 110,
-                        "y" : 3800
-                    },
-                    "5" : {
-                        "x" : 128.5,
-                        "y" : 4000
-                    },
-                    "6" : {
-                        "x" : 148,
-                        "y" : 6200
-                    },
-                    "7" : {
-                        "x" : 162,
-                        "y" : 6800
-                    },
-                    "8" : {
-                        "x":  250,
-                        "y" : 6800
-                    }
-                }         
-            }            
-        },
-        "shooter2" : {
-            "hw" : {
-                "motors" : {
-                    "type" : "talon-fx",
-                    "bus" : "",
-                    "canid" : 4,
-                    "inverted" : false,
-                    "neutral-mode": "brake",
-                    "current-limit" : 20.0
-                },
-                "encoder": {
-                    //
-                    // Units are revolutions.  Velocities are revs per second.
-                    //
-                    "type": "motor",
-                    "m": 0.029296875,
-                    "b": 0,
-                    "posunits" : "REV",
-                    "velunits" : "RPM",
-                    "accunits" : "RPM/sec"
-                }
-            },            
-            "props" : {
-                "position-important" : "High",
-                "velocity-important" : "High"
-            },
-            "targets" : {
-                "shoot" : 3500
-            },
-            "pids" : {
-                "velocity" : {
-                    "kp" : 1.0,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kv" : 0.0,
-                    "ka" : 0.0,
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 0.0
-                }
-            },
-            "parameters" : {
-                "velocity-pwl" : {
-                    "1" : {
-                        "x" : 42.5,
-                        "y" : 3200
-                    },
-                    "2" : {
-                        "x" : 68.4,
-                        "y" : 3400
-                    },
-                    "3" : {
-                        "x" : 92,
-                        "y" : 3500
-                    },
-                    "4" : {
-                        "x" : 110,
-                        "y" : 3800
-                    },
-                    "5" : {
-                        "x" : 128.5,
-                        "y" : 4000
-                    },
-                    "6" : {
-                        "x" : 148,
-                        "y" : 6200
-                    },
-                    "7" : {
-                        "x" : 162,
-                        "y" : 6800
-                    },
-                    "8" : {
-                        "x":  250,
-                        "y" : 6800
-                    }
-                }         
-            }            
-        },        
-        "tilt" : {
-            "hw" : {
-                "motors" : {
-                    "type" : "talon-fx",
-                    "bus" : "",
-                    "canid" : 5,
-                    "inverted" : false,
-                    "neutral-mode": "brake",
-                    "current-limit" : 20.0
-                },
-                "encoder": {
-                    //
-                    // Degrees (assuming a 1:1 gear ratio)
-                    //
-                    "type": "motor",
-                    "m": 0.17578125,
-                    "b": 0,
-                    "posunits" : "degs",
-                    "velunits" : "degs/s",
-                    "accunits" : "degs/s/s"
-                }
-            },             
-            "props" : {
-                "position-important" : "Off",
-                "velocity-important" : "Off"
-            },        
-            "targets" : {
-                "collect" : 30,
-                "stow" : 0,
-                "shoot" : 0,
-                "eject" : 0
-            },
-            "pids" : {
-                "position" : {
-                    "kp" : 1.0,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kv" : 0.0,
-                    "ka" : 0.0,
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 0.0,
-                    "maxv" : 45.0,
-                    "maxa" : 45.0,                    
-                    "jerk" : 0.0
-                }   
-            },
-            "parameters" : {
-                "tilt-pwl" : {
-                    "1" : {
-                        "x" : 42.5,
-                        "y" : 3200
-                    },
-                    "2" : {
-                        "x" : 68.4,
-                        "y" : 3400
-                    },
-                    "3" : {
-                        "x" : 92,
-                        "y" : 3500
-                    },
-                    "4" : {
-                        "x" : 110,
-                        "y" : 3800
-                    },
-                    "5" : {
-                        "x" : 128.5,
-                        "y" : 4000
-                    },
-                    "6" : {
-                        "x" : 148,
-                        "y" : 6200
-                    },
-                    "7" : {
-                        "x" : 162,
-                        "y" : 6800
-                    },
-                    "8" : {
-                        "x":  250,
-                        "y" : 6800
-                    }
-                }         
-            }
-        },
-        "elevator-pivot" : {
-        },
-        "elevator" : {
-=======
                     "canid" : 7,
                     "inverted" : false,
                     "neutral-mode" : "brake",
@@ -481,145 +125,10 @@
             }
         },
         "wrist" : {
->>>>>>> main
             "hw" : {
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-<<<<<<< HEAD
-                    "canid" : 61,
-                    "inverted" : false,
-                    "neutral-mode": "brake",
-                    "current-limit" : 20.0
-                },
-                "encoder": {
-                    //
-                    // Degrees (assuming a 1:1 gear ratio)
-                    //
-                    "type": "motor",
-                    "m": 0.17578125,
-                    "b": 0,
-                    "posunits" : "degs",
-                    "velunits" : "degs/s",
-                    "accunits" : "degs/s/s"
-                }
-            },             
-            "props" : {
-                "position-important" : "Off",
-                "velocity-important" : "Off"
-            },        
-            "targets" : {
-                "collect" : 30,
-                "stow" : 0
-            },
-            "pids" : {
-                "position" : {
-                    "kp" : 1.0,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kv" : 0.0,
-                    "ka" : 0.0,
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 0.0,
-                    "maxv" : 45.0,
-                    "maxa" : 45.0,                    
-                    "jerk" : 0.0
-                }   
-            }         
-        },
-        "pivot" : {
-            "hw" : {
-                "motors" : {
-                    "type" : "talon-fx",
-                    "bus" : "",
-                    "canid" : 52,
-                    "inverted" : false,
-                    "neutral-mode": "brake",
-                    "current-limit" : 20.0
-                },
-                "encoder": {
-                    //
-                    // Degrees (assuming a 1:1 gear ratio)
-                    //
-                    "type": "motor",
-                    "m": 0.17578125,
-                    "b": 0,
-                    "posunits" : "degs",
-                    "velunits" : "degs/s",
-                    "accunits" : "degs/s/s"
-                }
-            },             
-            "props" : {
-                "position-important" : "Off",
-                "velocity-important" : "Off"
-            },        
-            "targets" : {
-                "collect" : 30,
-                "stow" : 0
-            },
-            "pids" : {
-                "position" : {
-                    "kp" : 1.0,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kv" : 0.0,
-                    "ka" : 0.0,
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 0.0,
-                    "maxv" : 45.0,
-                    "maxa" : 45.0,                    
-                    "jerk" : 0.0
-                }   
-            }         
-        },
-        "hooks" : {
-            "hw" : {
-                "motors" : {
-                    "type" : "talon-fx",
-                    "bus" : "",
-                    "canid" : 53,
-                    "inverted" : false,
-                    "neutral-mode": "brake",
-                    "current-limit" : 20.0
-                },
-                "encoder": {
-                    //
-                    // Degrees (assuming a 1:1 gear ratio)
-                    //
-                    "type": "motor",
-                    "m": 0.17578125,
-                    "b": 0,
-                    "posunits" : "degs",
-                    "velunits" : "degs/s",
-                    "accunits" : "degs/s/s"
-                }
-            },             
-            "props" : {
-                "position-important" : "Off",
-                "velocity-important" : "Off"
-            },        
-            "targets" : {
-                "collect" : 30,
-                "stow" : 0
-            },
-            "pids" : {
-                "position" : {
-                    "kp" : 1.0,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kv" : 0.0,
-                    "ka" : 0.0,
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 0.0,
-                    "maxv" : 45.0,
-                    "maxa" : 45.0,                    
-                    "jerk" : 0.0
-                }   
-            }         
-=======
                     "canid" : 8,
                     "inverted" : false,
                     "neutral-mode" : "brake",
@@ -656,57 +165,12 @@
                     "jerk" : 0.0
                 }
             }
->>>>>>> main
         },
         "manipulator" : {
             "hw" : {
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-<<<<<<< HEAD
-                    "canid" : 54,
-                    "inverted" : false,
-                    "neutral-mode": "brake",
-                    "current-limit" : 20.0
-                },
-                "encoder": {
-                    //
-                    // Degrees (assuming a 1:1 gear ratio)
-                    //
-                    "type": "motor",
-                    "m": 0.17578125,
-                    "b": 0,
-                    "posunits" : "degs",
-                    "velunits" : "degs/s",
-                    "accunits" : "degs/s/s"
-                }
-            },             
-            "props" : {
-                "position-important" : "Off",
-                "velocity-important" : "Off"
-            },        
-            "targets" : {
-                "collect" : 30,
-                "stow" : 0
-            },
-            "pids" : {
-                "position" : {
-                    "kp" : 1.0,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kv" : 0.0,
-                    "ka" : 0.0,
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 0.0,
-                    "maxv" : 45.0,
-                    "maxa" : 45.0,                    
-                    "jerk" : 0.0
-                }   
-            }         
-        },        
-        "mtilt" : {
-=======
                     "canid" : 9,
                     "inverted" : false,
                     "neutral-mode" : "brake",
@@ -746,53 +210,10 @@
             }
         },
         "climber" : {
->>>>>>> main
             "hw" : {
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-<<<<<<< HEAD
-                    "canid" : 55,
-                    "inverted" : false,
-                    "neutral-mode": "brake",
-                    "current-limit" : 20.0
-                },
-                "encoder": {
-                    //
-                    // Degrees (assuming a 1:1 gear ratio)
-                    //
-                    "type": "motor",
-                    "m": 0.17578125,
-                    "b": 0,
-                    "posunits" : "degs",
-                    "velunits" : "degs/s",
-                    "accunits" : "degs/s/s"
-                }
-            },             
-            "props" : {
-                "position-important" : "Off",
-                "velocity-important" : "Off"
-            },        
-            "targets" : {
-                "collect" : 30,
-                "stow" : 0
-            },
-            "pids" : {
-                "position" : {
-                    "kp" : 1.0,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kv" : 0.0,
-                    "ka" : 0.0,
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 0.0,
-                    "maxv" : 45.0,
-                    "maxa" : 45.0,                    
-                    "jerk" : 0.0
-                }   
-            }         
-=======
                     "canid" : 10,
                     "inverted" : false,
                     "neutral-mode" : "brake",
@@ -832,7 +253,6 @@
                     "jerk" : 0.0
                 }
             }
->>>>>>> main
         },
         "swerve" : {
             //
@@ -1109,10 +529,6 @@
             "swerve_gamepad": {
                 "index": 0,
                 "angle": {
-<<<<<<< HEAD
-=======
-
->>>>>>> main
                     "p" : 1.0,
                     "maximum": 180,
                     "deadband": 0.05
@@ -1126,17 +542,6 @@
                 },
                 "power": 2.0
             }            
-<<<<<<< HEAD
-        }    
-    },
-    "testmode" : {
-        "enabled": true,
-        "which": 11,
-        "0": {
-            "angle": 45,
-            "power": 0.1,
-            "duration": 3.0         // optional, if missing will run forever
-=======
         },
         "intake-updown" : {
             "hw" : {
@@ -1386,7 +791,6 @@
             "angle": 45,
             "power": 0.1,
             "duration": 300.0         // optional, if missing will run forever
->>>>>>> main
         },
         "1": {
             "angle": 45.0,
@@ -1418,99 +822,12 @@
         "4": {
             "name": "Edge1Blue-Path1"
         },
-<<<<<<< HEAD
-        "10" : {
-            //
-            // Apply the given power to the intake up/down motor for the given duration
-            //
-            "power" : 0.1,
-            "duration" : 4.0
-        },
-        "11" : {
-            //
-            // Step the power 0.1, 0.3, 0.5, 0.7, 0.9
-            //
-            "duration" : 2.0
-        },        
-        "12" : {
-            //
-            // Use the motor control PID to run the spinner at the velocity given
-            //
-            "velocity" : 66
-        },
-        "20" : {
-            //
-            // Apply the given power to the intake spinner motor for the given duration
-            //
-            "power" : 0.2,
-            "duration" : 1.0
-        },
-        "21" : {
-            //
-            // Step the power 0.1, 0.3, 0.5, 0.7, 0.9
-            //
-            "duration" : 2.0
-        },          
-        "22" : {
-            //
-            // Use the motor control PID to run the spinner at the velocity given
-            //
-            "position" : 50,
-            "pos-threshold" : 2,
-            "vel-threshold" : 0.2
-        },
-        "30" : {
-            //
-            // Apply the given power to the intake spinner motor for the given duration
-            //
-            "power" : 0.2,
-            "duration" : 1.0
-        },
-        "31" : {
-            //
-            // Use the motor control PID to run the spinner at the velocity given
-            //
-            "position" : 30
-        },   
-        "40" : {
-            //
-            // Apply the given power to the intake up/down motor for the given duration
-            //
-            "power" : 0.2,
-            "duration" : 1.0
-        },
-        "41" : {
-            //
-            // Step the power 0.1, 0.3, 0.5, 0.7, 0.9
-            //
-            "duration" : 2.0
-        },           
-        "42" : {
-            //
-            // Use the motor control PID to run the spinner at the velocity given
-            //
-            "velocity" : 30
-        }, 
-        "50" : {
-            //
-            // Apply the given power to the intake up/down motor for the given duration
-            //
-            "power" : 0.2,
-            "duration" : 1.0
-        },
-        "51" : {
-            //
-            // Use the motor control PID to run the spinner at the velocity given
-            //
-            "velocity" : 50
-=======
         "60" : {
             "power" : 0.5,
             "duration" : 3.0
         },
         "61" : {
             "duration" : 2.0
->>>>>>> main
         }
     }
 }
