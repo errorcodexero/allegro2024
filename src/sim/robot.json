@@ -35,6 +35,7 @@
             "model" : "intake-shooter",
             "instance" : "1",
             "props" : {
+<<<<<<< HEAD
                 "note-sensor" : 1,
 
                 "spinner:type" : "talon-fx",
@@ -43,6 +44,14 @@
                 "spinner:count" : 1,
                 "spinner:gearing" : 1.0,
                 "spinner:moment" : 0.000183064,
+=======
+                "feeder:type" : "talon-fx",
+                "feeder:bus" : "",
+                "feeder:canid" : 1,
+                "feeder:count" : 1,
+                "feeder:gearing" : 1.0,
+                "feeder:moment" : 0.000183064,
+>>>>>>> main
 
                 "updown:type" : "talon-fx",
                 "updown:bus" : "",
@@ -74,6 +83,49 @@
             }
         },
         {
+<<<<<<< HEAD
+=======
+            "model" : "amp-trap",
+            "instance" : "1",
+            "props" : {
+                "elevator:type" : "talon-fx",
+                "elevator:bus" : "",
+                "elevator:canid" : 6,
+                "elevator:count" : 1,
+                "elevator:gearing" : 1.0,
+                "elevator:moment" : 0.000183064,
+
+                "arm:type" : "talon-fx",
+                "arm:bus" : "",
+                "arm:canid" : 7,
+                "arm:count" : 1,
+                "arm:gearing" : 1.0,
+                "arm:moment" :  0.001349695365, 
+
+                "wrist:type" : "talon-fx",
+                "wrist:bus" : "",
+                "wrist:canid" : 8,
+                "wrist:count" : 1,
+                "wrist:gearing" : 1.0,
+                "wrist:moment" : 0.000183064,
+                
+                "manipulator:type" : "talon-fx",
+                "manipulator:bus" : "",
+                "manipulator:canid" : 9,
+                "manipulator:count" : 1,
+                "manipulator:gearing" : 1.0,
+                "manipulator:moment" : 0.00036613,
+
+                "climber:type" : "talon-fx",
+                "climber:bus" : "",
+                "climber:canid" : 10,
+                "climber:count" : 1,
+                "climber:gearing" : 1.0,
+                "climber:moment" : 0.000183064
+            }
+        },        
+        {
+>>>>>>> main
             "model" : "sds-swerve-db",
             "instance" : "1",
             "props" : {
@@ -88,14 +140,22 @@
                 "steer:canid" : 11,
                 "steer:count" : 1,
                 "steer:gearing" : 0.046666667,
+<<<<<<< HEAD
                 "steer:moment" : 0.00036613,
+=======
+                "steer:moment" : 0.000036613,
+>>>>>>> main
 
                 "drive:type" : "talon-fx",
                 "drive:bus" : "DriveBase",
                 "drive:canid" : 12,
                 "drive:count" : 1,
                 "drive:gearing" : 0.122807018,
+<<<<<<< HEAD
                 "drive:moment" : 0.00036613                
+=======
+                "drive:moment" : 0.000036613                
+>>>>>>> main
             }
         },
         {
@@ -107,14 +167,22 @@
                 "steer:canid" : 21,
                 "steer:count" : 1,
                 "steer:gearing" : 0.046666667,
+<<<<<<< HEAD
                 "steer:moment" : 0.00036613,
+=======
+                "steer:moment" : 0.000036613,
+>>>>>>> main
 
                 "drive:type" : "talon-fx",
                 "drive:bus" : "DriveBase",
                 "drive:canid" : 22,
                 "drive:count" : 1,
                 "drive:gearing" : 0.122807018,
+<<<<<<< HEAD
                 "drive:moment" : 0.00036613     
+=======
+                "drive:moment" : 0.000036613     
+>>>>>>> main
             }
         },
         {
@@ -126,14 +194,22 @@
                 "steer:canid" : 41,
                 "steer:count" : 1,
                 "steer:gearing" : 0.046666667,
+<<<<<<< HEAD
                 "steer:moment" : 0.00036613,
+=======
+                "steer:moment" : 0.000036613,
+>>>>>>> main
 
                 "drive:type" : "talon-fx",
                 "drive:bus" : "DriveBase",
                 "drive:canid" : 42,
                 "drive:count" : 1,
                 "drive:gearing" : 0.122807018,
+<<<<<<< HEAD
                 "drive:moment" : 0.00036613     
+=======
+                "drive:moment" : 0.000036613     
+>>>>>>> main
             }
         },
         {
@@ -145,14 +221,22 @@
                 "steer:canid" : 31,
                 "steer:count" : 1,
                 "steer:gearing" : 0.046666667,
+<<<<<<< HEAD
                 "steer:moment" : 0.00036613,
+=======
+                "steer:moment" : 0.000036613,
+>>>>>>> main
 
                 "drive:type" : "talon-fx",
                 "drive:bus" : "DriveBase",
                 "drive:canid" : 32,
                 "drive:count" : 1,
                 "drive:gearing" : 0.122807018,
+<<<<<<< HEAD
                 "drive:moment" : 0.00036613     
+=======
+                "drive:moment" : 0.000036613     
+>>>>>>> main
             }
         }
     ]

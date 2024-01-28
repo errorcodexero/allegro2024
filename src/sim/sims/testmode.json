@@ -12,9 +12,15 @@
                     "values" : 
                     {
                         "start" : 0,
+<<<<<<< HEAD
                         "autonomous" : 20.0,
                         "between" : 0.0,
                         "teleop" : 100000000.0,
+=======
+                        "autonomous" : 6000.0,
+                        "between" : 0.0,
+                        "teleop" : 0.0,
+>>>>>>> main
                         "fms" : false
                     }
                 }

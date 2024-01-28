@@ -47,12 +47,6 @@ public class EjectAction extends Action {
             sub_.shooter1().setPower(0.0);
             sub_.shooter2().setPower(0.0);
             sub_.spinner_feeder().setPower(0.0);
-
-            //
-            // TODO: If we can just go up, we can do this here, otherwise if we have to sequence 
-            //       the tilt and up/down we need a new action
-            //
-
             setDone() ;
         }
     }

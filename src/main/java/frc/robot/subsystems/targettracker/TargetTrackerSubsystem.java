@@ -14,7 +14,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 
-public class TargetTracker extends Subsystem {
+public class TargetTrackerSubsystem extends Subsystem {
     private int speaker_tag_  ;
 
     private SwerveBaseSubsystem db_ ;
@@ -24,7 +24,7 @@ public class TargetTracker extends Subsystem {
     private double distance_ ;
     private double angle_ ;
 
-    public TargetTracker(Subsystem parent, SwerveBaseSubsystem db, LimeLightSubsystem ll) {
+    public TargetTrackerSubsystem(Subsystem parent, SwerveBaseSubsystem db, LimeLightSubsystem ll) {
         super(parent, "TargetTracker") ;
 
         db_ = db ;

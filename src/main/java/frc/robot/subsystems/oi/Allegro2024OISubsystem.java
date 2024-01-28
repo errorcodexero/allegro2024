@@ -9,10 +9,10 @@ import org.xero1425.base.subsystems.oi.SwerveDriveGamepad;
 public class Allegro2024OISubsystem extends OISubsystem {
 
     private final static SwerveDriveGamepad.SwerveButton[] resetButtons = { SwerveDriveGamepad.SwerveButton.Y, SwerveDriveGamepad.SwerveButton.B} ;
-    private final static SwerveDriveGamepad.SwerveButton[] xActionButtons = { SwerveDriveGamepad.SwerveButton.LBack } ;
+    private final static SwerveDriveGamepad.SwerveButton[] xActionButtons = { SwerveDriveGamepad.SwerveButton.LBack } ;    
 
     public Allegro2024OISubsystem(Subsystem parent, DriveBaseSubsystem db) {
-        super (parent,"allegro2024oi",GamePadType.Swerve, db, true, false);
+        super (parent,"allegro2024oi",GamePadType.Swerve, db, true, true);
     }
 
     @Override
@@ -22,5 +22,5 @@ public class Allegro2024OISubsystem extends OISubsystem {
             swgp.setSwerveResetButtons(resetButtons);
             swgp.setSwerveXButtons(xActionButtons);
         }
-    }
+    }    
 }

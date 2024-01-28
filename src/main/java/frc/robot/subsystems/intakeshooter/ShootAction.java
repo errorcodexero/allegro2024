@@ -8,11 +8,11 @@ import org.xero1425.base.utils.PieceWiseLinear;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
-import frc.robot.subsystems.targettracker.TargetTracker;
+import frc.robot.subsystems.targettracker.TargetTrackerSubsystem;
 
 public class ShootAction extends Action {
     private IntakeShooterSubsystem sub_ ;
-    private TargetTracker tt_ ;
+    private TargetTrackerSubsystem tt_ ;
     private PieceWiseLinear tilt_pwl_ ;
     private PieceWiseLinear shooter1_pwl_ ;
     private PieceWiseLinear shooter2_pwl_ ;    
@@ -34,7 +34,7 @@ public class ShootAction extends Action {
     private XeroTimer shoot_timer_ ;
     private boolean shooting_ ;
     
-    public ShootAction(IntakeShooterSubsystem sub, TargetTracker tt) throws Exception {
+    public ShootAction(IntakeShooterSubsystem sub, TargetTrackerSubsystem tt) throws Exception {
         super(sub.getRobot().getMessageLogger());
         String name ;
 
