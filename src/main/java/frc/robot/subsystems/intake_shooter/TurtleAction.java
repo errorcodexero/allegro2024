@@ -1,4 +1,4 @@
-package frc.robot.subsystems.intakeshooter;
+package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
@@ -14,19 +14,19 @@ public class TurtleAction extends Action {
 
         sub_ = sub ;
 
-        updown_action_ = new MCMotionMagicAction(sub_.updown(), "pids:position", "target:turtle", 1, 1) ;
-        tilt_action_ = new MCMotionMagicAction(sub_.tilt(), "pids:position", "targets:turtle", 1, 1);
+        updown_action_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", "target:turtle", 1, 1) ;
+        tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", "targets:turtle", 1, 1);
     }   
 
     @Override
     public void start() throws Exception {
         super.start() ;
 
-        sub_.updown().setAction(updown_action_);
-        sub_.tilt().setAction(tilt_action_) ;
-        sub_.shooter1().setPower(0.0);
-        sub_.shooter2().setPower(0.0);
-        sub_.spinner_feeder().setPower(0.0);
+        sub_.getUpDown().setAction(updown_action_);
+        sub_.getTilt().setAction(tilt_action_) ;
+        sub_.getShooter1().setPower(0.0);
+        sub_.getShooter2().setPower(0.0);
+        sub_.getFeeder().setPower(0.0);
     }
 
     @Override

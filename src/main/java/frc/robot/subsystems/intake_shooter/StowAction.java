@@ -1,4 +1,4 @@
-package frc.robot.subsystems.intakeshooter;
+package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
@@ -14,16 +14,16 @@ public class StowAction extends Action {
 
         sub_ = sub ;
 
-        updown_action_ = new MCMotionMagicAction(sub_.updown(), "pids:position", "target:stow", 1, 1) ;
-        tilt_action_ = new MCMotionMagicAction(sub_.tilt(), "pids:position", "targets:stow", 1, 1);
+        updown_action_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", "target:stow", 1, 1) ;
+        tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", "targets:stow", 1, 1);
     }   
 
     @Override
     public void start() throws Exception {
         super.start() ;
 
-        sub_.updown().setAction(updown_action_);
-        sub_.tilt().setAction(tilt_action_) ;
+        sub_.getUpDown().setAction(updown_action_);
+        sub_.getTilt().setAction(tilt_action_) ;
     }
 
     @Override

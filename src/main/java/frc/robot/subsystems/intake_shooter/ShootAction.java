@@ -1,4 +1,4 @@
-package frc.robot.subsystems.intakeshooter;
+package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.misc.XeroTimer;
@@ -55,10 +55,10 @@ public class ShootAction extends Action {
         name = "subsystems:shooter2:parameters:velocity-pwl" ;
         shooter2_pwl_ = new PieceWiseLinear(sub.getRobot().getSettingsSupplier(), name) ;        
 
-        shoot1_velocity_ = new MCVelocityAction(sub_.shooter1(), "pids:velocity", 0.0) ;
-        shoot2_velocity_ = new MCVelocityAction(sub_.shooter1(), "pids:velocity", 0.0) ;
-        tilt_position_ = new MCMotionMagicAction(sub_.tilt(), "pids:position", 1.0, 1, 1) ;
-        feed_velocity_ = new MCVelocityAction(sub_.spinner_feeder(), "pids:velocity", "targets:shoot");
+        shoot1_velocity_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", 0.0) ;
+        shoot2_velocity_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", 0.0) ;
+        tilt_position_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", 1.0, 1, 1) ;
+        feed_velocity_ = new MCVelocityAction(sub_.getFeeder(), "pids:velocity", "targets:shoot");
 
         shoot_timer_ = new XeroTimer(sub.getRobot(), "shoot", 1.0) ;
     }
@@ -75,9 +75,9 @@ public class ShootAction extends Action {
             setDone() ;
         }
         else {
-            sub_.shooter1().setAction(shoot1_velocity_, true) ;
-            sub_.shooter2().setAction(shoot2_velocity_, true) ;
-            sub_.tilt().setAction(tilt_position_, true) ;
+            sub_.getShooter1().setAction(shoot1_velocity_, true) ;
+            sub_.getShooter2().setAction(shoot2_velocity_, true) ;
+            sub_.getTilt().setAction(tilt_position_, true) ;
         }
     }
 
@@ -97,16 +97,16 @@ public class ShootAction extends Action {
             tilt_position_.setTarget(target_tilt_);
             
             if (tiltIsReady() && shooterIsReady() && dbIsReady()) {
-                sub_.spinner_feeder().setAction(feed_velocity_, true) ;
+                sub_.getFeeder().setAction(feed_velocity_, true) ;
                 shoot_timer_.start() ;
                 shooting_ = true ;
             }
         }
         else {
             if (shoot_timer_.isExpired()) {
-                sub_.shooter1().setPower(0.0);
-                sub_.shooter2().setPower(0.0);
-                sub_.spinner_feeder().setPower(0.0);
+                sub_.getShooter1().setPower(0.0);
+                sub_.getShooter2().setPower(0.0);
+                sub_.getFeeder().setPower(0.0);
                 setDone() ;
             }
         }
@@ -118,12 +118,12 @@ public class ShootAction extends Action {
     }
 
     private boolean tiltIsReady() {
-        return Math.abs(sub_.tilt().getPosition() - target_tilt_) < tilt_margin_ ;
+        return Math.abs(sub_.getTilt().getPosition() - target_tilt_) < tilt_margin_ ;
     }
 
     public boolean shooterIsReady() {
-        return Math.abs(sub_.shooter1().getVelocity() - target_s1_) < shoot_margin_ &&
-               Math.abs(sub_.shooter2().getVelocity() - target_s2_) < shoot_margin_ ;
+        return Math.abs(sub_.getShooter1().getVelocity() - target_s1_) < shoot_margin_ &&
+               Math.abs(sub_.getShooter2().getVelocity() - target_s2_) < shoot_margin_ ;
     }
 
     public boolean dbIsReady() {

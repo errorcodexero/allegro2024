@@ -1,4 +1,4 @@
-package frc.robot.subsystems.intakeshooter;
+package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
@@ -35,25 +35,25 @@ public class StartCollectAction extends Action {
 
         tilt_threshold_ = sub.getSettingsValue("actions:collect:tilt-threshold").getDouble() ;
 
-        intake_down_ = new MCMotionMagicAction(sub_.updown(), "pids:position", "targets:collect", 1, 1) ;
-        spinner_feeder_on_ = new MCVelocityAction(sub_.spinner_feeder(), "pids:velocity", "targets:collect") ;
-        tilt_collect_ = new MCMotionMagicAction(sub_.tilt(), "pids:position", "targets:collect", 1, 1) ;
+        intake_down_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", "targets:collect", 1, 1) ;
+        spinner_feeder_on_ = new MCVelocityAction(sub_.getFeeder(), "pids:velocity", "targets:collect") ;
+        tilt_collect_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", "targets:collect", 1, 1) ;
     }
 
     @Override
     public void start() throws Exception {
         super.start() ;
 
-        sub_.spinner_feeder().setAction(spinner_feeder_on_, true) ;
-        sub_.tilt().setAction(tilt_collect_, true) ;
+        sub_.getFeeder().setAction(spinner_feeder_on_, true) ;
+        sub_.getTilt().setAction(tilt_collect_, true) ;
     }
 
     @Override
     public void run() throws Exception {
         super.run() ;
 
-        if (sub_.tilt().getPosition() > tilt_threshold_) {
-            sub_.updown().setAction(intake_down_, true) ;
+        if (sub_.getTilt().getPosition() > tilt_threshold_) {
+            sub_.getUpDown().setAction(intake_down_, true) ;
         }
 
         if (sub_.isNotePresent()) {

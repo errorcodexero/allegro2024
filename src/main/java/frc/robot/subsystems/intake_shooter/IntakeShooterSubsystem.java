@@ -27,7 +27,10 @@ public class IntakeShooterSubsystem extends Subsystem{
 
         shooter2_ = new MotorEncoderSubsystem(this,"intake-shooter2", false);
         addChild(shooter2_);
+    }
 
+    public boolean isNotePresent() {
+        return true ;
     }
 
     public MotorEncoderSubsystem getUpDown() {
