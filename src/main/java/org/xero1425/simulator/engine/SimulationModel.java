@@ -246,4 +246,12 @@ public abstract class SimulationModel {
 
         return ret ;
     }
+
+    protected boolean hasCANMotors(String bus, int[] ids) {
+        for(int id : ids) {
+            if (getEngine().getRobot().getMotorFactory().getMotorController(bus, id) == null)
+                return false ;
+        }
+        return true ;
+    }
 }

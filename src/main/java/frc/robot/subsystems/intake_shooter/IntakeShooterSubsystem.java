@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
@@ -13,13 +13,13 @@ public class IntakeShooterSubsystem extends Subsystem{
     public IntakeShooterSubsystem(Subsystem parent) throws Exception {
         super(parent, "intakeShooter");
 
-        updown_ = new MotorEncoderSubsystem(this,"intake-updown", true);
+        updown_ = new MotorEncoderSubsystem(this,"intake-updown", false);
         addChild(updown_);
 
         feeder_ = new MotorEncoderSubsystem(this,"intake-feeder", false);
         addChild(feeder_);
 
-        tilt_ = new MotorEncoderSubsystem(this,"intake-tilt", true);
+        tilt_ = new MotorEncoderSubsystem(this,"intake-tilt", false);
         addChild(tilt_);
 
         shooter1_ = new MotorEncoderSubsystem(this,"intake-shooter1", false);
