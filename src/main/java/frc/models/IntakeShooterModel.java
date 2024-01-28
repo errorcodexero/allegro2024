@@ -9,7 +9,6 @@ public class IntakeShooterModel extends SimulationModel {
     final private static String bus = "" ;
     final private static int [] RequiredMotors = new int[] { 1, 2, 3, 4, 5} ;
 
-    ISimMotorController spinner_ ;
     ISimMotorController updown_ ;
     ISimMotorController feeder_ ;
     ISimMotorController shooter1_ ;
@@ -29,7 +28,7 @@ public class IntakeShooterModel extends SimulationModel {
         //
         // Create the models for the motors
         //
-        spinner_ = createSimulatedMotor(engine, "spinner");
+        feeder_ = createSimulatedMotor(engine, "feeder");
         updown_ = createSimulatedMotor(engine, "updown");
         feeder_ = createSimulatedMotor(engine, "feeder");
         shooter1_ = createSimulatedMotor(engine, "shooter1");
@@ -48,10 +47,9 @@ public class IntakeShooterModel extends SimulationModel {
 
     @Override
     public void run(double dt) {
-        if (spinner_ != null) {
-            spinner_.run(dt) ;
-            updown_.run(dt) ;
+        if (feeder_ != null) {
             feeder_.run(dt) ;
+            updown_.run(dt) ;
             shooter1_.run(dt) ;
             shooter2_.run(dt) ;        
             tilt_.run(dt) ;
