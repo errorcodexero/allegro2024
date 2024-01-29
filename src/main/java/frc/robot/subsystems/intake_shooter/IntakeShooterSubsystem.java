@@ -52,4 +52,8 @@ public class IntakeShooterSubsystem extends Subsystem{
     public MotorEncoderSubsystem getShooter2() {
             return shooter2_ ;
     }
+
+    public boolean hasNote() {
+        return false ;
+    }
 }

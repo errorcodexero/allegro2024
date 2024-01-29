@@ -56,5 +56,8 @@ public class AmpTrapSubsystem extends Subsystem{
         return climber_;
     }
 
+    public boolean hasNote() {
+        return false ;
+    }
 
 }

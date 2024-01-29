@@ -1,5 +1,8 @@
 package org.xero1425.base.subsystems.oi;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.xero1425.base.LoopType;
 import org.xero1425.base.subsystems.RobotSubsystem;
 import org.xero1425.base.subsystems.swerve.SwerveBaseSubsystem;
@@ -28,8 +31,25 @@ public class SwerveDriveGamepad extends Gamepad {
         LTrigger
     }
 
+    public interface Execute {
+        void execute() ;
+    } ;
+
+    private class ButtonMapping {
+        public SwerveButton[] buttons_ ;
+        public Execute execute_press_ ;
+        public Execute execute_release_ ;
+        public boolean pressed_ ;
+
+        public ButtonMapping(SwerveButton[] buttons, Execute executePress, Execute executeRelease) {
+            buttons_ = buttons ;
+            execute_press_ = executePress ;
+            execute_release_ = executeRelease ;
+            pressed_ = false ;
+        }
+    }
+
     private SwerveBaseSubsystem db_;
-    private boolean invert_ ;
     private double angle_maximum_;
     private double pos_maximum_;
     private double deadband_pos_x_ ;
@@ -38,8 +58,7 @@ public class SwerveDriveGamepad extends Gamepad {
     private double power_ ;
     private SwerveDriveChassisSpeedAction action_;
     private SwerveDriveXPatternAction x_action_;
-    private SwerveButton[] reset_buttons_ ;
-    private SwerveButton[] drivebase_x_buttons_;
+    private List<ButtonMapping> mappings_ ;
     private boolean holding_x_;
     private boolean holding_angle_ ;
     private double holding_angle_value_ ;
@@ -57,22 +76,10 @@ public class SwerveDriveGamepad extends Gamepad {
         }
 
         db_ = drive_;
-        reset_buttons_ = null ;
-        drivebase_x_buttons_ = null;
         holding_x_ = false ;
         holding_angle_ = false ;
-    }
 
-    public void invert(boolean inv) {
-        invert_ = inv;
-    }
-
-    public void setSwerveResetButtons(SwerveButton[] buttons) {
-        reset_buttons_ = buttons ;
-    }
-
-    public void setSwerveXButtons(SwerveButton[] buttons) {
-        drivebase_x_buttons_ = buttons ;
+        mappings_ = new ArrayList<ButtonMapping>() ;
     }
 
     @Override
@@ -94,75 +101,66 @@ public class SwerveDriveGamepad extends Gamepad {
         x_action_ = new SwerveDriveXPatternAction(db_);
     }
 
-    private boolean isButtonSequencePressed(SwerveButton[] buttons) {
-        boolean ret = true ;
+    public void bindButtons(SwerveButton[] buttons, Execute press, Execute release) {
+        ButtonMapping bm = new ButtonMapping(buttons, press, release) ;
+        mappings_.add(bm) ;
+    }
 
-        if (buttons == null)
-            return false ;
+    public void bindButton(SwerveButton button, Execute press, Execute release) {
+        SwerveButton[] buttons = { button } ;
+        bindButtons(buttons, press, release) ;
+    }    
 
-        if (buttons != null && buttons.length > 0) {
-            for(SwerveButton button : buttons) {
-                boolean bstate = false ;
-
-                switch(button) {
-                    case A: bstate = isAPressed() ; break ;
-                    case B: bstate = isBPressed() ; break ;
-                    case X: bstate = isXPressed() ; break ;
-                    case Y: bstate = isYPressed() ; break ;
-                    case LBack: bstate = isLBackButtonPressed() ; break ;
-                    case RBack: bstate = isRBackButtonPressed() ; break ;
-                    case LJoy: bstate = isLJoyButtonPressed() ; break ;
-                    case RJoy: bstate = isRJoyButtonPressed() ; break ;
-                    case LTrigger: bstate = isLTriggerPressed() ; break ;
-                    case RTrigger: bstate = isRTriggerPressed() ; break ;
-                } ;
-
-                if (!bstate) {
-                    ret = false ;
-                    break ;
-                }
+    public void resetSwerveDriveDirection() {
+        RobotSubsystem robotSubsystem = getSubsystem().getRobot().getRobotSubsystem();
+        SwerveBaseSubsystem db = (SwerveBaseSubsystem)robotSubsystem.getDB() ;
+        if (db != null) {
+            boolean invert = false ;
+            if (DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red) {
+                invert = true ;
+            }
+            try {
+                db.resetPose(invert);
+            }
+            catch(Exception ex) {
+                MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+                logger.startMessage(MessageType.Error).add("exeception thrown in swerve resetPose - " + ex.getMessage()).endMessage();
+                logger.logStackTrace(ex.getStackTrace());
             }
         }
+    }
 
-        return ret;
+    public void startDriveBaseX() {
+        if (db_.getAction() != x_action_) {
+            db_.setAction(x_action_);
+        }
+        action_.update(new ChassisSpeeds());
+        holding_x_ = true ;
+    }
+
+    public void stopDriveBaseX() {
+        if (db_.getAction() != action_ && getSubsystem().getRobot().isTeleop()) {
+            db_.setAction(action_);
+        }
+        holding_x_ = false ;
     }
 
     @Override
     public void computeState() {
         super.computeState();
 
-        if (isButtonSequencePressed(reset_buttons_)) {
-            RobotSubsystem robotSubsystem = getSubsystem().getRobot().getRobotSubsystem();
-            SwerveBaseSubsystem db = (SwerveBaseSubsystem)robotSubsystem.getDB() ;
-            if (db != null) {
-                boolean invert = false ;
-                if (invert_ && DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red) {
-                    invert = true ;
-                }
-                try {
-                    db.resetPose(invert);
-                }
-                catch(Exception ex) {
-                    MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
-                    logger.startMessage(MessageType.Error).add("exeception thrown in swerve resetPose - " + ex.getMessage()).endMessage();
-                    logger.logStackTrace(ex.getStackTrace());
-                }
-            }
-        }
+        for(ButtonMapping bm : mappings_) {
+            boolean pressed = isButtonSequencePressed(bm.buttons_) ;
 
-        if (action_ != null) {
-            if (isButtonSequencePressed(drivebase_x_buttons_)) {
-                if (db_.getAction() != x_action_) {
-                    db_.setAction(x_action_);
-                }
-                action_.update(new ChassisSpeeds());
-                holding_x_ = true ;
+            if (pressed && !bm.pressed_) {
+                bm.pressed_ = true ;
+                if (bm.execute_press_ != null)
+                    bm.execute_press_.execute() ;
             }
-            else {
-                if (db_.getAction() != action_ && getSubsystem().getRobot().isTeleop()) {
-                    db_.setAction(action_);
-                }
-                holding_x_ = false ;
+            else if (!pressed && bm.pressed_) {
+                bm.pressed_ = false ;
+                if (bm.execute_release_ != null)
+                    bm.execute_release_.execute() ;
             }
         }
     }
@@ -241,6 +239,39 @@ public class SwerveDriveGamepad extends Gamepad {
         if (db_.getAction() != action_)
             db_.setAction(action_) ;
     }
+
+    private boolean isButtonSequencePressed(SwerveButton[] buttons) {
+        boolean ret = true ;
+
+        if (buttons == null)
+            return false ;
+
+        if (buttons != null && buttons.length > 0) {
+            for(SwerveButton button : buttons) {
+                boolean bstate = false ;
+
+                switch(button) {
+                    case A: bstate = isAPressed() ; break ;
+                    case B: bstate = isBPressed() ; break ;
+                    case X: bstate = isXPressed() ; break ;
+                    case Y: bstate = isYPressed() ; break ;
+                    case LBack: bstate = isLBackButtonPressed() ; break ;
+                    case RBack: bstate = isRBackButtonPressed() ; break ;
+                    case LJoy: bstate = isLJoyButtonPressed() ; break ;
+                    case RJoy: bstate = isRJoyButtonPressed() ; break ;
+                    case LTrigger: bstate = isLTriggerPressed() ; break ;
+                    case RTrigger: bstate = isRTriggerPressed() ; break ;
+                } ;
+
+                if (!bstate) {
+                    ret = false ;
+                    break ;
+                }
+            }
+        }
+
+        return ret;
+    }    
 
     private double mapJoyStick(double v, double maxv, double db, double power) {
         if (Math.abs(v) < db)
