@@ -148,7 +148,10 @@
                 "velocity-important" : "high"
             },
             "targets" : {
-                
+                "stow" : 0,
+                "transfer" : -90,
+                "placeTrap" : 0,
+                "placeAmp" : -30
             },
             "pids" : {
                 "position" : {
@@ -223,9 +226,9 @@
                     "type" : "motor",
                     "m" : 0.17578125,
                     "b" : 0,
-                    "posunits" : "revolutions",
-                    "velunits" : "revolutions/s",
-                    "accunits" : "revolutions/s/s"
+                    "posunits" : "rev",
+                    "velunits" : "rev/s",
+                    "accunits" : "rev/s/s"
                 }
             },
             "props" : {
@@ -787,7 +790,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 61,
+        "which": 100,
         "0": {
             "angle": 45,
             "power": 0.1,
@@ -829,6 +832,9 @@
         },
         "61" : {
             "duration" : 2.0
+        },
+        "100" : {
+            "duration" : 5.0
         }
     }
 }
