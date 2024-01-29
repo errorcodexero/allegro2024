@@ -10,7 +10,7 @@ public class Climb extends Action{
     public Climb(AmpTrapSubsystem sub) throws Exception{
         super(sub.getRobot().getMessageLogger());
         sub_ = sub;
-        climb_ = new MCMotionMagicAction(sub.getClimber(), "climb", "climb", 0.5, 1);
+        climb_ = new MCMotionMagicAction(sub.getClimber(), "pids:position", "targets:climbprep", 0.5, 1);
     }
 
     @Override
