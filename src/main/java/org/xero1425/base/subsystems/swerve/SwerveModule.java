@@ -40,6 +40,7 @@ public class SwerveModule {
         name_ = name ;
         subsys_ = subsys ;
         synchronized_ = false ;
+
         steer_ = subsys_.getRobot().getMotorFactory().createMotor(name + "-steer", id + ":motors:steer");
         steer_.setInverted(cfg.steer_inverted);
         steer_.setNeutralMode(XeroNeutralMode.Brake);
@@ -91,6 +92,16 @@ public class SwerveModule {
             Timer.delay(0.1) ;
         }
         addDashBoardEntries(container);
+    }
+
+    public double ticks2Angle(double ticks) {
+        double angle = ticks * ticksToRadians_ ;
+        angle %= 2.0 * Math.PI ;
+        if (angle < 0.0) {
+            angle += 2.0 * Math.PI ;
+        }
+
+        return angle ;        
     }
 
     public CANcoder getCANCoder() {
@@ -148,15 +159,8 @@ public class SwerveModule {
     }
 
     public double getStateAngle() throws BadMotorRequestException, MotorRequestFailedException {
-        double ticks = steer_.getPosition() ;
+        return ticks2Angle(steer_.getPosition());
 
-        double angle = ticks * ticksToRadians_ ;
-        angle %= 2.0 * Math.PI ;
-        if (angle < 0.0) {
-            angle += 2.0 * Math.PI ;
-        }
-
-        return angle ;
     }    
 
     public double getTargetAngle() {

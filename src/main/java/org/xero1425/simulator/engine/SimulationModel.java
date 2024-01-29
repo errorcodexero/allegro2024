@@ -1,6 +1,8 @@
 package org.xero1425.simulator.engine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,6 +23,8 @@ public abstract class SimulationModel {
     private boolean created_ ;
     private int logger_id_ ;
     private boolean warned_not_run_ ;
+    private boolean run_this_cycle_ ;
+    private List<SimulationModel> dependencies_ ;
     
     public SimulationModel(SimulationEngine engine, String model, String instance) {
         engine_ = engine ;
@@ -32,6 +36,15 @@ public abstract class SimulationModel {
         props_ = new HashMap<String, SettingsValue>() ;
 
         logger_id_ = engine.getMessageLogger().registerSubsystem(model + "_model") ;
+        dependencies_ = new ArrayList<SimulationModel>() ;
+    }
+
+    public void addDependentModel(SimulationModel m) {
+        dependencies_.add(m) ;
+    }
+
+    public List<SimulationModel> getDependentModels() {
+        return dependencies_ ;
     }
 
     public boolean warnedNotRun() {
@@ -52,6 +65,14 @@ public abstract class SimulationModel {
 
     public String getInstanceName() {
         return instance_ ;
+    }
+
+    public boolean hasRunThisCycle() {
+        return run_this_cycle_ ;
+    }
+
+    public void setRunThisCycle(boolean b) {
+        run_this_cycle_ = b ;
     }
 
     public abstract boolean create(SimulationEngine engine) throws Exception ;

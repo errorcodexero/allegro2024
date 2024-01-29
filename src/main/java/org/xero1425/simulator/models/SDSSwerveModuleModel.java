@@ -10,7 +10,6 @@ import org.xero1425.simulator.engine.SimulationModel;
 import com.ctre.phoenix6.hardware.CANcoder;
 
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.Timer;
 
 public class SDSSwerveModuleModel extends SimulationModel {
     private ISimMotorController steer_ ;
@@ -38,8 +37,6 @@ public class SDSSwerveModuleModel extends SimulationModel {
         encoder_.getSimState().setSupplyVoltage(RobotController.getBatteryVoltage());
         encoder_.getSimState().setRawPosition(0.0) ;            
 
-        Timer.delay(0.1) ;
-
         setCreated();
 
         return true ;
@@ -47,6 +44,7 @@ public class SDSSwerveModuleModel extends SimulationModel {
 
     @Override
     public void run(double dt) {
+
         encoder_.getSimState().setSupplyVoltage(RobotController.getBatteryVoltage());
         encoder_.getSimState().setRawPosition(angle_) ;
 

@@ -126,14 +126,14 @@
                 "steer:canid" : 11,
                 "steer:count" : 1,
                 "steer:gearing" : 0.046666667,
-                "steer:moment" : 0.000036613,
+                "steer:moment" : 0.0000036613,
 
                 "drive:type" : "talon-fx",
                 "drive:bus" : "DriveBase",
                 "drive:canid" : 12,
                 "drive:count" : 1,
                 "drive:gearing" : 0.122807018,
-                "drive:moment" : 0.000036613                
+                "drive:moment" : 0.0000036613                
             }
         },
         {
@@ -145,14 +145,14 @@
                 "steer:canid" : 21,
                 "steer:count" : 1,
                 "steer:gearing" : 0.046666667,
-                "steer:moment" : 0.000036613,
+                "steer:moment" : 0.0000036613,
 
                 "drive:type" : "talon-fx",
                 "drive:bus" : "DriveBase",
                 "drive:canid" : 22,
                 "drive:count" : 1,
                 "drive:gearing" : 0.122807018,
-                "drive:moment" : 0.000036613     
+                "drive:moment" : 0.0000036613     
             }
         },
         {
@@ -164,14 +164,14 @@
                 "steer:canid" : 41,
                 "steer:count" : 1,
                 "steer:gearing" : 0.046666667,
-                "steer:moment" : 0.000036613,
+                "steer:moment" : 0.0000036613,
 
                 "drive:type" : "talon-fx",
                 "drive:bus" : "DriveBase",
                 "drive:canid" : 42,
                 "drive:count" : 1,
                 "drive:gearing" : 0.122807018,
-                "drive:moment" : 0.000036613     
+                "drive:moment" : 0.0000036613     
             }
         },
         {
@@ -183,14 +183,14 @@
                 "steer:canid" : 31,
                 "steer:count" : 1,
                 "steer:gearing" : 0.046666667,
-                "steer:moment" : 0.000036613,
+                "steer:moment" : 0.0000036613,
 
                 "drive:type" : "talon-fx",
                 "drive:bus" : "DriveBase",
                 "drive:canid" : 32,
                 "drive:count" : 1,
                 "drive:gearing" : 0.122807018,
-                "drive:moment" : 0.000036613     
+                "drive:moment" : 0.0000036613     
             }
         }
     ]

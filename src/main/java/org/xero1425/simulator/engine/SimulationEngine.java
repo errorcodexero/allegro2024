@@ -199,17 +199,71 @@ public class SimulationEngine {
         }
     }
 
+    private boolean dependentModelsRun(SimulationModel model) {
+        boolean ret = true ;
+
+        for(SimulationModel m : model.getDependentModels()) {
+            if (m.hasRunThisCycle()) {
+                ret = false ;
+                break ;
+            }
+        }
+
+        return ret ;
+    }
+
     private void runModels(double dt) {
         for(SimulationModel m : active_models_) {
-            if (m.isCreated())
-                m.run(dt) ;
-            else {
-                if (!m.warnedNotRun()) {
-                    logger_.startMessage(MessageType.Error) ;
-                    logger_.add("did not run model ").addQuoted(m.getModelName()) ;
-                    logger_.add(" instance ").addQuoted(m.getInstanceName()) ;
-                    logger_.add(" - model not created").endMessage(); 
-                    m.setWarnedNotRun(); 
+            m.setRunThisCycle(false);
+        }
+        boolean waiting = true ;
+
+        //
+        // We keep iterating through the models until all models have run.
+        //
+        while (waiting) {
+            waiting = false ;
+            for(SimulationModel m : active_models_) {
+                //
+                // See if the model has already run this cycle.
+                //
+                if (!m.hasRunThisCycle()) {
+                    //
+                    // It has not been run
+                    //
+                    if (m.isCreated()) {
+                        //
+                        // If the model has been created, then we can run it if all of its dependent models
+                        // have been run.0
+                        //
+                        if (dependentModelsRun(m)) {
+                            //
+                            // All dependent models have been run, so we can run this model and set the flag indicating
+                            // that this model has been run.
+                            //
+                            m.run(dt) ;
+                            m.setRunThisCycle(true);
+                        }
+                        else {
+                            //
+                            // This model is waiting for one or more of its dependent models to run, so we set the
+                            // waiting flag to true so we will continue to iterate through the models.
+                            //
+                            waiting = true ;
+                        }
+                    } else {
+                        //
+                        // This model was not created, warn the user and mark it as run so we don't keep trying to run it.
+                        //
+                        if (!m.warnedNotRun()) {
+                            logger_.startMessage(MessageType.Error) ;
+                            logger_.add("did not run model ").addQuoted(m.getModelName()) ;
+                            logger_.add(" instance ").addQuoted(m.getInstanceName()) ;
+                            logger_.add(" - model not created").endMessage(); 
+                            m.setWarnedNotRun(); 
+                        }
+                        m.setRunThisCycle(true) ;
+                    }
                 }
             }
         }

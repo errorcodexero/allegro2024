@@ -12,6 +12,7 @@ import com.ctre.phoenix6.hardware.Pigeon2;
 import edu.wpi.first.wpilibj.RobotController;
 
 public class SDSSwerveDriveModel extends SimulationModel {
+    SDSSwerveDriveSubsystem db_ ;
     final SimulationEngine engine_ ;
     private SDSSwerveModuleModel fl_ ;
     private SDSSwerveModuleModel fr_ ;
@@ -35,8 +36,8 @@ public class SDSSwerveDriveModel extends SimulationModel {
         if (!(db instanceof SDSSwerveDriveSubsystem)) {
             return false ;
         }
-        SDSSwerveDriveSubsystem swdb = (SDSSwerveDriveSubsystem)db ;   
-        XeroGyro gyro = swdb.getGyro() ;
+        db_ = (SDSSwerveDriveSubsystem)db ;   
+        XeroGyro gyro = db_.getGyro() ;
         if (!(gyro instanceof Pigeon2Gyro)) {
             throw new Exception("SDSSwerveDriveModel required a Pigeon 2 gyro");
         }
@@ -64,8 +65,15 @@ public class SDSSwerveDriveModel extends SimulationModel {
 
     private void getModuleModels() {
         fl_ = (SDSSwerveModuleModel)engine_.getModelByNameInst("sds-swerve-module", "fl") ;
+        addDependentModel(fl_);
+
         fr_ = (SDSSwerveModuleModel)engine_.getModelByNameInst("sds-swerve-module", "fr") ;
+        addDependentModel(fr_);
+
         bl_ = (SDSSwerveModuleModel)engine_.getModelByNameInst("sds-swerve-module", "bl") ;
+        addDependentModel(bl_);
+
         br_ = (SDSSwerveModuleModel)engine_.getModelByNameInst("sds-swerve-module", "br") ;
+        addDependentModel(br_);
     }
 }
