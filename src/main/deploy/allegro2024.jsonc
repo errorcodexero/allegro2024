@@ -37,7 +37,7 @@
         "elevator" : {
             "hw" : {
                 "motors" : {
-                    "type" : "talon-fx",
+                    "type" : "kraken",
                     "bus" : "",
                     "canid" : 6,
                     "inverted" : false,
@@ -567,7 +567,7 @@
                     "posunits" : "deg",
                     "velunits" : "deg/s",
                     "accunits" : "deg/s/s"
-                },
+                }
             },
             "props" : {
                 "position-important" : "High",
@@ -615,7 +615,7 @@
                     "posunits" : "deg",
                     "velunits" : "deg/s",
                     "accunits" : "deg/s/s"
-                },
+                }
             },
             "props" : {
                 "position-important" : "High",
@@ -663,7 +663,7 @@
                     "posunits" : "deg",
                     "velunits" : "deg/s",
                     "accunits" : "deg/s/s"
-                },
+                }
             },
             "props" : {
                 "position-important" : "High",

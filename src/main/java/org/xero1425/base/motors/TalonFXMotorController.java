@@ -39,7 +39,6 @@ public class TalonFXMotorController extends MotorController
 {
     private final static int kApplyTries = 5 ;
     private final static int kTicksPerRevolution = 2048 ;
-    private final static String kRobotType = "TalonFX" ;
 
     private TalonFX ctrl_ ;
     private TalonFXConfiguration cfg_ ;
@@ -51,11 +50,13 @@ public class TalonFXMotorController extends MotorController
     private int minor_ ;
     private int bugfix_ ;
     private int build_ ;
+    private String type_ ;
 
-    public TalonFXMotorController(String name, String bus, int canid, boolean leader) throws MotorRequestFailedException {
+    public TalonFXMotorController(String name, String bus, int canid, boolean leader, String type) throws MotorRequestFailedException, BadMotorRequestException {
         super(name) ;
 
         bus_ = bus ;
+        type_ = type ;
 
         ctrl_ = new TalonFX(canid, bus_);
         cfg_ = new TalonFXConfiguration() ;
@@ -67,6 +68,7 @@ public class TalonFXMotorController extends MotorController
 
         checkError("TalonFXMotorController - apply configuration", () -> ctrl_.getConfigurator().apply(cfg_));
         checkError("TalonFXMotorController - optimize bus", () -> ctrl_.optimizeBusUtilization()) ;
+        setPosition(0.0);
     }
 
     private void checkError(String msg, Supplier<StatusCode> toApply) throws MotorRequestFailedException {
@@ -214,7 +216,7 @@ public class TalonFXMotorController extends MotorController
     /// \brief Return a human readable string giving the physical motor controller type (e.g. TalonFX, SparkMaxBrushless, etc.)
     /// \returns a human readable string giving the physical motor controller type
     public String getType() throws BadMotorRequestException, MotorRequestFailedException {
-        return kRobotType ;
+        return type_ ;
     }    
 
     /// \brief Return the firmware version of the motor controller
