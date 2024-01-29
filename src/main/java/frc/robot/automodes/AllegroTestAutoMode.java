@@ -79,7 +79,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 break ;
 
             case 61:
-                if (amptrap != null && amptrap.elevator() != null) {
+                if (amptrap != null && amptrap.getElevator() != null) {
                     double duration = getDouble("duration") ;
                     double [] times = new double[] { duration, duration, duration, duration, duration } ;
                     double [] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9} ;
@@ -88,8 +88,8 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 break ;                
 
             case 62:
-                if (amptrap != null && amptrap.elevator() != null) {
-                    addSubActionPair(amptrap.elevator(), new MCVelocityAction(amptrap.elevator(), "pids:velocity", getDouble("velocity")), true);
+                if (amptrap != null && amptrap.getElevator() != null) {
+                    addSubActionPair(amptrap.getElevator(), new MCVelocityAction(amptrap.getElevator(), "pids:velocity", getDouble("velocity")), true);
                 }
                 break ;   
                 
@@ -116,8 +116,6 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             /////////////////////////////////////////////////////////////////////////
             case 90:
                 break;    
-<<<<<<< Updated upstream
-=======
 
             /////////////////////////////////////////////////////////////////////////
             //
@@ -129,14 +127,14 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                     addSubActionPair(amptrap.getClimber(), new Climb(amptrap), true);
                 }
                 break;
->>>>>>> Stashed changes
+
                 
             /////////////////////////////////////////////////////////////////////////
             //
             // Intake-Shooter tests
             //
             /////////////////////////////////////////////////////////////////////////
-            case 100:
+            case 110:
                 break;                  
 
             /////////////////////////////////////////////////////////////////////////
