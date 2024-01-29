@@ -148,7 +148,10 @@
                 "velocity-important" : "high"
             },
             "targets" : {
-                
+                "stow" : 0,
+                "transfer" : -90,
+                "placeTrap" : 0,
+                "placeAmp" : -30
             },
             "pids" : {
                 "position" : {
