@@ -223,9 +223,9 @@
                     "type" : "motor",
                     "m" : 0.17578125,
                     "b" : 0,
-                    "posunits" : "revolutions",
-                    "velunits" : "revolutions/s",
-                    "accunits" : "revolutions/s/s"
+                    "posunits" : "rev",
+                    "velunits" : "rev/s",
+                    "accunits" : "rev/s/s"
                 }
             },
             "props" : {
