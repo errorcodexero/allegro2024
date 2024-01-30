@@ -2,6 +2,7 @@ package frc.robot.automodes;
 
 import org.xero1425.base.controllers.AutoController;
 import org.xero1425.base.controllers.SwerveTestAutoMode;
+import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
@@ -77,7 +78,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 22:
                 if (intakeshooter != null && intakeshooter.getUpDown() != null) {
-                    addSubActionPair(intakeshooter.getUpDown(), new MCVelocityAction(intakeshooter.getUpDown(), "pids:velocity", getDouble("velocity")), true);
+                    addSubActionPair(intakeshooter.getUpDown(), new MCMotionMagicAction(intakeshooter.getUpDown(), "upDown", getDouble("target"), 0.5, 0.5), true);
                 }
                 break; 
 
@@ -155,7 +156,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 52:
                 if (intakeshooter != null && intakeshooter.getTilt() != null) {
-                    addSubActionPair(intakeshooter.getTilt(), new MCVelocityAction(intakeshooter.getTilt(), "pids:velocity", getDouble("velocity")), true);
+                    addSubActionPair(intakeshooter.getTilt(), new MCMotionMagicAction(intakeshooter.getTilt(), "upDown", getDouble("target"), 0.5, 0.5), true);
                 }
                 break;  
                 

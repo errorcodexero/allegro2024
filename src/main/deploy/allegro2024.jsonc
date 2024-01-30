@@ -547,6 +547,14 @@
                 "power": 2.0
             }            
         },
+        "intake-shooter" : {
+            "hw" : {
+                "sensor" : {
+                    "channel" : 0,
+                    "inverted" : false
+                }
+            }
+        },
         "intake-updown" : {
             "hw" : {
                 "motors" : {
