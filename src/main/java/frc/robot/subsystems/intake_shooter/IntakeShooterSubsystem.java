@@ -18,7 +18,6 @@ public class IntakeShooterSubsystem extends Subsystem{
     private AnalogInput absoluteEncoder_;
     private EncoderMapper encoderMapper_;
     private boolean is_note_present_;
-    private boolean invert_note_sensor_;
     private double angle_;
 
     public IntakeShooterSubsystem(Subsystem parent) throws Exception {
@@ -55,7 +54,7 @@ public class IntakeShooterSubsystem extends Subsystem{
         encoderMapper_ = new EncoderMapper(rmax,rmin,emax,emin);
         encoderMapper_.calibrate(rcval, ecval);
 
-        invert_note_sensor_ = getSettingsValue("hw:sensor:inverted").getBoolean();
+        noteSensorInverted_ = getSettingsValue("hw:sensor:inverted").getBoolean();
 
     }
 
