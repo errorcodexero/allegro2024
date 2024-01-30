@@ -552,6 +552,15 @@
                 "sensor" : {
                     "channel" : 0,
                     "inverted" : false
+                },
+                "encoder" : {
+                    "channel" : 0,
+                    "emin" : 0.0,
+                    "emax" : 5.0,
+                    "rmin" : 0.0,
+                    "rmax" : 90.0,
+                    "ecval" : 0.0,
+                    "rcval" : 0.0
                 }
             }
         },
