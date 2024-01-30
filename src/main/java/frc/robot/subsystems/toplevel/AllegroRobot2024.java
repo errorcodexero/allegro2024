@@ -5,9 +5,9 @@ import org.xero1425.base.subsystems.RobotSubsystem;
 import org.xero1425.base.subsystems.swerve.SDSSwerveDriveSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
 
+import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.lidar.LidarSubsystem;
-import frc.robot.subsystems.ampTrap.AmpTrapSubsystem;
 import frc.robot.subsystems.oi.Allegro2024OISubsystem;
 
 public class AllegroRobot2024 extends RobotSubsystem {
