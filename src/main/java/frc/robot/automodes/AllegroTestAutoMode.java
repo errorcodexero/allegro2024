@@ -2,6 +2,7 @@ package frc.robot.automodes;
 
 import org.xero1425.base.controllers.AutoController;
 import org.xero1425.base.controllers.SwerveTestAutoMode;
+import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
@@ -284,7 +285,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 102:
                 if (amptrap != null && amptrap.getClimber() != null) {
-                    addSubActionPair(amptrap.getClimber(), new MCVelocityAction(amptrap.getClimber(), "pids:velocity", getDouble("velocity")), true);
+                    addSubActionPair(amptrap.getClimber(), new MCMotionMagicAction(amptrap.getClimber(), "pids:position", 10, 0.5, 0.5), true);
                 }
                 break ;  
                 
@@ -294,9 +295,6 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 110:
-                if(amptrap != null && amptrap.getClimber() != null){
-                    addSubActionPair(amptrap.getClimber(), new ClimbAction(amptrap), true);
-                }
                 break;                  
 
             /////////////////////////////////////////////////////////////////////////
@@ -305,6 +303,9 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 120:
+                if(amptrap != null && amptrap.getClimber() != null){
+                    addSubActionPair(amptrap, new ClimbAction(amptrap, ""), true);
+                }
                 break;                 
         }
     }
