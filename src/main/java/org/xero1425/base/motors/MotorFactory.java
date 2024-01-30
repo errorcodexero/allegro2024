@@ -190,6 +190,10 @@ public class MotorFactory {
         return ret ;
     }
 
+    private boolean isCTREMotor(String name) {
+        return name.equals("talon-fx") || name.equals("kraken") ;
+    }
+
     //
     // Create a single motor from the settings in the settings file
     //
@@ -249,8 +253,8 @@ public class MotorFactory {
         //
         // Check to be sure the bus is "" except for the TalonFX
         //
-        if (!type.equals("talon-fx") && !bus.equals("")) {
-            errorMessage(id, "cannot create motor, the bus value can only be non-empty for TalonFX motors") ;
+        if (!isCTREMotor(type) && !bus.equals("")) {
+            errorMessage(id, "cannot create motor, the bus value can only be non-empty for CTRE motors") ;
             return null;
         }
 
@@ -259,8 +263,8 @@ public class MotorFactory {
         //
         // Create the motor controller object based on its type
         //
-        if (type.equals("talon-fx")) {
-            ctrl = new TalonFXMotorController(name, bus, canid, leader);
+        if (isCTREMotor(type)) {
+            ctrl = new TalonFXMotorController(name, bus, canid, leader, type);
         } else if (type.equals("sparkmax-brushless")) {
             ctrl = new SparkMaxMotorController(name, canid, true, leader);
         } else if (type.equals("sparmmax-brushed")) {
