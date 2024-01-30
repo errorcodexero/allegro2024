@@ -6,6 +6,7 @@ import org.xero1425.base.subsystems.swerve.SDSSwerveDriveSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
 
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
+import frc.robot.subsystems.lidar.LidarSubsystem;
 import frc.robot.subsystems.ampTrap.AmpTrapSubsystem;
 import frc.robot.subsystems.oi.Allegro2024OISubsystem;
 
@@ -16,6 +17,7 @@ public class AllegroRobot2024 extends RobotSubsystem {
     private LimeLightSubsystem ll_;
     private IntakeShooterSubsystem is_;
     private AmpTrapSubsystem at_;
+    private LidarSubsystem lidar_;
 
     public AllegroRobot2024(XeroRobot robot) throws Exception {
         super(robot, "Allegro2024RobotSubsystem");
@@ -31,20 +33,23 @@ public class AllegroRobot2024 extends RobotSubsystem {
 
         is_ = new IntakeShooterSubsystem(db_);
         addChild(is_);
-      
+
         at_ = new AmpTrapSubsystem(this);
         addChild(at_);
+
+        lidar_ = new LidarSubsystem(this);
+        addChild(lidar_);
 
     }
 
     public SDSSwerveDriveSubsystem getSwerve() {
         return db_;
     }
-    
+
     public Allegro2024OISubsystem getOI() {
         return oi_;
     }
-    
+
     public LimeLightSubsystem getLimelight() {
         return ll_;
     }
@@ -53,7 +58,11 @@ public class AllegroRobot2024 extends RobotSubsystem {
         return is_;
     }
 
-    public AmpTrapSubsystem getAmpTrap(){
+    public AmpTrapSubsystem getAmpTrap() {
         return at_;
-    }  
+    }
+
+    public LidarSubsystem getLidar() {
+        return lidar_;
+    }
 }
