@@ -7,8 +7,10 @@ import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
 
+import frc.robot.subsystems.amp_trap.AmpTrapStowAction;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.amp_trap.ClimbAction;
+import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
 import frc.robot.subsystems.amp_trap.PrepTrapAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
@@ -296,7 +298,10 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 110:
-                break;                  
+                break;  
+                
+            case 111:
+                break;
 
             /////////////////////////////////////////////////////////////////////////
             //
@@ -306,6 +311,13 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 120:
                 if(amptrap != null && amptrap.getClimber() != null){
                     addSubActionPair(amptrap, new ClimbAction(amptrap), true);
+                }
+                break;  
+                
+            case 121:
+                if(true || intakeshooter != null && intakeshooter.getUpDown() != null && intakeshooter.getTilt() != null && intakeshooter.getFeeder() != null && intakeshooter.getShooter1() != null && intakeshooter.getShooter2() != null){
+                    addSubActionPair(amptrap, new AmpTrapStowAction(amptrap), true);
+                    addSubActionPair(intakeshooter, new IntakeShooterStowAction(intakeshooter), true);
                 }
                 break;   
             case 121:

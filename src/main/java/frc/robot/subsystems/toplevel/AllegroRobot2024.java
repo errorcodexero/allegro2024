@@ -31,7 +31,7 @@ public class AllegroRobot2024 extends RobotSubsystem {
         ll_ = new LimeLightSubsystem(this, "limelight");
         addChild(ll_);
 
-        is_ = new IntakeShooterSubsystem(db_);
+        is_ = new IntakeShooterSubsystem(this);
         addChild(is_);
 
         at_ = new AmpTrapSubsystem(this);
