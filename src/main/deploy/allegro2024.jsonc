@@ -105,8 +105,8 @@
             "targets" : {
                 "stow": 0,
                 "transfer" : 60,
-                "placeAmp" : 225,
-                "placeTrap" : 135
+                "ampprep" : 225,
+                "trapprep" : 135
             },
             "pids" : {
                 "position" : {
@@ -150,8 +150,8 @@
             "targets" : {
                 "stow" : 0,
                 "transfer" : -90,
-                "placeTrap" : 0,
-                "placeAmp" : -30
+                "trapprep" : 0,
+                "ampprep" : -30
             },
             "pids" : {
                 "position" : {
@@ -192,10 +192,10 @@
                 "position-important" : "high",
                 "velocity-important" : "high"
             },
-            "targets" : {
-                "place" : 10,
-                "eject" : 10
-            },
+            // "targets" : {
+            //     "place" : 10,
+            //     "eject" : 10
+            // },
             "pids" : {
                 "position" : {
                     "kp" : 0.0035,

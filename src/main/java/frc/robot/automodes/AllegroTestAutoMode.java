@@ -304,7 +304,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             /////////////////////////////////////////////////////////////////////////
             case 120:
                 if(amptrap != null && amptrap.getClimber() != null){
-                    addSubActionPair(amptrap, new ClimbAction(amptrap, ""), true);
+                    addSubActionPair(amptrap, new ClimbAction(amptrap), true);
                 }
                 break;                 
         }
