@@ -20,10 +20,10 @@ public class AmpTrapStowAction extends Action{
 
         // Initialization
         sub_ = sub;
-        stow_elevator_ = new MCMotionMagicAction(sub_.getElevator(), "stow" , "stow" , 0 , 1);
+        stow_elevator_ = new MCMotionMagicAction(sub_.getElevator(), "pids:position" , "targets:stow" , 0 , 1);
         stow_roller_ = new MotorEncoderPowerAction(sub_.getManipulator(), 0);
-        stow_pivot_ = new MCMotionMagicAction(sub_.getArm(), "stow" , "stow" , 0 , 1);
-        stow_wrist_ = new MCMotionMagicAction(sub_.getArm(), "stow" , "stow" , 0 , 1);
+        stow_pivot_ = new MCMotionMagicAction(sub_.getArm(), "pids:position" , "targets:stow" , 0 , 1);
+        stow_wrist_ = new MCMotionMagicAction(sub_.getArm(), "pids:position" , "targets:stow" , 0 , 1);
     }
 
     @Override

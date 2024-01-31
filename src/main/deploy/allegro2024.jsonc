@@ -807,7 +807,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 102,
+        "which": 121,
         "0": {
             "angle": 45,
             "power": 0.1,
@@ -878,7 +878,13 @@
         "101" : {
             "duration" : 2.0
         },
+        "111" : {
+            "duration" : 5.0
+        },
         "120" : {
+            "duration" : 5.0
+        },
+        "121" : {
             "duration" : 5.0
         }
     }
