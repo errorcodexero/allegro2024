@@ -807,7 +807,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 123,
+        "which": 125,
 
         "0": {
             "angle": 45,
@@ -887,6 +887,19 @@
         },
         "121" : {
             "duration" : 5.0
+        },
+        "122" : {
+            "duration" : 5.0
+        },
+        "123" : {
+            "duration" : 5.0
+        },
+        "124" : {
+            "duration" : 5.0
+        },
+        "125" : {
+            "duration" : 5.0
         }
+
     }
 }
