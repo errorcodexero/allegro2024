@@ -11,6 +11,7 @@ import frc.robot.subsystems.amp_trap.AmpTrapStowAction;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.amp_trap.ClimbAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
+import frc.robot.subsystems.amp_trap.PrepTrapAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
@@ -309,7 +310,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             /////////////////////////////////////////////////////////////////////////
             case 120:
                 if(amptrap != null && amptrap.getClimber() != null){
-                    addSubActionPair(amptrap, new ClimbAction(amptrap, ""), true);
+                    addSubActionPair(amptrap, new ClimbAction(amptrap), true);
                 }
                 break;  
                 
@@ -318,8 +319,11 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                     addSubActionPair(amptrap, new AmpTrapStowAction(amptrap), true);
                     addSubActionPair(intakeshooter, new IntakeShooterStowAction(intakeshooter), true);
                 }
-                break;
-
+                break;   
+            case 121:
+                if(amptrap != null && amptrap.getClimber() != null && amptrap.getElevator() != null && amptrap.getArm() != null && amptrap.getWrist() != null){
+                    addSubActionPair(amptrap, new PrepTrapAction(amptrap), true);
+                }            
         }
     }
 }
