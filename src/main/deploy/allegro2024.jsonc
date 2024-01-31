@@ -48,9 +48,9 @@
                     "type" : "motor",
                     "m" : 0.17578125,               // TODO: This is a guess, need to get real value from design
                     "b" : 0,
-                    "posunits" : "rev",
-                    "velunits" : "rev/s",
-                    "accunits" : "rev/s/s"
+                    "posunits" : "m",
+                    "velunits" : "m/s",
+                    "accunits" : "m/s/s"
                 }
             },
             "props" : {
@@ -226,9 +226,9 @@
                     "type" : "motor",
                     "m" : 0.17578125,
                     "b" : 0,
-                    "posunits" : "rev",
-                    "velunits" : "rev/s",
-                    "accunits" : "rev/s/s"
+                    "posunits" : "m",
+                    "velunits" : "m/s",
+                    "accunits" : "m/s/s"
                 }
             },
             "props" : {
