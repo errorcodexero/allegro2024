@@ -11,7 +11,7 @@ public class AmpTrapSubsystem extends Subsystem{
     private MotorEncoderSubsystem climber_;
 
     public AmpTrapSubsystem(Subsystem parent) throws Exception{
-        super(parent, "ampTrap");
+        super(parent, "amp-trap");
 
         //The elavator moves the elevator up and down. 0 is fully down, and it is calculated in revolutions. 
         elevator_ = new MotorEncoderSubsystem(this, "elevator", false);

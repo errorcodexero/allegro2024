@@ -10,6 +10,7 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
 import frc.robot.subsystems.amp_trap.AmpTrapStowAction;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.amp_trap.ClimbAction;
+import frc.robot.subsystems.amp_trap.PrepClimbAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
 import frc.robot.subsystems.amp_trap.PrepTrapAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
@@ -315,15 +316,21 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 break;  
                 
             case 121:
-                if(true || intakeshooter != null && intakeshooter.getUpDown() != null && intakeshooter.getTilt() != null && intakeshooter.getFeeder() != null && intakeshooter.getShooter1() != null && intakeshooter.getShooter2() != null){
+                if(amptrap.getClimber() != null && amptrap.getElevator() != null && amptrap.getArm() != null && amptrap.getWrist() != null || intakeshooter != null && intakeshooter.getUpDown() != null && intakeshooter.getTilt() != null && intakeshooter.getFeeder() != null && intakeshooter.getShooter1() != null && intakeshooter.getShooter2() != null){
                     addSubActionPair(amptrap, new AmpTrapStowAction(amptrap), true);
                     addSubActionPair(intakeshooter, new IntakeShooterStowAction(intakeshooter), true);
                 }
                 break;   
-            case 121:
+            case 122:
                 if(amptrap != null && amptrap.getClimber() != null && amptrap.getElevator() != null && amptrap.getArm() != null && amptrap.getWrist() != null){
                     addSubActionPair(amptrap, new PrepTrapAction(amptrap), true);
-                }            
+                }
+                break;
+                
+            case 123:
+                if(amptrap != null && amptrap.getClimber() != null && amptrap.getElevator() != null && amptrap.getArm() != null && amptrap.getWrist() != null){
+                    addSubActionPair(amptrap, new PrepClimbAction(amptrap), true);
+                }
         }
     }
 }
