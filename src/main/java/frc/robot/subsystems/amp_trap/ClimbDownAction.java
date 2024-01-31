@@ -16,7 +16,7 @@ public class ClimbDownAction extends Action{
     @Override
     public void start() throws Exception{
         super.start();
-        sub_.getClimber().setAction(climb_);
+        sub_.getClimber().setAction(climb_, true);
     }
 
     @Override
