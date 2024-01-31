@@ -8,11 +8,22 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class IntakeShooterSubsystem extends Subsystem{
+
+    // moves the intake roller straight up (0 degrees) to flat to the ground (90 degrees), actual range 15-75 degrees   
     private MotorEncoderSubsystem updown_;
+
+    // holds the note in place before it is shot
     private MotorEncoderSubsystem feeder_;
+    
+    // adjusts the angle of the shot, actual range is -45 to 45, resting posititon is 0 degrees
     private MotorEncoderSubsystem tilt_;
+    
+    // intakes the note into the robot
     private MotorEncoderSubsystem shooter1_;
+    
+    // shoots the note out of the robot
     private MotorEncoderSubsystem shooter2_;
+    
     private DigitalInput noteSensor_; 
     private boolean noteSensorInverted_;
     private AnalogInput absoluteEncoder_;
