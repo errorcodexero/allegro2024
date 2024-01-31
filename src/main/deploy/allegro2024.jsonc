@@ -60,8 +60,8 @@
             "targets" : {
                 "stow": 0,
                 "transfer" : 0,
-                "ampprep" : 10,
-                "trapprep" : 15
+                "ampprep" : 2,
+                "trapprep" : 3
             },
             "pids" : {
                 "position" : {
@@ -236,9 +236,9 @@
                 "velocity-important" : "high"
             },
             "targets" : {
-                "climbprep" : 10.0,
+                "climbprep" : 3,
                 "climb" : 0.0,
-                "climbdown" : 10.0,
+                "climbdown" : 3,
                 "stow" : 0.0
             },
             "pids" : {
@@ -807,7 +807,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 102,
+        "which": 121,
         "0": {
             "angle": 45,
             "power": 0.1,
@@ -879,6 +879,9 @@
             "duration" : 2.0
         },
         "120" : {
+            "duration" : 5.0
+        },
+        "121" : {
             "duration" : 5.0
         }
     }

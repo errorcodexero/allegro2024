@@ -21,9 +21,10 @@ public class PrepTrapAction extends Action{
     public PrepTrapAction (AmpTrapSubsystem sub) throws Exception{
         super(sub.getRobot().getMessageLogger());
 
+        sub_ = sub;
         elevate_ = new MCMotionMagicAction(sub.getElevator(), "pids:position", "targets:trapprep", 0.5, 0.5);
-        tiltArm_ = new MCMotionMagicAction(sub.getArm(), "pids:position", "targets:trapprep", 0.5, 0.5);
-        tiltWrist_ = new MCMotionMagicAction(sub.getWrist(), "pids:position", "targets:trapprep", 0.5, 0.5);
+        tiltArm_ = new MCMotionMagicAction(sub.getArm(), "pids:position", "targets:trapprep", 1, 1);
+        tiltWrist_ = new MCMotionMagicAction(sub.getWrist(), "pids:position", "targets:trapprep", 2, 2);
         extendClimber_ = new MCMotionMagicAction(sub.getClimber(), "pids:position", "targets:climbprep", 0.5, 0.5);
     }
 
