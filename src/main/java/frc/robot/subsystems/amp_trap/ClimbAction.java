@@ -9,10 +9,10 @@ import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 public class ClimbAction extends Action{
     private AmpTrapSubsystem sub_;
     private MCMotionMagicAction climb_;
-    public ClimbAction(AmpTrapSubsystem sub, String type) throws Exception{
+    public ClimbAction(AmpTrapSubsystem sub) throws Exception{
         super(sub.getRobot().getMessageLogger());
         sub_ = sub;
-        climb_ = new MCMotionMagicAction(sub.getClimber(), "pids:position", "targets:climb" + type, 0.5, 0.5);
+        climb_ = new MCMotionMagicAction(sub.getClimber(), "pids:position", "targets:climb", 0.5, 0.5);
     }
 
     @Override
