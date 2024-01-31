@@ -2,14 +2,14 @@ package frc.robot.automodes;
 
 import org.xero1425.base.controllers.AutoController;
 import org.xero1425.base.controllers.SwerveTestAutoMode;
+import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
 
+import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
+import frc.robot.subsystems.amp_trap.ClimbAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
-import frc.robot.subsystems.ampTrap.AmpTrapSubsystem;
-//import frc.robot.subsystems.ampTrap.Climb;
-import frc.robot.subsystems.ampTrap.ClimbAction;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class AllegroTestAutoMode extends SwerveTestAutoMode {
@@ -77,7 +77,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 22:
                 if (intakeshooter != null && intakeshooter.getUpDown() != null) {
-                    addSubActionPair(intakeshooter.getUpDown(), new MCVelocityAction(intakeshooter.getUpDown(), "pids:velocity", getDouble("velocity")), true);
+                    addSubActionPair(intakeshooter.getUpDown(), new MCMotionMagicAction(intakeshooter.getUpDown(), "upDown", getDouble("target"), 0.5, 0.5), true);
                 }
                 break; 
 
@@ -155,7 +155,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 52:
                 if (intakeshooter != null && intakeshooter.getTilt() != null) {
-                    addSubActionPair(intakeshooter.getTilt(), new MCVelocityAction(intakeshooter.getTilt(), "pids:velocity", getDouble("velocity")), true);
+                    addSubActionPair(intakeshooter.getTilt(), new MCMotionMagicAction(intakeshooter.getTilt(), "upDown", getDouble("target"), 0.5, 0.5), true);
                 }
                 break;  
                 
@@ -191,7 +191,25 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 70:
-                break;          
+                if (amptrap != null && amptrap.getArm() != null) {
+                    addSubActionPair(amptrap.getArm(), new MotorEncoderPowerAction(amptrap.getArm(), getDouble("power"), getDouble("duration")), true) ;
+                }
+                break ;
+
+            case 71:
+                if (amptrap != null && amptrap.getArm() != null) {
+                    double duration = getDouble("duration") ;
+                    double [] times = new double[] { duration, duration, duration, duration, duration } ;
+                    double [] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9} ;
+                    addSubActionPair(amptrap.getArm(), new MotorPowerSequenceAction(amptrap.getArm(), times, powers), true) ;
+                }
+                break ;                
+
+            case 72:
+                if (amptrap != null && amptrap.getArm() != null) {
+                    addSubActionPair(amptrap.getArm(), new MCVelocityAction(amptrap.getArm(), "pids:velocity", getDouble("velocity")), true);
+                }
+                break ;            
                 
             /////////////////////////////////////////////////////////////////////////
             //
@@ -199,7 +217,25 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 80:
-                break;                 
+                if (amptrap != null && amptrap.getWrist() != null) {
+                    addSubActionPair(amptrap.getWrist(), new MotorEncoderPowerAction(amptrap.getWrist(), getDouble("power"), getDouble("duration")), true) ;
+                }
+                break ;
+
+            case 81:
+                if (amptrap != null && amptrap.getWrist() != null) {
+                    double duration = getDouble("duration") ;
+                    double [] times = new double[] { duration, duration, duration, duration, duration } ;
+                    double [] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9} ;
+                    addSubActionPair(amptrap.getWrist(), new MotorPowerSequenceAction(amptrap.getWrist(), times, powers), true) ;
+                }
+                break ;                
+
+            case 82:
+                if (amptrap != null && amptrap.getWrist() != null) {
+                    addSubActionPair(amptrap.getWrist(), new MCVelocityAction(amptrap.getWrist(), "pids:velocity", getDouble("velocity")), true);
+                }
+                break ;                   
 
             /////////////////////////////////////////////////////////////////////////
             //
@@ -207,7 +243,25 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 90:
-                break;    
+                if (amptrap != null && amptrap.getManipulator() != null) {
+                    addSubActionPair(amptrap.getManipulator(), new MotorEncoderPowerAction(amptrap.getManipulator(), getDouble("power"), getDouble("duration")), true) ;
+                }
+                break ;
+
+            case 91:
+                if (amptrap != null && amptrap.getManipulator() != null) {
+                    double duration = getDouble("duration") ;
+                    double [] times = new double[] { duration, duration, duration, duration, duration } ;
+                    double [] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9} ;
+                    addSubActionPair(amptrap.getManipulator(), new MotorPowerSequenceAction(amptrap.getManipulator(), times, powers), true) ;
+                }
+                break ;                
+
+            case 92:
+                if (amptrap != null && amptrap.getManipulator() != null) {
+                    addSubActionPair(amptrap.getManipulator(), new MCVelocityAction(amptrap.getManipulator(), "pids:velocity", getDouble("velocity")), true);
+                }
+                break ;     
 
             /////////////////////////////////////////////////////////////////////////
             //
@@ -215,10 +269,25 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////'
             case 100: 
-                if(amptrap != null && amptrap.getClimber() != null){
-                    addSubActionPair(amptrap.getClimber(), new ClimbAction(amptrap), true);
+                if (amptrap != null && amptrap.getClimber() != null) {
+                    addSubActionPair(amptrap.getClimber(), new MotorEncoderPowerAction(amptrap.getClimber(), getDouble("power"), getDouble("duration")), true) ;
                 }
-                break;
+                break ;
+
+            case 101:
+                if (amptrap != null && amptrap.getClimber() != null) {
+                    double duration = getDouble("duration") ;
+                    double [] times = new double[] { duration, duration, duration, duration, duration } ;
+                    double [] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9} ;
+                    addSubActionPair(amptrap.getClimber(), new MotorPowerSequenceAction(amptrap.getClimber(), times, powers), true) ;
+                }
+                break ;                
+
+            case 102:
+                if (amptrap != null && amptrap.getClimber() != null) {
+                    addSubActionPair(amptrap.getClimber(), new MCMotionMagicAction(amptrap.getClimber(), "pids:position", 10, 0.5, 0.5), true);
+                }
+                break ;  
                 
             /////////////////////////////////////////////////////////////////////////
             //
@@ -234,6 +303,9 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 120:
+                if(amptrap != null && amptrap.getClimber() != null){
+                    addSubActionPair(amptrap, new ClimbAction(amptrap, ""), true);
+                }
                 break;                 
         }
     }
