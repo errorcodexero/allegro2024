@@ -1,4 +1,4 @@
-package frc.robot.subsystems.ampTrap;
+package frc.robot.subsystems.amp_trap;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
