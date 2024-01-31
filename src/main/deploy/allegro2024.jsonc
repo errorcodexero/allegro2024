@@ -60,8 +60,8 @@
             "targets" : {
                 "stow": 0,
                 "transfer" : 0,
-                "ampprep" : 10,
-                "trapprep" : 15
+                "ampprep" : 2,
+                "trapprep" : 3
             },
             "pids" : {
                 "position" : {
@@ -105,8 +105,8 @@
             "targets" : {
                 "stow": 0,
                 "transfer" : 60,
-                "placeAmp" : 225,
-                "placeTrap" : 135
+                "ampprep" : 225,
+                "trapprep" : 135
             },
             "pids" : {
                 "position" : {
@@ -150,8 +150,8 @@
             "targets" : {
                 "stow" : 0,
                 "transfer" : -90,
-                "placeTrap" : 0,
-                "placeAmp" : -30
+                "trapprep" : 0,
+                "ampprep" : -30
             },
             "pids" : {
                 "position" : {
@@ -192,10 +192,10 @@
                 "position-important" : "high",
                 "velocity-important" : "high"
             },
-            "targets" : {
-                "place" : 10,
-                "eject" : 10
-            },
+            // "targets" : {
+            //     "place" : 10,
+            //     "eject" : 10
+            // },
             "pids" : {
                 "position" : {
                     "kp" : 0.0035,
@@ -236,9 +236,9 @@
                 "velocity-important" : "high"
             },
             "targets" : {
-                "climbprep" : 10.0,
+                "climbprep" : 3,
                 "climb" : 0.0,
-                "climbdown" : 10.0,
+                "climbdown" : 3,
                 "stow" : 0.0
             },
             "pids" : {
@@ -807,7 +807,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 102,
+        "which": 121,
         "0": {
             "angle": 45,
             "power": 0.1,
@@ -879,6 +879,9 @@
             "duration" : 2.0
         },
         "120" : {
+            "duration" : 5.0
+        },
+        "121" : {
             "duration" : 5.0
         }
     }
