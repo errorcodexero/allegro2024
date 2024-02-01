@@ -593,10 +593,9 @@
                 "velocity-important" : "High"
             },
             "targets" : {
-                "collect" : 25,
-                "stow" : 90,
-                "shoot" : 90,
-                "eject" : 25
+                "collect" : 35,
+                "stow" : 0,
+                "shoot" : 0,
             },
             "pids" : {
                 "position" : {
@@ -631,9 +630,9 @@
                     "type" : "motor",
                     "m": 0.17578125,             
                     "b" : 0,
-                    "posunits" : "deg",
-                    "velunits" : "deg/s",
-                    "accunits" : "deg/s/s"
+                    "posunits" : "rev",
+                    "velunits" : "rev/s",
+                    "accunits" : "rev/s/s"
                 }
             },
             "props" : {
@@ -641,10 +640,10 @@
                 "velocity-important" : "High"
             },
             "targets" : {
-                "collect" : 25,
-                "stow" : 90,
-                "shoot" : 90,
-                "eject" : 25
+                "collect" : 5,
+                "stow" : 0,
+                "shoot" : 10,
+                "eject" : -5
             },
             "pids" : {
                 "position" : {
@@ -689,10 +688,9 @@
                 "velocity-important" : "High"
             },
             "targets" : {
-                "collect" : 25,
-                "stow" : 90,
-                "shoot" : 90,
-                "eject" : 25
+                "collect" : -15,
+                "stow" : 0,
+                "shoot" : 45
             },
             "pids" : {
                 "position" : {
@@ -727,9 +725,9 @@
                     "type" : "motor",
                     "m": 0.17578125,             
                     "b" : 0,
-                    "posunits" : "deg",
-                    "velunits" : "deg/s",
-                    "accunits" : "deg/s/s"
+                    "posunits" : "rev",
+                    "velunits" : "rev/s",
+                    "accunits" : "rev/s/s"
                 }
             },
             "props" : {
@@ -737,10 +735,9 @@
                 "velocity-important" : "High"
             },
             "targets" : {
-                "collect" : 25,
-                "stow" : 90,
-                "shoot" : 90,
-                "eject" : 25
+                "stow" : 0,
+                "shoot" : 20,
+                "eject" : -10
             },
             "pids" : {
                 "position" : {
@@ -785,10 +782,9 @@
                 "velocity-important" : "High"
             },
             "targets" : {
-                "collect" : 25,
-                "stow" : 90,
-                "shoot" : 90,
-                "eject" : 25
+                "stow" : 0,
+                "shoot" : 20,
+                "eject" : -10
             },
             "pids" : {
                 "position" : {
