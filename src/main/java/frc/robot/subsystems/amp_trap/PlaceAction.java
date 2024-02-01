@@ -2,11 +2,7 @@ package frc.robot.subsystems.amp_trap;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.misc.XeroTimer;
-import org.xero1425.base.motors.BadMotorRequestException;
-import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
-import org.xero1425.misc.BadParameterTypeException;
-import org.xero1425.misc.MissingParameterException;
 
 public class PlaceAction extends Action{
     private AmpTrapSubsystem sub_;
@@ -26,7 +22,7 @@ public class PlaceAction extends Action{
 
         stop_ = new MCVelocityAction(sub.getManipulator(), "pids:position", "targets:stop");
 
-        timer_ = new XeroTimer(sub_.getRobot(), "Place", 1);
+        timer_ = new XeroTimer(sub_.getRobot(), "Place", 5);
     }
 
     public void start() throws Exception{
