@@ -192,10 +192,12 @@
                 "position-important" : "high",
                 "velocity-important" : "high"
             },
-            // "targets" : {
-            //     "place" : 10,
-            //     "eject" : 10
-            // },
+            "targets" : {
+                // Used for the velocity of the motor in revs/s during the eject, place, and stop actions. 
+                "place" : 12.5,
+                "eject" : 12.5,
+                "stop" : 0
+            },
             "pids" : {
                 "position" : {
                     "kp" : 0.0035,
@@ -807,7 +809,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 125,
+        "which": 126,
 
         "0": {
             "angle": 45,
@@ -896,10 +898,12 @@
         },
         "124" : {
             "duration" : 5.0
-        },
+        },          
         "125" : {
             "duration" : 5.0
+        },
+        "126" : {
+            "duration" : 5.0
         }
-
     }
 }
