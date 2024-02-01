@@ -37,7 +37,6 @@ public class AmpTrapStowAction extends Action{
         sub_.getArm().setAction(stow_pivot_, true);
         sub_.getWrist().setAction(stow_wrist_, true);
         sub_.getClimber().setAction(stow_climber_, true);
-        //setDone();
     }
 
     @Override
