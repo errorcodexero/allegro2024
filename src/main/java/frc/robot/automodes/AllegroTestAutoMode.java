@@ -10,7 +10,7 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
 import frc.robot.subsystems.amp_trap.AmpTrapStowAction;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.amp_trap.ClimbAction;
-
+import frc.robot.subsystems.amp_trap.PlaceAction;
 import frc.robot.subsystems.amp_trap.PrepClimbAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
 
@@ -384,6 +384,10 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 123:
                 if (amptrap != null) {
                     addSubActionPair(amptrap, new PrepClimbAction(amptrap), true);
+                }
+            case 126:
+                if(amptrap != null) {
+                    addSubActionPair(amptrap, new PlaceAction(amptrap), true);
                 }
         }
     }
