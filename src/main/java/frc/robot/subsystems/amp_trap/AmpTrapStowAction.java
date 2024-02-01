@@ -52,7 +52,3 @@ public class AmpTrapStowAction extends Action{
         return spaces(indent) + "AmpTrapStowAction";
     }
 }
-
-
-    
-
