@@ -15,6 +15,9 @@ import frc.robot.subsystems.amp_trap.PrepAmpAction;
 import frc.robot.subsystems.amp_trap.ClimbDownAction;
 import frc.robot.subsystems.amp_trap.PrepClimbAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
+import frc.robot.subsystems.amp_trap.AmpTrapEjectAction;
+import frc.robot.subsystems.intake_shooter.IntakeShooterEjectAction;
+
 
 import frc.robot.subsystems.amp_trap.PrepTrapAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
@@ -356,6 +359,9 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 break;
 
             case 111:
+                if (intakeshooter != null) {
+                    addSubActionPair(intakeshooter, new IntakeShooterEjectAction(intakeshooter), true);
+                }
                 break;
 
             /////////////////////////////////////////////////////////////////////////
@@ -404,6 +410,12 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 126:
                 if (amptrap != null) {
                     addSubActionPair(amptrap, new PlaceAction(amptrap), true);
+                }
+                break;
+
+            case 127:
+                 if (amptrap != null) {
+                    addSubActionPair(amptrap, new AmpTrapEjectAction(amptrap), true);
                 }
                 break;
 
