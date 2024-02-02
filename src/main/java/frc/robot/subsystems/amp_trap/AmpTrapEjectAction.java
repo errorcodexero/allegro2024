@@ -3,7 +3,7 @@ package frc.robot.subsystems.amp_trap;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
-import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
+import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 
 public class AmpTrapEjectAction extends Action{
     
@@ -11,7 +11,7 @@ public class AmpTrapEjectAction extends Action{
     private MCMotionMagicAction eject_elevator_;
     private MCMotionMagicAction eject_arm_;
     private MCMotionMagicAction eject_wrist_;
-    private MotorEncoderPowerAction eject_manipulator_;
+    private MCVelocityAction eject_manipulator_;
     
     
     public AmpTrapEjectAction(AmpTrapSubsystem sub) throws Exception {
@@ -23,7 +23,7 @@ public class AmpTrapEjectAction extends Action{
         eject_elevator_ = new MCMotionMagicAction(sub_.getElevator(), "pids:position" , "targets:stow" , 0.5 , 1);
         eject_arm_ = new MCMotionMagicAction(sub_.getArm(), "pids:position" , "targets:stow" , 0.5 , 1);
         eject_wrist_ = new MCMotionMagicAction(sub_.getWrist(), "pids:position" , "targets:stow" , 0.5 , 1);
-        eject_manipulator_ = new MotorEncoderPowerAction(sub_.getManipulator(), 1, 5);
+        eject_manipulator_ = new MCVelocityAction(sub_.getManipulator(), "pids:position", "targets:eject");
     }
 
     @Override 
