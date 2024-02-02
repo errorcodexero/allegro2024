@@ -1,6 +1,7 @@
 package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.actions.Action;
+import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 
@@ -12,6 +13,9 @@ public class IntakeShooterEjectAction extends Action{
     private MCVelocityAction eject_feeder_;
     private MCVelocityAction eject_shooter1_;
     private MCVelocityAction eject_shooter2_;
+    private MCVelocityAction stop_shooter1_;
+    private MCVelocityAction stop_shooter2_;
+    private XeroTimer timer_;
 
     public IntakeShooterEjectAction(IntakeShooterSubsystem sub) throws Exception {
 
@@ -22,26 +26,33 @@ public class IntakeShooterEjectAction extends Action{
         eject_updown_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position" , "targets:stow" , 0.5 , 1);
         eject_tilt_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position" , "targets:stow" , 0.5 , 1);
         eject_feeder_ = new MCVelocityAction(sub_.getFeeder(), "pids:position" , "targets:eject");
-        eject_shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:positon", "targets:eject");
-        eject_shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:positon", "targets:eject");
+        eject_shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:position", "targets:eject");
+        eject_shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:position", "targets:eject");
+        stop_shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:position", "targets:stop");
+        stop_shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:position", "targets:stop");
+        timer_ = new XeroTimer(sub.getRobot(), "Eject", 1.5);
     }
 
     @Override 
     public void start() throws Exception{
         super.start();
 
-        sub_.getUpDown().setAction(eject_updown_, true);
-        sub_.getTilt().setAction(eject_tilt_, true);
-        sub_.getFeeder().setAction(eject_feeder_, true);
         sub_.getShooter1().setAction(eject_shooter1_, true);
         sub_.getShooter2().setAction(eject_shooter2_, true);
+        timer_.start();
     }
 
     @Override
     public void run() throws Exception {
         super.run() ;
-
-        if (eject_updown_.isDone() && eject_tilt_.isDone() && eject_feeder_.isDone() && eject_shooter1_.isDone() && eject_shooter2_.isDone()) {
+        if(timer_.isExpired()){
+            sub_.getUpDown().setAction(eject_updown_, true);
+            sub_.getTilt().setAction(eject_tilt_, true);
+            sub_.getFeeder().setAction(eject_feeder_, true);
+            sub_.getShooter1().setAction(stop_shooter1_, true);
+            sub_.getShooter2().setAction(stop_shooter2_, true);
+        }
+        if (eject_updown_.isDone() && eject_tilt_.isDone() && eject_feeder_.isDone()) {
             setDone();
         }
 
