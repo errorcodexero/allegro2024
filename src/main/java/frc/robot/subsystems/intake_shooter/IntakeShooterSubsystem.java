@@ -98,7 +98,9 @@ public class IntakeShooterSubsystem extends Subsystem{
     }
 
     @Override
-    public void computeMyState() {
+    public void computeMyState() throws Exception {
+        super.computeMyState();
+        
         is_note_present_ = noteSensor_.get() ^ noteSensorInverted_;
         
         double eval = absoluteEncoder_.getVoltage();
