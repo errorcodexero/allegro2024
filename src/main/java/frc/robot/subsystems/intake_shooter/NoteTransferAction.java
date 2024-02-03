@@ -1,7 +1,7 @@
 import frc.robot.subsystems.intake_shooter;
 import org.xero1425.base.actions.Action;
-import org.xero1425.base.subsytems.motorsubsystem.MCMotionMagicAction
-import org.xero1425.base.subsytems.motorsubsystem.MotorEncoderPowerAction
+import org.xero1425.base.subsytems.motorsubsystem.MCMotionMagicAction;
+import org.xero1425.base.subsytems.motorsubsystem.MotorEncoderPowerAction;
 
 public class NoteTransferAction extends Action {
     private IntakeShooterSubsystem sub_;
@@ -15,7 +15,10 @@ public class NoteTransferAction extends Action {
         super(sub.getRobot().getMessageLogger());
         sub = sub_;
         // after the feeder wheels are prepared, then we make sure the tilt is in the right degrees
-        tilt_ = new MCMotionMagicAction(sub.getFeeder(), "pids:position", "target:shoot", 1, 1);
+        if(feeder_.isDone) {
+            tilt_ = new MCMotionMagicAction(sub.getTilt(), "pids:position", "target:shoot");
+        }
+
 
         
     }
