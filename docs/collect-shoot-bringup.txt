@@ -1,0 +1,22 @@
+To get to a shooting robot/automode robot
+-----------------------------------------
+
+Mechanical needed
+- Hardstop on up/down arm
+
+Software
+1. Get all CAN bus peripherals (motors + encoders) to their proper address.
+2. Move each motor to ensure wiring is right, find/set motor directions
+3. Test/Calibrate absolute encoder on tilt
+4. Look at required sequencing for start collect if any
+5. Look at required sequencing for stop collect if any
+6. Tune up/down arm
+7. Tune tilt
+8. Test collect
+9. Tune shooter1
+10. Tune shooter2 (should be same as shooter1)
+11. Test/Tune shoot operation
+12. Tune drivebase
+13. Target tracker Code
+14. Test drive base rotation tracking
+15. OI Code

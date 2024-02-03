@@ -7,7 +7,7 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 public class StopCollectAction extends Action {
     private IntakeShooterSubsystem sub_ ;
 
-    private double tilt_threshold_ ;
+    private double updown_threshold_ ;
     private MCMotionMagicAction intake_up_ ;
     private MotorEncoderPowerAction spinner_feeder_off_ ;
     private MCMotionMagicAction tilt_stow_ ;
@@ -16,7 +16,7 @@ public class StopCollectAction extends Action {
         super(sub.getRobot().getMessageLogger()) ;
         sub_ = sub ;
 
-        tilt_threshold_ = sub.getSettingsValue("actions:stow:tilt-threshold").getDouble() ;
+        updown_threshold_ = sub.getSettingsValue("actions:stop-collect:updown-threshold").getDouble() ;
 
         intake_up_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", "targets:stow", 1, 1) ;
         spinner_feeder_off_ = new MotorEncoderPowerAction(sub_.getFeeder(), 0.0) ;
@@ -28,15 +28,15 @@ public class StopCollectAction extends Action {
         super.start() ;
 
         sub_.getFeeder().setAction(spinner_feeder_off_, true) ;
-        sub_.getTilt().setAction(tilt_stow_, true) ;
+        sub_.getUpDown().setAction(intake_up_, true) ;
     }
 
     @Override
     public void run() throws Exception {
         super.run() ;
 
-        if (sub_.getTilt().getPosition() < tilt_threshold_) {
-            sub_.getUpDown().setAction(intake_up_, true) ;
+        if (sub_.getUpDown().getPosition() < updown_threshold_) {
+            sub_.getTilt().setAction(tilt_stow_, true) ;
         }
 
         if (intake_up_.isDone() && tilt_stow_.isDone()) {
@@ -50,6 +50,6 @@ public class StopCollectAction extends Action {
     }
 
     public String toString(int indent) {
-        return spaces(indent) + "CollectAction" ;
+        return spaces(indent) + "StopCollectAction" ;
     }    
 }

@@ -24,15 +24,21 @@ public class Allegro2024OISubsystem extends OISubsystem {
     public Allegro2024OISubsystem(Subsystem parent, DriveBaseSubsystem db) throws Exception {
         super (parent,"allegro2024oi",GamePadType.Swerve, db, true);
 
-        AllegroRobot2024 robot = (AllegroRobot2024)parent.getRobot().getRobotSubsystem() ;
-        IntakeShooterSubsystem sub = robot.getIntakeShooter() ;
-
-        start_collect_ = new StartCollectAction(sub) ;
-        stop_collect_ = new StopCollectAction(sub) ;
     }
 
     @Override
     protected void gamePadCreated(Gamepad gp) {
+        AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
+        IntakeShooterSubsystem sub = robot.getIntakeShooter() ;
+
+        try {
+            start_collect_ = new StartCollectAction(sub) ;
+            stop_collect_ = new StopCollectAction(sub) ;
+        }
+        catch(Exception ex) {
+
+        }
+
         SDSSwerveDriveSubsystem swerve = (SDSSwerveDriveSubsystem)getRobot().getRobotSubsystem().getDB();
 
         SwerveDriveGamepad swgp = (SwerveDriveGamepad)gp ;
@@ -43,9 +49,11 @@ public class Allegro2024OISubsystem extends OISubsystem {
             swgp.bindButtons(xActionButtons, 
                                 ()->swgp.startDriveBaseX(), 
                                 ()->swgp.stopDriveBaseX()) ;
-            swgp.bindButton(SwerveDriveGamepad.SwerveButton.RTrigger, 
-                                ()-> { intake_.setAction(start_collect_) ; }, 
-                                ()-> { intake_.setAction(stop_collect_) ; }) ;
+            if (start_collect_ != null && stop_collect_ != null) {
+                swgp.bindButton(SwerveDriveGamepad.SwerveButton.RTrigger, 
+                                    ()-> { intake_.setAction(start_collect_) ; }, 
+                                    ()-> { intake_.setAction(stop_collect_) ; }) ;
+            }
             swgp.bindButton(SwerveDriveGamepad.SwerveButton.LTrigger,
                                 () -> { swerve.setRotationSWControl(true);},
                                 () -> { swerve.setRotationSWControl(false);}) ;

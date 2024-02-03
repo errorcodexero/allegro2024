@@ -254,6 +254,16 @@
                 }
             }
         },
+        "intakeShooter" : {
+            "actions" : {
+                "start-collect" : {
+                    "tilt-threshold" : 22.5
+                },
+                "stop-collect" : {
+                    "updown-threshold" : 45.0
+                }
+            }
+        },
         "intake-updown" : {
             "hw" : {
                 "motors" : {
@@ -335,7 +345,7 @@
                 "eject" : 25
             },
             "pids" : {
-                "position" : {
+                "velocity" : {
                     "kp" : 0.0035,
                     "ki" : 0.0,
                     "kd" : 0.004,
@@ -795,7 +805,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 61,
+        "which": 101,
         "0": {
             "angle": 45,
             "power": 0.1,

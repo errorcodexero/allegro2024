@@ -11,15 +11,8 @@ import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 //   - Start spinning the intake rollers (intake motor)
 //   - Start spinning the keeper rollers (keeper motor)
 //
-// Wait for note sensor or cancel
-//
-// Phase 2: Note detected
-//   - Move the collector up to stowed position
-//   - Stop spinning the collector
-//
-// Phase 2: Canceled
-//   - Move the collector to stowed positoin
-//   - Stop spinning the collector
+// Wait for note detected and then mark the action as done.
+// This action is paired with the stop collect action.
 //
 public class StartCollectAction extends Action {
     private IntakeShooterSubsystem sub_ ;
@@ -33,7 +26,7 @@ public class StartCollectAction extends Action {
         super(sub.getRobot().getMessageLogger()) ;
         sub_ = sub ;
 
-        tilt_threshold_ = sub.getSettingsValue("actions:collect:tilt-threshold").getDouble() ;
+        tilt_threshold_ = sub.getSettingsValue("actions:start-collect:tilt-threshold").getDouble() ;
 
         intake_down_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", "targets:collect", 1, 1) ;
         spinner_feeder_on_ = new MCVelocityAction(sub_.getFeeder(), "pids:velocity", "targets:collect") ;

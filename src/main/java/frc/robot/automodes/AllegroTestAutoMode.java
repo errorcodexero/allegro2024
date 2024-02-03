@@ -1,5 +1,6 @@
 package frc.robot.automodes;
 
+import org.xero1425.base.actions.DelayAction;
 import org.xero1425.base.controllers.AutoController;
 import org.xero1425.base.controllers.SwerveTestAutoMode;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
@@ -7,6 +8,9 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
 
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
+import frc.robot.subsystems.intake_shooter.StartCollectAction;
+import frc.robot.subsystems.intake_shooter.StopCollectAction;
+import frc.robot.subsystems.intake_shooter.ShooterTuningAction;
 import frc.robot.subsystems.ampTrap.AmpTrapSubsystem;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
@@ -213,7 +217,14 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 100:
-                break;                  
+                addSubActionPair(intakeshooter, new StartCollectAction(intakeshooter), true);
+                addAction(new DelayAction(robot.getRobot(), 1.0));
+                addSubActionPair(intakeshooter, new StopCollectAction(intakeshooter), true);
+                break;
+
+            case 101:
+                addSubActionPair(intakeshooter, new ShooterTuningAction(intakeshooter), true);
+                break;
 
             /////////////////////////////////////////////////////////////////////////
             //

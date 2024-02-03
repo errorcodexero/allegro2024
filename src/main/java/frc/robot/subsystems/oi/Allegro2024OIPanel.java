@@ -50,7 +50,7 @@ public class Allegro2024OIPanel extends OIPanel {
         super.generateActions();
 
         AllegroRobot2024 robot = (AllegroRobot2024)getSubsystem().getRobot().getRobotSubsystem() ;
-        if (robot.getIntakeShooter().hasNote()) {
+        if (robot.getIntakeShooter().isNotePresent()) {
             //
             // The intake has a note.  Valid Actions ...
             // - shoot

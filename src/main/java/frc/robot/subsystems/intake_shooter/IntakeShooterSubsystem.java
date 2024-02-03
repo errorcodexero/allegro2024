@@ -2,6 +2,10 @@ package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
+import org.xero1425.misc.EncoderMapper;
+
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 public class IntakeShooterSubsystem extends Subsystem{
     private MotorEncoderSubsystem updown_;
@@ -9,6 +13,12 @@ public class IntakeShooterSubsystem extends Subsystem{
     private MotorEncoderSubsystem tilt_;
     private MotorEncoderSubsystem shooter1_;
     private MotorEncoderSubsystem shooter2_;
+
+    private DigitalInput noteSensor_; 
+    private boolean noteSensorInverted_;
+    private AnalogInput absoluteEncoder_;
+    private EncoderMapper encoderMapper_;
+    private boolean is_note_present_;
 
     public IntakeShooterSubsystem(Subsystem parent) throws Exception {
         super(parent, "intakeShooter");
@@ -27,10 +37,29 @@ public class IntakeShooterSubsystem extends Subsystem{
 
         shooter2_ = new MotorEncoderSubsystem(this,"intake-shooter2", false);
         addChild(shooter2_);
+
+
+        int channel = getSettingsValue("hw:sensor:channel").getInteger();
+        noteSensor_ = new DigitalInput(channel);
+
+        channel = getSettingsValue("hw:encoder:channel").getInteger();
+        absoluteEncoder_ = new AnalogInput(channel);
+
+        double rmax = getSettingsValue("hw:encoder:rmax").getDouble();
+        double rmin = getSettingsValue("hw:encoder:rmin").getDouble();
+        double emax = getSettingsValue("hw:encoder:emax").getDouble();
+        double emin = getSettingsValue("hw:encoder:emin").getDouble();
+        double rcval = getSettingsValue("hw:encoder:rcval").getDouble();
+        double ecval = getSettingsValue("hw:encoder:ecval").getDouble();
+
+        encoderMapper_ = new EncoderMapper(rmax,rmin,emax,emin);
+        encoderMapper_.calibrate(rcval, ecval);
+
+        noteSensorInverted_ = getSettingsValue("hw:sensor:inverted").getBoolean();        
     }
 
     public boolean isNotePresent() {
-        return true ;
+        return is_note_present_ ;
     }
 
     public MotorEncoderSubsystem getUpDown() {
@@ -53,7 +82,23 @@ public class IntakeShooterSubsystem extends Subsystem{
             return shooter2_ ;
     }
 
-    public boolean hasNote() {
-        return false ;
+    @Override
+    public void postHWInit() throws Exception {
+        super.postHWInit();
+
+        double voltage = absoluteEncoder_.getVoltage();
+        double mappedpos =  encoderMapper_.toRobot(voltage);
+        tilt_.getMotorController().setPosition(mappedpos);
     }
+
+    @Override
+    public void computeMyState() throws Exception {
+        super.computeMyState();
+        
+        is_note_present_ = noteSensor_.get() ^ noteSensorInverted_;
+
+        double voltage = absoluteEncoder_.getVoltage();
+        double mappedpos =  encoderMapper_.toRobot(voltage);
+        putDashboard("absenc", DisplayType.Verbose, mappedpos);
+    }    
 }
