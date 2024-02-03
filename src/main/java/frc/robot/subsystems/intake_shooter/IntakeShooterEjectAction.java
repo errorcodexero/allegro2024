@@ -45,12 +45,14 @@ public class IntakeShooterEjectAction extends Action{
     @Override
     public void run() throws Exception {
         super.run() ;
-        if(timer_.isExpired()){
+        boolean step1= false;
+        if(timer_.isExpired() && !step1){
             sub_.getUpDown().setAction(eject_updown_, true);
             sub_.getTilt().setAction(eject_tilt_, true);
             sub_.getFeeder().setAction(eject_feeder_, true);
             sub_.getShooter1().setAction(stop_shooter1_, true);
             sub_.getShooter2().setAction(stop_shooter2_, true);
+            step1 = true;
         }
         if (eject_updown_.isDone() && eject_tilt_.isDone() && eject_feeder_.isDone()) {
             setDone();

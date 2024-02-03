@@ -41,11 +41,13 @@ public class AmpTrapEjectAction extends Action{
     @Override
     public void run() throws Exception {
         super.run() ;
-        if(timer_.isExpired()){
+        boolean step1= false;
+        if(timer_.isExpired() && !step1){
             sub_.getElevator().setAction(eject_elevator_, true);
             sub_.getWrist().setAction(eject_wrist_, true);
             sub_.getArm().setAction(eject_arm_, true);
             sub_.getManipulator().setAction(stop_manipulator_);
+            step1 = true;
         }
         if (eject_elevator_.isDone() && eject_arm_.isDone() && eject_wrist_.isDone()) {
             setDone();
