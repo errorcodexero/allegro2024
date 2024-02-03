@@ -22,7 +22,7 @@ public class PlaceAction extends Action{
 
         stop_ = new MCVelocityAction(sub.getManipulator(), "pids:position", "targets:stop");
 
-        timer_ = new XeroTimer(sub_.getRobot(), "Place", 5);
+        timer_ = new XeroTimer(sub_.getRobot(), "Place", 1);
     }
 
     public void start() throws Exception{

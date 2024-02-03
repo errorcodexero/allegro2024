@@ -641,10 +641,10 @@
                 "velocity-important" : "High"
             },
             "targets" : {
-                "collect" : 25,
-                "stow" : 90,
-                "shoot" : 90,
-                "eject" : 25
+                "collect" : 5,
+                "stop" : 0,
+                "shoot" : 10,
+                "eject" : -5
             },
             "pids" : {
                 "position" : {
@@ -737,10 +737,9 @@
                 "velocity-important" : "High"
             },
             "targets" : {
-                "collect" : 25,
-                "stow" : 90,
-                "shoot" : 90,
-                "eject" : 25
+                "stop" : 0,
+                "shoot" : 15,
+                "eject" : -5
             },
             "pids" : {
                 "position" : {
@@ -785,10 +784,9 @@
                 "velocity-important" : "High"
             },
             "targets" : {
-                "collect" : 25,
-                "stow" : 90,
-                "shoot" : 90,
-                "eject" : 25
+                "stop" : 0,
+                "shoot" : 15,
+                "eject" : -5
             },
             "pids" : {
                 "position" : {
@@ -809,7 +807,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 126,
+        "which": 111,
 
         "0": {
             "angle": 45,
@@ -903,6 +901,9 @@
             "duration" : 5.0
         },
         "126" : {
+            "duration" : 5.0
+        },
+        "127" : {
             "duration" : 5.0
         }
     }
