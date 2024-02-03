@@ -13,18 +13,17 @@ public class StartCollectAction extends Action{
     private enum State {
         Idle,
         TiltUp,
-        IntakeDown,
         WaitForNote
     }
 
     private IntakeShooterSubsystem sub_;
 
     //Defining the collect actions for the different motors
-    private MCMotionMagicAction collect_updown_;
+    private MCMotionMagicAction collect_updown_action;
 
-    private MCMotionMagicAction collect_tilt_;
+    private MCMotionMagicAction collect_tilt_action;
 
-    private MCVelocityAction collect_feeder_;
+    private MCVelocityAction collect_feeder_action;
 
     private State state_;
 
@@ -35,19 +34,20 @@ public class StartCollectAction extends Action{
 
         sub_ = sub;
         //Initializing the upDown and tilt collect actions with the Motion Magic constructor
-        collect_updown_ = new MCMotionMagicAction(sub.getUpDown(), "pid:position", "targets:collect",0.5, 0.5);
+        collect_updown_action = new MCMotionMagicAction(sub.getUpDown(), "updown_position", "targets:collect",0.5, 0.5);
 
-        collect_tilt_ = new MCMotionMagicAction(sub.getTilt(), "pid:position", "targets:collect", 0,0 );
+        collect_tilt_action = new MCMotionMagicAction(sub.getTilt(), "tilt_position", "targets:collect", 0,0 );
         //Initializing the feeder collect action with the velocity action
-        collect_feeder_ = new MCVelocityAction(sub.getFeeder(), "pid:postion", "targets:collect");
+        collect_feeder_action = new MCVelocityAction(sub.getFeeder(), "feeder_velocity", "targets:collect");
 
     }
     @Override
     public void start() throws Exception {
         super.start();
-        //Sets the state to where it begins to move the Tilt upwards to a safe position. Also begins spinning the feeder motor
+        //Begins to move the Tilt upwards to a safe position. Also begins spinning the feeder motor
         state_ = State.TiltUp;
-        sub_.getFeeder().setAction(collect_feeder_, true);
+        sub_.getFeeder().setAction(collect_feeder_action, true);
+        sub_.getTilt().setAction(collect_tilt_action, true);
    }
     @Override
     public void run() throws Exception{
@@ -58,10 +58,10 @@ public class StartCollectAction extends Action{
                 break;
             case TiltUp:
                 stateTiltUp();
-            case IntakeDown:
-                stateIntakeDown();
+                break;
             case WaitForNote:
                 stateWaitForNote();
+                break;
         }
    }
    @Override
@@ -69,22 +69,19 @@ public class StartCollectAction extends Action{
         return prefix(indent) + "StartCollectAction";
     }
     private void stateTiltUp() {
-       //Runs the tilt motor to the position we want and switches to the IntakeDown state so in the next robot loop, it will run that.
-        sub_.getTilt().setAction(collect_tilt_, true);
-        state_ = State.IntakeDown;
-    }
-    private void stateIntakeDown() {
-        //This moves the upDown motor down to the desired position and continues moving the Tilt motor until it reaches it's final position 
-        sub_.getUpDown().setAction(collect_updown_, true);
+       //Checks if the Tilt motor has reached the safe position. If it has, switch to next state and begin moving the intake down
+        if (!sub_.getTilt().isBusy()) {
+            state_ = State.WaitForNote;
+             sub_.getUpDown().setAction(collect_updown_action, true);
+             sub_.getTilt().setAction(collect_tilt_action, true);
 
-        sub_.getTilt().setAction(collect_tilt_, true);
-
-        state_ = State.WaitForNote;
+        }
     }
     private void stateWaitForNote() {
         //This uses the sensor and keeps checking until the sensor detects a note is in place
         if (sub_.isNotePresent()) {
             sub_.getFeeder().cancelAction();
+            state_ = State.Idle;
             setDone();
         }
     }
