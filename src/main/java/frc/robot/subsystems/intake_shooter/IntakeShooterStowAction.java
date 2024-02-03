@@ -1,5 +1,7 @@
 package frc.robot.subsystems.intake_shooter;
 
+// Stows the updown, tilt, shooter, and feeder motors to their respective positions. 
+
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
