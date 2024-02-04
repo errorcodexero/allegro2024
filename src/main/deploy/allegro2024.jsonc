@@ -302,7 +302,7 @@
                         "canid" : 13,
                         "bus" : "DriveBase",
                         "offset": {
-                            "PRACTICE" : -221.5,
+                            "PRACTICE" : -54.318,
                             "COMPETITION" : 0.0
                         }                        
                     }
@@ -333,7 +333,7 @@
                         "canid" : 23,
                         "bus" : "DriveBase",                        
                         "offset": {
-                            "PRACTICE" : -147.6,
+                            "PRACTICE" :  -258.486,
                             "COMPETITION" : 0
                         }                        
                     }
@@ -365,7 +365,7 @@
                         "canid" : 43,
                         "bus" : "DriveBase",                        
                         "offset": {
-                            "PRACTICE" : -127.0,
+                            "PRACTICE" : -287.58,
                             "COMPETITION" : 0
                         }                        
                     }
@@ -396,8 +396,8 @@
                         "canid" : 33,
                         "bus" : "DriveBase",                        
                         "offset": {
-                            "PRACTICE" : -320.4,
-                            "COMPETITION" : 0
+                            "PRACTICE" : -169.629,
+                            "COMPETITION" : 0.0
                         }                        
                     }
                 }                   
@@ -559,9 +559,9 @@
                     "channel" : 0,
                     "emin" : 0.0,
                     "emax" : 5.0,
-                    "rmin" : 0.0,
+                    "rmin" : -90.0,
                     "rmax" : 90.0,
-                    "ecval" : 0.0,
+                    "ecval" : 0.25,
                     "rcval" : 0.0
                 }
             }
@@ -571,7 +571,7 @@
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-                    "canid" : 1,
+                    "canid" : 2,
                     "inverted" : false,
                     "neutral-mode" : "brake",
                     "current-limit" : 20.0
@@ -619,7 +619,7 @@
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-                    "canid" : 2,
+                    "canid" : 1,
                     "inverted" : false,
                     "neutral-mode" : "brake",
                     "current-limit" : 20.0
@@ -667,7 +667,7 @@
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-                    "canid" : 3,
+                    "canid" : 5,
                     "inverted" : false,
                     "neutral-mode" : "brake",
                     "current-limit" : 20.0
@@ -677,7 +677,7 @@
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m": 0.17578125,          
+                    "m": 0.019775395,          
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -696,16 +696,16 @@
             },
             "pids" : {
                 "position" : {
-                    "kp" : 0.0035,
+                    "kp" : 1.0,
                     "ki" : 0.0,
-                    "kd" : 0.004,
-                    "kv" : 0.000312,
+                    "kd" : 0.0,
+                    "kv" : 0.312,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 80,
-                    "maxa" : 80,
+                    "maxv" : 100,
+                    "maxa" : 100,
                     "jerk" : 0.0
                 }
             }
@@ -715,8 +715,8 @@
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-                    "canid" : 4,
-                    "inverted" : false,
+                    "canid" : 3,
+                    "inverted" : true,
                     "neutral-mode" : "brake",
                     "current-limit" : 20.0
                 },
@@ -762,8 +762,8 @@
                 "motors" : {
                     "type" : "talon-fx",
                     "bus" : "",
-                    "canid" : 5,
-                    "inverted" : false,
+                    "canid" : 4,
+                    "inverted" : true,
                     "neutral-mode" : "brake",
                     "current-limit" : 20.0
                 },
@@ -807,7 +807,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 111,
+        "which": 20,
 
         "0": {
             "angle": 45,
@@ -843,6 +843,35 @@
         },
         "4": {
             "name": "Edge1Blue-Path1"
+        },
+        "10" : {
+            "power" : 0.2,
+            "duration" : 5.0
+        },
+        "20" : {
+            "power" : 0.2,
+            "duration" : 1.0
+        },        
+        "30" : {
+            "power" : 0.2,
+            "duration" : 5.0
+        },
+        "40" : {
+            "power" : 0.2,
+            "duration" : 5.0
+        },
+        "50" : {
+            "power" : 0.2,
+            "duration" : 1.0
+        },
+        "52": {
+            "target" : 0.0
+        },
+        "53" : {
+            "target1" : 0.0,
+            "target2" : 25.0,
+            "target3" : -20.0,
+            "target4" : -30.0
         },
         "60" : {
             "power" : 0.5,
@@ -881,6 +910,10 @@
         },
         "111" : {
             "duration" : 5.0
+        },
+        "112" : {
+            "shooter-power" : 0.5,
+            "feeder-power" : 0.3
         },
         "120" : {
             "duration" : 5.0

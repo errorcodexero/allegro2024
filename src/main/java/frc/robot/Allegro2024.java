@@ -28,7 +28,7 @@ public class Allegro2024 extends XeroRobot {
   }
 
   public String getPracticeSerialNumber() {
-    return "032238BC" ;
+    return "032414C9" ;
   }
 
   public String getName() {
