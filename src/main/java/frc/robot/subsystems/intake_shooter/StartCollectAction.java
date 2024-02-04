@@ -27,8 +27,7 @@ public class StartCollectAction extends Action {
 
     private State state_;
 
-    public StartCollectAction(IntakeShooterSubsystem sub) throws Exception 
- {
+    public StartCollectAction(IntakeShooterSubsystem sub) throws Exception {
         super(sub.getRobot().getMessageLogger());
         //switches the state to Idle at first where it doesn't do anything
         state_ = State.Idle;
@@ -40,21 +39,19 @@ public class StartCollectAction extends Action {
 
         //Initializing the feeder collect action with the velocity action
         collect_feeder_action = new MCVelocityAction(sub.getFeeder(), "pids:velocity", "targets:feeder_collect_velocity");
-
     }
+
     @Override
-    public void start() throws Exception 
- {
+    public void start() throws Exception {
         super.start();
         //Begins to move the Tilt upwards to a safe position. Also begins spinning the feeder motor
         state_ = State.TiltUp;
         sub_.getFeeder().setAction(collect_feeder_action, true);
         sub_.getTilt().setAction(collect_tilt_action, true);
+    }
 
-   }
     @Override
-    public void run() throws Exception
- {
+    public void run() throws Exception {
         super.run();
        //Defines the sequence of each state and what to do in these states
         switch(state_) {
@@ -68,22 +65,23 @@ public class StartCollectAction extends Action {
                 break;
         }
    }
+
    @Override
     public String toString(int indent) {
         return prefix(indent) + "StartCollectAction";
     }
-    private void stateTiltUp()
- {
+
+    private void stateTiltUp() {
        //Checks if the Tilt motor has reached the safe position. If it has, switch to the next state and begin moving the intake down
         if (!sub_.getTilt().isBusy()) {
             state_ = State.WaitForNote;
-             sub_.getUpDown().setAction(collect_updown_action, true);
+            sub_.getUpDown().setAction(collect_updown_action, true);
 
 
         }
     }
-    private void stateWaitForNote() 
- {
+
+    private void stateWaitForNote() {
         //Uses the sensor to detect if a note is in place. If it is, then stop the feeder and end everything.
         if (sub_.isNotePresent()) {
             sub_.getFeeder().cancelAction();
