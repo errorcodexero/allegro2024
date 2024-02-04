@@ -34,6 +34,7 @@ public class IntakeShooterModel extends SimulationModel {
         shooter1_ = createSimulatedMotor(engine, "shooter1");
         shooter2_ = createSimulatedMotor(engine, "shooter2");
         tilt_ = createSimulatedMotor(engine, "tilt");
+        
 
         setCreated();
 
