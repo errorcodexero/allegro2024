@@ -564,6 +564,14 @@
                     "ecval" : 0.25,
                     "rcval" : 0.0
                 }
+            },
+            "actions" : {
+                "butch-start-collect" : {
+                    "tilt-threshold" : 0.0
+                },
+                "butch-stop-collect" : {
+                    "updown-threshold" : 0.0
+                }
             }
         },
         "intake-updown" : {
@@ -647,7 +655,7 @@
                 "eject" : -5
             },
             "pids" : {
-                "position" : {
+                "velocity" : {
                     "kp" : 0.0035,
                     "ki" : 0.0,
                     "kd" : 0.004,
@@ -742,7 +750,7 @@
                 "eject" : -5
             },
             "pids" : {
-                "position" : {
+                "velocity" : {
                     "kp" : 0.0035,
                     "ki" : 0.0,
                     "kd" : 0.004,
@@ -789,7 +797,7 @@
                 "eject" : -5
             },
             "pids" : {
-                "position" : {
+                "velocity" : {
                     "kp" : 0.0035,
                     "ki" : 0.0,
                     "kd" : 0.004,
@@ -807,7 +815,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 20,
+        "which": 112,
 
         "0": {
             "angle": 45,
@@ -911,7 +919,7 @@
         "111" : {
             "duration" : 5.0
         },
-        "112" : {
+        "119" : {
             "shooter-power" : 0.5,
             "feeder-power" : 0.3
         },

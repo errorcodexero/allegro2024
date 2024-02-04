@@ -35,6 +35,8 @@
             "model" : "intake-shooter",
             "instance" : "1",
             "props" : {
+                "note-sensor" : 0,
+                
                 "feeder:type" : "talon-fx",
                 "feeder:bus" : "",
                 "feeder:canid" : 1,

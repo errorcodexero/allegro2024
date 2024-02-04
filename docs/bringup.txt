@@ -24,3 +24,4 @@ Preliminary tune shooter to multiple distances
 - 4 feet
 - 10 feet
 - max distances
+Tune Swerve Drive Motors (move to MCVelocity?)

@@ -19,6 +19,34 @@
                     }
                 }
             ]
-        }       
+        },
+        {
+            "time" : 0.1,
+            "events" :
+            [
+                {
+                    "model" : "intake-shooter",
+                    "instance" : "1",
+                    "values" : 
+                    {
+                        "note-sensor" : false
+                    }
+                }
+            ]
+        },
+        {
+            "time" : 10.0,
+            "events" :
+            [
+                {
+                    "model" : "intake-shooter",
+                    "instance" : "1",
+                    "values" : 
+                    {
+                        "note-sensor" : true
+                    }
+                }
+            ]
+        }
     ]
 }

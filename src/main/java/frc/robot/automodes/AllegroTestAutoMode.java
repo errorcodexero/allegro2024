@@ -17,6 +17,8 @@ import frc.robot.subsystems.amp_trap.ClimbDownAction;
 import frc.robot.subsystems.amp_trap.PrepClimbAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
 import frc.robot.subsystems.amp_trap.AmpTrapEjectAction;
+import frc.robot.subsystems.intake_shooter.ButchStartCollectAction;
+import frc.robot.subsystems.intake_shooter.ButchStopCollectionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterEjectAction;
 
 
@@ -387,6 +389,13 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 112:
                 if (intakeshooter != null) {
+                    addSubActionPair(intakeshooter, new ButchStartCollectAction(intakeshooter), true);
+                    addSubActionPair(intakeshooter, new ButchStopCollectionAction(intakeshooter), true);
+                }
+                break ;
+
+            case 119:
+                if (intakeshooter != null) {
                     double shpower = getDouble("shooter-power") ;
                     double fdpower = getDouble("feeder-power") ;
                     addSubActionPair(intakeshooter.getShooter1(), new MotorEncoderPowerAction(intakeshooter.getShooter1(), shpower), false) ;
@@ -395,6 +404,8 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                     addAction(new DelayAction(getAutoController().getRobot(), 30));
                 }
                 break ;
+
+
             /////////////////////////////////////////////////////////////////////////
             //
             // Amp-Trap tests

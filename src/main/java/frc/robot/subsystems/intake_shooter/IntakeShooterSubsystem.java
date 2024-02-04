@@ -110,6 +110,7 @@ public class IntakeShooterSubsystem extends Subsystem{
 
         putDashboard("RawEnc", DisplayType.Verbose, eval);
         putDashboard("Angle", DisplayType.Verbose, angle_);
+        putDashboard("note", DisplayType.Always, is_note_present_) ;
     }
 
     @Override

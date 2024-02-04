@@ -8,11 +8,8 @@ import org.xero1425.base.subsystems.Subsystem;
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
-import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.hardware.CANcoder;
-import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
-import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 
 import edu.wpi.first.wpilibj.RobotBase;
@@ -53,8 +50,8 @@ public class SwerveModule {
         double i = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:i").getDouble() ;
         double d = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:d").getDouble() ;
         steer_.setPID(XeroPidType.Position, p, i, d, 0, 0, 0, 0, 0.1);
-        steer_.setPositionImportant(IMotorController.ImportantType.High);
-        steer_.setVelocityImportant(IMotorController.ImportantType.High);
+        steer_.setPositionImportant(IMotorController.ImportantType.Low);
+        steer_.setVelocityImportant(IMotorController.ImportantType.Low);
         target_angle_ = 0.0 ;
 
         //
