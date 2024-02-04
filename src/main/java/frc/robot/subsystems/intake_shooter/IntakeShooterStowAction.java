@@ -1,21 +1,17 @@
 package frc.robot.subsystems.intake_shooter;
 
-
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 
 public class IntakeShooterStowAction  extends Action{
     
-
     private IntakeShooterSubsystem sub_;
     private MCMotionMagicAction stow_updown_;
     private MCMotionMagicAction stow_tilt_;
     private MotorEncoderPowerAction stow_feeder_;
     private MotorEncoderPowerAction stow_shooter1_;
     private MotorEncoderPowerAction stow_shooter2_;
-
-
 
     public IntakeShooterStowAction(IntakeShooterSubsystem sub) throws Exception {
         super(sub.getRobot().getMessageLogger());

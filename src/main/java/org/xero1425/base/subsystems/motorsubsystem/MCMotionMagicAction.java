@@ -66,8 +66,8 @@ public class MCMotionMagicAction extends MotorAction {
         double d = getSubsystem().getSettingsValue(name_ + ":kd").getDouble() / enc.mapPhysicalToMotor(1) ;
         double v = getSubsystem().getSettingsValue(name_ + ":kv").getDouble() / enc.mapPhysicalToMotor(1) ;
         double a = getSubsystem().getSettingsValue(name_ + ":ka").getDouble() / enc.mapPhysicalToMotor(1) ;
-        double s = getSubsystem().getSettingsValue(name_ + ":ks").getDouble() / enc.mapPhysicalToMotor(1) ;
-        double g = getSubsystem().getSettingsValue(name_ + ":kg").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double s = getSubsystem().getSettingsValue(name_ + ":ks").getDouble() ;
+        double g = getSubsystem().getSettingsValue(name_ + ":kg").getDouble() ;
         double outmax = getSubsystem().getSettingsValue(name_ + ":outmax").getDouble() ;
         getSubsystem().getMotorController().setPID(XeroPidType.MotionMagic, p, i, d, v, a, g, s, outmax);
 

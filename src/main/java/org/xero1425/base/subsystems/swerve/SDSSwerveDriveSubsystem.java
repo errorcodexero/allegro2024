@@ -41,6 +41,7 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
     private ChassisSpeeds chassis_speed_ ;
     private boolean disabled_init_ ;
+    private boolean coast_mode_ ;
 
     private Mode mode_ ;
     private double [] speeds_ ;
@@ -53,6 +54,7 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         super(parent, name) ;
 
         disabled_init_ = false ;
+        coast_mode_ = false ;
 
         speeds_ = new double[4] ;
         powers_ = new double[4] ;
@@ -235,9 +237,10 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         if (getRobot().isDisabled()) {
             if (!disabled_init_) {
                 modules_[FL].hw.setNeutralMode(XeroNeutralMode.Coast);
-                modules_[FL].hw.setNeutralMode(XeroNeutralMode.Coast);
-                modules_[FL].hw.setNeutralMode(XeroNeutralMode.Coast);
-                modules_[FL].hw.setNeutralMode(XeroNeutralMode.Coast);                                    
+                modules_[FR].hw.setNeutralMode(XeroNeutralMode.Coast);
+                modules_[BL].hw.setNeutralMode(XeroNeutralMode.Coast);
+                modules_[BR].hw.setNeutralMode(XeroNeutralMode.Coast);      
+                coast_mode_ = true ;                              
 
                 modules_[FL].hw.set(0.0, modules_[FL].hw.getStateAngle());
                 modules_[FR].hw.set(0.0, modules_[FR].hw.getStateAngle());
@@ -248,6 +251,13 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
             }
         }
         else {
+            if (coast_mode_) {
+                modules_[FL].hw.setNeutralMode(XeroNeutralMode.Brake);
+                modules_[FR].hw.setNeutralMode(XeroNeutralMode.Brake);
+                modules_[BL].hw.setNeutralMode(XeroNeutralMode.Brake);
+                modules_[BR].hw.setNeutralMode(XeroNeutralMode.Brake);
+                coast_mode_ = false ;            
+            }
             disabled_init_ = false ;
         }
     }
