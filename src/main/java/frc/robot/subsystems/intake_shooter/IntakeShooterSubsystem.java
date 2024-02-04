@@ -1,5 +1,7 @@
 package frc.robot.subsystems.intake_shooter;
 
+import org.xero1425.base.motors.BadMotorRequestException;
+import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.misc.EncoderMapper;
@@ -105,5 +107,17 @@ public class IntakeShooterSubsystem extends Subsystem{
         
         double eval = absoluteEncoder_.getVoltage();
         angle_ = encoderMapper_.toRobot(eval);
+
+        putDashboard("RawEnc", DisplayType.Verbose, eval);
+        putDashboard("Angle", DisplayType.Verbose, angle_);
+    }
+
+    @Override
+    public void postHWInit() throws BadMotorRequestException, MotorRequestFailedException {
+        double eval = absoluteEncoder_.getVoltage();
+        angle_ = encoderMapper_.toRobot(eval);
+
+        double m = tilt_.getEncoder().mapPhysicalToMotor(angle_) ;
+        tilt_.getMotorController().setPosition(m);
     }
 }

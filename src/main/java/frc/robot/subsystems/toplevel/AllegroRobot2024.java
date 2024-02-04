@@ -28,18 +28,18 @@ public class AllegroRobot2024 extends RobotSubsystem {
         oi_ = new Allegro2024OISubsystem(this, db_);
         addChild(oi_);
 
-        ll_ = new LimeLightSubsystem(this, "limelight");
-        addChild(ll_);
+        // ll_ = new LimeLightSubsystem(this, "limelight");
+        // addChild(ll_);
 
         is_ = new IntakeShooterSubsystem(this);
         addChild(is_);
 
-        at_ = new AmpTrapSubsystem(this);
-        addChild(at_);
+        // at_ = new AmpTrapSubsystem(this);
+        // addChild(at_);
 
-        lidar_ = new LidarSubsystem(this);
-        addChild(lidar_);
-
+        // lidar_ = new LidarSubsystem(this);
+        // addChild(lidar_);
+        System.out.println("Here");
     }
 
     public SDSSwerveDriveSubsystem getSwerve() {
