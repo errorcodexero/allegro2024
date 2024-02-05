@@ -22,24 +22,23 @@ public class AllegroRobot2024 extends RobotSubsystem {
     public AllegroRobot2024(XeroRobot robot) throws Exception {
         super(robot, "Allegro2024RobotSubsystem");
 
+        is_ = new IntakeShooterSubsystem(this);
+        addChild(is_);        
+
         db_ = new SDSSwerveDriveSubsystem(this, "swerve");
         addChild(db_);
 
         oi_ = new Allegro2024OISubsystem(this, db_);
         addChild(oi_);
 
-        // ll_ = new LimeLightSubsystem(this, "limelight");
-        // addChild(ll_);
-
-        is_ = new IntakeShooterSubsystem(this);
-        addChild(is_);
+        ll_ = new LimeLightSubsystem(this, "limelight");
+        addChild(ll_);
 
         // at_ = new AmpTrapSubsystem(this);
         // addChild(at_);
 
         // lidar_ = new LidarSubsystem(this);
         // addChild(lidar_);
-        System.out.println("Here");
     }
 
     public SDSSwerveDriveSubsystem getSwerve() {

@@ -18,7 +18,9 @@
             "limelight" : false
         },
         "verbose": {
-            "swerve" : true
+            "swerve" : false,
+            "intake-tilt-pos" : true,
+            "intake-updown-pos" : true
         },
         "plotting": {
             "enabled" : true,
@@ -552,8 +554,8 @@
         "intake-shooter" : {
             "hw" : {
                 "sensor" : {
-                    "channel" : 0,
-                    "inverted" : false
+                    "channel" : 1,
+                    "inverted" : true
                 },
                 "encoder" : {
                     "channel" : 0,
@@ -561,7 +563,7 @@
                     "emax" : 5.0,
                     "rmin" : -90.0,
                     "rmax" : 90.0,
-                    "ecval" : 0.25,
+                    "ecval" : 1.2,
                     "rcval" : 0.0
                 }
             },
@@ -582,19 +584,20 @@
                     "canid" : 2,
                     "inverted" : false,
                     "neutral-mode" : "brake",
-                    "current-limit" : 20.0
+                    "current-limit" : 60.0
                 },
                 "encoder": {
                     //
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m": 0.17578125, 
+                    "m": 0.002471962, 
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
                     "accunits" : "deg/s/s"
-                }
+                },
+                "hard-stop" : 124.0
             },
             "props" : {
                 "position-important" : "High",
@@ -608,16 +611,16 @@
             },
             "pids" : {
                 "position" : {
-                    "kp" : 0.0035,
+                    "kp" : 10.0,
                     "ki" : 0.0,
-                    "kd" : 0.004,
-                    "kv" : 0.000312,
+                    "kd" : 0.0,
+                    "kv" : 0.01666667,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 80,
-                    "maxa" : 80,
+                    "maxv" : 40,
+                    "maxa" : 40,
                     "jerk" : 0.0
                 }
             }
@@ -630,7 +633,7 @@
                     "canid" : 1,
                     "inverted" : false,
                     "neutral-mode" : "brake",
-                    "current-limit" : 20.0
+                    "current-limit" : 60.0
                 },
                 "encoder": {
                     //
@@ -678,7 +681,7 @@
                     "canid" : 5,
                     "inverted" : false,
                     "neutral-mode" : "brake",
-                    "current-limit" : 20.0
+                    "current-limit" : 60.0
                 },
                 "encoder": {
                     //
@@ -704,16 +707,28 @@
             },
             "pids" : {
                 "position" : {
-                    "kp" : 1.0,
+                    // "kp" : 1.0,
+                    // "ki" : 0.0,
+                    // "kd" : 0.001,
+                    // "kv" : 0.312,
+                    // "ka" : 0.0,
+                    // "kg" : 0.0,
+                    // "ks" : 0.0,
+                    // "outmax" : 12.0,
+                    // "maxv" : 120,
+                    // "maxa" : 180,
+                    // "jerk" : 0.0
+
+                    "kp" : 1.6,
                     "ki" : 0.0,
-                    "kd" : 0.0,
+                    "kd" : 0.001,
                     "kv" : 0.312,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 100,
-                    "maxa" : 100,
+                    "maxv" : 120,
+                    "maxa" : 180,
                     "jerk" : 0.0
                 }
             }
@@ -726,14 +741,14 @@
                     "canid" : 3,
                     "inverted" : true,
                     "neutral-mode" : "brake",
-                    "current-limit" : 20.0
+                    "current-limit" : 60.0
                 },
                 "encoder": {
                     //
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m": 0.17578125,             
+                    "m": 0.000488,             
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -751,17 +766,14 @@
             },
             "pids" : {
                 "velocity" : {
-                    "kp" : 0.0035,
+                    "kp" : 0.55,
                     "ki" : 0.0,
-                    "kd" : 0.004,
-                    "kv" : 0.000312,
+                    "kd" : 0.0,
+                    "kv" : 0.145,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
-                    "outmax" : 12.0,
-                    "maxv" : 80,
-                    "maxa" : 80,
-                    "jerk" : 0.0
+                    "outmax" : 12.0
                 }
             }            
         },
@@ -773,14 +785,14 @@
                     "canid" : 4,
                     "inverted" : true,
                     "neutral-mode" : "brake",
-                    "current-limit" : 20.0
+                    "current-limit" : 60.0
                 },
                 "encoder": {
                     //
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m": 0.17578125,             
+                    "m": 0.000488,             
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -798,25 +810,21 @@
             },
             "pids" : {
                 "velocity" : {
-                    "kp" : 0.0035,
+                    "kp" : 0.55,
                     "ki" : 0.0,
-                    "kd" : 0.004,
-                    "kv" : 0.000312,
+                    "kd" : 0.0,
+                    "kv" : 0.13,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
-                    "outmax" : 12.0,
-                    "maxv" : 80,
-                    "maxa" : 80,
-                    "jerk" : 0.0
+                    "outmax" : 12.0
                 }
             }            
         }
     },
     "testmode" : {
         "enabled": true,
-        "which": 112,
-
+        "which": 50,
         "0": {
             "angle": 45,
             "power": 0.1,
@@ -853,23 +861,35 @@
             "name": "Edge1Blue-Path1"
         },
         "10" : {
-            "power" : 0.2,
+            "power" : 0.5,
             "duration" : 5.0
         },
+        "11" : {
+            "duration": 2.0
+        },
         "20" : {
-            "power" : 0.2,
-            "duration" : 1.0
+            "power" : -0.1,
+            "duration" : 0.5
         },        
         "30" : {
             "power" : 0.2,
             "duration" : 5.0
         },
+        "31" : {
+            "duration" : 2.0
+        },
+        "32" : {
+            "velocity" : 15
+        },
         "40" : {
             "power" : 0.2,
             "duration" : 5.0
         },
+        "42" : {
+            "velocity" : 15
+        },
         "50" : {
-            "power" : 0.2,
+            "power" : 0.4,
             "duration" : 1.0
         },
         "52": {
