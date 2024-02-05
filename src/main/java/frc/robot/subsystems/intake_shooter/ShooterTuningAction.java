@@ -46,7 +46,8 @@ public class ShooterTuningAction extends Action {
     private MCVelocityAction velocity1_action_ ;
     private MCVelocityAction velocity2_action_ ;
     private MCMotionMagicAction tilt_action_ ;
-    private MotorEncoderPowerAction feeder_action_ ;
+    private MotorEncoderPowerAction feeder_start_action_ ;
+    private MotorEncoderPowerAction feeder_stop_action_ ;
     private ShuffleboardTab tab_ ;
 
     private double current_tilt_ ;
@@ -71,7 +72,8 @@ public class ShooterTuningAction extends Action {
         velocity1_action_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", 0.0, false);
         velocity2_action_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", 0.0, false);
         tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", -65.0, kTiltPositionTolerance, kTiltVelocityTolerance) ;
-        feeder_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), 0.0);
+        feeder_start_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), kFeederPowerLevel);
+        feeder_stop_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), 0.0);        
 
         plot_data_ = new Double[plot_columns_.length] ;
     }
@@ -93,7 +95,7 @@ public class ShooterTuningAction extends Action {
         tab_.addDouble("VSET", () -> { return current_velocity_ ;});
         tab_.addDouble("TSET", () -> { return current_tilt_ ;});
 
-        sub_.getFeeder().setAction(feeder_action_, true) ;
+        sub_.getFeeder().setAction(feeder_stop_action_, true) ;
 
         sub_.getShooter1().setAction(velocity1_action_, true) ;
         sub_.getShooter2().setAction(velocity2_action_, true) ;
@@ -155,7 +157,7 @@ public class ShooterTuningAction extends Action {
                 current_velocity_ = v ;
                 velocity1_action_.setTarget(current_velocity_);
                 velocity2_action_.setTarget(current_velocity_);
-                feeder_action_.update(0.0) ;
+                sub_.getFeeder().setAction(feeder_stop_action_, true) ;
                 wait_for_ready_ = true ;
             }
 
@@ -167,7 +169,7 @@ public class ShooterTuningAction extends Action {
                 current_tilt_ = v ;
                 tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", current_tilt_, kTiltPositionTolerance, kTiltVelocityTolerance) ;
                 sub_.getTilt().setAction(tilt_action_, true) ;
-                feeder_action_.update(0) ;
+                sub_.getFeeder().setAction(feeder_stop_action_, true) ;
                 wait_for_ready_ = true ;
             }
         }
@@ -176,7 +178,7 @@ public class ShooterTuningAction extends Action {
 
         if (wait_for_ready_ && fire) {
             wait_for_ready_ = false ;
-            feeder_action_.update(kFeederPowerLevel);
+                sub_.getFeeder().setAction(feeder_start_action_, true) ;
         }
 
         if (plotting_) {
