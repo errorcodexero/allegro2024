@@ -9,70 +9,101 @@ import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 
 public class IntakeShooterEjectAction extends Action{
     
+    private enum State {
+        Idle,
+        GoToEject,
+        Eject,
+        Stow
+
+    }
+
     private IntakeShooterSubsystem sub_;
     private MCMotionMagicAction eject_updown_;
     private MCMotionMagicAction eject_tilt_;
     private MCVelocityAction eject_feeder_;
-    private MCVelocityAction stop_feeder_;
     private MCVelocityAction eject_shooter1_;
     private MCVelocityAction eject_shooter2_;
-    private MCVelocityAction stop_shooter1_;
-    private MCVelocityAction stop_shooter2_;
     private XeroTimer timer_;
+    private State state_;
+    private IntakeShooterStowAction stow_intake_shooter_;
 
     public IntakeShooterEjectAction(IntakeShooterSubsystem sub) throws Exception {
 
         super(sub.getRobot().getMessageLogger());
+
+        state_ = State.Idle;
 
 
         sub_ = sub;
         eject_updown_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position" , "targets:stow" , 0.5 , 1);
         eject_tilt_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position" , "targets:stow" , 0.5 , 1);
         eject_feeder_ = new MCVelocityAction(sub_.getFeeder(), "pids:position" , "targets:eject");
-        stop_feeder_ = new MCVelocityAction(sub_.getFeeder(), "pids:position", "targets:stop");
         eject_shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:position", "targets:eject");
         eject_shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:position", "targets:eject");
-        stop_shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:position", "targets:stop");
-        stop_shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:position", "targets:stop");
+        stow_intake_shooter_ = new IntakeShooterStowAction(sub_);
         timer_ = new XeroTimer(sub.getRobot(), "Eject", 1.5);
     }
 
     @Override 
     public void start() throws Exception{
         super.start();
-        
+
+        state_ = State.GoToEject;
         sub_.getUpDown().setAction(eject_updown_, true);
         sub_.getTilt().setAction(eject_tilt_, true);
     }
 
     @Override
     public void run() throws Exception {
-        super.run() ;
+        super.run();
 
-        // Checks if the updown and tilt motors have reached their positions, then starts the feeder and shooter motors for 1.5 seconds before ending the action.
-
-        if (eject_updown_.isDone() && eject_tilt_.isDone()) {
-
-            // May change after action is tested.
-
-        sub_.getShooter1().setAction(eject_shooter1_, true);
-        sub_.getShooter2().setAction(eject_shooter2_, true);
-        sub_.getFeeder().setAction(eject_feeder_, true);
-        timer_.start();
-
-            if(timer_.isExpired()){
-    
-            sub_.getFeeder().setAction(stop_feeder_, true);
-            sub_.getShooter1().setAction(stop_shooter1_, true);
-            sub_.getShooter2().setAction(stop_shooter2_, true);
-            setDone();
-            }
+        switch(state_) {
+            case Idle:
+                break;
+            case GoToEject:
+                stateGoToEject();
+                break;
+            case Eject:
+                stateEject();
+                break;
+            case Stow:
+                stateStow();
+                break;
         }
+
+       
 
     }
 
     @Override
     public String toString(int indent) {
         return spaces(indent) + "IntakeShooterEjectAction";
+    }
+
+    private void stateGoToEject(){
+        if(eject_updown_.isDone() && eject_tilt_.isDone()) {
+            state_ = State.Eject;
+            sub_.getFeeder().setAction(eject_feeder_, true);
+            sub_.getShooter1().setAction(eject_shooter1_, true);
+            sub_.getShooter2().setAction(eject_shooter2_, true);
+            timer_.start();
+        }
+    }
+
+    private void stateEject(){
+        if(timer_.isExpired()) {
+            state_ = State.Stow;
+            sub_.getFeeder().cancelAction();
+            sub_.getShooter1().cancelAction();
+            sub_.getShooter2().cancelAction();
+            sub_.setAction(stow_intake_shooter_, true);
+        }
+    }
+
+    private void stateStow(){
+        if(stow_intake_shooter_.isDone()){
+            state_ = State.Idle;
+            setDone();
+        }
     }
 }
