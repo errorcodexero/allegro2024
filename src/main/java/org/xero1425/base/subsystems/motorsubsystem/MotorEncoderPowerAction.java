@@ -1,5 +1,8 @@
 package org.xero1425.base.subsystems.motorsubsystem ;
 
+import org.xero1425.base.motors.BadMotorRequestException;
+import org.xero1425.base.motors.IMotorController.XeroPidType;
+import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MissingParameterException;
 
@@ -18,7 +21,7 @@ public class MotorEncoderPowerAction extends MotorPowerAction
     private Double data_[] ;
 
     // The columns to plot
-    private String[] plot_columns_ = { 
+    private static final String[] plot_columns_ = { 
         "time (s)",
         "pos (%%posunits%%)",
         "vel (%%velunits%%/s)",
@@ -100,6 +103,11 @@ public class MotorEncoderPowerAction extends MotorPowerAction
     public void cancel() {
         super.cancel() ;
         getSubsystem().endPlot(plot_id_) ;        
+    }
+
+    /// \brief update the power to the motor
+    public void update(double p) throws BadMotorRequestException, MotorRequestFailedException {
+        getSubsystem().getMotorController().set(XeroPidType.Power, p) ;
     }
 
     /// \brief Returnsa human readable string describing the action

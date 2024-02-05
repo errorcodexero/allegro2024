@@ -20,7 +20,7 @@ public class ButchStartCollectAction extends Action {
         tilt_threshold_ = sub.getSettingsValue("actions:butch-start-collect:tilt-threshold").getDouble() ;
 
         intake_down_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", "targets:collect", 1, 1) ;
-        spinner_feeder_on_ = new MCVelocityAction(sub_.getFeeder(), "pids:velocity", "targets:collect") ;
+        spinner_feeder_on_ = new MCVelocityAction(sub_.getFeeder(), "pids:velocity", "targets:collect", false) ;
         tilt_collect_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", "targets:collect", 1, 1) ;
     }
 

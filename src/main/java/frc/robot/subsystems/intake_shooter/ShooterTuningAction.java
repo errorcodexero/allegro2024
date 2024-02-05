@@ -11,14 +11,37 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 
 public class ShooterTuningAction extends Action {
+
+    private enum PlotStatus {
+        Start,
+        Stop,
+        Nothing
+    } ;
+
+    private final double kFeederPowerLevel = 0.2 ;
+    private final double kTiltLowerLimit = -70.0 ;
+    private final double kTiltUpperLimit = 0.0 ;
+    private final double kShooterVelocityLimit = 100 ;
+
     private final double kTiltPositionTolerance = 1.0 ;
     private final double kTiltVelocityTolerance = 1.0 ;
+
+    private final double kVelocityFireTolerance = 10.0 ;
+    private final double kTiltFireTolerance = 1.0 ;
+
+    private static int plot_number_ = 1 ;
 
     private IntakeShooterSubsystem sub_ ;
     private SimpleWidget tilt_widget_ ;
     private SimpleWidget velocity_widget_ ;
-    private SimpleWidget toggle_widget_ ;
-    private boolean last_toggle_value_ ;
+    private SimpleWidget apply_widget_ ;
+    private SimpleWidget plot_widget_ ;
+    private boolean last_apply_value_ ;
+    private boolean last_plot_value_ ;
+    private boolean wait_for_ready_ ;
+    private int plot_id_ ;
+    private boolean plotting_ ;
+    private double plot_start_time_ ;
 
     private MCVelocityAction velocity1_action_ ;
     private MCVelocityAction velocity2_action_ ;
@@ -28,26 +51,44 @@ public class ShooterTuningAction extends Action {
 
     private double current_tilt_ ;
     private double current_velocity_ ;
+    private Double [] plot_data_ ;
+
+    private static final String[] plot_columns_ = { 
+        "time (s)",
+        "s1-vel-t (%%velunits%%)",
+        "s1-vel-a (%%velunits%%)",        
+        "s2-vel-t (%%velunits%%)",
+        "s2-vel-a (%%velunits%%)",        
+        "tilt-t (v)",
+        "tilt-a (v)",
+        "fire (bool)"
+    } ;    
 
     public ShooterTuningAction(IntakeShooterSubsystem sub) throws Exception {
         super(sub.getRobot().getMessageLogger()) ;
         sub_ = sub ;
 
-        velocity1_action_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", 0.0);
-        velocity2_action_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", 0.0);
+        velocity1_action_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", 0.0, false);
+        velocity2_action_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", 0.0, false);
         tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", -65.0, kTiltPositionTolerance, kTiltVelocityTolerance) ;
-        feeder_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), 0.2);
+        feeder_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), 0.0);
+
+        plot_data_ = new Double[plot_columns_.length] ;
     }
 
     @Override
     public void start() throws Exception {
         super.start() ;
 
-        last_toggle_value_ = false ;
+        wait_for_ready_ = true ;
+        last_apply_value_ = false ;
+        last_plot_value_ = false ;
+        plotting_ = false ;
         tab_ = Shuffleboard.getTab("Tuning");
         tilt_widget_ = tab_.add("Tilt Input", 0.0).withWidget(BuiltInWidgets.kTextView) ;
         velocity_widget_ = tab_.add("Velocity Input", 0.0).withWidget(BuiltInWidgets.kTextView) ;
-        toggle_widget_ = tab_.add("Apply", false).withWidget(BuiltInWidgets.kToggleSwitch) ;
+        apply_widget_ = tab_.add("Apply", false).withWidget(BuiltInWidgets.kToggleSwitch) ;
+        plot_widget_ = tab_.add("Plot", false).withWidget(BuiltInWidgets.kToggleSwitch) ;
 
         tab_.addDouble("VSET", () -> { return current_velocity_ ;});
         tab_.addDouble("TSET", () -> { return current_tilt_ ;});
@@ -59,30 +100,111 @@ public class ShooterTuningAction extends Action {
         sub_.getTilt().setAction(tilt_action_, true) ;
     }
 
+    private PlotStatus checkPlot() {
+        PlotStatus ret = PlotStatus.Nothing ;
+        boolean curval = plot_widget_.getEntry().getBoolean(false) ;
+
+        if (curval && !last_plot_value_) {
+            ret = PlotStatus.Start ;
+        }
+        else if (!curval && last_plot_value_) {
+            ret = PlotStatus.Stop ;
+        }
+        last_plot_value_ = curval ;
+        return ret;
+    }
+
+    private boolean applySettings() {
+        boolean curval = apply_widget_.getEntry().getBoolean(false) ;
+        boolean ret = curval && !last_apply_value_ ;
+
+        last_apply_value_ = curval ;
+        return ret ;
+    }    
+
     @Override
     public void run() throws Exception {
         super.run() ;
+        PlotStatus st = checkPlot() ;
+        boolean fire = false ;
 
-        boolean tw = toggle_widget_.getEntry().getBoolean(false);
-        if (tw == false && last_toggle_value_ == true) {
-            double v = velocity_widget_.getEntry().getDouble(0.0) ;
-            if (v <= 100.0) {
+        if (st == PlotStatus.Start) {
+            plot_id_ = sub_.initPlot("ShooterTuning-" + plot_number_++) ;
+            sub_.startPlot(plot_id_, plot_columns_);
+            plotting_ = true ;
+            plot_start_time_ = sub_.getRobot().getTime();
+        }
+        else if (st == PlotStatus.Stop) {
+            sub_.endPlot(plot_id_);
+            plotting_ = false ;
+        }
+
+        if (applySettings()) {
+            double v ;
+
+            //
+            // We are applying the settings, reset the switch to its off position
+            //
+            apply_widget_.getEntry().setBoolean(false) ;
+
+            //
+            // Apply the velocity if its in the limits
+            //
+            v = velocity_widget_.getEntry().getDouble(0.0) ;
+            if (v <= kShooterVelocityLimit) {
                 current_velocity_ = v ;
                 velocity1_action_.setTarget(current_velocity_);
                 velocity2_action_.setTarget(current_velocity_);
+                feeder_action_.update(0.0) ;
+                wait_for_ready_ = true ;
             }
 
+            //
+            // Apply the tilt if its in the limits
+            //
             v = tilt_widget_.getEntry().getDouble(0.0) ;
-            if (v >= -70.0 && v <= 0.0) {
+            if (v >= kTiltLowerLimit && v <= kTiltUpperLimit && Math.abs(v - current_tilt_) > 0.1) {
                 current_tilt_ = v ;
-                tilt_action_.setTarget(current_tilt_);
+                tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", current_tilt_, kTiltPositionTolerance, kTiltVelocityTolerance) ;
+                sub_.getTilt().setAction(tilt_action_, true) ;
+                feeder_action_.update(0) ;
+                wait_for_ready_ = true ;
             }
         }
-        
-        last_toggle_value_ = tw ;
+
+        fire = isReady() ;
+
+        if (wait_for_ready_ && fire) {
+            wait_for_ready_ = false ;
+            feeder_action_.update(kFeederPowerLevel);
+        }
+
+        if (plotting_) {
+            plot_data_[0] = sub_.getRobot().getTime() - plot_start_time_ ;
+            plot_data_[1] = current_velocity_ ;
+            plot_data_[2] = sub_.getShooter1().getVelocity() ;
+            plot_data_[3] = current_velocity_ ;
+            plot_data_[4] = sub_.getShooter2().getVelocity() ;
+            plot_data_[5] = current_tilt_ ;
+            plot_data_[6] = sub_.getTilt().getPosition() ;
+            plot_data_[7] = fire ? 1.0 : 0.0 ;
+            sub_.addPlotData(plot_id_, plot_data_);
+        }
+    }
+
+    private boolean isReady() {
+        if (Math.abs(sub_.getShooter1().getVelocity() - current_velocity_) > kVelocityFireTolerance)
+            return false ;
+
+        if (Math.abs(sub_.getShooter2().getVelocity() - current_velocity_) > kVelocityFireTolerance)
+            return false ;            
+
+        if (Math.abs(sub_.getTilt().getVelocity() - current_velocity_) > kTiltFireTolerance)
+            return false ;            
+
+        return true ;
     }
     
-
     public String toString(int indent) {
         return prefix(indent) + "TuningAction" ;
     }
