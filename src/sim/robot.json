@@ -35,6 +35,8 @@
             "model" : "intake-shooter",
             "instance" : "1",
             "props" : {
+                "note-sensor" : 0,
+                
                 "feeder:type" : "talon-fx",
                 "feeder:bus" : "",
                 "feeder:canid" : 1,
@@ -68,7 +70,7 @@
                 "tilt:canid" : 5,
                 "tilt:count" : 1,
                 "tilt:gearing" : 1.0,
-                "tilt:moment" : 0.000183064
+                "tilt:moment" : 0.00173064
             }
         },
         {

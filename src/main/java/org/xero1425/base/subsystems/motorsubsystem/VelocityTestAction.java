@@ -19,7 +19,7 @@ public class VelocityTestAction extends MotorAction {
 
         current_ = 0.0 ;
         try {
-            action_ = new MCVelocityAction(sub, "testvelaction", current_) ;
+            action_ = new MCVelocityAction(sub, "testvelaction", current_, true) ;
         }
         catch(Exception ex) {
             action_ = null ;

@@ -26,8 +26,8 @@ public class AmpTrapEjectAction extends Action{
         eject_elevator_ = new MCMotionMagicAction(sub_.getElevator(), "pids:position" , "targets:stow" , 0.5 , 1);
         eject_arm_ = new MCMotionMagicAction(sub_.getArm(), "pids:position" , "targets:stow" , 0.5 , 1);
         eject_wrist_ = new MCMotionMagicAction(sub_.getWrist(), "pids:position" , "targets:stow" , 0.5 , 1);
-        eject_manipulator_ = new MCVelocityAction(sub_.getManipulator(), "pids:position", "targets:eject");
-        stop_manipulator_ = new MCVelocityAction(sub_.getManipulator(), "pids:position", "targets:stop");
+        eject_manipulator_ = new MCVelocityAction(sub_.getManipulator(), "pids:position", "targets:eject",true);
+        stop_manipulator_ = new MCVelocityAction(sub_.getManipulator(), "pids:position", "targets:stop", true);
         timer_ = new XeroTimer(sub_.getRobot(), "Eject", 1.5);
     }
 

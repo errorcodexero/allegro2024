@@ -349,4 +349,11 @@ public class MotorGroupController extends MotorController
 
         return motors_.get(0).getClosedLoopError() ;
     }
+
+    public double getVoltage() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).getVoltage() ;
+    }    
 } ;

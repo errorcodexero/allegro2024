@@ -293,7 +293,7 @@ public class MotorFactory {
             ctrl.setNeutralMode(nm);
 
         double limit = getCurrentLimit(id);
-        if (!Double.isInfinite(limit) && !Double.isInfinite(limit)) {
+        if (!Double.isInfinite(limit) && !Double.isNaN(limit)) {
             ctrl.setCurrentLimit(limit);
         }      
 

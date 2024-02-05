@@ -1,0 +1,27 @@
+
+Item                                                                    Status
+------------------------------------------------------------------------------
+Check All Motors Work                                                     Done
+  Swerve                                                                  Done
+  Tilt                                                                    Done
+  UpDown                                                                  Done
+  Shooter1                                                                Done
+  Shooter2                                                                Done
+  Feeder                                                                  Done
+Test Tilt Absolute Encoder                                                Done
+Set alignment of the swerve drive                                         Done
+Basic shooter test                                                        Done
+Tune Up/Down Motion Magic
+Tune Tilt Motion Magic
+Tune feeder wheels
+Tune Shooter1 Wheels
+Tune Shooter2 Wheels
+Test Sensor on Intake/Collector
+Test Pseudo collect action
+Test Tuning action
+Preliminary tune shooter to multiple distances
+- Next to subwoofer
+- 4 feet
+- 10 feet
+- max distances
+Tune Swerve Drive Motors (move to MCVelocity?)

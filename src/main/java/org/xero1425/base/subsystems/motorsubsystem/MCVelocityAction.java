@@ -54,7 +54,7 @@ public class MCVelocityAction extends MotorAction {
     /// \param sub the target MotorEncoderSubsystem
     /// \param name the name of the action, for entries from the settings file
     /// \param target the traget velocity
-    public MCVelocityAction(MotorEncoderSubsystem sub, String name, double target)
+    public MCVelocityAction(MotorEncoderSubsystem sub, String name, double target, boolean plots)
             throws MissingParameterException, BadParameterTypeException, BadMotorRequestException, MotorRequestFailedException {
 
         super(sub);
@@ -66,21 +66,26 @@ public class MCVelocityAction extends MotorAction {
 
         String pidname = "subsystems:" + sub.getName() + ":" + name_ ;
 
-        plot_id_ = sub.initPlot(toString(0) + "-" + String.valueOf(which_++)) ;     
-        plot_duration_ = kDefaultPlotDuration ;
+        if (plots) {
+            plot_id_ = sub.initPlot(toString(0) + "-" + String.valueOf(which_++)) ;     
+            plot_duration_ = kDefaultPlotDuration ;
 
-        if (settings.isDefined(pidname + ":plot-duration")) {
-            plot_duration_ = settings.get(pidname + ":plot-duration").getDouble() ;
+            if (settings.isDefined(pidname + ":plot-duration")) {
+                plot_duration_ = settings.get(pidname + ":plot-duration").getDouble() ;
+            }
+            plot_timer_ = new XeroTimer(sub.getRobot(), "velocity-action-plot", plot_duration_) ;
+            data_ = new Double[columns_.length] ;
         }
-        plot_timer_ = new XeroTimer(sub.getRobot(), "velocity-action-plot", plot_duration_) ;
-        data_ = new Double[columns_.length] ;
+        else {
+            plot_id_ = -1 ;
+        }
     }
 
     /// \brief Create a new MotorEncoderVelocityAction
     /// \param sub the target MotorEncoderSubsystem
     /// \param target a string with the name of the target velocity in settings file
-    public MCVelocityAction(MotorEncoderSubsystem sub, String name, String target) throws BadParameterTypeException, MissingParameterException, BadMotorRequestException, MotorRequestFailedException {
-        this(sub, name, sub.getSettingsValue(target).getDouble()) ;
+    public MCVelocityAction(MotorEncoderSubsystem sub, String name, String target, boolean plots) throws BadParameterTypeException, MissingParameterException, BadMotorRequestException, MotorRequestFailedException {
+        this(sub, name, sub.getSettingsValue(target).getDouble(), plots) ;
     }
 
     public double getError() {
@@ -136,8 +141,8 @@ public class MCVelocityAction extends MotorAction {
         double d = getSubsystem().getSettingsValue(name_ + ":kd").getDouble() / enc.mapPhysicalToMotor(1) ;
         double v = getSubsystem().getSettingsValue(name_ + ":kv").getDouble() / enc.mapPhysicalToMotor(1) ;
         double a = getSubsystem().getSettingsValue(name_ + ":ka").getDouble() / enc.mapPhysicalToMotor(1) ;
-        double s = getSubsystem().getSettingsValue(name_ + ":ks").getDouble() / enc.mapPhysicalToMotor(1) ;
-        double g = getSubsystem().getSettingsValue(name_ + ":kg").getDouble() / enc.mapPhysicalToMotor(1) ;
+        double s = getSubsystem().getSettingsValue(name_ + ":ks").getDouble() ;
+        double g = getSubsystem().getSettingsValue(name_ + ":kg").getDouble() ;
         double outmax = getSubsystem().getSettingsValue(name_ + ":outmax").getDouble() ;
 
         getSubsystem().getMotorController().setPID(XeroPidType.Velocity, p, i, d, v, a, g, s, outmax) ;
@@ -178,8 +183,9 @@ public class MCVelocityAction extends MotorAction {
         }
 
         getSubsystem().setPower(0.0);
-        if (plot_id_ != -1)
+        if (plot_id_ != -1) {
             getSubsystem().endPlot(plot_id_) ;
+        }
     }
 
     /// \brief return a human readable string for the action

@@ -24,11 +24,8 @@ public class TankDriveRotateAction extends TankDriveAction {
     // The TrapezoidalProfile that is the plan to follow
     TrapezoidalProfile profile_ ;
 
-    // ID number to add to each action
-    static int name_id_ = 0 ;
-    
     // The columns to plot
-    static final String [] plot_columns_ = { "time (sec)", "tpos (m)", "apos (m)", "tvel (m/s)", "avel (m/s)", "out (volt)" } ;
+    private static final String [] plot_columns_ = { "time (sec)", "tpos (m)", "apos (m)", "tvel (m/s)", "avel (m/s)", "out (volt)" } ;
 
     public TankDriveRotateAction(TankDriveSubsystem sub, double target) throws BadParameterTypeException, MissingParameterException {
         super(sub) ;

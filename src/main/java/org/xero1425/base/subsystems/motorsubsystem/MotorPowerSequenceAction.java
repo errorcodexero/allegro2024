@@ -26,7 +26,7 @@ public class MotorPowerSequenceAction extends MotorAction {
     private Double data_[] ;
 
     // The columns to plot
-    private String[] plot_columns_ = { 
+    private static final String[] plot_columns_ = { 
         "time (s)",
         "pos (%%posunits%%)",
         "vel (%%velunits%%)",

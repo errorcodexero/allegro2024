@@ -198,5 +198,7 @@ public interface IMotorController {
 
     /// \brief Return the closed loop error
     /// \returns  the closed loop error
-    public double getClosedLoopError() throws BadMotorRequestException, MotorRequestFailedException ;    
+    public double getClosedLoopError() throws BadMotorRequestException, MotorRequestFailedException ;  
+    
+    public double getVoltage() throws BadMotorRequestException, MotorRequestFailedException ;
 }
