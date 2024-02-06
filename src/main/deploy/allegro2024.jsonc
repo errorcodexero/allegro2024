@@ -807,7 +807,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 111,
+        "which": 127,
 
         "0": {
             "angle": 45,

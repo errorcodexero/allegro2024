@@ -10,6 +10,7 @@ import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 
 public class AmpTrapEjectAction extends Action{
 
+    // Creating FMS states
     private enum State {
         Idle, 
         GoToEject,
@@ -56,6 +57,7 @@ public class AmpTrapEjectAction extends Action{
     public void run() throws Exception {
         super.run() ;
 
+        // Switching between different states
         switch(state_) {
             case Idle:
                 break;
@@ -77,6 +79,9 @@ public class AmpTrapEjectAction extends Action{
         return spaces(indent) + "AmpTrapEjectAction";
     }
 
+
+    // Creating and defining what happens during each state before it can switch
+    
     private void stateGoToEject(){
         if (eject_elevator_.isDone() && eject_arm_.isDone() && eject_wrist_.isDone()){
             state_ = State.Eject;
