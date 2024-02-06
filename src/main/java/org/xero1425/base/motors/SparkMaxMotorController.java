@@ -583,4 +583,8 @@ public class SparkMaxMotorController extends MotorController
     public double getClosedLoopError() throws BadMotorRequestException, MotorRequestFailedException {
         throw new BadMotorRequestException(this, "the SparkMax does not support returning closed loop error") ;
     }    
+
+    public double getVoltage() throws BadMotorRequestException, MotorRequestFailedException {
+        throw new BadMotorRequestException(this, "the SparkMax does not support returning voltage") ;
+    }        
 } ;

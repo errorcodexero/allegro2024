@@ -1,9 +1,13 @@
 package frc.models;
 
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 import org.xero1425.misc.SettingsValue;
 import org.xero1425.simulator.engine.SimulationEngine;
 import org.xero1425.simulator.engine.SimulationModel;
 import org.xero1425.simulator.models.ISimMotorController;
+
+import edu.wpi.first.hal.simulation.DIODataJNI;
 
 public class IntakeShooterModel extends SimulationModel {
     final private static String bus = "" ;
@@ -14,6 +18,7 @@ public class IntakeShooterModel extends SimulationModel {
     ISimMotorController shooter1_ ;
     ISimMotorController shooter2_ ;    
     ISimMotorController tilt_ ;
+    int note_sensor_ ;
     
     public IntakeShooterModel(SimulationEngine engine, String model, String inst) {
         super(engine, model, inst) ;
@@ -34,7 +39,10 @@ public class IntakeShooterModel extends SimulationModel {
         shooter1_ = createSimulatedMotor(engine, "shooter1");
         shooter2_ = createSimulatedMotor(engine, "shooter2");
         tilt_ = createSimulatedMotor(engine, "tilt");
-        
+
+        note_sensor_ = getProperty("note-sensor").getInteger() ;
+        DIODataJNI.setIsInput(note_sensor_, true);
+        DIODataJNI.setValue(note_sensor_, false) ;
 
         setCreated();
 
@@ -43,7 +51,23 @@ public class IntakeShooterModel extends SimulationModel {
 
     @Override
     public boolean processEvent(String name, SettingsValue value) {
-        return false ;
+        boolean ret = false ;
+        
+        try {
+            if (name.equals("note-sensor")) {
+                DIODataJNI.setIsInput(note_sensor_, true);
+                DIODataJNI.setValue(note_sensor_, value.getBoolean());
+            }
+        }
+        catch(Exception ex) {
+            MessageLogger logger = getEngine().getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Error) ;
+            logger.add("time", getEngine().getSimulationTime());
+            logger.add("event", name) ;
+            logger.add("- expected boolean value, but got " + value.toString()) ;
+            logger.endMessage();
+        }
+        return ret ;
     }
 
     @Override

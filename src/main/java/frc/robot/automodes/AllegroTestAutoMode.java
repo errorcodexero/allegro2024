@@ -6,6 +6,7 @@ import org.xero1425.base.controllers.SwerveTestAutoMode;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
+import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
 
 import frc.robot.subsystems.amp_trap.AmpTrapStowAction;
@@ -17,11 +18,14 @@ import frc.robot.subsystems.amp_trap.ClimbDownAction;
 import frc.robot.subsystems.amp_trap.PrepClimbAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
 import frc.robot.subsystems.amp_trap.AmpTrapEjectAction;
+import frc.robot.subsystems.intake_shooter.ButchStartCollectAction;
+import frc.robot.subsystems.intake_shooter.ButchStopCollectionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterEjectAction;
 
 
 import frc.robot.subsystems.amp_trap.PrepTrapAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
+import frc.robot.subsystems.intake_shooter.ShooterTuningAction;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class AllegroTestAutoMode extends SwerveTestAutoMode {
@@ -31,6 +35,8 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
         AllegroRobot2024 robot = (AllegroRobot2024) ctrl.getRobot().getRobotSubsystem();
         IntakeShooterSubsystem intakeshooter = robot.getIntakeShooter();
+        MotorEncoderSubsystem tilt = intakeshooter.getTilt();
+        MotorEncoderSubsystem updown = intakeshooter.getUpDown();
         AmpTrapSubsystem amptrap = robot.getAmpTrap();
 
         if (createTest()) {
@@ -72,7 +78,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 12:
                 if (intakeshooter != null && intakeshooter.getFeeder() != null) {
                     addSubActionPair(intakeshooter.getFeeder(),
-                            new MCVelocityAction(intakeshooter.getFeeder(), "pids:velocity", getDouble("velocity")),
+                            new MCVelocityAction(intakeshooter.getFeeder(), "pids:velocity", getDouble("velocity"), true),
                             true);
                 }
                 break;
@@ -83,27 +89,24 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 20:
-                if (intakeshooter != null && intakeshooter.getUpDown() != null) {
-                    addSubActionPair(intakeshooter.getUpDown(), new MotorEncoderPowerAction(intakeshooter.getUpDown(),
-                            getDouble("power"), getDouble("duration")), true);
+                if (intakeshooter != null) {
+                    addSubActionPair(updown, new MotorEncoderPowerAction(updown, getDouble("power"), getDouble("duration")), true);
                 }
                 break;
 
             case 21:
-                if (intakeshooter != null && intakeshooter.getUpDown() != null) {
+                if (intakeshooter != null) {
                     double duration = getDouble("duration");
                     double[] times = new double[] { duration, duration, duration, duration, duration };
                     double[] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9 };
-                    addSubActionPair(intakeshooter.getUpDown(),
-                            new MotorPowerSequenceAction(intakeshooter.getUpDown(), times, powers), true);
+                    addSubActionPair(updown, new MotorPowerSequenceAction(updown, times, powers), true);
                 }
                 break;
 
             case 22:
-                if (intakeshooter != null && intakeshooter.getUpDown() != null) {
-                    addSubActionPair(intakeshooter.getUpDown(),
-                            new MCMotionMagicAction(intakeshooter.getUpDown(), "upDown", getDouble("target"), 0.5, 0.5),
-                            true);
+                if (intakeshooter != null) {
+                    addSubActionPair(tilt, new MCMotionMagicAction(tilt, "pids:position", 0.0, 1.0, 1.0), true) ;
+                    addSubActionPair(updown,new MCMotionMagicAction(updown, "pids:position", 45.0, 1.0, 1.0), true) ;
                 }
                 break;
 
@@ -132,7 +135,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 32:
                 if (intakeshooter != null && intakeshooter.getShooter1() != null) {
                     addSubActionPair(intakeshooter.getShooter1(),
-                            new MCVelocityAction(intakeshooter.getShooter1(), "pids:velocity", getDouble("velocity")),
+                            new MCVelocityAction(intakeshooter.getShooter1(), "pids:velocity", getDouble("velocity"), true),
                             true);
                 }
                 break;
@@ -162,7 +165,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 42:
                 if (intakeshooter != null && intakeshooter.getShooter2() != null) {
                     addSubActionPair(intakeshooter.getShooter2(),
-                            new MCVelocityAction(intakeshooter.getShooter2(), "pids:velocity", getDouble("velocity")),
+                            new MCVelocityAction(intakeshooter.getShooter2(), "pids:velocity", getDouble("velocity"), true),
                             true);
                 }
                 break;
@@ -173,8 +176,8 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 50:
-                if (intakeshooter != null && intakeshooter.getTilt() != null) {
-                    addSubActionPair(intakeshooter.getTilt(), new MotorEncoderPowerAction(intakeshooter.getTilt(),
+                if (intakeshooter != null && tilt != null) {
+                    addSubActionPair(tilt, new MotorEncoderPowerAction(tilt,
                             getDouble("power"), getDouble("duration")), true);
                 }
                 break;
@@ -184,35 +187,35 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                     double duration = getDouble("duration");
                     double[] times = new double[] { duration, duration, duration, duration, duration };
                     double[] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9 };
-                    addSubActionPair(intakeshooter.getTilt(),
-                            new MotorPowerSequenceAction(intakeshooter.getTilt(), times, powers), true);
+                    addSubActionPair(tilt,
+                            new MotorPowerSequenceAction(tilt, times, powers), true);
                 }
                 break;
 
             case 52:
                 if (intakeshooter != null) {
-                    addSubActionPair(intakeshooter.getTilt(),
-                            new MCMotionMagicAction(intakeshooter.getTilt(), "pids:position", getDouble("target"), 
-                                                        3, 3), true);
+                    addSubActionPair(tilt,
+                            new MCMotionMagicAction(tilt, "pids:position", getDouble("target"), 
+                                                        1, 1), true);
                 }
                 break;
 
             case 53:
                 if (intakeshooter != null) {
-                    addSubActionPair(intakeshooter.getTilt(),
-                            new MCMotionMagicAction(intakeshooter.getTilt(), "pids:position", getDouble("target1"), 
+                    addSubActionPair(tilt,
+                            new MCMotionMagicAction(tilt, "pids:position", getDouble("target1"), 
                                                         3, 3), true);
                     addAction(new DelayAction(intakeshooter.getRobot(), 2.0));
-                    addSubActionPair(intakeshooter.getTilt(),
-                            new MCMotionMagicAction(intakeshooter.getTilt(), "pids:position", getDouble("target2"), 
+                    addSubActionPair(tilt,
+                            new MCMotionMagicAction(tilt, "pids:position", getDouble("target2"), 
                                                         3, 3), true);       
                     addAction(new DelayAction(intakeshooter.getRobot(), 2.0));
-                    addSubActionPair(intakeshooter.getTilt(),
-                            new MCMotionMagicAction(intakeshooter.getTilt(), "pids:position", getDouble("target3"), 
+                    addSubActionPair(tilt,
+                            new MCMotionMagicAction(tilt, "pids:position", getDouble("target3"), 
                                                         3, 3), true);
                     addAction(new DelayAction(intakeshooter.getRobot(), 2.0));
-                    addSubActionPair(intakeshooter.getTilt(),
-                            new MCMotionMagicAction(intakeshooter.getTilt(), "pids:position", getDouble("target4"), 
+                    addSubActionPair(tilt,
+                            new MCMotionMagicAction(tilt, "pids:position", getDouble("target4"), 
                                                         3, 3), true);                                                        
                 }
                 break;    
@@ -242,7 +245,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 62:
                 if (amptrap != null && amptrap.getElevator() != null) {
                     addSubActionPair(amptrap.getElevator(),
-                            new MCVelocityAction(amptrap.getElevator(), "pids:velocity", getDouble("velocity")), true);
+                            new MCVelocityAction(amptrap.getElevator(), "pids:velocity", getDouble("velocity"), true), true);
                 }
                 break;
 
@@ -272,7 +275,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 72:
                 if (amptrap != null && amptrap.getArm() != null) {
                     addSubActionPair(amptrap.getArm(),
-                            new MCVelocityAction(amptrap.getArm(), "pids:velocity", getDouble("velocity")), true);
+                            new MCVelocityAction(amptrap.getArm(), "pids:velocity", getDouble("velocity"), true), true);
                 }
                 break;
 
@@ -302,7 +305,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 82:
                 if (amptrap != null && amptrap.getWrist() != null) {
                     addSubActionPair(amptrap.getWrist(),
-                            new MCVelocityAction(amptrap.getWrist(), "pids:velocity", getDouble("velocity")), true);
+                            new MCVelocityAction(amptrap.getWrist(), "pids:velocity", getDouble("velocity"), true), true);
                 }
                 break;
 
@@ -331,7 +334,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 92:
                 if (amptrap != null && amptrap.getManipulator() != null) {
                     addSubActionPair(amptrap.getManipulator(),
-                            new MCVelocityAction(amptrap.getManipulator(), "pids:velocity", getDouble("velocity")),
+                            new MCVelocityAction(amptrap.getManipulator(), "pids:velocity", getDouble("velocity"), true),
                             true);
                 }
                 break;
@@ -387,6 +390,19 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 112:
                 if (intakeshooter != null) {
+                    addSubActionPair(intakeshooter, new ButchStartCollectAction(intakeshooter), true);
+                    addSubActionPair(intakeshooter, new ButchStopCollectionAction(intakeshooter), true);
+                }
+                break ;
+
+            case 118:
+                if (intakeshooter != null) {
+                    addSubActionPair(intakeshooter, new ShooterTuningAction(intakeshooter), true);
+                }
+                break ;
+
+            case 119:
+                if (intakeshooter != null) {
                     double shpower = getDouble("shooter-power") ;
                     double fdpower = getDouble("feeder-power") ;
                     addSubActionPair(intakeshooter.getShooter1(), new MotorEncoderPowerAction(intakeshooter.getShooter1(), shpower), false) ;
@@ -395,6 +411,8 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                     addAction(new DelayAction(getAutoController().getRobot(), 30));
                 }
                 break ;
+
+
             /////////////////////////////////////////////////////////////////////////
             //
             // Amp-Trap tests

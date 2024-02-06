@@ -58,7 +58,7 @@ public class TankDrivePathFollowerAction extends TankDrivePathAction {
     private Double [] plot_data_ ;
 
     // The data columns to plot with this action
-    static final String[] plot_columns_ = {             
+    private static final String[] plot_columns_ = {             
         "time (s)", 
         "ltpos (m)", "lapos (m)", "ltvel (m/s)", "lavel (m/s)", "ltaccel (m/s/s)", "laaccel (m/s/s)", "lout (volts)","lticks (ticks)","lvout (volts)","laout (volts)","lpout (volts)","ldout (volts)","lerr",
         "rtpos (m)", "rapos (m)", "rtvel (m/s)", "ravel (m/s)", "rtaccel (m/s/s)", "raaccel (m/s/s)", "rout (volts)","rticks (ticks)","rvout (volts)","raout (volts)","rpout (volts)","rdout (volts)","rerr",

@@ -69,6 +69,20 @@ public class IntakeShooterSubsystem extends Subsystem{
 
         noteSensorInverted_ = getSettingsValue("hw:sensor:inverted").getBoolean();
 
+        //
+        // Get the value in degrees from the settings file
+        //
+        double initpos = updown_.getSettingsValue("hw:hard-stop").getDouble() ;
+
+        //
+        // Using the encoder in the motor/encoder subsystem, map the degrees to ticks
+        //
+        initpos = updown_.getEncoder().mapPhysicalToMotor(initpos) ;
+
+        //
+        // Set the motor position in ticks
+        //
+        updown_.getMotorController().setPosition(initpos);
     }
 
     public MotorEncoderSubsystem getUpDown() {
@@ -110,6 +124,7 @@ public class IntakeShooterSubsystem extends Subsystem{
 
         putDashboard("RawEnc", DisplayType.Verbose, eval);
         putDashboard("Angle", DisplayType.Verbose, angle_);
+        putDashboard("note", DisplayType.Always, is_note_present_) ;
     }
 
     @Override

@@ -529,12 +529,16 @@ public class TalonFXMotorController extends MotorController
     /// \brief Return the closed loop target
     /// \returns  the closed loop target
     public double getClosedLoopTarget() throws BadMotorRequestException, MotorRequestFailedException {
-        return ctrl_.getClosedLoopReference().getValue() ;
+        return ctrl_.getClosedLoopReference().getValue() * kTicksPerRevolution ;
     }
 
     /// \brief Return the closed loop error
     /// \returns  the closed loop error
     public double getClosedLoopError() throws BadMotorRequestException, MotorRequestFailedException {
-        return ctrl_.getClosedLoopError().getValue() ;
+        return ctrl_.getClosedLoopError().getValue() * kTicksPerRevolution ;
     }
+
+    public double getVoltage() throws BadMotorRequestException, MotorRequestFailedException {
+        return ctrl_.getMotorVoltage().getValue() ;
+    }    
 } ;

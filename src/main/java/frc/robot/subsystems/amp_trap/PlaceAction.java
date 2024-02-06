@@ -18,9 +18,8 @@ public class PlaceAction extends Action{
 
         sub_ = sub;
 
-        place_ = new MCVelocityAction(sub.getManipulator(), "pids:position", "targets:place");
-
-        stop_ = new MCVelocityAction(sub.getManipulator(), "pids:position", "targets:stop");
+        place_ = new MCVelocityAction(sub.getManipulator(), "pids:position", "targets:place", true);
+        stop_ = new MCVelocityAction(sub.getManipulator(), "pids:position", "targets:stop", true);
 
         timer_ = new XeroTimer(sub_.getRobot(), "Place", 1);
     }

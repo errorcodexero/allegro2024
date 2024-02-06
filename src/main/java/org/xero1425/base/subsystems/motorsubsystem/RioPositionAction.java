@@ -91,7 +91,7 @@ public class RioPositionAction extends MotorAction {
     static int name_id_ = 0 ;
 
     // The columns to plot
-    private String [] plot_columns_ = 
+    private static final String [] plot_columns_ = 
     { 
         "time (sec)", 
         "tpos (%%posunits%%)", "apos (%%posunits%%)", 
