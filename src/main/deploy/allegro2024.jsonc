@@ -48,7 +48,8 @@
                     "bus" : "",
                     "canid" : 6,
                     "inverted" : false,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -93,6 +94,7 @@
                     "canid" : 7,
                     "inverted" : false,
                     "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -136,7 +138,8 @@
                     "bus" : "",
                     "canid" : 8,
                     "inverted" : false,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -181,6 +184,7 @@
                     "canid" : 9,
                     "inverted" : false,
                     "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -225,6 +229,7 @@
                     "canid" : 10,
                     "inverted" : false,
                     "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -273,7 +278,7 @@
                     "emax" : 5.0,
                     "rmin" : -90.0,
                     "rmax" : 90.0,
-                    "ecval" : 1.2,
+                    "ecval" : 2.75,
                     "rcval" : 0.0
                 }
             },
@@ -293,7 +298,8 @@
                     "bus" : "",
                     "canid" : 2,
                     "inverted" : false,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder": {
                     //
@@ -341,7 +347,8 @@
                     "bus" : "",
                     "canid" : 1,
                     "inverted" : false,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder": {
                     //
@@ -388,7 +395,8 @@
                     "bus" : "",
                     "canid" : 5,
                     "inverted" : false,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 40
                 },
                 "encoder": {
                     //
@@ -447,7 +455,8 @@
                     "bus" : "",
                     "canid" : 3,
                     "inverted" : true,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder": {
                     //
@@ -490,7 +499,8 @@
                     "bus" : "",
                     "canid" : 4,
                     "inverted" : true,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder": {
                     //
@@ -552,9 +562,9 @@
                             "inverted" : false,
                             "neutral-mode": "brake",
                             "current-limit" : 20.0,
-                            "p" : 4.804692,
+                            "p" : 0.002346041055718470,
                             "i" : 0.0,
-                            "d" : 0.002402
+                            "d" :  0.000001172851562500,
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -583,9 +593,9 @@
                             "inverted" : false,
                             "neutral-mode": "brake",
                             "current-limit" : 20.0,
-                            "p" : 4.804692,
+                            "p" : 0.002346041055718470,
                             "i" : 0.0,
-                            "d" : 0.0024021
+                            "d" :  0.000001172851562500
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -615,9 +625,9 @@
                             "neutral-mode": "brake",
                             "pdp-channel" : 4,
                             "current-limit" : 20.0,
-                            "p" : 4.804692,
+                            "p" : 0.002346041055718470,
                             "i" : 0.0,
-                            "d" : 0.002402
+                            "d" :  0.000001172851562500
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -646,9 +656,9 @@
                             "inverted" : false,
                             "neutral-mode": "brake",
                             "current-limit" : 20.0,
-                            "p" : 4.804692,
+                            "p" : 0.002346041055718470,
                             "i" : 0.0,
-                            "d" : 0.002402
+                            "d" :  0.000001172851562500
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -818,7 +828,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 118,
+        "which":52,
         "0": {
             "angle": 45,
             "power": 0.1,
@@ -887,7 +897,7 @@
             "duration" : 1.0
         },
         "52": {
-            "target" : 0.0
+            "target" : -38.0
         },
         "53" : {
             "target1" : 0.0,

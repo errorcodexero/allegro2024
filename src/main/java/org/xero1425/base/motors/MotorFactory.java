@@ -168,17 +168,6 @@ public class MotorFactory {
         return ret;
     }
 
-    //
-    // Print an error message with the motor ID given
-    //
-    private void errorMessage(String id, String msg) {
-        logger_.startMessage(MessageType.Error);
-        logger_.add("error creating motor '");
-        logger_.add(id);
-        logger_.add("' - ").add(msg);
-        logger_.endMessage();
-    }
-
     public IMotorController getMotorController(String bus, int canid) {
         IMotorController ret = null ;
 
@@ -188,6 +177,42 @@ public class MotorFactory {
         }
 
         return ret ;
+    }
+
+    public void printFaults() throws BadMotorRequestException, MotorRequestFailedException {
+
+        logger_.startMessage(MessageType.Info) ;
+        logger_.add("Motor Faults Report");
+        logger_.endMessage();
+        logger_.startMessage(MessageType.Info) ;
+        logger_.add("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        logger_.endMessage();        
+        for(IMotorController ctrl : motor_list_) {
+            String bus = ctrl.getBus() ;
+            if (bus.isEmpty())
+                bus = "rio" ;
+            String faultstr = getFaultString(ctrl) ;
+            if (faultstr.isEmpty())
+                faultstr = "NONE" ;
+            logger_.startMessage(MessageType.Info) ;
+            logger_.add(ctrl.getName() + ":" + bus + "-" +ctrl.getCanID() + ":") ;
+            logger_.add(faultstr);
+            logger_.endMessage();
+        }
+        logger_.startMessage(MessageType.Info) ;
+        logger_.add("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        logger_.endMessage();          
+    }
+
+    //
+    // Print an error message with the motor ID given
+    //
+    private void errorMessage(String id, String msg) {
+        logger_.startMessage(MessageType.Error);
+        logger_.add("error creating motor '");
+        logger_.add(id);
+        logger_.add("' - ").add(msg);
+        logger_.endMessage();
     }
 
     private boolean isCTREMotor(String name) {
@@ -283,7 +308,14 @@ public class MotorFactory {
         logger_.add(",").add("id", ctrl.getCanID());
         logger_.add(",").add("type", ctrl.getType(), true);
         logger_.add(",").add("firmware", ctrl.getFirmwareVersion(), true);
-        logger_.endMessage();
+        logger_.endMessage() ;
+
+        String faultstr = getFaultString(ctrl);
+        if (faultstr.length() > 0) {
+            logger_.startMessage(MessageType.Info);
+            logger_.add("    Faults: " + faultstr);
+            logger_.endMessage();
+        }
 
         //
         // Set the motor neutral type
@@ -413,5 +445,18 @@ public class MotorFactory {
         }
 
         return v.getBoolean() ;
+    }
+
+    private String getFaultString(IMotorController ctrl) throws BadMotorRequestException, MotorRequestFailedException {
+        String ret = "" ;
+        List<String> faults = ctrl.getFaults() ;
+
+        for(String f : faults) {
+            if (ret.length() > 0)
+                ret += " " ;    
+            ret += f ;
+        }
+
+        return ret;
     }
 } ;

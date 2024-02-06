@@ -520,7 +520,19 @@ public abstract class XeroRobot extends TimedRobot {
         logger_.startMessage(MessageType.Info);
         logger_.add("changing robot loop type: ") ;
         logger_.add(prev.toString() + " -> " + ltype.toString());
-        logger_.endMessage();
+        logger_.endMessage();        
+
+        if (ltype == LoopType.Disabled && prev != LoopType.Initialization) {
+            try {
+                motors_.printFaults() ;
+            }
+            catch(Exception ex) {
+                logger_.startMessage(MessageType.Error);
+                logger_.add("exception caught in printFaults() - ").add(ex.getMessage());
+                logger_.endMessage();
+                logger_.logStackTrace(ex.getStackTrace());
+            }
+        }
     }
 
     /// \brief Called from the base class to indicate we are entering auto mode.
