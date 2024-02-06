@@ -37,9 +37,9 @@ public class IntakeShooterEjectAction extends Action{
         sub_ = sub;
         eject_updown_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position" , "targets:stow" , 0.5 , 1);
         eject_tilt_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position" , "targets:stow" , 0.5 , 1);
-        eject_feeder_ = new MCVelocityAction(sub_.getFeeder(), "pids:position" , "targets:eject");
-        eject_shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:position", "targets:eject");
-        eject_shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:position", "targets:eject");
+        eject_feeder_ = new MCVelocityAction(sub_.getFeeder(), "pids:position" , "targets:eject", true);
+        eject_shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:position", "targets:eject", true);
+        eject_shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:position", "targets:eject", true);
         stow_intake_shooter_ = new IntakeShooterStowAction(sub_);
         timer_ = new XeroTimer(sub.getRobot(), "Eject", 1.5);
     }
