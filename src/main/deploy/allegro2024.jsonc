@@ -278,16 +278,16 @@
                     "emax" : 5.0,
                     "rmin" : -90.0,
                     "rmax" : 90.0,
-                    "ecval" : 2.75,
+                    "ecval" : 1.76,
                     "rcval" : 0.0
                 }
             },
             "actions" : {
                 "butch-start-collect" : {
-                    "tilt-threshold" : 0.0
+                    "tilt-threshold" : -10.0
                 },
                 "butch-stop-collect" : {
-                    "updown-threshold" : 0.0
+                    "updown-threshold" : 45.0
                 }
             }
         },
@@ -306,7 +306,7 @@
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m": 0.002471962, 
+                    "m":   0.0010986328125000, 
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -326,10 +326,10 @@
             },
             "pids" : {
                 "position" : {
-                    "kp" : 10.0,
+                    "kp" : 0.1,
                     "ki" : 0.0,
                     "kd" : 0.0,
-                    "kv" : 0.01666667,
+                    "kv" : 0.056,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
@@ -403,7 +403,7 @@
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m": 0.019775395,          
+                    "m":   0.0015449222183161,          
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -415,8 +415,8 @@
                 "velocity-important" : "High"
             },
             "targets" : {
-                "collect" : 25,
-                "stow" : 90,
+                "collect" : 50,
+                "stow" : -30,
                 "shoot" : 90,
                 "eject" : 25
             },
@@ -424,27 +424,15 @@
                 "position" : {
                     "kp" : 1.0,
                     "ki" : 0.0,
-                    "kd" : 0.001,
-                    "kv" : 0.312,
+                    "kd" : 0.0,
+                    "kv" : 0.003592814,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
                     "maxv" : 120,
-                    "maxa" : 180,
+                    "maxa" : 60,
                     "jerk" : 0.0
-
-                    // "kp" : 1.6,
-                    // "ki" : 0.0,
-                    // "kd" : 0.001,
-                    // "kv" : 0.312,
-                    // "ka" : 0.0,
-                    // "kg" : 0.0,
-                    // "ks" : 0.0,
-                    // "outmax" : 12.0,
-                    // "maxv" : 120,
-                    // "maxa" : 180,
-                    // "jerk" : 0.0
                 }
             }
         },
@@ -481,10 +469,10 @@
             },
             "pids" : {
                 "velocity" : {
-                    "kp" : 0.55,
+                    "kp" : 0.6,
                     "ki" : 0.0,
                     "kd" : 0.0,
-                    "kv" : 0.145,
+                    "kv" : 0.130099913,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
@@ -525,10 +513,10 @@
             },
             "pids" : {
                 "velocity" : {
-                    "kp" : 0.55,
+                    "kp" : 0.6,
                     "ki" : 0.0,
                     "kd" : 0.0,
-                    "kv" : 0.13,
+                    "kv" : 0.130099913,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
@@ -828,7 +816,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which":52,
+        "which":112,
         "0": {
             "angle": 45,
             "power": 0.1,
@@ -875,6 +863,10 @@
             "power" : -0.1,
             "duration" : 0.5
         },        
+        "22" : {
+            "tilt-target" : 0.0,
+            "updown-target" : 90.0
+        },
         "30" : {
             "power" : 0.2,
             "duration" : 5.0
@@ -883,7 +875,7 @@
             "duration" : 2.0
         },
         "32" : {
-            "velocity" : 15
+            "velocity" : 25
         },
         "40" : {
             "power" : 0.2,
@@ -893,11 +885,11 @@
             "velocity" : 15
         },
         "50" : {
-            "power" : 0.4,
+            "power" : 0.3,
             "duration" : 1.0
         },
         "52": {
-            "target" : -38.0
+            "target" : 0.0
         },
         "53" : {
             "target1" : 0.0,

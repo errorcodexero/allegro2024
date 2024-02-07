@@ -95,7 +95,7 @@ public class ShooterTuningAction extends Action {
         tab_.addDouble("VSET", () -> { return current_velocity_ ;});
         tab_.addDouble("TSET", () -> { return current_tilt_ ;});
 
-        sub_.getFeeder().setAction(feeder_stop_action_, true) ;
+        sub_.getFeeder().setAction(feeder_start_action_, true) ;
 
         sub_.getShooter1().setAction(velocity1_action_, true) ;
         sub_.getShooter2().setAction(velocity2_action_, true) ;
@@ -119,6 +119,8 @@ public class ShooterTuningAction extends Action {
     private boolean applySettings() {
         boolean curval = apply_widget_.getEntry().getBoolean(false) ;
         boolean ret = curval && !last_apply_value_ ;
+
+        System.out.println("OUT " + curval + ", last " + last_apply_value_);
 
         last_apply_value_ = curval ;
         return ret ;
@@ -157,7 +159,7 @@ public class ShooterTuningAction extends Action {
                 current_velocity_ = v ;
                 velocity1_action_.setTarget(current_velocity_);
                 velocity2_action_.setTarget(current_velocity_);
-                sub_.getFeeder().setAction(feeder_stop_action_, true) ;
+                sub_.getFeeder().setAction(feeder_start_action_, true) ;
                 wait_for_ready_ = true ;
             }
 
@@ -169,7 +171,7 @@ public class ShooterTuningAction extends Action {
                 current_tilt_ = v ;
                 tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", current_tilt_, kTiltPositionTolerance, kTiltVelocityTolerance) ;
                 sub_.getTilt().setAction(tilt_action_, true) ;
-                sub_.getFeeder().setAction(feeder_stop_action_, true) ;
+                sub_.getFeeder().setAction(feeder_start_action_, true) ;
                 wait_for_ready_ = true ;
             }
         }

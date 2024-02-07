@@ -43,6 +43,7 @@ public class ButchStartCollectAction extends Action {
         }
 
         if (sub_.isNotePresent()) {
+            sub_.getFeeder().setPower(0.0) ;
             setDone() ;
         }
     }

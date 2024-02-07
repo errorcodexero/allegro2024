@@ -105,8 +105,8 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 22:
                 if (intakeshooter != null) {
-                    addSubActionPair(tilt, new MCMotionMagicAction(tilt, "pids:position", 0.0, 1.0, 1.0), true) ;
-                    addSubActionPair(updown,new MCMotionMagicAction(updown, "pids:position", 45.0, 1.0, 1.0), true) ;
+                    addSubActionPair(tilt, new MCMotionMagicAction(tilt, "pids:position", getDouble("tilt-target"), 1.0, 1.0), true) ;
+                    addSubActionPair(updown,new MCMotionMagicAction(updown, "pids:position", getDouble("updown-target"), 1.0, 1.0), true) ;
                 }
                 break;
 
@@ -125,8 +125,12 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 31:
                 if (intakeshooter != null && intakeshooter.getShooter1() != null) {
                     double duration = getDouble("duration");
-                    double[] times = new double[] { duration, duration, duration, duration, duration };
-                    double[] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9 };
+                    double[] times ;
+                    double[] powers = new double[] { 0.1, 0.3, 0.5 };
+                    times = new double[powers.length] ;
+                    for(int i = 0 ; i < powers.length ; i++) {
+                        times[i] = duration ;
+                    }
                     addSubActionPair(intakeshooter.getShooter1(),
                             new MotorPowerSequenceAction(intakeshooter.getShooter1(), times, powers), true);
                 }
@@ -155,8 +159,12 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 41:
                 if (intakeshooter != null && intakeshooter.getShooter2() != null) {
                     double duration = getDouble("duration");
-                    double[] times = new double[] { duration, duration, duration, duration, duration };
-                    double[] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9 };
+                    double[] times ;
+                    double[] powers = new double[] { 0.1, 0.3, 0.5 };
+                    times = new double[powers.length] ;
+                    for(int i = 0 ; i < powers.length ; i++) {
+                        times[i] = duration ;
+                    }
                     addSubActionPair(intakeshooter.getShooter2(),
                             new MotorPowerSequenceAction(intakeshooter.getShooter2(), times, powers), true);
                 }
