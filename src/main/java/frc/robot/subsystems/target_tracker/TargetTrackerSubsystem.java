@@ -35,9 +35,8 @@ public class TargetTrackerSubsystem extends Subsystem {
     public void computeMyState() throws Exception {
         super.computeMyState();
 
-        AllegroRobot2024 robot_= (AllegroRobot2024)getRobot().getRobotSubsystem();
-        Pose2d robot_pos_ = robot_.getSwerve().getPose();
-    
+        // AllegroRobot2024 robot_= (AllegroRobot2024)getRobot().getRobotSubsystem();
+        // Pose2d robot_pos_ = robot_.getSwerve().getPose()
     }
 
 }

@@ -301,6 +301,7 @@ public class MotorFactory {
 
         addMotorToFactory(ctrl) ;
 
+        String faultstr = getFaultString(ctrl);
         logger_.startMessage(MessageType.Info) ;
         logger_.add("create motor:");
         logger_.add("name", ctrl.getName(), true);
@@ -308,9 +309,11 @@ public class MotorFactory {
         logger_.add(",").add("id", ctrl.getCanID());
         logger_.add(",").add("type", ctrl.getType(), true);
         logger_.add(",").add("firmware", ctrl.getFirmwareVersion(), true);
+        if (faultstr.length() == 0) {
+            logger_.add(", no faults");
+        }
         logger_.endMessage() ;
 
-        String faultstr = getFaultString(ctrl);
         if (faultstr.length() > 0) {
             logger_.startMessage(MessageType.Info);
             logger_.add("    Faults: " + faultstr);
