@@ -1,8 +1,7 @@
 package frc.robot.subsystems.amp_trap;
 
-// Runs the Eject Action for 1.5 seconds which runs the manipulator motor after the elevator, arm, and wrist move to their respective stowed positions.
-
-
+// Runs the Eject Action for 1.5 seconds which runs the manipulator motor 
+// after the elevator, arm, and wrist move to their respective stowed positions.
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
@@ -13,7 +12,7 @@ public class AmpTrapEjectAction extends Action{
     // Creating FMS states
     private enum State {
         Idle, 
-        GoToEject,
+        ReadyToEject,
         Eject,
         Stow
     }
@@ -47,7 +46,7 @@ public class AmpTrapEjectAction extends Action{
     public void start() throws Exception{
         super.start();
 
-        state_ = State.GoToEject;
+        state_ = State.ReadyToEject;
         sub_.getElevator().setAction(eject_elevator_, true);
         sub_.getWrist().setAction(eject_wrist_, true);
         sub_.getArm().setAction(eject_arm_, true);
@@ -61,8 +60,8 @@ public class AmpTrapEjectAction extends Action{
         switch(state_) {
             case Idle:
                 break;
-            case GoToEject:
-                stateGoToEject();
+            case ReadyToEject:
+                stateReadyToEject();
                 break;
             case Eject:
                 stateEject();
@@ -81,8 +80,7 @@ public class AmpTrapEjectAction extends Action{
 
 
     // Creating and defining what happens during each state before it can switch
-    
-    private void stateGoToEject(){
+    private void stateReadyToEject(){
         if (eject_elevator_.isDone() && eject_arm_.isDone() && eject_wrist_.isDone()){
             state_ = State.Eject;
             sub_.getManipulator().setAction(eject_manipulator_, true);

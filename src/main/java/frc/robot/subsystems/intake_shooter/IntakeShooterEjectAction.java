@@ -1,7 +1,7 @@
 package frc.robot.subsystems.intake_shooter;
 
-// Runs the eject action for 1.5 seconds after the updown and tilt motors reach their stowed positions
-
+// Runs the eject action for 1.5 seconds after the updown and tilt motors reach
+// their stowed positions
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
@@ -11,7 +11,7 @@ public class IntakeShooterEjectAction extends Action{
     
     private enum State {
         Idle,
-        GoToEject,
+        ReadyToEject,
         Eject,
         Stow
 
@@ -48,7 +48,7 @@ public class IntakeShooterEjectAction extends Action{
     public void start() throws Exception{
         super.start();
 
-        state_ = State.GoToEject;
+        state_ = State.ReadyToEject;
         sub_.getUpDown().setAction(eject_updown_, true);
         sub_.getTilt().setAction(eject_tilt_, true);
     }
@@ -60,8 +60,8 @@ public class IntakeShooterEjectAction extends Action{
         switch(state_) {
             case Idle:
                 break;
-            case GoToEject:
-                stateGoToEject();
+            case ReadyToEject:
+                stateReadyToEject();
                 break;
             case Eject:
                 stateEject();
@@ -80,7 +80,7 @@ public class IntakeShooterEjectAction extends Action{
         return spaces(indent) + "IntakeShooterEjectAction";
     }
 
-    private void stateGoToEject(){
+    private void stateReadyToEject(){
         if(eject_updown_.isDone() && eject_tilt_.isDone()) {
             state_ = State.Eject;
             sub_.getFeeder().setAction(eject_feeder_, true);
