@@ -34,11 +34,13 @@ public class AllegroRobot2024 extends RobotSubsystem {
         ll_ = new LimeLightSubsystem(this, "limelight");
         addChild(ll_);
 
-        // at_ = new AmpTrapSubsystem(this);
-        // addChild(at_);
+        if (XeroRobot.isSimulation()) {
+            at_ = new AmpTrapSubsystem(this);
+            addChild(at_);
 
-        // lidar_ = new LidarSubsystem(this);
-        // addChild(lidar_);
+            lidar_ = new LidarSubsystem(this);
+            addChild(lidar_);
+        }
     }
 
     public SDSSwerveDriveSubsystem getSwerve() {

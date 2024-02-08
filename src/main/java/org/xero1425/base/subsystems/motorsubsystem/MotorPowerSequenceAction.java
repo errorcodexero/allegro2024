@@ -46,7 +46,7 @@ public class MotorPowerSequenceAction extends MotorAction {
         powers_ = powers;
 
         if (times_.length == 0 || powers_.length == 0 || times_.length != powers_.length)
-            throw new Exception("invalid arguments to Conveyor action");
+            throw new Exception("invalid arguments to MotorPowerSequenceAction action");
 
         plot_id_ = sub.initPlot(toString(0)) ;
         data_ = new Double[plot_columns_.length] ;            

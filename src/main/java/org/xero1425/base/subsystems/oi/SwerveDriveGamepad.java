@@ -63,6 +63,10 @@ public class SwerveDriveGamepad extends Gamepad {
         holding_angle_ = false ;
     }
 
+    public String getState() {
+        return  "power " + power_ + ", rotate:deadband " + deadband_rotate_ + ", pos:deadband:x " + deadband_pos_x_ + ", pos:deadband:y " + deadband_pos_y_ ;
+    }
+
     public void invert(boolean inv) {
         invert_ = inv;
     }

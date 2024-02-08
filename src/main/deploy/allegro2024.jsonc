@@ -48,7 +48,8 @@
                     "bus" : "",
                     "canid" : 6,
                     "inverted" : false,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -93,6 +94,7 @@
                     "canid" : 7,
                     "inverted" : false,
                     "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -136,7 +138,8 @@
                     "bus" : "",
                     "canid" : 8,
                     "inverted" : false,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -181,6 +184,7 @@
                     "canid" : 9,
                     "inverted" : false,
                     "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -225,6 +229,7 @@
                     "canid" : 10,
                     "inverted" : false,
                     "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -273,16 +278,17 @@
                     "emax" : 5.0,
                     "rmin" : -90.0,
                     "rmax" : 90.0,
-                    "ecval" : 1.2,
+                    "ecval" : 1.22,
                     "rcval" : 0.0
                 }
             },
             "actions" : {
                 "butch-start-collect" : {
-                    "tilt-threshold" : 0.0
+                    "tilt-threshold" : -60.0,
+                    "delay-time" : 0.04
                 },
                 "butch-stop-collect" : {
-                    "updown-threshold" : 0.0
+                    "updown-threshold" : 45.0
                 }
             }
         },
@@ -293,14 +299,15 @@
                     "bus" : "",
                     "canid" : 2,
                     "inverted" : false,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 40
                 },
                 "encoder": {
                     //
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m": 0.002471962, 
+                    "m":   0.0010986328125000, 
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -313,23 +320,23 @@
                 "velocity-important" : "High"
             },
             "targets" : {
-                "collect" : 25,
-                "stow" : 90,
+                "collect" : 4.0,
+                "stow" : 115,
                 "shoot" : 90,
                 "eject" : 25
             },
             "pids" : {
                 "position" : {
-                    "kp" : 10.0,
+                    "kp" : 0.2,
                     "ki" : 0.0,
                     "kd" : 0.0,
-                    "kv" : 0.01666667,
+                    "kv" : 0.056,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 40,
-                    "maxa" : 40,
+                    "maxv" : 120,
+                    "maxa" : 80,
                     "jerk" : 0.0
                 }
             }
@@ -341,7 +348,8 @@
                     "bus" : "",
                     "canid" : 1,
                     "inverted" : false,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder": {
                     //
@@ -388,14 +396,15 @@
                     "bus" : "",
                     "canid" : 5,
                     "inverted" : false,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 40
                 },
                 "encoder": {
                     //
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m": 0.019775395,          
+                    "m": 0.003955078125000,
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -407,8 +416,8 @@
                 "velocity-important" : "High"
             },
             "targets" : {
-                "collect" : 25,
-                "stow" : 90,
+                "collect" : 45,
+                "stow" : -30,
                 "shoot" : 90,
                 "eject" : 25
             },
@@ -416,27 +425,15 @@
                 "position" : {
                     "kp" : 1.0,
                     "ki" : 0.0,
-                    "kd" : 0.001,
-                    "kv" : 0.312,
+                    "kd" : 0.0,
+                    "kv" : 0.003592814,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
                     "maxv" : 120,
-                    "maxa" : 180,
+                    "maxa" : 60,
                     "jerk" : 0.0
-
-                    // "kp" : 1.6,
-                    // "ki" : 0.0,
-                    // "kd" : 0.001,
-                    // "kv" : 0.312,
-                    // "ka" : 0.0,
-                    // "kg" : 0.0,
-                    // "ks" : 0.0,
-                    // "outmax" : 12.0,
-                    // "maxv" : 120,
-                    // "maxa" : 180,
-                    // "jerk" : 0.0
                 }
             }
         },
@@ -447,7 +444,8 @@
                     "bus" : "",
                     "canid" : 3,
                     "inverted" : true,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder": {
                     //
@@ -472,10 +470,10 @@
             },
             "pids" : {
                 "velocity" : {
-                    "kp" : 0.55,
+                    "kp" : 0.6,
                     "ki" : 0.0,
                     "kd" : 0.0,
-                    "kv" : 0.145,
+                    "kv" : 0.130099913,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
@@ -490,7 +488,8 @@
                     "bus" : "",
                     "canid" : 4,
                     "inverted" : true,
-                    "neutral-mode" : "brake"
+                    "neutral-mode" : "brake",
+                    "current-limit" : 60
                 },
                 "encoder": {
                     //
@@ -515,10 +514,10 @@
             },
             "pids" : {
                 "velocity" : {
-                    "kp" : 0.55,
+                    "kp" : 0.6,
                     "ki" : 0.0,
                     "kd" : 0.0,
-                    "kv" : 0.13,
+                    "kv" : 0.130099913,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
@@ -552,9 +551,9 @@
                             "inverted" : false,
                             "neutral-mode": "brake",
                             "current-limit" : 20.0,
-                            "p" : 4.804692,
+                            "p" : 0.002346041055718470,
                             "i" : 0.0,
-                            "d" : 0.002402
+                            "d" :  0.000001172851562500,
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -583,9 +582,9 @@
                             "inverted" : false,
                             "neutral-mode": "brake",
                             "current-limit" : 20.0,
-                            "p" : 4.804692,
+                            "p" : 0.002346041055718470,
                             "i" : 0.0,
-                            "d" : 0.0024021
+                            "d" :  0.000001172851562500
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -615,9 +614,9 @@
                             "neutral-mode": "brake",
                             "pdp-channel" : 4,
                             "current-limit" : 20.0,
-                            "p" : 4.804692,
+                            "p" : 0.002346041055718470,
                             "i" : 0.0,
-                            "d" : 0.002402
+                            "d" :  0.000001172851562500
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -646,9 +645,9 @@
                             "inverted" : false,
                             "neutral-mode": "brake",
                             "current-limit" : 20.0,
-                            "p" : 4.804692,
+                            "p" : 0.002346041055718470,
                             "i" : 0.0,
-                            "d" : 0.002402
+                            "d" :  0.000001172851562500
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -818,7 +817,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 118,
+        "which":112,
         "0": {
             "angle": 45,
             "power": 0.1,
@@ -862,9 +861,13 @@
             "duration": 2.0
         },
         "20" : {
-            "power" : -0.1,
-            "duration" : 0.5
-        },        
+            "power" : -0.3,
+            "duration" : 4.0
+        },
+        "22" : {
+            "tilt-target" : 0.0,
+            "updown-target" : 90.0
+        },
         "30" : {
             "power" : 0.2,
             "duration" : 5.0
@@ -873,7 +876,7 @@
             "duration" : 2.0
         },
         "32" : {
-            "velocity" : 15
+            "velocity" : 25
         },
         "40" : {
             "power" : 0.2,
@@ -883,7 +886,7 @@
             "velocity" : 15
         },
         "50" : {
-            "power" : 0.4,
+            "power" : 0.2,
             "duration" : 1.0
         },
         "52": {

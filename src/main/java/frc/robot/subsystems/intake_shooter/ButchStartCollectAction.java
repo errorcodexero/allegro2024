@@ -1,8 +1,10 @@
 package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.actions.Action;
+import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
+import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 
 public class ButchStartCollectAction extends Action {
     private IntakeShooterSubsystem sub_ ;
@@ -10,8 +12,10 @@ public class ButchStartCollectAction extends Action {
     private boolean up_down_started_ ;
     private double tilt_threshold_ ;
     private MCMotionMagicAction intake_down_ ;
-    private MCVelocityAction spinner_feeder_on_ ;
+    private MotorEncoderPowerAction spinner_feeder_on_ ;
     private MCMotionMagicAction tilt_collect_ ;
+    private XeroTimer timer_ ;
+    private boolean running_timer_ ;
 
     public ButchStartCollectAction(IntakeShooterSubsystem sub) throws Exception {
         super(sub.getRobot().getMessageLogger()) ;
@@ -20,14 +24,18 @@ public class ButchStartCollectAction extends Action {
         tilt_threshold_ = sub.getSettingsValue("actions:butch-start-collect:tilt-threshold").getDouble() ;
 
         intake_down_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", "targets:collect", 1, 1) ;
-        spinner_feeder_on_ = new MCVelocityAction(sub_.getFeeder(), "pids:velocity", "targets:collect", false) ;
+        spinner_feeder_on_ = new MotorEncoderPowerAction(sub_.getFeeder(), 0.5) ;
         tilt_collect_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", "targets:collect", 1, 1) ;
+
+        double t = sub.getSettingsValue("actions:butch-start-collect:delay-time").getDouble() ;
+        timer_ = new XeroTimer(sub.getRobot(), "collect-timer", t) ;
     }
 
     @Override
     public void start() throws Exception {
         super.start() ;
 
+        running_timer_ = false ;
         up_down_started_ = false ;
         sub_.getFeeder().setAction(spinner_feeder_on_, true) ;
         sub_.getTilt().setAction(tilt_collect_, true) ;
@@ -43,6 +51,12 @@ public class ButchStartCollectAction extends Action {
         }
 
         if (sub_.isNotePresent()) {
+            timer_.start();
+            running_timer_ = true ;
+        }
+
+        if (running_timer_ && timer_.isExpired()) {
+            sub_.getFeeder().setPower(0.0) ;
             setDone() ;
         }
     }

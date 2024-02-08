@@ -37,6 +37,9 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
         IntakeShooterSubsystem intakeshooter = robot.getIntakeShooter();
         MotorEncoderSubsystem tilt = intakeshooter.getTilt();
         MotorEncoderSubsystem updown = intakeshooter.getUpDown();
+        MotorEncoderSubsystem shooter1 = intakeshooter.getShooter1() ;
+        MotorEncoderSubsystem shooter2 = intakeshooter.getShooter2() ;
+        MotorEncoderSubsystem feeder = intakeshooter.getFeeder() ;
         AmpTrapSubsystem amptrap = robot.getAmpTrap();
 
         if (createTest()) {
@@ -105,8 +108,8 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 22:
                 if (intakeshooter != null) {
-                    addSubActionPair(tilt, new MCMotionMagicAction(tilt, "pids:position", 0.0, 1.0, 1.0), true) ;
-                    addSubActionPair(updown,new MCMotionMagicAction(updown, "pids:position", 45.0, 1.0, 1.0), true) ;
+                    addSubActionPair(tilt, new MCMotionMagicAction(tilt, "pids:position", getDouble("tilt-target"), 1.0, 1.0), true) ;
+                    addSubActionPair(updown,new MCMotionMagicAction(updown, "pids:position", getDouble("updown-target"), 1.0, 1.0), true) ;
                 }
                 break;
 
@@ -125,8 +128,12 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 31:
                 if (intakeshooter != null && intakeshooter.getShooter1() != null) {
                     double duration = getDouble("duration");
-                    double[] times = new double[] { duration, duration, duration, duration, duration };
-                    double[] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9 };
+                    double[] times ;
+                    double[] powers = new double[] { 0.1, 0.3, 0.5 };
+                    times = new double[powers.length] ;
+                    for(int i = 0 ; i < powers.length ; i++) {
+                        times[i] = duration ;
+                    }
                     addSubActionPair(intakeshooter.getShooter1(),
                             new MotorPowerSequenceAction(intakeshooter.getShooter1(), times, powers), true);
                 }
@@ -155,8 +162,12 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 41:
                 if (intakeshooter != null && intakeshooter.getShooter2() != null) {
                     double duration = getDouble("duration");
-                    double[] times = new double[] { duration, duration, duration, duration, duration };
-                    double[] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9 };
+                    double[] times ;
+                    double[] powers = new double[] { 0.1, 0.3, 0.5 };
+                    times = new double[powers.length] ;
+                    for(int i = 0 ; i < powers.length ; i++) {
+                        times[i] = duration ;
+                    }
                     addSubActionPair(intakeshooter.getShooter2(),
                             new MotorPowerSequenceAction(intakeshooter.getShooter2(), times, powers), true);
                 }
@@ -392,6 +403,14 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 if (intakeshooter != null) {
                     addSubActionPair(intakeshooter, new ButchStartCollectAction(intakeshooter), true);
                     addSubActionPair(intakeshooter, new ButchStopCollectionAction(intakeshooter), true);
+                    addSubActionPair(shooter1, new MCVelocityAction(shooter1, "pids:velocity", 57, false), false) ;
+                    addSubActionPair(shooter2, new MCVelocityAction(shooter2, "pids:velocity", 57, false), false) ;
+                    addSubActionPair(tilt, new MCMotionMagicAction(tilt, "pids:position", -37.0, 1.0, 1.0), false) ;
+                    addAction(new DelayAction(getAutoController().getRobot(), 2.0));
+                    addSubActionPair(feeder, new MotorEncoderPowerAction(feeder, 0.5, 1.0), true) ;
+                    addSubActionPair(shooter1, new MotorEncoderPowerAction(shooter1, 0.0), true);
+                    addSubActionPair(shooter2, new MotorEncoderPowerAction(shooter2, 0.0), true);
+                    addSubActionPair(feeder, new MotorEncoderPowerAction(feeder, 0.0), true) ;
                 }
                 break ;
 

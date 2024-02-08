@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.hal.simulation.SimulatorJNI;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.simulation.DriverStationSim;
 
 import org.xero1425.base.XeroRobot;
@@ -46,9 +45,7 @@ public class SimulationEngine {
     }
 
     static public void initializeSimulator(XeroRobot robot, MessageLogger logger) {
-        String evname = DriverStation.getEventName() ;
         the_one_ = new SimulationEngine(robot, logger);
-        logger.startMessage(MessageType.Info).add("Simulated Event: ").add(evname).endMessage();
     }
 
     public void addAssertError() {
