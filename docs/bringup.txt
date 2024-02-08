@@ -4,27 +4,39 @@ Item                                                                    Status
 Basic Bringup
   Check All Motors Work                                                   Done
     Swerve                                                                Done
-    Tilt                                                                  Done
+    Tilt                                                                  2/7 (day 4)
     UpDown                                                                Done
     Shooter1                                                              Done
     Shooter2                                                              Done
-    Feeder                                                                Done
-  Test Tilt Absolute Encoder                                              Done
+    Feeder                                                                2/7 (day 4)
+  Verify Tilt Absolute Encoder                                            2/7 (day 4)
   Set alignment of the swerve drive                                       Done
   Basic shooter test                                                      Done
   Test Note Sensor on Intake/Collector                                    Done
 
 Shoot
-  Tune Up/Down Motion Magic
-  Tune Tilt Motion Magic
-  Tune Shooter1 Wheels
-  Tune Shooter2 Wheels
-  Tune Shooter for various shots (tuning action)
+  1st Tune Up/Down Motion Magic                                           Done
+  1st Tune Tilt Motion Magic                                              2/7 (day 4)
+  1st Tune Shooter1 Wheels                                                Done
+  1st Tune Shooter2 Wheels                                                Done
+  1st Tune Shooter for various shots (tuning action)                      Done
 
 Collect
-  Test Pseudo collect action
+  Test Pseudo collect action                                              2/7 (day 4)
+  Test Collect At Speed                                                   2/7 (day 4)
 
 Drive
-  Check swerve drive modules steer PID
+  Check swerve drive modules steer PID                                    Done
   Tune Swerve Drive Motors (move to MCVelocity?)
-  
+
+Real Shoot
+  TargetTracker
+  DriveBase Rotate Action
+  Tune Shooter (Tilt + velocity PWL)
+  Shoot Action
+    -
+    -
+
+Automodes
+  Stratetgy
+  Path reflections
