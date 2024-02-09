@@ -7,18 +7,22 @@ import org.xero1425.misc.MissingParameterException;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 
 public class SwerveRotateToAngle extends Action {
-    private final double kAnglePositionToleranceDegrees = 2.0 ;
-    private final double kAngleVelocityTolerangeDegreesPerSecond = 1.0 ;
     private SwerveBaseSubsystem swerve_ ;
     private double angle_ ;
     private double p_ ;
+    private double postol_ ;
+    private double veltol_ ;
 
-    public SwerveRotateToAngle(SwerveBaseSubsystem swerve, double angle) throws BadParameterTypeException, MissingParameterException {
+    public SwerveRotateToAngle(SwerveBaseSubsystem swerve, double angle, double postol, double veltol) throws BadParameterTypeException, MissingParameterException {
         super(swerve.getRobot().getMessageLogger());
         swerve_ = swerve ;
         angle_ = angle ;
 
         p_ = swerve.getSettingsValue("angle-tracker:p").getDouble() ;
+    }
+
+    public void setAngle(double angle) {
+        angle_ = angle ;
     }
 
     @Override
@@ -31,7 +35,7 @@ public class SwerveRotateToAngle extends Action {
         super.run();
 
         double err = angle_ - swerve_.getPose().getRotation().getDegrees() ;        
-        if (Math.abs(err) < kAnglePositionToleranceDegrees && Math.abs(swerve_.getRotationalVelocity()) < kAngleVelocityTolerangeDegreesPerSecond) {
+        if (Math.abs(err) < postol_ && Math.abs(swerve_.getRotationalVelocity()) < veltol_) {
             swerve_.drive(new ChassisSpeeds());
             setDone() ;
         }

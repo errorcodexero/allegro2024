@@ -8,7 +8,7 @@ import org.xero1425.base.utils.PieceWiseLinear;
 
 import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
 
-public class IntakeShootAction extends Action {
+public class IntakeAutoShootAction extends Action {
     private final static double kVelocityStart = 45.0 ;
     private final static double kUpDownStart = 123.5 ;
     private final static double kTiltStart = -40.0 ;
@@ -34,7 +34,7 @@ public class IntakeShootAction extends Action {
     private boolean drive_team_ready_ ;
     private boolean shooting_ ;
 
-    public IntakeShootAction(IntakeShooterSubsystem intake, TargetTrackerSubsystem tracker) throws Exception {
+    public IntakeAutoShootAction(IntakeShooterSubsystem intake, TargetTrackerSubsystem tracker) throws Exception {
         super(intake.getRobot().getMessageLogger());
 
         sub_ = intake ;
@@ -93,7 +93,8 @@ public class IntakeShootAction extends Action {
         super.run();
 
         if (shooting_) {
-            if (isDone()) {
+            if (feeder_on_.isDone()) {
+                sub_.setNoteInIntake(false);
                 sub_.getFeeder().setPower(0.0);
                 sub_.getShooter1().setPower(0.0);
                 sub_.getShooter2().setPower(0.0);

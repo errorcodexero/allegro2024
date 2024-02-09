@@ -43,6 +43,10 @@ public class AllegroRobot2024 extends RobotSubsystem {
         addChild(lidar_) ;
     }
 
+    public SuperStructureSubsystem getSuperStructure() {
+        return ss_ ;
+    }
+
     public SDSSwerveDriveSubsystem getSwerve() {
         return db_;
     }

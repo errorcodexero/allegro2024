@@ -882,7 +882,24 @@
                     }
                 },
                 "power": 2.0
-            }            
+            },
+            "panel" : {
+                "index" : 2,
+                "gadgets" : {
+
+                },
+                "leds" : {
+                    "target_toggle1" : 1,
+                    "target_toggle2" : 2,
+                    "climb_up_prep" : 3,
+                    "climb_up_exec" : 4,
+                    "climb_down" : 6,
+                    "shoot" : 7,
+                    "turtle" : 8,
+                    "abort" : 9,
+                    "eject" : 10
+                }
+            },
         }        
     },
     "testmode" : {
