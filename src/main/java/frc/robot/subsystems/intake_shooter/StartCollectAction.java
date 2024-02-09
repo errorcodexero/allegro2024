@@ -38,7 +38,7 @@ public class StartCollectAction extends Action {
         collect_tilt_action = new MCMotionMagicAction(sub.getTilt(), "pids:position", "targets:tilt_collect_position", 0,0 );
 
         //Initializing the feeder collect action with the velocity action
-        collect_feeder_action = new MCVelocityAction(sub.getFeeder(), "pids:velocity", "targets:feeder_collect_velocity", false);
+        collect_feeder_action = new MCVelocityAction(sub.getFeeder(), "pids:velocity", "targets:feeder_collect_velocity", 10.0, false);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class StartCollectAction extends Action {
 
     private void stateWaitForNote() {
         //Uses the sensor to detect if a note is in place. If it is, then stop the feeder and end everything.
-        if (sub_.isNotePresent()) {
+        if (sub_.isNoteCurrentlyDetected()) {
             sub_.getFeeder().cancelAction();
             state_ = State.Idle;
             setDone();

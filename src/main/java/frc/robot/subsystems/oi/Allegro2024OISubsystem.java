@@ -5,7 +5,6 @@ import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.oi.Gamepad;
 import org.xero1425.base.subsystems.oi.OISubsystem;
 import org.xero1425.base.subsystems.oi.SwerveDriveGamepad;
-import org.xero1425.base.subsystems.swerve.SDSSwerveDriveSubsystem;
 
 import frc.robot.subsystems.intake_shooter.ButchStartCollectAction;
 import frc.robot.subsystems.intake_shooter.ButchStopCollectionAction;
@@ -15,7 +14,7 @@ import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class Allegro2024OISubsystem extends OISubsystem {
 
-    private final static SwerveDriveGamepad.SwerveButton[] resetButtons = { SwerveDriveGamepad.SwerveButton.Y, SwerveDriveGamepad.SwerveButton.B} ;
+    private final static Gamepad.Button[] resetButtons = { Gamepad.Button.Y, Gamepad.Button.B} ;
 
     private ButchStartCollectAction startCollectAction_ ;
     private ButchStopCollectionAction stopCollectAction_ ;
@@ -41,36 +40,43 @@ public class Allegro2024OISubsystem extends OISubsystem {
         intake.setAction(stopCollectAction_) ;
     }
 
-    public void startTargetLockMode() {
-        SDSSwerveDriveSubsystem sdb = (SDSSwerveDriveSubsystem)getRobot().getRobotSubsystem().getDB() ;
-        sdb.setRotationSWControl(true);
+    public void targetLockMode(boolean enable) {
+        AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();
+        robot.getSwerve().setSWRotationControl(enable);
+        robot.getTargetTracker().sendTargetInfoToDB(enable);
     }
 
-    public void stopTargetLockMode() {
-        SDSSwerveDriveSubsystem sdb = (SDSSwerveDriveSubsystem)getRobot().getRobotSubsystem().getDB() ;
-        sdb.setRotationSWControl(false);
-    }
-
-    public void manualShoot() {
+    public void manualShootSubwoofer() {
         try {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();
             IntakeShooterSubsystem intake = robot.getIntakeShooter();
-            intake.setAction(new ManualShootAction(intake));    
+            intake.setAction(new ManualShootAction(intake, "subwoofer"));    
         }
         catch(Exception ex) {
         }
     }
+
+    public void manualShootPodium() {
+        try {
+            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();
+            IntakeShooterSubsystem intake = robot.getIntakeShooter();
+            intake.setAction(new ManualShootAction(intake, "podium"));    
+        }
+        catch(Exception ex) {
+        }
+    }    
 
     @Override
     protected void gamePadCreated(Gamepad gp) {
         SwerveDriveGamepad swgp = (SwerveDriveGamepad)gp ;
         if (swgp != null) {
             swgp.bindButtons(resetButtons, ()->swgp.resetSwerveDriveDirection(), null);            
-            swgp.bindButton(SwerveDriveGamepad.SwerveButton.LBack, ()-> swgp.startDriveBaseX(), ()->swgp.stopDriveBaseX());   
-            swgp.bindButton(SwerveDriveGamepad.SwerveButton.RBack, ()->startCollect(), ()->stopCollect());
-            swgp.bindButton(SwerveDriveGamepad.SwerveButton.LTrigger, ()->startTargetLockMode(), null);
-            swgp.bindButton(SwerveDriveGamepad.SwerveButton.RTrigger, ()->stopTargetLockMode(), null);
-            swgp.bindButton(SwerveDriveGamepad.SwerveButton.A, ()->manualShoot(), null);
+            swgp.bindButton(Gamepad.Button.LBack, ()-> swgp.startDriveBaseX(), ()->swgp.stopDriveBaseX());   
+            swgp.bindButton(Gamepad.Button.RBack, ()->startCollect(), ()->stopCollect());
+            swgp.bindButton(Gamepad.Button.LTrigger, ()->targetLockMode(false), null);
+            swgp.bindButton(Gamepad.Button.RTrigger, ()->targetLockMode(true), null);
+            swgp.bindButton(Gamepad.Button.A, ()->manualShootSubwoofer(), null);
+            swgp.bindButton(Gamepad.Button.A, ()->manualShootPodium(), null);
         }
     }    
 }

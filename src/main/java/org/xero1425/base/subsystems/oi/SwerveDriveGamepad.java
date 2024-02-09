@@ -1,8 +1,5 @@
 package org.xero1425.base.subsystems.oi;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.xero1425.base.LoopType;
 import org.xero1425.base.subsystems.RobotSubsystem;
 import org.xero1425.base.subsystems.swerve.SwerveBaseSubsystem;
@@ -18,51 +15,17 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 
 public class SwerveDriveGamepad extends Gamepad {
-    public enum SwerveButton {
-        A,
-        B,
-        X,
-        Y,
-        LJoy,
-        RJoy,
-        RBack,
-        LBack,
-        RTrigger,
-        LTrigger
-    }
-
-    public interface Execute {
-        void execute() ;
-    } ;
-
-    private class ButtonMapping {
-        public SwerveButton[] buttons_ ;
-        public Execute execute_press_ ;
-        public Execute execute_release_ ;
-        public boolean pressed_ ;
-
-        public ButtonMapping(SwerveButton[] buttons, Execute executePress, Execute executeRelease) {
-            buttons_ = buttons ;
-            execute_press_ = executePress ;
-            execute_release_ = executeRelease ;
-            pressed_ = false ;
-        }
-    }
-
-    private SwerveBaseSubsystem db_;
-    private double angle_maximum_;
-    private double pos_maximum_;
+    private SwerveBaseSubsystem db_;                    // The drive base we are controlling
+    private double angle_maximum_;                      // The maximum angle value in degrees
+    private double pos_maximum_;                        // The maximum position value in meters
     private double deadband_pos_x_ ;
     private double deadband_pos_y_ ;
     private double deadband_rotate_ ;
     private double power_ ;
     private SwerveDriveChassisSpeedAction action_;
     private SwerveDriveXPatternAction x_action_;
-    private List<ButtonMapping> mappings_ ;
+
     private boolean holding_x_;
-    private boolean holding_angle_ ;
-    private double holding_angle_value_ ;
-    private double rotation_p_value_ ;
 
     public SwerveDriveGamepad(OISubsystem oi, int index, SwerveBaseSubsystem drive_) throws Exception {
         super(oi, "swerve_gamepad", index);
@@ -77,8 +40,6 @@ public class SwerveDriveGamepad extends Gamepad {
 
         db_ = drive_;
         holding_x_ = false ;
-        holding_angle_ = false ;
-        mappings_ = new ArrayList<ButtonMapping>() ;
     }
 
     public String getState() {
@@ -91,8 +52,6 @@ public class SwerveDriveGamepad extends Gamepad {
 
     @Override
     public void createStaticActions() throws BadParameterTypeException, MissingParameterException {
-        rotation_p_value_ = getSubsystem().getSettingsValue("swerve_gamepad:angle:p").getDouble() ;
-
         deadband_pos_x_ = getSubsystem().getSettingsValue("swerve_gamepad:position:deadband:x").getDouble() ;
         deadband_pos_y_ = getSubsystem().getSettingsValue("swerve_gamepad:position:deadband:y").getDouble() ;
         deadband_rotate_ = getSubsystem().getSettingsValue("swerve_gamepad:angle:deadband").getDouble() ;
@@ -103,16 +62,6 @@ public class SwerveDriveGamepad extends Gamepad {
         action_ = new SwerveDriveChassisSpeedAction(db_) ;
         x_action_ = new SwerveDriveXPatternAction(db_);
     }
-
-    public void bindButtons(SwerveButton[] buttons, Execute press, Execute release) {
-        ButtonMapping bm = new ButtonMapping(buttons, press, release) ;
-        mappings_.add(bm) ;
-    }
-
-    public void bindButton(SwerveButton button, Execute press, Execute release) {
-        SwerveButton[] buttons = { button } ;
-        bindButtons(buttons, press, release) ;
-    }    
 
     public void resetSwerveDriveDirection() {
         RobotSubsystem robotSubsystem = getSubsystem().getRobot().getRobotSubsystem();
@@ -151,21 +100,6 @@ public class SwerveDriveGamepad extends Gamepad {
     @Override
     public void computeState() {
         super.computeState();
-
-        for(ButtonMapping bm : mappings_) {
-            boolean pressed = isButtonSequencePressed(bm.buttons_) ;
-
-            if (pressed && !bm.pressed_) {
-                bm.pressed_ = true ;
-                if (bm.execute_press_ != null)
-                    bm.execute_press_.execute() ;
-            }
-            else if (!pressed && bm.pressed_) {
-                bm.pressed_ = false ;
-                if (bm.execute_release_ != null)
-                    bm.execute_release_.execute() ;
-            }
-        }
     }
 
     @Override
@@ -201,29 +135,21 @@ public class SwerveDriveGamepad extends Gamepad {
             //
             // The rotation stick is set to zero, so we want to maintain the current angle.
             //
-            if (!holding_angle_) {
+            if (!db_.getSWRotationControl()) {
                 //
                 // This is the first robot loop with the rotation stick at zero.  Setup the mode to
                 // hold the angle and remember the current robot angle.
                 //
-                holding_angle_ = true ;
-                holding_angle_value_ = db_.getHeading().getDegrees() ;
-            }
-            else {
-                //
-                // This is how far we have drifted from the desired angle
-                //
-                double angerr = db_.getHeading().getDegrees() - holding_angle_value_ ;
-
-                //
-                // Now scale the drift angle by a factor to create a rotational velocity that
-                // will rotate us back to our desired heading
-                //
-                rxscaled = rotation_p_value_ * angerr ;
+                db_.setSWRotationControl(true);
+                db_.setSWRotationAngle(db_.getHeading().getDegrees());
             }
         }
         else {
-            holding_angle_ = false ;
+            //
+            // The rotation stick is not zero, so we want to rotate the robot.  Turn off the angle
+            // control mechanism in the drive base and get this data from the joystick.
+            //
+            db_.setSWRotationControl(false);
         }
 
         //
@@ -242,39 +168,6 @@ public class SwerveDriveGamepad extends Gamepad {
         if (db_.getAction() != action_)
             db_.setAction(action_) ;
     }
-
-    private boolean isButtonSequencePressed(SwerveButton[] buttons) {
-        boolean ret = true ;
-
-        if (buttons == null)
-            return false ;
-
-        if (buttons != null && buttons.length > 0) {
-            for(SwerveButton button : buttons) {
-                boolean bstate = false ;
-
-                switch(button) {
-                    case A: bstate = isAPressed() ; break ;
-                    case B: bstate = isBPressed() ; break ;
-                    case X: bstate = isXPressed() ; break ;
-                    case Y: bstate = isYPressed() ; break ;
-                    case LBack: bstate = isLBackButtonPressed() ; break ;
-                    case RBack: bstate = isRBackButtonPressed() ; break ;
-                    case LJoy: bstate = isLJoyButtonPressed() ; break ;
-                    case RJoy: bstate = isRJoyButtonPressed() ; break ;
-                    case LTrigger: bstate = isLTriggerPressed() ; break ;
-                    case RTrigger: bstate = isRTriggerPressed() ; break ;
-                } ;
-
-                if (!bstate) {
-                    ret = false ;
-                    break ;
-                }
-            }
-        }
-
-        return ret;
-    }    
 
     private double mapJoyStick(double v, double maxv, double db, double power) {
         if (Math.abs(v) < db)

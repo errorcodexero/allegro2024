@@ -289,8 +289,8 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
         if (mode_ == Mode.Chassis) {
 
-            if (getRotationSWControl()) {
-                double err = getRotationAngle() - getPose().getRotation().getDegrees() ;
+            if (getSWRotationControl()) {
+                double err = -(getRotationAngle() - getPose().getRotation().getDegrees()) ;
                 double omega = err * sw_rotation_p_ ;
                 chassis_speed_ = new ChassisSpeeds(chassis_speed_.vxMetersPerSecond, chassis_speed_.vyMetersPerSecond, omega);
             }

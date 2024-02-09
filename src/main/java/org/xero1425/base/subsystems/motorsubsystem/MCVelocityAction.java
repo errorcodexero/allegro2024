@@ -21,6 +21,9 @@ public class MCVelocityAction extends MotorAction {
     // The target velocity
     private double target_ ;
 
+    // The threshold for the target
+    private double threshold_ ;
+
     // The error in the last robot loop
     private double error_ ;
 
@@ -54,7 +57,7 @@ public class MCVelocityAction extends MotorAction {
     /// \param sub the target MotorEncoderSubsystem
     /// \param name the name of the action, for entries from the settings file
     /// \param target the traget velocity
-    public MCVelocityAction(MotorEncoderSubsystem sub, String name, double target, boolean plots)
+    public MCVelocityAction(MotorEncoderSubsystem sub, String name, double target, double threshold, boolean plots)
             throws MissingParameterException, BadParameterTypeException, BadMotorRequestException, MotorRequestFailedException {
 
         super(sub);
@@ -84,8 +87,20 @@ public class MCVelocityAction extends MotorAction {
     /// \brief Create a new MotorEncoderVelocityAction
     /// \param sub the target MotorEncoderSubsystem
     /// \param target a string with the name of the target velocity in settings file
-    public MCVelocityAction(MotorEncoderSubsystem sub, String name, String target, boolean plots) throws BadParameterTypeException, MissingParameterException, BadMotorRequestException, MotorRequestFailedException {
-        this(sub, name, sub.getSettingsValue(target).getDouble(), plots) ;
+    public MCVelocityAction(MotorEncoderSubsystem sub, String name, String target, String threshold, boolean plots) throws BadParameterTypeException, MissingParameterException, BadMotorRequestException, MotorRequestFailedException {
+        this(sub, name, sub.getSettingsValue(target).getDouble(), sub.getSettingsValue(threshold).getDouble(), plots) ;
+    }
+
+    /// \brief Create a new MotorEncoderVelocityAction
+    /// \param sub the target MotorEncoderSubsystem
+    /// \param target a string with the name of the target velocity in settings file
+    public MCVelocityAction(MotorEncoderSubsystem sub, String name, String target, double threshold, boolean plots) throws BadParameterTypeException, MissingParameterException, BadMotorRequestException, MotorRequestFailedException {
+        this(sub, name, sub.getSettingsValue(target).getDouble(), threshold, plots) ;
+    }    
+
+    public boolean isAtVelocity() {
+        MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem() ;
+        return Math.abs(me.getVelocity() - target_) < threshold_ ;
     }
 
     public double getError() {

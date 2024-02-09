@@ -6,6 +6,7 @@ import org.xero1425.base.actions.Action;
 import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
+import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 
 public class IntakeShooterEjectAction extends Action{
     
@@ -20,7 +21,7 @@ public class IntakeShooterEjectAction extends Action{
     private IntakeShooterSubsystem sub_;
     private MCMotionMagicAction eject_updown_;
     private MCMotionMagicAction eject_tilt_;
-    private MCVelocityAction eject_feeder_;
+    private MotorEncoderPowerAction eject_feeder_;
     private MCVelocityAction eject_shooter1_;
     private MCVelocityAction eject_shooter2_;
     private XeroTimer timer_;
@@ -37,9 +38,9 @@ public class IntakeShooterEjectAction extends Action{
         sub_ = sub;
         eject_updown_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position" , "targets:stow" , 0.5 , 1);
         eject_tilt_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position" , "targets:stow" , 0.5 , 1);
-        eject_feeder_ = new MCVelocityAction(sub_.getFeeder(), "pids:position" , "targets:eject", true);
-        eject_shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:position", "targets:eject", true);
-        eject_shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:position", "targets:eject", true);
+        eject_feeder_ = new MotorEncoderPowerAction(sub_.getFeeder(), "targets:eject");
+        eject_shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:position", "targets:eject", 1.0, false);
+        eject_shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:position", "targets:eject", 1.0, false);
         stow_intake_shooter_ = new IntakeShooterStowAction(sub_);
         timer_ = new XeroTimer(sub.getRobot(), "Eject", 1.5);
     }

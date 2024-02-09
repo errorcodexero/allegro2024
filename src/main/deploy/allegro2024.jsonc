@@ -290,6 +290,73 @@
                 },
                 "butch-stop-collect" : {
                     "updown-threshold" : 45.0
+                },
+                "manual-shoot" : {
+                    "subwoofer" : {
+                        "tilt" : -37.0,
+                        "tilt-pos-threshold" : 5.0,
+                        "tilt-velocity-threshold" : 5.0,
+
+                        "up-down-pos" : 90.0,
+                        "up-down-pos-threshold" : 5.0,
+                        "up-down-velocity-threshold" : 5.0,
+                        
+                        "shooter-velocity" : 45.0,
+                        "shooter-velocity-threshold" : 5.0
+                    },
+                    "podium" : {
+                        "tilt" : -37.0,
+                        "tilt-pos-threshold" : 5.0,
+                        "tilt-velocity-threshold" : 5.0,
+
+                        "up-down-pos" : 90.0,
+                        "up-down-pos-threshold" : 5.0,
+                        "up-down-velocity-threshold" : 5.0,
+                        
+                        "shooter-velocity" : 45.0,
+                        "shooter-velocity-threshold" : 5.0
+                    }
+                },
+                "auto-shoot" : {
+                    "shooter-velocity-threshold" : 5.0,
+                    "updown-pos-threshold" : 2.0,
+                    "updown-velocity-threshold" : 2.0,
+                    "tilt-pos-threshold" : 2.0,
+                    "tilt-velocity-threshold" : 2.0,
+                    "feeder-power" : 0.5,
+                    "feeder-time" : 1.0
+                }
+            },
+            "pwls" : {
+                "updown" : {
+                    "1" : {
+                        "x" : 0.0,
+                        "y" : 123.5
+                    },
+                    "2" : {
+                        "x" : 8.23,
+                        "y" : 123.5
+                    }
+                },
+                "tilt" : {
+                    "1" : {
+                        "x" : 0.0,
+                        "y" : 123.5
+                    },
+                    "2" : {
+                        "x" : 8.23,
+                        "y" : 123.5
+                    }
+                },
+                "shooter" : {
+                    "1" : {
+                        "x" : 0.0,
+                        "y" : 123.5
+                    },
+                    "2" : {
+                        "x" : 8.23,
+                        "y" : 123.5
+                    }
                 }
             }
         },
@@ -322,7 +389,7 @@
             },
             "targets" : {
                 "collect" : 4.0,
-                "stow" : 115,
+                "stow" : 122,
                 "shoot" : 90,
                 "eject" : 25
             },
@@ -418,7 +485,7 @@
             },
             "targets" : {
                 "collect" : 45,
-                "stow" : -30,
+                "stow" : -37,
                 "shoot" : 90,
                 "eject" : 25
             },
@@ -671,7 +738,7 @@
             },
 
             "angle-tracker" : {
-                "p" : 1.0
+                "p" : 0.5
             },
 
             //
@@ -804,7 +871,6 @@
             "swerve_gamepad": {
                 "index": 0,
                 "angle": {
-                    "p" : 0.0,
                     "maximum": 180,
                     "deadband": 0.05
                 },

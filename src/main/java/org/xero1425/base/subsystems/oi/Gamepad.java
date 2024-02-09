@@ -3,6 +3,9 @@ package org.xero1425.base.subsystems.oi ;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController ;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.xero1425.base.misc.XeroTimer;
 
 import edu.wpi.first.wpilibj.DriverStation ;
@@ -13,6 +16,40 @@ import edu.wpi.first.wpilibj.DriverStation ;
 /// switches.  It does not provide any mapping to the drivebase.  This is done by derived classes.
 public abstract class Gamepad extends OIDevice
 {
+    public enum Button {
+        A,
+        B,
+        X,
+        Y,
+        LJoy,
+        RJoy,
+        RBack,
+        LBack,
+        RTrigger,
+        LTrigger
+    }
+
+    public interface Execute {
+        void execute() ;
+    } ;
+
+    private class ButtonMapping {
+        public Button[] buttons_ ;
+        public Execute execute_press_ ;
+        public Execute execute_release_ ;
+        public boolean pressed_ ;
+
+        public ButtonMapping(Button[] buttons, Execute executePress, Execute executeRelease) {
+            buttons_ = buttons ;
+            execute_press_ = executePress ;
+            execute_release_ = executeRelease ;
+            pressed_ = false ;
+        }
+    }
+
+    // Mapping of specific buttons on the controller to java functions
+    private List<ButtonMapping> mappings_ ;
+
     // The XBOX Controller attached
     private XboxController controller_ ;
 
@@ -28,7 +65,19 @@ public abstract class Gamepad extends OIDevice
 
         controller_ = new XboxController(index) ;
         timer_ = null ;
+        mappings_ = new ArrayList<ButtonMapping>() ;        
     }
+
+
+    public void bindButtons(Button[] buttons, Execute press, Execute release) {
+        ButtonMapping bm = new ButtonMapping(buttons, press, release) ;
+        mappings_.add(bm) ;
+    }
+
+    public void bindButton(Button button, Execute press, Execute release) {
+        Button[] buttons = { button } ;
+        bindButtons(buttons, press, release) ;
+    }      
 
     /// \brief Rumble the gamepad for a fixed magnitude and duraction
     /// \param amount the magnitude of the rumble
@@ -51,8 +100,57 @@ public abstract class Gamepad extends OIDevice
     /// rumble function is processed.
     @Override
     public void computeState() {
+
+        for(ButtonMapping bm : mappings_) {
+            boolean pressed = isButtonSequencePressed(bm.buttons_) ;
+
+            if (pressed && !bm.pressed_) {
+                bm.pressed_ = true ;
+                if (bm.execute_press_ != null)
+                    bm.execute_press_.execute() ;
+            }
+            else if (!pressed && bm.pressed_) {
+                bm.pressed_ = false ;
+                if (bm.execute_release_ != null)
+                    bm.execute_release_.execute() ;
+            }
+        }
+                
         processRumble();
     }
+
+    private boolean isButtonSequencePressed(Button[] buttons) {
+        boolean ret = true ;
+
+        if (buttons == null)
+            return false ;
+
+        if (buttons != null && buttons.length > 0) {
+            for(Button button : buttons) {
+                boolean bstate = false ;
+
+                switch(button) {
+                    case A: bstate = isAPressed() ; break ;
+                    case B: bstate = isBPressed() ; break ;
+                    case X: bstate = isXPressed() ; break ;
+                    case Y: bstate = isYPressed() ; break ;
+                    case LBack: bstate = isLBackButtonPressed() ; break ;
+                    case RBack: bstate = isRBackButtonPressed() ; break ;
+                    case LJoy: bstate = isLJoyButtonPressed() ; break ;
+                    case RJoy: bstate = isRJoyButtonPressed() ; break ;
+                    case LTrigger: bstate = isLTriggerPressed() ; break ;
+                    case RTrigger: bstate = isRTriggerPressed() ; break ;
+                } ;
+
+                if (!bstate) {
+                    ret = false ;
+                    break ;
+                }
+            }
+        }
+
+        return ret;
+    }      
 
     private void processRumble() {
         if (timer_ != null) {

@@ -15,6 +15,7 @@ public class TargetTrackerSubsystem extends Subsystem {
     private Pose2d target_pos_;
     private double distance_between_robot_and_target_;
     private double angle_to_target_;
+    private boolean send_target_info_to_db_ ;
 
     public TargetTrackerSubsystem(Subsystem parent) {
         super(parent, "targettracker");
@@ -24,6 +25,7 @@ public class TargetTrackerSubsystem extends Subsystem {
     public void init(LoopType prev, LoopType current) {
         super.init(prev, current);
 
+        send_target_info_to_db_ = false ;
         AprilTagFieldLayout field_layout = getRobot().getAprilTags();
 
         Pose3d target_pos_3d = null;
@@ -35,7 +37,10 @@ public class TargetTrackerSubsystem extends Subsystem {
         if (target_pos_3d != null) {
             target_pos_ = target_pos_3d.toPose2d();
         }
+    }
 
+    public void sendTargetInfoToDB(boolean v) {
+        send_target_info_to_db_ = v ;
     }
 
     @Override
@@ -50,10 +55,12 @@ public class TargetTrackerSubsystem extends Subsystem {
         putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
         putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);
         
-        //
-        // Tell the drive base the angle we want you to have.
-        //
-        robotSubsystem.getSwerve().setRotationAngle(angle_to_target_ + robot_pos_.getRotation().getDegrees());
+        if (send_target_info_to_db_) {
+            //
+            // Tell the drive base the angle we want you to have.
+            //
+            robotSubsystem.getSwerve().setSWRotationAngle(angle_to_target_ + robot_pos_.getRotation().getDegrees());
+        }
     }
 
     private double calculateDistanceBetweenPoses(

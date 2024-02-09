@@ -108,7 +108,7 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
         last_pose_ = new Pose2d() ;
     }
 
-    public void setRotationAngle(double angle) {
+    public void setSWRotationAngle(double angle) {
         sw_rotation_angle_ = angle ;
     }
 
@@ -116,11 +116,11 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
         return sw_rotation_angle_ ;
     }
 
-    public void setRotationSWControl(boolean enable) {
+    public void setSWRotationControl(boolean enable) {
         sw_rotation_control_ = enable ;
     }
 
-    protected boolean getRotationSWControl() {
+    public boolean getSWRotationControl() {
         return sw_rotation_control_ ;
     }
 

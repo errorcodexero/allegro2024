@@ -69,8 +69,8 @@ public class ShooterTuningAction extends Action {
         super(sub.getRobot().getMessageLogger()) ;
         sub_ = sub ;
 
-        velocity1_action_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", 0.0, false);
-        velocity2_action_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", 0.0, false);
+        velocity1_action_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", 0.0, kVelocityFireTolerance, false);
+        velocity2_action_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", 0.0, kVelocityFireTolerance, false);
         tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", -65.0, kTiltPositionTolerance, kTiltVelocityTolerance) ;
         feeder_start_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), kFeederPowerLevel);
         feeder_stop_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), 0.0);        
@@ -94,8 +94,6 @@ public class ShooterTuningAction extends Action {
 
         tab_.addDouble("VSET", () -> { return current_velocity_ ;});
         tab_.addDouble("TSET", () -> { return current_tilt_ ;});
-
-        sub_.getFeeder().setAction(feeder_start_action_, true) ;
 
         sub_.getShooter1().setAction(velocity1_action_, true) ;
         sub_.getShooter2().setAction(velocity2_action_, true) ;
@@ -159,7 +157,7 @@ public class ShooterTuningAction extends Action {
                 current_velocity_ = v ;
                 velocity1_action_.setTarget(current_velocity_);
                 velocity2_action_.setTarget(current_velocity_);
-                sub_.getFeeder().setAction(feeder_start_action_, true) ;
+                sub_.getFeeder().setAction(feeder_stop_action_, true) ;
                 wait_for_ready_ = true ;
             }
 
@@ -171,7 +169,7 @@ public class ShooterTuningAction extends Action {
                 current_tilt_ = v ;
                 tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", current_tilt_, kTiltPositionTolerance, kTiltVelocityTolerance) ;
                 sub_.getTilt().setAction(tilt_action_, true) ;
-                sub_.getFeeder().setAction(feeder_start_action_, true) ;
+                sub_.getFeeder().setAction(feeder_stop_action_, true) ;
                 wait_for_ready_ = true ;
             }
         }
@@ -180,7 +178,7 @@ public class ShooterTuningAction extends Action {
 
         if (wait_for_ready_ && fire) {
             wait_for_ready_ = false ;
-                sub_.getFeeder().setAction(feeder_start_action_, true) ;
+            sub_.getFeeder().setAction(feeder_start_action_, true) ;
         }
 
         if (plotting_) {
@@ -197,16 +195,7 @@ public class ShooterTuningAction extends Action {
     }
 
     private boolean isReady() {
-        if (Math.abs(sub_.getShooter1().getVelocity() - current_velocity_) > kVelocityFireTolerance)
-            return false ;
-
-        if (Math.abs(sub_.getShooter2().getVelocity() - current_velocity_) > kVelocityFireTolerance)
-            return false ;            
-
-        if (Math.abs(sub_.getTilt().getVelocity() - current_velocity_) > kTiltFireTolerance)
-            return false ;            
-
-        return true ;
+        return velocity1_action_.isAtVelocity() && velocity2_action_.isAtVelocity() && Math.abs(sub_.getTilt().getPosition() - current_tilt_) < kTiltFireTolerance ;
     }
     
     public String toString(int indent) {

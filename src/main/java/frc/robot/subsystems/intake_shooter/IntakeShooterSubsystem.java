@@ -30,11 +30,21 @@ public class IntakeShooterSubsystem extends Subsystem{
     private boolean noteSensorInverted_;
     private AnalogInput absoluteEncoder_;
     private EncoderMapper encoderMapper_;
+
+    // This is true if the sensor is currently detecting a note
     private boolean is_note_present_;
+
     private double angle_;
+
+    // This is true if a note has previously been detected and has not been
+    // transferred to the amp/trap manipulator or been shot.  The note sensor may
+    // not be detecting a note as th e sensor may be over the hole in the note.
+    private boolean note_present_ ;
 
     public IntakeShooterSubsystem(Subsystem parent) throws Exception {
         super(parent, "intake-shooter");
+
+        note_present_ = false ;
 
         updown_ = new MotorEncoderSubsystem(this,"intake-updown", false);
         addChild(updown_);
@@ -105,8 +115,16 @@ public class IntakeShooterSubsystem extends Subsystem{
             return shooter2_ ;
     }
 
-    public boolean isNotePresent() {
+    public boolean isNoteCurrentlyDetected() {
         return is_note_present_;
+    }
+
+    public boolean isNoteInIntake() {
+        return note_present_ ;
+    }
+
+    public void setNoteInIntake(boolean b) {
+        note_present_ = b ;
     }
 
     public double getAngle() {
