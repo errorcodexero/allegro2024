@@ -285,7 +285,8 @@
             "actions" : {
                 "butch-start-collect" : {
                     "tilt-threshold" : -60.0,
-                    "delay-time" : 0.04
+                    "delay-time" : 0.04,
+                    "feeder-power" : 0.5
                 },
                 "butch-stop-collect" : {
                     "updown-threshold" : 45.0
