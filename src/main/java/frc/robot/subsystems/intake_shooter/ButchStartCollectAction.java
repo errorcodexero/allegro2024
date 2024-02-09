@@ -3,7 +3,6 @@ package frc.robot.subsystems.intake_shooter;
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
-import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 
 public class ButchStartCollectAction extends Action {

@@ -669,6 +669,10 @@
                 }                   
             },
 
+            "angle-tracker" : {
+                "p" : 1.0
+            },
+
             //
             // This section descrdibes the physical characteristics of the robot
             //
@@ -741,7 +745,7 @@
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
-                        "PRACTICE" : 0.18566326,
+                        "PRACTICE" : 0.200573641,
                         "COMPETITION" : 0
                     },
                     "min": -1.0,
@@ -756,7 +760,7 @@
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
-                        "PRACTICE" : 0.184747,
+                        "PRACTICE" : 0.200573641,
                         "COMPETITION" : 0
                     },
                     "min": -1.0,
@@ -771,7 +775,7 @@
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
-                        "PRACTICE" : 0.186217,
+                        "PRACTICE" : 0.200573641,
                         "COMPETITION" : 0
                     },
                     "min": -1.0,
@@ -786,7 +790,7 @@
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
-                        "PRACTICE" : 0.183776,
+                        "PRACTICE" : 0.200573641,
                         "COMPETITION" : 0
                     },
                     "min": -1.0,
@@ -799,8 +803,7 @@
             "swerve_gamepad": {
                 "index": 0,
                 "angle": {
-
-                    "p" : 1.0,
+                    "p" : 0.0,
                     "maximum": 180,
                     "deadband": 0.05
                 },
@@ -817,11 +820,11 @@
     },
     "testmode" : {
         "enabled": true,
-        "which":112,
+        "which": 0,
         "0": {
-            "angle": 45,
-            "power": 0.1,
-            "duration": 300.0         // optional, if missing will run forever
+            "angle": 0,
+            "power": 0.5,
+            "duration": 1.5         // optional, if missing will run forever
         },
         "1": {
             "angle": 45.0,
@@ -861,9 +864,9 @@
             "duration": 2.0
         },
         "20" : {
-            "power" : -0.3,
-            "duration" : 4.0
-        },
+            "power" : -0.1,
+            "duration" : 0.5
+        },        
         "22" : {
             "tilt-target" : 0.0,
             "updown-target" : 90.0
@@ -886,7 +889,7 @@
             "velocity" : 15
         },
         "50" : {
-            "power" : 0.2,
+            "power" : 0.3,
             "duration" : 1.0
         },
         "52": {

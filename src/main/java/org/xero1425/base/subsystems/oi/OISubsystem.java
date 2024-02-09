@@ -53,15 +53,13 @@ public class OISubsystem extends Subsystem {
     private final String DriverGamepadXero1425 = "xero1425_gamepad:index" ;
     private final String DriverGamepadStandard = "standard_gamepad:index" ;
     private final String DriverGamepadSwerve = "swerve_gamepad:index" ;
-
-    private boolean inverted_ ;
     
     /// \brief Create a new OI subsystem
     /// \param parent the subsystem that manages this one
     /// \param name the name of the subsystem
     /// \param type the type of gamepad to attach
     /// \param db the drivebase to control via the gamepad
-    public OISubsystem(Subsystem parent, String name, GamePadType type, DriveBaseSubsystem db, boolean addshuffleboard, boolean invertred) {
+    public OISubsystem(Subsystem parent, String name, GamePadType type, DriveBaseSubsystem db, boolean addshuffleboard) {
         super(parent, name);
 
         devices_ = new ArrayList<OIDevice>();
@@ -69,7 +67,6 @@ public class OISubsystem extends Subsystem {
         gp_index_ = -1 ;
 
         gamepad_type_ = type ;
-        inverted_ = invertred;
         addGamePad();
 
         if (addshuffleboard) {
@@ -323,7 +320,6 @@ public class OISubsystem extends Subsystem {
                         SwerveDriveGamepad gp = new SwerveDriveGamepad(this, gp_index_, (SwerveBaseSubsystem)db_) ;
                         gp_ = gp ;
                         addHIDDevice(gp_) ;
-                        gp.invert(inverted_);
 
                         logger.startMessage(MessageType.Info) ;
                         logger.add("using swerve gamepad, ") ;

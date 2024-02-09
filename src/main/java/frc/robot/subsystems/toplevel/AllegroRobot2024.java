@@ -28,7 +28,7 @@ public class AllegroRobot2024 extends RobotSubsystem {
         db_ = new SDSSwerveDriveSubsystem(this, "swerve");
         addChild(db_);
 
-        oi_ = new Allegro2024OISubsystem(this, db_);
+        oi_ = new Allegro2024OISubsystem(this, db_, is_);
         addChild(oi_);
 
         ll_ = new LimeLightSubsystem(this, "limelight");

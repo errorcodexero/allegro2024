@@ -25,6 +25,7 @@ import frc.robot.subsystems.intake_shooter.IntakeShooterEjectAction;
 
 import frc.robot.subsystems.amp_trap.PrepTrapAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
+import frc.robot.subsystems.intake_shooter.ManualShootAction;
 import frc.robot.subsystems.intake_shooter.ShooterTuningAction;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
@@ -37,9 +38,6 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
         IntakeShooterSubsystem intakeshooter = robot.getIntakeShooter();
         MotorEncoderSubsystem tilt = intakeshooter.getTilt();
         MotorEncoderSubsystem updown = intakeshooter.getUpDown();
-        MotorEncoderSubsystem shooter1 = intakeshooter.getShooter1() ;
-        MotorEncoderSubsystem shooter2 = intakeshooter.getShooter2() ;
-        MotorEncoderSubsystem feeder = intakeshooter.getFeeder() ;
         AmpTrapSubsystem amptrap = robot.getAmpTrap();
 
         if (createTest()) {
@@ -403,14 +401,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 if (intakeshooter != null) {
                     addSubActionPair(intakeshooter, new ButchStartCollectAction(intakeshooter), true);
                     addSubActionPair(intakeshooter, new ButchStopCollectionAction(intakeshooter), true);
-                    addSubActionPair(shooter1, new MCVelocityAction(shooter1, "pids:velocity", 57, false), false) ;
-                    addSubActionPair(shooter2, new MCVelocityAction(shooter2, "pids:velocity", 57, false), false) ;
-                    addSubActionPair(tilt, new MCMotionMagicAction(tilt, "pids:position", -37.0, 1.0, 1.0), false) ;
-                    addAction(new DelayAction(getAutoController().getRobot(), 2.0));
-                    addSubActionPair(feeder, new MotorEncoderPowerAction(feeder, 0.5, 1.0), true) ;
-                    addSubActionPair(shooter1, new MotorEncoderPowerAction(shooter1, 0.0), true);
-                    addSubActionPair(shooter2, new MotorEncoderPowerAction(shooter2, 0.0), true);
-                    addSubActionPair(feeder, new MotorEncoderPowerAction(feeder, 0.0), true) ;
+                    addSubActionPair(intakeshooter, new ManualShootAction(intakeshooter), true);
                 }
                 break ;
 

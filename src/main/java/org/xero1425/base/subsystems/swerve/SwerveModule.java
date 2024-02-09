@@ -94,6 +94,16 @@ public class SwerveModule {
         addDashBoardEntries(container);
     }
 
+    public double ticks2Angle(double ticks) {
+        double angle = ticks * ticksToRadians_ ;
+        angle %= 2.0 * Math.PI ;
+        if (angle < 0.0) {
+            angle += 2.0 * Math.PI ;
+        }
+
+        return angle ;        
+    }
+
     public CANcoder getCANCoder() {
         return absolute_encoder_ ;
     }
@@ -149,15 +159,7 @@ public class SwerveModule {
     }
 
     public double getStateAngle() throws BadMotorRequestException, MotorRequestFailedException {
-        double ticks = steer_.getPosition() ;
-
-        double angle = ticks * ticksToRadians_ ;
-        angle %= 2.0 * Math.PI ;
-        if (angle < 0.0) {
-            angle += 2.0 * Math.PI ;
-        }
-
-        return angle ;
+        return ticks2Angle(steer_.getPosition());
     }    
 
     public double getTargetAngle() {

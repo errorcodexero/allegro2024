@@ -18,7 +18,6 @@ public class TargetTrackerSubsystem extends Subsystem {
 
     public TargetTrackerSubsystem(Subsystem parent) {
         super(parent, "targettracker");
-
     }
 
     @Override
@@ -49,8 +48,12 @@ public class TargetTrackerSubsystem extends Subsystem {
         angle_to_target_ = calculateAngleBetweenPoses(robot_pos_, target_pos_);
     
         putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
-        putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);   
-    
+        putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);
+        
+        //
+        // Tell the drive base the angle we want you to have.
+        //
+        robotSubsystem.getSwerve().setRotationAngle(angle_to_target_ + robot_pos_.getRotation().getDegrees());
     }
 
     private double calculateDistanceBetweenPoses(
