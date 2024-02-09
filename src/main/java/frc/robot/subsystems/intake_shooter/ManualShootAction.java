@@ -77,10 +77,6 @@ public class ManualShootAction extends Action {
         super.run();
 
         if (!shooting_) {
-
-            boolean s1ready = false ;
-            boolean s2ready = false ;
-
             if (tilt_action_.isDone()) {
                 tilt_ready_ = true ;
             }
