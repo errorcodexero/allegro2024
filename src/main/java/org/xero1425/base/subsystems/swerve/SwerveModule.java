@@ -40,7 +40,7 @@ public class SwerveModule {
         name_ = name ;
         subsys_ = subsys ;
         synchronized_ = false ;
-
+        
         steer_ = subsys_.getRobot().getMotorFactory().createMotor(name + "-steer", id + ":motors:steer");
         steer_.setInverted(cfg.steer_inverted);
         steer_.setNeutralMode(XeroNeutralMode.Brake);

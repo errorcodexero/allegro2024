@@ -47,7 +47,7 @@ public class TalonFXSimMotorController extends SimMotorController {
     @Override
     public void run(double dt) {
         TalonFXSimState state = getState() ;
-        
+
         state.setSupplyVoltage(RobotController.getBatteryVoltage());
 
         voltage_ = state.getMotorVoltage() ;
