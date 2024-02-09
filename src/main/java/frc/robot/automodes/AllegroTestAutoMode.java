@@ -25,6 +25,7 @@ import frc.robot.subsystems.intake_shooter.IntakeShooterEjectAction;
 
 import frc.robot.subsystems.amp_trap.PrepTrapAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
+import frc.robot.subsystems.intake_shooter.ManualShootAction;
 import frc.robot.subsystems.intake_shooter.ShooterTuningAction;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
@@ -392,6 +393,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 if (intakeshooter != null) {
                     addSubActionPair(intakeshooter, new ButchStartCollectAction(intakeshooter), true);
                     addSubActionPair(intakeshooter, new ButchStopCollectionAction(intakeshooter), true);
+                    addSubActionPair(intakeshooter, new ManualShootAction(intakeshooter), true);
                 }
                 break ;
 

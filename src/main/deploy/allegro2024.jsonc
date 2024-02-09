@@ -552,9 +552,9 @@
                             "inverted" : false,
                             "neutral-mode": "brake",
                             "current-limit" : 20.0,
-                            "p" : 4.804692,
+                            "p" : 0.002346041015625,
                             "i" : 0.0,
-                            "d" : 0.002402
+                            "d" : 0.0000011728515625
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -583,9 +583,9 @@
                             "inverted" : false,
                             "neutral-mode": "brake",
                             "current-limit" : 20.0,
-                            "p" : 4.804692,
+                            "p" : 0.002346041015625,
                             "i" : 0.0,
-                            "d" : 0.0024021
+                            "d" : 0.0000011728515625
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -615,9 +615,9 @@
                             "neutral-mode": "brake",
                             "pdp-channel" : 4,
                             "current-limit" : 20.0,
-                            "p" : 4.804692,
+                            "p" : 0.002346041015625,
                             "i" : 0.0,
-                            "d" : 0.002402
+                            "d" : 0.0000011728515625
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -646,9 +646,9 @@
                             "inverted" : false,
                             "neutral-mode": "brake",
                             "current-limit" : 20.0,
-                            "p" : 4.804692,
+                            "p" : 0.002346041015625,
                             "i" : 0.0,
-                            "d" : 0.002402
+                            "d" : 0.0000011728515625
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -668,6 +668,10 @@
                         }                        
                     }
                 }                   
+            },
+
+            "angle-tracker" : {
+                "p" : 1.0
             },
 
             //
