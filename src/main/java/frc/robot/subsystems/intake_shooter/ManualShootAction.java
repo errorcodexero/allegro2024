@@ -6,9 +6,9 @@ import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 
 public class ManualShootAction extends Action {
-    private final double kTiltPosition = -37.0;
+    private final double kTiltPosition = -45.0;
     private final double kUpDownPosition = 90.0; 
-    private final double kShooterVelocity = 30.0;
+    private final double kShooterVelocity = 45.0;
     private final double kShooterThreshold = 5.0 ;
 
     private IntakeShooterSubsystem intake_;

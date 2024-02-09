@@ -322,7 +322,10 @@ public class OISubsystem extends Subsystem {
                         addHIDDevice(gp_) ;
 
                         logger.startMessage(MessageType.Info) ;
-                        logger.add("using swerve gamepad control").endMessage();
+                        logger.add("using swerve gamepad, ") ;
+                        logger.add("index", gp_index_);
+                        logger.add(", " + gp.getState()) ;
+                        logger.endMessage();
                         gamePadCreated(gp_) ;
                     }
                     catch(Exception ex) {

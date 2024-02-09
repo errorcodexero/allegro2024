@@ -78,8 +78,11 @@ public class SwerveDriveGamepad extends Gamepad {
         db_ = drive_;
         holding_x_ = false ;
         holding_angle_ = false ;
-
         mappings_ = new ArrayList<ButtonMapping>() ;
+    }
+
+    public String getState() {
+        return  "power " + power_ + ", rotate:deadband " + deadband_rotate_ + ", pos:deadband:x " + deadband_pos_x_ + ", pos:deadband:y " + deadband_pos_y_ ;
     }
 
     @Override

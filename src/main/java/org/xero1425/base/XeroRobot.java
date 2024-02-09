@@ -152,10 +152,18 @@ public abstract class XeroRobot extends TimedRobot {
         // Setup the mesasge logger to log messages
         start = getTime() ;
         enableMessageLogger();
+        String snum ;
+        
+        if (XeroRobot.isSimulation()) {
+            snum = "simulation" ;
+        } else {
+            snum = RobotController.getSerialNumber() ;
+        }
+
         logger_id_ = logger_.registerSubsystem(LoggerName) ;
         logger_.startMessage(MessageType.Info).add("============================================================").endMessage();
         logger_.startMessage(MessageType.Info).add("robot code starting").endMessage();
-        logger_.startMessage(MessageType.Info).add("SerialNumber", RobotController.getSerialNumber(), true).endMessage();
+        logger_.startMessage(MessageType.Info).add("SerialNumber", snum, true).endMessage();
         logger_.startMessage(MessageType.Info).add("enableMessageLogger time", getTime() - start).endMessage();
         logger_.startMessage(MessageType.Info).add("============================================================").endMessage();
 
@@ -520,7 +528,19 @@ public abstract class XeroRobot extends TimedRobot {
         logger_.startMessage(MessageType.Info);
         logger_.add("changing robot loop type: ") ;
         logger_.add(prev.toString() + " -> " + ltype.toString());
-        logger_.endMessage();
+        logger_.endMessage();        
+
+        if (ltype == LoopType.Disabled && prev != LoopType.Initialization) {
+            try {
+                motors_.printFaults() ;
+            }
+            catch(Exception ex) {
+                logger_.startMessage(MessageType.Error);
+                logger_.add("exception caught in printFaults() - ").add(ex.getMessage());
+                logger_.endMessage();
+                logger_.logStackTrace(ex.getStackTrace());
+            }
+        }
     }
 
     /// \brief Called from the base class to indicate we are entering auto mode.

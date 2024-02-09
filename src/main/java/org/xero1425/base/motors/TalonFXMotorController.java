@@ -79,6 +79,7 @@ public class TalonFXMotorController extends MotorController
         } while (!code.isOK() && --tries > 0)  ;
 
         if (!code.isOK()) {
+            msg = msg + " - " + code.toString() ;
             throw new MotorRequestFailedException(this, msg, code) ;
         }
     }
@@ -112,6 +113,10 @@ public class TalonFXMotorController extends MotorController
             results.add("proctemp") ;
         }
 
+        if (ctrl_.getStickyFault_ProcTemp().getValue()) {
+            results.add("proctemp") ;
+        }        
+
         if (ctrl_.getFault_DeviceTemp().getValue()) {
             results.add("devicetemp") ;
         }        
@@ -136,6 +141,14 @@ public class TalonFXMotorController extends MotorController
             results.add("sticky-boot-during-enable") ;
         }
 
+        if (ctrl_.getFault_UnlicensedFeatureInUse().getValue()) {
+            results.add("unlicensed-feature") ;
+        }     
+
+        if (ctrl_.getStickyFault_UnlicensedFeatureInUse().getValue()) {
+            results.add("sticky-unlicensed-feature") ;
+        }          
+
         if (ctrl_.getFault_BridgeBrownout().getValue()) {
             results.add("bridge-brownout") ;
         }     
@@ -145,17 +158,17 @@ public class TalonFXMotorController extends MotorController
         }        
 
         if (ctrl_.getFault_RemoteSensorReset().getValue()) {
-            results.add("undervoltage") ;
-        }   
-        
+            results.add("remote-sensor-reset") ;
+        }            
+
         if (ctrl_.getStickyFault_RemoteSensorReset().getValue()) {
-            results.add("undervoltage") ;
+            results.add("sticky-remote-sensor-reset") ;
         }
 
         if (ctrl_.getFault_MissingDifferentialFX().getValue()) {
             results.add("missing-differential-fx") ;
-        }      
-        
+        }            
+
         if (ctrl_.getStickyFault_MissingDifferentialFX().getValue()) {
             results.add("sticky-missing-differential-fx") ;
         }
@@ -165,24 +178,96 @@ public class TalonFXMotorController extends MotorController
         }    
         
         if (ctrl_.getStickyFault_RemoteSensorPosOverflow().getValue()) {
-            results.add("stick-remote-sensor-pos-overflow") ;
-        }      
-        
+            results.add("sticky-remote-sensor-pos-overflow") ;
+        }
+
         if (ctrl_.getFault_OverSupplyV().getValue()) {
             results.add("over-supply") ;
-        }           
+        }
 
         if (ctrl_.getStickyFault_OverSupplyV().getValue()) {
             results.add("sticky-over-supply") ;
-        }    
-        
+        }
+
         if (ctrl_.getFault_UnstableSupplyV().getValue()) {
-            results.add("over-supply") ;
-        }          
+            results.add("unstable-supply") ;
+        }
 
         if (ctrl_.getStickyFault_UnstableSupplyV().getValue()) {
-            results.add("sticky-over-supply") ;
-        }          
+            results.add("sticky-unstable-supply") ;
+        }
+
+        if (ctrl_.getFault_ReverseHardLimit().getValue()) {
+            results.add("reverse-hard-limit") ;
+        }
+
+        if (ctrl_.getStickyFault_ReverseHardLimit().getValue()) {
+            results.add("sticky-reverse-hard-limit") ;
+        }
+
+        if (ctrl_.getFault_ForwardHardLimit().getValue()) {
+            results.add("forward-hard-limit") ;
+        }
+
+        if (ctrl_.getStickyFault_ForwardHardLimit().getValue()) {
+            results.add("sticky-forward-hard-limit") ;
+        }
+
+        if (ctrl_.getFault_ReverseSoftLimit().getValue()) {
+            results.add("reverse-soft-limit") ;
+        }
+
+        if (ctrl_.getStickyFault_ReverseSoftLimit().getValue()) {
+            results.add("sticky-reverse-soft-limit") ;
+        }
+
+        if (ctrl_.getFault_ForwardSoftLimit().getValue()) {
+            results.add("forward-soft-limit") ;
+        }
+
+        if (ctrl_.getStickyFault_ForwardSoftLimit().getValue()) {
+            results.add("sticky-forward-soft-limit") ;
+        }        
+
+        if (ctrl_.getFault_RemoteSensorDataInvalid().getValue()) {
+            results.add("remote-sensor-data-invalid") ;
+        }
+
+        if (ctrl_.getStickyFault_RemoteSensorDataInvalid().getValue()) {
+            results.add("sticky-remote-sensor-data-invalid") ;
+        }
+
+        if (ctrl_.getFault_FusedSensorOutOfSync().getValue()) {
+            results.add("fused-sensor-out-of-sync") ;
+        }
+
+        if (ctrl_.getStickyFault_FusedSensorOutOfSync().getValue()) {
+            results.add("sticky-fused-sensor-out-of-sync") ;
+        }
+
+        if (ctrl_.getFault_StatorCurrLimit().getValue()) {
+            results.add("stator-curr-limit") ;
+        }
+
+        if (ctrl_.getStickyFault_StatorCurrLimit().getValue()) {
+            results.add("sticky-stator-curr-limit") ;
+        }
+
+        if (ctrl_.getFault_SupplyCurrLimit().getValue()) {
+            results.add("supply-curr-limit") ;
+        }
+
+        if (ctrl_.getStickyFault_SupplyCurrLimit().getValue()) {
+            results.add("sticky-supply-curr-limit") ;
+        }
+
+        if (ctrl_.getFault_UsingFusedCANcoderWhileUnlicensed().getValue()) {
+            results.add("using-fused-cancoder-while-unlicensed") ;
+        }
+
+        if (ctrl_.getStickyFault_UsingFusedCANcoderWhileUnlicensed().getValue()) {
+            results.add("sticky-using-fused-cancoder-while-unlicensed") ;
+        }
 
         return results ;
     }
@@ -346,8 +431,8 @@ public class TalonFXMotorController extends MotorController
         cfg.kD = d * kTicksPerRevolution ;
         cfg.kV = v * kTicksPerRevolution ;
         cfg.kA = a * kTicksPerRevolution ;
-        cfg.kG = g * kTicksPerRevolution ;
-        cfg.kS = s * kTicksPerRevolution ;
+        cfg.kG = g ;
+        cfg.kS = s ;
         checkError("setPID()", () -> ctrl_.getConfigurator().apply(cfg));
 
         VoltageConfigs mo = cfg_.Voltage ;

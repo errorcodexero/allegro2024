@@ -55,6 +55,7 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         super(parent, name) ;
 
         disabled_init_ = false ;
+	coast_mode_ = false ;
 
         sw_rotation_p_ = getSettingsValue("angle-tracker:p").getDouble() ;
 
