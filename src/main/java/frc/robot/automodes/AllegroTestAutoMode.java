@@ -400,6 +400,19 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 112:
                 if (intakeshooter != null) {
                     addSubActionPair(intakeshooter, new ButchStartCollectAction(intakeshooter), true);
+                }
+                break ;          
+                
+            case 113:
+                if (intakeshooter != null) {
+                    addSubActionPair(intakeshooter, new ButchStartCollectAction(intakeshooter), true);
+                    addSubActionPair(intakeshooter, new ButchStopCollectionAction(intakeshooter), true);
+                }
+                break ;                
+
+            case 114:
+                if (intakeshooter != null) {
+                    addSubActionPair(intakeshooter, new ButchStartCollectAction(intakeshooter), true);
                     addSubActionPair(intakeshooter, new ButchStopCollectionAction(intakeshooter), true);
                     addSubActionPair(intakeshooter, new ManualShootAction(intakeshooter, "subwoofer"), true);
                 }

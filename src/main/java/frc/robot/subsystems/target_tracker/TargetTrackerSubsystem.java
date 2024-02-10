@@ -47,25 +47,28 @@ public class TargetTrackerSubsystem extends Subsystem {
     public void computeMyState() throws Exception {
         super.computeMyState();
 
-        AllegroRobot2024 robotSubsystem = (AllegroRobot2024) getRobot().getRobotSubsystem();
-        Pose2d robot_pos_ = robotSubsystem.getSwerve().getPose();
-        distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos_, target_pos_);
-        angle_to_target_ = calculateAngleBetweenPoses(robot_pos_, target_pos_);
-    
-        putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
-        putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);
+        if (target_pos_ != null) {
+            AllegroRobot2024 robotSubsystem = (AllegroRobot2024) getRobot().getRobotSubsystem();
+            Pose2d robot_pos_ = robotSubsystem.getSwerve().getPose();
+            distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos_, target_pos_);
+            angle_to_target_ = calculateAngleBetweenPoses(robot_pos_, target_pos_);
         
-        if (send_target_info_to_db_) {
-            //
-            // Tell the drive base the angle we want you to have.
-            //
-            robotSubsystem.getSwerve().setSWRotationAngle(angle_to_target_ + robot_pos_.getRotation().getDegrees());
+            putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
+            putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);
+            
+            if (send_target_info_to_db_) {
+                //
+                // Tell the drive base the angle we want you to have.
+                //
+                robotSubsystem.getSwerve().setSWRotationAngle(angle_to_target_ + robot_pos_.getRotation().getDegrees());
+            }
         }
     }
 
-    private double calculateDistanceBetweenPoses(
-            Pose2d robot,
-            Pose2d target) {
+    private double calculateDistanceBetweenPoses(Pose2d robot, Pose2d target) {        
+        if (target == null) {
+            System.out.println("Target is null");
+        }
         double dist = robot.getTranslation().getDistance(target.getTranslation());
         return dist;
     }

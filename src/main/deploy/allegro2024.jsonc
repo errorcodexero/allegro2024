@@ -8,6 +8,7 @@
             "simulator": false,
             "limelight-edgar" : false,
             "oibuttons" : false,
+            "intake-shooter" : true,
 
             // Special settings
             "pathfollowing": false,
@@ -904,7 +905,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 0,
+        "which": 112,
         "0": {
             "angle": 0,
             "power": 0.5,

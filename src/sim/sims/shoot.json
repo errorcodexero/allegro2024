@@ -1,0 +1,38 @@
+{
+    "stimulus" :
+    [
+        {
+            "time" : 0.0,
+            "events" :
+            [
+                {
+                    "model" : "fms",
+                    "instance" : "1",
+                    "values" : 
+                    {
+                        "start" : 0,
+                        "autonomous" : 40.0,
+                        "between" : 0.0,
+                        "teleop" : 0.0,
+                        "fms" : false
+                    }
+                }
+            ]
+        },
+        {
+            "time" : 11.0,
+            "events" :
+            [
+                {
+                    "model" : "intake-shooter",
+                    "instance" : "1",
+                    "values" : 
+                    {
+                        "comment" : "Note arrived in intake - triggered sensor",
+                        "note-sensor" : false
+                    }
+                }
+            ]
+        }
+    ]
+}

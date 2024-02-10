@@ -42,7 +42,7 @@ public class IntakeShooterModel extends SimulationModel {
 
         note_sensor_ = getProperty("note-sensor").getInteger() ;
         DIODataJNI.setIsInput(note_sensor_, true);
-        DIODataJNI.setValue(note_sensor_, false) ;
+        DIODataJNI.setValue(note_sensor_, true) ;
 
         setCreated();
 
@@ -55,7 +55,7 @@ public class IntakeShooterModel extends SimulationModel {
         
         try {
             if (name.equals("note-sensor")) {
-                DIODataJNI.setIsInput(note_sensor_, true);
+                DIODataJNI.setIsInput(note_sensor_, false);
                 DIODataJNI.setValue(note_sensor_, value.getBoolean());
             }
         }

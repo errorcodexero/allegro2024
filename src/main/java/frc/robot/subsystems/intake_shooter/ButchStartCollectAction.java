@@ -4,6 +4,7 @@ import org.xero1425.base.actions.Action;
 import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
+import org.xero1425.misc.MessageType;
 
 public class ButchStartCollectAction extends Action {
     private enum CollectState {
@@ -23,8 +24,8 @@ public class ButchStartCollectAction extends Action {
 
     private XeroTimer timer_ ;
 
-    private MCMotionMagicAction intake_down_ ;
-    private MCMotionMagicAction intake_up_ ;
+    private MCMotionMagicAction intake_collect_ ;
+    private MCMotionMagicAction intake_stow_ ;
     private MCMotionMagicAction tilt_collect_ ;
     private MCMotionMagicAction tilt_stow_ ;
     private MotorEncoderPowerAction spinner_feeder_on_ ;
@@ -38,12 +39,12 @@ public class ButchStartCollectAction extends Action {
         feeder_power_ = sub.getSettingsValue("actions:butch-start-collect:feeder-power").getDouble() ;
         tilt_threshold_ = sub.getSettingsValue("actions:butch-start-collect:tilt-threshold").getDouble() ;
 
-        intake_down_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", "targets:collect", 1, 1) ;
-        intake_up_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", "targets:stow", 1, 1) ;
+        intake_collect_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", "targets:collect", 1, 1) ;
+        intake_stow_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", "targets:stow", 1, 1) ;
         spinner_feeder_on_ = new MotorEncoderPowerAction(sub_.getFeeder(), feeder_power_) ;
         spinner_feeder_off_ = new MotorEncoderPowerAction(sub_.getFeeder(), 0.0) ;
         tilt_collect_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", "targets:collect", 1, 1) ;
-        tilt_collect_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", "targets:stow", 1, 1) ;
+        tilt_stow_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", "targets:stow", 1, 1) ;
 
         double t = sub.getSettingsValue("actions:butch-start-collect:delay-time").getDouble() ;
         timer_ = new XeroTimer(sub.getRobot(), "collect-timer", t) ;
@@ -63,13 +64,15 @@ public class ButchStartCollectAction extends Action {
     public void run() throws Exception {
         super.run() ;
 
+        CollectState prev = state_ ;
+
         switch(state_) {
             case Idle:
                 break ;
 
             case TiltMoving:
                 if (sub_.getTilt().getPosition() > tilt_threshold_)  {
-                    sub_.getUpDown().setAction(intake_down_, true) ;
+                    sub_.getUpDown().setAction(intake_collect_, true) ;
                     state_ = CollectState.BothMoving ;
                 }
                 break ;
@@ -80,7 +83,7 @@ public class ButchStartCollectAction extends Action {
                     state_ = CollectState.WaitingForCollect ;
                     timer_.start() ;
                 }
-                else if (tilt_collect_.isDone() && intake_down_.isDone()) {
+                else if (tilt_collect_.isDone() && intake_collect_.isDone()) {
                     state_ = CollectState.WaitingForNote ;
                 }
                 break ;
@@ -96,14 +99,14 @@ public class ButchStartCollectAction extends Action {
             case WaitingForCollect:
                 if (timer_.isExpired()) {
                     sub_.getFeeder().setAction(spinner_feeder_off_, true) ;
-                    sub_.getUpDown().setAction(intake_up_, true) ;
+                    sub_.getUpDown().setAction(intake_stow_, true) ;
                     sub_.getTilt().setAction(tilt_stow_, true) ;
                     state_ = CollectState.Stowing;
                 }
                 break;
 
             case Stowing:
-                if (tilt_stow_.isDone() && intake_up_.isDone()) {
+                if (tilt_stow_.isDone() && intake_stow_.isDone()) {
                     setDone() ;
                     state_ = CollectState.Done ;
                 }
@@ -111,6 +114,15 @@ public class ButchStartCollectAction extends Action {
 
             case Done:
                 break ;
+        }
+
+        if (state_ != prev) {
+            sub_.getRobot().getMessageLogger().startMessage(MessageType.Debug, sub_.getLoggerID()) ;
+            sub_.getRobot().getMessageLogger().add("state changed: ");
+            sub_.getRobot().getMessageLogger().add(prev.toString()) ;
+            sub_.getRobot().getMessageLogger().add(" ->");            
+            sub_.getRobot().getMessageLogger().add(state_.toString()) ;            
+            sub_.getRobot().getMessageLogger().endMessage();
         }
     }
 
