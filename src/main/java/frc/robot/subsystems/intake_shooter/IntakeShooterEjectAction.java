@@ -8,6 +8,14 @@ import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 
+//
+// TODO: This will not work like this.  The issue is that we are assinging a new action to
+//       the intake shooter subsystem.  This will cancel this action so once you assign the
+//       stow action, this action will be cancelled and run() will never be called again.  We
+//       need to rework this so that the stow happens as part of this action, which by the way
+//       it already does given the starts for eject_updown and eject_tilt are all stow targets.
+//
+
 public class IntakeShooterEjectAction extends Action{
     
     private enum State {
@@ -15,7 +23,6 @@ public class IntakeShooterEjectAction extends Action{
         ReadyToEject,
         Eject,
         Stow
-
     }
 
     private IntakeShooterSubsystem sub_;
@@ -33,7 +40,6 @@ public class IntakeShooterEjectAction extends Action{
         super(sub.getRobot().getMessageLogger());
 
         state_ = State.Idle;
-
 
         sub_ = sub;
         eject_updown_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position" , "targets:stow" , 0.5 , 1);
@@ -71,9 +77,6 @@ public class IntakeShooterEjectAction extends Action{
                 stateStow();
                 break;
         }
-
-       
-
     }
 
     @Override
@@ -91,7 +94,7 @@ public class IntakeShooterEjectAction extends Action{
         }
     }
 
-    private void stateEject(){
+    private void stateEject() {
         if(timer_.isExpired()) {
             state_ = State.Stow;
             sub_.getFeeder().cancelAction();

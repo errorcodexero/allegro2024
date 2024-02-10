@@ -36,8 +36,6 @@ public class IntakeShooterStowAction  extends Action{
         sub_.getFeeder().setAction(stow_feeder_ , true);
         sub_.getShooter1().setAction(stow_shooter1_ , true);
         sub_.getShooter2().setAction(stow_shooter2_ , true);
-
-       
     }
 
     @Override
@@ -47,13 +45,10 @@ public class IntakeShooterStowAction  extends Action{
         if(stow_updown_.isDone() && stow_tilt_.isDone()) {
             setDone();
         }
-
     }
 
     @Override
     public String toString(int indent) {
         return spaces(indent) + "IntakeShooterStowAction";
     }
-
-
 }

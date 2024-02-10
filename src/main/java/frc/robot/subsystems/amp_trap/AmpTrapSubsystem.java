@@ -57,6 +57,4 @@ public class AmpTrapSubsystem extends Subsystem {
     public MotorEncoderSubsystem getClimber() {
         return climber_;
     }
-
-
 }
