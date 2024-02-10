@@ -1,0 +1,15 @@
+{
+    "_version": "1",
+    "drivetype": 1,
+    "efflength": 0.813,
+    "effwidth": 0.711,
+    "lengthunits": "m",
+    "maxacceleration": 4.3,
+    "maxvelocity": 4.3,
+    "name": "allegro",
+    "robotlength": 0.978,
+    "robotwidth": 0.876,
+    "timestep": 0.02,
+    "weight": 150,
+    "weightunits": "lbs"
+}

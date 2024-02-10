@@ -21,6 +21,10 @@ public class AllegroRobotAutoController extends AutoController {
         try {
             test_mode_ = new AllegroTestAutoMode(this);
 
+            addAutoMode(new Start1Shoot4AutoMode(this));
+            addAutoMode(new Start2Shoot3AutoMode(this));
+            addAutoMode(new Start3Shoot3AutoMode(this));
+
         } catch(Exception e) {
             MessageLogger logger = robot.getMessageLogger() ;
             logger.startMessage(MessageType.Error).add("Exception thrown creating automodes - ") ;
