@@ -86,6 +86,10 @@
                     "elevator" : 0.0,
                     "pivot" : 0.0
                 },
+                "trap-up" : {
+                    "elevator" : 0.0,
+                    "pivot" : 0.0
+                },
                 "amp" : {
                     "elevator" : 0.0,
                     "pivot" : 0.0

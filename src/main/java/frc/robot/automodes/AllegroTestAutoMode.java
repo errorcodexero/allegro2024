@@ -18,6 +18,7 @@ import frc.robot.subsystems.intake_shooter.IntakeShooterEjectAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.intake_shooter.ManualShootAction;
 import frc.robot.subsystems.intake_shooter.ShooterTuningAction;
+import frc.robot.subsystems.superstructure.SuperStructureSubsystem;
 import frc.robot.subsystems.superstructure.TransferIntakeToTrampAction;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
@@ -27,6 +28,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
         super(ctrl, "Allegro-Test-Mode");
 
         AllegroRobot2024 robot = (AllegroRobot2024) ctrl.getRobot().getRobotSubsystem();
+        SuperStructureSubsystem superstructure = robot.getSuperStructure();
         IntakeShooterSubsystem intakeshooter = robot.getIntakeShooter();
         MotorEncoderSubsystem tilt = intakeshooter.getTilt();
         MotorEncoderSubsystem updown = intakeshooter.getUpDown();
@@ -316,26 +318,26 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             ///////////////////////////////////////////////////////////////////////// '
             case 100:
-                if (amptrap != null && amptrap.getClimber() != null) {
-                    addSubActionPair(amptrap.getClimber(), new MotorEncoderPowerAction(amptrap.getClimber(),
+                if (superstructure.getClimber() != null) {
+                    addSubActionPair(superstructure.getClimber(), new MotorEncoderPowerAction(superstructure.getClimber(),
                             getDouble("power"), getDouble("duration")), true);
                 }
                 break;
 
             case 101:
-                if (amptrap != null && amptrap.getClimber() != null) {
+                if (superstructure.getClimber() != null) {
                     double duration = getDouble("duration");
                     double[] times = new double[] { duration, duration, duration, duration, duration };
                     double[] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9 };
-                    addSubActionPair(amptrap.getClimber(),
-                            new MotorPowerSequenceAction(amptrap.getClimber(), times, powers), true);
+                    addSubActionPair(superstructure.getClimber(),
+                            new MotorPowerSequenceAction(superstructure.getClimber(), times, powers), true);
                 }
                 break;
 
             case 102:
-                if (amptrap != null && amptrap.getClimber() != null) {
-                    addSubActionPair(amptrap.getClimber(),
-                            new MCMotionMagicAction(amptrap.getClimber(), "pids:position", 10, 0.5, 0.5), true);
+                if (superstructure.getClimber() != null) {
+                    addSubActionPair(superstructure.getClimber(),
+                            new MCMotionMagicAction(superstructure.getClimber(), "pids:position", 10, 0.5, 0.5), true);
                 }
                 break;
 

@@ -41,7 +41,10 @@ public class ButchOIPanel extends OIPanel {
         StowingAmpTrap,
         GoToClimbPosition,
         WaitForClimbButton,
-        Climbing
+        Climbing,
+        MovingTrapWhileUp,
+        ShootingTrap,
+        Climbed
     }
 
     //
@@ -51,10 +54,10 @@ public class ButchOIPanel extends OIPanel {
     private int target_toggle2_gadget_ ;                    // Speaker, Amp, or Trap     
     private int climb_up_prep_gadget_ ;                     // Prepare to climb up
     private int climb_up_exec_gadget_ ;                     // Perform the climb up
-    private int climb_down_gadget_ ;                        // Prepare to climb down
     private int shoot_gadget_ ;                             // Shoot the note
     private int abort_gadget_ ;                             // Abort mode
 
+    private int climb_down_gadget_ ;                        // Prepare to climb down
     private int eject_gadget_ ;                             // Eject the note
     private int turtle_gadget_ ;                            // Turtle mode
 
@@ -65,6 +68,7 @@ public class ButchOIPanel extends OIPanel {
     private OILed shooter_velocity_ready_led_ ;
     private OILed shooter_tilt_ready_led_ ;
     private OILed shooter_april_tag_led_ ;
+
     private OILed climb_up_prep_enabled_led_ ;
     private OILed climb_up_exec_enabled_led_ ;
     private OILed climb_down_exec_enabled_led_ ;
@@ -78,6 +82,7 @@ public class ButchOIPanel extends OIPanel {
     private IntakeGotoNamedPositionAction stow_intake_action_ ;
     private AmpTrapPositionAction goto_amp_action_ ;
     private AmpTrapPositionAction goto_trap_action_ ;
+    private AmpTrapPositionAction goto_trap_up_action_ ;
     private AmpTrapPositionAction stow_amp_trap_action_ ;
     private AmpTrapShootAction amp_trap_shoot_action_ ;
     private AmpTrapPositionAction goto_climb_pos_action_ ;
@@ -264,11 +269,39 @@ public class ButchOIPanel extends OIPanel {
     private void climbingState() {
         if (hooks_down_action_.isDone()) {
             climb_up_exec_enabled_led_.setState(State.OFF);
-            //
-            // TODO: what now?
-            //
-            state_ = OIState.Idle ;
+
+            AllegroRobot2024 robot = (AllegroRobot2024)getSubsystem().getRobot().getRobotSubsystem() ;  
+            robot.getAmpTrap().setAction(goto_trap_up_action_, true) ;
+
+            climb_down_exec_enabled_led_.setState(State.ON);
+            state_ = OIState.MovingTrapWhileUp ;
         }
+    }
+
+    private void movingTrapWhileUpState() {
+        if (goto_trap_up_action_.isDone()) {
+            climb_down_exec_enabled_led_.setState(State.OFF);
+            AllegroRobot2024 robot = (AllegroRobot2024)getSubsystem().getRobot().getRobotSubsystem() ;  
+            robot.getAmpTrap().setAction(amp_trap_shoot_action_, true) ;
+            state_ = OIState.ShootingTrap ;
+        }
+    }
+
+    private void shootingTrapState() {
+        if (amp_trap_shoot_action_.isDone()) {
+            state_ = OIState.Climbed ;
+            climb_down_exec_enabled_led_.setState(State.ON);
+        }
+    }
+
+    private void climbedState() {
+        if (getValue(climb_down_gadget_) == 1) {
+            climb_down_exec_enabled_led_.setState(State.BLINK_FAST);
+
+            //
+            // TODO: execute the climb down
+            //
+        }   
     }
 
     @Override
@@ -332,6 +365,17 @@ public class ButchOIPanel extends OIPanel {
             climbingState() ;
             break ;
 
+        case MovingTrapWhileUp:
+            movingTrapWhileUpState() ;
+            break ;
+
+        case ShootingTrap:
+            shootingTrapState() ;
+            break ;
+
+        case Climbed:
+            climbedState() ;
+            break ;
         }
     }
 
@@ -354,6 +398,7 @@ public class ButchOIPanel extends OIPanel {
         goto_amp_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:amp:pivot", "actions:amp:elevator") ;
         goto_trap_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:trap:pivot", "actions:trap:elevator") ;
         goto_climb_pos_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:climb:pivot", "actions:climb:elevator") ;
+        goto_trap_up_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:trap-up:pivot", "actions:trap-up:elevator") ;
 
         amp_trap_shoot_action_ = new AmpTrapShootAction(robot.getAmpTrap()) ;
 
