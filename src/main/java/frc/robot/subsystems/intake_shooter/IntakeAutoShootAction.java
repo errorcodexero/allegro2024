@@ -30,15 +30,16 @@ public class IntakeAutoShootAction extends Action {
     private MotorEncoderPowerAction feeder_on_ ;
 
     private boolean db_ready_ ;
-    private boolean target_tracker_ready_ ;
     private boolean drive_team_ready_ ;
+    private boolean initial_drive_team_ready_ ;
     private boolean shooting_ ;
 
-    public IntakeAutoShootAction(IntakeShooterSubsystem intake, TargetTrackerSubsystem tracker) throws Exception {
+    public IntakeAutoShootAction(IntakeShooterSubsystem intake, TargetTrackerSubsystem tracker, boolean initialDriveTeamReady) throws Exception {
         super(intake.getRobot().getMessageLogger());
 
         sub_ = intake ;
         tracker_ = tracker ;
+        initial_drive_team_ready_ = initialDriveTeamReady ;
 
         double velthresh = sub_.getSettingsValue("actions:auto-shoot:shooter-velocity-threshold").getDouble() ;
 
@@ -67,10 +68,6 @@ public class IntakeAutoShootAction extends Action {
         db_ready_ = ready ;
     }
 
-    public void setTargetTrackerReady(boolean ready) {
-        target_tracker_ready_ = ready ;
-    }
-
     public void setDriveTeamReady(boolean ready) {
         drive_team_ready_ = ready ;
     }
@@ -81,6 +78,7 @@ public class IntakeAutoShootAction extends Action {
 
         db_ready_ = false ;
         shooting_ = false ;
+        drive_team_ready_ = initial_drive_team_ready_ ;
 
         sub_.getUpDown().setAction(updown_, true);
         sub_.getTilt().setAction(tilt_, true);
@@ -112,7 +110,7 @@ public class IntakeAutoShootAction extends Action {
             shooter1_.setTarget(current_velocity_);
             shooter2_.setTarget(current_velocity_);
 
-            if (updown_.isAtTarget() && tilt_.isAtTarget() && shooter1_.isAtVelocity() && shooter2_.isAtVelocity() && db_ready_ && target_tracker_ready_ && drive_team_ready_) {
+            if (updown_.isAtTarget() && tilt_.isAtTarget() && shooter1_.isAtVelocity() && shooter2_.isAtVelocity() && db_ready_ && tracker_.seesTarget() && drive_team_ready_) {
                 shooting_ = true ;
                 sub_.getFeeder().setAction(feeder_on_, true);
             } 

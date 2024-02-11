@@ -410,7 +410,7 @@ public class ButchOIPanel extends OIPanel {
         IntakeShooterSubsystem intake = robot.getIntakeShooter() ;
         TargetTrackerSubsystem tracker = robot.getTargetTracker() ;
 
-        shoot_action_ = new IntakeAutoShootAction(intake, tracker) ;
+        shoot_action_ = new IntakeAutoShootAction(intake, tracker, false) ;
         rotate_action_ = new SwerveRotateToAngle(robot.getSwerve(), 0.0, 5.0, 1.0) ;
         fwd_transfer_action_ = new TransferIntakeToTrampAction(robot.getSuperStructure()) ;
 

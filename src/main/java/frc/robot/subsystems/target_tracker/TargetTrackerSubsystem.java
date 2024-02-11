@@ -2,6 +2,8 @@ package frc.robot.subsystems.target_tracker;
 
 import org.xero1425.base.LoopType;
 import org.xero1425.base.subsystems.Subsystem;
+import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
+
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -16,9 +18,13 @@ public class TargetTrackerSubsystem extends Subsystem {
     private double distance_between_robot_and_target_;
     private double angle_to_target_;
     private boolean send_target_info_to_db_ ;
+    private boolean sees_target_ ;
+    private int target_number_ ;
 
     public TargetTrackerSubsystem(Subsystem parent) {
         super(parent, "targettracker");
+
+        sees_target_ = false ;
     }
 
     @Override
@@ -30,8 +36,10 @@ public class TargetTrackerSubsystem extends Subsystem {
 
         Pose3d target_pos_3d = null;
         if (DriverStation.getAlliance().get() == Alliance.Red) {
+            target_number_ = 4 ;
             target_pos_3d = field_layout.getTagPose(4).orElse(null);
         } else if (DriverStation.getAlliance().get() == Alliance.Blue) {
+            target_number_ = 7 ;
             target_pos_3d = field_layout.getTagPose(7).orElse(null);
         }
         if (target_pos_3d != null) {
@@ -62,7 +70,16 @@ public class TargetTrackerSubsystem extends Subsystem {
                 //
                 robotSubsystem.getSwerve().setSWRotationAngle(angle_to_target_ + robot_pos_.getRotation().getDegrees());
             }
+
+            LimeLightSubsystem ll = robotSubsystem.getLimelight() ;
+            if (ll.hasAprilTag(target_number_)) {
+                sees_target_ = true ;
+            }
         }
+    }
+
+    public boolean seesTarget() {
+        return sees_target_ ;
     }
 
     private double calculateDistanceBetweenPoses(Pose2d robot, Pose2d target) {        
@@ -88,5 +105,4 @@ public class TargetTrackerSubsystem extends Subsystem {
     public double getRotation() {
         return angle_to_target_;
     }
-
 }
