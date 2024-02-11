@@ -120,13 +120,13 @@ public class OIPanel extends OIDevice
         return items_.get(handle).getValue() ;
     }
 
-    public OILed createLED(int io) {
+    public OILed createLED(int io, boolean inverted) {
         for(OILed led: leds_) {
             if (led.getIndex() == io)
                 return led ;
         }
 
-        OILed led = new OILed(this, io) ;
+        OILed led = new OILed(this, io, inverted) ;
         leds_.add(led) ;
         return led ;
     }

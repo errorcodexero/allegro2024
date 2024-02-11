@@ -1,14 +1,19 @@
 package frc.robot.subsystems.oi;
 
+import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.oi.OILed;
 import org.xero1425.base.subsystems.oi.OIPanel;
 import org.xero1425.base.subsystems.oi.OISubsystem;
+import org.xero1425.base.subsystems.oi.OILed.State;
 import org.xero1425.base.subsystems.oi.OIPanelButton.ButtonType;
 import org.xero1425.base.subsystems.swerve.SwerveRotateToAngle;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MissingParameterException;
 
+import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
+import frc.robot.subsystems.amp_trap.AmpTrapShootAction;
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
+import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.superstructure.TransferIntakeToTrampAction;
 import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
@@ -27,23 +32,31 @@ public class ButchOIPanel extends OIPanel {
         NoteInIntake,
         WaitingToShoot,
         Shooting,
-        TransferToAmpTrap
+        TransferToAmpTrap,
+        NoteInAmpPositon,
+        NoteInTrapPosition,
+        NoteGoingToAmpPositon,
+        NoteGoingToTrapPosition,
+        ShootingAmp,
+        StowingAmpTrap,
+        GoToClimbPosition,
+        WaitForClimbButton,
+        Climbing
     }
 
     //
     // Panel gadgets
     //
     private int target_toggle1_gadget_ ;                    // Speaker, Amp, or Trap
-    private int target_toggle2_gadget_ ;                    // Speaker, Amp, or Trap    
-    private int amp_purpose_target1_gadget_ ;               // Amplification, Cooperition, None
-    private int amp_purpose_target2_gadget_ ;               // Amplification, Cooperition, None    
+    private int target_toggle2_gadget_ ;                    // Speaker, Amp, or Trap     
     private int climb_up_prep_gadget_ ;                     // Prepare to climb up
     private int climb_up_exec_gadget_ ;                     // Perform the climb up
     private int climb_down_gadget_ ;                        // Prepare to climb down
     private int shoot_gadget_ ;                             // Shoot the note
-    private int turtle_gadget_ ;                            // Turtle mode
     private int abort_gadget_ ;                             // Abort mode
+
     private int eject_gadget_ ;                             // Eject the note
+    private int turtle_gadget_ ;                            // Turtle mode
 
     //
     // LEDs
@@ -52,10 +65,8 @@ public class ButchOIPanel extends OIPanel {
     private OILed shooter_velocity_ready_led_ ;
     private OILed shooter_tilt_ready_led_ ;
     private OILed shooter_april_tag_led_ ;
-    private OILed note_in_manipulator_led_ ;
     private OILed climb_up_prep_enabled_led_ ;
     private OILed climb_up_exec_enabled_led_ ;
-    private OILed climb_down_prep_enabled_led_ ;
     private OILed climb_down_exec_enabled_led_ ;
 
     //
@@ -64,6 +75,14 @@ public class ButchOIPanel extends OIPanel {
     private IntakeAutoShootAction shoot_action_ ;
     private SwerveRotateToAngle rotate_action_ ;
     private TransferIntakeToTrampAction fwd_transfer_action_ ;
+    private IntakeGotoNamedPositionAction stow_intake_action_ ;
+    private AmpTrapPositionAction goto_amp_action_ ;
+    private AmpTrapPositionAction goto_trap_action_ ;
+    private AmpTrapPositionAction stow_amp_trap_action_ ;
+    private AmpTrapShootAction amp_trap_shoot_action_ ;
+    private AmpTrapPositionAction goto_climb_pos_action_ ;
+    private MCMotionMagicAction hooks_up_action_ ;
+    private MCMotionMagicAction hooks_down_action_ ;    
 
     //
     // Misc
@@ -83,7 +102,7 @@ public class ButchOIPanel extends OIPanel {
 
     private void idleState() {
         AllegroRobot2024 robot = (AllegroRobot2024)getSubsystem().getRobot().getRobotSubsystem() ;
-        if (robot.getIntakeShooter().isNoteInIntake()) {
+        if (robot.getIntakeShooter().isHoldingNote()) {
             state_ = OIState.NoteInIntake ;
         }
     }
@@ -104,7 +123,6 @@ public class ButchOIPanel extends OIPanel {
 
     private void waitingToShootState() {
         AllegroRobot2024 robot = (AllegroRobot2024)getSubsystem().getRobot().getRobotSubsystem() ;
-
         NoteTarget target = getNoteTarget() ;
         if (target != NoteTarget.Speaker) {
             //
@@ -157,9 +175,99 @@ public class ButchOIPanel extends OIPanel {
 
     private void transferToAmpTrapState() {
         if (fwd_transfer_action_.isDone()) {
+            AllegroRobot2024 robot = (AllegroRobot2024)getSubsystem().getRobot().getRobotSubsystem() ;
+            NoteTarget target = getNoteTarget() ;
+
             //
-            // TODO: after we see the actual hardware
+            // We have transferred the note to the manipulator on the elevator/arm.
+            // Now, decide how to position the elevator/arm based on the target feature
+            // (amp or trap).
             //
+            if (target == NoteTarget.Amp) {
+                state_ = OIState.NoteGoingToAmpPositon ;
+                robot.getAmpTrap().setAction(goto_amp_action_, true) ;
+            }
+            else {
+                state_ = OIState.NoteGoingToTrapPosition ;
+                robot.getAmpTrap().setAction(goto_trap_action_, true) ;
+                robot.getSuperStructure().getClimber().setAction(hooks_up_action_, true) ;
+            }
+
+            //
+            // While we are doing this, also stow the intake shooter
+            //
+            robot.getIntakeShooter().setAction(stow_intake_action_, true) ;
+        }
+    }
+
+    private void noteGoingToAmpPositonState() {
+        if (goto_amp_action_.isDone()) {
+            state_ = OIState.NoteInAmpPositon ;
+        }
+    }
+
+    private void noteGoingToTrapPositionState() {
+        if (goto_trap_action_.isDone()) {
+            state_ = OIState.NoteInTrapPosition ;
+        }
+    }   
+
+    private void noteInAmpPositonState() {
+        if (getValue(shoot_gadget_) == 1) {
+            AllegroRobot2024 robot = (AllegroRobot2024)getSubsystem().getRobot().getRobotSubsystem() ;
+            robot.getAmpTrap().setAction(amp_trap_shoot_action_, true) ;
+            state_ = OIState.ShootingAmp ;
+        }
+    }
+
+    private void shootingAmpState() {
+        if (amp_trap_shoot_action_.isDone()) {
+            AllegroRobot2024 robot = (AllegroRobot2024)getSubsystem().getRobot().getRobotSubsystem() ;
+            robot.getAmpTrap().setAction(stow_amp_trap_action_, true) ;            
+            state_ = OIState.StowingAmpTrap ;
+        }
+    }
+
+    private void stowingAmpTrapState() {
+        if (stow_amp_trap_action_.isDone()) {
+            state_ = OIState.Idle ;
+        }
+    }
+
+    private void noteInTrapPositionState() {
+        climb_up_prep_enabled_led_.setState(State.ON);
+        if (getValue(climb_up_prep_gadget_) == 1) {
+            AllegroRobot2024 robot = (AllegroRobot2024)getSubsystem().getRobot().getRobotSubsystem() ;            
+            climb_up_prep_enabled_led_.setState(State.BLINK_FAST);
+            robot.getAmpTrap().setAction(goto_climb_pos_action_, true) ;
+            state_ = OIState.GoToClimbPosition ;
+        }
+    }
+
+    private void gotoClimbPositionState() {
+        if (goto_climb_pos_action_.isDone() && hooks_up_action_.isDone()) {
+            climb_up_prep_enabled_led_.setState(State.OFF);
+            climb_up_exec_enabled_led_.setState(State.ON);
+            state_ = OIState.WaitForClimbButton ;
+        }
+    }
+
+    private void waitForClimbButtonState() {
+        if (hooks_up_action_.isDone() && getValue(climb_up_exec_gadget_) == 1) {
+            climb_up_exec_enabled_led_.setState(State.BLINK_FAST);
+            AllegroRobot2024 robot = (AllegroRobot2024)getSubsystem().getRobot().getRobotSubsystem() ;  
+            robot.getSuperStructure().getClimber().setAction(hooks_down_action_, true) ;
+            state_ = OIState.Climbing ;
+        }
+    }
+
+    private void climbingState() {
+        if (hooks_down_action_.isDone()) {
+            climb_up_exec_enabled_led_.setState(State.OFF);
+            //
+            // TODO: what now?
+            //
+            state_ = OIState.Idle ;
         }
     }
 
@@ -187,6 +295,43 @@ public class ButchOIPanel extends OIPanel {
         case TransferToAmpTrap:
             transferToAmpTrapState() ;
             break ;
+
+        case NoteGoingToAmpPositon:
+            noteGoingToAmpPositonState() ;
+            break ;
+
+        case NoteGoingToTrapPosition:
+            noteGoingToTrapPositionState() ;
+            break ;
+
+        case NoteInAmpPositon:
+            noteInAmpPositonState();
+            break ;
+
+        case NoteInTrapPosition:
+            noteInTrapPositionState();
+            break ;
+
+        case ShootingAmp:
+            shootingAmpState() ;
+            break ;
+
+        case StowingAmpTrap:
+            stowingAmpTrapState() ;
+            break ;
+
+        case GoToClimbPosition:
+            gotoClimbPositionState() ;
+            break ;
+
+        case WaitForClimbButton:
+            waitForClimbButtonState() ;
+            break ;
+
+        case Climbing:
+            climbingState() ;
+            break ;
+
         }
     }
 
@@ -199,7 +344,24 @@ public class ButchOIPanel extends OIPanel {
         shoot_action_ = new IntakeAutoShootAction(intake, tracker) ;
         rotate_action_ = new SwerveRotateToAngle(robot.getSwerve(), 0.0, 5.0, 1.0) ;
         fwd_transfer_action_ = new TransferIntakeToTrampAction(robot.getSuperStructure()) ;
-    }    
+
+        double v1, v2 ;
+
+        v1 = intake.getUpDown().getSettingsValue("target:stow").getDouble() ;
+        v2 = intake.getTilt().getSettingsValue("target:stow").getDouble() ; 
+        stow_intake_action_ = new IntakeGotoNamedPositionAction(intake, v1, v2) ;
+        
+        goto_amp_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:amp:pivot", "actions:amp:elevator") ;
+        goto_trap_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:trap:pivot", "actions:trap:elevator") ;
+        goto_climb_pos_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:climb:pivot", "actions:climb:elevator") ;
+
+        amp_trap_shoot_action_ = new AmpTrapShootAction(robot.getAmpTrap()) ;
+
+        stow_amp_trap_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:stow:pivot", "actions:stow:elevator") ;
+
+        hooks_up_action_ = new MCMotionMagicAction(robot.getSuperStructure().getClimber(), "pids:position", "targets:climb:up", 0.05, 0.05) ;
+        hooks_down_action_ = new MCMotionMagicAction(robot.getSuperStructure().getClimber(), "pids:position", "targets:climb:down", 0.05, 0.05) ;
+    }
 
     @Override
     protected void initializeLEDs() throws BadParameterTypeException, MissingParameterException {
@@ -207,31 +369,25 @@ public class ButchOIPanel extends OIPanel {
         int num ;
 
         num = getSubsystem().getSettingsValue("panel:leds:db-ready").getInteger() ;
-        db_ready_led_ = createLED(num) ;
+        db_ready_led_ = createLED(num, false) ;
         
         num = getSubsystem().getSettingsValue("panel:leds:shooter-velocity-ready").getInteger() ;
-        shooter_velocity_ready_led_ = createLED(num) ;
+        shooter_velocity_ready_led_ = createLED(num, false) ;
 
         num = getSubsystem().getSettingsValue("panel:leds:shooter-tilt-ready").getInteger() ;
-        shooter_tilt_ready_led_ = createLED(num) ;
+        shooter_tilt_ready_led_ = createLED(num, false) ;
 
         num = getSubsystem().getSettingsValue("panel:leds:shooter-april-tag").getInteger() ;
-        shooter_april_tag_led_ = createLED(num) ;
-
-        num = getSubsystem().getSettingsValue("panel:leds:note-in-manipulator").getInteger() ;
-        note_in_manipulator_led_ = createLED(num) ;
+        shooter_april_tag_led_ = createLED(num, false) ;
 
         num = getSubsystem().getSettingsValue("panel:leds:climb-up-prep-enabled").getInteger() ;
-        climb_up_prep_enabled_led_ = createLED(num) ;
+        climb_up_prep_enabled_led_ = createLED(num, false) ;
 
         num = getSubsystem().getSettingsValue("panel:leds:climb-up-exec-enabled").getInteger() ;
-        climb_up_exec_enabled_led_ = createLED(num) ;
-
-        num = getSubsystem().getSettingsValue("panel:leds:climb-down-prep-enabled").getInteger() ;
-        climb_down_prep_enabled_led_ = createLED(num) ;
+        climb_up_exec_enabled_led_ = createLED(num, false) ;
 
         num = getSubsystem().getSettingsValue("panel:leds:climb-down-exec-enabled").getInteger() ;
-        climb_down_exec_enabled_led_ = createLED(num) ;
+        climb_down_exec_enabled_led_ = createLED(num, false) ;
     }
 
     @Override

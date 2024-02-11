@@ -94,7 +94,7 @@ public class IntakeAutoShootAction extends Action {
 
         if (shooting_) {
             if (feeder_on_.isDone()) {
-                sub_.setNoteInIntake(false);
+                sub_.setHoldingNote(false);
                 sub_.getFeeder().setPower(0.0);
                 sub_.getShooter1().setPower(0.0);
                 sub_.getShooter2().setPower(0.0);

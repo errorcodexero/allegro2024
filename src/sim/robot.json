@@ -90,13 +90,6 @@
                 "arm:count" : 1,
                 "arm:gearing" : 1.0,
                 "arm:moment" :  0.001349695365, 
-
-                "wrist:type" : "talon-fx",
-                "wrist:bus" : "",
-                "wrist:canid" : 8,
-                "wrist:count" : 1,
-                "wrist:gearing" : 1.0,
-                "wrist:moment" : 0.000183064,
                 
                 "manipulator:type" : "talon-fx",
                 "manipulator:bus" : "",

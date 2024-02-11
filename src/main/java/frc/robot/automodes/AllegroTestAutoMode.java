@@ -9,24 +9,16 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
 
-import frc.robot.subsystems.amp_trap.AmpTrapStowAction;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
-import frc.robot.subsystems.amp_trap.ClimbAction;
-import frc.robot.subsystems.amp_trap.PlaceAction;
-import frc.robot.subsystems.amp_trap.PrepAmpAction;
-import frc.robot.subsystems.amp_trap.ClimbDownAction;
-import frc.robot.subsystems.amp_trap.PrepClimbAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
-import frc.robot.subsystems.amp_trap.AmpTrapEjectAction;
 import frc.robot.subsystems.intake_shooter.ButchStartCollectAction;
 import frc.robot.subsystems.intake_shooter.ButchStopCollectionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterEjectAction;
 
-
-import frc.robot.subsystems.amp_trap.PrepTrapAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.intake_shooter.ManualShootAction;
 import frc.robot.subsystems.intake_shooter.ShooterTuningAction;
+import frc.robot.subsystems.superstructure.TransferIntakeToTrampAction;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class AllegroTestAutoMode extends SwerveTestAutoMode {
@@ -290,36 +282,6 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             /////////////////////////////////////////////////////////////////////////
             //
-            // Wrists motor tests
-            //
-            /////////////////////////////////////////////////////////////////////////
-            case 80:
-                if (amptrap != null && amptrap.getWrist() != null) {
-                    addSubActionPair(amptrap.getWrist(),
-                            new MotorEncoderPowerAction(amptrap.getWrist(), getDouble("power"), getDouble("duration")),
-                            true);
-                }
-                break;
-
-            case 81:
-                if (amptrap != null && amptrap.getWrist() != null) {
-                    double duration = getDouble("duration");
-                    double[] times = new double[] { duration, duration, duration, duration, duration };
-                    double[] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9 };
-                    addSubActionPair(amptrap.getWrist(),
-                            new MotorPowerSequenceAction(amptrap.getWrist(), times, powers), true);
-                }
-                break;
-
-            case 82:
-                if (amptrap != null && amptrap.getWrist() != null) {
-                    addSubActionPair(amptrap.getWrist(),
-                            new MCVelocityAction(amptrap.getWrist(), "pids:velocity", getDouble("velocity"), 1.0, true), true);
-                }
-                break;
-
-            /////////////////////////////////////////////////////////////////////////
-            //
             // Manipulator motor tests
             //
             /////////////////////////////////////////////////////////////////////////
@@ -444,53 +406,41 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 120:
-                if (amptrap != null) {
-                    addSubActionPair(amptrap, new ClimbAction(amptrap), true);
-                }
                 break;
 
             case 121:
-                if (amptrap != null) {
-                    addSubActionPair(amptrap, new AmpTrapStowAction(amptrap), true);
-                }
                 break;
 
             case 122:
-                if (amptrap != null) {
-                    addSubActionPair(amptrap, new PrepTrapAction(amptrap), true);
-                }
                 break;
 
             case 123:
-                if (amptrap != null) {
-                    addSubActionPair(amptrap, new PrepClimbAction(amptrap), true);
-                }
                 break;
 
             case 124: 
-                if (amptrap != null) {
-                    addSubActionPair(amptrap, new ClimbDownAction(amptrap), true);
-                }
                 break;
             
             case 125:
-                if (amptrap != null) {
-                    addSubActionPair(amptrap, new PrepAmpAction(amptrap), true);
-                }
                 break;
             
             case 126:
-                if (amptrap != null) {
-                    addSubActionPair(amptrap, new PlaceAction(amptrap), true);
-                }
                 break;
 
             case 127:
-                 if (amptrap != null) {
-                    addSubActionPair(amptrap, new AmpTrapEjectAction(amptrap), true);
-                }
                 break;
 
+            /////////////////////////////////////////////////////////////////////////
+            //
+            // Superstructure tests
+            //
+            // This is for testing the amp-trap as a whole instead of its various parts
+            //
+            /////////////////////////////////////////////////////////////////////////            
+            case 140:
+                if (intakeshooter != null && amptrap != null) {
+                    addSubActionPair(robot.getSuperStructure(), new TransferIntakeToTrampAction(robot.getSuperStructure()), true) ;
+                }
+                break ;
         }
     }
 }

@@ -55,7 +55,7 @@ public class ManualShootAction extends Action {
     public void start() throws Exception {
         super.start();
 
-        if (!intake_.isNoteInIntake()) {
+        if (!intake_.isHoldingNote()) {
             MessageLogger logger = intake_.getRobot().getMessageLogger() ;
             logger.startMessage(MessageType.Error).add("ManualShootAction started with no note in intake").endMessage();
             setDone() ;
@@ -92,7 +92,7 @@ public class ManualShootAction extends Action {
         }
         else {
             if (feeder_action_.isDone()) {
-                intake_.setNoteInIntake(false) ;
+                intake_.setHoldingNote(false) ;
                 intake_.getShooter1().setPower(0.0) ;
                 intake_.getShooter2().setPower(0.0) ;
                 setDone() ;

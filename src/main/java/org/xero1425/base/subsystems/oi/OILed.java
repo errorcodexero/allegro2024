@@ -14,13 +14,15 @@ public class OILed {
     private double next_blink_ ;
     private boolean current_state_ ;
     private double blink_time_ ;
+    private boolean inverted_ ;
 
     private final double FastBlinkTime = 0.25 ;
     private final double SlowBlinkTime = 1.0 ;
 
-    public OILed(OIPanel panel, int index) {
+    public OILed(OIPanel panel, int index, boolean inverted) {
         panel_ = panel ;
         index_ = index ;
+        inverted_ = inverted ;
         state_ = State.OFF ;
     }
 
@@ -53,10 +55,10 @@ public class OILed {
 
     protected void run() {
         if (state_ == State.OFF) {
-            panel_.setOutput(index_, true) ;
+            panel_.setOutput(index_, inverted_) ;
         }
         else if (state_ == State.ON) {
-            panel_.setOutput(index_, false) ;
+            panel_.setOutput(index_, !inverted_) ;
         }
         else {
             double time = panel_.getSubsystem().getRobot().getTime() ;

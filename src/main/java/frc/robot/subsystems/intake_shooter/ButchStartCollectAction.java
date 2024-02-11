@@ -79,7 +79,7 @@ public class ButchStartCollectAction extends Action {
 
             case BothMoving:
                 if (sub_.isNoteCurrentlyDetected()) {
-                    sub_.setNoteInIntake(true) ;
+                    sub_.setHoldingNote(true) ;
                     state_ = CollectState.WaitingForCollect ;
                     timer_.start() ;
                 }
@@ -90,7 +90,7 @@ public class ButchStartCollectAction extends Action {
 
             case WaitingForNote:
                 if (sub_.isNoteCurrentlyDetected()) {
-                    sub_.setNoteInIntake(true) ;
+                    sub_.setHoldingNote(true) ;
                     state_ = CollectState.WaitingForCollect ;
                     timer_.start() ;
                 }

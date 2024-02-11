@@ -10,14 +10,11 @@ public class AmpTrapSubsystem extends Subsystem {
     // The arm is attached to the top of the elevator, and moves the manipulator and wrist. 0 is fully pointed down, and it is calculated in degrees.  
     private MotorEncoderSubsystem arm_;
 
-    // The wrist is attached to the end of the arm. It has the manipulator attached to it. 0 is fully pointed down (the manipulator wheels are paralel with the elevator), and it is calculated in degrees.  
-    private MotorEncoderSubsystem wrist_;
-
     // The manipulator is the two rolling wheels attached to the wrist. They are used for holding and placing the note. They should use a power action, and it is calculated in revolutions. 
     private MotorEncoderSubsystem manipulator_;
 
-    // The climber is an elevator (I think) with hooks attached to it to climb. 0 is fully down and it is calculated in revolutions.
-    private MotorEncoderSubsystem climber_;
+    // If true, the subsystem is holding a note
+    private boolean holding_note_ ;
 
     public AmpTrapSubsystem(Subsystem parent) throws Exception {
         super(parent, "amp-trap");
@@ -28,14 +25,18 @@ public class AmpTrapSubsystem extends Subsystem {
         arm_ = new MotorEncoderSubsystem(this, "arm", true);
         addChild(arm_);
 
-        wrist_ = new MotorEncoderSubsystem(this, "wrist", true);
-        addChild(wrist_);
-
         manipulator_ = new MotorEncoderSubsystem(this, "manipulator", false);
         addChild(manipulator_);
 
-        climber_ = new MotorEncoderSubsystem(this, "climber", false);
-        addChild(climber_);
+        holding_note_ = false ;
+    }
+
+    public boolean isHoldingNote() {
+        return holding_note_ ;
+    }
+
+    public void setHoldingNote(boolean value) {
+        holding_note_ = value ;
     }
 
     public MotorEncoderSubsystem getElevator() {
@@ -46,15 +47,7 @@ public class AmpTrapSubsystem extends Subsystem {
         return arm_;
     }
 
-    public MotorEncoderSubsystem getWrist() {
-        return wrist_;
-    }
-
     public MotorEncoderSubsystem getManipulator() {
         return manipulator_;
-    }
-
-    public MotorEncoderSubsystem getClimber() {
-        return climber_;
     }
 }

@@ -119,11 +119,11 @@ public class IntakeShooterSubsystem extends Subsystem{
         return is_note_present_;
     }
 
-    public boolean isNoteInIntake() {
+    public boolean isHoldingNote() {
         return note_present_ ;
     }
 
-    public void setNoteInIntake(boolean b) {
+    public void setHoldingNote(boolean b) {
         note_present_ = b ;
     }
 

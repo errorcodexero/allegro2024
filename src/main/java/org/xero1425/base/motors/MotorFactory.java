@@ -330,7 +330,10 @@ public class MotorFactory {
         double limit = getCurrentLimit(id);
         if (!Double.isInfinite(limit) && !Double.isNaN(limit)) {
             ctrl.setCurrentLimit(limit);
-        }      
+        }
+
+        ctrl.setPositionImportant(getImportant(id, "position"));
+        ctrl.setPositionImportant(getImportant(id, "velocity"));        
 
         int channel = getPDPChannel(id) ;
         if (channel != Integer.MAX_VALUE)
@@ -428,6 +431,36 @@ public class MotorFactory {
         }
 
         return mode ;
+    }
+
+    private IMotorController.ImportantType getImportant(String id, String type) throws BadParameterTypeException {
+        IMotorController.ImportantType ret = IMotorController.ImportantType.Low ;
+
+        SettingsValue v ;
+        String pname = id + ":" + type + "-important" ;
+
+        v = settings_.getOrNull(pname) ;
+        if (v != null) {
+            if (!v.isString()) {
+                logger_.startMessage(MessageType.Error).add("parameter '").add(pname).add("'") ;
+                logger_.add(" - does not have string type") ;
+                throw new BadParameterTypeException(SettingsType.String, v.getType());
+            }
+
+            if (v.getString().toLowerCase().equals("low"))
+                ret = IMotorController.ImportantType.Low ;
+            else if (v.getString().toLowerCase().equals("off"))
+                ret = IMotorController.ImportantType.Off ;
+            else if (v.getString().toLowerCase().equals("high"))
+                ret = IMotorController.ImportantType.High ;
+            else {
+                logger_.startMessage(MessageType.Error).add("parameter '").add(pname).add("'") ;
+                logger_.add(" - does not have a valid value") ;
+                throw new BadParameterTypeException(SettingsType.String, v.getType());
+            }
+        }
+
+        return ret;
     }
 
     //
