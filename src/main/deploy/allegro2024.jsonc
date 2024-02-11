@@ -97,6 +97,10 @@
                 "climb" : {
                     "elevator" : 0.0,
                     "pivot" : 0.0
+                },
+                "climb-down" : {
+                    "elevator" : 0.0,
+                    "pivot" : 0.0
                 }
             },
         },
