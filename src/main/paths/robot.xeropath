@@ -1,0 +1,171 @@
+{
+    "_version": "3",
+    "generator": "errorcodexeroswerve",
+    "groups": [
+        {
+            "name": "S1S4",
+            "paths": [
+                {
+                    "constraints": [
+                    ],
+                    "endvelocity": 0,
+                    "maxacceleration": 3,
+                    "maxvelocity": 4,
+                    "name": "P1",
+                    "points": [
+                        {
+                            "heading": 0,
+                            "swrot": 30,
+                            "swrotvel": 0,
+                            "x": 1.1352660484632922,
+                            "y": 6.4719757621137575
+                        },
+                        {
+                            "heading": 0,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 2.8100531087926286,
+                            "y": 7.668351550507924
+                        },
+                        {
+                            "heading": 0,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 7.670918516756325,
+                            "y": 7.423424223750063
+                        }
+                    ],
+                    "startvelocity": 0
+                },
+                {
+                    "constraints": [
+                    ],
+                    "endvelocity": 0,
+                    "maxacceleration": 3,
+                    "maxvelocity": 4,
+                    "name": "P2",
+                    "points": [
+                        {
+                            "heading": 180,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 7.67092,
+                            "y": 7.42342
+                        },
+                        {
+                            "heading": -151.6992442339942,
+                            "swrot": 25,
+                            "swrotvel": 0,
+                            "x": 4.072370869775449,
+                            "y": 6.735743652468377
+                        }
+                    ],
+                    "startvelocity": 0
+                },
+                {
+                    "constraints": [
+                    ],
+                    "endvelocity": 0,
+                    "maxacceleration": 3,
+                    "maxvelocity": 4,
+                    "name": "P3",
+                    "points": [
+                        {
+                            "heading": 28.300999999999988,
+                            "swrot": 25,
+                            "swrotvel": 0,
+                            "x": 4.07237,
+                            "y": 6.73574
+                        },
+                        {
+                            "heading": -31.534791905188264,
+                            "swrot": -30,
+                            "swrotvel": 0,
+                            "x": 7.623817107764429,
+                            "y": 6.085744208380208
+                        }
+                    ],
+                    "startvelocity": 0
+                },
+                {
+                    "constraints": [
+                    ],
+                    "endvelocity": 0,
+                    "maxacceleration": 3,
+                    "maxvelocity": 4,
+                    "name": "P4",
+                    "points": [
+                        {
+                            "heading": 148.4652,
+                            "swrot": -30,
+                            "swrotvel": 0,
+                            "x": 7.62382,
+                            "y": 6.08574
+                        },
+                        {
+                            "heading": -176.26894766371245,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 4.618747214081447,
+                            "y": 7.706032677701441
+                        },
+                        {
+                            "heading": 180,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 3.0832412809456273,
+                            "y": 7.687192114104683
+                        },
+                        {
+                            "heading": -151.69899999999998,
+                            "swrot": 25,
+                            "swrotvel": 0,
+                            "x": 1.5759961932049458,
+                            "y": 6.688642243476481
+                        }
+                    ],
+                    "startvelocity": 0
+                },
+                {
+                    "constraints": [
+                    ],
+                    "endvelocity": 0,
+                    "maxacceleration": 3,
+                    "maxvelocity": 4,
+                    "name": "P5",
+                    "points": [
+                        {
+                            "heading": 28.300999999999988,
+                            "swrot": 25,
+                            "swrotvel": 0,
+                            "x": 1.576,
+                            "y": 6.68864
+                        },
+                        {
+                            "heading": 14.150499999999994,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 2.4144012732606996,
+                            "y": 7.027772388218134
+                        },
+                        {
+                            "heading": 0,
+                            "swrot": 30,
+                            "swrotvel": 0,
+                            "x": 3.0267195901553516,
+                            "y": 7.046612951814893
+                        }
+                    ],
+                    "startvelocity": 0
+                }
+            ]
+        },
+        {
+            "name": "S2S3",
+            "paths": [
+            ]
+        }
+    ],
+    "outdir": "C:/cygwin64/home/butch/robottools/robots/1425/2024/allegro2024/src/main/deploy/paths",
+    "units": "m"
+}

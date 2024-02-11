@@ -9,6 +9,7 @@ import org.xero1425.base.controllers.AutoController;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MissingParameterException;
 import org.xero1425.misc.SimArgs;
+import org.xero1425.misc.XeroPathType;
 import org.xero1425.simulator.engine.ModelFactory;
 import org.xero1425.simulator.engine.SimulationEngine;
 
@@ -66,5 +67,10 @@ public class Allegro2024 extends XeroRobot {
     }
 
     return ctrl;
+  }
+
+  @Override
+  protected XeroPathType getPathType() {
+    return XeroPathType.SwerveHolonomic ;
   }
 }

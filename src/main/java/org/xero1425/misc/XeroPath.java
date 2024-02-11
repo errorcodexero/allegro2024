@@ -103,4 +103,20 @@ public class XeroPath
 
         return true ;
     }
+
+    public void mirrorY(double dim) {
+        assert(data_.size() == 1) ;
+
+        ArrayList<XeroPathSegment> segs = data_.get(0) ;
+        ArrayList<XeroPathSegment> newsegs = new ArrayList<>() ;
+
+        for(int i = 0 ; i < segs.size() ; i++)
+        {
+            XeroPathSegment seg = segs.get(i) ;
+            XeroPathSegment newseg = new XeroPathSegment(seg.getTime(), seg.getX(), dim - seg.getY(), seg.getPosition(), seg.getVelocity(), seg.getAccel(), seg.getJerk(), -seg.getHeading(), seg.getCurvature(), -seg.getRotation()) ;
+            newsegs.add(newseg) ;
+        }
+
+        data_.set(0, newsegs) ;
+    }
 }
