@@ -534,6 +534,10 @@ public class SparkMaxMotorController extends MotorController
     public double getAcceleration() throws BadMotorRequestException, MotorRequestFailedException {
         throw new BadMotorRequestException(this, "the SparkMaxMotorController does not support acceleration") ; 
     }
+    
+    public boolean hasAcceleration() throws BadMotorRequestException, MotorRequestFailedException {
+        return false ;
+    }
 
     /// \brief Reset the encoder values to zero    
     public void resetEncoder() throws BadMotorRequestException, MotorRequestFailedException {

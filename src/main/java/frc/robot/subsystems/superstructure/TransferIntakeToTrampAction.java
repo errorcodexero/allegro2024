@@ -40,13 +40,14 @@ public class TransferIntakeToTrampAction extends Action {
         v2 = sub.getSettingsValue("actions:xfer:shooter-velocity").getDouble() ;
         intake_shooter_xfer_action_ = new IntakeShooterXferAction(sub_.getIntakeShooter(), v1, v2) ;
 
-        xfer_length_ = sub_.getSettingsValue("actions:xfer:feeder-length").getDouble() ;
+        xfer_length_ = sub_.getSettingsValue("actions:xfer:shooter-length").getDouble() ;
     }
 
     @Override
     public void start() throws Exception {
         super.start();
 
+        start_pos_ = sub_.getIntakeShooter().getShooter1().getPosition() ;
         doing_xfer_ = false ;
         sub_.getAmpTrap().setAction(amp_trap_position_action_, true);
         sub_.getIntakeShooter().setAction(intake_shooter_position_action_, true);
@@ -55,7 +56,7 @@ public class TransferIntakeToTrampAction extends Action {
     @Override
     public void run() throws Exception {
         if(doing_xfer_) {
-            if (sub_.getIntakeShooter().getFeeder().getPosition() - start_pos_ > xfer_length_) {
+            if (sub_.getIntakeShooter().getShooter1().getPosition() - start_pos_ > xfer_length_) {
                 sub_.getAmpTrap().getManipulator().setPower(0.0);
                 sub_.getIntakeShooter().getFeeder().setPower(0.0);
                 sub_.getIntakeShooter().getShooter1().setPower(0.0);

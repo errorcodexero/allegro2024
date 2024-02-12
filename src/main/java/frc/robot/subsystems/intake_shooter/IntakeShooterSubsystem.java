@@ -82,7 +82,7 @@ public class IntakeShooterSubsystem extends Subsystem{
         //
         // Get the value in degrees from the settings file
         //
-        double initpos = updown_.getSettingsValue("hw:hard-stop").getDouble() ;
+        double initpos = updown_.getSettingsValue("targets:shoot").getDouble() ;
 
         //
         // Using the encoder in the motor/encoder subsystem, map the degrees to ticks

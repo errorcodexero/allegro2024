@@ -1,0 +1,23 @@
+{
+    "stimulus" :
+    [
+        {
+            "time" : 0.0,
+            "events" :
+            [
+                {
+                    "model" : "fms",
+                    "instance" : "1",
+                    "values" : 
+                    {
+                        "start" : 30.0,
+                        "autonomous" : 40.0,
+                        "between" : 0.0,
+                        "teleop" : 0.0,
+                        "fms" : true
+                    }
+                }
+            ]
+        }
+    ]
+}

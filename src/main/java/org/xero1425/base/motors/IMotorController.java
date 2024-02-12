@@ -187,6 +187,10 @@ public interface IMotorController {
     /// \returns the acceleration of the motor in ticks per second squared
     public double getAcceleration()  throws BadMotorRequestException, MotorRequestFailedException ;
 
+    /// \brief Returns true if the motor can provide acceleration information
+    /// \returns true if the motor can provide acceleration information
+    public boolean hasAcceleration()  throws BadMotorRequestException, MotorRequestFailedException ;
+
     /// \brief Enable voltage compensation for the given motor
     /// \param enabled if true voltage compensation is enabled
     /// \param nominal if enabled is true, this is the nominal voltage for compensation

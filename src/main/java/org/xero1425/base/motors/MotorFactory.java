@@ -333,7 +333,10 @@ public class MotorFactory {
         }
 
         ctrl.setPositionImportant(getImportant(id, "position"));
-        ctrl.setPositionImportant(getImportant(id, "velocity"));        
+        ctrl.setPositionImportant(getImportant(id, "velocity"));
+        if (ctrl.hasAcceleration()) {
+            ctrl.setAccelerationImportant(getImportant(id, "acceleration"));
+        }
 
         int channel = getPDPChannel(id) ;
         if (channel != Integer.MAX_VALUE)

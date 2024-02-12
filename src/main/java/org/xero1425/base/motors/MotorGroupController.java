@@ -261,6 +261,13 @@ public class MotorGroupController extends MotorController
         return motors_.get(0).getAcceleration() ;  
     }      
 
+    public boolean hasAcceleration() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).hasAcceleration() ;
+    }         
+
     /// \brief Reset the encoder values to zero      
     public void resetEncoder() throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)

@@ -28,6 +28,7 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 
 public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
 
@@ -64,6 +65,8 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
 
     private MinMaxData velocity_ ;
     private MinMaxData rotational_velocity_ ;
+
+    private Field2d field_ ;
    
     static public final int FL = 0;                                                             // Index of the front left module
     static public final int FR = 1;                                                             // Index of the front right module
@@ -95,6 +98,7 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
         length_ = getSettingsValue("physical:length").getDouble() ;
         maxv_ = getSettingsValue("physical:path:maxv").getDouble() ;
         maxa_ = getSettingsValue("physical:path:maxa").getDouble() ;
+
 
         //
         // Calculate the angle for the velocity vector to rotate the robot
@@ -205,6 +209,14 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
         shuffleboardTab.addNumber("Heading", () -> getHeading().getDegrees());
         shuffleboardTab.addNumber("Pose X", () -> getPose().getX());
         shuffleboardTab.addNumber("Pose Y", () -> getPose().getY());
+
+
+        if (getRobot().getSettingsSupplier().isDefined("system:verbose:swerve-field")) {
+            if (getRobot().getSettingsSupplier().get("system:verbose:swerve-field").getBoolean()) {
+                field_ = new Field2d() ;
+                Shuffleboard.getTab("Field").add(field_) ;
+            }
+        }        
     }
 
     // Control the swerve drive by settings a ChassisSppeds object
@@ -254,6 +266,10 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
         rotational_velocity_.addData(v) ;
 
         last_pose_ = p ;
+
+        if (field_ != null) {
+            field_.setRobotPose(p) ;
+        }   
     }
 
     @Override

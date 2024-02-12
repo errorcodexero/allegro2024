@@ -25,6 +25,7 @@ public class MotorEncoderPowerAction extends MotorPowerAction
         "time (s)",
         "pos (%%posunits%%)",
         "vel (%%velunits%%/s)",
+        "acc (%%accunits%%/s^2)",
         "out (v)",
     } ;
 
@@ -90,7 +91,8 @@ public class MotorEncoderPowerAction extends MotorPowerAction
         data_[0] = getSubsystem().getRobot().getTime() - start_ ;
         data_[1] = ((MotorEncoderSubsystem)(getSubsystem())).getPosition() ;
         data_[2] = ((MotorEncoderSubsystem)(getSubsystem())).getVelocity() ;
-        data_[3] = getSubsystem().getPower() ;
+        data_[3] = ((MotorEncoderSubsystem)(getSubsystem())).getAcceleration() ;
+        data_[4] = getSubsystem().getPower() ;
         getSubsystem().addPlotData(plot_id_, data_);
         
         if (isDone()) {

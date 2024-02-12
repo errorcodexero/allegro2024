@@ -592,6 +592,10 @@ public class TalonFXMotorController extends MotorController
         return ctrl_.getAcceleration().getValue() * kTicksPerRevolution ;
     }
 
+    public boolean hasAcceleration() throws BadMotorRequestException, MotorRequestFailedException {
+        return true ;
+    }
+
     /// \brief Reset the encoder values to zero    
     public void resetEncoder() throws BadMotorRequestException, MotorRequestFailedException {
         checkError("resetEncoder", () -> ctrl_.setPosition(0.0)) ;

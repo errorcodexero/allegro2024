@@ -20,6 +20,7 @@
         },
         "verbose": {
             "swerve" : false,
+            "swerve-field" : true,
             "intake-tilt-pos" : true,
             "intake-updown-pos" : true
         },
@@ -43,18 +44,30 @@
         // hw - describes the hardware used by the subsystem
         // props - describes the physical properties of the subsystem
         // targets - describes target locations for the subsytstem that are defined by the subsystem
-        // actions - describes target locations that are specific to an action for the subsystem
+        // actions - describes parameters and target locations that are specific to an action for the subsystem
         //
         "superstructure" : {
             "actions" : {
                 "xfer" : {
-                    "feeder-length" : 10.0,
+                    //
+                    // The position of the amp trap subsystem to perform the transfer
+                    //
                     "arm" : 30.0,
                     "elevator" : 0.155,
+
+                    //
+                    // The position of the intake subsystem to perform the transfer
+                    //
                     "updown" : 90.0,
                     "tilt" : -45.0,
+
+                    //
+                    // The velocity/power of the wheels that perform the transfer and the
+                    // distance to move the feeder wheels.
+                    //
                     "feeder-power" : 0.3,
-                    "shooter-velocity" : 20
+                    "shooter-velocity" : 20,
+                    "shooter-length" : 10.0
                 }
             }
         },
@@ -64,7 +77,7 @@
             //
             "props" : {
                 //
-                // If the arm is going to move through this keepout zone, the elevator must be higher than 
+                // If the arm is going to move through this keepout zone, the elevator must be higher than
                 // the elevator-height to avoid a collision.
                 //
                 "keepout-zone" : {
@@ -102,7 +115,7 @@
                     "elevator" : 0.0,
                     "pivot" : 0.0
                 }
-            },
+            }
         },
         "elevator" : {
             "hw" : {
@@ -114,7 +127,8 @@
                     "neutral-mode" : "brake",
                     "current-limit" : 60,
                     "position-important" : "high",
-                    "velocity-important" : "high"                    
+                    "velocity-important" : "high",
+                    "acceleration-imporant" : "high"
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -135,7 +149,7 @@
                     "kd" : 0.004,
                     "kv" : 0.000312,
                     "ka" : 0.0,
-                    "kg" : 0.0, 
+                    "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
                     "maxv" : 2,
@@ -154,7 +168,8 @@
                     "neutral-mode" : "brake",
                     "current-limit" : 60,
                     "position-important" : "high",
-                    "velocity-important" : "high"                    
+                    "velocity-important" : "high",
+                    "acceleration-imporant" : "high"
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -172,7 +187,7 @@
                     "kd" : 0.004,
                     "kv" : 0.000312,
                     "ka" : 0.0,
-                    "kg" : 0.0, 
+                    "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
                     "maxv" : 270.0,
@@ -191,7 +206,8 @@
                     "neutral-mode" : "brake",
                     "current-limit" : 60,
                     "position-important" : "high",
-                    "velocity-important" : "high"                    
+                    "velocity-important" : "high",
+                    "acceleration-imporant" : "high"
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -209,7 +225,7 @@
                     "kd" : 0.004,
                     "kv" : 0.000312,
                     "ka" : 0.0,
-                    "kg" : 0.0, 
+                    "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
                     "maxv" : 5,
@@ -228,7 +244,8 @@
                     "neutral-mode" : "brake",
                     "current-limit" : 60,
                     "position-important" : "high",
-                    "velocity-important" : "high"
+                    "velocity-important" : "high",
+                    "acceleration-imporant" : "high"
                 },
                 "encoder" : {
                     "type" : "motor",
@@ -249,7 +266,7 @@
                     "kd" : 0.004,
                     "kv" : 0.000312,
                     "ka" : 0.0,
-                    "kg" : 0.0, 
+                    "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
                     "maxv" : 2,
@@ -296,7 +313,7 @@
                         "up-down-pos" : 90.0,
                         "up-down-pos-threshold" : 5.0,
                         "up-down-velocity-threshold" : 5.0,
-                        
+
                         "shooter-velocity" : 45.0,
                         "shooter-velocity-threshold" : 5.0
                     },
@@ -308,7 +325,7 @@
                         "up-down-pos" : 90.0,
                         "up-down-pos-threshold" : 5.0,
                         "up-down-velocity-threshold" : 5.0,
-                        
+
                         "shooter-velocity" : 45.0,
                         "shooter-velocity-threshold" : 5.0
                     }
@@ -370,21 +387,26 @@
                     "neutral-mode" : "brake",
                     "current-limit" : 40,
                     "position-important" : "High",
-                    "velocity-important" : "High"                    
+                    "velocity-important" : "High",
+                    "acceleration-imporant" : "high"
                 },
                 "encoder": {
                     //
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m":   0.0010986328125000, 
+                    "m":   0.0010986328125000,
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
                     "accunits" : "deg/s/s"
                 },
-                "hard-stop" : 124.0
             },
+            "targets" : {
+                "collect" : 5.0,
+                "shoot" : 124.0,
+                "stow" : 123.0
+            },            
             "pids" : {
                 "position" : {
                     "kp" : 0.2,
@@ -411,14 +433,15 @@
                     "neutral-mode" : "brake",
                     "current-limit" : 60,
                     "position-important" : "High",
-                    "velocity-important" : "High"                    
+                    "velocity-important" : "High",
+                    "acceleration-imporant" : "high"
                 },
                 "encoder": {
                     //
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m": 0.17578125,             
+                    "m": 0.17578125,
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -439,7 +462,7 @@
                     "maxa" : 80,
                     "jerk" : 0.0
                 }
-            }            
+            }
         },
         "intake-tilt" : {
             "hw" : {
@@ -451,7 +474,8 @@
                     "neutral-mode" : "brake",
                     "current-limit" : 40,
                     "position-important" : "High",
-                    "velocity-important" : "High"                    
+                    "velocity-important" : "High",
+                    "acceleration-imporant" : "high"
                 },
                 "encoder": {
                     //
@@ -466,7 +490,8 @@
                 }
             },
             "targets" : {
-                "stow" : -37.0
+                "stow" : -37.0,
+                "collect" : 5.0
             },
             "pids" : {
                 "position" : {
@@ -494,14 +519,15 @@
                     "neutral-mode" : "brake",
                     "current-limit" : 60,
                     "position-important" : "High",
-                    "velocity-important" : "High"                    
+                    "velocity-important" : "High",
+                    "acceleration-imporant" : "high"
                 },
                 "encoder": {
                     //
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m": 0.000488,             
+                    "m": 0.000488,
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -519,7 +545,7 @@
                     "ks" : 0.0,
                     "outmax" : 12.0
                 }
-            }            
+            }
         },
         "intake-shooter2" : {
             "hw" : {
@@ -531,14 +557,15 @@
                     "neutral-mode" : "brake",
                     "current-limit" : 60,
                     "position-important" : "High",
-                    "velocity-important" : "High"                    
+                    "velocity-important" : "High",
+                    "acceleration-imporant" : "high"
                 },
                 "encoder": {
                     //
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m": 0.000488,             
+                    "m": 0.000488,
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -556,7 +583,7 @@
                     "ks" : 0.0,
                     "outmax" : 12.0
                 }
-            }            
+            }
         },
         "swerve" : {
             //
@@ -586,7 +613,7 @@
                             "current-limit" : 20.0,
                             "p" : 0.002346041055718470,
                             "i" : 0.0,
-                            "d" :  0.000001172851562500,
+                            "d" :  0.000001172851562500
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -603,7 +630,7 @@
                         "offset": {
                             "PRACTICE" : -54.318,
                             "COMPETITION" : 0.0
-                        }                        
+                        }
                     }
                 },
                 "fr" : {
@@ -630,11 +657,11 @@
                     },
                     "encoder" : {
                         "canid" : 23,
-                        "bus" : "DriveBase",                        
+                        "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" :  -258.486,
                             "COMPETITION" : 0
-                        }                        
+                        }
                     }
                 },
                 "bl" : {
@@ -662,11 +689,11 @@
                     },
                     "encoder" : {
                         "canid" : 43,
-                        "bus" : "DriveBase",                        
+                        "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" : -287.58,
                             "COMPETITION" : 0
-                        }                        
+                        }
                     }
                 },
                 "br" : {
@@ -693,13 +720,13 @@
                     },
                     "encoder" : {
                         "canid" : 33,
-                        "bus" : "DriveBase",                        
+                        "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" : -169.629,
                             "COMPETITION" : 0.0
-                        }                        
+                        }
                     }
-                }                   
+                }
             },
 
             "angle-tracker" : {
@@ -719,10 +746,10 @@
                 "max-angular-speed": 100,
                 "max-angular-accel": 100
             },
-            
+
             //
             // This section describes how the vision integration with the drive base behaves
-            //            
+            //
             "estimator" : {
                 "advanced-rejection" : false,                   // If true, the advanced rejection of vision samples is used, see the code for more details
                 "vision-reject-threshold" : 100.0,              // Reject vision samples that are more than this distance from the current robot pose
@@ -764,11 +791,11 @@
                         "heading" : 0.1
                     }
                 }
-            },       
+            },
             //
             // This section is the pid controller for the low level modules, specifically the module velocity since the
             // angle is managed in the motor controller and initialize by the low level code.
-            //            
+            //
             "pids": {
                 "fl": {
                     "kp":  {
@@ -830,7 +857,7 @@
                     "max": 1.0,
                     "imax": 0.0
                 }
-            }            
+            }
         },
         "allegro2024oi" : {
             "swerve_gamepad": {
@@ -868,10 +895,10 @@
                     "shooter-april-tag" : 4,
                     "climb-up-prep-enabled" : 5,
                     "climb-up-exec-enabled" : 6,
-                    "climb-down-exec-enabled" : 8,   
+                    "climb-down-exec-enabled" : 8
                 }
-            },
-        }        
+            }
+        }
     },
     "testmode" : {
         "enabled": true,
@@ -898,7 +925,7 @@
             "power-br" : 0.8
         },
         "3" : {
-            "duration" : 3.0,            
+            "duration" : 3.0,
             "angle-fl" : 45.0,
             "angle-fr" : 135.0,
             "angle-bl" : 225.0,
@@ -906,7 +933,7 @@
             "speed-fl" : 1.0,
             "speed-fr" : 1.5,
             "speed-bl" : 2.0,
-            "speed-br" : 2.5   
+            "speed-br" : 2.5
         },
         "4": {
             "name": "Edge1Blue-Path1"
@@ -921,7 +948,7 @@
         "20" : {
             "power" : -0.1,
             "duration" : 0.5
-        },        
+        },
         "22" : {
             "tilt-target" : 0.0,
             "updown-target" : 90.0
@@ -1012,7 +1039,7 @@
         },
         "124" : {
             "duration" : 5.0
-        },          
+        },
         "125" : {
             "duration" : 5.0
         },

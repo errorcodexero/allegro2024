@@ -1,12 +1,9 @@
 package org.xero1425.base.subsystems.motorsubsystem;
 
-import org.xero1425.base.motors.IMotorController.ImportantType;
 import org.xero1425.base.motors.IMotorController.XeroPidType;
 import org.xero1425.base.subsystems.Subsystem;
-import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
-import org.xero1425.misc.MissingParameterException;
 
 /// \file
 
@@ -31,16 +28,10 @@ public class MotorEncoderSubsystem extends MotorSubsystem
 
         angular_ = angular ;
 
-        ImportantType postype = getImportantType("props:position-important") ;
-        ImportantType veltype = getImportantType("props:velocity-important") ;
-
-        getMotorController().setPositionImportant(postype) ;
-        getMotorController().setVelocityImportant(veltype) ;
-        getMotorController().setAccelerationImportant(ImportantType.Off);
         getMotorController().enableVoltageCompensation(true, 11.0);
 
         String encname = "subsystems:" + name + ":hw:encoder" ;
-        encoder_ = new XeroEncoder(parent.getRobot(), encname, angular, getMotorController()) ;        
+        encoder_ = new XeroEncoder(parent.getRobot(), encname, angular, getMotorController()) ;
 
         if (isSettingDefined("maxpos"))
             max_value_ = getSettingsValue("maxpos").getDouble() ;
@@ -50,21 +41,7 @@ public class MotorEncoderSubsystem extends MotorSubsystem
         if (isSettingDefined("minpos"))
             min_value_ = getSettingsValue("minpos").getDouble() ;
         else
-            min_value_ = -Double.MAX_VALUE ;    
-    }
-
-    private ImportantType getImportantType(String name) throws BadParameterTypeException, MissingParameterException {
-        ImportantType ret = ImportantType.Invalid ;
-
-        String impstr = getSettingsValue(name).getString() ;
-        if (impstr.toLowerCase().equals("high"))
-            ret = ImportantType.High ;
-        else if (impstr.toLowerCase().equals("low"))
-            ret = ImportantType.Low ;
-        else if (impstr.toLowerCase().equals("off"))
-            ret = ImportantType.Off ;
-
-        return ret;
+            min_value_ = -Double.MAX_VALUE ;
     }
 
     public XeroEncoder getEncoder() {
@@ -74,7 +51,7 @@ public class MotorEncoderSubsystem extends MotorSubsystem
     public String[] getUnits() {
         return encoder_.getUnits();
     }
-    
+
     public double getMaxPos() {
         return max_value_ ;
     }
@@ -121,9 +98,9 @@ public class MotorEncoderSubsystem extends MotorSubsystem
 
         return ret;
     }
-    
+
     /// \brief Returns the velocity of the motor output, as measured by the speedometer
-    /// \returns the velocity of the motor output, as measured by the speedometer    
+    /// \returns the velocity of the motor output, as measured by the speedometer
     public double getVelocity() {
         double ret = 0.0 ;
 
@@ -140,6 +117,25 @@ public class MotorEncoderSubsystem extends MotorSubsystem
         return ret ;
     }
 
+    public double getAcceleration() {
+        double ret = 0.0 ;
+
+        try {
+            if (getMotorController().hasAcceleration()) {
+                ret = getMotorController().getAcceleration() ;
+                ret = encoder_.mapMotorToPhysical(ret) ;
+            }
+        }
+        catch(Exception ex) {
+            MessageLogger logger = getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Error).add("getVelocity() threw an exception") ;
+            logger.add("subsystem name", getName()).endMessage();
+            logger.logStackTrace(ex.getStackTrace());
+        }
+
+        return ret ;
+    }
+
     /// \brief Calibrates the motor encoder with the given position
     /// \param pos the current real world position of the motor output
     public void calibrate(double pos) {
@@ -152,7 +148,7 @@ public class MotorEncoderSubsystem extends MotorSubsystem
         encoder_.reset() ;
     }
 
-    /// \brief Reset the motor and attacd encoder.  This will reset the encoder value to 
+    /// \brief Reset the motor and attacd encoder.  This will reset the encoder value to
     /// zero and set the motor power to off.
     public void reset() {
         super.reset() ;
