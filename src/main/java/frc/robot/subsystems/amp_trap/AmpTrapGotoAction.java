@@ -14,6 +14,9 @@ public class AmpTrapGotoAction extends Action {
     private double wristTarget;
     private String state;
 
+    public AmpTrapGotoAction(AmpTrapSubsystem subsystem, String elevatorTarget, String wristTarget) throws Exception{
+        this(subsystem, subsystem.getSettingsValue(elevatorTarget).getDouble(), subsystem.getSettingsValue(wristTarget).getDouble());
+    }
     public AmpTrapGotoAction(AmpTrapSubsystem subsystem, double elevatorTarget, double wristTarget) throws Exception{
         super(subsystem.getRobot().getMessageLogger());
         this.subsystem = subsystem;
