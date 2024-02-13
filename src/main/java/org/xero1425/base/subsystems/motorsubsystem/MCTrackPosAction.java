@@ -32,11 +32,11 @@ public class MCTrackPosAction extends MotorAction {
 
     private static int which_ = 0 ;
 
-    public MCTrackPosAction(MotorEncoderSubsystem sub, String name, String target, double posthresh, double velthresh) throws Exception {
-        this(sub, name, sub.getSettingsValue(target).getDouble(), posthresh, velthresh) ;
+    public MCTrackPosAction(MotorEncoderSubsystem sub, String name, String target, double posthresh, double velthresh, boolean plot) throws Exception {
+        this(sub, name, sub.getSettingsValue(target).getDouble(), posthresh, velthresh, plot) ;
     }    
 
-    public MCTrackPosAction(MotorEncoderSubsystem sub, String name, double target, double posthresh, double velthresh) throws Exception {
+    public MCTrackPosAction(MotorEncoderSubsystem sub, String name, double target, double posthresh, double velthresh, boolean plot) throws Exception {
         super(sub);
 
         target_ = target ;
@@ -45,7 +45,12 @@ public class MCTrackPosAction extends MotorAction {
         pos_threshold_ = posthresh ;
         vel_threshold_ = velthresh ;
 
-        plot_id_ = sub.initPlot(toString(0) + "-" + String.valueOf(which_++)) ;     
+        if (plot) {
+            plot_id_ = sub.initPlot(toString(0) + "-" + String.valueOf(which_++)) ;     
+        }
+        else {
+            plot_id_ = -1 ;
+        }
         data_ = new Double[columns_.length] ;
     }
 
@@ -90,11 +95,20 @@ public class MCTrackPosAction extends MotorAction {
         // motor controller.  Since the motor controller does not run its PID loop in robot units,
         // we must as the subsystem to translate the units from robot units to motor controller units.
         //
-        MotorEncoderSubsystem sub = (MotorEncoderSubsystem)getSubsystem() ;
-        double ticks = sub.getEncoder().mapPhysicalToMotor(target) ;
+        MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem() ;
+        double pos = me.getPosition() ;
+        double vel = me.getVelocity() ;
+        double error = Math.abs(pos - target_) ;
+
+        double ticks = me.getEncoder().mapPhysicalToMotor(target) ;
         getSubsystem().getMotorController().set(XeroPidType.MotionMagic, ticks) ;
 
-        is_at_target_ = false ;
+        if (error < pos_threshold_ && Math.abs(vel) < vel_threshold_) {
+            is_at_target_ = true ;
+        }
+        else {
+            is_at_target_ = false ;
+        }
     }
 
     public boolean isAtTarget() {
@@ -149,7 +163,7 @@ public class MCTrackPosAction extends MotorAction {
     public String toString(int indent) {
         String ret ;
 
-        ret = spaces(indent) + "MotorEncoderMotionMagicAction (" + getSubsystem().getName() + ")";
+        ret = spaces(indent) + "MCTrackPosAction (" + getSubsystem().getName() + ")";
         ret += " target=" + target_ ;
 
         return ret ;

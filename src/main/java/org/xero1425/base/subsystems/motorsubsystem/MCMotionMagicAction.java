@@ -143,7 +143,7 @@ public class MCMotionMagicAction extends MotorAction {
     public String toString(int indent) {
         String ret ;
 
-        ret = spaces(indent) + "MotorEncoderMotionMagicAction (" + getSubsystem().getName() + ")";
+        ret = spaces(indent) + "MCMotionMagicAction (" + getSubsystem().getName() + ")";
         ret += " target=" + target_ ;
 
         return ret ;

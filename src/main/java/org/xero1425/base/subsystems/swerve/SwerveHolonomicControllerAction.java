@@ -33,19 +33,19 @@ public abstract class SwerveHolonomicControllerAction extends SwerveDriveAction 
         double maxv = swerve_.getSettingsValue("physical:max-angular-speed").getDouble() ;
         double maxa = swerve_.getSettingsValue("physical:max-angular-accel").getDouble() ;
 
-        kp = swerve_.getSettingsValue("pid:xctrl:kp").getDouble() ;
-        ki = swerve_.getSettingsValue("pid:xctrl:ki").getDouble() ;
-        kd = swerve_.getSettingsValue("pid:xctrl:kd").getDouble() ;
+        kp = swerve_.getSettingsValue("path-following:xctrl:kp").getDouble() ;
+        ki = swerve_.getSettingsValue("path-following:xctrl:ki").getDouble() ;
+        kd = swerve_.getSettingsValue("path-following:xctrl:kd").getDouble() ;
         PIDController xctrl = new PIDController(kp, ki, kd) ;
 
-        kp = swerve_.getSettingsValue("pid:yctrl:kp").getDouble() ;
-        ki = swerve_.getSettingsValue("pid:yctrl:ki").getDouble() ;
-        kd = swerve_.getSettingsValue("pid:yctrl:kd").getDouble() ;
+        kp = swerve_.getSettingsValue("path-following:yctrl:kp").getDouble() ;
+        ki = swerve_.getSettingsValue("path-following:yctrl:ki").getDouble() ;
+        kd = swerve_.getSettingsValue("path-following:yctrl:kd").getDouble() ;
         PIDController yctrl = new PIDController(kp, ki, kd) ;
 
-        kp = swerve_.getSettingsValue("pid:rotation:kp").getDouble() ;
-        ki = swerve_.getSettingsValue("pid:rotation:ki").getDouble() ;
-        kd = swerve_.getSettingsValue("pid:rotation:kd").getDouble() ;
+        kp = swerve_.getSettingsValue("path-following:rotation:kp").getDouble() ;
+        ki = swerve_.getSettingsValue("path-following:rotation:ki").getDouble() ;
+        kd = swerve_.getSettingsValue("path-following:rotation:kd").getDouble() ;
         TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(maxv, maxa) ;
         ProfiledPIDController thetactrl = new ProfiledPIDController(kp, ki, kd, constraints) ;
         thetactrl.enableContinuousInput(-Math.PI, Math.PI);
@@ -55,8 +55,8 @@ public abstract class SwerveHolonomicControllerAction extends SwerveDriveAction 
         
         ISettingsSupplier settings = getSubsystem().getRobot().getSettingsSupplier() ;
         String s = getSubsystem().getName() ;
-        double xytol = settings.get("subsystems:" + s + ":holonomic-path-following:xy-tolerance").getDouble() ;
-        double angletol = settings.get("subsystems:" + s + ":holonomic-path-following:angle-tolerance").getDouble() ;
+        double xytol = settings.get("subsystems:" + s + ":path-following:xy-tolerance").getDouble() ;
+        double angletol = settings.get("subsystems:" + s + ":path-following:angle-tolerance").getDouble() ;
         ctrl.setTolerance(new Pose2d(xytol, xytol, Rotation2d.fromDegrees(angletol))) ;
 
         return ctrl ;

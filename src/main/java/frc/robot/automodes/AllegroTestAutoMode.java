@@ -13,7 +13,6 @@ import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
 import frc.robot.subsystems.intake_shooter.ButchStartCollectAction;
 import frc.robot.subsystems.intake_shooter.ButchStopCollectionAction;
-import frc.robot.subsystems.intake_shooter.IntakeShooterEjectAction;
 
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.intake_shooter.ManualShootAction;
@@ -356,9 +355,6 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 break;
 
             case 111:
-                if (intakeshooter != null) {
-                    addSubActionPair(intakeshooter, new IntakeShooterEjectAction(intakeshooter), true);
-                }
                 break;
 
             case 112:

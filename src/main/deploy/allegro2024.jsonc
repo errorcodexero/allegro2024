@@ -22,7 +22,8 @@
             "swerve" : false,
             "swerve-field" : true,
             "intake-tilt-pos" : true,
-            "intake-updown-pos" : true
+            "intake-updown-pos" : true,
+            "auto-shoot": true
         },
         "plotting": {
             "enabled" : true,
@@ -199,7 +200,7 @@
         "manipulator" : {
             "hw" : {
                 "motors" : {
-                    "type" : "talon-fx",
+                    "type" : "sparkflex",
                     "bus" : "",
                     "canid" : 9,
                     "inverted" : false,
@@ -276,7 +277,9 @@
             },
             "targets" : {
                 "up" : 0.635,
-                "down" : 0.0
+                "down" : 0.0,
+                "climb-up" : 0.635,
+                "climb-down" : 0.0
             }
         },
         "intake-shooter" : {
@@ -291,7 +294,7 @@
                     "emax" : 5.0,
                     "rmin" : -90.0,
                     "rmax" : 90.0,
-                    "ecval" : 1.22,
+                    "ecval" : 0.616,
                     "rcval" : 0.0
                 }
             },
@@ -358,21 +361,21 @@
                 "tilt" : {
                     "1" : {
                         "x" : 0.0,
-                        "y" : 123.5
+                        "y" : -37.0
                     },
                     "2" : {
                         "x" : 8.23,
-                        "y" : 123.5
+                        "y" : -37.0
                     }
                 },
                 "shooter" : {
                     "1" : {
                         "x" : 0.0,
-                        "y" : 123.5
+                        "y" : 45
                     },
                     "2" : {
                         "x" : 8.23,
-                        "y" : 123.5
+                        "y" : 45
                     }
                 }
             }
@@ -400,11 +403,11 @@
                     "posunits" : "deg",
                     "velunits" : "deg/s",
                     "accunits" : "deg/s/s"
-                },
+                }
             },
             "targets" : {
                 "collect" : 5.0,
-                "shoot" : 124.0,
+                "shoot" : 116.0,
                 "stow" : 123.0
             },            
             "pids" : {
@@ -417,8 +420,8 @@
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 120,
-                    "maxa" : 80,
+                    "maxv" : 40,
+                    "maxa" : 40,
                     "jerk" : 0.0
                 }
             }
@@ -491,7 +494,7 @@
             },
             "targets" : {
                 "stow" : -37.0,
-                "collect" : 5.0
+                "collect" : 50.0
             },
             "pids" : {
                 "position" : {
@@ -857,6 +860,29 @@
                     "max": 1.0,
                     "imax": 0.0
                 }
+            },
+
+            //
+            // PID controllers for path following
+            //
+            "path-following" : {
+                "xy-tolerance": 0.05,
+                "angle-tolerance": 2.0,
+                "xctrl": {
+                    "kp": 6.0,
+                    "ki": 0,
+                    "kd": 0
+                },
+                "yctrl": {
+                    "kp": 6.0,
+                    "ki": 0,
+                    "kd": 0
+                },
+                "rotation": {
+                    "kp": 8.0,
+                    "ki": 0,
+                    "kd": 0
+                }
             }
         },
         "allegro2024oi" : {
@@ -902,7 +928,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 140,
+        "which": 22,
         "0": {
             "angle": 0,
             "power": 0.5,

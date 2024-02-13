@@ -6,7 +6,7 @@ import org.xero1425.base.subsystems.oi.OIPanel;
 import org.xero1425.base.subsystems.oi.OISubsystem;
 import org.xero1425.base.subsystems.oi.OILed.State;
 import org.xero1425.base.subsystems.oi.OIPanelButton.ButtonType;
-import org.xero1425.base.subsystems.swerve.SwerveRotateToAngle;
+import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MissingParameterException;
 
@@ -79,7 +79,7 @@ public class ButchOIPanel extends OIPanel {
     // Actions
     //
     private IntakeAutoShootAction shoot_action_ ;
-    private SwerveRotateToAngle rotate_action_ ;
+    private SwerveTrackAngle rotate_action_ ;
     private TransferIntakeToTrampAction fwd_transfer_action_ ;
     private IntakeGotoNamedPositionAction stow_intake_action_ ;
     private AmpTrapShootAction amp_trap_shoot_action_ ;
@@ -103,6 +103,22 @@ public class ButchOIPanel extends OIPanel {
         state_ = OIState.Idle ;
     }
 
+    public void setVelocityReady(boolean b) {
+        shooter_velocity_ready_led_.setState(b ? State.ON : State.OFF);
+    }
+
+    public void setTiltReady(boolean b) {
+        shooter_tilt_ready_led_.setState(b ? State.ON : State.OFF);
+    }
+
+    public void setAprilTagReady(boolean b) {
+        shooter_april_tag_led_.setState(b ? State.ON : State.OFF);
+    }
+
+    public void setDBReady(boolean b) {
+        db_ready_led_.setState(b ? State.ON : State.OFF);
+    }
+
     @Override
     public void computeState() throws Exception {
         super.computeState();
@@ -120,7 +136,7 @@ public class ButchOIPanel extends OIPanel {
         NoteTarget target = getNoteTarget() ;
 
         if (target == NoteTarget.Speaker) {
-            robot.getIntakeShooter().setAction(shoot_action_);            
+            robot.getIntakeShooter().setAction(shoot_action_);         
             state_ = OIState.WaitingToShoot ;
         }
         else if (target == NoteTarget.Amp || target == NoteTarget.Trap) {
@@ -150,10 +166,6 @@ public class ButchOIPanel extends OIPanel {
                 //
                 double angle = robot.getTargetTracker().getRotation() + robot.getSwerve().getPose().getRotation().getDegrees() ;
                 rotate_action_.setAngle(angle) ;
-
-                //
-                // Tell the drive base to rotate to the desired angle
-                //
                 robot.getSwerve().setAction(rotate_action_) ;
                 state_ = OIState.Shooting ;
 
@@ -171,10 +183,6 @@ public class ButchOIPanel extends OIPanel {
             state_ = OIState.NoteInIntake ;
         }
         else {
-            if (rotate_action_.isDone()) {
-                shoot_action_.setDBReady(true);
-            }
-
             if (shoot_action_.isDone()) {
                 state_ = OIState.Idle ;
             }
@@ -410,14 +418,15 @@ public class ButchOIPanel extends OIPanel {
         IntakeShooterSubsystem intake = robot.getIntakeShooter() ;
         TargetTrackerSubsystem tracker = robot.getTargetTracker() ;
 
-        shoot_action_ = new IntakeAutoShootAction(intake, tracker, false) ;
-        rotate_action_ = new SwerveRotateToAngle(robot.getSwerve(), 0.0, 5.0, 1.0) ;
+        rotate_action_ = new SwerveTrackAngle(robot.getSwerve(), 0.0, 5.0, 1.0) ;
+        shoot_action_ = new IntakeAutoShootAction(intake, tracker, rotate_action_, false, true) ;
+
         fwd_transfer_action_ = new TransferIntakeToTrampAction(robot.getSuperStructure()) ;
 
         double v1, v2 ;
 
-        v1 = intake.getUpDown().getSettingsValue("target:stow").getDouble() ;
-        v2 = intake.getTilt().getSettingsValue("target:stow").getDouble() ; 
+        v1 = intake.getUpDown().getSettingsValue("targets:stow").getDouble() ;
+        v2 = intake.getTilt().getSettingsValue("targets:stow").getDouble() ; 
         stow_intake_action_ = new IntakeGotoNamedPositionAction(intake, v1, v2) ;
         
         goto_amp_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:amp:pivot", "actions:amp:elevator") ;
@@ -430,8 +439,8 @@ public class ButchOIPanel extends OIPanel {
 
         stow_amp_trap_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:stow:pivot", "actions:stow:elevator") ;
 
-        hooks_up_action_ = new MCMotionMagicAction(robot.getSuperStructure().getClimber(), "pids:position", "targets:climb:up", 0.05, 0.05) ;
-        hooks_down_action_ = new MCMotionMagicAction(robot.getSuperStructure().getClimber(), "pids:position", "targets:climb:down", 0.05, 0.05) ;
+        hooks_up_action_ = new MCMotionMagicAction(robot.getSuperStructure().getClimber(), "pids:position", "targets:climb-up", 0.05, 0.05) ;
+        hooks_down_action_ = new MCMotionMagicAction(robot.getSuperStructure().getClimber(), "pids:position", "targets:climb-down", 0.05, 0.05) ;
     }
 
     @Override
@@ -441,24 +450,31 @@ public class ButchOIPanel extends OIPanel {
 
         num = getSubsystem().getSettingsValue("panel:leds:db-ready").getInteger() ;
         db_ready_led_ = createLED(num, false) ;
+        db_ready_led_.setState(State.OFF);
         
         num = getSubsystem().getSettingsValue("panel:leds:shooter-velocity-ready").getInteger() ;
         shooter_velocity_ready_led_ = createLED(num, false) ;
+        shooter_velocity_ready_led_.setState(State.OFF);        
 
         num = getSubsystem().getSettingsValue("panel:leds:shooter-tilt-ready").getInteger() ;
         shooter_tilt_ready_led_ = createLED(num, false) ;
+        shooter_tilt_ready_led_.setState(State.OFF);
 
         num = getSubsystem().getSettingsValue("panel:leds:shooter-april-tag").getInteger() ;
         shooter_april_tag_led_ = createLED(num, false) ;
+        shooter_april_tag_led_.setState(State.OFF);
 
         num = getSubsystem().getSettingsValue("panel:leds:climb-up-prep-enabled").getInteger() ;
         climb_up_prep_enabled_led_ = createLED(num, false) ;
+        climb_up_prep_enabled_led_.setState(State.OFF);
 
         num = getSubsystem().getSettingsValue("panel:leds:climb-up-exec-enabled").getInteger() ;
         climb_up_exec_enabled_led_ = createLED(num, false) ;
+        climb_up_exec_enabled_led_.setState(State.OFF);
 
         num = getSubsystem().getSettingsValue("panel:leds:climb-down-exec-enabled").getInteger() ;
         climb_down_exec_enabled_led_ = createLED(num, false) ;
+        climb_down_exec_enabled_led_.setState(State.OFF);        
     }
 
     @Override

@@ -294,6 +294,8 @@ public class MotorFactory {
             ctrl = new SparkMaxMotorController(name, canid, true, leader);
         } else if (type.equals("sparmmax-brushed")) {
             ctrl = new SparkMaxMotorController(name, canid, false, leader);
+        } else if (type.equals("sparkflex")) {
+            ctrl = new SparkFlexMotorController(name, canid, leader) ;
         } else {
             errorMessage(id, "motor type '" + type + "' is not a valid motor type");
             return null;

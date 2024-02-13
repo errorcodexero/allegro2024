@@ -21,6 +21,9 @@ public class MCVelocityAction extends MotorAction {
     // The target velocity
     private double target_ ;
 
+    // The current velocity
+    private double current_ ;
+
     // The threshold for the target
     private double threshold_ ;
 
@@ -66,6 +69,7 @@ public class MCVelocityAction extends MotorAction {
 
         name_ = name ;
         target_ = target;
+        threshold_ = threshold ;
 
         String pidname = "subsystems:" + sub.getName() + ":" + name_ ;
 
@@ -134,6 +138,10 @@ public class MCVelocityAction extends MotorAction {
         return target_ ;
     }
 
+    public double getCurrent() {
+        return current_ ;
+    }
+
     /// \brief Start the velocity action
     @Override
     public void start() throws Exception {
@@ -170,7 +178,8 @@ public class MCVelocityAction extends MotorAction {
         super.run() ;
 
         MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem() ;
-        error_ = target_ - me.getVelocity() ;
+        current_ = me.getVelocity() ;
+        error_ = target_ - current_ ;
 
         if (plot_id_ != -1) {
             data_[0] = getSubsystem().getRobot().getTime() - start_ ;

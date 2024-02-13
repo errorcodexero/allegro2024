@@ -56,14 +56,14 @@
                 "shooter1:canid" : 3,
                 "shooter1:count" : 1,
                 "shooter1:gearing" : 1.0,
-                "shooter1:moment" : 0.00036613,
+                "shooter1:moment" : 0.001,
 
                 "shooter2:type" : "talon-fx",
                 "shooter2:bus" : "",
                 "shooter2:canid" : 4,
                 "shooter2:count" : 1,
                 "shooter2:gearing" : 1.0,
-                "shooter2:moment" : 0.00036613,                
+                "shooter2:moment" : 0.001,                
 
                 "tilt:type" : "talon-fx",
                 "tilt:bus" : "",
