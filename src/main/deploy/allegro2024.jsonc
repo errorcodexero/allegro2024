@@ -70,6 +70,7 @@
                 "ampprep" : 2,
                 "trapprep" : 3
             },
+            "threshold" : 0.75,
             "pids" : {
                 "position" : {
                     "kp" : 0.0035,
@@ -114,6 +115,10 @@
                 "transfer" : 60,
                 "ampprep" : 225,
                 "trapprep" : 135
+            },
+            "no-go-zone" : {
+                "upper" : 90,
+                "lower" : 0
             },
             "pids" : {
                 "position" : {
@@ -553,7 +558,7 @@
                             "current-limit" : 20.0,
                             "p" : 0.002346041055718470,
                             "i" : 0.0,
-                            "d" :  0.000001172851562500,
+                            "d" :  0.000001172851562500
                         },
                         "drive" : {
                             "type": "talon-fx",

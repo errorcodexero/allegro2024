@@ -22,9 +22,9 @@ public class AmpTrapGotoAction extends Action {
         this.subsystem = subsystem;
 
         // Get the elevator threshold and the no-go zone limits for the wrist from the params file
-        this.elevatorThreshold = subsystem.getSettingsValue("elevatorThreshold").getDouble();
-        this.wristNoGoZoneLower = subsystem.getSettingsValue("wristNoGoZoneLower").getDouble();
-        this.wristNoGoZoneUpper = subsystem.getSettingsValue("wristNoGoZoneUpper").getDouble();
+        this.elevatorThreshold = subsystem.getElevator().getSettingsValue("threshold").getDouble();
+        this.wristNoGoZoneLower = subsystem.getArm().getSettingsValue("no-go-zone:lower").getDouble();
+        this.wristNoGoZoneUpper = subsystem.getSettingsValue("no-go-zone:upper").getDouble();
 
         this.wristTarget = wristTarget;
 
