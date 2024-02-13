@@ -136,51 +136,6 @@
                 }
             }
         },
-        "wrist" : {
-            "hw" : {
-                "motors" : {
-                    "type" : "talon-fx",
-                    "bus" : "",
-                    "canid" : 8,
-                    "inverted" : false,
-                    "neutral-mode" : "brake",
-                    "current-limit" : 60
-                },
-                "encoder" : {
-                    "type" : "motor",
-                    "m" : 0.17578125,
-                    "b" : 0,
-                    "posunits" : "deg",
-                    "velunits" : "deg/s",
-                    "accunits" : "deg/s/s"
-                }
-            },
-            "props" : {
-                "position-important" : "high",
-                "velocity-important" : "high"
-            },
-            "targets" : {
-                "stow" : 0,
-                "transfer" : -90,
-                "trapprep" : 0,
-                "ampprep" : -30
-            },
-            "pids" : {
-                "position" : {
-                    "kp" : 0.0035,
-                    "ki" : 0.0,
-                    "kd" : 0.004,
-                    "kv" : 0.000312,
-                    "ka" : 0.0,
-                    "kg" : 0.0, 
-                    "ks" : 0.0,
-                    "outmax" : 12.0,
-                    "maxv" : 270.0,
-                    "maxa" : 270.0,
-                    "jerk" : 0.0
-                }
-            }
-        },
         "manipulator" : {
             "hw" : {
                 "motors" : {

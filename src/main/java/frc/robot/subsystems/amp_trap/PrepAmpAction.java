@@ -10,8 +10,8 @@ public class PrepAmpAction extends Action{
     // Moves arm
     private MCMotionMagicAction tiltArm_;
 
-    // Moves wrist
-    private MCMotionMagicAction tiltWrist_;
+    // // Moves wrist
+    // private MCMotionMagicAction tiltWrist_;
 
     private AmpTrapSubsystem sub_;
 
@@ -21,7 +21,7 @@ public class PrepAmpAction extends Action{
         sub_ = sub;
         elevate_ = new MCMotionMagicAction(sub.getElevator(), "pids:position", "targets:ampprep", 0.5, 0.5);
         tiltArm_ = new MCMotionMagicAction(sub.getArm(), "pids:position", "targets:ampprep", 1, 1);
-        tiltWrist_ = new MCMotionMagicAction(sub.getWrist(), "pids:position", "targets:ampprep", 2, 2);
+        //tiltWrist_ = new MCMotionMagicAction(sub.getWrist(), "pids:position", "targets:ampprep", 2, 2);
     }
 
     @Override
@@ -29,13 +29,13 @@ public class PrepAmpAction extends Action{
         super.start();
         sub_.getElevator().setAction(elevate_, true);
         sub_.getArm().setAction(tiltArm_, true);
-        sub_.getWrist().setAction(tiltWrist_, true);
+        //sub_.getWrist().setAction(tiltWrist_, true);
     }
 
     @Override
     public void run() throws Exception{
         super.run();
-        if(elevate_.isDone() && tiltArm_.isDone() && tiltWrist_.isDone()){
+        if(elevate_.isDone() && tiltArm_.isDone()){
             setDone();
         }
     }
