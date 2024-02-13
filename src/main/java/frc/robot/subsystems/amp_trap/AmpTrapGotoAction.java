@@ -43,11 +43,11 @@ public class AmpTrapGotoAction extends Action {
 
         // Start the MCMotionMagicActions
         if(wristTarget < wristNoGoZoneLower && wristTarget > wristNoGoZoneUpper){
-            wristAction.start();
-            elevatorGotoAction.start();
+            subsystem.getWrist().setAction(wristAction);
+            subsystem.getElevator().setAction(elevatorGotoAction);
             state = "Goto";
         }else{
-            elevatorThreshAction.start();
+            subsystem.getElevator().setAction(elevatorThreshAction);
             state = "Thresh";
         }
     }
@@ -67,7 +67,7 @@ public class AmpTrapGotoAction extends Action {
         }
         // If the elevator has moved up past the elevator threshold, move the wrist to its target position
         if (elevatorThreshAction.isDone() && state.equals("Thresh")){
-            wristAction.start();
+            subsystem.getWrist().setAction(wristAction);
             state = "WristGoto";
         }
 
@@ -77,7 +77,7 @@ public class AmpTrapGotoAction extends Action {
                 return;
             }
             if(state.equals("WristGoto")){
-                elevatorGotoAction.start();
+                subsystem.getElevator().setAction(elevatorGotoAction);
                 state = "Goto";
             }
         }
