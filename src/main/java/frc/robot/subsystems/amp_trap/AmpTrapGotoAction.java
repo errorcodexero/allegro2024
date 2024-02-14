@@ -45,7 +45,7 @@ public class AmpTrapGotoAction extends Action {
         subsystem.getArm().setAction(armAction);
 
         // Start the MCMotionMagicActions
-        if(armTarget < armNoGoZoneLower && armTarget > armNoGoZoneUpper){
+        if(((armTarget < armNoGoZoneLower && armTarget > armNoGoZoneUpper) && !(armTarget > armNoGoZoneUpper && subsystem.getArm().getPosition() < armNoGoZoneLower)) || ((armTarget > armNoGoZoneUpper && subsystem.getArm().getPosition() > armNoGoZoneUpper) || (armTarget < armNoGoZoneLower && subsystem.getArm().getPosition() < armNoGoZoneLower))){
             subsystem.getArm().setAction(armAction);
             subsystem.getElevator().setAction(elevatorGotoAction);
             state = "Goto";

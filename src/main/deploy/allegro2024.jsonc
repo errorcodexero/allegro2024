@@ -117,8 +117,8 @@
                 "trapprep" : 135
             },
             "no-go-zone" : {
-                "upper" : 90,
-                "lower" : 0
+                "upper" : 70,
+                "lower" : 10
             },
             "pids" : {
                 "position" : {
