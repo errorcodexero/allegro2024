@@ -1,0 +1,53 @@
+{
+    "stimulus" :
+    [
+        {
+            "time" : 0.0,
+            "events" :
+            [
+                {
+                    "model" : "fms",
+                    "instance" : "1",
+                    "values" : 
+                    {
+                        "start" : 10.0,
+                        "autonomous" : 0.0,
+                        "between" : 0.0,
+                        "teleop" : 1000.0,
+                        "fms" : false
+                    }
+                }
+            ]
+        },
+        {
+            "time" : 20.0,
+            "events" : 
+            [
+                {
+                    "model" : "drivergamepad",
+                    "instance" : "1",
+                    "values" : 
+                    {
+                        "comment": "Press the collect button",
+                        "button6" : true
+                    }
+                }                
+            ]
+        },
+        {
+            "time" : 26.0,
+            "events" :
+            [
+                {
+                    "model" : "intake-shooter",
+                    "instance" : "1",
+                    "values" : 
+                    {
+                        "comment" : "Note arrived in intake - triggered sensor",
+                        "note-sensor" : false
+                    }
+                }
+            ]
+        }        
+    ]
+}

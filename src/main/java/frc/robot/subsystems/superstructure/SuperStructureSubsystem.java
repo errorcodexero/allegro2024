@@ -40,6 +40,7 @@ public class SuperStructureSubsystem extends Subsystem {
 
         try {
             climber_ = new MotorEncoderSubsystem(this, "climber", false);
+            addChild(climber_) ;
         }
         catch(Exception ex) {
             MessageLogger logger = getRobot().getMessageLogger() ;

@@ -16,9 +16,10 @@ public class MCMotionMagicAction extends MotorAction {
     private static String [] columns_ = { 
         "time", 
         "target (%%posunits%%)", 
+        "curpos-target (%%posunits%%)",
         "actual (%%posunits%%)",
-        "mctarget (%%posunits%%)",
         "velocity (%%velunits%%)",
+        "curvel-target (%%velunits%%)",
         "voltage (v)",
         "error (percent)"
     } ;    
@@ -103,17 +104,18 @@ public class MCMotionMagicAction extends MotorAction {
         double pos = me.getPosition() ;
         double vel = me.getVelocity() ;
         double error = Math.abs(pos - target_) ;
-        double mctarget = me.getMotorController().getClosedLoopTarget() ;
-        mctarget = me.getEncoder().mapMotorToPhysical(mctarget) ;
+        double mcpostarget = me.getEncoder().mapMotorToPhysical(me.getMotorController().getCurrentTargetPosition()) ;
+        double mcveltarget = me.getEncoder().mapMotorToPhysical(me.getMotorController().getCurrentTargetVelocity()) ;        
 
         if (plot_id_ != -1) {
             data_[0] = getSubsystem().getRobot().getTime() - start_ ;
             data_[1] = target_ ;
-            data_[2] = pos ;
-            data_[3] = mctarget ;
+            data_[2] = mcpostarget ;
+            data_[3] = pos ;
             data_[4] = vel ;
-            data_[5] = me.getMotorController().getVoltage() ;
-            data_[6] = error ;
+            data_[5] = mcveltarget ;
+            data_[6] = me.getMotorController().getVoltage() ;
+            data_[7] = error ;
             getSubsystem().addPlotData(plot_id_, data_);
         }
 
@@ -143,7 +145,7 @@ public class MCMotionMagicAction extends MotorAction {
     public String toString(int indent) {
         String ret ;
 
-        ret = spaces(indent) + "MCMotionMagicAction (" + getSubsystem().getName() + ")";
+        ret = spaces(indent) + "MCMotionMagicAction (" + getSubsystem().getName() + ", " + getSerial() + ")";
         ret += " target=" + target_ ;
 
         return ret ;

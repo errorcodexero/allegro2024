@@ -591,4 +591,13 @@ public class SparkMaxMotorController extends MotorController
     public double getVoltage() throws BadMotorRequestException, MotorRequestFailedException {
         throw new BadMotorRequestException(this, "the SparkMax does not support returning voltage") ;
     }        
-} ;
+    
+    public double getCurrentTargetPosition() throws BadMotorRequestException, MotorRequestFailedException {
+        throw new BadMotorRequestException(this, "the SparkMax does not support returning voltage") ;
+    }      
+
+    public double getCurrentTargetVelocity() throws BadMotorRequestException, MotorRequestFailedException {
+        throw new BadMotorRequestException(this, "the SparkMax does not support returning voltage") ;
+    }    
+}
+    

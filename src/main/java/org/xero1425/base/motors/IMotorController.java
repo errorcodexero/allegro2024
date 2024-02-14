@@ -165,6 +165,14 @@ public interface IMotorController {
     /// \param target the target value, depends on the type
     public void set(XeroPidType type, double target) throws BadMotorRequestException, MotorRequestFailedException ;
 
+    /// \brief Return the current target for the motor controller
+    /// \returns the current target for the motor controller
+    public double getCurrentTargetPosition() throws BadMotorRequestException, MotorRequestFailedException ;
+
+    /// \brief Return the current target for the motor controller
+    /// \returns the current target for the motor controller
+    public double getCurrentTargetVelocity() throws BadMotorRequestException, MotorRequestFailedException ;    
+
     /// \brief Reset the encoder values to zero
     public void resetEncoder() throws BadMotorRequestException, MotorRequestFailedException ;
 

@@ -1,40 +1,45 @@
-
 Item                                                                    Status
 ------------------------------------------------------------------------------
-Basic Bringup
-  Check All Motors Work                                                   Done
-    Swerve                                                                Done
-    Tilt                                                                  Done
-    UpDown                                                                Done
-    Shooter1                                                              Done
-    Shooter2                                                              Done
-    Feeder                                                                Done
-  Verify Tilt Absolute Encoder                                            Done
-  Set alignment of the swerve drive                                       Done
-  Basic shooter test                                                      Done
-  Test Note Sensor on Intake/Collector                                    Done
+Manipulator: Check SparkFlex/Vortex startup
+Tilt: Check angles while disabled
+UpDown: Check angles while disabled
 
-Shoot
-  1st Tune Up/Down Motion Magic                                           Done
-  1st Tune Tilt Motion Magic                                              Done
-  1st Tune Shooter1 Wheels                                                Done
-  1st Tune Shooter2 Wheels                                                Done
-  1st Tune Shooter for various shots (tuning action)                      Done
+Tilt: Tune (kv, kp, maxvel, maxaccel)
+      - experiment with jerk
+      - check position to target
+      - check position following
+      - check velocity following
+      - optimize maxvel & maxaccel
 
-Collect
-  Test Pseudo collect action                                              Done
-  Test Collect At Speed                                                   Done
+UpDown: Tune (kv, kp, maxvel, maxaccel)
+      - check position to target
+      - check position following
+      - check velocity following
+      - optimize maxvel & maxaccel
 
-Drive
-  Check swerve drive modules steer PID                                    Done
-  Tune Swerve Drive Motors (move to MCVelocity?)                          Done
-  Target tracking                                                         
-     - tracking bound to left/right trigger
-     - use this to test db angle capability                               
+Shooter 1/2: Tune (kv, kp)
+      - check actual velocity vs target
 
-Real Shoot
-  TargetTracker
-  Create PWLs for shooting (Tilt + velocity PWL)
+Feeder: power only, no tuning
 
-Automodes
-  Path reflections
+Arm: Tune (kv, kp, maxvel, maxaccel)
+      - check position to target
+      - check position following
+      - check velocity following
+      - optimize maxvel & maxaccel
+
+Elevator: Tune (kv, kp, maxvel, maxaccel)
+      - check position to target
+      - check position following
+      - check velocity following
+      - optimize maxvel & maxaccel
+
+Climber: Tune (kv, kp, maxvel, maxaccel)
+      - check position to target
+      - check position following
+      - check velocity following
+      - optimize maxvel & maxaccel
+
+Manipulator: power only, no tuning
+
+Start working climb sequence w/OI

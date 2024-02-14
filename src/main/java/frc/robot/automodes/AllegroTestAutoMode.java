@@ -9,6 +9,7 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
 
+import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
 import frc.robot.subsystems.intake_shooter.ButchStartCollectAction;
@@ -32,6 +33,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
         MotorEncoderSubsystem tilt = intakeshooter.getTilt();
         MotorEncoderSubsystem updown = intakeshooter.getUpDown();
         AmpTrapSubsystem amptrap = robot.getAmpTrap();
+        MotorEncoderSubsystem climber = superstructure.getClimber() ;
 
         if (createTest()) {
             //
@@ -120,7 +122,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 if (intakeshooter != null && intakeshooter.getShooter1() != null) {
                     double duration = getDouble("duration");
                     double[] times ;
-                    double[] powers = new double[] { 0.1, 0.3, 0.5 };
+                    double[] powers = new double[] { 0.1, 0.3, 0.5, 0.7 };
                     times = new double[powers.length] ;
                     for(int i = 0 ; i < powers.length ; i++) {
                         times[i] = duration ;
@@ -131,7 +133,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 break;
 
             case 32:
-                if (intakeshooter != null && intakeshooter.getShooter1() != null) {
+                if (intakeshooter != null) {
                     addSubActionPair(intakeshooter.getShooter1(),
                             new MCVelocityAction(intakeshooter.getShooter1(), "pids:velocity", getDouble("velocity"), 1.0, true),
                             true);
@@ -245,9 +247,10 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 break;
 
             case 62:
-                if (amptrap != null && amptrap.getElevator() != null) {
+                if (amptrap != null) {
                     addSubActionPair(amptrap.getElevator(),
-                            new MCVelocityAction(amptrap.getElevator(), "pids:velocity", getDouble("velocity"), 1.0, true), true);
+                            new MCMotionMagicAction(amptrap.getElevator(), "pids:position", 
+                                getDouble("position"), 0.01, 0.01), true) ;
                 }
                 break;
 
@@ -257,7 +260,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 70:
-                if (amptrap != null && amptrap.getArm() != null) {
+                if (amptrap != null) {
                     addSubActionPair(amptrap.getArm(),
                             new MotorEncoderPowerAction(amptrap.getArm(), getDouble("power"), getDouble("duration")),
                             true);
@@ -277,7 +280,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 72:
                 if (amptrap != null && amptrap.getArm() != null) {
                     addSubActionPair(amptrap.getArm(),
-                            new MCVelocityAction(amptrap.getArm(), "pids:velocity", getDouble("velocity"), 1.0, true), true);
+                            new MCMotionMagicAction(amptrap.getArm(), "pids:position", getDouble("target"), 1,1), true) ;
                 }
                 break;
 
@@ -318,6 +321,14 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             ///////////////////////////////////////////////////////////////////////// '
             case 100:
                 if (superstructure.getClimber() != null) {
+                    addSubActionPair(amptrap.getElevator(),
+                            new MCMotionMagicAction(amptrap.getElevator(), "pids:position", 
+                                0.304, 0.1, 0.1), true) ;
+
+                   addSubActionPair(amptrap.getArm(),
+                            new MCMotionMagicAction(amptrap.getArm(), "pids:position", 120.0, 
+                            5,5), true) ;
+
                     addSubActionPair(superstructure.getClimber(), new MotorEncoderPowerAction(superstructure.getClimber(),
                             getDouble("power"), getDouble("duration")), true);
                 }
@@ -335,8 +346,22 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 102:
                 if (superstructure.getClimber() != null) {
+                    addSubActionPair(amptrap.getElevator(),
+                            new MCMotionMagicAction(amptrap.getElevator(), "pids:position", 
+                                0.304, 0.1, 0.1), true) ;
+
+                   addSubActionPair(amptrap.getArm(),
+                            new MCMotionMagicAction(amptrap.getArm(), "pids:position", 120.0, 
+                            5,5), true) ;
+
                     addSubActionPair(superstructure.getClimber(),
-                            new MCMotionMagicAction(superstructure.getClimber(), "pids:position", 10, 0.5, 0.5), true);
+                            new MCMotionMagicAction(superstructure.getClimber(), "pids:position", 0.45, 0.02, 0.02), true);
+
+                    addAction(new DelayAction(superstructure.getRobot(), 2.0));
+
+                    addSubActionPair(superstructure.getClimber(),
+                            new MCMotionMagicAction(superstructure.getClimber(), "pids:position", 0.05, 0.02, 0.02), true);
+
                 }
                 break;
 
@@ -439,6 +464,51 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                     addSubActionPair(robot.getSuperStructure(), new TransferIntakeToTrampAction(robot.getSuperStructure()), true) ;
                 }
                 break ;
+
+            //
+            // Test the climb sequence
+            //
+            case 200:
+            {
+                //
+                // Collect a note and move it into intake/shooter subsystem
+                //
+                addSubActionPair(intakeshooter, new ButchStartCollectAction(intakeshooter), true) ;
+
+                //
+                // Transfer the note to the amp/trap subsystem
+                //
+                addSubActionPair(superstructure, new TransferIntakeToTrampAction(superstructure), true) ;
+
+                //
+                // Raise the elevator and rotate the pivot ARM
+                //
+                AmpTrapPositionAction act = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:trap:pivot", "actions:trap:elevator") ;
+                addSubActionPair(amptrap, act, true) ;
+
+                //
+                // Raise the climber hooks
+                //
+                MCMotionMagicAction climb_up = new MCMotionMagicAction(robot.getSuperStructure().getClimber(), "pids:position", "targets:climb-up", 0.05, 0.05) ;
+                addSubActionPair(climber, climb_up, true) ;
+
+                //
+                // Wait for the driver to drive into the chains (we just delay)
+                //
+                addAction(new DelayAction(robot.getRobot(), 30.0)) ;
+
+                //
+                // Raise the climber hooks
+                //
+                MCMotionMagicAction climb_down = new MCMotionMagicAction(robot.getSuperStructure().getClimber(), "pids:position", "targets:climb-down", 0.05, 0.05) ;
+                addSubActionPair(climber, climb_up, true) ;
+
+                //
+                // What next?
+                //
+
+                break ;
+            }
         }
     }
 }

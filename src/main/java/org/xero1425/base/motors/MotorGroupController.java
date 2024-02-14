@@ -363,4 +363,19 @@ public class MotorGroupController extends MotorController
 
         return motors_.get(0).getVoltage() ;
     }    
+
+
+    public double getCurrentTargetPosition() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).getCurrentTargetPosition() ;
+    }    
+    
+    public double getCurrentTargetVelocity() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).getCurrentTargetVelocity() ;
+    }       
 } ;

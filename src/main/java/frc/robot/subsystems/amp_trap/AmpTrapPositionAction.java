@@ -55,6 +55,7 @@ public class AmpTrapPositionAction extends Action {
 
     @Override
     public void start() throws Exception {
+        super.start() ;
         double current = sub_.getArm().getPosition() ;
         if (current < keep_out_min_ && target_angle_ > keep_out_max_) {
             //
@@ -92,6 +93,7 @@ public class AmpTrapPositionAction extends Action {
 
     @Override
     public void run() throws Exception {
+        super.run() ;
         if (state_ == State.CrossMinToMax) {
             if (sub_.getElevator().getPosition() >= keep_out_height_) {
                 sub_.getArm().setAction(arm_goto_target_action_, true) ;

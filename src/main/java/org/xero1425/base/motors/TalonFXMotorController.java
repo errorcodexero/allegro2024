@@ -630,4 +630,12 @@ public class TalonFXMotorController extends MotorController
     public double getVoltage() throws BadMotorRequestException, MotorRequestFailedException {
         return ctrl_.getMotorVoltage().getValue() ;
     }    
+
+    public double getCurrentTargetPosition() throws BadMotorRequestException, MotorRequestFailedException {
+        return ctrl_.getClosedLoopReference().getValue() ;
+    }
+
+    public double getCurrentTargetVelocity() throws BadMotorRequestException, MotorRequestFailedException {
+        return ctrl_.getClosedLoopReferenceSlope().getValue() ;
+    }    
 } ;

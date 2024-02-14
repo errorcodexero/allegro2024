@@ -14,6 +14,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.Timer;
 
 public class SparkFlexMotorController extends MotorController {
    public class SimState {
@@ -62,7 +63,8 @@ public class SparkFlexMotorController extends MotorController {
     }
 
     static public final String SimDeviceNameSparkFlex = "SparkFlex" ;
-    static final int kTicksPerRevolution = 2048 ;
+    static private final double kFactoryResetDelay = 0.1 ;
+    static final int kTicksPerRevolution = 4096 ;
     static private final int kApplyTries = 5 ;
     static final String kRobotType = "SparkFlex" ;
 
@@ -103,14 +105,30 @@ public class SparkFlexMotorController extends MotorController {
             }
             checkError("restoreFactoryDefaults - restoreFactoryDefaults", () -> ctrl_.restoreFactoryDefaults());
 
+            //
+            // We need a short delay to ensure the motor is ready to respond after the factory reset
+            //
+            double start = Timer.getFPGATimestamp() ;
+            while (Timer.getFPGATimestamp() - start < kFactoryResetDelay) {
+                try {
+                    //
+                    // This gives other threads a chance to run
+                    //
+                    Thread.sleep(10);
+                }
+                catch(Exception ex) {
+                }
+            }
+
             pid_ = ctrl_.getPIDController() ;
             encoder_ = ctrl_.getEncoder() ;
             
             // Output the position in ticks
-            // checkError("constructor - setPositionConversionFactor", () -> encoder_.setPositionConversionFactor(kTicksPerRevolution)) ;
+            encoder_.setPositionConversionFactor(kTicksPerRevolution) ;
+            checkError("constructor - setPositionConversionFactor", () -> encoder_.setPositionConversionFactor(kTicksPerRevolution)) ;
 
             // Output velocity in ticks per second
-            // checkError("constructor - setVelocityConversionFactor", () -> encoder_.setVelocityConversionFactor(kTicksPerRevolution / 60.0)) ;
+            checkError("constructor - setVelocityConversionFactor", () -> encoder_.setVelocityConversionFactor(kTicksPerRevolution / 60.0)) ;
         }
     }
 
@@ -245,7 +263,7 @@ public class SparkFlexMotorController extends MotorController {
         return ctrl_ ;
     }
 
-    /// \brief Return a human readable string giving the physical motor controller type (e.g. TalonFX, SparkMaxBrushless, etc.)
+    /// \brief Return a human readable string giving the physical motor controller type (e.g. TalonFX, SparkFlexBrushless, etc.)
     /// \returns a human readable string giving the physical motor controller type
     public String getType() throws BadMotorRequestException, MotorRequestFailedException {
         return kRobotType ;
@@ -300,7 +318,7 @@ public class SparkFlexMotorController extends MotorController {
     public void setNeutralDeadband(double value) throws BadMotorRequestException, MotorRequestFailedException {
         deadband_ = value ;
 
-        throw new BadMotorRequestException(this, "setNeutralDeadband is not supported for SparkMax controllers") ;
+        throw new BadMotorRequestException(this, "setNeutralDeadband is not supported for SparkFlex controllers") ;
     } 
 
     /// \brief Get the deadband value for the motor
@@ -378,7 +396,7 @@ public class SparkFlexMotorController extends MotorController {
             checkError("could not set PID controller OUTMAX value", () -> pid_.setOutputRange(-outmax, outmax));
         }
         else {
-            throw new BadMotorRequestException(this, "setPID is not supported for SparkMax when simulating") ;
+            throw new BadMotorRequestException(this, "setPID is not supported for SparkFlex when simulating") ;
         }
     }
 
@@ -387,7 +405,7 @@ public class SparkFlexMotorController extends MotorController {
     /// \param a the max acceleration for the motion
     /// \param j the max jerk for the motion
     public void setMotionMagicParams(double v, double a, double j) throws BadMotorRequestException, MotorRequestFailedException {
-        throw new BadMotorRequestException(this, "the SparkMaxMotorController does not support motion magic") ;        
+        throw new BadMotorRequestException(this, "the SparkFlexMotorController does not support motion magic") ;        
     }    
 
     /// \brief Set the motor target.  What the target is depends on the mode.
@@ -415,7 +433,7 @@ public class SparkFlexMotorController extends MotorController {
                     checkError("could not set velocity", () -> pid_.setReference(target, CANSparkFlex.ControlType.kVelocity)) ;
                     break ;            
                 case MotionMagic:
-                    throw new BadMotorRequestException(this, "the SparkMaxMotorController does not support motion magic") ;
+                    throw new BadMotorRequestException(this, "the SparkFlexMotorController does not support motion magic") ;
             }
         }
     }
@@ -473,7 +491,7 @@ public class SparkFlexMotorController extends MotorController {
     /// \brief If value is true, the motor controller will consider acceleration data as important and update
     /// the data a quickly as possible.
     public void setAccelerationImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
-        // throw new BadMotorRequestException(this, "the SparkMaxMotorController does not support acceleration") ;       
+        // throw new BadMotorRequestException(this, "the SparkFlexMotorController does not support acceleration") ;       
     }
 
     /// \brief Returns the position of the motor in motor units from the motor controller.  If the motor does not
@@ -512,7 +530,7 @@ public class SparkFlexMotorController extends MotorController {
     /// have an attached encoder, an exception is thrown.
     /// \returns the acceleration of the motor in ticks per second squared
     public double getAcceleration() throws BadMotorRequestException, MotorRequestFailedException {
-        throw new BadMotorRequestException(this, "the SparkMaxMotorController does not support acceleration") ; 
+        throw new BadMotorRequestException(this, "the SparkFlexMotorController does not support acceleration") ; 
     }
     
     public boolean hasAcceleration() throws BadMotorRequestException, MotorRequestFailedException {
@@ -559,10 +577,18 @@ public class SparkFlexMotorController extends MotorController {
     /// \brief Return the closed loop error
     /// \returns  the closed loop error
     public double getClosedLoopError() throws BadMotorRequestException, MotorRequestFailedException {
-        throw new BadMotorRequestException(this, "the SparkMax does not support returning closed loop error") ;
+        throw new BadMotorRequestException(this, "the SparkFlex does not support returning closed loop error") ;
     }    
 
     public double getVoltage() throws BadMotorRequestException, MotorRequestFailedException {
-        throw new BadMotorRequestException(this, "the SparkMax does not support returning voltage") ;
+        throw new BadMotorRequestException(this, "the SparkFlex does not support returning voltage") ;
     }     
+
+    public double getCurrentTargetPosition() throws BadMotorRequestException, MotorRequestFailedException {
+        throw new BadMotorRequestException(this, "the SparkFlex does not support returning voltage") ;
+    }      
+
+    public double getCurrentTargetVelocity() throws BadMotorRequestException, MotorRequestFailedException {
+        throw new BadMotorRequestException(this, "the SparkFlex does not support returning voltage") ;
+    }      
 }

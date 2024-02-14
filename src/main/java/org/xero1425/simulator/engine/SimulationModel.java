@@ -9,6 +9,7 @@ import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 import org.xero1425.misc.SettingsValue;
 import org.xero1425.simulator.models.ISimMotorController;
+import org.xero1425.simulator.models.SparkFlexSimMotorController;
 import org.xero1425.simulator.models.SparkMaxSimMotorController;
 import org.xero1425.simulator.models.TalonFXSimMotorController;
 
@@ -239,6 +240,9 @@ public abstract class SimulationModel {
         }
         else if (type.equals("sparkmax")) {
             ret = new SparkMaxSimMotorController(engine, bus, canid, count, gearing, moment) ;
+        }
+        else if (type.equals("sparkflex")) {
+            ret = new SparkFlexSimMotorController(engine, bus, canid, count, gearing, moment) ;
         }
         else {
             throw new Exception("unrecognized type of simulated motor '" + type + "'");

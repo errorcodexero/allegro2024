@@ -24,9 +24,10 @@ public class AmpTrapSubsystem extends Subsystem {
 
         arm_ = new MotorEncoderSubsystem(this, "arm", true);
         addChild(arm_);
+        arm_.getMotorController().setNeutralDeadband(0.01);
 
-        // manipulator_ = new MotorEncoderSubsystem(this, "manipulator", false);
-        // addChild(manipulator_);
+        manipulator_ = new MotorEncoderSubsystem(this, "manipulator", false);
+        addChild(manipulator_);
 
         holding_note_ = false ;
     }

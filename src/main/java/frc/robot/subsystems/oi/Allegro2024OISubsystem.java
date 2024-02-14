@@ -31,35 +31,34 @@ public class Allegro2024OISubsystem extends OISubsystem {
         startCollectAction_ = new ButchStartCollectAction(intake);
         stopCollectAction_ = new ButchStopCollectionAction(intake);
 
-        // int index ;
-        // MessageLogger logger = getRobot().getMessageLogger() ;
+        int index ;
+        MessageLogger logger = getRobot().getMessageLogger() ;
 
-        
-        // try {
-        //     index = getSettingsValue(OIHIDIndexName).getInteger() ;
-        // } catch (BadParameterTypeException e) {
-        //     logger.startMessage(MessageType.Error) ;
-        //     logger.add("parameter ").addQuoted(OIHIDIndexName) ;
-        //     logger.add(" exists, but is not an integer").endMessage();
-        //     index = -1 ;
-        // } catch (MissingParameterException e) {
-        //     logger.startMessage(MessageType.Error) ;
-        //     logger.add("parameter ").addQuoted(OIHIDIndexName) ;
-        //     logger.add(" does not exist").endMessage();
-        //     index = -1 ;            
-        // }
+        try {
+            index = getSettingsValue(OIHIDIndexName).getInteger() ;
+        } catch (BadParameterTypeException e) {
+            logger.startMessage(MessageType.Error) ;
+            logger.add("parameter ").addQuoted(OIHIDIndexName) ;
+            logger.add(" exists, but is not an integer").endMessage();
+            index = -1 ;
+        } catch (MissingParameterException e) {
+            logger.startMessage(MessageType.Error) ;
+            logger.add("parameter ").addQuoted(OIHIDIndexName) ;
+            logger.add(" does not exist").endMessage();
+            index = -1 ;            
+        }
 
-        // if (index != -1) {
-        //     try {
-        //         oipanel_ = new ButchOIPanel(this, index) ;
-        //         addHIDDevice(oipanel_) ;
-        //     }
-        //     catch(Exception ex) {
-        //         logger.startMessage(MessageType.Error) ;
-        //         logger.add("OI HID device was not created - ") ;
-        //         logger.add(ex.getMessage()).endMessage(); ;
-        //     }
-        // }         
+        if (index != -1) {
+            try {
+                oipanel_ = new ButchOIPanel(this, index) ;
+                addHIDDevice(oipanel_) ;
+            }
+            catch(Exception ex) {
+                logger.startMessage(MessageType.Error) ;
+                logger.add("OI HID device was not created - ") ;
+                logger.add(ex.getMessage()).endMessage(); ;
+            }
+        }
     }
 
     public ButchOIPanel getPanel() {

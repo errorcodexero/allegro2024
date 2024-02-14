@@ -70,7 +70,7 @@
                 "tilt:canid" : 5,
                 "tilt:count" : 1,
                 "tilt:gearing" : 1.0,
-                "tilt:moment" : 0.0001
+                "tilt:moment" : 0.0005
             }
         },
         {
@@ -82,16 +82,16 @@
                 "elevator:canid" : 6,
                 "elevator:count" : 1,
                 "elevator:gearing" : 1.0,
-                "elevator:moment" : 0.000183064,
+                "elevator:moment" : 0.001,
 
                 "arm:type" : "talon-fx",
                 "arm:bus" : "",
                 "arm:canid" : 7,
                 "arm:count" : 1,
                 "arm:gearing" : 1.0,
-                "arm:moment" :  0.001349695365, 
+                "arm:moment" :  0.0001, 
                 
-                "manipulator:type" : "talon-fx",
+                "manipulator:type" : "sparkflex",
                 "manipulator:bus" : "",
                 "manipulator:canid" : 9,
                 "manipulator:count" : 1,

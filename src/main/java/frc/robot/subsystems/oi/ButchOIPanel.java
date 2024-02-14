@@ -8,6 +8,8 @@ import org.xero1425.base.subsystems.oi.OILed.State;
 import org.xero1425.base.subsystems.oi.OIPanelButton.ButtonType;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 import org.xero1425.misc.BadParameterTypeException;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 import org.xero1425.misc.MissingParameterException;
 
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
@@ -333,6 +335,8 @@ public class ButchOIPanel extends OIPanel {
     public void generateActions() {
         super.generateActions();
 
+        OIState prev = state_ ;
+
         switch(state_) {
         case Idle:
             idleState() ;
@@ -409,6 +413,13 @@ public class ButchOIPanel extends OIPanel {
         case ClimbingDown:
             climbingDownState() ;
             break ;
+        }
+
+        if (prev != state_) {
+            MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Debug) ;
+            logger.add("OI State changed : " + prev.toString() + " -> " + state_.toString()) ;
+            logger.endMessage();
         }
     }
 

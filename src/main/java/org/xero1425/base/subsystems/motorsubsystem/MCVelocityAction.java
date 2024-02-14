@@ -218,8 +218,9 @@ public class MCVelocityAction extends MotorAction {
     @Override
     public String toString(int indent) {
         String ret = null ;
+        
 
-        ret = prefix(indent) + "MCVelocityAction, " + getSubsystem().getName() + ", " +  Double.toString(target_) ;
+        ret = prefix(indent) + "MCVelocityAction (" + getSubsystem().getName() + ", " +  getSerial() + "), target = " + target_ ;
         return ret ;
     }
 }

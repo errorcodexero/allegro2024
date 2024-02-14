@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -906,7 +907,17 @@ public abstract class XeroRobot extends TimedRobot {
     }
 
     public boolean shutdownDebug() {
-        return DriverStation.isFMSAttached() || DriverStation.getLocation().getAsInt() == 3 ;
+        boolean ret = false ;
+
+        if (DriverStation.isFMSAttached())
+            ret = true ;
+        else {
+            OptionalInt loc = DriverStation.getLocation() ;
+            if (loc.isEmpty() || loc.getAsInt() == 3)
+                ret = true ;
+        }
+
+        return ret ;
     }
 
     private void logAutoModeState() {
