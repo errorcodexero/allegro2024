@@ -1062,6 +1062,8 @@ public abstract class XeroRobot extends TimedRobot {
         String bot ;
         if (isPracticeBot())
             bot = "PRACTICE" ;
+        else if (RobotBase.isSimulation())
+            bot = "SIMULATION" ;
         else
             bot = "COMPETITION" ;
 

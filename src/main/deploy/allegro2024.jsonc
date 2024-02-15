@@ -344,7 +344,7 @@
                     "tilt-velocity-threshold" : 2.0,
                     "feeder-power" : 0.5,
                     "feeder-time" : 1.0
-                }
+                },
             },
             "pwls" : {
                 "updown" : {
@@ -405,7 +405,7 @@
                 }
             },
             "targets" : {
-                "collect" : 5.0,
+                "collect" : 10.0,
                 "shoot" : 118.0,
                 "stow" : 118.0
             },            
@@ -929,7 +929,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 141,
+        "which": 140,
         "0": {
             "angle": 0,
             "power": 0.5,

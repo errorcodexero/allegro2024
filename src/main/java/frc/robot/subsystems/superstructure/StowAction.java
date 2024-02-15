@@ -27,12 +27,17 @@ public class StowAction extends Action {
     public StowAction(SuperStructureSubsystem sub) throws Exception {
         super(sub.getRobot().getMessageLogger());
 
+        double v1, v2 ;
+
         sub_ = sub ;
 
         climber_down_pos_ = sub_.getClimber().getSettingsValue("actions:climb:hooks-down:target").getDouble() ;
         goto_safe_pos_for_climber_ = new AmpTrapPositionAction(sub_.getAmpTrap(), "actions:climb:pivot", "actions:climb:elevator") ;
         amp_trap_stow_ = new AmpTrapPositionAction(sub_.getAmpTrap(), "actions:stow:pivot", "actions:stow:elevator") ;
-        intake_stow_ = new IntakeGotoNamedPositionAction(sub_.getIntakeShooter(), "actions:stow:updown", "actions:stow:tilt") ;
+
+        v1 = sub_.getIntakeShooter().getUpDown().getSettingsValue("targets:stow").getDouble() ;
+        v2 = sub_.getIntakeShooter().getTilt().getSettingsValue("targets:stow").getDouble() ;
+        intake_stow_ = new IntakeGotoNamedPositionAction(sub_.getIntakeShooter(), v1, v2) ;
     }
 
     @Override

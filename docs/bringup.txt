@@ -5,9 +5,10 @@ Item                                                                    Status
 - Check soft limits on position using elevator (test mode 62)
 
 - Test collect
-  o basic
+  o basic - get the up/down position for collect, currently 10, find out how low it can go
   o press collect and keep holding after note collected
   o press collect while already having a note
+  o check the 1 foot frame extension limit
 
 - Test climber
   o hooks-up
@@ -15,4 +16,16 @@ Item                                                                    Status
   o hooks-down-with-robot
 
 - Test note collect -> xfer
+
+- Tune trap place sequence
+
+- Drive base
+  o Fixed angle
+  o april tags feeding into position
+  
+- Tune shooter PWLs
+
+- Complete auto shoot action
+
+- Auto modes
 
