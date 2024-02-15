@@ -23,7 +23,14 @@ public class IntakeShooterXferAction extends Action {
         super.start();
         sub_.getFeeder().setAction(feeder_, true);
         sub_.getShooter1().setAction(shooter1_, true);
-        sub_.getShooter1().setAction(shooter2_, true);
+        sub_.getShooter2().setAction(shooter2_, true);
+    }
+
+    @Override
+    public void cancel() {
+        feeder_.cancel();
+        shooter1_.cancel();
+        shooter2_.cancel();
     }
 
     @Override

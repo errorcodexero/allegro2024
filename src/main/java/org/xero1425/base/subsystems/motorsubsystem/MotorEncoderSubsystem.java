@@ -33,15 +33,25 @@ public class MotorEncoderSubsystem extends MotorSubsystem
         String encname = "subsystems:" + name + ":hw:encoder" ;
         encoder_ = new XeroEncoder(parent.getRobot(), encname, angular, getMotorController()) ;
 
-        if (isSettingDefined("maxpos"))
-            max_value_ = getSettingsValue("maxpos").getDouble() ;
+        if (isSettingDefined("props:maxpos"))
+            max_value_ = getSettingsValue("props:maxpos").getDouble() ;
         else
-            max_value_ = Double.MAX_VALUE ;
+            max_value_ = Double.POSITIVE_INFINITY ;
 
-        if (isSettingDefined("minpos"))
-            min_value_ = getSettingsValue("minpos").getDouble() ;
+        if (isSettingDefined("props:minpos"))
+            min_value_ = getSettingsValue("props:minpos").getDouble() ;
         else
-            min_value_ = -Double.MAX_VALUE ;
+            min_value_ = Double.NEGATIVE_INFINITY ;
+
+        if (Double.isFinite(max_value_)) {
+            double v = encoder_.mapMotorToPhysical(max_value_) ;
+            getMotorController().enableSoftForwardLimit(v);
+        }
+
+        if (Double.isFinite(min_value_)) {
+            double v = encoder_.mapMotorToPhysical(min_value_) ;            
+            getMotorController().enableSoftReverseLimit(v);
+        }
     }
 
     public XeroEncoder getEncoder() {

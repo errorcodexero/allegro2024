@@ -1,45 +1,18 @@
 Item                                                                    Status
 ------------------------------------------------------------------------------
-Manipulator: Check SparkFlex/Vortex startup
-Tilt: Check angles while disabled
-UpDown: Check angles while disabled
+- Test brake/coast mode switch on OI
 
-Tilt: Tune (kv, kp, maxvel, maxaccel)
-      - experiment with jerk
-      - check position to target
-      - check position following
-      - check velocity following
-      - optimize maxvel & maxaccel
+- Check soft limits on position using elevator (test mode 62)
 
-UpDown: Tune (kv, kp, maxvel, maxaccel)
-      - check position to target
-      - check position following
-      - check velocity following
-      - optimize maxvel & maxaccel
+- Test collect
+  o basic
+  o press collect and keep holding after note collected
+  o press collect while already having a note
 
-Shooter 1/2: Tune (kv, kp)
-      - check actual velocity vs target
+- Test climber
+  o hooks-up
+  o hooks-down
+  o hooks-down-with-robot
 
-Feeder: power only, no tuning
+- Test note collect -> xfer
 
-Arm: Tune (kv, kp, maxvel, maxaccel)
-      - check position to target
-      - check position following
-      - check velocity following
-      - optimize maxvel & maxaccel
-
-Elevator: Tune (kv, kp, maxvel, maxaccel)
-      - check position to target
-      - check position following
-      - check velocity following
-      - optimize maxvel & maxaccel
-
-Climber: Tune (kv, kp, maxvel, maxaccel)
-      - check position to target
-      - check position following
-      - check velocity following
-      - optimize maxvel & maxaccel
-
-Manipulator: power only, no tuning
-
-Start working climb sequence w/OI

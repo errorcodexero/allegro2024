@@ -3,6 +3,8 @@ package org.xero1425.base.subsystems.motorsubsystem;
 import org.xero1425.base.motors.BadMotorRequestException;
 import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.motors.IMotorController.XeroPidType;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 
 public class MCMotionMagicAction extends MotorAction {
 
@@ -24,7 +26,8 @@ public class MCMotionMagicAction extends MotorAction {
         "error (percent)"
     } ;    
 
-    private double start_ ;
+    private double start_time_ ;
+    private double start_pos_ ;
     private double target_ ;
     private double pos_threshold_ ;
     private double vel_threshold_ ;
@@ -32,15 +35,15 @@ public class MCMotionMagicAction extends MotorAction {
 
     private static int which_ = 0 ;
 
-    public MCMotionMagicAction(MotorEncoderSubsystem sub, String name, String target, double posthresh, double velthresh) throws Exception {
-        this(sub, name, sub.getSettingsValue(target).getDouble(), posthresh, velthresh) ;
+    public MCMotionMagicAction(MotorEncoderSubsystem sub, String pidblock, String target, double posthresh, double velthresh) throws Exception {
+        this(sub, pidblock, sub.getSettingsValue(target).getDouble(), posthresh, velthresh) ;
     }    
 
-    public MCMotionMagicAction(MotorEncoderSubsystem sub, String name, double target, double posthresh, double velthresh) throws Exception {
+    public MCMotionMagicAction(MotorEncoderSubsystem sub, String pidblock, double target, double posthresh, double velthresh) throws Exception {
         super(sub);
 
         target_ = target ;
-        name_ = name ;
+        name_ = pidblock ;
 
         pos_threshold_ = posthresh ;
         vel_threshold_ = velthresh ;
@@ -57,7 +60,8 @@ public class MCMotionMagicAction extends MotorAction {
             MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem() ;
             getSubsystem().startPlot(plot_id_, convertUnits(columns_, me.getUnits())) ;
         }
-        start_ = getSubsystem().getRobot().getTime() ;
+        start_time_ = getSubsystem().getRobot().getTime() ;
+        start_pos_ = ((MotorEncoderSubsystem)getSubsystem()).getPosition() ;
 
         //
         // We are using a control loop in the motor controller, get the parameters from the
@@ -108,7 +112,7 @@ public class MCMotionMagicAction extends MotorAction {
         double mcveltarget = me.getEncoder().mapMotorToPhysical(me.getMotorController().getCurrentTargetVelocity()) ;        
 
         if (plot_id_ != -1) {
-            data_[0] = getSubsystem().getRobot().getTime() - start_ ;
+            data_[0] = getSubsystem().getRobot().getTime() - start_time_ ;
             data_[1] = target_ ;
             data_[2] = mcpostarget ;
             data_[3] = pos ;
@@ -120,6 +124,15 @@ public class MCMotionMagicAction extends MotorAction {
         }
 
         if (error < pos_threshold_ && Math.abs(vel) < vel_threshold_) {
+            MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Info, getSubsystem().getLoggerID()) ;
+            logger.add("MCMotionMagicAction complete") ;
+            logger.add("time", getSubsystem().getRobot().getTime() - start_time_) ;
+            logger.add("startpos", start_pos_) ;
+            logger.add("target", target_) ;
+            logger.add("endpos", pos) ;
+            logger.add("endvel", vel) ;
+            logger.endMessage();
             getSubsystem().endPlot(plot_id_);
             setDone() ;
         }

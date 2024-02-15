@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 
 import org.xero1425.base.motors.IMotorController;
 import org.xero1425.base.motors.SparkFlexMotorController;
-import org.xero1425.base.motors.SparkMaxMotorController;
 
 public class SparkFlexSimMotorController extends SimMotorController {
     private static final double kTicksPerRev = 2048 ;

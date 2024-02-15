@@ -10,6 +10,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.FaultID;
 import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkBase.SoftLimitDirection;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 
@@ -534,7 +535,7 @@ public class SparkMaxMotorController extends MotorController
     public double getAcceleration() throws BadMotorRequestException, MotorRequestFailedException {
         throw new BadMotorRequestException(this, "the SparkMaxMotorController does not support acceleration") ; 
     }
-    
+  
     public boolean hasAcceleration() throws BadMotorRequestException, MotorRequestFailedException {
         return false ;
     }
@@ -575,7 +576,6 @@ public class SparkMaxMotorController extends MotorController
         }
     }
 
-
     /// \brief Return the closed loop target
     /// \returns  the closed loop target
     public double getClosedLoopTarget() throws BadMotorRequestException, MotorRequestFailedException {
@@ -599,5 +599,25 @@ public class SparkMaxMotorController extends MotorController
     public double getCurrentTargetVelocity() throws BadMotorRequestException, MotorRequestFailedException {
         throw new BadMotorRequestException(this, "the SparkMax does not support returning voltage") ;
     }    
+
+
+    public void enableSoftForwardLimit(double value) throws BadMotorRequestException, MotorRequestFailedException {
+        checkError("setSoftLimit", () -> ctrl_.setSoftLimit(SoftLimitDirection.kForward, (float)value)) ;
+        checkError("enableSoftLimit", () -> ctrl_.enableSoftLimit(SoftLimitDirection.kForward, true)) ;        
+    }
+
+    public void disableSoftForwardLimit() throws BadMotorRequestException, MotorRequestFailedException {
+        checkError("enableSoftLimit", () -> ctrl_.enableSoftLimit(SoftLimitDirection.kForward, false)) ;          
+    }
+
+    public void enableSoftReverseLimit(double value) throws BadMotorRequestException, MotorRequestFailedException {
+        checkError("setSoftLimit", () -> ctrl_.setSoftLimit(SoftLimitDirection.kReverse, (float)value)) ;
+        checkError("enableSoftLimit", () -> ctrl_.enableSoftLimit(SoftLimitDirection.kReverse, true)) ;        
+    }
+
+    public void disableSoftReverseLimit() throws BadMotorRequestException, MotorRequestFailedException {
+        checkError("enableSoftLimit", () -> ctrl_.enableSoftLimit(SoftLimitDirection.kReverse, false)) ;          
+    }    
+
 }
     

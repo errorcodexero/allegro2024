@@ -63,7 +63,12 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     public ButchOIPanel getPanel() {
         return oipanel_ ;
-    }   
+    }
+
+    @Override
+    public boolean isCoastMode() {
+        return oipanel_.getCoastValue() == 1 ;
+    }
 
     public void startCollect() {
         AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();

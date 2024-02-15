@@ -138,6 +138,6 @@ public class AmpTrapPositionAction extends Action {
     
     @Override
     public String toString(int indent) {
-        return spaces(indent) + "AmpTrapPositionAction";
+        return spaces(indent) + "AmpTrapPositionAction, angle=" + target_angle_ + ", height " + target_height_ ;
     }
 }

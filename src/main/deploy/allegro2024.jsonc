@@ -17,7 +17,7 @@
             "allegro2024oi": true,
             "limelight-edgar" : false,
             "oibuttons" : false,
-            "intake-shooter" : true            
+            "intake-shooter" : false
         },
         "verbose": {
             "swerve" : false,
@@ -95,28 +95,31 @@
                     "distance" : 10.0
                 },
                 "stow" : {
-                    "elevator" : 0.0,
+                    "elevator" : 0.05,
                     "pivot" : 0.0
                 },
                 "trap" : {
-                    "elevator" : 12.0,
-                    "pivot" : 90.0
+                    "elevator" : 0.46,
+                    "pivot" : 0.0
                 },
                 "trap-up" : {
-                    "elevator" : 0.0,
-                    "pivot" : 0.0
+                    "elevator" : 0.46,
+                    "pivot" : 120.0
                 },
                 "amp" : {
-                    "elevator" : 0.0,
-                    "pivot" : 0.0
+                    "elevator" : 0.2,
+                    "pivot" : -90.0
                 },
                 "climb" : {
-                    "elevator" : 0.0,
-                    "pivot" : 0.0
+                    "elevator" : 0.46,
+                    "pivot" : 120.0
                 },
                 "climb-down" : {
                     "elevator" : 0.0,
                     "pivot" : 0.0
+                },
+                "xfer" : {
+                    "power" : 0.2
                 }
             }
         },
@@ -143,7 +146,8 @@
                 }
             },
             "props" : {
-                "max-height" : 0.635                   // meters
+                "minpos" : 0.0,
+                "maxpos" : 0.3                  // 0.635
             },
             "pids" : {
                 "position" : {
@@ -261,29 +265,24 @@
                 }
             },
             "props" : {
-                "max-height" : 0.635
+                "minpos" : 0.0,
+                "maxpos" : 0.48
             },
-            "pids" : {
-                "position" : {
-                    "kp" : 20.0,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kv" : 256.0,
-                    "ka" : 0.0,
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 12.0,
-                    "maxv" : 1,
-                    "maxa" : 1,
-                    "jerk" : 0.0
-
+            "actions" : {
+                "climb" : {
+                    "hooks-up" : {
+                        "power" : 0.3,
+                        "target" : 0.46
+                    },
+                    "hooks-down" : {
+                        "power" : 0.2,
+                        "target" : 0.05
+                    },
+                    "hooks-down-with-robot" : {
+                        "power" : 0.4,
+                        "target" : 0.05
+                    }
                 }
-            },
-            "targets" : {
-                "up" : 0.635,
-                "down" : 0.0,
-                "climb-up" : 0.46,
-                "climb-down" : 0.0
             }
         },
         "intake-shooter" : {
@@ -345,10 +344,6 @@
                     "tilt-velocity-threshold" : 2.0,
                     "feeder-power" : 0.5,
                     "feeder-time" : 1.0
-                },
-                "stow" : {
-                    "intake" : 124.0,
-                    "tilt" : -37.0
                 }
             },
             "pwls" : {
@@ -916,7 +911,9 @@
                     "shoot" : 7,
                     "turtle" : 8,
                     "abort" : 9,
-                    "eject" : 10
+                    "eject" : 10,
+                    "coast1" : 12,
+                    "coast2" : 13
                 },
                 "leds" : {
                     "db-ready" : 1,
@@ -932,7 +929,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 102,
+        "which": 141,
         "0": {
             "angle": 0,
             "power": 0.5,
@@ -1021,7 +1018,7 @@
             "duration" : 2.0
         },
         "62" : {
-            "position" : 0.3048
+            "position" : 0.6
         },
         "70" : {
             "power" : -0.3,

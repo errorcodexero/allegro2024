@@ -129,6 +129,9 @@ public abstract class XeroRobot extends TimedRobot {
     // If true, we have run autonomous already
     private List<LoopType> loop_type_history_ ;
 
+    // If true, we have moved motors to coast mode in disabled state
+    boolean motors_in_coast_mode_ ;
+
     /// \brief The "subsystem" name for the message logger for this class
     public static final String LoggerName = "xerorobot" ;
 
@@ -237,6 +240,7 @@ public abstract class XeroRobot extends TimedRobot {
         automode_ = -1;
 
         layout_ = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField() ;
+        motors_in_coast_mode_ = false ;
     }
 
     public RobotPaths getRobotFileSystemPaths() {
@@ -660,9 +664,6 @@ public abstract class XeroRobot extends TimedRobot {
             updateAutoMode();
         }
 
-        // server_.setRobotStatus("RobotStatus");
-        // robot_subsystem_.publishStatus() ;
-
         try {
             robot_subsystem_.computeState();
         } catch (Exception ex) {
@@ -679,6 +680,11 @@ public abstract class XeroRobot extends TimedRobot {
 
         last_time_ = initial_time;
         loop_count_++ ;
+
+        if (!motors_in_coast_mode_ && isCoastMode()) {
+            motors_.setAllCoastMode() ;
+            motors_in_coast_mode_ = true ;
+        }
     }
 
     /// \brief Called from the base class, must be overridden
@@ -833,6 +839,8 @@ public abstract class XeroRobot extends TimedRobot {
         double initial_time = getTime() ;
         delta_time_ = initial_time - last_time_ ;
 
+        motors_in_coast_mode_ = false ;
+
         if (getCompressor() != null)
             robot_subsystem_.putDashboard("Pressure", DisplayType.Always, getCompressor().getPressure()) ;
 
@@ -984,6 +992,16 @@ public abstract class XeroRobot extends TimedRobot {
         }
         logger_.startMessage(MessageType.Info) ;
         logger_.add("    FMS Attached: ").add(str).endMessage();
+    }
+
+    public boolean isCoastMode() {
+        boolean ret = false ;
+
+        if (robot_subsystem_.getOI() != null) {
+            ret = robot_subsystem_.getOI().isCoastMode() ;
+        }
+
+        return ret ;
     }
 
     private void displayAutoModeState() {

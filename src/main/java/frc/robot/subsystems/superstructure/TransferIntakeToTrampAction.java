@@ -2,7 +2,6 @@ package frc.robot.subsystems.superstructure;
 
 import org.xero1425.base.actions.Action;
 
-import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.amp_trap.AmpTrapXferAction;
 import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
@@ -30,28 +29,16 @@ public class TransferIntakeToTrampAction extends Action {
         v1 = sub_.getSettingsValue("actions:xfer:arm").getDouble() ;
         v2 = sub_.getSettingsValue("actions:xfer:elevator").getDouble() ;
 
-        if (RobotBase.isSimulation()) {
-            v1 = 10.0 ;
-            v2 = 10.0 ;
-        }
         amp_trap_position_action_ = new AmpTrapPositionAction(sub_.getAmpTrap(), v1, v2) ;
 
         v1 = sub_.getSettingsValue("actions:xfer:updown").getDouble() ;
         v2 = sub_.getSettingsValue("actions:xfer:tilt").getDouble() ;
-        if (RobotBase.isSimulation()) {
-            v1 = 10.0 ;
-            v2 = 10.0 ;
-        }        
         intake_shooter_position_action_ = new IntakeGotoNamedPositionAction(sub_.getIntakeShooter(), v1, v2) ;
       
         amp_trap_xfer_action_ = new AmpTrapXferAction(sub_.getAmpTrap()) ;
 
         v1 = sub.getSettingsValue("actions:xfer:feeder-power").getDouble() ;
         v2 = sub.getSettingsValue("actions:xfer:shooter-velocity").getDouble() ;
-        if (RobotBase.isSimulation()) {
-            v1 = 10.0 ;
-            v2 = 10.0 ;
-        }        
         intake_shooter_xfer_action_ = new IntakeShooterXferAction(sub_.getIntakeShooter(), v1, v2) ;
 
         xfer_length_ = sub_.getSettingsValue("actions:xfer:shooter-length").getDouble() ;
@@ -72,11 +59,9 @@ public class TransferIntakeToTrampAction extends Action {
         super.run() ;
         
         if(doing_xfer_) {
-            if (sub_.getIntakeShooter().getShooter1().getPosition() - start_pos_ > xfer_length_) {
-                sub_.getAmpTrap().getManipulator().setPower(0.0);
-                sub_.getIntakeShooter().getFeeder().setPower(0.0);
-                sub_.getIntakeShooter().getShooter1().setPower(0.0);
-                sub_.getIntakeShooter().getShooter2().setPower(0.0);
+            if (sub_.getIntakeShooter().getFeeder().getPosition() - start_pos_ > xfer_length_) {
+                amp_trap_position_action_.cancel() ;
+                intake_shooter_xfer_action_.cancel();
 
                 sub_.getIntakeShooter().setHoldingNote(false);
                 sub_.getAmpTrap().setHoldingNote(true);

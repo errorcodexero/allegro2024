@@ -48,29 +48,29 @@
                 "updown:bus" : "",
                 "updown:canid" : 2,
                 "updown:count" : 1,
-                "updown:gearing" : 1.0,
+                "updown:gearing" : 53.33,
                 "updown:moment" :  0.0001, 
                 
                 "shooter1:type" : "talon-fx",
                 "shooter1:bus" : "",
                 "shooter1:canid" : 3,
                 "shooter1:count" : 1,
-                "shooter1:gearing" : 1.0,
+                "shooter1:gearing" : 0.6,
                 "shooter1:moment" : 0.001,
 
                 "shooter2:type" : "talon-fx",
                 "shooter2:bus" : "",
                 "shooter2:canid" : 4,
                 "shooter2:count" : 1,
-                "shooter2:gearing" : 1.0,
+                "shooter2:gearing" : 0.6,
                 "shooter2:moment" : 0.001,                
 
                 "tilt:type" : "talon-fx",
                 "tilt:bus" : "",
                 "tilt:canid" : 5,
                 "tilt:count" : 1,
-                "tilt:gearing" : 1.0,
-                "tilt:moment" : 0.0005
+                "tilt:gearing" : 21.33,
+                "tilt:moment" : 0.1
             }
         },
         {
@@ -81,14 +81,14 @@
                 "elevator:bus" : "",
                 "elevator:canid" : 6,
                 "elevator:count" : 1,
-                "elevator:gearing" : 1.0,
-                "elevator:moment" : 0.001,
+                "elevator:gearing" : 40.0,
+                "elevator:moment" : 0.000001,
 
                 "arm:type" : "talon-fx",
                 "arm:bus" : "",
                 "arm:canid" : 7,
                 "arm:count" : 1,
-                "arm:gearing" : 1.0,
+                "arm:gearing" : 12.5,
                 "arm:moment" :  0.0001, 
                 
                 "manipulator:type" : "sparkflex",
@@ -102,7 +102,7 @@
                 "climber:bus" : "",
                 "climber:canid" : 10,
                 "climber:count" : 1,
-                "climber:gearing" : 1.0,
+                "climber:gearing" : 101.56,
                 "climber:moment" : 0.000183064
             }
         },        
@@ -187,6 +187,20 @@
                 "drive:gearing" : 0.122807018,
                 "drive:moment" : 0.000036613     
             }
-        }
+        },
+        {
+            "model" : "allegro-oi",
+            "instance" : "1",
+            "props" : {
+                "index" : 2,
+                "name" : "Allegro Custom OI",
+                "axes" : 8,
+                "buttons" : 16,
+                "povs" : 1,
+                "create_early" : true,
+                "name-speaker_amp_trap:1" : 1,
+                "name-speaker_amp_trap:2" : 2
+            }
+        } 
     ]
 }

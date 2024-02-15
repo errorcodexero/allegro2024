@@ -9,7 +9,6 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
 
-import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
 import frc.robot.subsystems.intake_shooter.ButchStartCollectAction;
@@ -18,6 +17,7 @@ import frc.robot.subsystems.intake_shooter.ButchStopCollectionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.intake_shooter.ManualShootAction;
 import frc.robot.subsystems.intake_shooter.ShooterTuningAction;
+import frc.robot.subsystems.superstructure.StowAction;
 import frc.robot.subsystems.superstructure.SuperStructureSubsystem;
 import frc.robot.subsystems.superstructure.TransferIntakeToTrampAction;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
@@ -33,7 +33,6 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
         MotorEncoderSubsystem tilt = intakeshooter.getTilt();
         MotorEncoderSubsystem updown = intakeshooter.getUpDown();
         AmpTrapSubsystem amptrap = robot.getAmpTrap();
-        MotorEncoderSubsystem climber = superstructure.getClimber() ;
 
         if (createTest()) {
             //
@@ -355,12 +354,12 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                             5,5), true) ;
 
                     addSubActionPair(superstructure.getClimber(),
-                            new MCMotionMagicAction(superstructure.getClimber(), "pids:position", 0.45, 0.02, 0.02), true);
+                            new MCMotionMagicAction(superstructure.getClimber(), "pids:position-empty", 0.45, 0.02, 0.02), true);
 
                     addAction(new DelayAction(superstructure.getRobot(), 2.0));
 
                     addSubActionPair(superstructure.getClimber(),
-                            new MCMotionMagicAction(superstructure.getClimber(), "pids:position", 0.05, 0.02, 0.02), true);
+                            new MCMotionMagicAction(superstructure.getClimber(), "pids:position-empty", 0.05, 0.02, 0.02), true);
 
                 }
                 break;
@@ -460,55 +459,16 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////            
             case 140:
-                if (intakeshooter != null && amptrap != null) {
-                    addSubActionPair(robot.getSuperStructure(), new TransferIntakeToTrampAction(robot.getSuperStructure()), true) ;
+                if (superstructure != null) {
+                    addSubActionPair(superstructure, new TransferIntakeToTrampAction(robot.getSuperStructure()), true) ;
                 }
                 break ;
 
-            //
-            // Test the climb sequence
-            //
-            case 200:
-            {
-                //
-                // Collect a note and move it into intake/shooter subsystem
-                //
-                addSubActionPair(intakeshooter, new ButchStartCollectAction(intakeshooter), true) ;
-
-                //
-                // Transfer the note to the amp/trap subsystem
-                //
-                addSubActionPair(superstructure, new TransferIntakeToTrampAction(superstructure), true) ;
-
-                //
-                // Raise the elevator and rotate the pivot ARM
-                //
-                AmpTrapPositionAction act = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:trap:pivot", "actions:trap:elevator") ;
-                addSubActionPair(amptrap, act, true) ;
-
-                //
-                // Raise the climber hooks
-                //
-                MCMotionMagicAction climb_up = new MCMotionMagicAction(robot.getSuperStructure().getClimber(), "pids:position", "targets:climb-up", 0.05, 0.05) ;
-                addSubActionPair(climber, climb_up, true) ;
-
-                //
-                // Wait for the driver to drive into the chains (we just delay)
-                //
-                addAction(new DelayAction(robot.getRobot(), 30.0)) ;
-
-                //
-                // Raise the climber hooks
-                //
-                MCMotionMagicAction climb_down = new MCMotionMagicAction(robot.getSuperStructure().getClimber(), "pids:position", "targets:climb-down", 0.05, 0.05) ;
-                addSubActionPair(climber, climb_up, true) ;
-
-                //
-                // What next?
-                //
-
+            case 141:
+                if (superstructure != null) {
+                    addSubActionPair(superstructure, new StowAction(superstructure), true) ;
+                }
                 break ;
-            }
         }
     }
 }

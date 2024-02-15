@@ -637,5 +637,27 @@ public class TalonFXMotorController extends MotorController
 
     public double getCurrentTargetVelocity() throws BadMotorRequestException, MotorRequestFailedException {
         return ctrl_.getClosedLoopReferenceSlope().getValue() ;
-    }    
+    }
+
+    public void enableSoftForwardLimit(double value) throws BadMotorRequestException, MotorRequestFailedException {
+        cfg_.SoftwareLimitSwitch.ForwardSoftLimitEnable = true ;
+        cfg_.SoftwareLimitSwitch.ForwardSoftLimitThreshold = value / kTicksPerRevolution ;
+        checkError("enableSoftForwardLimit", () -> ctrl_.getConfigurator().apply(cfg_.SoftwareLimitSwitch)) ;
+    }
+
+    public void disableSoftForwardLimit() throws BadMotorRequestException, MotorRequestFailedException {
+        cfg_.SoftwareLimitSwitch.ForwardSoftLimitEnable = false ;
+        checkError("disableSoftForwardLimit", () -> ctrl_.getConfigurator().apply(cfg_.SoftwareLimitSwitch)) ;
+    }
+
+    public void enableSoftReverseLimit(double value) throws BadMotorRequestException, MotorRequestFailedException {
+        cfg_.SoftwareLimitSwitch.ReverseSoftLimitEnable = true ;
+        cfg_.SoftwareLimitSwitch.ReverseSoftLimitThreshold = value / kTicksPerRevolution ;
+        checkError("enableSoftReverseLimit", () -> ctrl_.getConfigurator().apply(cfg_.SoftwareLimitSwitch)) ;
+    }
+
+    public void disableSoftReverseLimit() throws BadMotorRequestException, MotorRequestFailedException {
+        cfg_.SoftwareLimitSwitch.ReverseSoftLimitEnable = false ;
+        checkError("disableSoftReverseLimit", () -> ctrl_.getConfigurator().apply(cfg_.SoftwareLimitSwitch)) ;
+    }
 } ;

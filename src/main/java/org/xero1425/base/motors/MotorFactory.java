@@ -50,6 +50,23 @@ public class MotorFactory {
         motor_list_ = new ArrayList<IMotorController>() ;
     }
 
+    public void setAllCoastMode() {
+        logger_.startMessage(MessageType.Info) ;
+        logger_.add("setting all motors to coast mode while disabled") ;
+        logger_.endMessage();
+
+        for(IMotorController motor : motor_list_) {
+            try {
+                motor.setNeutralMode(IMotorController.XeroNeutralMode.Coast);
+            } catch (Exception ex) {
+                logger_.startMessage(MessageType.Error) ;
+                logger_.add("could not set motor '").add(motor.getName()).add("' to coast mode - ") ;
+                logger_.add(ex.getMessage()) ;
+                logger_.endMessage();
+            }
+        }
+    }
+
     /// \brief This method creates a new motor based on the settings in the settings file.
     /// \param name the base name of the motor
     /// \param id the ID of the motor in the settings file

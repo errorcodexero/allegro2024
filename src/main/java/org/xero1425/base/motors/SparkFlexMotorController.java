@@ -10,11 +10,11 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.FaultID;
 import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkBase.SoftLimitDirection;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 
 import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.Timer;
 
 public class SparkFlexMotorController extends MotorController {
    public class SimState {
@@ -63,7 +63,6 @@ public class SparkFlexMotorController extends MotorController {
     }
 
     static public final String SimDeviceNameSparkFlex = "SparkFlex" ;
-    static private final double kFactoryResetDelay = 0.1 ;
     static final int kTicksPerRevolution = 4096 ;
     static private final int kApplyTries = 5 ;
     static final String kRobotType = "SparkFlex" ;
@@ -105,20 +104,6 @@ public class SparkFlexMotorController extends MotorController {
             }
             checkError("restoreFactoryDefaults - restoreFactoryDefaults", () -> ctrl_.restoreFactoryDefaults());
 
-            //
-            // We need a short delay to ensure the motor is ready to respond after the factory reset
-            //
-            double start = Timer.getFPGATimestamp() ;
-            while (Timer.getFPGATimestamp() - start < kFactoryResetDelay) {
-                try {
-                    //
-                    // This gives other threads a chance to run
-                    //
-                    Thread.sleep(10);
-                }
-                catch(Exception ex) {
-                }
-            }
 
             pid_ = ctrl_.getPIDController() ;
             encoder_ = ctrl_.getEncoder() ;
@@ -296,13 +281,7 @@ public class SparkFlexMotorController extends MotorController {
         current_limit_ = limit ;
 
         if (simstate_ == null) {
-            try {
-                checkError("could not set current limit", () -> ctrl_.setSmartCurrentLimit((int)limit)) ;
-            }
-            catch(MotorRequestFailedException ex) {
-                System.out.println("Code " + ex.getREV().toString()) ;
-                System.out.println("failed") ;
-            }
+            checkError("could not set current limit", () -> ctrl_.setSmartCurrentLimit((int)limit)) ;
         }
     }
 
@@ -591,4 +570,22 @@ public class SparkFlexMotorController extends MotorController {
     public double getCurrentTargetVelocity() throws BadMotorRequestException, MotorRequestFailedException {
         throw new BadMotorRequestException(this, "the SparkFlex does not support returning voltage") ;
     }      
+
+    public void enableSoftForwardLimit(double value) throws BadMotorRequestException, MotorRequestFailedException {
+        checkError("setSoftLimit", () -> ctrl_.setSoftLimit(SoftLimitDirection.kForward, (float)value)) ;
+        checkError("enableSoftLimit", () -> ctrl_.enableSoftLimit(SoftLimitDirection.kForward, true)) ;        
+    }
+
+    public void disableSoftForwardLimit() throws BadMotorRequestException, MotorRequestFailedException {
+        checkError("enableSoftLimit", () -> ctrl_.enableSoftLimit(SoftLimitDirection.kForward, false)) ;          
+    }
+
+    public void enableSoftReverseLimit(double value) throws BadMotorRequestException, MotorRequestFailedException {
+        checkError("setSoftLimit", () -> ctrl_.setSoftLimit(SoftLimitDirection.kReverse, (float)value)) ;
+        checkError("enableSoftLimit", () -> ctrl_.enableSoftLimit(SoftLimitDirection.kReverse, true)) ;        
+    }
+
+    public void disableSoftReverseLimit() throws BadMotorRequestException, MotorRequestFailedException {
+        checkError("enableSoftLimit", () -> ctrl_.enableSoftLimit(SoftLimitDirection.kReverse, false)) ;          
+    }
 }

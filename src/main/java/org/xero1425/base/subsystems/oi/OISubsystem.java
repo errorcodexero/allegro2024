@@ -75,6 +75,10 @@ public class OISubsystem extends Subsystem {
         }
     }
 
+    public boolean isCoastMode() {
+        return false ;
+    }
+
     public void disableGamepad() {
         if (gp_ != null) {
             gp_.disable();

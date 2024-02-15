@@ -20,6 +20,21 @@
             ]
         },
         {
+            "time" : 1.0,
+            "events" :
+            [
+                {
+                    "model" : "allegro-oi",
+                    "instance" : "1",
+                    "values" : 
+                    {
+                        "comment" : "Set Switch To Trap",
+                        "speaker_amp_trap" : 2
+                    }
+                }
+            ]
+        },
+        {
             "time" : 20.0,
             "events" : 
             [

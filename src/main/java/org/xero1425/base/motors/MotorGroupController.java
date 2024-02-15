@@ -313,7 +313,12 @@ public class MotorGroupController extends MotorController
 
     /// \brief If value is true, the motor controller will consider position data as important and update
     /// the data a quickly as possible.
-    public void setPositionImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
+        public double getCurrentTargetVelocity() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        return motors_.get(0).getCurrentTargetVelocity() ;
+    } public void setPositionImportant(ImportantType value) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
@@ -364,7 +369,6 @@ public class MotorGroupController extends MotorController
         return motors_.get(0).getVoltage() ;
     }    
 
-
     public double getCurrentTargetPosition() throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
@@ -372,10 +376,31 @@ public class MotorGroupController extends MotorController
         return motors_.get(0).getCurrentTargetPosition() ;
     }    
     
-    public double getCurrentTargetVelocity() throws BadMotorRequestException, MotorRequestFailedException {
+    public void enableSoftForwardLimit(double value) throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
 
-        return motors_.get(0).getCurrentTargetVelocity() ;
-    }       
+        motors_.get(0).enableSoftForwardLimit(value) ;
+    }
+
+    public void disableSoftForwardLimit() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        motors_.get(0).disableSoftForwardLimit() ;
+    }    
+
+    public void enableSoftReverseLimit(double value) throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        motors_.get(0).enableSoftReverseLimit(value) ;
+    }
+
+    public void disableSoftReverseLimit() throws BadMotorRequestException, MotorRequestFailedException {
+        if (motors_.size() == 0)
+            throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;
+
+        motors_.get(0).disableSoftReverseLimit() ;
+    }
 } ;

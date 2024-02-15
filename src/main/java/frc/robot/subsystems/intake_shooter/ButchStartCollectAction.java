@@ -55,9 +55,14 @@ public class ButchStartCollectAction extends Action {
     public void start() throws Exception {
         super.start() ;
 
-        sub_.getFeeder().setAction(spinner_feeder_on_, true) ;
-        sub_.getTilt().setAction(tilt_collect_, true) ;
-        state_ = CollectState.TiltMoving ;
+        if (sub_.isHoldingNote()) {
+            setDone() ;
+        }
+        else {
+            sub_.getFeeder().setAction(spinner_feeder_on_, true) ;
+            sub_.getTilt().setAction(tilt_collect_, true) ;
+            state_ = CollectState.TiltMoving ;
+        }
     }
 
     @Override

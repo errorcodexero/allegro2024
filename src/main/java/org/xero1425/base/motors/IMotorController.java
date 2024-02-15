@@ -212,5 +212,21 @@ public interface IMotorController {
     /// \returns  the closed loop error
     public double getClosedLoopError() throws BadMotorRequestException, MotorRequestFailedException ;  
     
+    /// \brief Return the voltage applied to the motor
+    /// \returns the voltage applied to the motor
     public double getVoltage() throws BadMotorRequestException, MotorRequestFailedException ;
+
+    /// \brief Set the limit of motion in the forward direction for the motor
+    /// \param value the limit the motor cannot exceed in the forward direction
+    public void enableSoftForwardLimit(double value) throws BadMotorRequestException, MotorRequestFailedException ;
+
+    /// \brief Disable the limit of motion in the forward direction for the motor
+    public void disableSoftForwardLimit() throws BadMotorRequestException, MotorRequestFailedException ;
+
+    /// \brief Set the limit of motion in the reverse direction for the motor
+    /// \param value the limit the motor cannot exceed in the reverse direction
+    public void enableSoftReverseLimit(double value) throws BadMotorRequestException, MotorRequestFailedException ;
+
+    /// \brief Disable the limit of motion in the reverse direction for the motor
+    public void disableSoftReverseLimit() throws BadMotorRequestException, MotorRequestFailedException ;
 }
