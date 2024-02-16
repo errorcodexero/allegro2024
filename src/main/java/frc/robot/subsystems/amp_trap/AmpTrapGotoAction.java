@@ -58,17 +58,17 @@ public class AmpTrapGotoAction extends Action {
         // Start the MCMotionMagicActions
         // If arm target isn't in no-go-zone
         // and the arm target and arm actual aren't on opposite sides
-        // then they can be run in paralell
-        if(((armTarget < armNoGoZoneLower || armTarget > armNoGoZoneUpper) && (!(armTarget > armNoGoZoneUpper && subsystem.getArm().getPosition() < armNoGoZoneLower) || !(armTarget < armNoGoZoneLower && subsystem.getArm().getPosition() > armNoGoZoneUpper)))){
-            subsystem.getArm().setAction(armAction);
-            subsystem.getElevator().setAction(elevatorGotoAction);
+        // then they can be run in paralel
+        if(((armTarget < armNoGoZoneLower || armTarget > armNoGoZoneUpper) && !(armTarget > armNoGoZoneUpper && subsystem.getArm().getPosition() < armNoGoZoneLower) && !(armTarget < armNoGoZoneLower && subsystem.getArm().getPosition() > armNoGoZoneUpper))){
+            subsystem.getArm().setAction(armAction, true);
+            subsystem.getElevator().setAction(elevatorGotoAction, true);
             state = State.Goto;
         }else if (elevatorTarget > elevatorThreshold){
-        // Otherwise, start the 
-            subsystem.getElevator().setAction(elevatorGotoAction);
+        // Otherwise, start the actions
+            subsystem.getElevator().setAction(elevatorGotoAction, true);
             state = State.ThreshGoto;
         }else{
-            subsystem.getElevator().setAction(elevatorThreshAction);
+            subsystem.getElevator().setAction(elevatorThreshAction, true);
             state = State.Thresh;
         }
     }
@@ -88,12 +88,12 @@ public class AmpTrapGotoAction extends Action {
         }
 
         if(state == State.ThreshGoto && subsystem.getElevator().getPosition() > elevatorThreshold){
-            subsystem.getArm().setAction(armAction);
+            subsystem.getArm().setAction(armAction, true);
             state = State.Goto;
         }
         // If the elevator has moved up past the elevator threshold, move the arm to its target position
         if (elevatorThreshAction.isDone() && state == State.Thresh){
-            subsystem.getArm().setAction(armAction);
+            subsystem.getArm().setAction(armAction, true);
             state =  State.ArmGoto;
         }
 
@@ -103,7 +103,7 @@ public class AmpTrapGotoAction extends Action {
                 return;
             }
             if(state == State.ArmGoto){
-                subsystem.getElevator().setAction(elevatorGotoAction);
+                subsystem.getElevator().setAction(elevatorGotoAction, true);
                 state = State.Goto;
             }
         }
