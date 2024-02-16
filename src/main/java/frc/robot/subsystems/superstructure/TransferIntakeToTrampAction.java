@@ -1,6 +1,8 @@
 package frc.robot.subsystems.superstructure;
 
 import org.xero1425.base.actions.Action;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.amp_trap.AmpTrapXferAction;
@@ -8,6 +10,14 @@ import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterXferAction;
 
 public class TransferIntakeToTrampAction extends Action {
+    private enum State {
+        MovingToPosition,
+        WaitingOnSensorNone1,
+        WaitingOnSensorDetected,
+        WaitingOnSensorNone2,
+        FinishingTransfer
+    } ;
+
     private SuperStructureSubsystem sub_ ;
 
     private AmpTrapPositionAction amp_trap_position_action_ ;
@@ -15,9 +25,10 @@ public class TransferIntakeToTrampAction extends Action {
     private AmpTrapXferAction amp_trap_xfer_action_ ;
     private IntakeShooterXferAction intake_shooter_xfer_action_ ;
 
-    private boolean doing_xfer_ ;
     private double xfer_length_ ;
     private double start_pos_ ;
+
+    private State state_ ;
 
     public TransferIntakeToTrampAction(SuperStructureSubsystem sub) throws Exception {
         super(sub.getRobot().getMessageLogger());
@@ -48,8 +59,8 @@ public class TransferIntakeToTrampAction extends Action {
     public void start() throws Exception {
         super.start();
 
+        state_ = State.MovingToPosition ;
         start_pos_ = sub_.getIntakeShooter().getShooter1().getPosition() ;
-        doing_xfer_ = false ;
         sub_.getAmpTrap().setAction(amp_trap_position_action_, true);
         sub_.getIntakeShooter().setAction(intake_shooter_position_action_, true);
     }
@@ -57,26 +68,59 @@ public class TransferIntakeToTrampAction extends Action {
     @Override
     public void run() throws Exception {
         super.run() ;
+
+        State prev = state_ ;
         
-        if(doing_xfer_) {
-            if (sub_.getIntakeShooter().getFeeder().getPosition() - start_pos_ > xfer_length_) {
-                amp_trap_position_action_.cancel() ;
+        switch(state_) {
+        case MovingToPosition:
+            if (amp_trap_position_action_.isDone() && intake_shooter_position_action_.isDone()) {
+                start_pos_ = sub_.getIntakeShooter().getShooter1().getPosition() ;
+                sub_.getAmpTrap().setAction(amp_trap_xfer_action_, true);
+                sub_.getIntakeShooter().setAction(intake_shooter_xfer_action_, true);
+                state_ = State.WaitingOnSensorNone1 ;
+            }
+            break ;
+
+        case WaitingOnSensorNone1:
+            if (!sub_.getIntakeShooter().isNoteCurrentlyDetected()) {
+                state_ = State.WaitingOnSensorDetected ;
+            }
+            break ;
+
+        case WaitingOnSensorDetected:
+            if (sub_.getIntakeShooter().isNoteCurrentlyDetected()) {
+                state_  = State.WaitingOnSensorNone2 ;
+            }
+            break ;
+
+        case WaitingOnSensorNone2:
+            if (!sub_.getIntakeShooter().isNoteCurrentlyDetected()) {
+                state_ = State.FinishingTransfer ;
+                start_pos_ = sub_.getIntakeShooter().getShooter1().getPosition() ;
+            }
+            break ;
+
+        case FinishingTransfer:
+            if (sub_.getIntakeShooter().getShooter1().getPosition() - start_pos_ > xfer_length_) {
+                amp_trap_xfer_action_.cancel() ;
                 intake_shooter_xfer_action_.cancel();
 
                 sub_.getIntakeShooter().setHoldingNote(false);
                 sub_.getAmpTrap().setHoldingNote(true);
                 setDone();
-            }
+            }        
+            break; 
         }
-        else {
-            if (amp_trap_position_action_.isDone() && intake_shooter_position_action_.isDone()) {
-                doing_xfer_ = true ;
-                start_pos_ = sub_.getIntakeShooter().getFeeder().getPosition() ;
 
-                sub_.getAmpTrap().setAction(amp_trap_xfer_action_, true);
-                sub_.getIntakeShooter().setAction(intake_shooter_xfer_action_, true);
-            }
+        if (state_ != prev) {
+            sub_.getRobot().getMessageLogger().startMessage(MessageType.Debug, sub_.getLoggerID()) ;
+            sub_.getRobot().getMessageLogger().add("transfer note state changed: ");
+            sub_.getRobot().getMessageLogger().add(prev.toString()) ;
+            sub_.getRobot().getMessageLogger().add(" ->");            
+            sub_.getRobot().getMessageLogger().add(state_.toString()) ;            
+            sub_.getRobot().getMessageLogger().endMessage();            
         }
+
     }
 
     @Override

@@ -11,6 +11,7 @@ public class ButchStopCollectionAction extends Action {
     private MCMotionMagicAction intake_up_ ;
     private MotorEncoderPowerAction spinner_feeder_off_ ;
     private MCMotionMagicAction tilt_stow_ ;
+    private boolean tilt_running_ ;
 
     public ButchStopCollectionAction(IntakeShooterSubsystem sub) throws Exception {
         super(sub.getRobot().getMessageLogger()) ;
@@ -29,13 +30,15 @@ public class ButchStopCollectionAction extends Action {
 
         sub_.getFeeder().setAction(spinner_feeder_off_, true) ;
         sub_.getUpDown().setAction(intake_up_, true) ;
+        tilt_running_ = false ;
     }
 
     @Override
     public void run() throws Exception {
         super.run() ;
 
-        if (sub_.getUpDown().getPosition() < updown_threshold_) {
+        if (sub_.getUpDown().getPosition() > updown_threshold_ && !tilt_running_) {
+            tilt_running_ = true ;
             sub_.getTilt().setAction(tilt_stow_, true) ;
         }
 

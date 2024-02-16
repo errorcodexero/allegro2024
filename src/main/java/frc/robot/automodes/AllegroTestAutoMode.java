@@ -17,9 +17,11 @@ import frc.robot.subsystems.intake_shooter.ButchStopCollectionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.intake_shooter.ManualShootAction;
 import frc.robot.subsystems.intake_shooter.ShooterTuningAction;
+import frc.robot.subsystems.superstructure.ClimbAction;
 import frc.robot.subsystems.superstructure.StowAction;
 import frc.robot.subsystems.superstructure.SuperStructureSubsystem;
 import frc.robot.subsystems.superstructure.TransferIntakeToTrampAction;
+import frc.robot.subsystems.superstructure.ClimbAction.ClimbType;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class AllegroTestAutoMode extends SwerveTestAutoMode {
@@ -33,6 +35,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
         MotorEncoderSubsystem tilt = intakeshooter.getTilt();
         MotorEncoderSubsystem updown = intakeshooter.getUpDown();
         AmpTrapSubsystem amptrap = robot.getAmpTrap();
+        MotorEncoderSubsystem climber = superstructure.getClimber();
 
         if (createTest()) {
             //
@@ -344,7 +347,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 break;
 
             case 102:
-                if (superstructure.getClimber() != null) {
+                if (climber != null) {
                     addSubActionPair(amptrap.getElevator(),
                             new MCMotionMagicAction(amptrap.getElevator(), "pids:position", 
                                 0.304, 0.1, 0.1), true) ;
@@ -353,13 +356,11 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                             new MCMotionMagicAction(amptrap.getArm(), "pids:position", 120.0, 
                             5,5), true) ;
 
-                    addSubActionPair(superstructure.getClimber(),
-                            new MCMotionMagicAction(superstructure.getClimber(), "pids:position-empty", 0.45, 0.02, 0.02), true);
+                    addSubActionPair(climber, new ClimbAction(climber, ClimbType.HooksUp), true) ;
 
                     addAction(new DelayAction(superstructure.getRobot(), 2.0));
 
-                    addSubActionPair(superstructure.getClimber(),
-                            new MCMotionMagicAction(superstructure.getClimber(), "pids:position-empty", 0.05, 0.02, 0.02), true);
+                    addSubActionPair(climber, new ClimbAction(climber, ClimbType.HooksDown), true) ;
 
                 }
                 break;
@@ -428,27 +429,6 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 120:
-                break;
-
-            case 121:
-                break;
-
-            case 122:
-                break;
-
-            case 123:
-                break;
-
-            case 124: 
-                break;
-            
-            case 125:
-                break;
-            
-            case 126:
-                break;
-
-            case 127:
                 break;
 
             /////////////////////////////////////////////////////////////////////////

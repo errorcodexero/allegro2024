@@ -1,13 +1,14 @@
-Item                                                                    Status
-------------------------------------------------------------------------------
-- Test brake/coast mode switch on OI
+Item                                                                                                  Status
+-----------------------------------------------------------------------------------------------------------
+- Test brake/coast mode switch on OI                                                                  Done
 
-- Check soft limits on position using elevator (test mode 62)
+- Check soft limits on position using elevator (test mode 62)                                         Done
 
 - Test collect
-  o basic - get the up/down position for collect, currently 10, find out how low it can go
+  o basic - get the up/down position for collect, currently 10, find out how low it can go            Done
   o press collect and keep holding after note collected
   o press collect while already having a note
+  
   o check the 1 foot frame extension limit
 
 - Test climber

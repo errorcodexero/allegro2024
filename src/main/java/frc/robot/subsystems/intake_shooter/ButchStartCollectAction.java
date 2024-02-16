@@ -35,7 +35,6 @@ public class ButchStartCollectAction extends Action {
         super(sub.getRobot().getMessageLogger()) ;
         sub_ = sub ;
 
-
         feeder_power_ = sub.getSettingsValue("actions:butch-start-collect:feeder-power").getDouble() ;
         tilt_threshold_ = sub.getSettingsValue("actions:butch-start-collect:tilt-threshold").getDouble() ;
 
@@ -84,9 +83,8 @@ public class ButchStartCollectAction extends Action {
 
             case BothMoving:
                 if (sub_.isNoteCurrentlyDetected()) {
-                    sub_.setHoldingNote(true) ;
-                    state_ = CollectState.WaitingForCollect ;
-                    timer_.start() ;
+                    timer_.start();
+                    state_ = CollectState.WaitingForCollect;
                 }
                 else if (tilt_collect_.isDone() && intake_collect_.isDone()) {
                     state_ = CollectState.WaitingForNote ;
@@ -95,7 +93,6 @@ public class ButchStartCollectAction extends Action {
 
             case WaitingForNote:
                 if (sub_.isNoteCurrentlyDetected()) {
-                    sub_.setHoldingNote(true) ;
                     state_ = CollectState.WaitingForCollect ;
                     timer_.start() ;
                 }
@@ -106,6 +103,7 @@ public class ButchStartCollectAction extends Action {
                     sub_.getFeeder().setAction(spinner_feeder_off_, true) ;
                     sub_.getUpDown().setAction(intake_stow_, true) ;
                     sub_.getTilt().setAction(tilt_stow_, true) ;
+                    sub_.setHoldingNote(true);
                     state_ = CollectState.Stowing;
                 }
                 break;
@@ -134,6 +132,8 @@ public class ButchStartCollectAction extends Action {
     @Override
     public void cancel() {
         super.cancel() ;
+
+        // sub_.getFeeder().setPower(0.0);        
     }
 
     public String toString(int indent) {

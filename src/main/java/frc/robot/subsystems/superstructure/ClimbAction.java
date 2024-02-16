@@ -2,6 +2,8 @@ package frc.robot.subsystems.superstructure;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 
 public class ClimbAction extends Action {
     public enum ClimbType {
@@ -40,7 +42,7 @@ public class ClimbAction extends Action {
     public void start() throws Exception {
         super.start();
 
-        if (!isAtTargetPosition()) {
+        if (isAtTargetPosition()) {
             setDone() ;
         }
         else {
@@ -49,10 +51,21 @@ public class ClimbAction extends Action {
     }
 
     private boolean isAtTargetPosition() {
-        double pos = climb_.getPosition() ;        
-        return 
-            (type_ == ClimbType.HooksUp && pos >= target_) ||                                                   // Climbing up and position is equal or above target
-            ((type_ == ClimbType.HooksDown || type_ == ClimbType.HooksDownWithRobot) && pos <= target_) ;       // Climbing down and position is equal or below target
+        double pos = climb_.getPosition() ;
+
+        if (type_ == ClimbType.HooksUp && pos >= target_) {
+            return true ;
+        }
+
+        if (type_ == ClimbType.HooksDown && pos <= target_) {
+            return true ;
+        }
+
+        if (type_ == ClimbType.HooksDownWithRobot && pos <= target_) {
+            return true ;
+        }
+
+        return false ;
     }
 
     @Override

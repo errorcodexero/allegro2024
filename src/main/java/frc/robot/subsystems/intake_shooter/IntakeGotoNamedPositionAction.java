@@ -16,8 +16,8 @@ public class IntakeGotoNamedPositionAction extends Action{
 
         sub_ = sub;
 
-        updown_action_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position" , updown, 0.5 , 1);
-        tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position" , tilt, 0.5 , 1);
+        updown_action_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position" , updown, 3.0 , 1);
+        tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position" , tilt, 3.0 , 1);
 
         updown_target_ = updown;
         tilt_target_ = tilt;

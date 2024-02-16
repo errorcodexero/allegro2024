@@ -118,7 +118,7 @@ public class MotorEncoderPowerAction extends MotorPowerAction
     public String toString(int indent) {
         String ret ;
 
-        ret = "MotorEncoderPowerAction " + getSubsystem().getName() ;
+        ret = "MotorEncoderPowerAction " + getSubsystem().getName() + " power = " + getPower() ;
         if (isTimed())
             ret += " " + getPower() + " " + getDuration() ;
 

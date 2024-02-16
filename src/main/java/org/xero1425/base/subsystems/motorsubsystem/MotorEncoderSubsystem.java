@@ -44,12 +44,12 @@ public class MotorEncoderSubsystem extends MotorSubsystem
             min_value_ = Double.NEGATIVE_INFINITY ;
 
         if (Double.isFinite(max_value_)) {
-            double v = encoder_.mapMotorToPhysical(max_value_) ;
+            double v = encoder_.mapPhysicalToMotor(max_value_) ;
             getMotorController().enableSoftForwardLimit(v);
         }
 
         if (Double.isFinite(min_value_)) {
-            double v = encoder_.mapMotorToPhysical(min_value_) ;            
+            double v = encoder_.mapPhysicalToMotor(min_value_) ;            
             getMotorController().enableSoftReverseLimit(v);
         }
     }

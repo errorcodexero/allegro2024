@@ -67,7 +67,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     @Override
     public boolean isCoastMode() {
-        return oipanel_.getCoastValue() == 1 ;
+        return oipanel_.getCoastValue() == 0 ;
     }
 
     public void startCollect() {
@@ -81,7 +81,9 @@ public class Allegro2024OISubsystem extends OISubsystem {
         AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();
         IntakeShooterSubsystem intake = robot.getIntakeShooter();
 
-        intake.setAction(stopCollectAction_) ;
+        if (!intake.isHoldingNote()) {
+            intake.setAction(stopCollectAction_) ;
+        }
     }
 
     public void targetLockMode(boolean enable) {

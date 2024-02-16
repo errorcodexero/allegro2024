@@ -240,7 +240,7 @@ public abstract class XeroRobot extends TimedRobot {
         automode_ = -1;
 
         layout_ = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField() ;
-        motors_in_coast_mode_ = false ;
+        motors_in_coast_mode_ = true ;
     }
 
     public RobotPaths getRobotFileSystemPaths() {

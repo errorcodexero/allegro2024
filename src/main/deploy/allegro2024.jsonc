@@ -17,7 +17,8 @@
             "allegro2024oi": true,
             "limelight-edgar" : false,
             "oibuttons" : false,
-            "intake-shooter" : false
+            "intake-shooter" : true,
+            "superstructure" : true
         },
         "verbose": {
             "swerve" : false,
@@ -55,22 +56,22 @@
                     //
                     // The position of the amp trap subsystem to perform the transfer
                     //
-                    "arm" : 30.0,
-                    "elevator" : 0.155,
+                    "arm" : 50.0,
+                    "elevator" : 0.0,
 
                     //
                     // The position of the intake subsystem to perform the transfer
                     //
-                    "updown" : 90.0,
-                    "tilt" : -45.0,
+                    "updown" : 86.5,
+                    "tilt" : 3.4,
 
                     //
                     // The velocity/power of the wheels that perform the transfer and the
                     // distance to move the feeder wheels.
                     //
                     "feeder-power" : 0.3,
-                    "shooter-velocity" : 20,
-                    "shooter-length" : 10.0
+                    "shooter-velocity" : 15,
+                    "shooter-length" : 1.1
                 }
             }
         },
@@ -91,7 +92,7 @@
             },
             "actions" : {
                 "shoot" : {
-                    "power" : 0.5,
+                    "power" : -0.5,
                     "distance" : 10.0
                 },
                 "stow" : {
@@ -99,11 +100,11 @@
                     "pivot" : 0.0
                 },
                 "trap" : {
-                    "elevator" : 0.46,
+                    "elevator" : 0.41,
                     "pivot" : 0.0
                 },
                 "trap-up" : {
-                    "elevator" : 0.46,
+                    "elevator" : 0.41,
                     "pivot" : 120.0
                 },
                 "amp" : {
@@ -111,7 +112,7 @@
                     "pivot" : -90.0
                 },
                 "climb" : {
-                    "elevator" : 0.46,
+                    "elevator" : 0.41,
                     "pivot" : 120.0
                 },
                 "climb-down" : {
@@ -119,7 +120,7 @@
                     "pivot" : 0.0
                 },
                 "xfer" : {
-                    "power" : 0.2
+                    "power" : -0.2
                 }
             }
         },
@@ -147,7 +148,7 @@
             },
             "props" : {
                 "minpos" : 0.0,
-                "maxpos" : 0.3                  // 0.635
+                "maxpos" : 0.6
             },
             "pids" : {
                 "position" : {
@@ -266,7 +267,7 @@
             },
             "props" : {
                 "minpos" : 0.0,
-                "maxpos" : 0.48
+                "maxpos" : 0.465
             },
             "actions" : {
                 "climb" : {
@@ -275,12 +276,12 @@
                         "target" : 0.46
                     },
                     "hooks-down" : {
-                        "power" : 0.2,
-                        "target" : 0.05
+                        "power" : -0.2,
+                        "target" : 0.0
                     },
                     "hooks-down-with-robot" : {
-                        "power" : 0.4,
-                        "target" : 0.05
+                        "power" : -0.4,
+                        "target" : 0.0
                     }
                 }
             }
@@ -405,7 +406,7 @@
                 }
             },
             "targets" : {
-                "collect" : 10.0,
+                "collect" : 0,
                 "shoot" : 118.0,
                 "stow" : 118.0
             },            
@@ -508,7 +509,20 @@
                     "maxv" : 150,
                     "maxa" : 340,
                     "jerk" : 0.0
-                }
+                },
+                "position-slow" : {
+                    "kp" : 0.7,
+                    "ki" : 0.0,
+                    "kd" : 0.0,
+                    "kv" : 0.03,
+                    "ka" : 0.0,
+                    "kg" : 0.0,
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 30,
+                    "maxa" : 340,
+                    "jerk" : 0.0
+                },                
             }
         },
         "intake-shooter1" : {
@@ -929,7 +943,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 140,
+        "which": 32,
         "0": {
             "angle": 0,
             "power": 0.5,
@@ -988,7 +1002,7 @@
             "duration" : 2.0
         },
         "32" : {
-            "velocity" : 25
+            "velocity" : 5
         },
         "40" : {
             "power" : 0.2,
@@ -1018,7 +1032,7 @@
             "duration" : 2.0
         },
         "62" : {
-            "position" : 0.6
+            "position" : 0.3
         },
         "70" : {
             "power" : -0.3,

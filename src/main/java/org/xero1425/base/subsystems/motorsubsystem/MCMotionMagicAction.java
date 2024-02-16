@@ -160,6 +160,8 @@ public class MCMotionMagicAction extends MotorAction {
 
         ret = spaces(indent) + "MCMotionMagicAction (" + getSubsystem().getName() + ", " + getSerial() + ")";
         ret += " target=" + target_ ;
+        ret += " posthresh=" + pos_threshold_ ;
+        ret += " velthresh=" + vel_threshold_ ;
 
         return ret ;
     }
