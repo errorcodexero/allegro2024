@@ -288,35 +288,35 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 }
                 break;
 
-            /////////////////////////////////////////////////////////////////////////
-            //
-            // Wrists motor tests
-            //
-            /////////////////////////////////////////////////////////////////////////
-            case 80:
-                if (amptrap != null && amptrap.getWrist() != null) {
-                    addSubActionPair(amptrap.getWrist(),
-                            new MotorEncoderPowerAction(amptrap.getWrist(), getDouble("power"), getDouble("duration")),
-                            true);
-                }
-                break;
+            // /////////////////////////////////////////////////////////////////////////
+            // //
+            // // Wrists motor tests
+            // //
+            // /////////////////////////////////////////////////////////////////////////
+            // case 80:
+            //     if (amptrap != null && amptrap.getWrist() != null) {
+            //         addSubActionPair(amptrap.getWrist(),
+            //                 new MotorEncoderPowerAction(amptrap.getWrist(), getDouble("power"), getDouble("duration")),
+            //                 true);
+            //     }
+            //     break;
 
-            case 81:
-                if (amptrap != null && amptrap.getWrist() != null) {
-                    double duration = getDouble("duration");
-                    double[] times = new double[] { duration, duration, duration, duration, duration };
-                    double[] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9 };
-                    addSubActionPair(amptrap.getWrist(),
-                            new MotorPowerSequenceAction(amptrap.getWrist(), times, powers), true);
-                }
-                break;
+            // case 81:
+            //     if (amptrap != null && amptrap.getWrist() != null) {
+            //         double duration = getDouble("duration");
+            //         double[] times = new double[] { duration, duration, duration, duration, duration };
+            //         double[] powers = new double[] { 0.1, 0.3, 0.5, 0.7, 0.9 };
+            //         addSubActionPair(amptrap.getWrist(),
+            //                 new MotorPowerSequenceAction(amptrap.getWrist(), times, powers), true);
+            //     }
+            //     break;
 
-            case 82:
-                if (amptrap != null && amptrap.getWrist() != null) {
-                    addSubActionPair(amptrap.getWrist(),
-                            new MCVelocityAction(amptrap.getWrist(), "pids:velocity", getDouble("velocity"), true), true);
-                }
-                break;
+            // case 82:
+            //     if (amptrap != null && amptrap.getWrist() != null) {
+            //         addSubActionPair(amptrap.getWrist(),
+            //                 new MCVelocityAction(amptrap.getWrist(), "pids:velocity", getDouble("velocity"), true), true);
+            //     }
+            //     break;
 
             /////////////////////////////////////////////////////////////////////////
             //

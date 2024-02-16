@@ -10,8 +10,8 @@ public class PrepTrapAction extends Action{
     // Moves arm
     private MCMotionMagicAction tiltArm_;
 
-    // Moves wrist
-    private MCMotionMagicAction tiltWrist_;
+    // // Moves wrist
+    // private MCMotionMagicAction tiltWrist_;
 
     // Extends climber
     private MCMotionMagicAction extendClimber_;
@@ -24,7 +24,7 @@ public class PrepTrapAction extends Action{
         sub_ = sub;
         elevate_ = new MCMotionMagicAction(sub.getElevator(), "pids:position", "targets:trapprep", 0.5, 0.5);
         tiltArm_ = new MCMotionMagicAction(sub.getArm(), "pids:position", "targets:trapprep", 1, 1);
-        tiltWrist_ = new MCMotionMagicAction(sub.getWrist(), "pids:position", "targets:trapprep", 2, 2);
+        //tiltWrist_ = new MCMotionMagicAction(sub.getWrist(), "pids:position", "targets:trapprep", 2, 2);
         extendClimber_ = new MCMotionMagicAction(sub.getClimber(), "pids:position", "targets:climbprep", 0.5, 0.5);
     }
 
@@ -33,14 +33,14 @@ public class PrepTrapAction extends Action{
         super.start();
         sub_.getElevator().setAction(elevate_, true);
         sub_.getArm().setAction(tiltArm_, true);
-        sub_.getWrist().setAction(tiltWrist_, true);
+        //sub_.getWrist().setAction(tiltWrist_, true);
         sub_.getClimber().setAction(extendClimber_, true);
     }
 
     @Override
     public void run() throws Exception{
         super.run();
-        if(elevate_.isDone() && tiltArm_.isDone() && tiltWrist_.isDone() && extendClimber_.isDone()){
+        if(elevate_.isDone() && tiltArm_.isDone() && extendClimber_.isDone()){
             setDone();
         }
     }

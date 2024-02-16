@@ -10,8 +10,8 @@ public class AmpTrapSubsystem extends Subsystem {
     // The arm is attached to the top of the elevator, and moves the manipulator and wrist. 0 is fully pointed down, and it is calculated in degrees.  
     private MotorEncoderSubsystem arm_;
 
-    // The wrist is attached to the end of the arm. It has the manipulator attached to it. 0 is fully pointed down (the manipulator wheels are paralel with the elevator), and it is calculated in degrees.  
-    private MotorEncoderSubsystem wrist_;
+    // // The wrist is attached to the end of the arm. It has the manipulator attached to it. 0 is fully pointed down (the manipulator wheels are paralel with the elevator), and it is calculated in degrees.  
+    // private MotorEncoderSubsystem wrist_;
 
     // The manipulator is the two rolling wheels attached to the wrist. They are used for holding and placing the note. They should use a power action, and it is calculated in revolutions. 
     private MotorEncoderSubsystem manipulator_;
@@ -28,8 +28,8 @@ public class AmpTrapSubsystem extends Subsystem {
         arm_ = new MotorEncoderSubsystem(this, "arm", true);
         addChild(arm_);
 
-        wrist_ = new MotorEncoderSubsystem(this, "wrist", true);
-        addChild(wrist_);
+        // wrist_ = new MotorEncoderSubsystem(this, "wrist", true);
+        // addChild(wrist_);
 
         manipulator_ = new MotorEncoderSubsystem(this, "manipulator", false);
         addChild(manipulator_);
@@ -46,9 +46,9 @@ public class AmpTrapSubsystem extends Subsystem {
         return arm_;
     }
 
-    public MotorEncoderSubsystem getWrist() {
-        return wrist_;
-    }
+    // public MotorEncoderSubsystem getWrist() {
+    //     return wrist_;
+    // }
 
     public MotorEncoderSubsystem getManipulator() {
         return manipulator_;

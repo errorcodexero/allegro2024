@@ -20,7 +20,7 @@ public class AmpTrapEjectAction extends Action{
     private AmpTrapSubsystem sub_;
     private MCMotionMagicAction eject_elevator_;
     private MCMotionMagicAction eject_arm_;
-    private MCMotionMagicAction eject_wrist_;
+    //private MCMotionMagicAction eject_wrist_;
     private MCVelocityAction eject_manipulator_;
     private XeroTimer timer_;
     private State state_;
@@ -36,7 +36,7 @@ public class AmpTrapEjectAction extends Action{
         sub_ = sub;
         eject_elevator_ = new MCMotionMagicAction(sub_.getElevator(), "pids:position" , "targets:stow" , 0.5 , 1);
         eject_arm_ = new MCMotionMagicAction(sub_.getArm(), "pids:position" , "targets:stow" , 0.5 , 1);
-        eject_wrist_ = new MCMotionMagicAction(sub_.getWrist(), "pids:position" , "targets:stow" , 0.5 , 1);
+        //eject_wrist_ = new MCMotionMagicAction(sub_.getWrist(), "pids:position" , "targets:stow" , 0.5 , 1);
         eject_manipulator_ = new MCVelocityAction(sub_.getManipulator(), "pids:position", "targets:eject", true);
         timer_ = new XeroTimer(sub_.getRobot(), "Eject", 1.5);
         stow_amp_trap_ = new AmpTrapStowAction(sub_);
@@ -48,7 +48,7 @@ public class AmpTrapEjectAction extends Action{
 
         state_ = State.ReadyToEject;
         sub_.getElevator().setAction(eject_elevator_, true);
-        sub_.getWrist().setAction(eject_wrist_, true);
+        //sub_.getWrist().setAction(eject_wrist_, true);
         sub_.getArm().setAction(eject_arm_, true);
     }
 
@@ -81,7 +81,7 @@ public class AmpTrapEjectAction extends Action{
 
     // Creating and defining what happens during each state before it can switch
     private void stateReadyToEject(){
-        if (eject_elevator_.isDone() && eject_arm_.isDone() && eject_wrist_.isDone()){
+        if (eject_elevator_.isDone() && eject_arm_.isDone()){
             state_ = State.Eject;
             sub_.getManipulator().setAction(eject_manipulator_, true);
             timer_.start();
