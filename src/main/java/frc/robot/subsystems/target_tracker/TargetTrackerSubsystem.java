@@ -46,10 +46,10 @@ public class TargetTrackerSubsystem extends Subsystem {
         if (value.isPresent()) {
             if (value.get() == Alliance.Red) {
                 target_number_ = AprilTags.RED_SPEAKER_CENTER ;
-                target_pos_3d = field_layout.getTagPose(4).orElse(null);
+                target_pos_3d = field_layout.getTagPose(target_number_).orElse(null);
             } else if (value.get() == Alliance.Blue) {
                 target_number_ = AprilTags.BLUE_SPEAKER_CENTER ;
-                target_pos_3d = field_layout.getTagPose(7).orElse(null);
+                target_pos_3d = field_layout.getTagPose(target_number_).orElse(null);
             }
 
             if (target_pos_3d != null) {
