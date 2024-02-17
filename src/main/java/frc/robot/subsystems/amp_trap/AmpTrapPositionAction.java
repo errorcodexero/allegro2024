@@ -5,12 +5,12 @@ import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 
 public class AmpTrapPositionAction extends Action {
     private enum State {
-        Idle,
-        CrossMinToMax,
-        CrossMaxToMin,
-        CrossMinToMaxWaitClear,
-        CrossMaxToMinWaitClear,
-        DirectToTarget
+        Idle,                           // Doing nothing
+        CrossMinToMax,                  // The arm needs to cross the keepout zone from min to max
+        CrossMaxToMin,                  // The arm needs to cross the keepout zone from max to min
+        CrossMinToMaxWaitClear,         // The arm is actively crossing from min to max, waiting for the arm to clear the keepout zone
+        CrossMaxToMinWaitClear,         // The arm is actively crossing from max to min, waiting for the arm to clear the keepout zone
+        DirectToTarget                  // Everything is clear, just waiting for the actions to complete
     }
 
     private AmpTrapSubsystem sub_ ;
@@ -62,10 +62,23 @@ public class AmpTrapPositionAction extends Action {
             // We need to cross the keep out zone from min to max
             //
             if (target_height_ > keep_out_height_) {
+                //
+                // The eventual height is above the keep out zone, so we can go directly to the target height
+                // and just monitor the elevator height and start the arm when we get above the keepout height
+                //
                 sub_.getElevator().setAction(elevator_goto_target_action_, true) ;
             } else {
+                //
+                // The eventual height is below the keepout zone, so we need to go to the keepout height,
+                // move the arm, and then go to the target height
+                //
                 sub_.getElevator().setAction(keepout_height_action_, true) ;
             }
+
+            //
+            // In either case we are going to move the arm to the min position and wait for the elevator
+            // to be above the keepout height before moving the arm to the target position
+            //
             sub_.getArm().setAction(arm_goto_min_action_, true) ;
             state_ = State.CrossMinToMax ;
         }
@@ -74,16 +87,29 @@ public class AmpTrapPositionAction extends Action {
             // We need to cross the keep out zone from max to min
             //
             if (target_height_ > keep_out_height_) {
+                //
+                // The eventual height is above the keep out zone, so we can go directly to the target height
+                // and just monitor the elevator height and start the arm when we get above the keepout height
+                //
                 sub_.getElevator().setAction(elevator_goto_target_action_, true) ;
             } else {
+                //
+                // The eventual height is below the keepout zone, so we need to go to the keepout height,
+                // move the arm, and then go to the target height
+                //
                 sub_.getElevator().setAction(keepout_height_action_, true) ;
             }
+
+            //
+            // In either case we are going to move the arm to the max position and wait for the elevator
+            // to be above the keepout height before moving the arm to the target position
+            //            
             sub_.getArm().setAction(arm_goto_max_action_, true) ;
             state_ = State.CrossMaxToMin ;
         }
         else {
             //
-            // We can go directly to the targets
+            // There is no interference with the keepout zone, both elevator and arm can go directly to the target
             //
             sub_.getElevator().setAction(elevator_goto_target_action_, true) ;
             sub_.getArm().setAction(arm_goto_target_action_, true) ;
@@ -95,6 +121,10 @@ public class AmpTrapPositionAction extends Action {
     public void run() throws Exception {
         super.run() ;
         if (state_ == State.CrossMinToMax) {
+            //
+            // We are going from the min to max position, we need to wait for the elevator to be above the keepout
+            // height before we can move the arm to the target position
+            //
             if (sub_.getElevator().getPosition() >= keep_out_height_) {
                 sub_.getArm().setAction(arm_goto_target_action_, true) ;
             }
@@ -106,6 +136,10 @@ public class AmpTrapPositionAction extends Action {
                 state_ = State.CrossMinToMaxWaitClear ;
             }
         } else if (state_ == State.CrossMaxToMin) {
+            //
+            // We are going from the max to min position, we need to wait for the elevator to be above the keepout
+            // height before we can move the arm to the target position
+            //
             if (sub_.getElevator().getPosition() >= keep_out_height_) {
                 sub_.getArm().setAction(arm_goto_target_action_, true) ;
             }
@@ -118,18 +152,29 @@ public class AmpTrapPositionAction extends Action {
             }            
         }
         else if (state_ == State.CrossMinToMaxWaitClear) {
+            //
+            // Wait for the ARM to clear the keepout zone and then have the elevator go to the
+            // the target height
+            //
             if (sub_.getArm().getPosition() >= keep_out_max_) {
                 sub_.getElevator().setAction(elevator_goto_target_action_, true) ;
                 state_ = State.DirectToTarget ;
             }
         }
         else if (state_ == State.CrossMaxToMinWaitClear) {
+            //
+            // Wait for the ARM to clear the keepout zone and then have the elevator go to the
+            // the target height
+            //
             if (sub_.getArm().getPosition() <= keep_out_min_) {
                 sub_.getElevator().setAction(elevator_goto_target_action_, true) ;
                 state_ = State.DirectToTarget ;
             }
         }
         else if (state_ == State.DirectToTarget) {
+            //
+            // Everything is all clear, wait for the actions to complete
+            //
             if (elevator_goto_target_action_.isDone() && arm_goto_target_action_.isDone()) {
                 setDone() ;
             }

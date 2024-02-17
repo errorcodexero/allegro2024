@@ -41,6 +41,8 @@ public class AllegroRobot2024 extends RobotSubsystem {
 
         lidar_ = new LidarSubsystem(this);
         addChild(lidar_) ;
+
+        db_.setVision(ll_);
     }
 
     public SuperStructureSubsystem getSuperStructure() {

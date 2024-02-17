@@ -153,6 +153,10 @@ public class ButchOIPanel extends OIPanel {
         state_ = OIState.Idle ;
     }
 
+    public boolean isIdle() {
+        return state_ == OIState.Idle ;
+    }
+
     public void setVelocityReady(boolean b) {
         shooter_velocity_ready_led_.setState(b ? State.ON : State.OFF);
     }

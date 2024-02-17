@@ -163,7 +163,7 @@ public class MCTrackPosAction extends MotorAction {
     public String toString(int indent) {
         String ret ;
 
-        ret = spaces(indent) + "MCTrackPosAction (" + getSubsystem().getName() + ", " + getSerial() + ")";
+        ret = spaces(indent) + "MCTrackPosAction (" + getSubsystem().getName() + ")";
         ret += " target=" + target_ ;        
 
         return ret ;

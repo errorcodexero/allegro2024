@@ -10,26 +10,17 @@ public abstract class MotorAction extends Action
     // The subsystem of interest
     private final MotorSubsystem motor_subsystem_;
 
-    private static int global_serial_number_ = 1 ;
-    private static int serial_number_ ;
-
     /// \brief Create the MotorAction
     /// \param subsystem the subsystem for the action
     public MotorAction(final MotorSubsystem subsystem) {
         super(subsystem.getRobot().getMessageLogger());
         motor_subsystem_ = subsystem;
-
-        serial_number_ = global_serial_number_++ ;
     }
 
     /// \brief Return the subsystem this action targets
     /// \returns the subsystem this action targets
     public MotorSubsystem getSubsystem() {
         return motor_subsystem_;
-    }
-
-    public int getSerial() {
-        return serial_number_ ;
     }
 
     protected String[] convertUnits(String[] columns, String[] units) {

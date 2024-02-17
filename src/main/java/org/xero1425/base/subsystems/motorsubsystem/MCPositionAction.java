@@ -133,7 +133,7 @@ public class MCPositionAction extends MotorAction {
     public String toString(int indent) {
         String ret = null ;
 
-        ret = prefix(indent) + "MCPositionAction (" + getSubsystem().getName() + ", " +  getSerial() + ") " + "target = " + target_ ;
+        ret = prefix(indent) + "MCPositionAction (" + getSubsystem().getName() + ") " + "target = " + target_ ;
         return ret ;
     }    
 }

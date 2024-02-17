@@ -48,7 +48,7 @@ public class Allegro2024 extends XeroRobot {
       if (ret != null)
           return ret;
 
-      return "auto";
+      return "collect-twice";
   }
 
   @Override

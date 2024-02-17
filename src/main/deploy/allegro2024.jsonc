@@ -5,7 +5,7 @@
             "actions": true,
             "pathmanager": false,
             "xerorobot": false,
-            "simulator": false,
+            "SIMULATION": false,
 
             // Special settings
             "pathfollowing": false,
@@ -412,7 +412,7 @@
             },            
             "pids" : {
                 "position" : {
-                    "kp" : 0.35,
+                    "kp" : 7.5,
                     "ki" : 0.0,
                     "kd" : 0.0,
                     "kv" : 0.056,
@@ -498,7 +498,7 @@
             },
             "pids" : {
                 "position" : {
-                    "kp" : 0.7,
+                    "kp" : 2.0,
                     "ki" : 0.0,
                     "kd" : 0.0,
                     "kv" : 0.03,
@@ -509,20 +509,7 @@
                     "maxv" : 150,
                     "maxa" : 340,
                     "jerk" : 0.0
-                },
-                "position-slow" : {
-                    "kp" : 0.7,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kv" : 0.03,
-                    "ka" : 0.0,
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 12.0,
-                    "maxv" : 30,
-                    "maxa" : 340,
-                    "jerk" : 0.0
-                },                
+                }               
             }
         },
         "intake-shooter1" : {
@@ -545,9 +532,9 @@
                     "type" : "motor",
                     "m": 0.000813802,
                     "b" : 0,
-                    "posunits" : "revs",
-                    "velunits" : "RPS",
-                    "accunits" : "RPS/s"
+                    "posunits" : "rev",
+                    "velunits" : "rev/s",
+                    "accunits" : "rev/s/s"
                 }
             },
             "pids" : {
@@ -645,7 +632,8 @@
                         "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" : -54.318,
-                            "COMPETITION" : 0.0
+                            "COMPETITION" : 0.0,
+                            "SIMULATION" : 0.0                            
                         }
                     }
                 },
@@ -708,7 +696,8 @@
                         "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" : -287.58,
-                            "COMPETITION" : 0
+                            "COMPETITION" : 0,
+                            "SIMULATION" : 0.0                            
                         }
                     }
                 },
@@ -739,14 +728,15 @@
                         "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" : -169.629,
-                            "COMPETITION" : 0.0
+                            "COMPETITION" : 0.0,
+                            "SIMULATION" : 0.0                            
                         }
                     }
                 }
             },
 
             "angle-tracker" : {
-                "p" : 0.5
+                "p" : 0.1
             },
 
             //
@@ -816,13 +806,15 @@
                 "fl": {
                     "kp":  {
                         "PRACTICE" : 0.0,
-                        "COMPETITION" : 0.0
+                        "COMPETITION" : 0.0,
+                        "SIMULATION" : 0.0
                     },
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
                         "PRACTICE" : 0.200573641,
-                        "COMPETITION" : 0
+                        "COMPETITION" : 0,
+                        "SIMULATION" : 0.0                        
                     },
                     "min": -1.0,
                     "max": 1.0,
@@ -831,13 +823,15 @@
                 "fr": {
                     "kp":  {
                         "PRACTICE" : 0.0,
-                        "COMPETITION" : 0.0
+                        "COMPETITION" : 0.0,
+                        "SIMULATION" : 0.0                        
                     },
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
                         "PRACTICE" : 0.200573641,
-                        "COMPETITION" : 0
+                        "COMPETITION" : 0,
+                        "SIMULATION" : 0.0                        
                     },
                     "min": -1.0,
                     "max": 1.0,
@@ -846,13 +840,15 @@
                 "bl": {
                     "kp":  {
                         "PRACTICE" : 0.0,
-                        "COMPETITION" : 0.0
+                        "COMPETITION" : 0.0,
+                        "SIMULATION" : 0.0                        
                     },
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
                         "PRACTICE" : 0.200573641,
-                        "COMPETITION" : 0
+                        "COMPETITION" : 0,
+                        "SIMULATION" : 0.0                        
                     },
                     "min": -1.0,
                     "max": 1.0,
@@ -861,13 +857,15 @@
                 "br": {
                     "kp":  {
                         "PRACTICE" : 0.0,
-                        "COMPETITION" : 0.0
+                        "COMPETITION" : 0.0,
+                        "SIMULATION" : 0.0                        
                     },
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
                         "PRACTICE" : 0.200573641,
-                        "COMPETITION" : 0
+                        "COMPETITION" : 0,
+                        "SIMULATION" : 0.0                        
                     },
                     "min": -1.0,
                     "max": 1.0,
@@ -943,7 +941,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 32,
+        "which": 118,
         "0": {
             "angle": 0,
             "power": 0.5,

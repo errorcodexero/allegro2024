@@ -71,17 +71,27 @@ public class Allegro2024OISubsystem extends OISubsystem {
     }
 
     public void startCollect() {
-        AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();
-        IntakeShooterSubsystem intake = robot.getIntakeShooter();
-
-        intake.setAction(startCollectAction_) ;
+        if (oipanel_.isIdle()) {        
+            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();
+            IntakeShooterSubsystem intake = robot.getIntakeShooter();
+            intake.setAction(startCollectAction_) ;
+        }
+        else {
+            MessageLogger logger = getRobot().getMessageLogger() ;            
+            logger.startMessage(MessageType.Debug, getLoggerID()) ;
+            logger.add("collect requested while OI Panel was not in idle state") ;
+            logger.endMessage() ;
+        }
     }
 
     public void stopCollect() {
-        AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();
-        IntakeShooterSubsystem intake = robot.getIntakeShooter();
-
-        if (!intake.isHoldingNote()) {
+        //
+        // If the panel is not idle, then it has detected a note and is processing
+        // what comes next.
+        //
+        if (oipanel_.isIdle()) {
+            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();
+            IntakeShooterSubsystem intake = robot.getIntakeShooter();
             intake.setAction(stopCollectAction_) ;
         }
     }
@@ -89,28 +99,21 @@ public class Allegro2024OISubsystem extends OISubsystem {
     public void targetLockMode(boolean enable) {
         AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();
         robot.getSwerve().setSWRotationControl(enable);
-        robot.getTargetTracker().sendTargetInfoToDB(enable);
+        robot.getTargetTracker().feedTargetToDB(enable);
     }
 
-    public void manualShootSubwoofer() {
+    public void manualShoot(String name) {
         try {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();
             IntakeShooterSubsystem intake = robot.getIntakeShooter();
-            intake.setAction(new ManualShootAction(intake, "subwoofer"));    
+            intake.setAction(new ManualShootAction(intake, name));
         }
         catch(Exception ex) {
+            MessageLogger logger = getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Error).add("exception thrown in manualShoot - " + ex.getMessage()).endMessage();
+            logger.logStackTrace(ex.getStackTrace());
         }
     }
-
-    public void manualShootPodium() {
-        try {
-            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();
-            IntakeShooterSubsystem intake = robot.getIntakeShooter();
-            intake.setAction(new ManualShootAction(intake, "podium"));    
-        }
-        catch(Exception ex) {
-        }
-    }    
 
     @Override
     protected void gamePadCreated(Gamepad gp) {
@@ -119,10 +122,10 @@ public class Allegro2024OISubsystem extends OISubsystem {
             swgp.bindButtons(resetButtons, ()->swgp.resetSwerveDriveDirection(), null);            
             swgp.bindButton(Gamepad.Button.LBack, ()-> swgp.startDriveBaseX(), ()->swgp.stopDriveBaseX());   
             swgp.bindButton(Gamepad.Button.RBack, ()->startCollect(), ()->stopCollect());
-            swgp.bindButton(Gamepad.Button.LTrigger, ()->targetLockMode(false), null);
-            swgp.bindButton(Gamepad.Button.RTrigger, ()->targetLockMode(true), null);
-            swgp.bindButton(Gamepad.Button.A, ()->manualShootSubwoofer(), null);
-            swgp.bindButton(Gamepad.Button.A, ()->manualShootPodium(), null);
+            swgp.bindButton(Gamepad.Button.LTrigger, ()->targetLockMode(true), null);
+            swgp.bindButton(Gamepad.Button.RTrigger, ()->targetLockMode(false), null);
+            swgp.bindButton(Gamepad.Button.A, ()->manualShoot("subwoofer"), null);
+            swgp.bindButton(Gamepad.Button.X, ()->manualShoot("podium"), null);
         }
     }    
 }

@@ -45,6 +45,7 @@ public abstract class Action
     /// this method should call the base class method.
     public void start() throws Exception {
         logger_.startMessage(MessageType.Debug, logger_id_) ;
+        logger_.add(getID()).add(":");
         logger_.add("starting action: ") ;
         addActionToMessage() ;
         logger_.endMessage();
@@ -95,6 +96,7 @@ public abstract class Action
     public void cancel() {
         if (!isDone()) {
             logger_.startMessage(MessageType.Debug, logger_id_) ;
+            logger_.add(getID()).add(":");            
             logger_.add("canceling action: ") ;
             addActionToMessage() ;
             logger_.endMessage();
@@ -120,6 +122,7 @@ public abstract class Action
     /// action done state to true.
     protected void setDone() {
         logger_.startMessage(MessageType.Debug, logger_id_) ;
+        logger_.add(getID()).add(":");        
         logger_.add("completing action: ") ;
         addActionToMessage() ;   
         logger_.endMessage();

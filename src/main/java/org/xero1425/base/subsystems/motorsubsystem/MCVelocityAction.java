@@ -220,7 +220,7 @@ public class MCVelocityAction extends MotorAction {
         String ret = null ;
         
 
-        ret = prefix(indent) + "MCVelocityAction (" + getSubsystem().getName() + ", " +  getSerial() + "), target = " + target_ ;
+        ret = prefix(indent) + "MCVelocityAction (" + getSubsystem().getName() + "), target = " + target_ ;
         return ret ;
     }
 }

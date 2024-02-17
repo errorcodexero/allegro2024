@@ -1,5 +1,8 @@
 package org.xero1425.base.subsystems.oi;
 
+import java.sql.Driver;
+import java.util.Optional;
+
 import org.xero1425.base.LoopType;
 import org.xero1425.base.subsystems.RobotSubsystem;
 import org.xero1425.base.subsystems.swerve.SwerveBaseSubsystem;
@@ -24,6 +27,7 @@ public class SwerveDriveGamepad extends Gamepad {
     private double power_ ;
     private SwerveDriveChassisSpeedAction action_;
     private SwerveDriveXPatternAction x_action_;
+    private double ysign_ = 1.0 ;
 
     private boolean holding_x_;
 
@@ -48,6 +52,12 @@ public class SwerveDriveGamepad extends Gamepad {
 
     @Override
     public void init(LoopType ltype) {
+        if (ltype == LoopType.Autonomous || ltype == LoopType.Teleop) {
+            Optional<Alliance> value = DriverStation.getAlliance() ;
+            if (value.isPresent() && value.get() == Alliance.Red) {
+                ysign_ = -1 ;
+            }
+        }
     }
 
     @Override
@@ -113,7 +123,7 @@ public class SwerveDriveGamepad extends Gamepad {
         // For Y axis, forward is -1, back is +1
 
         try {
-            ly = -DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTY.value) ;
+            ly = -DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTY.value) * ysign_ ;
             lx = -DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTX.value) ;
             rx = -DriverStation.getStickAxis(getIndex(), AxisNumber.RIGHTX.value) ;
         }
@@ -140,6 +150,11 @@ public class SwerveDriveGamepad extends Gamepad {
                 // This is the first robot loop with the rotation stick at zero.  Setup the mode to
                 // hold the angle and remember the current robot angle.
                 //
+                MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+                logger.startMessage(MessageType.Debug, getSubsystem().getLoggerID()) ;
+                logger.add("swerve gamepad, locking rotation") ;
+                logger.add("rotation", db_.getHeading().getDegrees()) ;
+                logger.endMessage();
                 db_.setSWRotationControl(true);
                 db_.setSWRotationAngle(db_.getHeading().getDegrees());
             }

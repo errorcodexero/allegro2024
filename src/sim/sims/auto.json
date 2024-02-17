@@ -11,7 +11,7 @@
                     "values" : 
                     {
                         "start" : 10.0,
-                        "autonomous" : 40.0,
+                        "autonomous" : 40000.0,
                         "between" : 0.0,
                         "teleop" : 0.0,
                         "fms" : false

@@ -2,6 +2,7 @@ package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
+import org.xero1425.base.subsystems.motorsubsystem.MCTrackPosAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 
@@ -9,6 +10,8 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
+import frc.robot.subsystems.oi.Allegro2024OISubsystem;
+import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class ShooterTuningAction extends Action {
 
@@ -18,12 +21,12 @@ public class ShooterTuningAction extends Action {
         Nothing
     } ;
 
-    private final double kFeederPowerLevel = 0.2 ;
+    private final double kFeederPowerLevel = 0.4 ;
     private final double kTiltLowerLimit = -70.0 ;
     private final double kTiltUpperLimit = 0.0 ;
     private final double kShooterVelocityLimit = 100 ;
 
-    private final double kTiltPositionTolerance = 1.0 ;
+    private final double kTiltPositionTolerance = 2.0 ;
     private final double kTiltVelocityTolerance = 1.0 ;
 
     private final double kVelocityFireTolerance = 10.0 ;
@@ -46,6 +49,7 @@ public class ShooterTuningAction extends Action {
     private MCVelocityAction velocity1_action_ ;
     private MCVelocityAction velocity2_action_ ;
     private MCMotionMagicAction tilt_action_ ;
+    private MCTrackPosAction updown_action_ ;
     private MotorEncoderPowerAction feeder_start_action_ ;
     private MotorEncoderPowerAction feeder_stop_action_ ;
     private ShuffleboardTab tab_ ;
@@ -73,7 +77,9 @@ public class ShooterTuningAction extends Action {
         velocity2_action_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", 0.0, kVelocityFireTolerance, false);
         tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", -65.0, kTiltPositionTolerance, kTiltVelocityTolerance) ;
         feeder_start_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), kFeederPowerLevel);
-        feeder_stop_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), 0.0);        
+        feeder_stop_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), 0.0);
+        double v = sub_.getUpDown().getSettingsValue("targets:shoot").getDouble() ;
+        updown_action_ = new MCTrackPosAction(sub_.getUpDown(), "pids:position", v, 2, 1, false) ;
 
         plot_data_ = new Double[plot_columns_.length] ;
     }
@@ -98,6 +104,7 @@ public class ShooterTuningAction extends Action {
         sub_.getShooter1().setAction(velocity1_action_, true) ;
         sub_.getShooter2().setAction(velocity2_action_, true) ;
         sub_.getTilt().setAction(tilt_action_, true) ;
+        sub_.getUpDown().setAction(updown_action_, true) ;
     }
 
     private PlotStatus checkPlot() {
@@ -117,8 +124,6 @@ public class ShooterTuningAction extends Action {
     private boolean applySettings() {
         boolean curval = apply_widget_.getEntry().getBoolean(false) ;
         boolean ret = curval && !last_apply_value_ ;
-
-        System.out.println("OUT " + curval + ", last " + last_apply_value_);
 
         last_apply_value_ = curval ;
         return ret ;
@@ -195,7 +200,16 @@ public class ShooterTuningAction extends Action {
     }
 
     private boolean isReady() {
-        return velocity1_action_.isAtVelocity() && velocity2_action_.isAtVelocity() && Math.abs(sub_.getTilt().getPosition() - current_tilt_) < kTiltFireTolerance ;
+        AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;
+        Allegro2024OISubsystem oi = robot.getOI() ;
+
+        boolean tiltready = Math.abs(sub_.getTilt().getPosition() - current_tilt_) < kTiltFireTolerance ;
+        oi.getPanel().setDBReady(velocity1_action_.isAtVelocity());
+        oi.getPanel().setVelocityReady(velocity2_action_.isAtVelocity());
+        oi.getPanel().setTiltReady(tiltready) ;
+        oi.getPanel().setAprilTagReady(updown_action_.isAtTarget());
+
+        return velocity1_action_.isAtVelocity() && velocity2_action_.isAtVelocity() &&  tiltready && updown_action_.isAtTarget() ;
     }
     
     public String toString(int indent) {

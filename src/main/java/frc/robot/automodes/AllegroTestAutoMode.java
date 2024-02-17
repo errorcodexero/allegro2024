@@ -8,12 +8,14 @@ import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
+import org.xero1425.base.subsystems.swerve.SwerveBaseSubsystem;
+import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
 import frc.robot.subsystems.intake_shooter.ButchStartCollectAction;
 import frc.robot.subsystems.intake_shooter.ButchStopCollectionAction;
-
+import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.intake_shooter.ManualShootAction;
 import frc.robot.subsystems.intake_shooter.ShooterTuningAction;
@@ -36,6 +38,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
         MotorEncoderSubsystem updown = intakeshooter.getUpDown();
         AmpTrapSubsystem amptrap = robot.getAmpTrap();
         MotorEncoderSubsystem climber = superstructure.getClimber();
+        SwerveBaseSubsystem swerve = robot.getSwerve() ;
 
         if (createTest()) {
             //
@@ -405,6 +408,9 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 118:
                 if (intakeshooter != null) {
+                    double v = intakeshooter.getUpDown().getSettingsValue("targets:shoot").getDouble() ;
+                    MCMotionMagicAction updownstow = new MCMotionMagicAction(intakeshooter.getUpDown(), "pids:position", v, 2.5, 1.0) ;
+                    addSubActionPair(intakeshooter.getUpDown(), updownstow, true) ;
                     addSubActionPair(intakeshooter, new ShooterTuningAction(intakeshooter), true);
                 }
                 break ;
@@ -448,6 +454,10 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 if (superstructure != null) {
                     addSubActionPair(superstructure, new StowAction(superstructure), true) ;
                 }
+                break ;
+
+            case 150:
+                addSubActionPair(swerve, new SwerveTrackAngle(swerve, 90, 1.0, 1.0), true) ;
                 break ;
         }
     }

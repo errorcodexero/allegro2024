@@ -1,9 +1,13 @@
 package frc.robot.subsystems.target_tracker;
 
+import java.util.Optional;
+
 import org.xero1425.base.LoopType;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
+import org.xero1425.misc.XeroMath;
 
+import frc.robot.AprilTags;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -17,38 +21,41 @@ public class TargetTrackerSubsystem extends Subsystem {
     private Pose2d target_pos_;
     private double distance_between_robot_and_target_;
     private double angle_to_target_;
-    private boolean send_target_info_to_db_ ;
     private boolean sees_target_ ;
     private int target_number_ ;
+    private boolean feed_angle_to_db_ ;
 
     public TargetTrackerSubsystem(Subsystem parent) {
         super(parent, "targettracker");
-
         sees_target_ = false ;
+        feed_angle_to_db_ = false ;
+    }
+
+    public void feedTargetToDB(boolean b) {
+        feed_angle_to_db_ = b ;
     }
 
     @Override
     public void init(LoopType prev, LoopType current) {
         super.init(prev, current);
 
-        send_target_info_to_db_ = false ;
         AprilTagFieldLayout field_layout = getRobot().getAprilTags();
 
         Pose3d target_pos_3d = null;
-        if (DriverStation.getAlliance().get() == Alliance.Red) {
-            target_number_ = 4 ;
-            target_pos_3d = field_layout.getTagPose(4).orElse(null);
-        } else if (DriverStation.getAlliance().get() == Alliance.Blue) {
-            target_number_ = 7 ;
-            target_pos_3d = field_layout.getTagPose(7).orElse(null);
-        }
-        if (target_pos_3d != null) {
-            target_pos_ = target_pos_3d.toPose2d();
-        }
-    }
+        Optional<Alliance> value = DriverStation.getAlliance() ;
+        if (value.isPresent()) {
+            if (value.get() == Alliance.Red) {
+                target_number_ = AprilTags.RED_SPEAKER_CENTER ;
+                target_pos_3d = field_layout.getTagPose(4).orElse(null);
+            } else if (value.get() == Alliance.Blue) {
+                target_number_ = AprilTags.BLUE_SPEAKER_CENTER ;
+                target_pos_3d = field_layout.getTagPose(7).orElse(null);
+            }
 
-    public void sendTargetInfoToDB(boolean v) {
-        send_target_info_to_db_ = v ;
+            if (target_pos_3d != null) {
+                target_pos_ = target_pos_3d.toPose2d();
+            }
+        }
     }
 
     @Override
@@ -64,17 +71,20 @@ public class TargetTrackerSubsystem extends Subsystem {
             putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
             putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);
             
-            if (send_target_info_to_db_) {
+            if (feed_angle_to_db_) {
                 //
-                // Tell the drive base the angle we want you to have.
+                // Tell the drive base the angle we want you to have.  This is only honored if it is enabled on the
+                // drivebase.  The driver will enable or disable this feature via the gamepad.
                 //
-                robotSubsystem.getSwerve().setSWRotationAngle(angle_to_target_ + robot_pos_.getRotation().getDegrees());
+                robotSubsystem.getSwerve().setSWRotationAngle(XeroMath.normalizeAngleDegrees(angle_to_target_ + robot_pos_.getRotation().getDegrees()));
             }
 
             LimeLightSubsystem ll = robotSubsystem.getLimelight() ;
-            if (ll.hasAprilTag(target_number_)) {
-                sees_target_ = true ;
-            }
+            sees_target_ = ll.validTargets() && ll.hasAprilTag(target_number_) ;
+
+            putDashboard("ll:dist", DisplayType.Always, distance_between_robot_and_target_);
+            putDashboard("ll:angle", DisplayType.Always, angle_to_target_);
+            putDashboard("ll:tag", DisplayType.Always, sees_target_);
         }
     }
 
@@ -82,27 +92,27 @@ public class TargetTrackerSubsystem extends Subsystem {
         return sees_target_ ;
     }
 
-    private double calculateDistanceBetweenPoses(Pose2d robot, Pose2d target) {        
-        if (target == null) {
-            System.out.println("Target is null");
-        }
-        double dist = robot.getTranslation().getDistance(target.getTranslation());
-        return dist;
-    }
-
     public double getDistance() {
         return distance_between_robot_and_target_;
-    }
-
-    private double calculateAngleBetweenPoses(
-            Pose2d robot,
-            Pose2d target) {
-        Transform2d diff = target.minus(robot);
-        double rotation = diff.getRotation().getDegrees();
-        return rotation;
-    }
+    }    
 
     public double getRotation() {
         return angle_to_target_;
+    }    
+
+    private static double calculateDistanceBetweenPoses(Pose2d robot, Pose2d target) {        
+        double dist = Double.POSITIVE_INFINITY ;
+
+        if (target != null) {
+            dist = robot.getTranslation().getDistance(target.getTranslation());
+        }
+
+        return dist;
+    }
+
+    private static double calculateAngleBetweenPoses(Pose2d robot, Pose2d target) {
+        Transform2d diff = target.minus(robot);
+        double rotation = diff.getRotation().getDegrees();
+        return rotation;
     }
 }
