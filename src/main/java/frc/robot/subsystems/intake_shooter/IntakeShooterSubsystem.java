@@ -48,12 +48,14 @@ public class IntakeShooterSubsystem extends Subsystem{
 
         updown_ = new MotorEncoderSubsystem(this,"intake-updown", false);
         addChild(updown_);
+        updown_.getMotorController().setNeutralDeadband(0.0);
 
         feeder_ = new MotorEncoderSubsystem(this,"intake-feeder", false);
         addChild(feeder_);
 
         tilt_ = new MotorEncoderSubsystem(this,"intake-tilt", false);
         addChild(tilt_);
+        tilt_.getMotorController().setNeutralDeadband(0.0);
 
         shooter1_ = new MotorEncoderSubsystem(this,"intake-shooter1", false);
         addChild(shooter1_);

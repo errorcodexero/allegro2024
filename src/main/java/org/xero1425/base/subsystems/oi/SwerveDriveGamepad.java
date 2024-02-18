@@ -54,7 +54,7 @@ public class SwerveDriveGamepad extends Gamepad {
     public void init(LoopType ltype) {
         if (ltype == LoopType.Autonomous || ltype == LoopType.Teleop) {
             Optional<Alliance> value = DriverStation.getAlliance() ;
-            if (value.isPresent() && value.get() == Alliance.Red) {
+            if (value.isPresent() && value.get() == Alliance.Blue) {
                 ysign_ = -1 ;
             }
         }

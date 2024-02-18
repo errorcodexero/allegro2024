@@ -64,7 +64,9 @@ public class IntakeAutoShootAction extends Action {
         "tilt (deg)",
         "dbready (bool)",
         "april-tag (bool)",
-        "oiready (bool)"
+        "oiready (bool)",
+        "swvel (deg/s)",
+        "swerr (deg)"
     } ;
 
     public IntakeAutoShootAction(IntakeShooterSubsystem intake, TargetTrackerSubsystem tracker, SwerveTrackAngle rotate, boolean initialDriveTeamReady, boolean requireAprilTag) throws Exception {
@@ -86,7 +88,7 @@ public class IntakeAutoShootAction extends Action {
         double updown_pos_threshold = sub_.getSettingsValue("actions:auto-shoot:updown-pos-threshold").getDouble() ;
         double updown_vel_threshold = sub_.getSettingsValue("actions:auto-shoot:updown-velocity-threshold").getDouble() ;
         double tilt_pos_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-pos-threshold").getDouble() ;
-        double tilt_vel_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-velocity-threshold").getDouble() ; 
+        double tilt_vel_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-velocity-threshold").getDouble() ;
 
         if (RobotBase.isSimulation()) {
             velthresh = 10.0 ;  
@@ -103,7 +105,7 @@ public class IntakeAutoShootAction extends Action {
         shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", kVelocityStart, velthresh, false) ;
         shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", kVelocityStart, velthresh, false) ;
         updown_ = new MCTrackPosAction(sub_.getUpDown(), "pids:position", kUpDownStart, updown_pos_threshold, updown_vel_threshold, false) ;      
-        tilt_ = new MCTrackPosAction(sub_.getTilt(), "pids:position", kTiltStart, tilt_pos_threshold, tilt_vel_threshold, false) ;
+        tilt_ = new MCTrackPosAction(sub_.getTilt(), "pids:position", kTiltStart, tilt_pos_threshold, tilt_vel_threshold,true) ;
 
         double feedpower = sub_.getSettingsValue("actions:auto-shoot:feeder-power").getDouble() ;
         double feedtime = sub_.getSettingsValue("actions:auto-shoot:feeder-time").getDouble() ;
@@ -203,6 +205,8 @@ public class IntakeAutoShootAction extends Action {
                 data_[8] = rotate_.isAtTarget() ? 1.0 : 0.0 ;
                 data_[9] = aprilTagTest() ? 0.5 : 0.0 ;
                 data_[10] = drive_team_ready_ ? 1.5 : 0.0 ;
+                data_[11] = rotate_.getRotVel() ;
+                data_[12] = rotate_.getError() ;
                 sub_.addPlotData(plot_id_, data_);
             }
 

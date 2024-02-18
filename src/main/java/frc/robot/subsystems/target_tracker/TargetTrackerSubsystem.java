@@ -12,7 +12,9 @@ import frc.robot.subsystems.toplevel.AllegroRobot2024;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 
@@ -70,7 +72,15 @@ public class TargetTrackerSubsystem extends Subsystem {
         
             putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
             putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);
-            
+
+            putDashboard("tt_target_x", DisplayType.Always, target_pos_.getX()) ;
+            putDashboard("tt_target_y", DisplayType.Always, target_pos_.getY()) ;
+            putDashboard("tt_target_ang", DisplayType.Always, target_pos_.getRotation().getDegrees()) ;
+
+            putDashboard("tt_robotpos_x", DisplayType.Always, target_pos_.getX()) ;
+            putDashboard("tt_robotpos_y", DisplayType.Always, target_pos_.getY()) ;
+            putDashboard("tt_robotpos_ang", DisplayType.Always, target_pos_.getRotation().getDegrees()) ;            
+
             if (feed_angle_to_db_) {
                 //
                 // Tell the drive base the angle we want you to have.  This is only honored if it is enabled on the
@@ -111,8 +121,8 @@ public class TargetTrackerSubsystem extends Subsystem {
     }
 
     private static double calculateAngleBetweenPoses(Pose2d robot, Pose2d target) {
-        Transform2d diff = target.minus(robot);
-        double rotation = diff.getRotation().getDegrees();
-        return rotation;
+        Translation2d diff = robot.getTranslation().minus(target.getTranslation()) ;
+        Rotation2d rotation = new Rotation2d(diff.getX(), diff.getY()) ;
+        return XeroMath.normalizeAngleDegrees(rotation.getDegrees() - robot.getRotation().getDegrees()) ;
     }
 }

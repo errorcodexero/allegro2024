@@ -14,6 +14,7 @@ import org.xero1425.misc.MissingParameterException;
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.amp_trap.AmpTrapShootAction;
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
+import frc.robot.subsystems.intake_shooter.IntakeEjectAction;
 import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.superstructure.ClimbAction;
@@ -48,7 +49,9 @@ public class ButchOIPanel extends OIPanel {
         ShootingTrap,
         Climbed,
         PrepToClimbDown,
-        ClimbingDown
+        ClimbingDown,
+        Eject,
+        BusyExternal
     }
 
     //
@@ -120,6 +123,8 @@ public class ButchOIPanel extends OIPanel {
     // This action moves the climber hooks down to cause the robot to climb.
     private ClimbAction hooks_down_action_ ;
 
+    private IntakeEjectAction intake_eject_action_ ;
+
     //
     // This action moves the elevator/arm to the position to shoot the note into the amp
     //
@@ -178,6 +183,15 @@ public class ButchOIPanel extends OIPanel {
         super.computeState();
     }
 
+    public void setBusyExternal(boolean b) {
+        if (b) {
+            state_ = OIState.BusyExternal ;
+        }
+        else {
+            state_ = OIState.Idle ;
+        }
+    }
+
     private void dispositionNoteInIntake() {
         AllegroRobot2024 robot = (AllegroRobot2024)getSubsystem().getRobot().getRobotSubsystem() ;
         NoteTarget target = getNoteTarget() ;         
@@ -193,7 +207,7 @@ public class ButchOIPanel extends OIPanel {
 
     private void idleState() {
         AllegroRobot2024 robot = (AllegroRobot2024)getSubsystem().getRobot().getRobotSubsystem() ;
-        if (robot.getIntakeShooter().isHoldingNote()) {
+        if (robot.getIntakeShooter().isHoldingNote() && getCoastValue() == 0) {
             dispositionNoteInIntake() ;
         }
     }
@@ -217,6 +231,7 @@ public class ButchOIPanel extends OIPanel {
                 //
                 // Find the desired absolute angle for the robot to aim at the goal.
                 //
+                getSubsystem().getGamePad().disable();
                 double angle = robot.getTargetTracker().getRotation() + robot.getSwerve().getPose().getRotation().getDegrees() ;
                 rotate_action_.setAngle(angle) ;
                 robot.getSwerve().setAction(rotate_action_) ;
@@ -233,11 +248,13 @@ public class ButchOIPanel extends OIPanel {
     private void shootingState() {
         if (getValue(abort_gadget_) == 1) {
             shoot_action_.cancel() ;
+            getSubsystem().getGamePad().enable();
             dispositionNoteInIntake() ;            
         }
         else {
             if (shoot_action_.isDone()) {
                 state_ = OIState.Idle ;
+                getSubsystem().getGamePad().enable();                
             }
         }
     }
@@ -397,7 +414,20 @@ public class ButchOIPanel extends OIPanel {
 
         OIState prev = state_ ;
 
+        if (getValue(eject_gadget_) == 1 && state_ != OIState.Eject) {
+            AllegroRobot2024 robot = (AllegroRobot2024)getSubsystem().getRobot().getRobotSubsystem() ;
+            robot.cancelAction();
+            robot.getIntakeShooter().setAction(intake_eject_action_);
+            state_ = OIState.Eject ;
+        }
+
         switch(state_) {
+        case Eject:
+            if (intake_eject_action_.isDone()) {
+                state_ = OIState.Idle ;
+            }
+            break ;
+
         case Idle:
             idleState() ;
             break ;
@@ -512,6 +542,8 @@ public class ButchOIPanel extends OIPanel {
 
         hooks_up_action_ = new ClimbAction(robot.getSuperStructure().getClimber(), ClimbAction.ClimbType.HooksUp) ;
         hooks_down_action_ = new ClimbAction(robot.getSuperStructure().getClimber(), ClimbAction.ClimbType.HooksDownWithRobot);
+
+        intake_eject_action_ = new IntakeEjectAction(robot.getIntakeShooter());
     }
 
     @Override
@@ -577,13 +609,13 @@ public class ButchOIPanel extends OIPanel {
         num = getSubsystem().getSettingsValue("panel:gadgets:shoot").getInteger() ;
         shoot_gadget_ = mapButton(num, ButtonType.LowToHigh) ;
 
-        num = getSubsystem().getSettingsValue("panel:gadgets:shoot").getInteger() ;
+        num = getSubsystem().getSettingsValue("panel:gadgets:turtle").getInteger() ;
         turtle_gadget_ = mapButton(num, ButtonType.LowToHigh) ;
         
-        num = getSubsystem().getSettingsValue("panel:gadgets:shoot").getInteger() ;
+        num = getSubsystem().getSettingsValue("panel:gadgets:abort").getInteger() ;
         abort_gadget_ = mapButton(num, ButtonType.LowToHigh) ;
         
-        num = getSubsystem().getSettingsValue("panel:gadgets:shoot").getInteger() ;
+        num = getSubsystem().getSettingsValue("panel:gadgets:eject").getInteger() ;
         eject_gadget_ = mapButton(num, ButtonType.LowToHigh) ;
     }
 

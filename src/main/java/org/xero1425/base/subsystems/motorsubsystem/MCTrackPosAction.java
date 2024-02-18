@@ -20,7 +20,8 @@ public class MCTrackPosAction extends MotorAction {
         "mctarget (%%posunits%%)",
         "velocity (%%velunits%%)",
         "voltage (v)",
-        "error (percent)"
+        "error (percent)",
+        "isAtTarget"
     } ;    
 
     private double start_ ;
@@ -90,6 +91,8 @@ public class MCTrackPosAction extends MotorAction {
     /// \brief Update the target velocity to a new velocity
     /// \param target the target velocity desired
     public void setTarget(double target) throws BadMotorRequestException, MotorRequestFailedException {
+        target_ = target ;
+
         //
         // If we are running the loop in the motor controller, commuincate the new target to the
         // motor controller.  Since the motor controller does not run its PID loop in robot units,
@@ -135,6 +138,7 @@ public class MCTrackPosAction extends MotorAction {
             data_[4] = vel ;
             data_[5] = me.getMotorController().getVoltage() ;
             data_[6] = error ;
+            data_[7] = is_at_target_ ? 1.0 : 0.0 ;
             getSubsystem().addPlotData(plot_id_, data_);
         }
 

@@ -58,6 +58,8 @@ public class ShooterTuningAction extends Action {
     private double current_velocity_ ;
     private Double [] plot_data_ ;
 
+    private double updown_ ;
+
     private static final String[] plot_columns_ = { 
         "time (s)",
         "s1-vel-t (%%velunits%%)",
@@ -69,17 +71,17 @@ public class ShooterTuningAction extends Action {
         "fire (bool)"
     } ;    
 
-    public ShooterTuningAction(IntakeShooterSubsystem sub) throws Exception {
+    public ShooterTuningAction(IntakeShooterSubsystem sub, double updown) throws Exception {
         super(sub.getRobot().getMessageLogger()) ;
         sub_ = sub ;
+        updown_ = updown ;
 
         velocity1_action_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", 0.0, kVelocityFireTolerance, false);
         velocity2_action_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", 0.0, kVelocityFireTolerance, false);
         tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", -65.0, kTiltPositionTolerance, kTiltVelocityTolerance) ;
         feeder_start_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), kFeederPowerLevel);
         feeder_stop_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), 0.0);
-        double v = sub_.getUpDown().getSettingsValue("targets:shoot").getDouble() ;
-        updown_action_ = new MCTrackPosAction(sub_.getUpDown(), "pids:position", v, 2, 1, false) ;
+        updown_action_ = new MCTrackPosAction(sub_.getUpDown(), "pids:position", updown_, 2, 1, false) ;
 
         plot_data_ = new Double[plot_columns_.length] ;
     }

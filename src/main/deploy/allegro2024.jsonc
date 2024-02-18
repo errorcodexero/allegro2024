@@ -12,13 +12,13 @@
 
             // Subsystem related messages
             "vision": false,
-            "swerve" : true,
+            "swerve" : false,
             "limelight" : false,
             "allegro2024oi": true,
             "limelight-edgar" : false,
             "oibuttons" : false,
-            "intake-shooter" : true,
-            "superstructure" : true
+            "intake-shooter" : false,
+            "superstructure" : false
         },
         "verbose": {
             "swerve" : false,
@@ -257,7 +257,7 @@
                 },
                 "encoder" : {
                     "type" : "motor",
-                    "m" :   0.0000006611942 
+                    "m" :   0.0000006611942
                     ,
                     "b" : 0,
                     "posunits" : "m",
@@ -304,8 +304,9 @@
             },
             "actions" : {
                 "butch-start-collect" : {
-                    "tilt-threshold" : -60.0,
-                    "delay-time" : 0.04,
+                    "tilt-down-threshold" : -65.0,
+                    "updown-up-threshold" : 30,
+                    "delay-time" : 0.08,
                     "feeder-power" : 0.5
                 },
                 "butch-stop-collect" : {
@@ -313,27 +314,27 @@
                 },
                 "manual-shoot" : {
                     "subwoofer" : {
-                        "tilt" : -37.0,
+                        "tilt" : -53.0,
                         "tilt-pos-threshold" : 5.0,
                         "tilt-velocity-threshold" : 5.0,
 
-                        "up-down-pos" : 90.0,
+                        "up-down-pos" : 100.0,
                         "up-down-pos-threshold" : 5.0,
                         "up-down-velocity-threshold" : 5.0,
 
-                        "shooter-velocity" : 45.0,
+                        "shooter-velocity" : 60.0,
                         "shooter-velocity-threshold" : 5.0
                     },
                     "podium" : {
-                        "tilt" : -37.0,
+                        "tilt" : -58.0,
                         "tilt-pos-threshold" : 5.0,
                         "tilt-velocity-threshold" : 5.0,
 
-                        "up-down-pos" : 90.0,
+                        "up-down-pos" : 118.0,
                         "up-down-pos-threshold" : 5.0,
                         "up-down-velocity-threshold" : 5.0,
 
-                        "shooter-velocity" : 45.0,
+                        "shooter-velocity" : 65.0,
                         "shooter-velocity-threshold" : 5.0
                     }
                 },
@@ -345,37 +346,85 @@
                     "tilt-velocity-threshold" : 2.0,
                     "feeder-power" : 0.5,
                     "feeder-time" : 1.0
-                },
+                }
             },
             "pwls" : {
                 "updown" : {
                     "1" : {
                         "x" : 0.0,
-                        "y" : 123.5
+                        "y" : 118.0
                     },
                     "2" : {
                         "x" : 8.23,
-                        "y" : 123.5
+                        "y" : 118.0
                     }
                 },
                 "tilt" : {
                     "1" : {
-                        "x" : 0.0,
-                        "y" : -37.0
+                        "x" : 2.08,
+                        "y" : -62.0
                     },
                     "2" : {
-                        "x" : 8.23,
-                        "y" : -37.0
-                    }
+                        "x" : 2.39,
+                        "y" : -58.0
+                    },
+                    "3" : {
+                        "x" : 2.62,
+                        "y" : -58.0
+                    },
+                    "4" : {
+                        "x" : 2.93,
+                        "y" : -54.0
+                    },
+                    "5" : {
+                        "x" : 3.25,
+                        "y" : -53.0
+                    },
+                    "6" : {
+                        "x" : 3.56,
+                        "y" : -52.0
+                    },
+                    "7" : {
+                        "x" : 3.83,
+                        "y" : -49.0
+                    },
+                    "8" : {
+                        "x" : 4.15,
+                        "y" : -50.0
+                    }                    
                 },
                 "shooter" : {
                     "1" : {
-                        "x" : 0.0,
-                        "y" : 45
+                        "x" : 2.08,
+                        "y" : 65
                     },
                     "2" : {
-                        "x" : 8.23,
-                        "y" : 45
+                        "x" : 2.39,
+                        "y" : 65
+                    },
+                    "3" : {
+                        "x" : 2.62,
+                        "y" : 65
+                    },
+                    "4" : {
+                        "x" : 2.93,
+                        "y" : 65
+                    },
+                    "5" : {
+                        "x" : 3.25,
+                        "y" : 65
+                    },
+                    "6" : {
+                        "x" : 3.56,
+                        "y" : 75
+                    },
+                    "7" : {
+                        "x" : 3.83,
+                        "y" : 75
+                    },
+                    "8" : {
+                        "x" : 4.15,
+                        "y" : 75
                     }
                 }
             }
@@ -409,7 +458,7 @@
                 "collect" : 0,
                 "shoot" : 118.0,
                 "stow" : 118.0
-            },            
+            },
             "pids" : {
                 "position" : {
                     "kp" : 7.5,
@@ -494,7 +543,7 @@
             },
             "targets" : {
                 "stow" : -37.0,
-                "collect" : 50.0
+                "collect" : 38.00
             },
             "pids" : {
                 "position" : {
@@ -509,7 +558,7 @@
                     "maxv" : 150,
                     "maxa" : 340,
                     "jerk" : 0.0
-                }               
+                }
             }
         },
         "intake-shooter1" : {
@@ -520,7 +569,7 @@
                     "canid" : 3,
                     "inverted" : true,
                     "neutral-mode" : "brake",
-                    "current-limit" : 60,
+                    "current-limit" : 80,
                     "position-important" : "High",
                     "velocity-important" : "High",
                     "acceleration-imporant" : "high"
@@ -539,7 +588,7 @@
             },
             "pids" : {
                 "velocity" : {
-                    "kp" : 0.0,
+                    "kp" : 0.4,
                     "ki" : 0.0,
                     "kd" : 0.0,
                     "kv" : 0.08,
@@ -558,7 +607,7 @@
                     "canid" : 4,
                     "inverted" : true,
                     "neutral-mode" : "brake",
-                    "current-limit" : 60,
+                    "current-limit" : 80,
                     "position-important" : "High",
                     "velocity-important" : "High",
                     "acceleration-imporant" : "high"
@@ -577,7 +626,7 @@
             },
             "pids" : {
                 "velocity" : {
-                    "kp" : 0.0,
+                    "kp" : 0.4,
                     "ki" : 0.0,
                     "kd" : 0.0,
                     "kv" : 0.08,
@@ -633,7 +682,7 @@
                         "offset": {
                             "PRACTICE" : -54.318,
                             "COMPETITION" : 0.0,
-                            "SIMULATION" : 0.0                            
+                            "SIMULATION" : 0.0
                         }
                     }
                 },
@@ -697,7 +746,7 @@
                         "offset": {
                             "PRACTICE" : -287.58,
                             "COMPETITION" : 0,
-                            "SIMULATION" : 0.0                            
+                            "SIMULATION" : 0.0
                         }
                     }
                 },
@@ -729,14 +778,14 @@
                         "offset": {
                             "PRACTICE" : -169.629,
                             "COMPETITION" : 0.0,
-                            "SIMULATION" : 0.0                            
+                            "SIMULATION" : 0.0
                         }
                     }
                 }
             },
 
             "angle-tracker" : {
-                "p" : 0.1
+                "p" : 0.0
             },
 
             //
@@ -814,7 +863,7 @@
                     "kf" : {
                         "PRACTICE" : 0.200573641,
                         "COMPETITION" : 0,
-                        "SIMULATION" : 0.0                        
+                        "SIMULATION" : 0.0
                     },
                     "min": -1.0,
                     "max": 1.0,
@@ -824,14 +873,14 @@
                     "kp":  {
                         "PRACTICE" : 0.0,
                         "COMPETITION" : 0.0,
-                        "SIMULATION" : 0.0                        
+                        "SIMULATION" : 0.0
                     },
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
                         "PRACTICE" : 0.200573641,
                         "COMPETITION" : 0,
-                        "SIMULATION" : 0.0                        
+                        "SIMULATION" : 0.0
                     },
                     "min": -1.0,
                     "max": 1.0,
@@ -841,14 +890,14 @@
                     "kp":  {
                         "PRACTICE" : 0.0,
                         "COMPETITION" : 0.0,
-                        "SIMULATION" : 0.0                        
+                        "SIMULATION" : 0.0
                     },
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
                         "PRACTICE" : 0.200573641,
                         "COMPETITION" : 0,
-                        "SIMULATION" : 0.0                        
+                        "SIMULATION" : 0.0
                     },
                     "min": -1.0,
                     "max": 1.0,
@@ -858,14 +907,14 @@
                     "kp":  {
                         "PRACTICE" : 0.0,
                         "COMPETITION" : 0.0,
-                        "SIMULATION" : 0.0                        
+                        "SIMULATION" : 0.0
                     },
                     "ki": 0.0,
                     "kd": 0.0,
                     "kf" : {
                         "PRACTICE" : 0.200573641,
                         "COMPETITION" : 0,
-                        "SIMULATION" : 0.0                        
+                        "SIMULATION" : 0.0
                     },
                     "min": -1.0,
                     "max": 1.0,
@@ -1000,14 +1049,17 @@
             "duration" : 2.0
         },
         "32" : {
-            "velocity" : 5
+            "velocity" : 65
         },
         "40" : {
             "power" : 0.2,
             "duration" : 5.0
         },
+        "41" : {
+            "duration" : 2.0
+        },
         "42" : {
-            "velocity" : 15
+            "velocity" : 65
         },
         "50" : {
             "power" : 0.3,
@@ -1068,6 +1120,9 @@
         },
         "111" : {
             "duration" : 5.0
+        },
+        "118" : {
+            "up-down" : 118
         },
         "119" : {
             "shooter-power" : 0.5,

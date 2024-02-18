@@ -15,7 +15,6 @@ import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
 import frc.robot.subsystems.intake_shooter.ButchStartCollectAction;
 import frc.robot.subsystems.intake_shooter.ButchStopCollectionAction;
-import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.intake_shooter.ManualShootAction;
 import frc.robot.subsystems.intake_shooter.ShooterTuningAction;
@@ -161,7 +160,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 if (intakeshooter != null && intakeshooter.getShooter2() != null) {
                     double duration = getDouble("duration");
                     double[] times ;
-                    double[] powers = new double[] { 0.1, 0.3, 0.5 };
+                    double[] powers = new double[] { 0.1, 0.3, 0.5, 0.7 };
                     times = new double[powers.length] ;
                     for(int i = 0 ; i < powers.length ; i++) {
                         times[i] = duration ;
@@ -408,10 +407,8 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 118:
                 if (intakeshooter != null) {
-                    double v = intakeshooter.getUpDown().getSettingsValue("targets:shoot").getDouble() ;
-                    MCMotionMagicAction updownstow = new MCMotionMagicAction(intakeshooter.getUpDown(), "pids:position", v, 2.5, 1.0) ;
-                    addSubActionPair(intakeshooter.getUpDown(), updownstow, true) ;
-                    addSubActionPair(intakeshooter, new ShooterTuningAction(intakeshooter), true);
+                    double v = getDouble("up-down") ;
+                    addSubActionPair(intakeshooter, new ShooterTuningAction(intakeshooter, v), true);
                 }
                 break ;
 

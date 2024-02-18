@@ -25,6 +25,8 @@ public class Allegro2024OISubsystem extends OISubsystem {
     private ButchStopCollectionAction stopCollectAction_ ;
     private ButchOIPanel oipanel_ ;
 
+    private ManualShootAction manual_ ;
+
     public Allegro2024OISubsystem(Subsystem parent, DriveBaseSubsystem db, IntakeShooterSubsystem intake) throws Exception {
         super (parent,"allegro2024oi",GamePadType.Swerve, db, true);
 
@@ -103,15 +105,30 @@ public class Allegro2024OISubsystem extends OISubsystem {
     }
 
     public void manualShoot(String name) {
+        if (!getPanel().isIdle() || manual_ != null)
+            return ;
+
         try {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();
             IntakeShooterSubsystem intake = robot.getIntakeShooter();
-            intake.setAction(new ManualShootAction(intake, name));
+            getPanel().setBusyExternal(true);
+            manual_ = new ManualShootAction(intake, name) ;
+            intake.setAction(manual_);
         }
         catch(Exception ex) {
             MessageLogger logger = getRobot().getMessageLogger() ;
             logger.startMessage(MessageType.Error).add("exception thrown in manualShoot - " + ex.getMessage()).endMessage();
             logger.logStackTrace(ex.getStackTrace());
+        }
+    }
+
+    @Override
+    public void computeMyState() throws Exception {
+        super.computeMyState();
+
+        if(manual_ != null && manual_.isDone()) {
+            getPanel().setBusyExternal(false);
+            manual_ = null ;
         }
     }
 
@@ -122,8 +139,8 @@ public class Allegro2024OISubsystem extends OISubsystem {
             swgp.bindButtons(resetButtons, ()->swgp.resetSwerveDriveDirection(), null);            
             swgp.bindButton(Gamepad.Button.LBack, ()-> swgp.startDriveBaseX(), ()->swgp.stopDriveBaseX());   
             swgp.bindButton(Gamepad.Button.RBack, ()->startCollect(), ()->stopCollect());
-            swgp.bindButton(Gamepad.Button.LTrigger, ()->targetLockMode(true), null);
-            swgp.bindButton(Gamepad.Button.RTrigger, ()->targetLockMode(false), null);
+            // swgp.bindButton(Gamepad.Button.LTrigger, ()->targetLockMode(true), null);
+            // swgp.bindButton(Gamepad.Button.RTrigger, ()->targetLockMode(false), null);
             swgp.bindButton(Gamepad.Button.A, ()->manualShoot("subwoofer"), null);
             swgp.bindButton(Gamepad.Button.X, ()->manualShoot("podium"), null);
         }

@@ -1,15 +1,15 @@
 Item                                                                                                  Status
 ------------------------------------------------------------------------------------------------------------
-- Make sure drivebase drives ok with angle-tracker P set to zero
-- Tune/Debug angle-tracker P
-- Mount april tags on speaker
-- Be sure limelight sees april tags and we have the right data
-- Check drive base sync with april tag data
-- Debug target tracker for correct angle and distance
-  o based on drive base only
-  o based on seeing the target april tag
-- Debug drivebase goto angle action
-- Tune PWL for shooting
+- Make sure drivebase drives ok with angle-tracker P set to zero                                      Done
+- Tune/Debug angle-tracker P                                                                          Partial
+- Mount april tags on speaker                                                                         Done
+- Be sure limelight sees april tags and we have the right data                                        Done
+- Check drive base sync with april tag data                                                           Done
+- Debug target tracker for correct angle and distance                                                 Done
+  o based on drive base only                                                                          Done
+  o based on seeing the target april tag                                                              Done
+- Debug drivebase goto angle action                                                                   Once
+- Tune PWL for shooting                                                                               Partial
 - Test OI shooting sequence
 - Test collect: check the 1 foot frame extension limit with bumpers and collect capability move
 - Test note collect: run 20 tests in a row

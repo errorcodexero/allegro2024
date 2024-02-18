@@ -4,6 +4,7 @@ import org.xero1425.base.actions.Action;
 import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
+import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
 public class ButchStartCollectAction extends Action {
@@ -13,13 +14,15 @@ public class ButchStartCollectAction extends Action {
         BothMoving,
         WaitingForNote,
         WaitingForCollect,
-        Stowing,
+        StowingUpDown,
+        StowingBoth,
         Done
     } ;
 
     private IntakeShooterSubsystem sub_ ;
     private CollectState state_ ;
-    private double tilt_threshold_ ;
+    private double tilt_down_threshold_ ;
+    private double updown_up_threshold_ ;
     private double feeder_power_ ;
 
     private XeroTimer timer_ ;
@@ -36,7 +39,8 @@ public class ButchStartCollectAction extends Action {
         sub_ = sub ;
 
         feeder_power_ = sub.getSettingsValue("actions:butch-start-collect:feeder-power").getDouble() ;
-        tilt_threshold_ = sub.getSettingsValue("actions:butch-start-collect:tilt-threshold").getDouble() ;
+        tilt_down_threshold_ = sub.getSettingsValue("actions:butch-start-collect:tilt-down-threshold").getDouble() ;
+        updown_up_threshold_ = sub.getSettingsValue("actions:butch-start-collect:updown-up-threshold").getDouble() ;
 
         intake_collect_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", "targets:collect", 1, 1) ;
         intake_stow_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", "targets:stow", 1, 1) ;
@@ -55,6 +59,10 @@ public class ButchStartCollectAction extends Action {
         super.start() ;
 
         if (sub_.isHoldingNote()) {
+            MessageLogger logger = sub_.getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Info);
+            logger.add("collect aborted - not already present") ;
+            logger.endMessage();
             setDone() ;
         }
         else {
@@ -75,7 +83,7 @@ public class ButchStartCollectAction extends Action {
                 break ;
 
             case TiltMoving:
-                if (sub_.getTilt().getPosition() > tilt_threshold_)  {
+                if (sub_.getTilt().getPosition() > tilt_down_threshold_)  {
                     sub_.getUpDown().setAction(intake_collect_, true) ;
                     state_ = CollectState.BothMoving ;
                 }
@@ -102,13 +110,27 @@ public class ButchStartCollectAction extends Action {
                 if (timer_.isExpired()) {
                     sub_.getFeeder().setAction(spinner_feeder_off_, true) ;
                     sub_.getUpDown().setAction(intake_stow_, true) ;
-                    sub_.getTilt().setAction(tilt_stow_, true) ;
                     sub_.setHoldingNote(true);
-                    state_ = CollectState.Stowing;
+                    state_ = CollectState.StowingUpDown;
                 }
                 break;
 
-            case Stowing:
+            case StowingUpDown:
+                if (sub_.getUpDown().getPosition() > updown_up_threshold_) {
+                    sub_.getTilt().setAction(tilt_stow_, true) ;
+                    state_ = CollectState.StowingBoth ;
+                }
+                break ;
+
+            case StowingBoth:
+                if (tilt_stow_.isDone()) {
+
+                }
+
+                if (intake_stow_.isDone()) {
+                    
+                }
+
                 if (tilt_stow_.isDone() && intake_stow_.isDone()) {
                     setDone() ;
                     state_ = CollectState.Done ;
