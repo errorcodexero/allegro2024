@@ -229,7 +229,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
             swgp.bindButton(Gamepad.Button.LTrigger, ()->targetLockMode(true), null);
             swgp.bindButton(Gamepad.Button.RTrigger, ()->targetLockMode(false), null);
 
-            swgp.bindButton(Gamepad.Button.LTrigger, ()->scaleDriveBaseVelocities(0.25), ()->scaleDriveBaseVelocities(1.0));
+            // swgp.bindButton(Gamepad.Button.LTrigger, ()->scaleDriveBaseVelocities(0.25), ()->scaleDriveBaseVelocities(1.0));
         }
     }
 
