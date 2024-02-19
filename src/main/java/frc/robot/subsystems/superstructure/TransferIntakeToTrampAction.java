@@ -1,7 +1,6 @@
 package frc.robot.subsystems.superstructure;
 
 import org.xero1425.base.actions.Action;
-import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;

@@ -1,7 +1,7 @@
 package org.xero1425.base.subsystems.oi;
 
 public class OILed {
-    public enum State {
+    public enum LEDState {
         ON,
         OFF,
         BLINK_FAST,
@@ -10,7 +10,7 @@ public class OILed {
 
     private OIPanel panel_ ;
     private int index_ ;
-    private State state_ ;
+    private LEDState state_ ;
     private double next_blink_ ;
     private boolean current_state_ ;
     private double blink_time_ ;
@@ -23,7 +23,7 @@ public class OILed {
         panel_ = panel ;
         index_ = index ;
         inverted_ = inverted ;
-        state_ = State.OFF ;
+        state_ = LEDState.OFF ;
     }
 
     public OIPanel getPanel() {
@@ -34,14 +34,14 @@ public class OILed {
         return index_ ;
     }
 
-    public void setState(State st) {
+    public void setState(LEDState st) {
 
         if (state_ != st) {
             state_ = st ;
 
-            if (state_ == State.BLINK_FAST)
+            if (state_ == LEDState.BLINK_FAST)
                 blink_time_ = FastBlinkTime ;
-            else if (state_ == State.BLINK_SLOW)
+            else if (state_ == LEDState.BLINK_SLOW)
                 blink_time_ = SlowBlinkTime ;
                 
             current_state_ = false ;
@@ -49,15 +49,15 @@ public class OILed {
         }
     }
 
-    public State getState() {
+    public LEDState getState() {
         return state_ ;
     }
 
     protected void run() {
-        if (state_ == State.OFF) {
+        if (state_ == LEDState.OFF) {
             panel_.setOutput(index_, inverted_) ;
         }
-        else if (state_ == State.ON) {
+        else if (state_ == LEDState.ON) {
             panel_.setOutput(index_, !inverted_) ;
         }
         else {

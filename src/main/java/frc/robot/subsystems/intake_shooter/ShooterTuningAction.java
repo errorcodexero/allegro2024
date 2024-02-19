@@ -5,6 +5,7 @@ import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCTrackPosAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
+import org.xero1425.base.subsystems.oi.OILed.LEDState;
 
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -206,10 +207,10 @@ public class ShooterTuningAction extends Action {
         Allegro2024OISubsystem oi = robot.getOI() ;
 
         boolean tiltready = Math.abs(sub_.getTilt().getPosition() - current_tilt_) < kTiltFireTolerance ;
-        oi.getPanel().setDBReady(velocity1_action_.isAtVelocity());
-        oi.getPanel().setVelocityReady(velocity2_action_.isAtVelocity());
-        oi.getPanel().setTiltReady(tiltready) ;
-        oi.getPanel().setAprilTagReady(updown_action_.isAtTarget());
+        oi.getPanel().setDBLED(velocity1_action_.isAtVelocity() ? LEDState.ON : LEDState.OFF) ;
+        oi.getPanel().setVelocityLED(velocity2_action_.isAtVelocity() ? LEDState.ON : LEDState.OFF) ;
+        oi.getPanel().setTiltLED(tiltready ? LEDState.ON : LEDState.OFF) ;
+        oi.getPanel().setAprilTagLED(updown_action_.isAtTarget() ? LEDState.ON : LEDState.OFF) ;
 
         return velocity1_action_.isAtVelocity() && velocity2_action_.isAtVelocity() &&  tiltready && updown_action_.isAtTarget() ;
     }

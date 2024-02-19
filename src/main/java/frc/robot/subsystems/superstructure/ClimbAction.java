@@ -2,8 +2,6 @@ package frc.robot.subsystems.superstructure;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
-import org.xero1425.misc.MessageLogger;
-import org.xero1425.misc.MessageType;
 
 public class ClimbAction extends Action {
     public enum ClimbType {

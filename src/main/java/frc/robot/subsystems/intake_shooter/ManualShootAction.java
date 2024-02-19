@@ -7,9 +7,6 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
-import frc.robot.subsystems.oi.ButchOIPanel;
-import frc.robot.subsystems.toplevel.AllegroRobot2024;
-
 public class ManualShootAction extends Action {
     private double kTiltPosition ;
     private double kTiltPositionThreshold ;
@@ -53,7 +50,7 @@ public class ManualShootAction extends Action {
         shooter1_action_ = new MCVelocityAction(intake_.getShooter1(), "pids:velocity", kShooterVelocity, kShooterThreshold, false) ;
         shooter2_action_ = new MCVelocityAction(intake_.getShooter2(), "pids:velocity", kShooterVelocity, kShooterThreshold, false) ;
 
-        feeder_action_ = new MotorEncoderPowerAction(intake_.getFeeder(), 0.5, 2.0) ;
+        feeder_action_ = new MotorEncoderPowerAction(intake_.getFeeder(), 0.5, 1.0) ;
     }
 
     @Override
@@ -84,9 +81,6 @@ public class ManualShootAction extends Action {
         super.run();
 
         if (!shooting_) {
-            AllegroRobot2024 robot = (AllegroRobot2024)intake_.getRobot().getRobotSubsystem() ;
-            ButchOIPanel panel = robot.getOI().getPanel() ;
-
             if (tilt_action_.isDone()) {
                 tilt_ready_ = true ;
             }
@@ -94,11 +88,6 @@ public class ManualShootAction extends Action {
             if (up_down_action_.isDone()) {
                 updown_ready_ = true ;
             }
-
-            panel.setDBReady(shooter1_action_.isAtVelocity());
-            panel.setVelocityReady(shooter2_action_.isAtVelocity());
-            panel.setTiltReady(tilt_ready_) ;
-            panel.setAprilTagReady(updown_ready_);
 
             if (shooter1_action_.isAtVelocity() && shooter2_action_.isAtVelocity() && tilt_ready_ && updown_ready_) {
                 shooting_ = true ;

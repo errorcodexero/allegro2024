@@ -4,6 +4,7 @@ import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MCTrackPosAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
+import org.xero1425.base.subsystems.oi.OILed.LEDState;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 import org.xero1425.base.utils.PieceWiseLinear;
 import org.xero1425.misc.ISettingsSupplier;
@@ -178,10 +179,10 @@ public class IntakeAutoShootAction extends Action {
             shooter1_.setTarget(current_velocity_);
             shooter2_.setTarget(current_velocity_);
 
-            oi.setTiltReady(tilt_.isAtTarget());
-            oi.setAprilTagReady(aprilTagTest());
-            oi.setDBReady(rotate_.isAtTarget()) ;
-            oi.setVelocityReady(shooter1_.isAtVelocity() && shooter2_.isAtVelocity());
+            oi.setTiltLED(tilt_.isAtTarget() ? LEDState.ON : LEDState.OFF);
+            oi.setAprilTagLED(aprilTagTest() ? LEDState.ON : LEDState.OFF);
+            oi.setDBLED(rotate_.isAtTarget() ? LEDState.ON : LEDState.OFF);
+            oi.setVelocityLED((shooter1_.isAtVelocity() && shooter2_.isAtVelocity()) ? LEDState.ON : LEDState.OFF);
 
             if (verbose_) {
                 SmartDashboard.putBoolean("Tilt", tilt_.isAtTarget()) ;

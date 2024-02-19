@@ -291,7 +291,7 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         if (mode_ == Mode.Chassis) {
 
             if (getSWRotationControl()) {
-                double err = XeroMath.normalizeAngleDegrees(getRotationAngle() - getPose().getRotation().getDegrees()) ;
+                double err = Math.toRadians(XeroMath.normalizeAngleDegrees(getRotationAngle() - getPose().getRotation().getDegrees())) ;
                 double omega = err * sw_rotation_p_ ;
                 chassis_speed_ = new ChassisSpeeds(chassis_speed_.vxMetersPerSecond, chassis_speed_.vyMetersPerSecond, omega);
                 MessageLogger logger = getRobot().getMessageLogger() ;

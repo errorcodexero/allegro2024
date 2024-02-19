@@ -1,6 +1,5 @@
 package org.xero1425.base.subsystems.oi;
 
-import java.sql.Driver;
 import java.util.Optional;
 
 import org.xero1425.base.LoopType;
@@ -28,6 +27,7 @@ public class SwerveDriveGamepad extends Gamepad {
     private SwerveDriveChassisSpeedAction action_;
     private SwerveDriveXPatternAction x_action_;
     private double ysign_ = 1.0 ;
+    private double scale_amount_ = 1.0 ;
 
     private boolean holding_x_;
 
@@ -44,6 +44,10 @@ public class SwerveDriveGamepad extends Gamepad {
 
         db_ = drive_;
         holding_x_ = false ;
+    }
+
+    public void setScaleAmount(double scale) {
+        scale_amount_ = scale ;
     }
 
     public String getState() {
@@ -135,11 +139,9 @@ public class SwerveDriveGamepad extends Gamepad {
         double lxscaled = mapJoyStick(lx, pos_maximum_, deadband_pos_x_, power_) ;
         double rxscaled = mapJoyStick(rx, angle_maximum_, deadband_rotate_, power_) ;
 
-        if (isLTriggerPressed()) {
-            lxscaled *= 0.25 ;
-            lyscaled *= 0.25 ;
-            rxscaled *= 0.25 ;
-        }
+        lxscaled *= scale_amount_ ;
+        lyscaled *= scale_amount_ ;
+        rxscaled *= scale_amount_ ;
 
         if (Math.abs(rxscaled) < deadband_rotate_ && (Math.abs(lxscaled) > deadband_pos_x_ || Math.abs(lyscaled) > deadband_pos_y_)) {
             //
@@ -176,8 +178,7 @@ public class SwerveDriveGamepad extends Gamepad {
         // gamepad is pushed forward (negative value from the gamepad), the driver expects the robot to move along
         // the positive X axis of the field.
         //
-        rxscaled *= 2.0 / Math.hypot(db_.getLength(), db_.getWidth()) / 39.37;  // 39.27 to convert meters -> inches. Original equation from SDS assumes inches.
-        ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(-lyscaled, -lxscaled, rxscaled, db_.getHeading()) ;
+        ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(-lyscaled, -lxscaled, Math.toRadians(rxscaled), db_.getHeading()) ;
         action_.update(speeds) ;
 
         if (db_.getAction() != action_)

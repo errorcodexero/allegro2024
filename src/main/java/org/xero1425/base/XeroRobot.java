@@ -996,11 +996,6 @@ public abstract class XeroRobot extends TimedRobot {
 
     public boolean isCoastMode() {
         boolean ret = false ;
-
-        if (robot_subsystem_.getOI() != null) {
-            ret = robot_subsystem_.getOI().isCoastMode() ;
-        }
-
         return ret ;
     }
 
