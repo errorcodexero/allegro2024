@@ -124,7 +124,7 @@ public class SwerveDriveGamepad extends Gamepad {
 
         try {
             ly = -DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTY.value) * ysign_ ;
-            lx = -DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTX.value) ;
+            lx = -DriverStation.getStickAxis(getIndex(), AxisNumber.LEFTX.value) * ysign_ ;
             rx = -DriverStation.getStickAxis(getIndex(), AxisNumber.RIGHTX.value) ;
         }
         catch(Exception ex) {
