@@ -55,9 +55,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
         Eject
     }    
 
-    private final static Gamepad.Button[] resetButtons = { Gamepad.Button.Y, Gamepad.Button.B} ;
-
-
     private ButchOIPanel oipanel_ ;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -161,8 +158,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
     public Allegro2024OISubsystem(Subsystem parent, DriveBaseSubsystem db, IntakeShooterSubsystem intake) throws Exception {
         super (parent,"allegro2024oi",GamePadType.Swerve, db, true);
 
-        startCollectAction_ = new ButchStartCollectAction(intake);
-        stopCollectAction_ = new ButchStopCollectionAction(intake);
 
         int index ;
         MessageLogger logger = getRobot().getMessageLogger() ;
@@ -228,13 +223,15 @@ public class Allegro2024OISubsystem extends OISubsystem {
             // Any other buttons that are used to control shooting or climbing are queried in the
             // state machine below.
             //
-            swgp.bindButtons(resetButtons, ()->swgp.resetSwerveDriveDirection(), null);
+            swgp.bindButtons(new Gamepad.Button[] {Gamepad.Button.Y, Gamepad.Button.B }, ()->swgp.resetSwerveDriveDirection(), null);
             swgp.bindButton(Gamepad.Button.LBack, ()-> swgp.startDriveBaseX(), ()->swgp.stopDriveBaseX());   
+
             swgp.bindButton(Gamepad.Button.LTrigger, ()->targetLockMode(true), null);
             swgp.bindButton(Gamepad.Button.RTrigger, ()->targetLockMode(false), null);
+
             swgp.bindButton(Gamepad.Button.LTrigger, ()->scaleDriveBaseVelocities(0.25), ()->scaleDriveBaseVelocities(1.0));
         }
-    }    
+    }
 
     private void dispositionNoteInIntake() {
         AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
@@ -256,9 +253,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
         if (gp.isRBackButtonPressed()) {
             robot.getSuperStructure().setAction(startCollectAction_) ;
             state_ = OIState.Collect ;
-        }
-        else if (robot.getIntakeShooter().isHoldingNote() && oipanel_.getCoastValue() == 0) {
-            dispositionNoteInIntake() ;
         }
     }
 
@@ -623,5 +617,8 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
         intake_eject_action_ = new IntakeEjectAction(robot.getIntakeShooter());
         trap_eject_action_ = new AmpTrapEjectAction(robot.getAmpTrap());
+
+        startCollectAction_ = new ButchStartCollectAction(intake);
+        stopCollectAction_ = new ButchStopCollectionAction(intake);
     }
 }
