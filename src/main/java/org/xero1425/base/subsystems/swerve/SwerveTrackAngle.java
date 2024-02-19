@@ -38,7 +38,6 @@ public class SwerveTrackAngle extends Action {
         angle_ = angle ;
 
         p_ = swerve.getSettingsValue("angle-tracker:p").getDouble() ;
-        p_ = -0.1;
 
         plot_id_ = swerve.initPlot("swerve-track-angle") ;
         data_ = new Double[columns_.length] ;
