@@ -9,7 +9,6 @@ import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 import org.xero1425.misc.MissingParameterException;
 import org.xero1425.misc.PIDCtrl;
-import org.xero1425.misc.XeroMath;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -42,7 +41,6 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
     private ChassisSpeeds chassis_speed_ ;
     private boolean disabled_init_ ;
-    private double sw_rotation_p_ ;
     private boolean coast_mode_ ;
 
     private Mode mode_ ;
@@ -57,8 +55,6 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
         disabled_init_ = false ;
 	    coast_mode_ = false ;
-
-        sw_rotation_p_ = getSettingsValue("angle-tracker:p").getDouble() ;
 
         speeds_ = new double[4] ;
         powers_ = new double[4] ;
@@ -289,20 +285,6 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
             powers_ = new double[4] ;   
 
         if (mode_ == Mode.Chassis) {
-
-            if (getSWRotationControl()) {
-                double err = Math.toRadians(XeroMath.normalizeAngleDegrees(getRotationAngle() - getPose().getRotation().getDegrees())) ;
-                double omega = err * sw_rotation_p_ ;
-                chassis_speed_ = new ChassisSpeeds(chassis_speed_.vxMetersPerSecond, chassis_speed_.vyMetersPerSecond, omega);
-                MessageLogger logger = getRobot().getMessageLogger() ;
-                logger.startMessage(MessageType.Debug, getLoggerID()) ;
-                logger.add("swerve: sw rotation control") ;
-                logger.add("desired", getRotationAngle()) ;
-                logger.add("current", getPose().getRotation().getDegrees());
-                logger.add("err", err) ;
-                logger.add("omega", omega) ;
-                logger.endMessage(); ;
-            }
 
             // Convert chassis speeds to module speeds and angles
             SwerveModuleState[] states = getKinematics().toSwerveModuleStates(chassis_speed_);

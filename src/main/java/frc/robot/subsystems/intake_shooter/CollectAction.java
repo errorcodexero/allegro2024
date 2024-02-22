@@ -32,7 +32,7 @@ public abstract class CollectAction extends Action {
 
     protected void startStow() {
         state_ = StowStates.StowingUpDown;
-        getSubsystem().getUpDown().setAction(updown_stow_);
+        getSubsystem().getUpDown().setAction(updown_stow_, true);
     }
 
     protected void runStow() {

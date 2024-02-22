@@ -12,5 +12,4 @@ public interface IVisionLocalization {
     int getTagCount();
     LocationData getLocation(Pose2d db) ;
     double getDistance() ;
-    double getMultiTagDistance() ;
 }

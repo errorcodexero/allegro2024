@@ -4,7 +4,10 @@ import java.util.Optional;
 
 import org.xero1425.base.LoopType;
 import org.xero1425.base.subsystems.Subsystem;
+import org.xero1425.base.subsystems.swerve.SwerveBaseSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
+import org.xero1425.misc.BadParameterTypeException;
+import org.xero1425.misc.MissingParameterException;
 import org.xero1425.misc.XeroMath;
 
 import frc.robot.AprilTags;
@@ -24,21 +27,27 @@ public class TargetTrackerSubsystem extends Subsystem {
     private double angle_to_target_;
     private boolean sees_target_ ;
     private int target_number_ ;
-    private boolean feed_angle_to_db_ ;
+    private LimeLightSubsystem ll_ ;
 
-    public TargetTrackerSubsystem(Subsystem parent) {
+    private double camera_angle_ ;
+    private double camera_height_ ;
+    private double target_height_ ;
+
+    public TargetTrackerSubsystem(Subsystem parent, LimeLightSubsystem ll) throws BadParameterTypeException, MissingParameterException {
         super(parent, "targettracker");
         sees_target_ = false ;
-        feed_angle_to_db_ = false ;
-    }
+        ll_ = ll ;
 
-    public void feedTargetToDB(boolean b) {
-        feed_angle_to_db_ = b ;
+        camera_angle_ = getSettingsValue("camera-angle").getDouble() ;
+        camera_height_ = getSettingsValue("camera-height").getDouble() ;
+        target_height_ = getSettingsValue("target-height").getDouble() ;        
     }
 
     @Override
     public void init(LoopType prev, LoopType current) {
         super.init(prev, current);
+
+
 
         AprilTagFieldLayout field_layout = getRobot().getAprilTags();
 
@@ -64,6 +73,8 @@ public class TargetTrackerSubsystem extends Subsystem {
         super.computeMyState();
 
         if (target_pos_ != null) {
+
+
             AllegroRobot2024 robotSubsystem = (AllegroRobot2024) getRobot().getRobotSubsystem();
             Pose2d robot_pos_ = robotSubsystem.getSwerve().getPose();
             distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos_, target_pos_);
@@ -72,24 +83,15 @@ public class TargetTrackerSubsystem extends Subsystem {
             putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
             putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);
 
-            putDashboard("tt_target_x", DisplayType.Always, target_pos_.getX()) ;
-            putDashboard("tt_target_y", DisplayType.Always, target_pos_.getY()) ;
-            putDashboard("tt_target_ang", DisplayType.Always, target_pos_.getRotation().getDegrees()) ;
+            SwerveBaseSubsystem sw = robotSubsystem.getSwerve() ;
+            double rotateto = XeroMath.normalizeAngleDegrees(angle_to_target_ + sw.getHeading().getDegrees()) ;
+            putDashboard("tt_robotrot", DisplayType.Always, rotateto) ;            
 
-            putDashboard("tt_robotpos_x", DisplayType.Always, target_pos_.getX()) ;
-            putDashboard("tt_robotpos_y", DisplayType.Always, target_pos_.getY()) ;
-            putDashboard("tt_robotpos_ang", DisplayType.Always, target_pos_.getRotation().getDegrees()) ;            
-
-            if (feed_angle_to_db_) {
-                //
-                // Tell the drive base the angle we want you to have.  This is only honored if it is enabled on the
-                // drivebase.  The driver will enable or disable this feature via the gamepad.
-                //
-                robotSubsystem.getSwerve().setSWRotationAngle(XeroMath.normalizeAngleDegrees(angle_to_target_ + robot_pos_.getRotation().getDegrees()));
+            if (ll_.validTargets() && ll_.hasAprilTag(target_number_)) {
+                sees_target_ = true ;
+                angle_to_target_ = ll_.getTX(target_number_);
+                distance_between_robot_and_target_ = XeroMath.InchesToMeters((target_height_ - camera_height_) / Math.tan(Math.toRadians(camera_angle_ + ll_.getTY(target_number_)))) ;
             }
-
-            LimeLightSubsystem ll = robotSubsystem.getLimelight() ;
-            sees_target_ = ll.validTargets() && ll.hasAprilTag(target_number_) ;
 
             putDashboard("ll:dist", DisplayType.Always, distance_between_robot_and_target_);
             putDashboard("ll:angle", DisplayType.Always, angle_to_target_);

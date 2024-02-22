@@ -36,7 +36,7 @@ public class AllegroRobot2024 extends RobotSubsystem {
         ll_ = new LimeLightSubsystem(this, "limelight");
         addChild(ll_);
 
-        tt_ = new TargetTrackerSubsystem(this);
+        tt_ = new TargetTrackerSubsystem(this, ll_);
         addChild(tt_);
 
         lidar_ = new LidarSubsystem(this);

@@ -12,9 +12,9 @@
 
             // Subsystem related messages
             "vision": false,
-            "swerve" : false,
+            "swerve" : true,
             "limelight" : false,
-            "allegro2024oi": true,
+            "allegro2024oi": false,
             "limelight-edgar" : false,
             "oibuttons" : false,
             "intake-shooter" : false,
@@ -50,20 +50,25 @@
         // targets - describes target locations for the subsytstem that are defined by the subsystem
         // actions - describes parameters and target locations that are specific to an action for the subsystem
         //
+        "targettracker" : {
+            "camera-angle" : 40.0,
+            "camera-height" : 6.5,
+            "target-height" : 55.94
+        },
         "superstructure" : {
             "actions" : {
                 "xfer" : {
                     //
                     // The position of the amp trap subsystem to perform the transfer
                     //
-                    "arm" : 50.0,
+                    "arm" : -24,
                     "elevator" : 0.0,
 
                     //
                     // The position of the intake subsystem to perform the transfer
                     //
-                    "updown" : 86.5,
-                    "tilt" : 3.4,
+                    "updown" : 118,
+                    "tilt" : -32,
 
                     //
                     // The velocity/power of the wheels that perform the transfer and the
@@ -71,7 +76,7 @@
                     //
                     "feeder-power" : 0.3,
                     "shooter-velocity" : 15,
-                    "shooter-length" : 1.1
+                    "shooter-length" : 1.20
                 }
             }
         },
@@ -87,7 +92,7 @@
                 "keepout-zone" : {
                     "min" : 45.0,
                     "max" : 90.0,
-                    "elevator-height" : 0.305
+                    "elevator-height" : 0.315
                 }
             },
             "actions" : {
@@ -100,20 +105,20 @@
                     "pivot" : 0.0
                 },
                 "trap" : {
-                    "elevator" : 0.41,
-                    "pivot" : 0.0
+                    "elevator" : 0.2746,
+                    "pivot" : 180.0
                 },
                 "trap-up" : {
-                    "elevator" : 0.41,
-                    "pivot" : 120.0
+                    "elevator" : 0.2746,
+                    "pivot" : 180.0
                 },
                 "amp" : {
                     "elevator" : 0.2,
                     "pivot" : -90.0
                 },
                 "climb" : {
-                    "elevator" : 0.41,
-                    "pivot" : 120.0
+                    "elevator" : 0.2746,
+                    "pivot" : 180.0
                 },
                 "climb-down" : {
                     "elevator" : 0.0,
@@ -272,7 +277,7 @@
             "actions" : {
                 "climb" : {
                     "hooks-up" : {
-                        "power" : 0.3,
+                        "power" : 0.6,
                         "target" : 0.46
                     },
                     "hooks-down" : {
@@ -280,7 +285,7 @@
                         "target" : 0.0
                     },
                     "hooks-down-with-robot" : {
-                        "power" : -0.4,
+                        "power" : -0.6,
                         "target" : 0.0
                     }
                 }
@@ -304,7 +309,7 @@
             },
             "actions" : {
                 "butch-start-collect" : {
-                    "tilt-down-threshold" : -65.0,
+                    "tilt-down-threshold" : -75.0,
                     "updown-up-threshold" : 30,
                     "delay-time" : 0.08,
                     "feeder-power" : 0.5
@@ -339,6 +344,7 @@
                     }
                 },
                 "auto-shoot" : {
+                    "aim-threshold" : 8.0,
                     "shooter-velocity-threshold" : 5.0,
                     "updown-pos-threshold" : 2.0,
                     "updown-velocity-threshold" : 2.0,
@@ -469,8 +475,8 @@
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 80,
-                    "maxa" : 120,
+                    "maxv" : 150,                   // 270
+                    "maxa" : 150,                   // 270
                     "jerk" : 0.0
                 }
             }
@@ -543,7 +549,7 @@
             },
             "targets" : {
                 "stow" : -37.0,
-                "collect" : 38.00
+                "collect" : 22.0
             },
             "pids" : {
                 "position" : {
@@ -588,7 +594,7 @@
             },
             "pids" : {
                 "velocity" : {
-                    "kp" : 0.4,
+                    "kp" : 0.3,
                     "ki" : 0.0,
                     "kd" : 0.0,
                     "kv" : 0.08,
@@ -626,7 +632,7 @@
             },
             "pids" : {
                 "velocity" : {
-                    "kp" : 0.4,
+                    "kp" : 0.3,
                     "ki" : 0.0,
                     "kd" : 0.0,
                     "kv" : 0.08,
@@ -785,7 +791,7 @@
             },
 
             "angle-tracker" : {
-                "p" : 1.0
+                "p" : 5.0
             },
 
             //
@@ -949,7 +955,7 @@
             "swerve_gamepad": {
                 "index": 0,
                 "angle": {
-                    "maximum": 180,
+                    "maximum": 360,
                     "deadband": 0.05
                 },
                 "position": {
@@ -989,7 +995,7 @@
         }
     },
     "testmode" : {
-        "enabled": false,
+        "enabled": true,
         "which": 118,
         "0": {
             "angle": 0,
@@ -1028,7 +1034,7 @@
         },
         "10" : {
             "power" : 0.5,
-            "duration" : 5.0
+            "duration" : 15.0
         },
         "11" : {
             "duration": 2.0
@@ -1129,7 +1135,9 @@
             "feeder-power" : 0.3
         },
         "120" : {
-            "duration" : 5.0
+            "angle" : 170.0,
+            "height" : 0.2746
+
         },
         "121" : {
             "duration" : 5.0

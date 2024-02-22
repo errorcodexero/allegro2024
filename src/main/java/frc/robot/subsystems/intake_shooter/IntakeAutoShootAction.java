@@ -5,7 +5,6 @@ import org.xero1425.base.subsystems.motorsubsystem.MCTrackPosAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.oi.OILed.LEDState;
-import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 import org.xero1425.base.utils.PieceWiseLinear;
 import org.xero1425.misc.ISettingsSupplier;
 
@@ -35,7 +34,6 @@ public class IntakeAutoShootAction extends Action {
     private MCTrackPosAction updown_ ;
     private MCTrackPosAction tilt_ ;
     private MotorEncoderPowerAction feeder_on_ ;
-    private SwerveTrackAngle rotate_ ;
 
     private boolean drive_team_ready_ ;
     private boolean initial_drive_team_ready_ ;
@@ -43,6 +41,11 @@ public class IntakeAutoShootAction extends Action {
     private boolean shooting_ ;
 
     private boolean verbose_ ;
+
+    private boolean db_ready_ ;
+
+    private double aim_threshold_ ;
+    private double tilt_stow_value_ ;
 
     // The start time of the shoot action
     private double start_time_ ;
@@ -65,12 +68,10 @@ public class IntakeAutoShootAction extends Action {
         "tilt (deg)",
         "dbready (bool)",
         "april-tag (bool)",
-        "oiready (bool)",
-        "swvel (deg/s)",
-        "swerr (deg)"
+        "oiready (bool)"
     } ;
 
-    public IntakeAutoShootAction(IntakeShooterSubsystem intake, TargetTrackerSubsystem tracker, SwerveTrackAngle rotate, boolean initialDriveTeamReady, boolean requireAprilTag) throws Exception {
+    public IntakeAutoShootAction(IntakeShooterSubsystem intake, TargetTrackerSubsystem tracker, boolean initialDriveTeamReady, boolean requireAprilTag) throws Exception {
         super(intake.getRobot().getMessageLogger());
 
         sub_ = intake ;
@@ -78,12 +79,14 @@ public class IntakeAutoShootAction extends Action {
         initial_drive_team_ready_ = initialDriveTeamReady ;
         require_april_tag_ = requireAprilTag ;
         verbose_ = false ;
-        rotate_ = rotate ;
 
         ISettingsSupplier settings = sub_.getRobot().getSettingsSupplier() ;
         if (settings.isDefined("system:verbose:auto-shoot")) {
             verbose_ = settings.get("system:verbose:auto-shoot").getBoolean() ;
         } 
+
+        tilt_stow_value_ = sub_.getTilt().getSettingsValue("targets:stow").getDouble() ;
+        aim_threshold_ = sub_.getSettingsValue("actions:auto-shoot:aim-threshold").getDouble() ;
 
         double velthresh = sub_.getSettingsValue("actions:auto-shoot:shooter-velocity-threshold").getDouble() ;
         double updown_pos_threshold = sub_.getSettingsValue("actions:auto-shoot:updown-pos-threshold").getDouble() ;
@@ -120,8 +123,16 @@ public class IntakeAutoShootAction extends Action {
         }
     }
 
+    public boolean isShooting() {
+        return shooting_ ;
+    }
+
     public void setDriveTeamReady(boolean ready) {
         drive_team_ready_ = ready ;
+    }
+
+    public void setDBReady(boolean ready) {
+        db_ready_ = ready ;
     }
 
     @Override
@@ -130,6 +141,7 @@ public class IntakeAutoShootAction extends Action {
 
         shooting_ = false ;
         drive_team_ready_ = initial_drive_team_ready_ ;
+        db_ready_ = false ;
 
         sub_.getUpDown().setAction(updown_, true);
         sub_.getTilt().setAction(tilt_, true);
@@ -167,9 +179,17 @@ public class IntakeAutoShootAction extends Action {
         }
         else {
             double dist = tracker_.getDistance() ;
-            current_updown_ = updown_pwl_.getValue(dist);
-            current_tilt_ = tilt_pwl_.getValue(dist);
-            current_velocity_ = velocity_pwl_.getValue(dist);
+
+            if (dist > aim_threshold_) {
+                current_updown_ = updown_pwl_.getValue(dist) ;
+                current_tilt_ = tilt_stow_value_ ;
+                current_velocity_ = 0.0 ;
+            }
+            else {
+                current_updown_ = updown_pwl_.getValue(dist);
+                current_tilt_ = tilt_pwl_.getValue(dist);
+                current_velocity_ = velocity_pwl_.getValue(dist);
+            }
 
             AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;
             ButchOIPanel oi = robot.getOI().getPanel() ;
@@ -181,7 +201,7 @@ public class IntakeAutoShootAction extends Action {
 
             oi.setTiltLED(tilt_.isAtTarget() ? LEDState.ON : LEDState.OFF);
             oi.setAprilTagLED(aprilTagTest() ? LEDState.ON : LEDState.OFF);
-            oi.setDBLED(rotate_.isAtTarget() ? LEDState.ON : LEDState.OFF);
+            oi.setDBLED(db_ready_ ? LEDState.ON : LEDState.OFF);
             oi.setVelocityLED((shooter1_.isAtVelocity() && shooter2_.isAtVelocity()) ? LEDState.ON : LEDState.OFF);
 
             if (verbose_) {
@@ -189,7 +209,7 @@ public class IntakeAutoShootAction extends Action {
                 SmartDashboard.putBoolean("UpDown", updown_.isAtTarget()) ;
                 SmartDashboard.putBoolean("Shooter1", shooter1_.isAtVelocity()) ;
                 SmartDashboard.putBoolean("Shooter2", shooter1_.isAtVelocity()) ;
-                SmartDashboard.putBoolean("DB", rotate_.isAtTarget()) ;
+                SmartDashboard.putBoolean("DB", db_ready_) ;
                 SmartDashboard.putBoolean("AprilTag ", tracker_.seesTarget()) ;
                 SmartDashboard.putBoolean("Button", drive_team_ready_) ;
             }
@@ -203,15 +223,13 @@ public class IntakeAutoShootAction extends Action {
                 data_[5] = sub_.getUpDown().getPosition() ;
                 data_[6] = current_tilt_ ;
                 data_[7] = sub_.getTilt().getPosition() ;
-                data_[8] = rotate_.isAtTarget() ? 1.0 : 0.0 ;
+                data_[8] = db_ready_ ? 1.0 : 0.0 ;
                 data_[9] = aprilTagTest() ? 0.5 : 0.0 ;
                 data_[10] = drive_team_ready_ ? 1.5 : 0.0 ;
-                data_[11] = rotate_.getRotVel() ;
-                data_[12] = rotate_.getError() ;
                 sub_.addPlotData(plot_id_, data_);
             }
 
-            if (updown_.isAtTarget() && tilt_.isAtTarget() && shooter1_.isAtVelocity() && shooter2_.isAtVelocity() && rotate_.isAtTarget() && aprilTagTest() && drive_team_ready_) {
+            if (updown_.isAtTarget() && tilt_.isAtTarget() && shooter1_.isAtVelocity() && shooter2_.isAtVelocity() && db_ready_ && aprilTagTest() && drive_team_ready_) {
                 shooting_ = true ;
                 sub_.getFeeder().setAction(feeder_on_, true);
             } 

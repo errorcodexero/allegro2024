@@ -1,6 +1,7 @@
 package org.xero1425.base.subsystems.oi;
 
 import java.util.Optional;
+import java.util.function.DoubleSupplier;
 
 import org.xero1425.base.LoopType;
 import org.xero1425.base.subsystems.RobotSubsystem;
@@ -28,8 +29,11 @@ public class SwerveDriveGamepad extends Gamepad {
     private SwerveDriveXPatternAction x_action_;
     private double ysign_ = 1.0 ;
     private double scale_amount_ = 1.0 ;
-
+    private double tracking_angle_ ;
+    private boolean driving_straight_ ;
+    private DoubleSupplier tracking_supplier_ ;
     private boolean holding_x_;
+    private double tracking_p_ ;
 
     public SwerveDriveGamepad(OISubsystem oi, int index, SwerveBaseSubsystem drive_) throws Exception {
         super(oi, "swerve_gamepad", index);
@@ -44,6 +48,16 @@ public class SwerveDriveGamepad extends Gamepad {
 
         db_ = drive_;
         holding_x_ = false ;
+        tracking_supplier_ = null ;
+        tracking_angle_ = 0.0 ;
+        driving_straight_ = false ;
+
+        tracking_p_ = drive_.getSettingsValue("angle-tracker:p").getDouble() ;
+    }
+
+    public void setTrackingSupplier(DoubleSupplier supplier) {
+        tracking_supplier_ = supplier ;
+        driving_straight_ = false ;
     }
 
     public void setScaleAmount(double scale) {
@@ -116,6 +130,10 @@ public class SwerveDriveGamepad extends Gamepad {
         super.computeState();
     }
 
+    private double getGyroTrackingValue() {
+        return db_.getGyro().getYaw() - tracking_angle_ ;
+    }
+
     @Override
     public void generateActions() {
         double ly, lx, rx ;
@@ -143,31 +161,51 @@ public class SwerveDriveGamepad extends Gamepad {
         lyscaled *= scale_amount_ ;
         rxscaled *= scale_amount_ ;
 
-        if (Math.abs(rxscaled) < deadband_rotate_ && (Math.abs(lxscaled) > deadband_pos_x_ || Math.abs(lyscaled) > deadband_pos_y_)) {
+        if (tracking_supplier_ == null || driving_straight_) {
             //
-            // The rotation stick is set to zero, so we want to maintain the current angle.
+            // If the tracking supplier is null or if we are already driving straight, then we want to process the driving straight
+            // code while moving along. 
             //
-            if (!db_.getSWRotationControl()) {
+            if (Math.abs(rxscaled) < deadband_rotate_ && (Math.abs(lxscaled) > deadband_pos_x_ || Math.abs(lyscaled) > deadband_pos_y_)) {
                 //
-                // This is the first robot loop with the rotation stick at zero.  Setup the mode to
-                // hold the angle and remember the current robot angle.
+                // The rotation stick is set to zero, so we want to maintain the current angle.
                 //
-                MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
-                logger.startMessage(MessageType.Debug, getSubsystem().getLoggerID()) ;
-                logger.add("swerve gamepad, locking rotation") ;
-                logger.add("rotation", db_.getHeading().getDegrees()) ;
-                logger.endMessage();
-                db_.setSWRotationControl(true);
-                db_.setSWRotationAngle(db_.getHeading().getDegrees());
+                if (!driving_straight_) {
+                    //
+                    // This is the first robot loop with the rotation stick at zero.  Setup the mode to
+                    // hold the angle and remember the current robot angle.
+                    //
+                    tracking_angle_ = db_.getGyro().getYaw() ;
+                    driving_straight_ = true ;
+                    tracking_supplier_ = () -> getGyroTrackingValue() ;
+
+                    MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+                    logger.startMessage(MessageType.Debug, getSubsystem().getLoggerID()) ;
+                    logger.add("swerve gamepad, locking rotation") ;
+                    logger.add("rotation", tracking_angle_) ;
+                    logger.endMessage();
+                }
+            }
+            else {
+                //
+                // The rotation stick is not zero, so we want to rotate the robot.  Turn off the angle
+                // control mechanism in the drive base and get this data from the joystick.
+                //
+                tracking_angle_ = 0.0 ;
+                driving_straight_ = false ;
+                tracking_supplier_ = null ;
             }
         }
-        else {
-            //
-            // The rotation stick is not zero, so we want to rotate the robot.  Turn off the angle
-            // control mechanism in the drive base and get this data from the joystick.
-            //
-            db_.setSWRotationControl(false);
+
+        //
+        // Now, if I have a tracking supplier, I want to use it to set the rotational velocity instead of the
+        // stick value.  This tracking supplier could be local and be about the gyro or it could be an external
+        // supplier that is tracking a target.
+        //
+        if (tracking_supplier_ != null) {
+            rxscaled = tracking_supplier_.getAsDouble() * tracking_p_ ;
         }
+
 
         //
         // The rotational velocity is given by rxscaled

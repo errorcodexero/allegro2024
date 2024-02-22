@@ -8,9 +8,8 @@ import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
-import org.xero1425.base.subsystems.swerve.SwerveBaseSubsystem;
-import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 
+import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
 import frc.robot.subsystems.intake_shooter.ButchStartCollectAction;
@@ -37,7 +36,6 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
         MotorEncoderSubsystem updown = intakeshooter.getUpDown();
         AmpTrapSubsystem amptrap = robot.getAmpTrap();
         MotorEncoderSubsystem climber = superstructure.getClimber();
-        SwerveBaseSubsystem swerve = robot.getSwerve() ;
 
         if (createTest()) {
             //
@@ -140,7 +138,10 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 if (intakeshooter != null) {
                     addSubActionPair(intakeshooter.getShooter1(),
                             new MCVelocityAction(intakeshooter.getShooter1(), "pids:velocity", getDouble("velocity"), 1.0, true),
-                            true);
+                            false);
+                    addSubActionPair(intakeshooter.getShooter2(),
+                            new MCVelocityAction(intakeshooter.getShooter2(), "pids:velocity", getDouble("velocity"), 1.0, true),
+                            true);                            
                 }
                 break;
 
@@ -432,6 +433,9 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             //
             /////////////////////////////////////////////////////////////////////////
             case 120:
+                if (amptrap != null) {
+                    addSubActionPair(amptrap, new AmpTrapPositionAction(amptrap, getDouble("angle"), getDouble("height")), true) ;
+                }   
                 break;
 
             /////////////////////////////////////////////////////////////////////////
@@ -454,7 +458,6 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 break ;
 
             case 150:
-                addSubActionPair(swerve, new SwerveTrackAngle(swerve, 90, 1.0, 1.0), true) ;
                 break ;
         }
     }

@@ -60,7 +60,7 @@ public class ButchStartCollectAction extends CollectAction {
         if (getSubsystem().isHoldingNote()) {
             MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
             logger.startMessage(MessageType.Info);
-            logger.add("collect aborted - not already present") ;
+            logger.add("collect aborted - note already present") ;
             logger.endMessage();
             setDone() ;
         }

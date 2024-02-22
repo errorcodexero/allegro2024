@@ -5,7 +5,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.xero1425.misc.MessageLogger ;
 import org.xero1425.misc.MessageType ;
-import org.xero1425.base.IVisionAlignmentData;
 import org.xero1425.base.IVisionLocalization;
 import org.xero1425.base.XeroRobot;
 import org.xero1425.base.subsystems.Subsystem;
@@ -19,7 +18,25 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Timer;
 
-public class LimeLightSubsystem extends Subsystem implements IVisionLocalization, IVisionAlignmentData {
+public class LimeLightSubsystem extends Subsystem implements IVisionLocalization {
+    /// \brief the mode for the camera
+    public enum CamMode
+    {
+        VisionProcessing,           ///< Processing vision targets on the field
+        DriverCamera,               ///< Relaying the image to the driver on the driver station
+        Invalid                     ///< Invalid camera mode
+    } ;
+
+    /// \brief the mode for the LED
+    public enum LedMode
+    {
+        UseLED,                     ///< Use the LED per the pipeline
+        ForceOff,                   ///< Force the LED to the off state
+        ForceBlink,                 ///< Force the LED to a blinking state
+        ForceOn,                    ///< Force the LED to the on state
+        Invalid                     ///< Invalid state
+    } ;
+
     public final static String LimeLightTableName = "limelight";
     public final static String CamModeKeyName = "camMode" ;
     public final static String LedModeKeyName = "ledMode" ;
@@ -107,7 +124,7 @@ public class LimeLightSubsystem extends Subsystem implements IVisionLocalization
     private boolean tv_;
 
     private CamMode cam_mode_ ;
-    private LedMode led_mode_;
+    private LedMode led_mode_ ;
 
     public LimeLightSubsystem(Subsystem parent, String name) {
         super(parent, name) ;
@@ -133,6 +150,26 @@ public class LimeLightSubsystem extends Subsystem implements IVisionLocalization
 
     public double getTY() {
         return ty_ ;
+    }
+
+    public double getTX(int target) {
+        double ret = Double.MAX_VALUE ;
+        Fiducial fud = getFUD(target) ;
+        if (fud != null) {
+            ret = fud.tx ;
+        }
+
+        return ret ;
+    }
+
+    public double getTY(int target) {
+        double ret = Double.MAX_VALUE ;
+        Fiducial fud = getFUD(target) ;
+        if (fud != null) {
+            ret = fud.ty ;
+        }
+
+        return ret ;
     }
 
     public boolean isTargetDetected() {
@@ -214,15 +251,7 @@ public class LimeLightSubsystem extends Subsystem implements IVisionLocalization
             double t = Timer.getFPGATimestamp();
             if (t > 1.0 && t < Double.MAX_VALUE) {
                 found_ = true ;
-                valid_targets_ = true;
-                fuds_ = new Fiducial[1];
-                double ax = Math.toRadians(0.0);
-                double ay = Math.toRadians(0.0);
-                double az = Math.toRadians(180.0);
-                Rotation3d r = new Rotation3d(ax, ay, az);
-                wpiblue_ = new Pose3d(3.5, 7.0, 0.333, r);
-                tl_ = 0.020;
-                cl_ = 0.011;
+                valid_targets_ = false ;
             }
             else {
                 fuds_ = null;
@@ -246,21 +275,6 @@ public class LimeLightSubsystem extends Subsystem implements IVisionLocalization
         return fuds_[0].robotToTarget.getTranslation().getNorm();
     }
 
-    public double getMultiTagDistance() {
-        if (XeroRobot.isSimulation()) {
-            return 1.5;
-        }
-
-        double dist = Double.MAX_VALUE ;
-        for(var fud : fuds_) {
-            double zvalue = Math.abs(fud.robotToTarget.getTranslation().getZ()) ;
-            if (zvalue < dist) {
-                dist = zvalue;
-            }
-        }
-
-        return dist ;
-    }
 
     ///////////////////////////////////////////////////////
     //
@@ -332,28 +346,6 @@ public class LimeLightSubsystem extends Subsystem implements IVisionLocalization
         return classifiers_ ;
     }
 
-    @Override
-    public String getStatus() {
-        String st = "" ;
-
-        if (!found_) {
-            st = "<B>Limelight device not found</B>" ;
-        }
-        else {
-            if (!valid_targets_) {
-                st = "<B>No targets detected</B>" ;
-            }
-            else {
-                st += getRetroStatus() ;
-                st += getFiducialStatus() ;
-                st += getClassifierStatus() ;
-                st += getDetectorStatus() ;
-            }
-        }
-
-        return st ;
-    }
-
     public void retroComputeMyState() {
         if (cam_mode_ == CamMode.VisionProcessing)
         {
@@ -411,40 +403,28 @@ public class LimeLightSubsystem extends Subsystem implements IVisionLocalization
             }
         }
 
-        String str = "" ;
-        if (fuds_ != null && fuds_.length > 0) {
+        retroComputeMyState();
+    }
+
+    private Fiducial getFUD(int target) {
+        if (fuds_ != null) {
             for(int i = 0 ; i < fuds_.length ; i++) {
-                if (str.length() > 0) {
-                    str += ", " ;
+                if (fuds_[i].id == target) {
+                    return fuds_[i] ;
                 }
-                if (fuds_[i] != null)
-                    str += fuds_[i].id ;
-                else
-                    str += "<NULL>";
             }
         }
 
-        if (str == "")
-            str = "NONE" ;
-
-        logger.startMessage(MessageType.Debug, getLoggerID());
-        logger.add("April Tags Seen: ", str) ;
-        logger.endMessage();
-
-        retroComputeMyState();
+        return null ;
     }
 
     public DistanceAngle getDistanceAngleToTag(int id) {
         DistanceAngle ret = null ;
 
-        if (fuds_ != null) {
-            for(int i = 0 ; i < fuds_.length ; i++) {
-                if (fuds_[i].id == id) {
-                    Pose2d p2d = fuds_[i].targetToRobot.toPose2d() ;
-                    ret = new DistanceAngle(p2d.getTranslation().getNorm(), p2d.getRotation().getDegrees());
-                    break ;
-                }
-            }
+        Fiducial fud = getFUD(id) ;
+        if (fud != null) {
+            Pose2d p2d = fud.targetToRobot.toPose2d() ;
+            ret = new DistanceAngle(p2d.getTranslation().getNorm(), p2d.getRotation().getDegrees());
         }
 
         return ret;
@@ -463,91 +443,6 @@ public class LimeLightSubsystem extends Subsystem implements IVisionLocalization
         }
 
         return ret ;
-    }
-
-    private String getRetroStatus() {
-        int count = 0 ;
-        if (retro_ != null) {
-            count = retro_.length ;
-        }
-        String st = "<br>Retro Targets, " + count + " detected<hr>" ;
-        return st ;
-    }
-
-    private String pose3dToString(Pose3d p) {
-        String st = p.getTranslation().toString() ;
-        st += ", rx " + p.getRotation().getX() ;
-        st += ", ry " + p.getRotation().getY() ;
-        st += ", rz " + p.getRotation().getZ() ;
-        return st ;
-    }
-
-    private String getOneFiducialStatus(Fiducial f) {
-        String st = "" ;
-
-        st += "<table border=\"1\">" ;
-        st += "<tr><th>Item</th><th>Value</th></tr>" ;
-        st += "<tr><td>ID</td><td>" + f.id + "</td></tr>" ;
-        st += "<tr><td>Family</td><td>" + f.family + "</td></tr>" ;
-        st += "<tr><td>ta</td><td>" + f.ta + "</td></tr>" ;
-        st += "<tr><td>tx</td><td>" + f.tx + "</td></tr>" ;
-        st += "<tr><td>txp</td><td>" + f.txp + "</td></tr>" ;
-        st += "<tr><td>ty</td><td>" + f.ty + "</td></tr>" ;
-        st += "<tr><td>typ</td><td>" + f.typ + "</td></tr>" ;
-        st += "<tr><td>Cam-To-Target</td><td>" + pose3dToString(f.camToTarget) + "</td></tr>" ;
-        st += "<tr><td>Robot-To-Field</td><td>" + pose3dToString(f.robotToField) + "</td></tr>" ;
-        st += "<tr><td>Robot-To-Target</td><td>" + pose3dToString(f.robotToTarget) + "</td></tr>" ;
-        st += "<tr><td>Target-To-Camera</td><td>" + pose3dToString(f.targetToCamera) + "</td></tr>" ;
-        st += "<tr><td>Target-To-Robot</td><td>" + pose3dToString(f.targetToRobot) + "</td></tr>" ;
-
-        st += "</table>";
-        return st ;
-    }
-
-    private String getFiducialStatus() {
-        int count ;
-
-        if (fuds_ == null) {
-            count = 0 ;
-        }
-        else {
-            count = fuds_.length ;
-        }
-        String st = "<br>Fiducial Targets, " + count + " detected<hr>" ;
-
-        if (count > 0) {
-            for(int i = 0 ; i < fuds_.length ; i++) {
-                st += getOneFiducialStatus(fuds_[i]) ;
-            }
-        }
-        return st ;
-    }
-
-    private String getClassifierStatus() {
-        int count ;
-
-        if (classifiers_ == null) {
-            count = 0 ;
-        }
-        else {
-            count = classifiers_.length ;
-        }
-        String st = "<br>Classifier Targets, " + count + " detected<hr>" ;
-        return st ;
-
-    }
-
-    private String getDetectorStatus() {
-        int count ;
-
-        if (detectors_ == null) {
-            count = 0 ;
-        }
-        else {
-            count = detectors_.length ;
-        }
-        String st = "<br>Detector Targets, " + count + " detected<hr>" ;
-        return st ;
     }
 
     private String getStringFromObject(JSONObject obj, String name, String def) {

@@ -8,6 +8,22 @@ import java.lang.Math ;
 /// \brief a set of general math functions
 public class XeroMath
 {
+    /// \brief convert inches to meters
+    /// This method converts inches to meters
+    /// \param inches the value in inches
+    /// \returns the value in meters
+    public static double InchesToMeters(double inches) {
+        return inches * 0.0254 ;
+    }
+
+    /// \brief convert meters to inches
+    /// This method converts meters to inches
+    /// \param meters the value in meters
+    /// \returns the value in inches
+    public static double MetersToInches(double meters) {
+        return meters / 0.0254 ;
+    }
+
     /// \brief normalize an angle in degrees
     /// This method converts the input angle to an angle between -180 and +180 degrees
     /// \param a the angle in degrees

@@ -2,6 +2,8 @@ package frc.robot.subsystems.amp_trap;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 
 public class AmpTrapPositionAction extends Action {
     private enum State {
@@ -28,7 +30,8 @@ public class AmpTrapPositionAction extends Action {
 
     private State state_ ;
 
-    public AmpTrapPositionAction(AmpTrapSubsystem sub, double angle, double height) throws Exception {
+    public 
+    AmpTrapPositionAction(AmpTrapSubsystem sub, double angle, double height) throws Exception {
         super(sub.getRobot().getMessageLogger()) ;
 
         sub_ = sub ;
@@ -120,20 +123,23 @@ public class AmpTrapPositionAction extends Action {
     @Override
     public void run() throws Exception {
         super.run() ;
+
+        State prev = state_ ;
+
         if (state_ == State.CrossMinToMax) {
             //
             // We are going from the min to max position, we need to wait for the elevator to be above the keepout
             // height before we can move the arm to the target position
             //
-            if (sub_.getElevator().getPosition() >= keep_out_height_) {
+            if (sub_.getElevator().getPosition() >= keep_out_height_ - 0.1) {
                 sub_.getArm().setAction(arm_goto_target_action_, true) ;
-            }
 
-            if (target_height_ > keep_out_height_) {
-                state_ = State.DirectToTarget ;
-            }
-            else {
-                state_ = State.CrossMinToMaxWaitClear ;
+                if (target_height_ > keep_out_height_) {
+                    state_ = State.DirectToTarget ;
+                }
+                else {
+                    state_ = State.CrossMinToMaxWaitClear ;
+                }                
             }
         } else if (state_ == State.CrossMaxToMin) {
             //
@@ -178,6 +184,13 @@ public class AmpTrapPositionAction extends Action {
             if (elevator_goto_target_action_.isDone() && arm_goto_target_action_.isDone()) {
                 setDone() ;
             }
+        }
+
+        if (prev != state_) {
+            MessageLogger logger = sub_.getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Debug) ;
+            logger.add("AmpTrapPositionState changed : " + prev.toString() + " -> " + state_.toString()) ;
+            logger.endMessage();            
         }
     }
     

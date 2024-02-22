@@ -1,20 +1,25 @@
 Item                                                                                                  Status
 ------------------------------------------------------------------------------------------------------------
 - Make sure drivebase drives ok with angle-tracker P set to zero                                      Done
-- Tune/Debug angle-tracker P                                                                          Partial
+- Tune/Debug angle-tracker P                                                                          Done
 - Mount april tags on speaker                                                                         Done
 - Be sure limelight sees april tags and we have the right data                                        Done
 - Check drive base sync with april tag data                                                           Done
 - Debug target tracker for correct angle and distance                                                 Done
   o based on drive base only                                                                          Done
   o based on seeing the target april tag                                                              Done
-- Debug drivebase goto angle action                                                                   Once
-- Tune PWL for shooting                                                                               Partial
-- Test OI shooting sequence
-- Test collect: check the 1 foot frame extension limit with bumpers and collect capability move
-- Test note collect: run 20 tests in a row
-- Tune trap place sequence
-- Drive base fixed angle driving (also anti drift driving)
+- Test OI shooting sequence                                                                           Done
+- Test collect: check the 1 foot frame extension limit with bumpers and collect capability move       Done
+- Eject                                                                                               Done
+- Test drivebase target tracking mode
+- Mount second april tag, test picking up the right tag (tx, ty, tv)
+- Tune PWL for shooting
+- Re-tune the xfer sequence
+- Setup AMP place sequence
+- Test transitions (collect in speaker mode, change target to amp, etc.)
 - Automodes
-- Eject
 - Turtle
+- Tune trap place sequence
+- Bug fixes
+------------------------------------------------------------------------------------------------------------
+
