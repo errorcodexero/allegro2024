@@ -22,7 +22,7 @@ import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
 import frc.robot.subsystems.intake_shooter.IntakeEjectAction;
 import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
-import frc.robot.subsystems.oi.ButchOIPanel.NoteTarget;
+import frc.robot.subsystems.oi.AllegroOIPanel.NoteTarget;
 import frc.robot.subsystems.superstructure.ClimbAction;
 import frc.robot.subsystems.superstructure.TransferIntakeToTrampAction;
 import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
@@ -56,7 +56,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
         Eject
     }    
 
-    private ButchOIPanel oipanel_ ;
+    private AllegroOIPanel oipanel_ ;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //
@@ -154,7 +154,12 @@ public class Allegro2024OISubsystem extends OISubsystem {
     //
     // This action moves the elevator/arm to the position to climb down from the trap
     //
-    private AmpTrapPositionAction goto_climb_down_pos_action_ ;    
+    private AmpTrapPositionAction goto_climb_down_pos_action_ ;
+
+    //
+    // If true, we are doing a climb and not a trap placement
+    //
+    private boolean climb_only_ ;
 
     //
     // Misc
@@ -183,7 +188,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
         if (index != -1) {
             try {
-                oipanel_ = new ButchOIPanel(this, index) ;
+                oipanel_ = new AllegroOIPanel(this, index) ;
                 addHIDDevice(oipanel_) ;
             }
             catch(Exception ex) {
@@ -192,9 +197,11 @@ public class Allegro2024OISubsystem extends OISubsystem {
                 logger.add(ex.getMessage()).endMessage(); ;
             }
         }
+
+        climb_only_ = false ;
     }
 
-    public ButchOIPanel getPanel() {
+    public AllegroOIPanel getPanel() {
         return oipanel_ ;
     }
 
@@ -265,6 +272,11 @@ public class Allegro2024OISubsystem extends OISubsystem {
         if (gp.isRBackButtonPressed()) {
             robot.getSuperStructure().setAction(startCollectAction_) ;
             state_ = OIState.Collect ;
+        }
+        else if (oipanel_.isClimbUpPrepPressed()) {
+            climb_only_ = true ;
+            robot.getAmpTrap().setAction(goto_climb_pos_action_, true) ;
+            state_ = OIState.GoToClimbPosition ;
         }
     }
 
@@ -453,6 +465,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
             robot.getSuperStructure().getClimber().setAction(hooks_down_, true) ;
             state_ = OIState.WaitForHooksDown ;
+            climb_only_ = false ;
         }
         else if (oipanel_.isClimbUpExecPressed()) {
             oipanel_.setClimbUpExecLED(LEDState.BLINK_FAST);
@@ -464,9 +477,16 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     private void waitingForHooksDown() {
         if (hooks_down_.isDone()) {
-            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;              
-            state_ = OIState.NoteGoingToTrapPosition ;
-            robot.getAmpTrap().setAction(goto_trap_place_pos_action_, true) ;
+            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
+
+            if (climb_only_) {
+                oipanel_.setClimbDownLED(LEDState.ON);
+                state_ = OIState.Climbed ;
+            }
+            else {
+                state_ = OIState.NoteGoingToTrapPosition ;
+                robot.getAmpTrap().setAction(goto_trap_place_pos_action_, true) ;
+            }
         }
     }
 

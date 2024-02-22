@@ -13,9 +13,10 @@ Item                                                                            
 - Eject                                                                                               Done
 - Test drivebase target tracking mode
 - Mount second april tag, test picking up the right tag (tx, ty, tv)
-- Tune PWL for shooting
+- Tune PWL for shooting                                                                               Done
 - Re-tune the xfer sequence
 - Setup AMP place sequence
+- Climb without trap                                                                                  
 - Test transitions (collect in speaker mode, change target to amp, etc.)
 - Automodes
 - Turtle

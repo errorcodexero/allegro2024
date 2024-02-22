@@ -8,7 +8,7 @@ import org.xero1425.base.subsystems.oi.OIPanelButton.ButtonType;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MissingParameterException;
 
-public class ButchOIPanel extends OIPanel {
+public class AllegroOIPanel extends OIPanel {
     public enum NoteTarget {
         Invalid,
         Trap,
@@ -49,7 +49,7 @@ public class ButchOIPanel extends OIPanel {
     // Actions
     //////////////
 
-    public ButchOIPanel(OISubsystem oi, int index) throws BadParameterTypeException, MissingParameterException {
+    public AllegroOIPanel(OISubsystem oi, int index) throws BadParameterTypeException, MissingParameterException {
         super(oi, "oipanel", index);
     }
 

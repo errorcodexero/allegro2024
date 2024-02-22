@@ -10,7 +10,7 @@ import org.xero1425.misc.ISettingsSupplier;
 
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.oi.ButchOIPanel;
+import frc.robot.subsystems.oi.AllegroOIPanel;
 import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
@@ -193,7 +193,7 @@ public class IntakeAutoShootAction extends Action {
             }
 
             AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;
-            ButchOIPanel oi = robot.getOI().getPanel() ;
+            AllegroOIPanel oi = robot.getOI().getPanel() ;
 
             updown_.setTarget(current_updown_);
             tilt_.setTarget(current_tilt_);
