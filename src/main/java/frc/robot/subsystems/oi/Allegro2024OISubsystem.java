@@ -16,8 +16,8 @@ import org.xero1425.misc.MissingParameterException;
 import frc.robot.subsystems.amp_trap.AmpTrapEjectAction;
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.amp_trap.AmpTrapShootAction;
-import frc.robot.subsystems.intake_shooter.ButchStartCollectAction;
-import frc.robot.subsystems.intake_shooter.ButchStopCollectionAction;
+import frc.robot.subsystems.intake_shooter.StartCollectAction;
+import frc.robot.subsystems.intake_shooter.StopCollectionAction;
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
 import frc.robot.subsystems.intake_shooter.IntakeEjectAction;
 import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
@@ -67,12 +67,12 @@ public class Allegro2024OISubsystem extends OISubsystem {
     //
     // This action is used to start the collect sequence
     //
-    private ButchStartCollectAction startCollectAction_ ;
+    private StartCollectAction startCollectAction_ ;
 
     //
     // This action is used to stop the collect sequence
     //
-    private ButchStopCollectionAction stopCollectAction_ ;
+    private StopCollectionAction stopCollectAction_ ;
 
     //
     // This puts the intake-shooter into shoot mode.  The tilt and shooter wheels will start moving to align to the target
@@ -679,7 +679,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
         intake_eject_action_ = new IntakeEjectAction(robot.getIntakeShooter());
         trap_eject_action_ = new AmpTrapEjectAction(robot.getAmpTrap());
 
-        startCollectAction_ = new ButchStartCollectAction(intake);
-        stopCollectAction_ = new ButchStopCollectionAction(intake);
+        startCollectAction_ = new StartCollectAction(intake);
+        stopCollectAction_ = new StopCollectionAction(intake);
     }
 }

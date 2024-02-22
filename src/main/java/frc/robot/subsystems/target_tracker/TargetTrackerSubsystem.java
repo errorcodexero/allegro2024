@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.xero1425.base.LoopType;
 import org.xero1425.base.subsystems.Subsystem;
-import org.xero1425.base.subsystems.swerve.SwerveBaseSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MessageLogger;

@@ -587,7 +587,8 @@
             },
             "targets" : {
                 "stow" : -37.0,
-                "collect" : 22.0
+                "collect" : 22.0,
+                "kick-out" : 30.0
             },
             "pids" : {
                 "position" : {

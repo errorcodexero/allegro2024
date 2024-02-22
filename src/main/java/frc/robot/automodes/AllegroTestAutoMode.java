@@ -12,8 +12,8 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
-import frc.robot.subsystems.intake_shooter.ButchStartCollectAction;
-import frc.robot.subsystems.intake_shooter.ButchStopCollectionAction;
+import frc.robot.subsystems.intake_shooter.StartCollectAction;
+import frc.robot.subsystems.intake_shooter.StopCollectionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.intake_shooter.ManualShootAction;
 import frc.robot.subsystems.intake_shooter.ShooterTuningAction;
@@ -387,21 +387,21 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
 
             case 112:
                 if (intakeshooter != null) {
-                    addSubActionPair(intakeshooter, new ButchStartCollectAction(intakeshooter), true);
+                    addSubActionPair(intakeshooter, new StartCollectAction(intakeshooter), true);
                 }
                 break ;          
                 
             case 113:
                 if (intakeshooter != null) {
-                    addSubActionPair(intakeshooter, new ButchStartCollectAction(intakeshooter), true);
-                    addSubActionPair(intakeshooter, new ButchStopCollectionAction(intakeshooter), true);
+                    addSubActionPair(intakeshooter, new StartCollectAction(intakeshooter), true);
+                    addSubActionPair(intakeshooter, new StopCollectionAction(intakeshooter), true);
                 }
                 break ;                
 
             case 114:
                 if (intakeshooter != null) {
-                    addSubActionPair(intakeshooter, new ButchStartCollectAction(intakeshooter), true);
-                    addSubActionPair(intakeshooter, new ButchStopCollectionAction(intakeshooter), true);
+                    addSubActionPair(intakeshooter, new StartCollectAction(intakeshooter), true);
+                    addSubActionPair(intakeshooter, new StopCollectionAction(intakeshooter), true);
                     addSubActionPair(intakeshooter, new ManualShootAction(intakeshooter, "subwoofer"), true);
                 }
                 break ;

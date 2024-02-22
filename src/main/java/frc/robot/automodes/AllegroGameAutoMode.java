@@ -9,7 +9,7 @@ import org.xero1425.base.subsystems.swerve.SwerveBaseSubsystem;
 import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollower;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 
-import frc.robot.subsystems.intake_shooter.ButchStartCollectAction;
+import frc.robot.subsystems.intake_shooter.StartCollectAction;
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
 import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
@@ -24,7 +24,7 @@ public class AllegroGameAutoMode extends AutoMode {
     private final static double kCollectEndOfPathDistance = 0.5 ;
     private final static double kShootEndOfPathDistance = 0.08 ;
 
-    private ButchStartCollectAction start_collect_ ;
+    private StartCollectAction start_collect_ ;
 
     public AllegroGameAutoMode(AutoController ctrl, String name) {
         super(ctrl, name) ;
@@ -48,7 +48,7 @@ public class AllegroGameAutoMode extends AutoMode {
     protected void driveAndCollect(String path, boolean setpose) throws Exception {
         AllegroRobot2024 robot = (AllegroRobot2024)getAutoController().getRobot().getRobotSubsystem() ;        
         SwerveHolonomicPathFollower pathact = new SwerveHolonomicPathFollower(robot.getSwerve(), path, setpose, 0.2);
-        start_collect_ = new ButchStartCollectAction(robot.getIntakeShooter()) ;
+        start_collect_ = new StartCollectAction(robot.getIntakeShooter()) ;
 
         double collectLength = pathact.getDistance() - kCollectEndOfPathDistance ;
 
@@ -76,7 +76,7 @@ public class AllegroGameAutoMode extends AutoMode {
 
         SequenceAction seq = new SequenceAction(getAutoController().getRobot().getMessageLogger()) ;    
         SwerveHolonomicPathFollower pathact = new SwerveHolonomicPathFollower(robot.getSwerve(), path, setpose, 0.2);
-        start_collect_ = new ButchStartCollectAction(robot.getIntakeShooter()) ;
+        start_collect_ = new StartCollectAction(robot.getIntakeShooter()) ;
 
         double collectLength = pathact.getDistance() - kCollectEndOfPathDistance ;        
 
