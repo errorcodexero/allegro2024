@@ -12,6 +12,7 @@ import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 import org.xero1425.misc.MissingParameterException;
+import org.xero1425.misc.XeroMath;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -34,6 +35,7 @@ public class SwerveDriveGamepad extends Gamepad {
     private DoubleSupplier tracking_supplier_ ;
     private boolean holding_x_;
     private double tracking_p_ ;
+    private int logger_id_ ;
 
     public SwerveDriveGamepad(OISubsystem oi, int index, SwerveBaseSubsystem drive_) throws Exception {
         super(oi, "swerve_gamepad", index);
@@ -53,6 +55,8 @@ public class SwerveDriveGamepad extends Gamepad {
         driving_straight_ = false ;
 
         tracking_p_ = drive_.getSettingsValue("angle-tracker:p").getDouble() ;
+
+        logger_id_ = getSubsystem().getRobot().getMessageLogger().registerSubsystem("swerve-gamepad");        
     }
 
     public void setTrackingSupplier(DoubleSupplier supplier) {
@@ -131,7 +135,8 @@ public class SwerveDriveGamepad extends Gamepad {
     }
 
     private double getGyroTrackingValue() {
-        return db_.getGyro().getYaw() - tracking_angle_ ;
+        double yaw = XeroMath.normalizeAngleDegrees(db_.getGyro().getYaw());
+        return yaw - tracking_angle_ ;
     }
 
     @Override
@@ -175,7 +180,7 @@ public class SwerveDriveGamepad extends Gamepad {
                     // This is the first robot loop with the rotation stick at zero.  Setup the mode to
                     // hold the angle and remember the current robot angle.
                     //
-                    tracking_angle_ = db_.getGyro().getYaw() ;
+                    tracking_angle_ = XeroMath.normalizeAngleDegrees(db_.getGyro().getYaw()) ;
                     driving_straight_ = true ;
                     tracking_supplier_ = () -> getGyroTrackingValue() ;
 
@@ -203,9 +208,16 @@ public class SwerveDriveGamepad extends Gamepad {
         // supplier that is tracking a target.
         //
         if (tracking_supplier_ != null) {
-            rxscaled = tracking_supplier_.getAsDouble() * tracking_p_ ;
+            double err = tracking_supplier_.getAsDouble() ;
+            rxscaled = err * tracking_p_ ;            
+            MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Debug, logger_id_) ;
+            logger.add("Swerve: tracking: ") ;
+            logger.add("drive_straight", driving_straight_) ;
+            logger.add("err", err) ;
+            logger.add("rxscaled", rxscaled) ;
+            logger.endMessage();
         }
-
 
         //
         // The rotational velocity is given by rxscaled

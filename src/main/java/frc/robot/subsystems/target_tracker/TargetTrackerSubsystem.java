@@ -7,6 +7,8 @@ import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.swerve.SwerveBaseSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
 import org.xero1425.misc.BadParameterTypeException;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 import org.xero1425.misc.MissingParameterException;
 import org.xero1425.misc.XeroMath;
 
@@ -47,8 +49,6 @@ public class TargetTrackerSubsystem extends Subsystem {
     public void init(LoopType prev, LoopType current) {
         super.init(prev, current);
 
-
-
         AprilTagFieldLayout field_layout = getRobot().getAprilTags();
 
         Pose3d target_pos_3d = null;
@@ -73,29 +73,31 @@ public class TargetTrackerSubsystem extends Subsystem {
         super.computeMyState();
 
         if (target_pos_ != null) {
-
-
             AllegroRobot2024 robotSubsystem = (AllegroRobot2024) getRobot().getRobotSubsystem();
             Pose2d robot_pos_ = robotSubsystem.getSwerve().getPose();
-            distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos_, target_pos_);
-            angle_to_target_ = calculateAngleBetweenPoses(robot_pos_, target_pos_);
-        
+
+            MessageLogger logger = getRobot().getMessageLogger() ;
+
             putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
-            putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);
+            putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);           
+            putDashboard("tt_tag", DisplayType.Always, sees_target_);
 
-            SwerveBaseSubsystem sw = robotSubsystem.getSwerve() ;
-            double rotateto = XeroMath.normalizeAngleDegrees(angle_to_target_ + sw.getHeading().getDegrees()) ;
-            putDashboard("tt_robotrot", DisplayType.Always, rotateto) ;            
-
+            logger.startMessage(MessageType.Debug, getLoggerID()) ;
             if (ll_.validTargets() && ll_.hasAprilTag(target_number_)) {
+                logger.add("apriltag", true) ;
                 sees_target_ = true ;
-                angle_to_target_ = ll_.getTX(target_number_);
+                angle_to_target_ = -ll_.getTX(target_number_);
                 distance_between_robot_and_target_ = XeroMath.InchesToMeters((target_height_ - camera_height_) / Math.tan(Math.toRadians(camera_angle_ + ll_.getTY(target_number_)))) ;
             }
-
-            putDashboard("ll:dist", DisplayType.Always, distance_between_robot_and_target_);
-            putDashboard("ll:angle", DisplayType.Always, angle_to_target_);
-            putDashboard("ll:tag", DisplayType.Always, sees_target_);
+            else {
+                logger.add("apriltag", false) ;
+                sees_target_ = false ;
+                distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos_, target_pos_);
+                angle_to_target_ = calculateAngleBetweenPoses(robot_pos_, target_pos_);
+            }
+            logger.add("distance", distance_between_robot_and_target_) ;
+            logger.add("angle", angle_to_target_) ;
+            logger.endMessage();
         }
     }
 

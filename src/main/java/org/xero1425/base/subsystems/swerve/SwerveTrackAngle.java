@@ -26,7 +26,7 @@ public class SwerveTrackAngle extends Action {
 
         postol_ = postol ;
 
-        p_ = swerve.getSettingsValue("angle-tracker:p").getDouble() ;
+        p_ = 3.0 ;
     }
 
     public boolean isAtTarget() {

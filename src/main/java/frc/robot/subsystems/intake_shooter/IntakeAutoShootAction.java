@@ -68,7 +68,8 @@ public class IntakeAutoShootAction extends Action {
         "tilt (deg)",
         "dbready (bool)",
         "april-tag (bool)",
-        "oiready (bool)"
+        "oiready (bool)",
+        "distance (m)"
     } ;
 
     public IntakeAutoShootAction(IntakeShooterSubsystem intake, TargetTrackerSubsystem tracker, boolean initialDriveTeamReady, boolean requireAprilTag) throws Exception {
@@ -226,6 +227,7 @@ public class IntakeAutoShootAction extends Action {
                 data_[8] = db_ready_ ? 1.0 : 0.0 ;
                 data_[9] = aprilTagTest() ? 0.5 : 0.0 ;
                 data_[10] = drive_team_ready_ ? 1.5 : 0.0 ;
+                data_[11] = robot.getTargetTracker().getDistance() ;
                 sub_.addPlotData(plot_id_, data_);
             }
 

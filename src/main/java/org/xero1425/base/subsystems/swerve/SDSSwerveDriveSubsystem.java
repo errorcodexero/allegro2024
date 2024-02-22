@@ -21,6 +21,8 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
+    static final double kOneDegreeInRadians = 0.01745329251994329576923690768489 ;
+
     enum Mode {
         RawPower,
         RawSpeed,
@@ -286,6 +288,11 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
         if (mode_ == Mode.Chassis) {
 
+            // System.out.println("rotational " + chassis_speed_.omegaRadiansPerSecond) ;
+            if (Math.abs(chassis_speed_.omegaRadiansPerSecond) < kOneDegreeInRadians) {
+                chassis_speed_.omegaRadiansPerSecond = 0.0 ;
+            }
+
             // Convert chassis speeds to module speeds and angles
             SwerveModuleState[] states = getKinematics().toSwerveModuleStates(chassis_speed_);
             
@@ -296,7 +303,7 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
             angles_[BL] = states[BL].angle.getDegrees() ;
             speeds_[BL] = states[BL].speedMetersPerSecond ;
             angles_[BR] = states[BR].angle.getDegrees() ;
-            speeds_[BR] = states[BR].speedMetersPerSecond ;                                    
+            speeds_[BR] = states[BR].speedMetersPerSecond ;   
         }
 
         if (mode_ == Mode.Chassis || mode_ == Mode.RawSpeed)
