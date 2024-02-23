@@ -11,6 +11,9 @@ Item                                                                            
 - Test OI shooting sequence                                                                           Done
 - Test collect: check the 1 foot frame extension limit with bumpers and collect capability move       Done
 - Eject                                                                                               Done
+- If collect cancelled without collecting note, intake doesn't stop
+- If pose not reset, shooter motors just vibrate. Feeding invalid values due to invalid pose.
+- Shuttleboard disconnecting sporadically + OI LEDs going out. DriverStation lights remain green.
 - Test drivebase target tracking mode
 - Mount second april tag, test picking up the right tag (tx, ty, tv)
 - Tune PWL for shooting                                                                               Done
