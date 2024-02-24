@@ -6,9 +6,9 @@ aspect_min:0.000000
 black_level:0
 blue_balance:1975
 botfloorsnap:0
-botlength:0.7112
+botlength:0.8
 bottype:swerve
-botwidth:0.7112
+botwidth:0.8
 calibration_type:0
 classifier_conf:0.100000
 contour_grouping:0
@@ -48,7 +48,7 @@ fiducial_resdiv:2
 fiducial_size:152.4
 fiducial_skip3d:0
 fiducial_type:aprilClassic36h11
-fiducial_vis_mode:3dbotposefieldspace
+fiducial_vis_mode:3dcamposetargspace
 flicker_correction:0
 force_convex:1
 hue_max:85
@@ -70,8 +70,8 @@ python_snapscript_name:
 red_balance:1200
 roi_x:0.000000
 roi_y:0.000000
-rsf:-0.406
-rspitch:-40
+rsf:-0.4
+rspitch:40
 rsroll:0.000000
 rss:0.000000
 rsu:0
