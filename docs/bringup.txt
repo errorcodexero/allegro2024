@@ -11,6 +11,10 @@ Item                                                                            
 - Test OI shooting sequence                                                                           Done
 - Test collect: check the 1 foot frame extension limit with bumpers and collect capability move       Done
 - Eject                                                                                               Done
+- angle-tracker p needs to be 7 instead of 1, but creates instability driving w/o tracking
+- Can't abort shoot and reclaim gamepad. 
+- Occasional loss of comms while shooting
+- Shooter inconsistent at eg 3.22m. Better with higher P but slop in belt.
 - If collect cancelled without collecting note, intake doesn't stop
 - If pose not reset, shooter motors just vibrate. Feeding invalid values due to invalid pose.
 - Shuttleboard disconnecting sporadically + OI LEDs going out. DriverStation lights remain green.

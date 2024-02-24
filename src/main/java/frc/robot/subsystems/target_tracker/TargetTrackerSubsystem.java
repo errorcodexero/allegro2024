@@ -77,10 +77,6 @@ public class TargetTrackerSubsystem extends Subsystem {
 
             MessageLogger logger = getRobot().getMessageLogger() ;
 
-            putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
-            putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);           
-            putDashboard("tt_tag", DisplayType.Always, sees_target_);
-
             logger.startMessage(MessageType.Debug, getLoggerID()) ;
             if (ll_.validTargets() && ll_.hasAprilTag(target_number_)) {
                 logger.add("apriltag", true) ;
@@ -97,6 +93,10 @@ public class TargetTrackerSubsystem extends Subsystem {
             logger.add("distance", distance_between_robot_and_target_) ;
             logger.add("angle", angle_to_target_) ;
             logger.endMessage();
+
+            putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
+            putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);           
+            putDashboard("tt_tag", DisplayType.Always, sees_target_);
         }
     }
 
