@@ -339,6 +339,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
             // shot and return to the state where they can press the shoot button again.
             //
             state_ = OIState.WaitingToShoot ;
+            getGamePad().enable();
         }
         else if (!shoot_action_.isShooting() && oipanel_.getNoteTarget() != NoteTarget.Speaker) {
             //

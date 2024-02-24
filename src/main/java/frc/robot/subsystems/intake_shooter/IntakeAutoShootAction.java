@@ -1,12 +1,15 @@
 package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.actions.Action;
+import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.motorsubsystem.MCTrackPosAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.oi.OILed.LEDState;
 import org.xero1425.base.utils.PieceWiseLinear;
 import org.xero1425.misc.ISettingsSupplier;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -41,6 +44,9 @@ public class IntakeAutoShootAction extends Action {
     private boolean shooting_ ;
 
     private boolean verbose_ ;
+
+    private XeroTimer wait_timer_ ;
+    private boolean waiting_ ;
 
     private boolean db_ready_ ;
 
@@ -80,6 +86,9 @@ public class IntakeAutoShootAction extends Action {
         initial_drive_team_ready_ = initialDriveTeamReady ;
         require_april_tag_ = requireAprilTag ;
         verbose_ = false ;
+        waiting_ = false ;
+
+        wait_timer_  = new XeroTimer(intake.getRobot(), "wait-timer", 2.0) ;
 
         ISettingsSupplier settings = sub_.getRobot().getSettingsSupplier() ;
         if (settings.isDefined("system:verbose:auto-shoot")) {
@@ -166,7 +175,13 @@ public class IntakeAutoShootAction extends Action {
     public void run() throws Exception {
         super.run();
 
-        if (shooting_) {
+        if (waiting_ && !shooting_) {
+            if (wait_timer_.isExpired()) {
+                sub_.getFeeder().setAction(feeder_on_, true);
+                shooting_ = true ;
+            }
+        }
+        else if (shooting_) {
             if (feeder_on_.isDone()) {
                 sub_.setHoldingNote(false);
                 sub_.getFeeder().setPower(0.0);
@@ -184,13 +199,20 @@ public class IntakeAutoShootAction extends Action {
             if (dist > aim_threshold_) {
                 current_updown_ = updown_pwl_.getValue(dist) ;
                 current_tilt_ = tilt_stow_value_ ;
-                current_velocity_ = 0.0 ;
+                current_velocity_ = 50 ;
             }
             else {
                 current_updown_ = updown_pwl_.getValue(dist);
                 current_tilt_ = tilt_pwl_.getValue(dist);
                 current_velocity_ = velocity_pwl_.getValue(dist);
             }
+
+            MessageLogger logger = sub_.getRobot().getMessageLogger();
+            logger.startMessage(MessageType.Debug, sub_.getLoggerID()) ;
+            logger.add("shooting") ;
+            logger.add("distance", dist) ;
+            logger.add("updown", current_updown_).add("tilt", current_tilt_).add("velocity", current_velocity_) ;
+            logger.endMessage();
 
             AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;
             AllegroOIPanel oi = robot.getOI().getPanel() ;
@@ -234,6 +256,8 @@ public class IntakeAutoShootAction extends Action {
             if (updown_.isAtTarget() && tilt_.isAtTarget() && shooter1_.isAtVelocity() && shooter2_.isAtVelocity() && db_ready_ && aprilTagTest() && drive_team_ready_) {
                 shooting_ = true ;
                 sub_.getFeeder().setAction(feeder_on_, true);
+                // waiting_ = true ;
+                // wait_timer_.start() ;
             } 
         }
     }

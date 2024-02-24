@@ -2,4 +2,4 @@
 
 /bin/mkdir -p logs
 /bin/rm logs/logfile*
-/bin/scp lvuser@10.14.25.2:/u/l\* logs/
+/bin/scp lvuser@10.14.25.2:/u/logf\* logs/

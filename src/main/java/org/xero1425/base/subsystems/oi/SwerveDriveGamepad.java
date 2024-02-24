@@ -135,8 +135,8 @@ public class SwerveDriveGamepad extends Gamepad {
     }
 
     private double getGyroTrackingValue() {
-        double yaw = XeroMath.normalizeAngleDegrees(db_.getGyro().getYaw());
-        return yaw - tracking_angle_ ;
+        double ret = XeroMath.normalizeAngleDegrees(tracking_angle_ - db_.getGyro().getYaw()) ;
+        return ret ;
     }
 
     @Override

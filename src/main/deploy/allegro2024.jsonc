@@ -17,7 +17,7 @@
             "allegro2024oi": false,
             "limelight-edgar" : false,
             "oibuttons" : false,
-            "intake-shooter" : false,
+            "intake-shooter" : true,
             "superstructure" : false,
             "swerve-gamepad" : false,
             "targettracker" : false
@@ -348,11 +348,12 @@
                 "auto-shoot" : {
                     "aim-threshold" : 8.0,
                     "shooter-velocity-threshold" : 5.0,
+                    
                     "updown-pos-threshold" : 2.0,
                     "updown-velocity-threshold" : 2.0,
                     "tilt-pos-threshold" : 2.0,
                     "tilt-velocity-threshold" : 2.0,
-                    "feeder-power" : 0.5,
+                    "feeder-power" : 0.8,
                     "feeder-time" : 1.0
                 }
             },
@@ -588,7 +589,7 @@
             "targets" : {
                 "stow" : -37.0,
                 "collect" : 22.0,
-                "kick-out" : 30.0
+                "kick-out" : 22.0
             },
             "pids" : {
                 "position" : {
@@ -830,7 +831,7 @@
             },
 
             "angle-tracker" : {
-                "p" : 1.0
+                "p" : 7.0
             },
 
             //

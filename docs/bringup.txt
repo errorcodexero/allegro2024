@@ -12,15 +12,20 @@ Item                                                                            
 - Test collect: check the 1 foot frame extension limit with bumpers and collect capability move       Done
 - Eject                                                                                               Done
 - angle-tracker p needs to be 7 instead of 1, but creates instability driving w/o tracking
-- Can't abort shoot and reclaim gamepad. 
+- Can't abort shoot and reclaim gamepad.                                                              Done/Need Test
 - Occasional loss of comms while shooting
 - Shooter inconsistent at eg 3.22m. Better with higher P but slop in belt.
-- If collect cancelled without collecting note, intake doesn't stop
+- If collect cancelled without collecting note, intake doesn't stop                                   Done/Need Test
 - If pose not reset, shooter motors just vibrate. Feeding invalid values due to invalid pose.
 - Shuttleboard disconnecting sporadically + OI LEDs going out. DriverStation lights remain green.
 - Test drivebase target tracking mode
 - Mount second april tag, test picking up the right tag (tx, ty, tv)
 - Tune PWL for shooting                                                                               Done
+- Test collect operation with new collector kickout at end
+- Test drivebase target tracking mode (l trigger on, right trigger off)
+- Test the shooting sequence works when the robot cannot see the april tag when shoot is pressed
+- Mount second april tag, make sure we are picking ou right tag
+- Test shooting from various locations and see if we can hit consistently
 - Re-tune the xfer sequence
 - Setup AMP place sequence
 - Climb without trap                                                                                  
