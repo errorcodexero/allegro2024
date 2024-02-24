@@ -16,7 +16,12 @@ Item                                                                            
 - Occasional loss of comms while shooting
 - Shooter inconsistent at eg 3.22m. Better with higher P but slop in belt.
 - If collect cancelled without collecting note, intake doesn't stop                                   Done/Need Test
-- If pose not reset, shooter motors just vibrate. Feeding invalid values due to invalid pose.
+- If pose not reset, shooter motors just vibrate. Feeding invalid values due to invalid pose.         Done
+- While driving in tracking mode, robot lost orientation (gyro direction for driving + location of target)
+- Limelight pose estimation of robot center and camera vs. target incorrect. May impact pose estimation.
+  And impacts distance when AT not seen.
+- Tilt fell back once when in testmode 118
+- Marshall/Ben: Deploy intake at same angles/sec for tilt and shooter. Gets to target destination with one motion.
 - Shuttleboard disconnecting sporadically + OI LEDs going out. DriverStation lights remain green.
 - Test drivebase target tracking mode
 - Mount second april tag, test picking up the right tag (tx, ty, tv)
