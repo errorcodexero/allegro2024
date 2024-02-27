@@ -17,14 +17,14 @@ import org.xero1425.base.controllers.AutoController;
 // Total       14.42
 
 public class Start1Shoot4AutoMode extends AllegroGameAutoMode {
-    public Start1Shoot4AutoMode(AutoController ctrl) throws Exception {
-        super(ctrl, "Start1Shoot4") ;
+    public Start1Shoot4AutoMode(AutoController ctrl, boolean mirror, double mvalue) throws Exception {
+        super(ctrl, "Start1Shoot4", mirror, mvalue) ;
 
-        // shootFirstNote() ;                                                  // Duration 0.5, Total 0.5
-        // driveAndCollect("S1S4-P1", true);                      // Duration 3.16, Total 3.66
-        // driveAndShoot("S1S4-P2", false);                       // Duration 2.22 + 0.5, Total 6.38
-        // driveAndCollect("S1S4-P3", false);                     // Duration 2.28, Total 8.66
-        // driveAndShoot("S1S4-P4", false);                       // Duration 3.18 + 0.5, Total 12.34
-        // driveAndCollectAndShoot("S1S4-P5", false) ;            // Duration 1.58 + 0.5, Total 14.42
+        shootFirstNote() ;                                                  // Duration 0.5, Total 0.5
+        driveAndCollect("S1S4-P1", true);                      // Duration 3.16, Total 3.66
+        driveAndShoot("S1S4-P2", false);                       // Duration 2.22 + 0.5, Total 6.38
+        driveAndCollect("S1S4-P3", false);                     // Duration 2.28, Total 8.66
+        driveAndShoot("S1S4-P4", false);                       // Duration 3.18 + 0.5, Total 12.34
+        driveAndCollectAndShoot("S1S4-P5", false) ;            // Duration 1.58 + 0.5, Total 14.42
     }
 }

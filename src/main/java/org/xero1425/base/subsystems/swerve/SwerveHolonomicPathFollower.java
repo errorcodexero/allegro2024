@@ -51,8 +51,8 @@ public class SwerveHolonomicPathFollower extends SwerveHolonomicControllerAction
     private boolean disable_vision_ ;
     private double distance_ ;
 
-    // private Executor lambda_ ;
-    // private double distance_ ;
+    private boolean mirror_ ;
+    private double mvalue_ ;
 
     private static final String [] columns_ = {
         "time", "index",
@@ -60,11 +60,13 @@ public class SwerveHolonomicPathFollower extends SwerveHolonomicControllerAction
         "ax (m)", "ay (m)", "aa (deg)"
     } ;
 
-    public SwerveHolonomicPathFollower(SwerveBaseSubsystem sub, String pathname, boolean setpose, double endtime) throws BadParameterTypeException, MissingParameterException {
+    public SwerveHolonomicPathFollower(SwerveBaseSubsystem sub, String pathname, boolean setpose, double endtime, boolean mirror, double mvalue) throws BadParameterTypeException, MissingParameterException {
         super(sub) ;
 
         pathname_ = pathname ;
         setpose_ = setpose ;
+        mirror_ = mirror ;
+        mvalue_ = mvalue ;
 
         plot_data_ = new Double[columns_.length] ;
         plot_id_ = getSubsystem().initPlot(pathname_) ;
@@ -78,11 +80,6 @@ public class SwerveHolonomicPathFollower extends SwerveHolonomicControllerAction
     public double getDistance() {
         return distance_ ;
     }
-
-    // public void setLambda(Executor lambda, double dist) {
-    //     lambda_ = lambda ;
-    //     distance_ = dist ;
-    // }
 
     public void addDistanceBasedAction(double dist, Executor action) {
         DistanceBasedAction act = new DistanceBasedAction(dist, action) ;
@@ -115,6 +112,10 @@ public class SwerveHolonomicPathFollower extends SwerveHolonomicControllerAction
 
         start_ = getSubsystem().getRobot().getTime() ;
         path_ = getSubsystem().getRobot().getPathManager().getPath(pathname_);
+
+        if (mirror_) {
+            path_.mirrorX(mvalue_);
+        }
 
         end_phase_ = false ;
 

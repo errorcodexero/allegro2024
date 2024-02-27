@@ -9,6 +9,7 @@ import org.xero1425.base.subsystems.swerve.SwerveBaseSubsystem;
 import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollower;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.subsystems.intake_shooter.StartCollectAction;
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
 import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
@@ -25,9 +26,14 @@ public class AllegroGameAutoMode extends AutoMode {
     private final static double kShootEndOfPathDistance = 0.08 ;
 
     private StartCollectAction start_collect_ ;
+    private boolean mirror_ ;
+    private double mvalue_ ;
 
-    public AllegroGameAutoMode(AutoController ctrl, String name) {
+    public AllegroGameAutoMode(AutoController ctrl, String name, boolean mirror, double mvalue) {
         super(ctrl, name) ;
+
+        mirror_ = mirror ;
+        mvalue_ = mvalue ;
     }
 
     protected void shootFirstNote() throws Exception {
@@ -38,7 +44,7 @@ public class AllegroGameAutoMode extends AutoMode {
         SwerveTrackAngle rotate = null ;
         if (kRequireAprilTagAndRotate) {
             double angle = tracker.getRotation() + swerve.getPose().getRotation().getDegrees() ;            
-            addSubActionPair(robot.getSwerve(), rotate, false);            
+            addSubActionPair(robot.getSwerve(), rotate, false);
         }
 
         IntakeAutoShootAction shoot = new IntakeAutoShootAction(robot.getIntakeShooter(), robot.getTargetTracker(), true, kRequireAprilTagAndRotate);
@@ -47,7 +53,7 @@ public class AllegroGameAutoMode extends AutoMode {
 
     protected void driveAndCollect(String path, boolean setpose) throws Exception {
         AllegroRobot2024 robot = (AllegroRobot2024)getAutoController().getRobot().getRobotSubsystem() ;        
-        SwerveHolonomicPathFollower pathact = new SwerveHolonomicPathFollower(robot.getSwerve(), path, setpose, 0.2);
+        SwerveHolonomicPathFollower pathact = new SwerveHolonomicPathFollower(robot.getSwerve(), path, setpose, 0.2, mirror_, mvalue_);
         start_collect_ = new StartCollectAction(robot.getIntakeShooter()) ;
 
         double collectLength = pathact.getDistance() - kCollectEndOfPathDistance ;
@@ -58,7 +64,7 @@ public class AllegroGameAutoMode extends AutoMode {
 
     protected void driveAndShoot(String path, boolean setpose) throws Exception {
         AllegroRobot2024 robot = (AllegroRobot2024)getAutoController().getRobot().getRobotSubsystem() ;        
-        SwerveHolonomicPathFollower pathact = new SwerveHolonomicPathFollower(robot.getSwerve(), path, setpose, 0.2);
+        SwerveHolonomicPathFollower pathact = new SwerveHolonomicPathFollower(robot.getSwerve(), path, setpose, 0.2, mirror_, mvalue_);
         IntakeAutoShootAction shoot = new IntakeAutoShootAction(robot.getIntakeShooter(), robot.getTargetTracker(), true, false) ;
 
         double shootdist = pathact.getDistance() - kShootEndOfPathDistance ;
@@ -75,7 +81,7 @@ public class AllegroGameAutoMode extends AutoMode {
         AllegroRobot2024 robot = (AllegroRobot2024)getAutoController().getRobot().getRobotSubsystem() ;  
 
         SequenceAction seq = new SequenceAction(getAutoController().getRobot().getMessageLogger()) ;    
-        SwerveHolonomicPathFollower pathact = new SwerveHolonomicPathFollower(robot.getSwerve(), path, setpose, 0.2);
+        SwerveHolonomicPathFollower pathact = new SwerveHolonomicPathFollower(robot.getSwerve(), path, setpose, 0.2, mirror_, mvalue_);
         start_collect_ = new StartCollectAction(robot.getIntakeShooter()) ;
 
         double collectLength = pathact.getDistance() - kCollectEndOfPathDistance ;        

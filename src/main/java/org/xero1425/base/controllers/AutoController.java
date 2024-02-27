@@ -10,6 +10,8 @@ import org.xero1425.misc.MessageType;
 import org.xero1425.misc.MissingParameterException;
 import org.xero1425.misc.SettingsValue;
 
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+
 /// \file
 
 /// \brief The base class for a robot specific Auto Mode Controller
@@ -52,6 +54,10 @@ public abstract class AutoController extends BaseController {
     /// \param mode the automode to add to the set
     public void addAutoMode(AutoMode mode) {
         automodes_.add(mode) ;
+    }
+
+    public void clearAutomodes() {
+        automodes_.clear() ;
     }
 
     /// \brief initialize the automode
@@ -109,7 +115,7 @@ public abstract class AutoController extends BaseController {
     /// derived class to perform the desired functions.
     /// \param mode the autumode number read from the automode selector switch on the OI
     /// \param gamedata the game data read from the WPILib driver station APIs.
-    public void updateAutoMode(int mode, String gamedata) throws Exception {
+    public void updateAutoMode(int mode, String gamedata, Alliance alliance) throws Exception {
         setAutoMode(null) ;
     }
 

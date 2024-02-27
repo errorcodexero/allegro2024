@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
@@ -13,6 +14,7 @@ import java.util.stream.Stream;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -92,6 +94,9 @@ public abstract class XeroRobot extends TimedRobot {
     // The game data as provided by the WPILib Driver Station APIs
     private String game_data_ ;
 
+    // The alliance for the current match
+    private Alliance alliance_ ;
+
     // if true, we have an FMS connection.  If true, the ploting manager is
     // disabled.
     private boolean fms_connection_ ;
@@ -131,6 +136,8 @@ public abstract class XeroRobot extends TimedRobot {
 
     // If true, we have moved motors to coast mode in disabled state
     boolean motors_in_coast_mode_ ;
+
+    private Translation2d field_size_ ;
 
     /// \brief The "subsystem" name for the message logger for this class
     public static final String LoggerName = "xerorobot" ;
@@ -194,6 +201,18 @@ public abstract class XeroRobot extends TimedRobot {
         readParamsFile();
         logger_.startMessage(MessageType.Info).add("readParamsFile time", getTime() - start).endMessage() ;
 
+        double w, l ;
+        try {
+            w = settings_.get("field:width").getDouble() ;
+            l = settings_.get("field:length").getDouble() ;
+        }
+        catch (Exception ex) {
+            logger_.startMessage(MessageType.Error).add("missing field size in settings file 'field:width' and 'field:length'").endMessage() ;
+            w = 16.541 ;
+            l = 8.211 ;
+        }
+        field_size_ = new Translation2d(w, l) ;
+
         // Enable messages in the message logger based on params file values
         start = getTime() ;
         enableMessagesFromSettingsFile() ;
@@ -241,6 +260,12 @@ public abstract class XeroRobot extends TimedRobot {
 
         layout_ = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField() ;
         motors_in_coast_mode_ = true ;
+
+        alliance_ = null ;
+    }
+
+    public Translation2d getFieldSize() {
+        return field_size_ ;
     }
 
     public RobotPaths getRobotFileSystemPaths() {
@@ -1007,23 +1032,24 @@ public abstract class XeroRobot extends TimedRobot {
     private void updateAutoMode() {
         if (auto_controller_ != null) {
             String msg = DriverStation.getGameSpecificMessage() ;
-
             int sel = -1 ;
 
             if (robot_subsystem_.getOI() != null) {
                 sel = getAutoModeSelection() ;
                 boolean dbg = shutdownDebug() ;
-                if (sel != automode_ || !msg.equals(game_data_) || dbg != fms_connection_ || auto_controller_.isTestMode())
-                {
-                    automode_ = sel ;
-                    game_data_ = msg ;
-                    fms_connection_ = dbg;
-
+                if (DriverStation.getAlliance().isPresent()) {
+                    if (sel != automode_ || !msg.equals(game_data_) || dbg != fms_connection_ || auto_controller_.isTestMode() || alliance_ != DriverStation.getAlliance().get())
+                    {
+                        automode_ = sel ;
+                        game_data_ = msg ;
+                        alliance_ = DriverStation.getAlliance().get() ;
+                        fms_connection_ = dbg;
+                    }
                 }
             }
 
             try {
-                auto_controller_.updateAutoMode(automode_, game_data_) ;
+                auto_controller_.updateAutoMode(automode_, game_data_, alliance_) ;
                 displayAutoModeState() ;
             }
             catch(Exception ex)

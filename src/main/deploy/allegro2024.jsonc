@@ -43,6 +43,10 @@
             "type" : "rev"
         }
     },
+    "field" : {
+        "length" : 16.541,
+        "width" : 8.211
+    },
     "subsystems": {
         //
         // Each subsystem has a set of sections.
@@ -305,7 +309,11 @@
                     "emax" : 5.0,
                     "rmin" : -90.0,
                     "rmax" : 90.0,
-                    "ecval" : 0.44311,
+                    "ecval" : { 
+                        "PRACTICE" : 0.44311,
+                        "COMPETITION" : 0.89,
+                        "SIMULATION": 0.0
+                    },
                     "rcval" : 0.0
                 }
             },
@@ -492,7 +500,7 @@
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m":   0.003296104,
+                    "m":   0.002663352,
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -727,7 +735,7 @@
                         "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" : -54.318,
-                            "COMPETITION" : 0.0,
+                            "COMPETITION" : -64.42,
                             "SIMULATION" : 0.0
                         }
                     }
@@ -759,7 +767,7 @@
                         "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" :  -258.486,
-                            "COMPETITION" : 0
+                            "COMPETITION" : -61.52
                         }
                     }
                 },
@@ -791,7 +799,7 @@
                         "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" : -287.58,
-                            "COMPETITION" : 0,
+                            "COMPETITION" : -29.57,
                             "SIMULATION" : 0.0
                         }
                     }
@@ -823,7 +831,7 @@
                         "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" : -169.629,
-                            "COMPETITION" : 0.0,
+                            "COMPETITION" : -128.5,
                             "SIMULATION" : 0.0
                         }
                     }
@@ -1036,7 +1044,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 118,
+        "which": 22,
         "0": {
             "angle": 0,
             "power": 0.5,
