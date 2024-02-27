@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 
 public class TargetTrackerSubsystem extends Subsystem {
 
+    private static final double kCameraOffset = 0.4;
     private Pose2d target_pos_;
     private double distance_between_robot_and_target_;
     private double angle_to_target_;
@@ -82,7 +83,7 @@ public class TargetTrackerSubsystem extends Subsystem {
                 logger.add("apriltag", true) ;
                 sees_target_ = true ;
                 angle_to_target_ = -ll_.getTX(target_number_);
-                distance_between_robot_and_target_ = XeroMath.InchesToMeters((target_height_ - camera_height_) / Math.tan(Math.toRadians(camera_angle_ + ll_.getTY(target_number_)))) ;
+                distance_between_robot_and_target_ = (target_height_ - camera_height_) / Math.tan(Math.toRadians(camera_angle_ + ll_.getTY(target_number_))) + kCameraOffset ;
             }
             else {
                 logger.add("apriltag", false) ;
@@ -95,6 +96,7 @@ public class TargetTrackerSubsystem extends Subsystem {
             logger.endMessage();
 
             putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
+            putDashboard("tt_distance(no LL)", DisplayType.Always, calculateDistanceBetweenPoses(robot_pos_, target_pos_));
             putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);           
             putDashboard("tt_tag", DisplayType.Always, sees_target_);
         }

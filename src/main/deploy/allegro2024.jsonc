@@ -57,9 +57,9 @@
         // actions - describes parameters and target locations that are specific to an action for the subsystem
         //
         "targettracker" : {
-            "camera-angle" : 40.0,
-            "camera-height" : 2.95,   // In inches
-            "target-height" : 55.94   // In inches
+            "camera-angle" : 1.016,
+            "camera-height" : 0.17145,   // In inches
+            "target-height" : 1.420876   // In inches
         },
         "superstructure" : {
             "actions" : {
@@ -150,7 +150,7 @@
                 },
                 "encoder" : {
                     "type" : "motor",
-                    "m" :  0.0000013729858,
+                    "m" : 0.0000018724662,
                     "b" : 0,
                     "posunits" : "m",
                     "velunits" : "m/s",
@@ -192,7 +192,7 @@
                 },
                 "encoder" : {
                     "type" : "motor",
-                    "m" : 0.0140625,
+                    "m" : 0.011869092,
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -268,8 +268,7 @@
                 },
                 "encoder" : {
                     "type" : "motor",
-                    "m" :   0.0000006611942
-                    ,
+                    "m" : 0.0000002686035,
                     "b" : 0,
                     "posunits" : "m",
                     "velunits" : "m/s",
@@ -354,8 +353,10 @@
                     }
                 },
                 "auto-shoot" : {
-                    "aim-threshold" : 8.0,
-                    "shooter-velocity-threshold" : 5.0,
+                    "aim-threshold" : 8.0,                                  // meters
+                    "translational-velocity-threshold": 0.05,               // meters per second
+                    "rotational-velocity-threshold": 2.0,                   // degrees per second
+                    "shooter-velocity-threshold" : 5.0,                     // RPS (revs per second)
                     
                     "updown-pos-threshold" : 2.0,
                     "updown-velocity-threshold" : 2.0,
@@ -376,11 +377,11 @@
                         "y" : 100.0
                     },
                     "3" : {
-                        "x" : 1.849,
+                        "x" : 2.249,
                         "y" : 100
                     },                    
                     "4" : {
-                        "x" : 1.85,
+                        "x" : 2.5,
                         "y" : 118
                     },
                     "5" : {
@@ -390,27 +391,27 @@
                 },
                 "tilt" : {
                     "1" : {
-                        "x" : 1.10,
+                        "x" : 1.5,
                         "y" : -53.0
                     },
                     "2" : {
-                        "x" : 1.849,
+                        "x" : 2.249,
                         "y" : -45
                     },
                     "3" : {
-                        "x" : 1.85,
+                        "x" : 2.25,
                         "y" : -60.0
                     },
                     "4" : {
-                        "x" : 2.15,
+                        "x" : 2.55,
                         "y" : -60
                     },
                     "5" : {
-                        "x" : 2.51,
+                        "x" : 2.91,
                         "y" : -58
                     },
                     "6" : {
-                        "x" : 2.89,
+                        "x" : 3.29,
                         "y" : -56.0
                     },
                     "7" : {
@@ -440,23 +441,23 @@
                         "y" : 60
                     },
                     "2" : {
-                        "x" : 1.849,
+                        "x" : 2.249,
                         "y" : 60
                     },
                     "3" : {
-                        "x" : 1.85,
+                        "x" : 2.25,
                         "y" : 70
                     },
                     "4" : {
-                        "x" : 2.15,
+                        "x" : 2.55,
                         "y" : 70
                     },
                     "5" : {
-                        "x" : 2.51,
+                        "x" : 2.91,
                         "y" : 75
                     },
                     "6" : {
-                        "x" : 2.89,
+                        "x" : 3.29,
                         "y" : 75
                     },
                     "7" : {
@@ -525,7 +526,20 @@
                     "maxv" : 80,                   // 270
                     "maxa" : 80,                   // 270
                     "jerk" : 0.0
-                }
+                },
+                "position-collect" : {
+                    "kp" : 7.5,
+                    "ki" : 0.0,
+                    "kd" : 0.0,
+                    "kv" : 0.056,
+                    "ka" : 0.0,
+                    "kg" : 0.0,
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 20,                   // 270
+                    "maxa" : 20,                   // 270
+                    "jerk" : 0.0
+                }                
             }
         },
         "intake-feeder" : {
@@ -612,7 +626,20 @@
                     "maxv" : 150,
                     "maxa" : 340,
                     "jerk" : 0.0
-                }
+                },
+                "position-collect" : {
+                    "kp" : 3.0,
+                    "ki" : 0.0,
+                    "kd" : 0.0,
+                    "kv" : 0.03,
+                    "ka" : 0.0,
+                    "kg" : 0.0,
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 20,
+                    "maxa" : 20,
+                    "jerk" : 0.0
+                }                
             }
         },
         "intake-shooter1" : {
@@ -735,7 +762,7 @@
                         "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" : -54.318,
-                            "COMPETITION" : -64.42,
+                            "COMPETITION" : -244.42,
                             "SIMULATION" : 0.0
                         }
                     }
@@ -767,7 +794,7 @@
                         "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" :  -258.486,
-                            "COMPETITION" : -61.52
+                            "COMPETITION" : -241.52
                         }
                     }
                 },
@@ -799,7 +826,7 @@
                         "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" : -287.58,
-                            "COMPETITION" : -29.57,
+                            "COMPETITION" : -209.57,
                             "SIMULATION" : 0.0
                         }
                     }
@@ -831,7 +858,7 @@
                         "bus" : "DriveBase",
                         "offset": {
                             "PRACTICE" : -169.629,
-                            "COMPETITION" : -128.5,
+                            "COMPETITION" : -308.5,
                             "SIMULATION" : 0.0
                         }
                     }
@@ -907,69 +934,37 @@
             //
             "pids": {
                 "fl": {
-                    "kp":  {
-                        "PRACTICE" : 0.0,
-                        "COMPETITION" : 0.0,
-                        "SIMULATION" : 0.0
-                    },
+                    "kp": 0.0,
                     "ki": 0.0,
                     "kd": 0.0,
-                    "kf" : {
-                        "PRACTICE" : 0.200573641,
-                        "COMPETITION" : 0,
-                        "SIMULATION" : 0.0
-                    },
+                    "kf" : 0.200573641,
                     "min": -1.0,
                     "max": 1.0,
                     "imax": 0.0
                 },
                 "fr": {
-                    "kp":  {
-                        "PRACTICE" : 0.0,
-                        "COMPETITION" : 0.0,
-                        "SIMULATION" : 0.0
-                    },
+                    "kp": 0.0,
                     "ki": 0.0,
                     "kd": 0.0,
-                    "kf" : {
-                        "PRACTICE" : 0.200573641,
-                        "COMPETITION" : 0,
-                        "SIMULATION" : 0.0
-                    },
+                    "kf" : 0.200573641,
                     "min": -1.0,
                     "max": 1.0,
                     "imax": 0.0
                 },
                 "bl": {
-                    "kp":  {
-                        "PRACTICE" : 0.0,
-                        "COMPETITION" : 0.0,
-                        "SIMULATION" : 0.0
-                    },
+                    "kp": 0.0,
                     "ki": 0.0,
                     "kd": 0.0,
-                    "kf" : {
-                        "PRACTICE" : 0.200573641,
-                        "COMPETITION" : 0,
-                        "SIMULATION" : 0.0
-                    },
+                    "kf" : 0.200573641,
                     "min": -1.0,
                     "max": 1.0,
                     "imax": 0.0
                 },
                 "br": {
-                    "kp":  {
-                        "PRACTICE" : 0.0,
-                        "COMPETITION" : 0.0,
-                        "SIMULATION" : 0.0
-                    },
+                    "kp": 0.0,
                     "ki": 0.0,
                     "kd": 0.0,
-                    "kf" : {
-                        "PRACTICE" : 0.200573641,
-                        "COMPETITION" : 0,
-                        "SIMULATION" : 0.0
-                    },
+                    "kf" : 0.200573641,
                     "min": -1.0,
                     "max": 1.0,
                     "imax": 0.0
@@ -1044,10 +1039,10 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 22,
+        "which": 10,
         "0": {
             "angle": 0,
-            "power": 0.5,
+            "power": 0.1,
             "duration": 1.5         // optional, if missing will run forever
         },
         "1": {
@@ -1081,8 +1076,8 @@
             "name": "Edge1Blue-Path1"
         },
         "10" : {
-            "power" : 0.5,
-            "duration" : 15.0
+            "power" : 0.2,
+            "duration" : 3.0
         },
         "11" : {
             "duration": 2.0
@@ -1106,7 +1101,7 @@
             "velocity" : 65
         },
         "40" : {
-            "power" : 0.2,
+            "power" : 0.5,
             "duration" : 5.0
         },
         "41" : {
@@ -1157,7 +1152,7 @@
         },
         "90" : {
             "power" : 0.1,
-            "duration" : 1.0
+            "duration" : 2.0
         },
         "91" : {
             "duration" : 2.0

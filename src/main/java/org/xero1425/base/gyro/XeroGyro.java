@@ -17,6 +17,8 @@ public interface XeroGyro {
     public double getPitch() ;
     public double getRoll();
 
+    public double getRate() ;
+
     /// \brief Returns the total angle for the NavX
     /// \returns the total angle for the NavX     
     public double getAngle() ;

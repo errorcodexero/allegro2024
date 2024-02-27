@@ -288,7 +288,6 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
         if (mode_ == Mode.Chassis) {
 
-            // System.out.println("rotational " + chassis_speed_.omegaRadiansPerSecond) ;
             if (Math.abs(chassis_speed_.omegaRadiansPerSecond) < kOneDegreeInRadians) {
                 chassis_speed_.omegaRadiansPerSecond = 0.0 ;
             }
@@ -315,6 +314,7 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         }
 
         if (allModulesSynchronized()) {
+            
             modules_[FL].hw.set(powers_[FL], Math.toRadians(angles_[FL])) ;
             modules_[FR].hw.set(powers_[FR], Math.toRadians(angles_[FR])) ;
             modules_[BL].hw.set(powers_[BL], Math.toRadians(angles_[BL])) ;

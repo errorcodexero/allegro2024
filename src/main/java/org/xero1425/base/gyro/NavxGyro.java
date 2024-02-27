@@ -33,6 +33,10 @@ public class NavxGyro implements XeroGyro {
         }
     }
 
+    public double getRate() {
+        return navx_.getRate() ;
+    }
+
     /// \brief Returns true if the NavX is connected
     /// \returns true if the NavX is connected, othewise false
     public boolean isConnected() {

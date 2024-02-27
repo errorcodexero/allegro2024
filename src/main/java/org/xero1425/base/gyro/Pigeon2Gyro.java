@@ -21,6 +21,11 @@ public class Pigeon2Gyro implements XeroGyro {
         checkError("setCofiguration", () -> gyro_.getConfigurator().apply(cfg_)) ;
     }
 
+    @Override
+    public double getRate() {
+        return gyro_.getRate() ;
+    }
+
     public Pigeon2 getPigeon2() {
         return gyro_ ;
     }
