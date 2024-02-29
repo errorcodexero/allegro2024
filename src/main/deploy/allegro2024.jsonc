@@ -28,7 +28,9 @@
             "intake-tilt" : true,
             "intake-updown" : true,
             "auto-shoot": true,
-            "climber" : true
+            "climber" : true,
+            "elevator" : true,
+            "arm" : true
         },
         "plotting": {
             "enabled" : true,
@@ -67,14 +69,14 @@
                     //
                     // The position of the amp trap subsystem to perform the transfer
                     //
-                    "arm" : -24,
+                    "arm" : 0.0,
                     "elevator" : 0.0,
 
                     //
                     // The position of the intake subsystem to perform the transfer
                     //
                     "updown" : 118,
-                    "tilt" : -32,
+                    "tilt" : -36,
 
                     //
                     // The velocity/power of the wheels that perform the transfer and the
@@ -82,7 +84,7 @@
                     //
                     "feeder-power" : 0.3,
                     "shooter-velocity" : 15,
-                    "shooter-length" : 1.20
+                    "shooter-length" : 1.0
                 }
             }
         },
@@ -96,34 +98,34 @@
                 // the elevator-height to avoid a collision.
                 //
                 "keepout-zone" : {
-                    "min" : 45.0,
-                    "max" : 90.0,
-                    "elevator-height" : 0.315
+                    "min" : 0.0,
+                    "max" : 75.0,
+                    "elevator-height" : 0.12
                 }
             },
             "actions" : {
                 "shoot" : {
-                    "power" : -0.5,
-                    "distance" : 10.0
+                    "power" : -1.0,
+                    "distance" : 1.0
                 },
                 "stow" : {
                     "elevator" : 0.05,
                     "pivot" : 0.0
                 },
                 "trap" : {
-                    "elevator" : 0.2746,
+                    "elevator" : 0.172,
                     "pivot" : 180.0
                 },
                 "trap-up" : {
-                    "elevator" : 0.2746,
-                    "pivot" : 180.0
+                    "elevator" : 0.278,
+                    "pivot" : 120.0
                 },
                 "amp" : {
                     "elevator" : 0.2,
                     "pivot" : -90.0
                 },
                 "climb" : {
-                    "elevator" : 0.2746,
+                    "elevator" : 0.172,
                     "pivot" : 180.0
                 },
                 "climb-down" : {
@@ -131,7 +133,7 @@
                     "pivot" : 0.0
                 },
                 "xfer" : {
-                    "power" : -0.2
+                    "power" : -0.1
                 }
             }
         },
@@ -141,7 +143,7 @@
                     "type" : "kraken",
                     "bus" : "",
                     "canid" : 6,
-                    "inverted" : true,
+                    "inverted" : false,
                     "neutral-mode" : "brake",
                     "current-limit" : 60,
                     "position-important" : "high",
@@ -150,7 +152,7 @@
                 },
                 "encoder" : {
                     "type" : "motor",
-                    "m" : 0.0000018724662,
+                    "m" :    0.0000018724662,
                     "b" : 0,
                     "posunits" : "m",
                     "velunits" : "m/s",
@@ -159,7 +161,7 @@
             },
             "props" : {
                 "minpos" : 0.0,
-                "maxpos" : 0.6
+                "maxpos" : 0.4289333222988
             },
             "pids" : {
                 "position" : {
@@ -268,7 +270,7 @@
                 },
                 "encoder" : {
                     "type" : "motor",
-                    "m" : 0.0000002686035,
+                    "m" :  0.0000107441406,
                     "b" : 0,
                     "posunits" : "m",
                     "velunits" : "m/s",
@@ -277,20 +279,21 @@
             },
             "props" : {
                 "minpos" : 0.0,
-                "maxpos" : 0.465
+                "maxpos" : 23.631522366888
             },
             "actions" : {
                 "climb" : {
                     "hooks-up" : {
-                        "power" : 0.6,
-                        "target" : 0.46
+                        "power" : 0.95,
+                        "target" : 23.6
                     },
                     "hooks-down" : {
-                        "power" : -0.2,
+                        "power" : -0.4,
                         "target" : 0.0
                     },
                     "hooks-down-with-robot" : {
-                        "power" : -0.6,
+                        "power" : -0.95
+                        ,
                         "target" : 0.0
                     }
                 }
@@ -578,8 +581,8 @@
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 150,                   // 270
-                    "maxa" : 80,                   // 270
+                    "maxv" : 270,                   // 270
+                    "maxa" : 270,                   // 270
                     "jerk" : 0.0
                 }                
             }
@@ -611,6 +614,7 @@
             },
             "targets" : {
                 "stow-no-note" : -65.0,
+                "stow" : -65.0,
                 "stow-note" : -50,
                 "collect" : 55.0,
                 "kick-out" : 55.0
@@ -638,8 +642,8 @@
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 150,
-                    "maxa" : 80,
+                    "maxv" :270,
+                    "maxa" : 270,
                     "jerk" : 0.0
                 }                
             }
@@ -1041,7 +1045,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 150,
+        "which": 118,
         "0": {
             "angle": 0,
             "power": 0.1,
@@ -1100,7 +1104,7 @@
             "duration" : 2.0
         },
         "32" : {
-            "velocity" : 65
+            "velocity" : 80
         },
         "40" : {
             "power" : 0.5,
@@ -1153,8 +1157,8 @@
             "duration" : 2.0
         },
         "90" : {
-            "power" : 0.1,
-            "duration" : 2.0
+            "power" : -1.0,
+            "duration" : 30
         },
         "91" : {
             "duration" : 2.0
