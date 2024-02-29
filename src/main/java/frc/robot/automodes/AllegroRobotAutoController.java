@@ -21,13 +21,22 @@ public class AllegroRobotAutoController extends AutoController {
         super(robot, "AllegroRobotAutoController");
     }
 
+    private String allianceString(Alliance a) {
+        return (a == null) ? "null" : a.toString() ;
+    }
+
     @Override
     public void updateAutoMode(int mode, String gamedata, Alliance alliance) {
-
+        MessageLogger logger = getRobot().getMessageLogger() ;
         AutoMode modeobj = null ;
 
         if (alliance != null && alliance != prev_alliance_) {
-            prev_alliance_ = alliance ;
+
+            logger.startMessage(MessageType.Info) ;
+            logger.add("alliance changed:" + allianceString(prev_alliance_) + " -> " + allianceString(alliance)) ;
+            logger.add(": recreated auto modes for new alliance value").endMessage();
+
+            prev_alliance_ = alliance ;            
 
             try {
                 //
@@ -50,7 +59,6 @@ public class AllegroRobotAutoController extends AutoController {
                 addAutoMode(new Start3Shoot3AutoMode(this, mirror, mvalue));
             }
             catch(Exception ex) {
-                MessageLogger logger = getRobot().getMessageLogger() ;
                 logger.startMessage(MessageType.Error).add("Exception thrown creating automodes - ") ;
                 logger.add(ex.getMessage()).endMessage();                                             
                 getRobot().logStackTrace(ex.getStackTrace());

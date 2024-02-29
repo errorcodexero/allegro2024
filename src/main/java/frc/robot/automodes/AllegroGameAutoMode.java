@@ -8,11 +8,12 @@ import org.xero1425.base.controllers.AutoMode;
 import org.xero1425.base.subsystems.swerve.SwerveBaseSubsystem;
 import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollower;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
+import org.xero1425.misc.ISettingsSupplier;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.subsystems.intake_shooter.StartCollectAction;
-import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
 import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
+import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
+import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 //
@@ -40,14 +41,17 @@ public class AllegroGameAutoMode extends AutoMode {
         AllegroRobot2024 robot = (AllegroRobot2024)getAutoController().getRobot().getRobotSubsystem() ;
         SwerveBaseSubsystem swerve = robot.getSwerve() ;
         TargetTrackerSubsystem tracker = robot.getTargetTracker() ;
-
         SwerveTrackAngle rotate = null ;
+ 
         if (kRequireAprilTagAndRotate) {
-            double angle = tracker.getRotation() + swerve.getPose().getRotation().getDegrees() ;            
+            ISettingsSupplier settings = robot.getRobot().getSettingsSupplier() ;
+            IntakeShooterSubsystem intake = robot.getIntakeShooter() ;
+            double postol = intake.getSettingsValue("actions:auto-shoot:rotational-position-tolerance").getDouble() ;
+            rotate = new SwerveTrackAngle(swerve, () -> tracker.getRotation(), postol) ;
             addSubActionPair(robot.getSwerve(), rotate, false);
         }
 
-        IntakeAutoShootAction shoot = new IntakeAutoShootAction(robot.getIntakeShooter(), robot.getTargetTracker(), true, kRequireAprilTagAndRotate);
+        IntakeAutoShootAction shoot = new IntakeAutoShootAction(robot.getIntakeShooter(), robot.getTargetTracker(), true, rotate) ;
         addSubActionPair(robot.getIntakeShooter(), shoot, true);
     }
 
@@ -65,7 +69,17 @@ public class AllegroGameAutoMode extends AutoMode {
     protected void driveAndShoot(String path, boolean setpose) throws Exception {
         AllegroRobot2024 robot = (AllegroRobot2024)getAutoController().getRobot().getRobotSubsystem() ;        
         SwerveHolonomicPathFollower pathact = new SwerveHolonomicPathFollower(robot.getSwerve(), path, setpose, 0.2, mirror_, mvalue_);
-        IntakeAutoShootAction shoot = new IntakeAutoShootAction(robot.getIntakeShooter(), robot.getTargetTracker(), true, false) ;
+        SwerveTrackAngle rotate = null ;
+
+        if (kRequireAprilTagAndRotate) {
+            ISettingsSupplier settings = robot.getRobot().getSettingsSupplier() ;
+            IntakeShooterSubsystem intake = robot.getIntakeShooter() ;
+            double postol = intake.getSettingsValue("actions:auto-shoot:rotational-position-tolerance").getDouble() ;
+            rotate = new SwerveTrackAngle(robot.getSwerve(), () -> robot.getTargetTracker().getRotation(), postol) ;
+            addSubActionPair(robot.getSwerve(), rotate, false);
+        }
+
+        IntakeAutoShootAction shoot = new IntakeAutoShootAction(robot.getIntakeShooter(), robot.getTargetTracker(), true, rotate);
 
         double shootdist = pathact.getDistance() - kShootEndOfPathDistance ;
         pathact.addDistanceBasedAction(shootdist, ()-> { shoot.setDriveTeamReady(true);}) ;
@@ -82,6 +96,8 @@ public class AllegroGameAutoMode extends AutoMode {
 
         SequenceAction seq = new SequenceAction(getAutoController().getRobot().getMessageLogger()) ;    
         SwerveHolonomicPathFollower pathact = new SwerveHolonomicPathFollower(robot.getSwerve(), path, setpose, 0.2, mirror_, mvalue_);
+        SwerveTrackAngle rotate = null ;
+
         start_collect_ = new StartCollectAction(robot.getIntakeShooter()) ;
 
         double collectLength = pathact.getDistance() - kCollectEndOfPathDistance ;        
@@ -89,7 +105,15 @@ public class AllegroGameAutoMode extends AutoMode {
         pathact.addDistanceBasedAction(collectLength, () -> { robot.getIntakeShooter().setAction(start_collect_); });
         seq.addSubActionPair(robot.getSwerve(), pathact, true) ;
 
-        IntakeAutoShootAction action = new IntakeAutoShootAction(robot.getIntakeShooter(), robot.getTargetTracker(), true, false) ;
+        if (kRequireAprilTagAndRotate) {
+            ISettingsSupplier settings = robot.getRobot().getSettingsSupplier() ;
+            IntakeShooterSubsystem intake = robot.getIntakeShooter() ;
+            double postol = intake.getSettingsValue("actions:auto-shoot:rotational-position-tolerance").getDouble() ;
+            rotate = new SwerveTrackAngle(robot.getSwerve(), () -> robot.getTargetTracker().getRotation(), postol) ;
+            addSubActionPair(robot.getSwerve(), rotate, false);
+        }        
+
+        IntakeAutoShootAction action = new IntakeAutoShootAction(robot.getIntakeShooter(), robot.getTargetTracker(), true, rotate) ;
         seq.addSubActionPair(robot.getIntakeShooter(), action, true);
         
         addAction(seq);

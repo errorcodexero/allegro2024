@@ -18,7 +18,7 @@ public class SwerveTrackAngle extends Action {
     private boolean is_at_target_ ;
     private double err_ ;
 
-    public SwerveTrackAngle(SwerveBaseSubsystem swerve, DoubleSupplier target, double postol, double veltol) throws BadParameterTypeException, MissingParameterException {
+    public SwerveTrackAngle(SwerveBaseSubsystem swerve, DoubleSupplier target, double postol) throws BadParameterTypeException, MissingParameterException {
         super(swerve.getRobot().getMessageLogger());
         swerve_ = swerve ;
         target_ = target ;

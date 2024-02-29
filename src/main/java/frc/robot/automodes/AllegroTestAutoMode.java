@@ -13,7 +13,8 @@ import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
 import frc.robot.subsystems.intake_shooter.StartCollectAction;
-import frc.robot.subsystems.intake_shooter.StopCollectionAction;
+import frc.robot.subsystems.intake_shooter.StartCollectAltAction;
+import frc.robot.subsystems.intake_shooter.StopCollectAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.intake_shooter.ManualShootAction;
 import frc.robot.subsystems.intake_shooter.ShooterTuningAction;
@@ -394,14 +395,14 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 113:
                 if (intakeshooter != null) {
                     addSubActionPair(intakeshooter, new StartCollectAction(intakeshooter), true);
-                    addSubActionPair(intakeshooter, new StopCollectionAction(intakeshooter), true);
+                    addSubActionPair(intakeshooter, new StopCollectAction(intakeshooter), true);
                 }
                 break ;                
 
             case 114:
                 if (intakeshooter != null) {
                     addSubActionPair(intakeshooter, new StartCollectAction(intakeshooter), true);
-                    addSubActionPair(intakeshooter, new StopCollectionAction(intakeshooter), true);
+                    addSubActionPair(intakeshooter, new StopCollectAction(intakeshooter), true);
                     addSubActionPair(intakeshooter, new ManualShootAction(intakeshooter, "subwoofer"), true);
                 }
                 break ;
@@ -458,6 +459,9 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 break ;
 
             case 150:
+                if (intakeshooter != null) {
+                    addSubActionPair(intakeshooter, new StartCollectAltAction(intakeshooter), false);
+                }
                 break ;
         }
     }

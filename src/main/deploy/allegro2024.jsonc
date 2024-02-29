@@ -25,8 +25,8 @@
         "verbose": {
             "swerve" : false,
             "swerve-field" : true,
-            "intake-tilt-pos" : true,
-            "intake-updown-pos" : true,
+            "intake-tilt" : true,
+            "intake-updown" : true,
             "auto-shoot": true,
             "climber" : true
         },
@@ -58,8 +58,8 @@
         //
         "targettracker" : {
             "camera-angle" : 1.016,
-            "camera-height" : 0.17145,   // In inches
-            "target-height" : 1.420876   // In inches
+            "camera-height" : 0.17145,      // In meters
+            "target-height" : 1.432         // In meters (56.375 inches per game manual)
         },
         "superstructure" : {
             "actions" : {
@@ -310,7 +310,7 @@
                     "rmax" : 90.0,
                     "ecval" : { 
                         "PRACTICE" : 0.44311,
-                        "COMPETITION" : 0.89,
+                        "COMPETITION" : 1.33,
                         "SIMULATION": 0.0
                     },
                     "rcval" : 0.0
@@ -356,6 +356,7 @@
                     "aim-threshold" : 8.0,                                  // meters
                     "translational-velocity-threshold": 0.05,               // meters per second
                     "rotational-velocity-threshold": 2.0,                   // degrees per second
+                    "rotational-position-tolerance" : 2.5,                  // degrees                    
                     "shooter-velocity-threshold" : 5.0,                     // RPS (revs per second)
                     
                     "updown-pos-threshold" : 2.0,
@@ -483,65 +484,6 @@
                 }
             }
         },
-        "intake-updown" : {
-            "hw" : {
-                "motors" : {
-                    "type" : "talon-fx",
-                    "bus" : "",
-                    "canid" : 2,
-                    "inverted" : false,
-                    "neutral-mode" : "brake",
-                    "current-limit" : 40,
-                    "position-important" : "High",
-                    "velocity-important" : "High",
-                    "acceleration-imporant" : "high"
-                },
-                "encoder": {
-                    //
-                    // Units are degrees
-                    //
-                    "type" : "motor",
-                    "m":   0.002663352,
-                    "b" : 0,
-                    "posunits" : "deg",
-                    "velunits" : "deg/s",
-                    "accunits" : "deg/s/s"
-                }
-            },
-            "targets" : {
-                "collect" : 5,
-                "shoot" : 118.0,
-                "stow" : 118.0
-            },
-            "pids" : {
-                "position" : {
-                    "kp" : 7.5,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kv" : 0.056,
-                    "ka" : 0.0,
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 12.0,
-                    "maxv" : 80,                   // 270
-                    "maxa" : 80,                   // 270
-                    "jerk" : 0.0
-                },
-                "position-collect" : {
-                    "kp" : 7.5,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kv" : 0.056,
-                    "ka" : 0.0,
-                    "kg" : 0.0,
-                    "ks" : 0.0,
-                    "outmax" : 12.0,
-                    "maxv" : 20,                   // 270
-                    "maxa" : 20,                   // 270
-                    "jerk" : 0.0
-                }                
-            }
-        },
         "intake-feeder" : {
             "hw" : {
                 "motors" : {
@@ -582,6 +524,65 @@
                     "jerk" : 0.0
                 }
             }
+        },        
+        "intake-updown" : {
+            "hw" : {
+                "motors" : {
+                    "type" : "talon-fx",
+                    "bus" : "",
+                    "canid" : 2,
+                    "inverted" : false,
+                    "neutral-mode" : "brake",
+                    "current-limit" : 40,
+                    "position-important" : "High",
+                    "velocity-important" : "High",
+                    "acceleration-imporant" : "high"
+                },
+                "encoder": {
+                    //
+                    // Units are degrees
+                    //
+                    "type" : "motor",
+                    "m":   0.002663352,
+                    "b" : 0,
+                    "posunits" : "deg",
+                    "velunits" : "deg/s",
+                    "accunits" : "deg/s/s"
+                }
+            },
+            "targets" : {
+                "collect" : -4,
+                "shoot" : 118.0,
+                "stow" : 118.0
+            },
+            "pids" : {
+                "position" : {
+                    "kp" : 7.5,
+                    "ki" : 0.0,
+                    "kd" : 0.0,
+                    "kv" : 0.056,
+                    "ka" : 0.0,
+                    "kg" : 0.0,
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 80,                   // 270
+                    "maxa" : 80,                   // 270
+                    "jerk" : 0.0
+                },
+                "position-collect" : {
+                    "kp" : 7.5,
+                    "ki" : 0.0,
+                    "kd" : 0.0,
+                    "kv" : 0.056,
+                    "ka" : 0.0,
+                    "kg" : 0.0,
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 150,                   // 270
+                    "maxa" : 80,                   // 270
+                    "jerk" : 0.0
+                }                
+            }
         },
         "intake-tilt" : {
             "hw" : {
@@ -609,9 +610,10 @@
                 }
             },
             "targets" : {
-                "stow" : -37.0,
-                "collect" : 22.0,
-                "kick-out" : 22.0
+                "stow-no-note" : -65.0,
+                "stow-note" : -50,
+                "collect" : 55.0,
+                "kick-out" : 55.0
             },
             "pids" : {
                 "position" : {
@@ -636,8 +638,8 @@
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 20,
-                    "maxa" : 20,
+                    "maxv" : 150,
+                    "maxa" : 80,
                     "jerk" : 0.0
                 }                
             }
@@ -1039,7 +1041,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 10,
+        "which": 150,
         "0": {
             "angle": 0,
             "power": 0.1,
@@ -1111,8 +1113,8 @@
             "velocity" : 65
         },
         "50" : {
-            "power" : 0.3,
-            "duration" : 1.0
+            "power" : 0.2,
+            "duration" : 3.0
         },
         "52": {
             "target" : 0

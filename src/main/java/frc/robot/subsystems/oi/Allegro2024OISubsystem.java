@@ -17,7 +17,9 @@ import frc.robot.subsystems.amp_trap.AmpTrapEjectAction;
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.amp_trap.AmpTrapShootAction;
 import frc.robot.subsystems.intake_shooter.StartCollectAction;
-import frc.robot.subsystems.intake_shooter.StopCollectionAction;
+import frc.robot.subsystems.intake_shooter.StartCollectAltAction;
+import frc.robot.subsystems.intake_shooter.StopCollectAction;
+import frc.robot.subsystems.intake_shooter.StopCollectAltAction;
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
 import frc.robot.subsystems.intake_shooter.IntakeEjectAction;
 import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
@@ -67,12 +69,12 @@ public class Allegro2024OISubsystem extends OISubsystem {
     //
     // This action is used to start the collect sequence
     //
-    private StartCollectAction startCollectAction_ ;
+    private StartCollectAltAction startCollectAction_ ;
 
     //
     // This action is used to stop the collect sequence
     //
-    private StopCollectionAction stopCollectAction_ ;
+    private StopCollectAltAction stopCollectAction_ ;
 
     //
     // This puts the intake-shooter into shoot mode.  The tilt and shooter wheels will start moving to align to the target
@@ -331,8 +333,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
     }
 
     private void shootingState() {
-        shoot_action_.setDBReady(rotate_action_.isAtTarget());
-
         if (!shoot_action_.isShooting() && oipanel_.isAbortPressed()) {
             //
             // The drive team has pressed the abort button before the shot actually occurred.  Cancel the
@@ -672,8 +672,9 @@ public class Allegro2024OISubsystem extends OISubsystem {
         IntakeShooterSubsystem intake = robot.getIntakeShooter() ;
         TargetTrackerSubsystem tracker = robot.getTargetTracker() ;
 
-        rotate_action_ = new SwerveTrackAngle(robot.getSwerve(), () -> robot.getTargetTracker().getRotation(), 2.5, 5.0) ;
-        shoot_action_ = new IntakeAutoShootAction(intake, tracker, false, true) ;
+        double postol = intake.getSettingsValue("actions:auto-shoot:rotational-position-tolerance").getDouble() ;        
+        rotate_action_ = new SwerveTrackAngle(robot.getSwerve(), () -> robot.getTargetTracker().getRotation(), postol) ;
+        shoot_action_ = new IntakeAutoShootAction(intake, tracker, false, rotate_action_) ;
 
         fwd_transfer_action_ = new TransferIntakeToTrampAction(robot.getSuperStructure()) ;
 
@@ -700,7 +701,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
         intake_eject_action_ = new IntakeEjectAction(robot.getIntakeShooter());
         trap_eject_action_ = new AmpTrapEjectAction(robot.getAmpTrap());
 
-        startCollectAction_ = new StartCollectAction(intake);
-        stopCollectAction_ = new StopCollectionAction(intake);
+        startCollectAction_ = new StartCollectAltAction(intake);
+        stopCollectAction_ = new StopCollectAltAction(intake);
     }
 }

@@ -6,6 +6,7 @@ import org.xero1425.base.subsystems.motorsubsystem.MCTrackPosAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.oi.OILed.LEDState;
+import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 import org.xero1425.base.utils.PieceWiseLinear;
 import org.xero1425.misc.ISettingsSupplier;
 import org.xero1425.misc.MessageLogger;
@@ -40,7 +41,6 @@ public class IntakeAutoShootAction extends Action {
 
     private boolean drive_team_ready_ ;
     private boolean initial_drive_team_ready_ ;
-    private boolean require_april_tag_ ;
     private boolean shooting_ ;
 
     private boolean verbose_ ;
@@ -51,6 +51,8 @@ public class IntakeAutoShootAction extends Action {
 
     private double translational_velocity_threshold_ ;
     private double rotational_velocity_threshold_ ;
+
+    SwerveTrackAngle rotate_ ;
 
     // The start time of the shoot action
     private double start_time_ ;
@@ -77,13 +79,13 @@ public class IntakeAutoShootAction extends Action {
         "distance (m)"
     } ;
 
-    public IntakeAutoShootAction(IntakeShooterSubsystem intake, TargetTrackerSubsystem tracker, boolean initialDriveTeamReady, boolean requireAprilTag) throws Exception {
+    public IntakeAutoShootAction(IntakeShooterSubsystem intake, TargetTrackerSubsystem tracker, boolean initialDriveTeamReady, SwerveTrackAngle rotate) throws Exception {
         super(intake.getRobot().getMessageLogger());
 
         sub_ = intake ;
         tracker_ = tracker ;
         initial_drive_team_ready_ = initialDriveTeamReady ;
-        require_april_tag_ = requireAprilTag ;
+        rotate_ = rotate ;
         verbose_ = false ;
 
         ISettingsSupplier settings = sub_.getRobot().getSettingsSupplier() ;
@@ -163,15 +165,23 @@ public class IntakeAutoShootAction extends Action {
     }
 
     private boolean aprilTagTest() {
-        if (require_april_tag_) {
-            return tracker_.seesTarget() ;
+        boolean ret = true ;
+        if (rotate_ != null && !tracker_.seesTarget()) {
+            ret = false ;
         }
-        return true ;
+        return ret ;
     }
 
     @Override
     public void run() throws Exception {
         super.run();
+
+        if (rotate_ != null) {
+            db_ready_ = rotate_.isAtTarget() ;
+        }
+        else {
+            db_ready_ = true ;
+        }
 
         if (shooting_) {
             if (feeder_on_.isDone()) {
@@ -189,7 +199,7 @@ public class IntakeAutoShootAction extends Action {
             double dist = tracker_.getDistance() ;
 
             if (dist > aim_threshold_) {
-                current_updown_ = updown_pwl_.getValue(dist) ;
+                current_updown_ = updown_pwl_.getValue(0.0) ;
                 current_tilt_ = tilt_stow_value_ ;
                 current_velocity_ = 10 ;
             }
@@ -260,7 +270,7 @@ public class IntakeAutoShootAction extends Action {
 
         return  db_ready_ && 
                 Math.abs(sub_.getRobot().getRobotSubsystem().getDB().getVelocity()) < translational_velocity_threshold_  &&
-                Math.abs(gyro.getRate()) < rotational_velocity_threshold_ ;                
+                Math.abs(gyro.getRate()) < rotational_velocity_threshold_ ;
     }
 
     private boolean readyToShoot() {

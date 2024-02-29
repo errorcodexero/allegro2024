@@ -2,12 +2,12 @@ package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 
-public class StopCollectionAction extends CollectBaseAction {
+public class StopCollectAction extends CollectBaseAction {
 
     IntakeShooterSubsystem sub_ ;
     private MotorEncoderPowerAction feeder_off_ ;
 
-    public StopCollectionAction(IntakeShooterSubsystem sub) throws Exception {
+    public StopCollectAction(IntakeShooterSubsystem sub) throws Exception {
         super(sub) ;
 
         sub_ = sub ;
