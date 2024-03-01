@@ -182,7 +182,7 @@
         "arm" : {
             "hw" : {
                 "motors" : {
-                    "type" : "talon-fx",
+                    "type" : "kraken",
                     "bus" : "",
                     "canid" : 7,
                     "inverted" : false,
@@ -258,7 +258,7 @@
         "climber" : {
             "hw" : {
                 "motors" : {
-                    "type" : "talon-fx",
+                    "type" : "kraken",
                     "bus" : "",
                     "canid" : 10,
                     "inverted" : true,
@@ -292,8 +292,7 @@
                         "target" : 0.0
                     },
                     "hooks-down-with-robot" : {
-                        "power" : -0.95
-                        ,
+                        "power" : -0.95,
                         "target" : 0.0
                     }
                 }
@@ -490,7 +489,7 @@
         "intake-feeder" : {
             "hw" : {
                 "motors" : {
-                    "type" : "talon-fx",
+                    "type" : "kraken",
                     "bus" : "",
                     "canid" : 1,
                     "inverted" : false,
@@ -531,7 +530,7 @@
         "intake-updown" : {
             "hw" : {
                 "motors" : {
-                    "type" : "talon-fx",
+                    "type" : "kraken",
                     "bus" : "",
                     "canid" : 2,
                     "inverted" : false,
@@ -590,7 +589,7 @@
         "intake-tilt" : {
             "hw" : {
                 "motors" : {
-                    "type" : "talon-fx",
+                    "type" : "kraken",
                     "bus" : "",
                     "canid" : 5,
                     "inverted" : false,
@@ -651,7 +650,7 @@
         "intake-shooter1" : {
             "hw" : {
                 "motors" : {
-                    "type" : "talon-fx",
+                    "type" : "kraken",
                     "bus" : "",
                     "canid" : 3,
                     "inverted" : true,
@@ -689,7 +688,7 @@
         "intake-shooter2" : {
             "hw" : {
                 "motors" : {
-                    "type" : "talon-fx",
+                    "type" : "kraken",
                     "bus" : "",
                     "canid" : 4,
                     "inverted" : true,
