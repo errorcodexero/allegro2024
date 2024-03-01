@@ -51,6 +51,18 @@ public class Pigeon2Gyro implements XeroGyro {
         return gyro_.getRoll().getValue() ;
     }
 
+    public double getAccelX() {
+        return gyro_.getAccelerationX().getValue() ;
+    }
+
+    public double getAccelY() {
+        return gyro_.getAccelerationY().getValue() ;
+    }
+
+    public double getAccelZ() {
+        return gyro_.getAccelerationZ().getValue() ;
+    }
+
     /// \brief Returns the total angle for the NavX
     /// \returns the total angle for the NavX    
     public double getAngle() {

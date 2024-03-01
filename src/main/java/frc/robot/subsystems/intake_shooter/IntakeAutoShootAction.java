@@ -13,7 +13,8 @@ import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
 import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.subsystems.oi.AllegroOIPanel;
 import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
@@ -46,13 +47,16 @@ public class IntakeAutoShootAction extends Action {
     private boolean verbose_ ;
     private boolean db_ready_ ;
 
+    private boolean swerve_stopped_ ;
+    private boolean gyro_stopped_ ;
+
     private double aim_threshold_ ;
     private double tilt_stow_value_ ;
 
-    private double translational_velocity_threshold_ ;
+    private double accel_threshold_ ;
     private double rotational_velocity_threshold_ ;
 
-    SwerveTrackAngle rotate_ ;
+    private SwerveTrackAngle rotate_ ;
 
     // The start time of the shoot action
     private double start_time_ ;
@@ -95,7 +99,7 @@ public class IntakeAutoShootAction extends Action {
 
         tilt_stow_value_ = sub_.getTilt().getSettingsValue("targets:stow").getDouble() ;
         aim_threshold_ = sub_.getSettingsValue("actions:auto-shoot:aim-threshold").getDouble() ;
-        translational_velocity_threshold_ = sub_.getSettingsValue("actions:auto-shoot:translational-velocity-threshold").getDouble() ;
+        accel_threshold_ = sub_.getSettingsValue("actions:auto-shoot:gyro-accel-threshold").getDouble() ;
         rotational_velocity_threshold_ = sub_.getSettingsValue("actions:auto-shoot:rotational-velocity-threshold").getDouble() ;
 
         double velthresh = sub_.getSettingsValue("actions:auto-shoot:shooter-velocity-threshold").getDouble() ;
@@ -131,6 +135,22 @@ public class IntakeAutoShootAction extends Action {
         } else {
             plot_id_ = -1 ;
         }
+
+
+        try {
+            ShuffleboardTab tab = Shuffleboard.getTab("Shooting");
+            tab.addBoolean("tilt", ()->tilt_.isAtTarget()) ;
+            tab.addBoolean("updown", ()->updown_.isAtTarget()) ;
+            tab.addBoolean("shooter1", ()->shooter1_.isAtVelocity());
+            tab.addBoolean("shooter2", ()->shooter2_.isAtVelocity()) ;
+            tab.addBoolean("dbangle", ()-> { return db_ready_ ; }) ;
+            tab.addBoolean("swerve", ()-> { return swerve_stopped_ ; }) ;
+            tab.addBoolean("gyro", ()-> { return gyro_stopped_ ; }) ;                        
+            tab.addBoolean("apriltag", ()->aprilTagTest()) ;
+            tab.addBoolean("button", ()-> { return drive_team_ready_ ; });
+        }
+        catch(Exception ex) {
+        }  
     }
 
     public boolean isShooting() {
@@ -162,6 +182,7 @@ public class IntakeAutoShootAction extends Action {
             start_time_ = sub_.getRobot().getTime() ;
             sub_.startPlot(plot_id_, columns_) ;
         }
+
     }
 
     private boolean aprilTagTest() {
@@ -226,18 +247,8 @@ public class IntakeAutoShootAction extends Action {
 
             oi.setTiltLED(tilt_.isAtTarget() ? LEDState.ON : LEDState.OFF);
             oi.setAprilTagLED(aprilTagTest() ? LEDState.ON : LEDState.OFF);
-            oi.setDBLED(db_ready_ ? LEDState.ON : LEDState.OFF);
+            oi.setDBLED(dbReadyToShoot() ? LEDState.ON : LEDState.OFF);
             oi.setVelocityLED((shooter1_.isAtVelocity() && shooter2_.isAtVelocity()) ? LEDState.ON : LEDState.OFF);
-
-            if (verbose_) {
-                SmartDashboard.putBoolean("Tilt", tilt_.isAtTarget()) ;
-                SmartDashboard.putBoolean("UpDown", updown_.isAtTarget()) ;
-                SmartDashboard.putBoolean("Shooter1", shooter1_.isAtVelocity()) ;
-                SmartDashboard.putBoolean("Shooter2", shooter1_.isAtVelocity()) ;
-                SmartDashboard.putBoolean("DB", db_ready_) ;
-                SmartDashboard.putBoolean("AprilTag ", tracker_.seesTarget()) ;
-                SmartDashboard.putBoolean("Button", drive_team_ready_) ;
-            }
 
             if (plot_id_ != -1) {
                 data_[0] = sub_.getRobot().getTime() - start_time_ ;
@@ -267,13 +278,31 @@ public class IntakeAutoShootAction extends Action {
         // We use the gyro rotation as it is more accurate
         //
         XeroGyro gyro = sub_.getRobot().getRobotSubsystem().getDB().getGyro() ;
+        AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;
 
-        return  db_ready_ && 
-                Math.abs(sub_.getRobot().getRobotSubsystem().getDB().getVelocity()) < translational_velocity_threshold_  &&
-                Math.abs(gyro.getRate()) < rotational_velocity_threshold_ ;
+        swerve_stopped_ = robot.getSwerve().isStopped() ;
+        gyro_stopped_ =     Math.abs(gyro.getRate()) < rotational_velocity_threshold_ && 
+                            Math.abs(gyro.getAccelX()) < accel_threshold_ && 
+                            Math.abs(gyro.getAccelY()) < accel_threshold_ && 
+                            Math.abs(gyro.getAccelZ()) < accel_threshold_ ; 
+
+        return  db_ready_ && swerve_stopped_ && gyro_stopped_ ;
     }
 
     private boolean readyToShoot() {
+        MessageLogger logger = sub_.getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Debug, sub_.getLoggerID()) ;
+        logger.add("updown", updown_.isAtTarget()) ;
+        logger.add("tilt", tilt_.isAtTarget());
+        logger.add("shooter1", shooter1_.isAtVelocity());
+        logger.add("shooter2", shooter2_.isAtVelocity());
+        logger.add("april", aprilTagTest());
+        logger.add("driveteam", drive_team_ready_);
+        logger.add("dbready", db_ready_);
+        logger.add("swerve_stopped", swerve_stopped_);
+        logger.add("gyro_stopped", gyro_stopped_) ;
+        logger.endMessage();
+
         return  updown_.isAtTarget() && 
                 tilt_.isAtTarget() && 
                 shooter1_.isAtVelocity() && 

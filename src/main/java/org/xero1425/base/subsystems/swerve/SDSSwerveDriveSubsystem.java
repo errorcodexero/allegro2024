@@ -7,6 +7,7 @@ import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
+import org.xero1425.misc.MinMaxData;
 import org.xero1425.misc.MissingParameterException;
 import org.xero1425.misc.PIDCtrl;
 
@@ -49,6 +50,8 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
     private double [] speeds_ ;
     private double [] powers_ ;
     private double [] angles_ ;
+    private MinMaxData[] history_ ;
+    private double stopped_threshold_ ;
 
     private int module_pos_ = 0 ;
 
@@ -57,10 +60,16 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
         disabled_init_ = false ;
 	    coast_mode_ = false ;
+        stopped_threshold_ = getSettingsValue("props:stopped_threshold").getDouble() ;
 
         speeds_ = new double[4] ;
         powers_ = new double[4] ;
         angles_ = new double[4] ;
+        history_ = new MinMaxData[4] ;
+        history_[FL] = new MinMaxData(10) ;
+        history_[FR] = new MinMaxData(10) ;
+        history_[BL] = new MinMaxData(10) ;
+        history_[BR] = new MinMaxData(10) ;
 
         String mtype = getSettingsValue("hw:modules:type").getString() ;
         String mratio = getSettingsValue("hw:modules:ratio").getString() ;
@@ -74,6 +83,7 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         modules_[FR] = createModule(cfg, "fr", shuffleboardTab) ;
         modules_[BL] = createModule(cfg, "bl", shuffleboardTab) ;
         modules_[BR] = createModule(cfg, "br", shuffleboardTab) ;
+        
 
         createOdometry();
     }
@@ -270,6 +280,12 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
     }
 
     @Override
+    public boolean isStopped() {
+        return history_[FL].getMax() < stopped_threshold_ && history_[FR].getMax() < stopped_threshold_ &&
+                history_[BL].getMax() < stopped_threshold_ && history_[BR].getMax() < stopped_threshold_ ;
+    }
+
+    @Override
     public void run() throws Exception {
         super.run() ;
 
@@ -313,12 +329,16 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
             powers_[BR] = modules_[BR].pid.getOutput(speeds_[BR], getModuleState(BR).speedMetersPerSecond, getRobot().getDeltaTime()) ;
         }
 
-        if (allModulesSynchronized()) {
-            
+        if (allModulesSynchronized()) {            
             modules_[FL].hw.set(powers_[FL], Math.toRadians(angles_[FL])) ;
             modules_[FR].hw.set(powers_[FR], Math.toRadians(angles_[FR])) ;
             modules_[BL].hw.set(powers_[BL], Math.toRadians(angles_[BL])) ;
             modules_[BR].hw.set(powers_[BR], Math.toRadians(angles_[BR])) ;
+
+            history_[FL].addData(powers_[FL]);
+            history_[FR].addData(powers_[FR]);
+            history_[BL].addData(powers_[BL]);
+            history_[BR].addData(powers_[BR]);
         }
         else {
             MessageLogger logger = getRobot().getMessageLogger();

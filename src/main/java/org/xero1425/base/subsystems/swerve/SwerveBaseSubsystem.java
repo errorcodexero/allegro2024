@@ -110,6 +110,8 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
         return vision_.getCurrentPose() ;
     }
 
+    public abstract boolean isStopped() ;
+
     public void resetPose(boolean inverted) throws BadMotorRequestException, MotorRequestFailedException {
         boolean reset = false ;
         if (vision_ != null && vision_enabled_ && vision_.hasTargets()) {

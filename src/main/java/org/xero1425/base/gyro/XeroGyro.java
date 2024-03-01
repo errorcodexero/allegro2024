@@ -17,7 +17,12 @@ public interface XeroGyro {
     public double getPitch() ;
     public double getRoll();
 
+    /// \brief Returns the current rate of rotation for the robot
     public double getRate() ;
+
+    public double getAccelX() ;
+    public double getAccelY() ;
+    public double getAccelZ() ;
 
     /// \brief Returns the total angle for the NavX
     /// \returns the total angle for the NavX     

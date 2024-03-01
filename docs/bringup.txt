@@ -25,16 +25,22 @@ Item                                                                            
 - Shuttleboard disconnecting sporadically + OI LEDs going out. DriverStation lights remain green.     ?
 - Test drivebase target tracking mode                                                                 Done
 - Mount second april tag, test picking up the right tag (tx, ty, tv)                                  Done
-- Test move note to back action
-- Test Climb without trap
-- Retune shooter w/ Comp Bot
+- Find new elevator max height                                                                        Done
+- Elevator test mode, maximize velocity                                                               Done
+- Climber test mode, climber                                                                          Done
+- Test Climb without trap                                                                             Done
+- Retune shooter w/ Comp Bot                                                                          Done
+- Speed up elevator                                                                                   Done
+- Test abort mid climb
+- Test shooting with gyro/swerve constraints
 - Test shooting from various locations and see if we can hit consistently
 - Setup AMP place sequence
 - Run teleop sequences to be sure we are ready for teleop
-- Speed up elevator
 - Automodes
-- In trap sequence, move note to other end of manipulator
-- Hold note tighter when climbing to trap
+- Revist Trap
+  - In trap sequence, move note to other end of manipulator
+  - Hold note tighter when climbing to trap
 - Turtle
+- Vibrate driver game pad when note collected
 - Bug fixes
 ------------------------------------------------------------------------------------------------------------
