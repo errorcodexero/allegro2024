@@ -60,6 +60,15 @@ public class AmpTrapPositionAction extends Action {
     public void start() throws Exception {
         super.start() ;
         double current = sub_.getArm().getPosition() ;
+        MessageLogger logger = sub_.getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Error) ;
+        logger.add("armpos") ;
+        logger.add("current", current) ;
+        logger.add("keepoutmax", keep_out_max_) ;
+        logger.add("keepoutmin", keep_out_min_) ;
+        logger.add("target", target_angle_) ;
+        logger.endMessage();
+
         if (current < keep_out_min_ && target_angle_ > keep_out_max_) {
             //
             // We need to cross the keep out zone from min to max
@@ -85,7 +94,7 @@ public class AmpTrapPositionAction extends Action {
             sub_.getArm().setAction(arm_goto_min_action_, true) ;
             state_ = State.CrossMinToMax ;
         }
-        else if (current > keep_out_max_ && target_angle_ < keep_out_min_) {
+        else if (current >= keep_out_max_ && target_angle_ <= keep_out_min_) {
             //
             // We need to cross the keep out zone from max to min
             //
@@ -187,11 +196,11 @@ public class AmpTrapPositionAction extends Action {
         }
 
         if (prev != state_) {
-            MessageLogger logger = sub_.getRobot().getMessageLogger() ;
-            logger.startMessage(MessageType.Debug) ;
+            MessageLogger logger = sub_.getRobot().getMessageLogger() ;              
+            logger.startMessage(MessageType.Error, sub_.getLoggerID()) ;
             logger.add("AmpTrapPositionState changed : " + prev.toString() + " -> " + state_.toString()) ;
-            logger.endMessage();            
-        }
+            logger.endMessage();       
+        }     
     }
     
     @Override

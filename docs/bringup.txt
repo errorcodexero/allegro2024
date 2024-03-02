@@ -43,4 +43,6 @@ Item                                                                            
 - Turtle
 - Vibrate driver game pad when note collected
 - Bug fixes
+  - Holding PID on trap place
+  - Transfer of note on trap place
 ------------------------------------------------------------------------------------------------------------

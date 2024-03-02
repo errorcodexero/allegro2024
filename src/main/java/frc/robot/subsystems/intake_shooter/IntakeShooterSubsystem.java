@@ -5,11 +5,12 @@ import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.misc.EncoderMapper;
+import org.xero1425.misc.Speedometer;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 
-public class IntakeShooterSubsystem extends Subsystem{
+public class IntakeShooterSubsystem extends Subsystem {
 
     // moves the intake roller straight up (0 degrees) to flat to the ground (90 degrees), actual range 15-75 degrees   
     private MotorEncoderSubsystem updown_;
@@ -150,6 +151,10 @@ public class IntakeShooterSubsystem extends Subsystem{
 
     @Override
     public void postHWInit() throws BadMotorRequestException, MotorRequestFailedException {
+        updateMotorPosition();
+    }
+    
+    private void updateMotorPosition() throws BadMotorRequestException, MotorRequestFailedException {
         double eval = absoluteEncoder_.getVoltage();
         angle_ = encoderMapper_.toRobot(eval);
 

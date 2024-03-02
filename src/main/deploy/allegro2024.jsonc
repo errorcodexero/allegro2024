@@ -20,7 +20,8 @@
             "intake-shooter" : true,
             "superstructure" : false,
             "swerve-gamepad" : false,
-            "targettracker" : false
+            "targettracker" : false,
+            "amp-trap" : true
         },
         "verbose": {
             "swerve" : false,
@@ -70,7 +71,7 @@
                     // The position of the amp trap subsystem to perform the transfer
                     //
                     "arm" : 0.0,
-                    "elevator" : 0.0,
+                    "elevator" : 0.021,
 
                     //
                     // The position of the intake subsystem to perform the transfer
@@ -83,8 +84,8 @@
                     // distance to move the feeder wheels.
                     //
                     "feeder-power" : 0.3,
-                    "shooter-velocity" : 15,
-                    "shooter-length" : 1.0
+                    "shooter-velocity" : 12,
+                    "shooter-length" : 1.1
                 }
             }
         },
@@ -98,9 +99,9 @@
                 // the elevator-height to avoid a collision.
                 //
                 "keepout-zone" : {
-                    "min" : 0.0,
+                    "min" : 5.0,
                     "max" : 75.0,
-                    "elevator-height" : 0.12
+                    "elevator-height" : 0.17
                 }
             },
             "actions" : {
@@ -113,16 +114,20 @@
                     "pivot" : 0.0
                 },
                 "trap" : {
-                    "elevator" : 0.278,
+                    "elevator" : 0.234,
+                    "pivot" : 180.0
+                },
+                "trap-up-1" : {
+                    "elevator" : 0.234,
                     "pivot" : 120.0
                 },
-                "trap-up" : {
-                    "elevator" : 0.278,
+                "trap-up-2" : {
+                    "elevator" : 0.343,
                     "pivot" : 120.0
-                },
+                },                
                 "climb" : {
-                    "elevator" : 0.278,
-                    "pivot" : 120.0
+                    "elevator" : 0.234,
+                    "pivot" : 180.0
                 },                
                 "amp" : {
                     "elevator" : 0.2,
@@ -256,7 +261,7 @@
             },
             "actions" : {
                 "move-note" : {
-                    "power" : 0.1
+                    "power" : 0.05
                 }
             }
         },
@@ -599,7 +604,7 @@
                     "ks" : 0.0,
                     "outmax" : 12.0,
                     "maxv" : 270,                   // 270
-                    "maxa" : 270,                   // 270
+                    "maxa" : 180,                   // 270
                     "jerk" : 0.0
                 }                
             }
@@ -659,8 +664,8 @@
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" :270,
-                    "maxa" : 270,
+                    "maxv" : 270,
+                    "maxa" : 180,
                     "jerk" : 0.0
                 }                
             }
@@ -1072,7 +1077,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 32,
+        "which": 143,
         "0": {
             "angle": 0,
             "power": 0.1,

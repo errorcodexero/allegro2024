@@ -445,8 +445,8 @@ public class SparkFlexMotorController extends MotorController {
 
         if (simstate_ == null) {
 
-            int k1Period = importantValueToMS(pos_important_) ;
-            int k2Period = importantValueToMS(vel_important_);
+            int k1Period = importantValueToMS(vel_important_) ;
+            int k2Period = importantValueToMS(pos_important_);
 
             checkError("could not set status frame frequency",() -> ctrl_.setPeriodicFramePeriod(PeriodicFrame.kStatus1, k1Period)) ;
             checkError("could not set status frame frequency",() -> ctrl_.setPeriodicFramePeriod(PeriodicFrame.kStatus2, k2Period)) ;
