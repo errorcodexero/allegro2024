@@ -2,6 +2,7 @@ package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.gyro.XeroGyro;
+import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.motorsubsystem.MCTrackPosAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
@@ -43,6 +44,9 @@ public class IntakeAutoShootAction extends Action {
     private boolean drive_team_ready_ ;
     private boolean initial_drive_team_ready_ ;
     private boolean shooting_ ;
+    private boolean waiting_ ;
+
+    private XeroTimer wait_timer_ ;
 
     private boolean verbose_ ;
     private boolean db_ready_ ;
@@ -108,6 +112,8 @@ public class IntakeAutoShootAction extends Action {
         double tilt_pos_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-pos-threshold").getDouble() ;
         double tilt_vel_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-velocity-threshold").getDouble() ;
 
+        wait_timer_ = new XeroTimer(intake.getRobot(), "wait-timer", 1.0);
+
         if (RobotBase.isSimulation()) {
             velthresh = 10.0 ;  
             updown_pos_threshold = 10.0 ;
@@ -135,7 +141,6 @@ public class IntakeAutoShootAction extends Action {
         } else {
             plot_id_ = -1 ;
         }
-
 
         try {
             ShuffleboardTab tab = Shuffleboard.getTab("Shooting");
@@ -170,6 +175,7 @@ public class IntakeAutoShootAction extends Action {
         super.start();
 
         shooting_ = false ;
+        waiting_ = false ;
         drive_team_ready_ = initial_drive_team_ready_ ;
         db_ready_ = false ;
 
@@ -204,7 +210,16 @@ public class IntakeAutoShootAction extends Action {
             db_ready_ = true ;
         }
 
-        if (shooting_) {
+        if (waiting_ && !shooting_) {
+            if (wait_timer_.isExpired()) {
+                shooting_ = true ;
+                if (rotate_ != null) {
+                    rotate_.cancel() ;
+                }
+                sub_.getFeeder().setAction(feeder_on_, true);                
+            }
+        }
+        else if (shooting_) {
             if (feeder_on_.isDone()) {
                 sub_.setHoldingNote(false);
                 sub_.getFeeder().setPower(0.0);
@@ -267,8 +282,8 @@ public class IntakeAutoShootAction extends Action {
             }
 
             if (readyToShoot()) {
-                shooting_ = true ;
-                sub_.getFeeder().setAction(feeder_on_, true);
+                waiting_ = true ;
+                wait_timer_.start() ;
             }
         }
     }
@@ -283,8 +298,7 @@ public class IntakeAutoShootAction extends Action {
         swerve_stopped_ = robot.getSwerve().isStopped() ;
         gyro_stopped_ =     Math.abs(gyro.getRate()) < rotational_velocity_threshold_ && 
                             Math.abs(gyro.getAccelX()) < accel_threshold_ && 
-                            Math.abs(gyro.getAccelY()) < accel_threshold_ && 
-                            Math.abs(gyro.getAccelZ()) < accel_threshold_ ; 
+                            Math.abs(gyro.getAccelY()) < accel_threshold_ ; 
 
         return  db_ready_ && swerve_stopped_ && gyro_stopped_ ;
     }

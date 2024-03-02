@@ -6,7 +6,7 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
-public class StartCollectAltAction extends CollectBaseAction {
+public class StartCollectAltAction extends CollectBaseAltAction {
     private enum CollectState {
         Idle,
         BothMoving,

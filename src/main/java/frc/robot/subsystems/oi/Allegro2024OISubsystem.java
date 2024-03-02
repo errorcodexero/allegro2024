@@ -16,7 +16,6 @@ import org.xero1425.misc.MissingParameterException;
 import frc.robot.subsystems.amp_trap.AmpTrapEjectAction;
 import frc.robot.subsystems.amp_trap.AmpTrapMoveNote;
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
-import frc.robot.subsystems.amp_trap.AmpTrapShootAction;
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
 import frc.robot.subsystems.intake_shooter.IntakeEjectAction;
 import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
@@ -103,9 +102,14 @@ public class Allegro2024OISubsystem extends OISubsystem {
     private IntakeGotoNamedPositionAction stow_intake_action_ ;
 
     //
-    // This action moves the elevator/arm to the position to shoot the note into the amp
+    // This action moves the note into the trap
     //
-    private AmpTrapShootAction amp_trap_shoot_action_ ;
+    private AmpTrapMoveNote trap_shoot_action_ ;
+
+    //
+    // This action moves the note into the amp
+    //
+    private AmpTrapMoveNote amp_shoot_action_ ;
 
     //
     // This action moves the climber hooks up to the height to climb onto the chain.
@@ -456,13 +460,13 @@ public class Allegro2024OISubsystem extends OISubsystem {
     private void noteInAmpPositonState() {
         if (oipanel_.isShootPressed()) {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
-            robot.getAmpTrap().setAction(amp_trap_shoot_action_, true) ;
+            robot.getAmpTrap().setAction(amp_shoot_action_, true) ;
             state_ = OIState.ShootingAmp ;
         }
     }
 
     private void shootingAmpState() {
-        if (amp_trap_shoot_action_.isDone()) {
+        if (amp_shoot_action_.isDone()) {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
             robot.getAmpTrap().setAction(stow_amp_trap_action_, true) ;            
             state_ = OIState.StowingAmpTrap ;
@@ -563,13 +567,13 @@ public class Allegro2024OISubsystem extends OISubsystem {
     private void movingTrapWhileUpState() {
         if (goto_trap_up_action_.isDone()) {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;  
-            robot.getAmpTrap().setAction(amp_trap_shoot_action_, true) ;
+            robot.getAmpTrap().setAction(trap_shoot_action_, true) ;
             state_ = OIState.ShootingTrap ;
         }
     }
 
     private void shootingTrapState() {
-        if (amp_trap_shoot_action_.isDone()) {
+        if (trap_shoot_action_.isDone()) {
             state_ = OIState.Climbed ;
             oipanel_.setClimbUpExecLED(LEDState.OFF);
             oipanel_.setClimbDownLED(LEDState.ON);
@@ -764,7 +768,8 @@ public class Allegro2024OISubsystem extends OISubsystem {
         goto_climb_down_pos_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:climb-down:pivot", "actions:climb-down:elevator") ;
         goto_trap_up_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:trap-up:pivot", "actions:trap-up:elevator") ;
 
-        amp_trap_shoot_action_ = new AmpTrapShootAction(robot.getAmpTrap()) ;
+        trap_shoot_action_ = new AmpTrapMoveNote(robot.getAmpTrap(), 10.0) ;
+        amp_shoot_action_ = new AmpTrapMoveNote(robot.getAmpTrap(), -10.0) ;        
 
         stow_amp_trap_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:stow:pivot", "actions:stow:elevator") ;
 
@@ -778,6 +783,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
         startCollectAction_ = new StartCollectAltAction(intake);
         stopCollectAction_ = new StopCollectAltAction(intake);
 
-        move_note_action_ = new AmpTrapMoveNote(robot.getAmpTrap(), 1.0) ;
+        move_note_action_ = new AmpTrapMoveNote(robot.getAmpTrap(), 2.0);
     }
 }

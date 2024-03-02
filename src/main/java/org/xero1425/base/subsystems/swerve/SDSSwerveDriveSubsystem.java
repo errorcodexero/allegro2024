@@ -60,7 +60,7 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
         disabled_init_ = false ;
 	    coast_mode_ = false ;
-        stopped_threshold_ = getSettingsValue("props:stopped_threshold").getDouble() ;
+        stopped_threshold_ = getSettingsValue("props:stopped-threshold").getDouble() ;
 
         speeds_ = new double[4] ;
         powers_ = new double[4] ;

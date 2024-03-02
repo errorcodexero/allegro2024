@@ -22,7 +22,7 @@ Item                                                                            
   And impacts distance when AT not seen.                                                              Done
 - Marshall/Ben: Deploy intake at same angles/sec for tilt and shooter.                                Done
   Gets to target destination with one motion.                                                         Done
-- Shuttleboard disconnecting sporadically + OI LEDs going out. DriverStation lights remain green.     ?
+- Shuttleboard disconnecting sporadically + OI LEDs going out. DriverStation lights remain green.     Done
 - Test drivebase target tracking mode                                                                 Done
 - Mount second april tag, test picking up the right tag (tx, ty, tv)                                  Done
 - Find new elevator max height                                                                        Done

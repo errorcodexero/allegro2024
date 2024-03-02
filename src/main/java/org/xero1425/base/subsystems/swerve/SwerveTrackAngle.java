@@ -74,6 +74,7 @@ public class SwerveTrackAngle extends Action {
     public void cancel() {
         super.cancel();
         try {
+            is_at_target_ = false ;
             swerve_.stop() ;
         }
         catch(Exception ex) {

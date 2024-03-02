@@ -10,7 +10,7 @@ import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollower;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 import org.xero1425.misc.ISettingsSupplier;
 
-import frc.robot.subsystems.intake_shooter.StartCollectAction;
+import frc.robot.subsystems.intake_shooter.StartCollectAltAction;
 import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
@@ -26,7 +26,7 @@ public class AllegroGameAutoMode extends AutoMode {
     private final static double kCollectEndOfPathDistance = 0.5 ;
     private final static double kShootEndOfPathDistance = 0.08 ;
 
-    private StartCollectAction start_collect_ ;
+    private StartCollectAltAction start_collect_ ;
     private boolean mirror_ ;
     private double mvalue_ ;
 
@@ -58,7 +58,7 @@ public class AllegroGameAutoMode extends AutoMode {
     protected void driveAndCollect(String path, boolean setpose) throws Exception {
         AllegroRobot2024 robot = (AllegroRobot2024)getAutoController().getRobot().getRobotSubsystem() ;        
         SwerveHolonomicPathFollower pathact = new SwerveHolonomicPathFollower(robot.getSwerve(), path, setpose, 0.2, mirror_, mvalue_);
-        start_collect_ = new StartCollectAction(robot.getIntakeShooter()) ;
+        start_collect_ = new StartCollectAltAction(robot.getIntakeShooter()) ;
 
         double collectLength = pathact.getDistance() - kCollectEndOfPathDistance ;
 
@@ -98,7 +98,7 @@ public class AllegroGameAutoMode extends AutoMode {
         SwerveHolonomicPathFollower pathact = new SwerveHolonomicPathFollower(robot.getSwerve(), path, setpose, 0.2, mirror_, mvalue_);
         SwerveTrackAngle rotate = null ;
 
-        start_collect_ = new StartCollectAction(robot.getIntakeShooter()) ;
+        start_collect_ = new StartCollectAltAction(robot.getIntakeShooter()) ;
 
         double collectLength = pathact.getDistance() - kCollectEndOfPathDistance ;        
 
