@@ -1,13 +1,7 @@
 package frc.robot.subsystems.intake_shooter;
 
-import org.xero1425.base.motors.BadMotorRequestException;
-import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
-import org.xero1425.misc.EncoderMapper;
-import org.xero1425.misc.Speedometer;
-
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class IntakeShooterSubsystem extends Subsystem {
@@ -29,8 +23,6 @@ public class IntakeShooterSubsystem extends Subsystem {
     
     private DigitalInput noteSensor_; 
     private boolean noteSensorInverted_;
-    private AnalogInput absoluteEncoder_;
-    private EncoderMapper encoderMapper_;
 
     // This is true if the sensor is currently detecting a note
     private boolean is_note_present_;
@@ -66,19 +58,6 @@ public class IntakeShooterSubsystem extends Subsystem {
 
         int channel = getSettingsValue("hw:sensor:channel").getInteger();
         noteSensor_ = new DigitalInput(channel);
-
-        channel = getSettingsValue("hw:encoder:channel").getInteger();
-        absoluteEncoder_ = new AnalogInput(channel);
-
-        double rmax = getSettingsValue("hw:encoder:rmax").getDouble();
-        double rmin = getSettingsValue("hw:encoder:rmin").getDouble();
-        double emax = getSettingsValue("hw:encoder:emax").getDouble();
-        double emin = getSettingsValue("hw:encoder:emin").getDouble();
-        double rcval = getSettingsValue("hw:encoder:rcval").getDouble();
-        double ecval = getSettingsValue("hw:encoder:ecval").getDouble();
-
-        encoderMapper_ = new EncoderMapper(rmax,rmin,emax,emin);
-        encoderMapper_.calibrate(rcval, ecval);
 
         noteSensorInverted_ = getSettingsValue("hw:sensor:inverted").getBoolean();
 
@@ -138,27 +117,6 @@ public class IntakeShooterSubsystem extends Subsystem {
     public void computeMyState() throws Exception {
         super.computeMyState();
         
-        is_note_present_ = noteSensor_.get() ^ noteSensorInverted_;
-        
-        double eval = absoluteEncoder_.getVoltage();
-        angle_ = encoderMapper_.toRobot(eval);
-
-        putDashboard("RawEnc", DisplayType.Verbose, eval);
-        putDashboard("Angle", DisplayType.Verbose, angle_);
-        putDashboard("note", DisplayType.Always, is_note_present_) ;
-        putDashboard("hasnote", DisplayType.Always, note_present_);
-    }
-
-    @Override
-    public void postHWInit() throws BadMotorRequestException, MotorRequestFailedException {
-        updateMotorPosition();
-    }
-    
-    private void updateMotorPosition() throws BadMotorRequestException, MotorRequestFailedException {
-        double eval = absoluteEncoder_.getVoltage();
-        angle_ = encoderMapper_.toRobot(eval);
-
-        double m = tilt_.getEncoder().mapPhysicalToMotor(angle_) ;
-        tilt_.getMotorController().setPosition(m);
+        is_note_present_ = noteSensor_.get() ^ noteSensorInverted_;        
     }
 }

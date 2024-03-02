@@ -6,6 +6,7 @@ import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.motorsubsystem.MCTrackPosAction;
 import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
+import org.xero1425.base.subsystems.motorsubsystem.RioTrackPositionAction;
 import org.xero1425.base.subsystems.oi.OILed.LEDState;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 import org.xero1425.base.utils.PieceWiseLinear;
@@ -38,7 +39,7 @@ public class IntakeAutoShootAction extends Action {
     private MCVelocityAction shooter1_ ;
     private MCVelocityAction shooter2_ ;
     private MCTrackPosAction updown_ ;
-    private MCTrackPosAction tilt_ ;
+    private RioTrackPositionAction tilt_ ;
     private MotorEncoderPowerAction feeder_on_ ;
 
     private boolean drive_team_ready_ ;
@@ -129,7 +130,7 @@ public class IntakeAutoShootAction extends Action {
         shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", kVelocityStart, velthresh, false) ;
         shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", kVelocityStart, velthresh, false) ;
         updown_ = new MCTrackPosAction(sub_.getUpDown(), "pids:position", kUpDownStart, updown_pos_threshold, updown_vel_threshold, false) ;      
-        tilt_ = new MCTrackPosAction(sub_.getTilt(), "pids:position", kTiltStart, tilt_pos_threshold, tilt_vel_threshold,true) ;
+        tilt_ = new RioTrackPositionAction(sub_.getTilt(), "pids:shoot", kTiltStart, tilt_pos_threshold, tilt_vel_threshold) ;
 
         double feedpower = sub_.getSettingsValue("actions:auto-shoot:feeder-power").getDouble() ;
         double feedtime = sub_.getSettingsValue("actions:auto-shoot:feeder-time").getDouble() ;

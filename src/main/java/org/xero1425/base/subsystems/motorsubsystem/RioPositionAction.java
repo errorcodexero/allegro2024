@@ -14,50 +14,6 @@ import org.xero1425.misc.XeroMath;
 
 /// \file
 
-/// \brief This action moves the position of a subsystem controlled by a motor to the requested
-/// position.  It does this be computed a TrapezoidalProfile as a plan for the motion and then using
-/// a PIDACtrl folllower to follow the plan.  The PIDACtrl follower is a PID controller based on position
-/// that has feed forward terms for both target velocity and acceleration.  This action supports goto actions
-/// that can be "up" or "down".    "Up" is defined as the position increasing to get from its current position 
-/// to its target position and "Down" is defined as the position decreasing to get from its current position 
-/// to its target position.  Different PID parameters are read from the settings file depending on direction.  If
-/// this action is being used on something like a turret, then the "up" and "down" parameters are really clockwise
-/// and counter clockwise and will be the same.  If this action is being used on a lift or elevator, then the "up"
-/// and "down" are truely up and down and will differ as in one direction gravity is with the motion and in the 
-/// other direction gravity is against the motion.
-///
-///     "subsystems" : {
-///         "NAME" : {
-///             "goto": {
-///                 "threshold": 2.5,
-///                 "maxa": 45,
-///                 "maxd": -45,
-///                 "maxv": 45
-///             },
-///             "follower" : {
-///                 "up" : {
-///                     "kp" : DOUBLE,
-///                     "ki" : DOUBLE,
-///                     "kd" : DOUBLE,
-///                     "kf" : DOUBLE,
-///                     "min" : DOUBLE,
-///                     "max" : DOUBLE,
-///                     "imax" : DOUBLE
-///                  },
-///                 "down" : {
-///                     "kp" : DOUBLE,
-///                     "ki" : DOUBLE,
-///                     "kd" : DOUBLE,
-///                     "kf" : DOUBLE,
-///                     "min" : DOUBLE,
-///                     "max" : DOUBLE,
-///                     "imax" : DOUBLE
-///                  }
-///              }
-///          }
-///     }
-///
-/// 
 public class RioPositionAction extends MotorAction {
     
     /// The difference between the current position and the target position below which we consider

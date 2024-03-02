@@ -7,6 +7,14 @@ public class RioTrackPositionAction extends MotorAction {
     // The target position
     private double target_ ;
 
+    // The threshold for being at the target
+    private double pos_threshold_ ;
+
+    private double vel_threshold_ ;
+
+    // If true, we are within the threshold of our target
+    private boolean is_at_target_ ;
+
     // The PID controller to follow the plan
     private PIDCtrl ctrl_ ;
 
@@ -29,17 +37,23 @@ public class RioTrackPositionAction extends MotorAction {
     /// \param sub the MotorEncoderSubsystem subsystem for the action    
     /// \param target the target position
     /// \param addhold if true, add a hold action when the goto action is complete
-    public RioTrackPositionAction(MotorEncoderSubsystem sub, String name, double target) throws Exception {
+    public RioTrackPositionAction(MotorEncoderSubsystem sub, String name, double target, double posthreshold, double velthreshold) throws Exception {
         super(sub) ;
 
         if (!(sub instanceof MotorEncoderSubsystem))
             throw new Exception("This subsystem is not a MotorEncoderSubsystem") ;
                     
         target_ = checkTarget(target) ;
+        pos_threshold_ = posthreshold ;
+        vel_threshold_ = velthreshold ;
         
         ctrl_ = new PIDCtrl(sub.getRobot().getSettingsSupplier(), "subsystems:" + sub.getName() + ":" + name, false) ;
 
         plot_id_ = sub.initPlot(toString(0)) ;
+    }
+
+    public boolean isAtTarget() {
+        return is_at_target_ ;
     }
 
     public double getError() {
@@ -52,7 +66,6 @@ public class RioTrackPositionAction extends MotorAction {
         super.start() ;
 
         start_ = getSubsystem().getRobot().getTime() ;
-
         if (plot_id_ != -1) {
             MotorEncoderSubsystem sub = (MotorEncoderSubsystem)getSubsystem();
             getSubsystem().startPlot(plot_id_, convertUnits(columns_, sub.getUnits())) ;
@@ -64,6 +77,12 @@ public class RioTrackPositionAction extends MotorAction {
 
         target_ = checkTarget(t) ;
         error_ = Math.abs(target_ - sub.getPosition()) ;
+        if (error_ < pos_threshold_) {
+            is_at_target_ = true ;
+        }
+        else {
+            is_at_target_ = false ;
+        }        
     }
 
     private double checkTarget(double t) {
@@ -88,6 +107,12 @@ public class RioTrackPositionAction extends MotorAction {
         last_time_ = t ;
 
         error_ = Math.abs(target_ - sub.getPosition()) ;
+        if (error_ < pos_threshold_) {
+            is_at_target_ = true ;
+        }
+        else {
+            is_at_target_ = false ;
+        }
 
         if (plot_id_ != -1) {
             Double[] data = new Double[columns_.length] ;

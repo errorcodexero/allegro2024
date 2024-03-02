@@ -622,17 +622,28 @@
                     "velocity-important" : "High",
                     "acceleration-imporant" : "high"
                 },
-                "encoder": {
-                    //
-                    // Units are degrees
-                    //
-                    "type" : "motor",
-                    "m": 0.008241034,
-                    "b" : 0,
+                "ecval" : { 
+                    "PRACTICE" : 0.44311,
+                    "COMPETITION" : 1.33,
+                    "SIMULATION": 0.0
+                },
+                "encoder" : {
+                    "type" : "analog",
+                    "ainput" : 0,
+                    "rmin" : -90.0,
+                    "rmax" : 90.0,
+                    "emin" : 0.0,
+                    "emax" : 5.0,
+                    "ec" : {
+                        "PRACTICE" : 0.44311,
+                        "COMPETITION" : 1.33,
+                        "SIMULATION": 0.0                        
+                    },
+                    "rc" : 0.0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
                     "accunits" : "deg/s/s"
-                }
+                }                
             },
             "targets" : {
                 "stow-no-note" : -65.0,
@@ -667,7 +678,17 @@
                     "maxv" : 270,
                     "maxa" : 180,
                     "jerk" : 0.0
-                }                
+                },
+                "shoot" : {
+                    "kp" : 3.0,
+                    "ki" : 0.0,
+                    "kd" : 0.0,
+                    "kf" : 0.03,
+                    "min" : -1.0,
+                    "max" : 1.0,
+                    "imax" : 0.0
+
+                }
             }
         },
         "intake-shooter1" : {
