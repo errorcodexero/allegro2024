@@ -180,25 +180,26 @@ public class SwerveVisionProcessing {
     }
 
     private void setVisionParams() {
-        if (vision_.getTagCount() == 1) {
-            if (vision_.getDistance() < single_tag_threshold_) {
-                setVisionParams(VisionParamsType.SingleNear);
-            }
-            else {
-                setVisionParams(VisionParamsType.SingleFar);
-            }
-        }
-        else if (vision_.getTagCount() > 1) {
-            if (vision_.getDistance() < multi_tag_threshold_) {
-                setVisionParams(VisionParamsType.MultiNear);
-            }
-            else {
-                setVisionParams(VisionParamsType.MultiFar);
-            }                
-        }
-        else if (vision_.getTagCount() == 0) {
-            setVisionParams(VisionParamsType.SingleNear);
-        }
+        // if (vision_.getTagCount() == 1) {
+        //     if (vision_.getDistance() < single_tag_threshold_) {
+        //         setVisionParams(VisionParamsType.SingleNear);
+        //     }
+        //     else {
+        //         setVisionParams(VisionParamsType.SingleFar);
+        //     }
+        // }
+        // else if (vision_.getTagCount() > 1) {
+        //     if (vision_.getDistance() < multi_tag_threshold_) {
+        //         setVisionParams(VisionParamsType.MultiNear);
+        //     }
+        //     else {
+        //         setVisionParams(VisionParamsType.MultiFar);
+        //     }                
+        // }
+        // else if (vision_.getTagCount() == 0) {
+        //     setVisionParams(VisionParamsType.SingleNear);
+        // }
+        setVisionParams(VisionParamsType.SingleNear);     
     }
 
     public static Vector<N3> getParams(Subsystem sub, String str) throws BadParameterTypeException, MissingParameterException {

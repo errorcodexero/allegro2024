@@ -1,6 +1,9 @@
 package frc.robot.automodes;
 
 import org.xero1425.base.controllers.AutoController;
+import org.xero1425.base.controllers.AutoMode;
+
+import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 //
 // Baseline for the automode
@@ -16,15 +19,13 @@ import org.xero1425.base.controllers.AutoController;
 // Shoot	    0.5
 // Total       14.42
 
-public class Start1Shoot4AutoMode extends AllegroGameAutoMode {
-    public Start1Shoot4AutoMode(AutoController ctrl, boolean mirror, double mvalue) throws Exception {
-        super(ctrl, "Start1Shoot4", mirror, mvalue) ;
+public class Start1Shoot4AutoMode extends AutoMode {
 
-        shootFirstNote() ;                                                  // Duration 0.5, Total 0.5
-        driveAndCollect("S1S4-P1", true);                      // Duration 3.16, Total 3.66
-        driveAndShoot("S1S4-P2", false);                       // Duration 2.22 + 0.5, Total 6.38
-        driveAndCollect("S1S4-P3", false);                     // Duration 2.28, Total 8.66
-        driveAndShoot("S1S4-P4", false);                       // Duration 3.18 + 0.5, Total 12.34
-        driveAndCollectAndShoot("S1S4-P5", false) ;            // Duration 1.58 + 0.5, Total 14.42
+    public Start1Shoot4AutoMode(AutoController ctrl, boolean mirror, double mvalue) throws Exception {
+        super(ctrl, "Start1Shoot4") ;
+
+        AllegroRobot2024 robot = (AllegroRobot2024)ctrl.getRobot().getRobotSubsystem() ;
+        Start1Shoot4Action action = new Start1Shoot4Action(robot, mirror, mvalue) ;
+        addSubActionPair(robot, action, true);
     }
 }

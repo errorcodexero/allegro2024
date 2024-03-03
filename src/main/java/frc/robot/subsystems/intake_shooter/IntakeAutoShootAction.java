@@ -112,7 +112,7 @@ public class IntakeAutoShootAction extends Action {
         double tilt_pos_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-pos-threshold").getDouble() ;
         double tilt_vel_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-velocity-threshold").getDouble() ;
 
-        wait_timer_ = new XeroTimer(intake.getRobot(), "wait-timer", 1.0);
+        wait_timer_ = new XeroTimer(intake.getRobot(), "wait-timer", 0.1);
 
         if (RobotBase.isSimulation()) {
             velthresh = 10.0 ;  

@@ -10,6 +10,7 @@ import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 import org.xero1425.misc.MissingParameterException;
+import org.xero1425.misc.MissingPathException;
 import org.xero1425.misc.XeroPath;
 import org.xero1425.misc.XeroPathSegment;
 
@@ -60,7 +61,7 @@ public class SwerveHolonomicPathFollower extends SwerveHolonomicControllerAction
         "ax (m)", "ay (m)", "aa (deg)"
     } ;
 
-    public SwerveHolonomicPathFollower(SwerveBaseSubsystem sub, String pathname, boolean setpose, double endtime, boolean mirror, double mvalue) throws BadParameterTypeException, MissingParameterException {
+    public SwerveHolonomicPathFollower(SwerveBaseSubsystem sub, String pathname, boolean setpose, double endtime, boolean mirror, double mvalue) throws BadParameterTypeException, MissingParameterException, MissingPathException {
         super(sub) ;
 
         pathname_ = pathname ;
@@ -75,10 +76,20 @@ public class SwerveHolonomicPathFollower extends SwerveHolonomicControllerAction
         disable_vision_ = true ;
 
         actions_ = new ArrayList<DistanceBasedAction>() ;
+
+        path_ = getSubsystem().getRobot().getPathManager().getPath(pathname_);
+        if (mirror_) {
+            path_.mirrorX(mvalue_);
+        }        
     }
 
     public double getDistance() {
         return distance_ ;
+    }
+
+    public double getPathLength() {
+        XeroPathSegment seg = path_.getSegment(0, path_.getTrajectoryEntryCount() - 1) ;
+        return seg.getPosition() ;
     }
 
     public void addDistanceBasedAction(double dist, Executor action) {
@@ -111,11 +122,7 @@ public class SwerveHolonomicPathFollower extends SwerveHolonomicControllerAction
         getSubsystem().startPlot(plot_id_, columns_);
 
         start_ = getSubsystem().getRobot().getTime() ;
-        path_ = getSubsystem().getRobot().getPathManager().getPath(pathname_);
 
-        if (mirror_) {
-            path_.mirrorX(mvalue_);
-        }
 
         end_phase_ = false ;
 
@@ -160,18 +167,6 @@ public class SwerveHolonomicPathFollower extends SwerveHolonomicControllerAction
             
             distance_ = getDistanceFromPath(index_);
             checkActions(distance_);
-
-            // if (lambda_ != null && dist > distance_) {
-            //     MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
-            //     logger.startMessage(MessageType.Info);
-            //     logger.add("PathFollowing executing lambda") ;
-            //     logger.add("target", distance_);
-            //     logger.add("actual", dist) ;
-            //     logger.endMessage();
-
-            //     lambda_.doit() ;
-            //     lambda_ = null ;
-            // }
         }
         else {
             target = getPoseFromPath(index_ - 1);

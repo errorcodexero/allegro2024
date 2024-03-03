@@ -17,11 +17,11 @@
             "allegro2024oi": false,
             "limelight-edgar" : false,
             "oibuttons" : false,
-            "intake-shooter" : true,
+            "intake-shooter" : false,
             "superstructure" : false,
             "swerve-gamepad" : false,
             "targettracker" : false,
-            "amp-trap" : true
+            "amp-trap" : false
         },
         "verbose": {
             "swerve" : false,
@@ -418,40 +418,32 @@
                     },
                     "5" : {
                         "x" : 2.12,
-                        "y" : -68
+                        "y" : -70
                     },
                     "6" : {
                         "x" : 2.43,
-                        "y" : -65
+                        "y" : -68
                     },
                     "7" : {
                         "x" : 2.73,
-                        "y" : -62
+                        "y" : -65
                     },
                     "8" : {
                         "x" : 3.04,
-                        "y" : -61
+                        "y" : -62
                     },
                     "9" : {
                         "x" : 3.34,
-                        "y" : -59.0
+                        "y" : -61
                     },
                     "10" : {
                         "x" : 3.64,
-                        "y" : -58.0
+                        "y" : -59
                     },
                     "11" : {
                         "x" : 3.94,
-                        "y" : -56.0
-                    },
-                    "12" : {
-                        "x" : 4.24,
-                        "y" : -56.0
-                    },
-                    "13" : {
-                        "x" : 4.55,
-                        "y" : -55
-                    }          
+                        "y" : -57.0
+                    }        
                 },
                 "shooter" : {
                     "1" : {
@@ -497,15 +489,7 @@
                     "11" : {
                         "x" : 3.94,
                         "y" : 75
-                    },
-                    "12" : {
-                        "x" : 4.24,
-                        "y" : 80
-                    },
-                    "13" : {
-                        "x" : 4.55,
-                        "y" : 80
-                    }  
+                    }
                 }
             }
         },
@@ -975,7 +959,7 @@
                     "kp": 0.0,
                     "ki": 0.0,
                     "kd": 0.0,
-                    "kf" : 0.200573641,
+                    "kf" : 0.20216,
                     "min": -1.0,
                     "max": 1.0,
                     "imax": 0.0
@@ -984,7 +968,7 @@
                     "kp": 0.0,
                     "ki": 0.0,
                     "kd": 0.0,
-                    "kf" : 0.200573641,
+                    "kf" : 0.199249,
                     "min": -1.0,
                     "max": 1.0,
                     "imax": 0.0
@@ -993,7 +977,7 @@
                     "kp": 0.0,
                     "ki": 0.0,
                     "kd": 0.0,
-                    "kf" : 0.200573641,
+                    "kf" : 0.19705,
                     "min": -1.0,
                     "max": 1.0,
                     "imax": 0.0
@@ -1002,7 +986,7 @@
                     "kp": 0.0,
                     "ki": 0.0,
                     "kd": 0.0,
-                    "kf" : 0.200573641,
+                    "kf" : 0.197261,
                     "min": -1.0,
                     "max": 1.0,
                     "imax": 0.0
@@ -1076,12 +1060,12 @@
         }
     },
     "testmode" : {
-        "enabled": true,
-        "which": 143,
+        "enabled": false,
+        "which": 0,
         "0": {
             "angle": 0,
-            "power": 0.1,
-            "duration": 1.5         // optional, if missing will run forever
+            "power": 0.5,
+            "duration": 2.0         // optional, if missing will run forever
         },
         "1": {
             "angle": 45.0,
@@ -1111,7 +1095,7 @@
             "speed-br" : 2.5
         },
         "4": {
-            "name": "Edge1Blue-Path1"
+            "name": "S2S2-Path1"
         },
         "10" : {
             "power" : 0.2,
