@@ -27,7 +27,8 @@ public class Start1Shoot4Action extends Action {
         Shoot3,
         Path4,
         Path5,
-        Shoot4
+        Shoot4,
+        Done
     }
 
     private boolean mirror_ ;
@@ -88,6 +89,10 @@ public class Start1Shoot4Action extends Action {
     private void idleState() {        
     }
 
+    private void doneState() {
+        setDone() ;
+    }
+
     private void shoot1State() {
         if (shoot_.isDone()) {
             robot_.getIntakeShooter().setAction(stow_, true) ;
@@ -121,7 +126,7 @@ public class Start1Shoot4Action extends Action {
             //
             // We just stop here for now (maybe do more later)
             //
-            state_ = State.Idle ;
+            state_ = State.Done ;
         }
     }
 
@@ -201,7 +206,7 @@ public class Start1Shoot4Action extends Action {
     private void shoot4State() {
         if (shoot_.isDone()) {
             robot_.getIntakeShooter().setAction(stow_, true) ;
-            state_ = State.Idle ;
+            state_ = State.Done ;
         }
     }
 
@@ -214,6 +219,10 @@ public class Start1Shoot4Action extends Action {
         switch(state_) {
             case Idle:
                 idleState() ;
+                break ;
+
+            case Done:
+                doneState() ;
                 break ;
 
             case Shoot1:
