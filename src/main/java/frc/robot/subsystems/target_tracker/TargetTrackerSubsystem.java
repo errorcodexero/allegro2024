@@ -96,9 +96,9 @@ public class TargetTrackerSubsystem extends Subsystem {
             logger.endMessage();
 
             putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
-            putDashboard("tt_distance(no LL)", DisplayType.Always, calculateDistanceBetweenPoses(robot_pos_, target_pos_));
-            putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);           
-            putDashboard("tt_tag", DisplayType.Always, sees_target_);
+            putDashboard("tt_distance(no LL)", DisplayType.Verbose, calculateDistanceBetweenPoses(robot_pos_, target_pos_));
+            putDashboard("tt_rotation", DisplayType.Verbose, angle_to_target_);           
+            putDashboard("tt_tag", DisplayType.Verbose, sees_target_);
         }
     }
 

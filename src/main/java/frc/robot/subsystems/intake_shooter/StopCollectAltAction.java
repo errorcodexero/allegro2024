@@ -33,6 +33,6 @@ public class StopCollectAltAction extends CollectBaseAltAction {
     }
 
     public String toString(int indent) {
-        return spaces(indent) + "ButchStopCollectAction" ;
+        return spaces(indent) + "StopCollectAction" ;
     }       
 }

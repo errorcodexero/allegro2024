@@ -222,9 +222,9 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
     public void computeMyState() throws Exception {
         super.computeMyState();
 
-        putDashboard("g-yaw", DisplayType.Always, gyro().getYaw());
-        putDashboard("g-pitch", DisplayType.Always, gyro().getPitch());
-        putDashboard("g-roll", DisplayType.Always, gyro().getRoll());
+        putDashboard("g-yaw", DisplayType.Verbose, gyro().getYaw());
+        putDashboard("g-pitch", DisplayType.Verbose, gyro().getPitch());
+        putDashboard("g-roll", DisplayType.Verbose, gyro().getRoll());
 
         SwerveModulePosition [] poss = new SwerveModulePosition[4] ;
         poss[0] = getModulePosition(FL) ;

@@ -54,9 +54,8 @@ public class AllegroRobotAutoController extends AutoController {
                 }
 
                 test_mode_ = new AllegroTestAutoMode(this);
-                addAutoMode(new Start1Shoot4AutoMode(this, mirror, mvalue));
-                addAutoMode(new Start2Shoot3AutoMode(this, mirror, mvalue));
-                addAutoMode(new Start3Shoot3AutoMode(this, mirror, mvalue));
+                addAutoMode(new Start1Shoot3AutoMode(this, mirror, mvalue));
+                addAutoMode(new Start3Shoot2AutoMode(this, mirror, mvalue));
                 addAutoMode(new Start2Shoot2AutoMode(this, mirror, mvalue));
             }
             catch(Exception ex) {

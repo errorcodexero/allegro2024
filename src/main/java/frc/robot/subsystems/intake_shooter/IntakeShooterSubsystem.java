@@ -5,7 +5,7 @@ import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.misc.EncoderMapper;
-import org.xero1425.misc.Speedometer;
+import org.xero1425.misc.MessageLogger;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -145,10 +145,10 @@ public class IntakeShooterSubsystem extends Subsystem {
 
         putDashboard("RawEnc", DisplayType.Verbose, eval);
         putDashboard("Angle", DisplayType.Verbose, angle_);
-        putDashboard("note", DisplayType.Always, is_note_present_) ;
+        putDashboard("note", DisplayType.Verbose, is_note_present_) ;
         putDashboard("hasnote", DisplayType.Always, note_present_);
     }
-
+    
     @Override
     public void postHWInit() throws BadMotorRequestException, MotorRequestFailedException {
         updateMotorPosition();

@@ -56,8 +56,8 @@ public abstract class DriveBaseSubsystem extends Subsystem {
     }
 
     public void computeMyState() throws Exception  {
-        putDashboard("gyro-heading", DisplayType.Always, gyro_.getYaw());
-        putDashboard("robot-heading", DisplayType.Always, getPose().getRotation().getDegrees());
+        putDashboard("gyro-heading", DisplayType.Verbose, gyro_.getYaw());
+        putDashboard("robot-heading", DisplayType.Verbose, getPose().getRotation().getDegrees());
     }
 
     public XeroGyro getGyro() {

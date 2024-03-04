@@ -31,6 +31,8 @@ public class AmpTrapMoveNote extends Action {
 
     @Override
     public void start() throws Exception {
+        super.start() ;
+        
         target_ = sub_.getManipulator().getPosition() + dist_ ;
         sub_.getManipulator().setAction(action_, true) ;
 
@@ -40,7 +42,6 @@ public class AmpTrapMoveNote extends Action {
         logger.add("dist", dist_) ;
         logger.add("target", target_) ;
         logger.endMessage();
-        
     }
 
     @Override
@@ -54,10 +55,18 @@ public class AmpTrapMoveNote extends Action {
         if (dist_ > 0.0 && sub_.getManipulator().getPosition() >= target_) {
             sub_.getManipulator().setPower(0.0);
             setDone() ;
+
+            logger.startMessage(MessageType.Debug) ;
+            logger.add("AmpTrapMoveNote Done dist_ > 0") ;
+            logger.endMessage();            
         }
         else if (dist_ < 0.0 && sub_.getManipulator().getPosition() <= target_) {
             sub_.getManipulator().setPower(0.0);
             setDone() ;            
+
+            logger.startMessage(MessageType.Debug) ;
+            logger.add("AmpTrapMoveNote Done dist_ < 0") ;
+            logger.endMessage();               
         }
     }
 

@@ -68,7 +68,7 @@ public class AllegroGameAutoMode extends AutoMode {
         par.addSubActionPair(intake, stow_intake_action, true);
         par.addSubActionPair(robot.getSwerve(), pathact, true);
 
-        start_collect_ = new StartCollectAltAction(robot.getIntakeShooter()) ;
+        start_collect_ = new StartCollectAltAction(robot.getIntakeShooter(), false) ;
 
         pathact.addDistanceBasedAction(coldist, () -> { robot.getIntakeShooter().setAction(start_collect_); });
         addAction(par);
@@ -92,7 +92,7 @@ public class AllegroGameAutoMode extends AutoMode {
         IntakeGotoNamedPositionAction stow_intake_action = new IntakeGotoNamedPositionAction(intake, v1, v2) ;        
         seq2.addSubActionPair(intake, stow_intake_action, true);
 
-        start_collect_ = new StartCollectAltAction(robot.getIntakeShooter()) ;
+        start_collect_ = new StartCollectAltAction(robot.getIntakeShooter(), false) ;
         seq2.addSubActionPair(robot.getIntakeShooter(), start_collect_, true);
 
         act.addAction(seq2);
@@ -122,7 +122,7 @@ public class AllegroGameAutoMode extends AutoMode {
         SwerveHolonomicPathFollower pathact = new SwerveHolonomicPathFollower(robot.getSwerve(), path, setpose, 0.2, mirror_, mvalue_);
         SwerveTrackAngle rotate = null ;
 
-        start_collect_ = new StartCollectAltAction(robot.getIntakeShooter()) ;
+        start_collect_ = new StartCollectAltAction(robot.getIntakeShooter(), false) ;
 
         double collectLength = pathact.getDistance() - kCollectEndOfPathDistance ;        
 

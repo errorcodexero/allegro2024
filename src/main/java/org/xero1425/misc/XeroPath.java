@@ -129,7 +129,10 @@ public class XeroPath
         for(int i = 0 ; i < segs.size() ; i++)
         {
             XeroPathSegment seg = segs.get(i) ;
-            XeroPathSegment newseg = new XeroPathSegment(seg.getTime(), dim - seg.getX(), seg.getY(), seg.getPosition(), seg.getVelocity(), seg.getAccel(), seg.getJerk(), -seg.getHeading(), seg.getCurvature(), -seg.getRotation()) ;
+            double h = XeroMath.normalizeAngleDegrees(seg.getHeading() - 180.0) ;
+            double r = XeroMath.normalizeAngleDegrees(seg.getRotation() - 180.0) ;
+            XeroPathSegment newseg = new XeroPathSegment(seg.getTime(), dim - seg.getX(), seg.getY(), seg.getPosition(), seg.getVelocity(), seg.getAccel(), 
+                            seg.getJerk(), h, seg.getCurvature(), r) ;
             newsegs.add(newseg) ;
         }
 

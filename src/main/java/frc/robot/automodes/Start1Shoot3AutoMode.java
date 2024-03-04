@@ -19,13 +19,13 @@ import frc.robot.subsystems.toplevel.AllegroRobot2024;
 // Shoot	    0.5
 // Total       14.42
 
-public class Start1Shoot4AutoMode extends AutoMode {
+public class Start1Shoot3AutoMode extends AutoMode {
 
-    public Start1Shoot4AutoMode(AutoController ctrl, boolean mirror, double mvalue) throws Exception {
-        super(ctrl, "Start1Shoot4") ;
+    public Start1Shoot3AutoMode(AutoController ctrl, boolean mirror, double mvalue) throws Exception {
+        super(ctrl, "Start1-Shoot3") ;
 
         AllegroRobot2024 robot = (AllegroRobot2024)ctrl.getRobot().getRobotSubsystem() ;
-        Start1Shoot4Action action = new Start1Shoot4Action(robot, mirror, mvalue) ;
+        Start1Shoot3Action action = new Start1Shoot3Action(robot, mirror, mvalue) ;
         addSubActionPair(robot, action, true);
     }
 }

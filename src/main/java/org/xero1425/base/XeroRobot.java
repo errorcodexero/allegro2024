@@ -200,17 +200,17 @@ public abstract class XeroRobot extends TimedRobot {
         readParamsFile();
         logger_.startMessage(MessageType.Info).add("readParamsFile time", getTime() - start).endMessage() ;
 
-        double w, l ;
+        double x, y;
         try {
-            w = settings_.get("field:width").getDouble() ;
-            l = settings_.get("field:length").getDouble() ;
+            x = settings_.get("field:x").getDouble() ;
+            y = settings_.get("field:y").getDouble() ;
         }
         catch (Exception ex) {
             logger_.startMessage(MessageType.Error).add("missing field size in settings file 'field:width' and 'field:length'").endMessage() ;
-            w = 16.541 ;
-            l = 8.211 ;
+            x = 16.541 ;
+            y = 8.211 ;
         }
-        field_size_ = new Translation2d(w, l) ;
+        field_size_ = new Translation2d(x, y) ;
 
         // Enable messages in the message logger based on params file values
         start = getTime() ;
@@ -866,7 +866,7 @@ public abstract class XeroRobot extends TimedRobot {
         motors_in_coast_mode_ = false ;
 
         if (getCompressor() != null)
-            robot_subsystem_.putDashboard("Pressure", DisplayType.Always, getCompressor().getPressure()) ;
+            robot_subsystem_.putDashboard("Pressure", DisplayType.Verbose, getCompressor().getPressure()) ;
 
         if (isSimulation() && delta_time_ < 0.005) {
             //
