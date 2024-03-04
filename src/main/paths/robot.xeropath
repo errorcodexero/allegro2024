@@ -9,8 +9,8 @@
                     "constraints": [
                     ],
                     "endvelocity": 0,
-                    "maxacceleration": 0.75,
-                    "maxvelocity": 0.75,
+                    "maxacceleration": 1,
+                    "maxvelocity": 1,
                     "name": "P1",
                     "points": [
                         {
@@ -296,6 +296,132 @@
                             "swrotvel": 0,
                             "x": 2.510498673058691,
                             "y": 5.548314500419041
+                        }
+                    ],
+                    "startvelocity": 0
+                }
+            ]
+        },
+        {
+            "name": "S3S3",
+            "paths": [
+                {
+                    "constraints": [
+                    ],
+                    "endvelocity": 0,
+                    "maxacceleration": 4.3,
+                    "maxvelocity": 4.3,
+                    "name": "P1",
+                    "points": [
+                        {
+                            "heading": 0,
+                            "swrot": -60,
+                            "swrotvel": 0,
+                            "x": 0.7447116530172205,
+                            "y": 4.252455373493172
+                        },
+                        {
+                            "heading": 0,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 3.803118239252212,
+                            "y": 1.4652836221230574
+                        },
+                        {
+                            "heading": 0,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 7.8342290608646925,
+                            "y": 0.7357554455899402
+                        }
+                    ],
+                    "startvelocity": 0
+                },
+                {
+                    "constraints": [
+                    ],
+                    "endvelocity": 0,
+                    "maxacceleration": 4.3,
+                    "maxvelocity": 4.3,
+                    "name": "P2",
+                    "points": [
+                        {
+                            "heading": 180,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 7.57235,
+                            "y": 0.726403
+                        },
+                        {
+                            "heading": 180,
+                            "swrot": -45,
+                            "swrotvel": 0,
+                            "x": 3.195178092141281,
+                            "y": 2.7933990204269374
+                        }
+                    ],
+                    "startvelocity": 0
+                },
+                {
+                    "constraints": [
+                    ],
+                    "endvelocity": 0,
+                    "maxacceleration": 4.3,
+                    "maxvelocity": 4.3,
+                    "name": "P3",
+                    "points": [
+                        {
+                            "heading": 0,
+                            "swrot": -45,
+                            "swrotvel": 0,
+                            "x": 3.19518,
+                            "y": 2.7934
+                        },
+                        {
+                            "heading": 0,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 5.430527248441474,
+                            "y": 1.6710479796067563
+                        },
+                        {
+                            "heading": 0,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 7.815523210184357,
+                            "y": 2.4005761561398735
+                        }
+                    ],
+                    "startvelocity": 0
+                },
+                {
+                    "constraints": [
+                    ],
+                    "endvelocity": 0,
+                    "maxacceleration": 4.3,
+                    "maxvelocity": 4.3,
+                    "name": "P4",
+                    "points": [
+                        {
+                            "heading": 180,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 7.81552,
+                            "y": 2.40058
+                        },
+                        {
+                            "heading": 180,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 5.477291875142314,
+                            "y": 1.5775187262050752
+                        },
+                        {
+                            "heading": 180,
+                            "swrot": -45,
+                            "swrotvel": 0,
+                            "x": 3.19518,
+                            "y": 2.7934
                         }
                     ],
                     "startvelocity": 0

@@ -796,7 +796,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
         intake_eject_action_ = new IntakeEjectAction(robot.getIntakeShooter());
         trap_eject_action_ = new AmpTrapEjectAction(robot.getAmpTrap());
 
-        startCollectAction_ = new StartCollectAltAction(intake, false);
+        startCollectAction_ = new StartCollectAltAction(intake);
         stopCollectAction_ = new StopCollectAltAction(intake);
 
         move_note_action_ = new AmpTrapMoveNote(robot.getAmpTrap(), 0.4);

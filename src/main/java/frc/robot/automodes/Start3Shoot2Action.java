@@ -20,8 +20,8 @@ public class Start3Shoot2Action extends Action {
         Shoot1,
         Path1,
         FinishCollect1,
-        Path1Stowing,
-        MissedCollect1,
+        MissedCollect,
+        MissedStow,
         Shoot2,
         Stowing,
         Done
@@ -52,7 +52,7 @@ public class Start3Shoot2Action extends Action {
         double v1 = robot_.getIntakeShooter().getUpDown().getSettingsValue("targets:stow").getDouble() ;
         double v2 = robot_.getIntakeShooter().getTilt().getSettingsValue("targets:stow").getDouble() ; 
         stow_ = new IntakeGotoNamedPositionAction(robot_.getIntakeShooter(), v1, v2) ;
-        start_collect_ = new StartCollectAltAction(robot_.getIntakeShooter(), false) ;
+        start_collect_ = new StartCollectAltAction(robot_.getIntakeShooter()) ;
         stop_collect_ = new StopCollectAltAction(robot_.getIntakeShooter()) ;
 
         p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S2-P1", true, 0.2, mirror_, mvalue_);
@@ -76,16 +76,8 @@ public class Start3Shoot2Action extends Action {
 
     private void shoot1State() {
         if (shoot_.isDone()) {
-            robot_.getSwerve().enableVision(false);
-            robot_.getIntakeShooter().setAction(stow_, true) ;
-            robot_.getSwerve().setAction(p1_, true) ;
-            state_ = State.Path1Stowing ;
-        }
-    }
-
-    private void path1StowingState() {
-        if (stow_.isDone()) {
             robot_.getIntakeShooter().setAction(start_collect_, true) ;
+            robot_.getSwerve().setAction(p1_, true) ;
             state_ = State.Path1 ;
         }
     }
@@ -95,7 +87,7 @@ public class Start3Shoot2Action extends Action {
             state_ = State.FinishCollect1 ;
         }
         else if (p1_.isDone()) {
-            state_ = State.MissedCollect1 ;
+            state_ = State.MissedCollect ;
         }
     }
 
@@ -107,11 +99,18 @@ public class Start3Shoot2Action extends Action {
         }
     }
 
-    private void missedCollect1State() {
+    private void missedCollectState() {
         if (stop_collect_.isDone()) {
             //
             // We just stop here for now (maybe do more later)
             //
+            robot_.getIntakeShooter().setAction(stow_, true) ;
+            state_ = State.MissedStow ;
+        }
+    }
+
+    private void missedStowState() {
+        if (stow_.isDone()) {
             state_ = State.Done ;
         }
     }
@@ -152,12 +151,12 @@ public class Start3Shoot2Action extends Action {
                 path1State() ;
                 break ;
 
-            case Path1Stowing:
-                path1StowingState() ;
+            case MissedCollect:
+                missedCollectState() ;
                 break ;
 
-            case MissedCollect1:
-                missedCollect1State() ;
+            case MissedStow:
+                missedStowState() ;
                 break ;
 
             case Shoot2:

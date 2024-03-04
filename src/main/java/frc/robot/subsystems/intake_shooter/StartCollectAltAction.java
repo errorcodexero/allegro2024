@@ -1,8 +1,6 @@
 package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.misc.XeroTimer;
-import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
-import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
@@ -10,7 +8,7 @@ import org.xero1425.misc.MessageType;
 public class StartCollectAltAction extends CollectBaseAltAction {
     private enum CollectState {
         Idle,
-        BothMoving,
+        Moving,
         WaitingForNote,
         WaitingForCollect,
         Stowing
@@ -23,32 +21,21 @@ public class StartCollectAltAction extends CollectBaseAltAction {
 
     private XeroTimer timer_ ;
 
-    private MCMotionMagicAction intake_collect_ ;
-    private MCMotionMagicAction tilt_collect_ ;
+    private IntakeGotoNamedPositionAction collect_ ;
     private MotorEncoderPowerAction spinner_feeder_on_ ;
     private MotorEncoderPowerAction spinner_feeder_off_ ;
-    private MCVelocityAction shooter1_ ;
-    private MCVelocityAction shooter2_ ;
 
-    private boolean shooter_ ;
-
-    public StartCollectAltAction(IntakeShooterSubsystem sub, boolean shooter) throws Exception {
+    public StartCollectAltAction(IntakeShooterSubsystem sub) throws Exception {
         super(sub) ;
-
-        shooter_ = shooter ;
 
         feeder_power_ = sub.getSettingsValue("actions:butch-start-collect:feeder-power").getDouble() ;
 
         spinner_feeder_on_ = new MotorEncoderPowerAction(getSubsystem().getFeeder(), feeder_power_) ;
         spinner_feeder_off_ = new MotorEncoderPowerAction(getSubsystem().getFeeder(), 0.0) ;
 
-        if (shooter_) {
-            shooter1_ = new MCVelocityAction(sub.getShooter1(), "pids:velocity", 75, 1.0, false) ;
-            shooter2_ = new MCVelocityAction(sub.getShooter2(), "pids:velocity", 75, 1.0, false) ;        
-        }
-
-        intake_collect_ = new MCMotionMagicAction(getSubsystem().getUpDown(), "pids:position-collect", "targets:collect", 1, 1) ;        
-        tilt_collect_ = new MCMotionMagicAction(getSubsystem().getTilt(), "pids:position-collect", "targets:collect", 1, 1) ;
+        double v1 = sub.getUpDown().getSettingsValue("targets:collect").getDouble() ;
+        double v2 = sub.getTilt().getSettingsValue("targets:collect").getDouble() ;
+        collect_ = new IntakeGotoNamedPositionAction(sub, v1, v2) ;
 
         double t = sub.getSettingsValue("actions:butch-start-collect:delay-time").getDouble() ;
         timer_ = new XeroTimer(sub.getRobot(), "collect-timer", t) ;
@@ -73,14 +60,8 @@ public class StartCollectAltAction extends CollectBaseAltAction {
         else {
             collecting_note_ = false ;
             getSubsystem().getFeeder().setAction(spinner_feeder_on_, true) ;
-            getSubsystem().getTilt().setAction(tilt_collect_, true) ;
-            getSubsystem().getUpDown().setAction(intake_collect_, true) ;
-            state_ = CollectState.BothMoving ;
-
-            if (shooter_) {
-                getSubsystem().getShooter1().setAction(shooter1_, true) ;
-                getSubsystem().getShooter2().setAction(shooter2_, true) ;
-            }
+            getSubsystem().setAction(collect_, true) ;
+            state_ = CollectState.Moving ;
         }
     }
 
@@ -94,13 +75,13 @@ public class StartCollectAltAction extends CollectBaseAltAction {
             case Idle:
                 break ;
 
-            case BothMoving:
+            case Moving:
                 if (getSubsystem().isNoteCurrentlyDetected()) {
                     getSubsystem().setHoldingNote(true);                    
                     timer_.start();
                     state_ = CollectState.WaitingForCollect;
                 }
-                else if (tilt_collect_.isDone() && intake_collect_.isDone()) {
+                else if (collect_.isDone()) {
                     state_ = CollectState.WaitingForNote ;
                 }
                 break ;
@@ -117,7 +98,6 @@ public class StartCollectAltAction extends CollectBaseAltAction {
             case WaitingForCollect:
                 if (timer_.isExpired()) {
                     getSubsystem().getFeeder().setAction(spinner_feeder_off_, true) ;
-
                     startStow();
                     state_ = CollectState.Stowing ;
                 }

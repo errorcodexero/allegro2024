@@ -4,12 +4,22 @@ import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 
 
-public class IntakeGotoNamedPositionAction extends Action{
+public class IntakeGotoNamedPositionAction extends Action {
+
+    private enum State {
+        Idle,
+        MovingTilt,
+        MovingBoth,
+        Done,
+    }
+
     private IntakeShooterSubsystem sub_;
     private MCMotionMagicAction updown_action_ ;
+    private MCMotionMagicAction tilt_only_action_ ;
     private MCMotionMagicAction tilt_action_ ;
     private double updown_target_ ;
     private double tilt_target_ ;
+    private State state_ ;
 
     public IntakeGotoNamedPositionAction(IntakeShooterSubsystem sub, double updown, double tilt) throws Exception{
         super(sub.getRobot().getMessageLogger());
@@ -18,6 +28,8 @@ public class IntakeGotoNamedPositionAction extends Action{
 
         updown_action_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position" , updown, 3.0 , 1);
         tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position" , tilt, 3.0 , 1);
+
+        state_ = State.Idle ;
 
         updown_target_ = updown;
         tilt_target_ = tilt;
@@ -30,16 +42,53 @@ public class IntakeGotoNamedPositionAction extends Action{
     @Override
     public void start() throws Exception {
         super.start();
-        sub_.getUpDown().setAction(updown_action_, true);
-        sub_.getTilt().setAction(tilt_action_, true);
+
+        state_ = State.Idle ;
+        double updownpos = sub_.getUpDown().getPosition() ;
+        double updownstow = sub_.getUpDown().getSettingsValue("targets:stow").getDouble() ;
+        double tiltstow = sub_.getTilt().getSettingsValue("targets:tilt").getDouble() ;
+
+        if (updownpos < updownstow) {
+            //
+            // The updown is not in the stowed position, we must move the tilt to a compatible
+            // position, before we start the synchronous movement.
+            //
+            double ttarget = tiltstow + updownstow - updownpos ;
+            tilt_only_action_ = new MCMotionMagicAction(sub_.getTilt(), "position", ttarget, 3.0, 1.0) ;
+            state_ = State.MovingTilt ;
+        }
+        else 
+        {
+            sub_.getUpDown().setAction(updown_action_, true);
+            sub_.getTilt().setAction(tilt_action_, true);
+            state_ = State.MovingBoth ;
+        }
     }
 
     @Override
     public void run() throws Exception{
         super.run() ;
 
-        if (updown_action_.isDone() && tilt_action_.isDone()) {
-            setDone();
+        switch(state_) {
+            case Idle:
+                break ;
+
+            case MovingTilt:
+                if (tilt_only_action_.isDone()) {
+                    sub_.getUpDown().setAction(updown_action_, true);
+                    sub_.getTilt().setAction(tilt_action_, true);
+                    state_ = State.MovingBoth ;                    
+                }
+                break ;
+
+            case MovingBoth:
+                if (tilt_action_.isDone() && updown_action_.isDone()) {
+                    setDone() ;
+                }
+                break ;
+
+            case Done:
+                break ;
         }
     }
 

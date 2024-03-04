@@ -19,13 +19,12 @@ public class Start1Shoot3Action extends Action {
         Idle,
         Shoot1,
         Path1,
-        Path1Stowing,
         FinishCollect1,
-        MissedCollect1,
+        MissedCollect,
+        MissedStow,
         Shoot2,
         Path2,
         Path3,
-        Path2Stowing,
         Shoot3,
         Stowing,
         Done
@@ -58,7 +57,7 @@ public class Start1Shoot3Action extends Action {
         double v1 = robot_.getIntakeShooter().getUpDown().getSettingsValue("targets:stow").getDouble() ;
         double v2 = robot_.getIntakeShooter().getTilt().getSettingsValue("targets:stow").getDouble() ; 
         stow_ = new IntakeGotoNamedPositionAction(robot_.getIntakeShooter(), v1, v2) ;
-        start_collect_ = new StartCollectAltAction(robot_.getIntakeShooter(), false) ;
+        start_collect_ = new StartCollectAltAction(robot_.getIntakeShooter()) ;
         stop_collect_ = new StopCollectAltAction(robot_.getIntakeShooter()) ;
 
         p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S1S3-P1", true, 0.2, mirror_, mvalue_);
@@ -84,15 +83,8 @@ public class Start1Shoot3Action extends Action {
 
     private void shoot1State() {
         if (shoot_.isDone()) {
-            robot_.getIntakeShooter().setAction(stow_, true) ;
+            robot_.getIntakeShooter().setAction(start_collect_, true) ;            
             robot_.getSwerve().setAction(p1_, true) ;
-            state_ = State.Path1Stowing ;
-        }
-    }
-
-    private void path1StowingState() {
-        if (stow_.isDone()) {
-            robot_.getIntakeShooter().setAction(start_collect_, true) ;
             state_ = State.Path1 ;
         }
     }
@@ -111,8 +103,7 @@ public class Start1Shoot3Action extends Action {
             //
             // We missed the note, 
             //
-            robot_.getIntakeShooter().setAction(stop_collect_, true) ;
-            state_ = State.MissedCollect1 ;
+            state_ = State.MissedCollect ;
         }
     }
 
@@ -127,37 +118,31 @@ public class Start1Shoot3Action extends Action {
         }
     }
 
-    private void missedCollect1State() {
+    private void missedCollectState() {
         if (stop_collect_.isDone()) {
             //
             // We just stop here for now (maybe do more later)
             //
+            robot_.getIntakeShooter().setAction(stow_, true) ;
+            state_ = State.MissedStow ;
+        }
+    }
+
+    private void missedStowState() {
+        if (stow_.isDone()) {
             state_ = State.Done ;
         }
     }
 
     private void shoot2State() {
         if (shoot_.isDone()) {
-            robot_.getIntakeShooter().setAction(stow_, true) ;
+            robot_.getIntakeShooter().setAction(start_collect_, true) ;            
             robot_.getSwerve().setAction(p2_, true) ;
-            state_ = State.Path2Stowing ;            
+            state_ = State.Path2 ;            
         }
     }
 
-    private void path2StowingState() {
-        if (stow_.isDone()) {
-            robot_.getIntakeShooter().setAction(start_collect_, true) ;
-            state_ = State.Path2;            
-        }
-    }      
-
     private void path2State() {
-
-        if (p2_.isDone()) {
-            MessageLogger logger = robot_.getRobot().getMessageLogger() ;
-            logger.startMessage(MessageType.Info).add("holding note", robot_.getIntakeShooter().isHoldingNote()).endMessage();
-        }
-
         if (p2_.isDone() && robot_.getIntakeShooter().isHoldingNote()) {
             //
             // We got the note, drive back
@@ -169,8 +154,7 @@ public class Start1Shoot3Action extends Action {
             //
             // We missed the note, 
             //
-            robot_.getIntakeShooter().setAction(stop_collect_, true) ;
-            state_ = State.MissedCollect1 ;
+            state_ = State.MissedCollect ;
         }            
     }
   
@@ -221,16 +205,16 @@ public class Start1Shoot3Action extends Action {
                 path1State() ;
                 break ;
 
-            case Path1Stowing:
-                path1StowingState() ;
-                break ;
-
             case FinishCollect1:
                 finishCollect1State();
                 break ;
 
-            case MissedCollect1:
-                missedCollect1State() ;
+            case MissedCollect:
+                missedCollectState() ;
+                break ;
+
+            case MissedStow:
+                missedStowState();
                 break ;
 
             case Shoot2:
@@ -247,10 +231,6 @@ public class Start1Shoot3Action extends Action {
 
             case Shoot3:
                 shoot3State() ;
-                break ;
-
-            case Path2Stowing:
-                path2StowingState() ;
                 break ;
 
             case Stowing:

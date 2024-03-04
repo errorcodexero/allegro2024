@@ -5,7 +5,6 @@ import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.misc.EncoderMapper;
-import org.xero1425.misc.MessageLogger;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
