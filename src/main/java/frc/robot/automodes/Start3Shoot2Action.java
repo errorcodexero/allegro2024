@@ -23,6 +23,7 @@ public class Start3Shoot2Action extends Action {
         Path1Stowing,
         MissedCollect1,
         Shoot2,
+        Stowing,
         Done
     }
 
@@ -54,7 +55,7 @@ public class Start3Shoot2Action extends Action {
         start_collect_ = new StartCollectAltAction(robot_.getIntakeShooter(), false) ;
         stop_collect_ = new StopCollectAltAction(robot_.getIntakeShooter()) ;
 
-        p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P1", true, 0.2, mirror_, mvalue_);
+        p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S2-P1", true, 0.2, mirror_, mvalue_);
     }
 
     @Override
@@ -117,6 +118,13 @@ public class Start3Shoot2Action extends Action {
 
     private void shoot2State() {
         if (shoot_.isDone()) {
+            robot_.getIntakeShooter().setAction(stow_) ;
+            state_ = State.Stowing ;
+        }
+    }
+
+    private void stowingState() {
+        if (stow_.isDone()) {
             state_ = State.Done ;
         }
     }
@@ -159,6 +167,10 @@ public class Start3Shoot2Action extends Action {
             case FinishCollect1:
                 finishCollect1State() ;
                 break ;
+            
+            case Stowing:
+                stowingState() ;
+                break ;
         }
 
         if (prev != state_) {
@@ -171,6 +183,6 @@ public class Start3Shoot2Action extends Action {
 
     @Override
     public String toString(int indent) {
-        return prefix(indent) + "Start2Shoot4Action" ;
+        return prefix(indent) + "Start3Shoot2Action" ;
     }
 }
