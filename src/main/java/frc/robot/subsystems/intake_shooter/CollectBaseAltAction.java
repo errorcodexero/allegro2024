@@ -18,11 +18,11 @@ public abstract class CollectBaseAltAction extends Action {
 
         v1 = sub_.getTilt().getSettingsValue("targets:stow-note").getDouble() ;
         v2 = sub_.getUpDown().getSettingsValue("targets:stow").getDouble() ;
-        shoot_ = new IntakeGotoNamedPositionAction(sub_, v1, v2) ;
+        shoot_ = new IntakeGotoNamedPositionAction(sub_, v2, v1) ;
 
         v1 = sub_.getTilt().getSettingsValue("targets:stow").getDouble() ;
         v2 = sub_.getUpDown().getSettingsValue("targets:stow").getDouble() ;
-        stow_ = new IntakeGotoNamedPositionAction(sub_, v1, v2) ;
+        stow_ = new IntakeGotoNamedPositionAction(sub_, v2, v1) ;
     }
 
     protected IntakeShooterSubsystem getSubsystem() {

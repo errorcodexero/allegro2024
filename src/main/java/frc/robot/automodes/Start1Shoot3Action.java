@@ -241,7 +241,7 @@ public class Start1Shoot3Action extends Action {
         if (prev != state_) {
             MessageLogger logger = robot_.getRobot().getMessageLogger() ;
             logger.startMessage(MessageType.Info);
-            logger.add("Start2Shoot4Action action changed states: " + prev.toString() + " -> " + state_.toString()) ;
+            logger.add("Start1Shoot3Action action changed states: " + prev.toString() + " -> " + state_.toString()) ;
             logger.endMessage();
         }
     }

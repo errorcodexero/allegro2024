@@ -84,6 +84,7 @@ public class TargetTrackerSubsystem extends Subsystem {
                 sees_target_ = true ;
                 angle_to_target_ = -ll_.getTX(target_number_);
                 distance_between_robot_and_target_ = (target_height_ - camera_height_) / Math.tan(Math.toRadians(camera_angle_ + ll_.getTY(target_number_))) + kCameraOffset ;
+                // distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos_, target_pos_);                
             }
             else {
                 logger.add("apriltag", false) ;

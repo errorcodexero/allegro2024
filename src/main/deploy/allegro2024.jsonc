@@ -84,8 +84,8 @@
                     // distance to move the feeder wheels.
                     //
                     "feeder-power" : 0.3,
-                    "shooter-velocity" : 12,
-                    "shooter-length" : 1.1
+                    "shooter-velocity" : 14,
+                    "shooter-length" : 1.15
                 }
             }
         },
@@ -114,21 +114,29 @@
                     "pivot" : 0.0
                 },
                 "trap" : {
-                    "elevator" : 0.234,
+                    "elevator" : 0.2411,
                     "pivot" : 180.0
                 },
                 "trap-up-1" : {
-                    "elevator" : 0.234,
-                    "pivot" : 120.0
+                    "elevator" : 0.2411,
+                    "pivot" : 149.6
                 },
                 "trap-up-2" : {
-                    "elevator" : 0.343,
-                    "pivot" : 120.0
+                    "elevator" : 0.2523,
+                    "pivot" : 149.6
                 },                
                 "climb" : {
-                    "elevator" : 0.234,
+                    "elevator" : 0.2411,
                     "pivot" : 180.0
-                },                
+                },    
+                "bend-back1" : {
+                    "elevator" : 0.2411,
+                    "pivot" : 149.6
+                },   
+                "bend-back2" : {
+                    "elevator" : 0.2411,
+                    "pivot" : 225.0
+                },               
                 "amp" : {
                     "elevator" : 0.2,
                     "pivot" : 225.0
@@ -170,7 +178,7 @@
             },
             "pids" : {
                 "position" : {
-                    "kp" : 1.0,
+                    "kp" : 500.0,
                     "ki" : 0.0,
                     "kd" : 0.0,
                     "kv" : 40.0,
@@ -609,8 +617,7 @@
                 "stow-no-note" : -65.0,
                 "stow" : -65.0,
                 "stow-note" : -50,
-                "collect" : 50.0,
-                "kick-out" : 55.0
+                "collect" : 50.0
             },
             "pids" : {
                 "position" : {
@@ -1035,7 +1042,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 118,
+        "which": 144,
         "0": {
             "angle": 0,
             "power": 0.5,
@@ -1127,7 +1134,7 @@
             "duration" : 2.0
         },
         "62" : {
-            "position" : 0.3
+            "position" : 0.2411
         },
         "70" : {
             "power" : -0.3,

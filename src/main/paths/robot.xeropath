@@ -279,8 +279,8 @@
                     "constraints": [
                     ],
                     "endvelocity": 0,
-                    "maxacceleration": 4.3,
-                    "maxvelocity": 4.3,
+                    "maxacceleration": 1,
+                    "maxvelocity": 1,
                     "name": "P1",
                     "points": [
                         {
@@ -309,8 +309,8 @@
                     "constraints": [
                     ],
                     "endvelocity": 0,
-                    "maxacceleration": 4.3,
-                    "maxvelocity": 4.3,
+                    "maxacceleration": 1,
+                    "maxvelocity": 1,
                     "name": "P1",
                     "points": [
                         {

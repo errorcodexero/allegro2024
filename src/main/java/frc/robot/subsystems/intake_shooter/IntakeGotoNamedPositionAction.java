@@ -2,6 +2,8 @@ package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 
 
 public class IntakeGotoNamedPositionAction extends Action {
@@ -46,15 +48,19 @@ public class IntakeGotoNamedPositionAction extends Action {
         state_ = State.Idle ;
         double updownpos = sub_.getUpDown().getPosition() ;
         double updownstow = sub_.getUpDown().getSettingsValue("targets:stow").getDouble() ;
-        double tiltstow = sub_.getTilt().getSettingsValue("targets:tilt").getDouble() ;
+        double tiltstow = sub_.getTilt().getSettingsValue("targets:stow").getDouble() ;
 
-        if (updownpos < updownstow) {
+        if (updownpos < updownstow && updown_target_ > updownpos) {
+            MessageLogger logger = sub_.getRobot().getMessageLogger();
+            logger.startMessage(MessageType.Info).add("pos < stow").add("pos", updownpos).add("stow", updownstow).endMessage() ;
+
             //
             // The updown is not in the stowed position, we must move the tilt to a compatible
             // position, before we start the synchronous movement.
             //
             double ttarget = tiltstow + updownstow - updownpos ;
-            tilt_only_action_ = new MCMotionMagicAction(sub_.getTilt(), "position", ttarget, 3.0, 1.0) ;
+            tilt_only_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", ttarget, 3.0, 1.0) ;
+            sub_.getTilt().setAction(tilt_only_action_, true) ;
             state_ = State.MovingTilt ;
         }
         else 

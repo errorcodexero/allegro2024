@@ -1,6 +1,7 @@
 package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.misc.XeroTimer;
+import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
@@ -8,6 +9,7 @@ import org.xero1425.misc.MessageType;
 public class StartCollectAltAction extends CollectBaseAltAction {
     private enum CollectState {
         Idle,
+        MovingTilt,
         Moving,
         WaitingForNote,
         WaitingForCollect,
@@ -16,12 +18,16 @@ public class StartCollectAltAction extends CollectBaseAltAction {
 
     private CollectState state_ ;
     private double feeder_power_ ;
+    private double updown_target_ ;
+    private double tilt_target_ ;
 
     private boolean collecting_note_ ;
 
     private XeroTimer timer_ ;
 
-    private IntakeGotoNamedPositionAction collect_ ;
+    private MCMotionMagicAction updown_action_ ;
+    private MCMotionMagicAction tilt_only_action_ ;
+    private MCMotionMagicAction tilt_action_ ;
     private MotorEncoderPowerAction spinner_feeder_on_ ;
     private MotorEncoderPowerAction spinner_feeder_off_ ;
 
@@ -33,9 +39,10 @@ public class StartCollectAltAction extends CollectBaseAltAction {
         spinner_feeder_on_ = new MotorEncoderPowerAction(getSubsystem().getFeeder(), feeder_power_) ;
         spinner_feeder_off_ = new MotorEncoderPowerAction(getSubsystem().getFeeder(), 0.0) ;
 
-        double v1 = sub.getUpDown().getSettingsValue("targets:collect").getDouble() ;
-        double v2 = sub.getTilt().getSettingsValue("targets:collect").getDouble() ;
-        collect_ = new IntakeGotoNamedPositionAction(sub, v1, v2) ;
+        updown_target_ = sub.getUpDown().getSettingsValue("targets:collect").getDouble() ;
+        tilt_target_ = sub.getTilt().getSettingsValue("targets:collect").getDouble() ;
+        updown_action_ = new MCMotionMagicAction(sub.getUpDown(), "pids:position" , updown_target_, 3.0 , 1);
+        tilt_action_ = new MCMotionMagicAction(sub.getTilt(), "pids:position" , tilt_target_, 3.0 , 1);
 
         double t = sub.getSettingsValue("actions:butch-start-collect:delay-time").getDouble() ;
         timer_ = new XeroTimer(sub.getRobot(), "collect-timer", t) ;
@@ -60,8 +67,30 @@ public class StartCollectAltAction extends CollectBaseAltAction {
         else {
             collecting_note_ = false ;
             getSubsystem().getFeeder().setAction(spinner_feeder_on_, true) ;
-            getSubsystem().setAction(collect_, true) ;
-            state_ = CollectState.Moving ;
+
+            double updownpos = getSubsystem().getUpDown().getPosition() ;
+            double updownstow = getSubsystem().getUpDown().getSettingsValue("targets:stow").getDouble() ;
+            double tiltstow = getSubsystem().getTilt().getSettingsValue("targets:stow").getDouble() ;
+
+            if (updownpos < updownstow && updown_target_ > updownpos) {
+                MessageLogger logger = getSubsystem().getRobot().getMessageLogger();
+                logger.startMessage(MessageType.Info).add("pos < stow").add("pos", updownpos).add("stow", updownstow).endMessage() ;
+
+                //
+                // The updown is not in the stowed position, we must move the tilt to a compatible
+                // position, before we start the synchronous movement.
+                //
+                double ttarget = tiltstow + updownstow - updownpos ;
+                tilt_only_action_ = new MCMotionMagicAction(getSubsystem().getTilt(), "pids:position", ttarget, 3.0, 1.0) ;
+                getSubsystem().getTilt().setAction(tilt_only_action_, true) ;
+                state_ = CollectState.MovingTilt ;
+            }
+            else 
+            {
+                getSubsystem().getUpDown().setAction(updown_action_, true);
+                getSubsystem().getTilt().setAction(tilt_action_, true);
+                state_ = CollectState.Moving ;
+            }
         }
     }
 
@@ -75,13 +104,21 @@ public class StartCollectAltAction extends CollectBaseAltAction {
             case Idle:
                 break ;
 
+            case MovingTilt:
+                if (tilt_only_action_.isDone()) {
+                    getSubsystem().getUpDown().setAction(updown_action_, true);
+                    getSubsystem().getTilt().setAction(tilt_action_, true);
+                    state_ = CollectState.Moving ;
+                }
+                break ;
+
             case Moving:
                 if (getSubsystem().isNoteCurrentlyDetected()) {
                     getSubsystem().setHoldingNote(true);                    
                     timer_.start();
                     state_ = CollectState.WaitingForCollect;
                 }
-                else if (collect_.isDone()) {
+                else if (updown_action_.isDone() && tilt_action_.isDone()) {
                     state_ = CollectState.WaitingForNote ;
                 }
                 break ;

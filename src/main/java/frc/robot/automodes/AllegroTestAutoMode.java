@@ -12,6 +12,7 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
 import frc.robot.subsystems.amp_trap.AmpTrapMoveNote;
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
+import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterStowAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.intake_shooter.ShooterTuningAction;
@@ -449,6 +450,12 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 addAction(new DelayAction(amptrap.getRobot(), 2.0)) ;
                 addSubActionPair(amptrap, new AmpTrapPositionAction(amptrap, 0.0, 0.05), true);        
                 break ;       
+
+            case 144:
+                addSubActionPair(intakeshooter, new IntakeGotoNamedPositionAction(intakeshooter, 100, -55), true) ;
+                addAction(new DelayAction(superstructure.getRobot(), 2.0));
+                addSubActionPair(intakeshooter, new IntakeGotoNamedPositionAction(intakeshooter, -5, 50), true) ;
+                break ;
         }
     }
 }
