@@ -30,7 +30,7 @@ public abstract class PlotManagerBase {
     protected boolean isPlotEnabled(String name) {
         boolean ret = false ;
 
-        if (!robot_.shutdownDebug()) {
+        if (!robot_.isRealEvent()) {
             if (enabled_ == true && enabled_plots_.size() > 0) {
                 if (enabled_plots_.contains(name))
                     ret = true ;

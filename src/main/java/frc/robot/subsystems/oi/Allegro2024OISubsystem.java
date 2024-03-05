@@ -15,18 +15,18 @@ import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 import org.xero1425.misc.MissingParameterException;
 
-import frc.robot.subsystems.amp_trap.AmpTrapEjectAction;
 import frc.robot.subsystems.amp_trap.AmpTrapMoveNote;
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
-import frc.robot.subsystems.intake_shooter.IntakeEjectAction;
 import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.intake_shooter.StartCollectAltAction;
 import frc.robot.subsystems.intake_shooter.StopCollectAltAction;
 import frc.robot.subsystems.oi.AllegroOIPanel.NoteTarget;
 import frc.robot.subsystems.superstructure.ClimbAction;
+import frc.robot.subsystems.superstructure.EjectAction;
 import frc.robot.subsystems.superstructure.TransferIntakeToTrampAction;
+import frc.robot.subsystems.superstructure.TurtleAction;
 import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
@@ -62,7 +62,8 @@ public class Allegro2024OISubsystem extends OISubsystem {
         Climbed,
         PrepToClimbDown,
         ClimbingDown,
-        Eject
+        Eject,
+        Turtle,
     }    
 
     private AllegroOIPanel oipanel_ ;
@@ -133,12 +134,9 @@ public class Allegro2024OISubsystem extends OISubsystem {
     //
     // The eject action for the intake
     //
-    private IntakeEjectAction intake_eject_action_ ;
+    private EjectAction eject_action_ ;
 
-    //
-    // The eject action for the arm/trap
-    //
-    private AmpTrapEjectAction trap_eject_action_ ;
+    private TurtleAction turtle_action_ ;
 
     //
     // This action moves the elevator/arm to the position to shoot the note into the amp
@@ -184,8 +182,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
     //
     private boolean climb_only_ ;
 
-    private XeroTimer shoot_timer_ ;
-
     //
     // Current OI state
     //
@@ -196,8 +192,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
         int index ;
         MessageLogger logger = getRobot().getMessageLogger() ;
-
-        shoot_timer_ = new XeroTimer(getRobot(), "shoottimer", 5.0) ;
 
         try {
             index = getSettingsValue(OIHIDIndexName).getInteger() ;
@@ -243,7 +237,9 @@ public class Allegro2024OISubsystem extends OISubsystem {
         SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;
 
         if (enable) {
-            gp.setTrackingSupplier(() -> tracker.getRotation());
+            if (oipanel_.getNoteTarget() == NoteTarget.Speaker && robot.getIntakeShooter().isHoldingNote()) {
+                gp.setTrackingSupplier(() -> tracker.getRotation());
+            }
         }
         else {
             gp.setTrackingSupplier(null);
@@ -655,8 +651,16 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
             getGamePad().enable() ;
             
-            robot.getIntakeShooter().setAction(intake_eject_action_);
-            robot.getAmpTrap().setAction(trap_eject_action_) ;
+            robot.getSuperStructure().setAction(eject_action_);
+            state_ = OIState.Eject ;
+        }
+        else if (oipanel_.isTurtlePressed() && state_ != OIState.Turtle) {
+            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
+            robot.getSuperStructure().cancelAction();
+
+            getGamePad().enable() ;
+            
+            robot.getSuperStructure().setAction(turtle_action_);
             state_ = OIState.Eject ;
         }
         else {
@@ -674,7 +678,13 @@ public class Allegro2024OISubsystem extends OISubsystem {
     private void runOIStateMachine() {
         switch(state_) {
         case Eject:
-            if (intake_eject_action_.isDone() && trap_eject_action_.isDone()) {
+            if (eject_action_.isDone()) {
+                state_ = OIState.Idle ;
+            }
+            break ;
+
+        case Turtle:
+            if (turtle_action_.isDone()) {
                 state_ = OIState.Idle ;
             }
             break ;
@@ -833,8 +843,8 @@ public class Allegro2024OISubsystem extends OISubsystem {
         hooks_down_ = new ClimbAction(robot.getSuperStructure().getClimber(), ClimbAction.ClimbType.HooksDown);
         hooks_down_with_robot_action_ = new ClimbAction(robot.getSuperStructure().getClimber(), ClimbAction.ClimbType.HooksDownWithRobot);
 
-        intake_eject_action_ = new IntakeEjectAction(robot.getIntakeShooter());
-        trap_eject_action_ = new AmpTrapEjectAction(robot.getAmpTrap());
+        eject_action_ = new EjectAction(robot.getSuperStructure());
+        turtle_action_ = new TurtleAction(robot.getSuperStructure());
 
         startCollectAction_ = new StartCollectAltAction(intake);
         stopCollectAction_ = new StopCollectAltAction(intake);

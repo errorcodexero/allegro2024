@@ -105,7 +105,7 @@ public abstract class AutoController extends BaseController {
     /// set mode setting "testmode:enabled" is true and the robot is NOT connected to an FMS system.
     /// \returns true if we are in the test mode
     public boolean isTestMode() {
-        if (getRobot().shutdownDebug())
+        if (getRobot().isRealEvent())
             return false ;
 
         return test_mode_ ;

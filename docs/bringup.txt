@@ -31,18 +31,27 @@ Item                                                                            
 - Test Climb without trap                                                                             Done
 - Retune shooter w/ Comp Bot                                                                          Done
 - Speed up elevator                                                                                   Done
-- Test abort mid climb
-- Test shooting with gyro/swerve constraints
-- Test shooting from various locations and see if we can hit consistently
-- Setup AMP place sequence
-- Run teleop sequences to be sure we are ready for teleop
+- Test shooting with gyro/swerve constraints                                                          Done
+- Setup AMP place sequence                                                                            Done
+- Run teleop sequences to be sure we are ready for teleop                                             Done
+- Revist Trap                                                                                         Done
+  - In trap sequence, move note to other end of manipulator                                           Done
+  - Hold note tighter when climbing to trap                                                           Done
+- Vibrate driver game pad when note collected                                                         Done
+- Holding PID on trap place                                                                           Done
+- Transfer of note on trap place                                                                      Done
 - Automodes
-- Revist Trap
-  - In trap sequence, move note to other end of manipulator
-  - Hold note tighter when climbing to trap
-- Turtle
-- Vibrate driver game pad when note collected
-- Bug fixes
-  - Holding PID on trap place
-  - Transfer of note on trap place
-------------------------------------------------------------------------------------------------------------
+  - S1S3                                                                                              Done
+  - S2S2                                                                                              Done
+  - S3S2                                                                                              Done
+  - S3S3
+- Turtle                                                                                              Needs Test
+- Extend Eject Sequence                                                                               Needs Test
+- Tune P for Up/Down
+- Tune P for rotate drive base
+- Abort mid climb                                                                                     Needs Test
+- Test shooting from various locations and see if we can hit consistently (teleop practice)
+- Drive practice
+- No target tracking unless in speaker + have note                                                    Needs Test
+- Disable coast mode switch                                                                           Needs Test
+----------------------------------------------------------------------------------------------------------------

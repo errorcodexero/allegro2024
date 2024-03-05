@@ -705,7 +705,7 @@ public abstract class XeroRobot extends TimedRobot {
         last_time_ = initial_time;
         loop_count_++ ;
 
-        if (!motors_in_coast_mode_ && isCoastMode()) {
+        if (!motors_in_coast_mode_ && isCoastMode() && !isRealEvent()) {
             motors_.setAllCoastMode() ;
             motors_in_coast_mode_ = true ;
         }
@@ -938,7 +938,7 @@ public abstract class XeroRobot extends TimedRobot {
         return layout_ ;
     }
 
-    public boolean shutdownDebug() {
+    public boolean isRealEvent() {
         boolean ret = false ;
 
         if (DriverStation.isFMSAttached())
@@ -1035,7 +1035,7 @@ public abstract class XeroRobot extends TimedRobot {
 
             if (robot_subsystem_.getOI() != null) {
                 sel = getAutoModeSelection() ;
-                boolean dbg = shutdownDebug() ;
+                boolean dbg = isRealEvent() ;
                 if (DriverStation.getAlliance().isPresent()) {
                     if (sel != automode_ || !msg.equals(game_data_) || dbg != fms_connection_ || auto_controller_.isTestMode() || alliance_ != DriverStation.getAlliance().get())
                     {

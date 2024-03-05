@@ -10,6 +10,8 @@ import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MissingParameterException;
 
 public class IntakeEjectAction extends Action {
+
+
     private IntakeShooterSubsystem sub_ ;
     private MotorEncoderPowerAction start_ ;
     private MCVelocityAction shooter1_ ;
