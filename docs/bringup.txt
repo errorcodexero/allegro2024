@@ -16,7 +16,6 @@ Item                                                                            
 - Occasional loss of comms while shooting                                                             Done
 - If collect cancelled without collecting note, intake doesn't stop                                   Done
 - If pose not reset, shooter motors just vibrate. Feeding invalid values due to invalid pose.         Done
-
 - While driving in tracking mode, robot lost orientation (gyro direction for driving)                 Done
 - Limelight pose estimation of robot center and camera vs. target incorrect impact pose estimation.   Done
   And impacts distance when AT not seen.                                                              Done
@@ -40,18 +39,22 @@ Item                                                                            
 - Vibrate driver game pad when note collected                                                         Done
 - Holding PID on trap place                                                                           Done
 - Transfer of note on trap place                                                                      Done
-- Automodes
-  - S1S3                                                                                              Done
-  - S2S2                                                                                              Done
-  - S3S2                                                                                              Done
-  - S3S3
-- Turtle                                                                                              Needs Test
-- Extend Eject Sequence                                                                               Needs Test
-- Tune P for Up/Down
-- Tune P for rotate drive base
-- Abort mid climb                                                                                     Needs Test
-- Test shooting from various locations and see if we can hit consistently (teleop practice)
-- Drive practice
-- No target tracking unless in speaker + have note                                                    Needs Test
-- Disable coast mode switch                                                                           Needs Test
+- Automode - S1S3                                                                                     Done
+- Automode - S2S2                                                                                     Done
+- AutoMode - S3S2                                                                                     Done
+- Turtle                                                                                              Done
+- Extend Eject Sequence                                                                               Done
+- Tune P for Up/Down                                                                                  Done
+- Tune P for rotate drive base                                                                        Done
+- Abort mid climb                                                                                     Done
+- Drive practice                                                                                      Done
+- No target tracking unless in speaker + have note                                                    Done
+- Disable coast mode switch                                                                           Done
+- Shooting/better distance calcuation                                                                 3/6
+  o Test shooting right side if distance is same as left                                              3/6
+  o 0', 1', 2' / red, blue / left, corner, middle, corner, right                                      3/6
+  o Tune shooter to pose distance                                                                     3/6
+  o Determine best distance strategy                                                                  3/6
+- Mirrored 3 note auto mode                                                                           3/6
+- Better right side auto mode                                                                         3/6
 ----------------------------------------------------------------------------------------------------------------

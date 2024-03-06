@@ -1,6 +1,5 @@
 package frc.robot.subsystems.oi;
 
-import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.DriveBaseSubsystem;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
@@ -115,7 +114,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
     //
     // This action moves the note into the amp
     //
-    private AmpTrapMoveNote amp_shoot_action_ ;
+    private MotorEncoderPowerAction amp_shoot_action_ ;
 
     //
     // This action moves the climber hooks up to the height to climb onto the chain.
@@ -835,7 +834,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
         goto_bend_back2_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:bend-back2:pivot", "actions:bend-back2:elevator") ;
 
         trap_shoot_action_ = new MotorEncoderPowerAction(robot.getAmpTrap().getManipulator(), -1.0, 1.5) ;
-        amp_shoot_action_ = new AmpTrapMoveNote(robot.getAmpTrap(), 3.0) ;        
+        amp_shoot_action_ = new MotorEncoderPowerAction(robot.getAmpTrap().getManipulator(), 1.0, 1.5) ;        
 
         stow_amp_trap_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:stow:pivot", "actions:stow:elevator") ;
 

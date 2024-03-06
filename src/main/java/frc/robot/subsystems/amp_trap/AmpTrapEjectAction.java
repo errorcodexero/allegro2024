@@ -38,6 +38,6 @@ public class AmpTrapEjectAction extends Action {
 
     @Override
     public String toString(int indent) {
-        return spaces(indent) + "IntakeEjectAction" ;
+        return spaces(indent) + "AmpTrapEjectAction" ;
     }    
 }

@@ -300,6 +300,15 @@ public class IntakeAutoShootAction extends Action {
                             Math.abs(gyro.getAccelX()) < accel_threshold_ && 
                             Math.abs(gyro.getAccelY()) < accel_threshold_ ; 
 
+        MessageLogger logger = robot.getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Info).add("gyroinfo");
+        logger.add("rate", gyro.getRate()) ;
+        logger.add("ratelimit", rotational_velocity_threshold_) ;
+        logger.add("ax", gyro.getAccelX()) ;
+        logger.add("ay", gyro.getAccelY()) ;
+        logger.add("alimit", accel_threshold_) ;
+        logger.endMessage();
+
         return  db_ready_ && swerve_stopped_ && gyro_stopped_ ;
     }
 

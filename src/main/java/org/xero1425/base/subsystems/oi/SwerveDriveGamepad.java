@@ -162,6 +162,10 @@ public class SwerveDriveGamepad extends Gamepad {
         double lxscaled = mapJoyStick(lx, pos_maximum_, deadband_pos_x_, power_) ;
         double rxscaled = mapJoyStick(rx, angle_maximum_, deadband_rotate_, power_) ;
 
+        // MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+        // logger.startMessage(MessageType.Info) ;
+        // logger.add("joystick").add("ly", lyscaled).add("lx", lxscaled).add("rx", rxscaled).endMessage();
+
         lxscaled *= scale_amount_ ;
         lyscaled *= scale_amount_ ;
         rxscaled *= scale_amount_ ;

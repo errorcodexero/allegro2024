@@ -84,7 +84,6 @@ public class TargetTrackerSubsystem extends Subsystem {
                 sees_target_ = true ;
                 angle_to_target_ = -ll_.getTX(target_number_);
                 distance_between_robot_and_target_ = (target_height_ - camera_height_) / Math.tan(Math.toRadians(camera_angle_ + ll_.getTY(target_number_))) + kCameraOffset ;
-                // distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos_, target_pos_);                
             }
             else {
                 logger.add("apriltag", false) ;
@@ -98,8 +97,8 @@ public class TargetTrackerSubsystem extends Subsystem {
 
             putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
             putDashboard("tt_distance(no LL)", DisplayType.Verbose, calculateDistanceBetweenPoses(robot_pos_, target_pos_));
-            putDashboard("tt_rotation", DisplayType.Verbose, angle_to_target_);           
-            putDashboard("tt_tag", DisplayType.Verbose, sees_target_);
+            putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);           
+            putDashboard("tt_tag", DisplayType.Always, sees_target_);
         }
     }
 
