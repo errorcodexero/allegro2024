@@ -7,7 +7,7 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
-public class ManualShootAction extends Action {
+public class IntakeManualShootAction extends Action {
     private double kTiltPosition ;
     private double kTiltPositionThreshold ;
     private double kTiltVelocityThreshold ;
@@ -31,7 +31,7 @@ public class ManualShootAction extends Action {
     private boolean tilt_ready_ ;
     private boolean updown_ready_ ;
 
-    public ManualShootAction(IntakeShooterSubsystem intake, String location) throws Exception {
+    public IntakeManualShootAction(IntakeShooterSubsystem intake, String location) throws Exception {
         super(intake.getRobot().getMessageLogger());
         intake_ = intake;
 

@@ -16,6 +16,12 @@ public class AllegroOIPanel extends OIPanel {
         Speaker
     } ;
 
+    public enum AutoManualMode {
+        Auto,
+        ManualPodium,
+        ManualSubwoofer
+    } ;
+
 
     //
     // Panel gadgets
@@ -26,8 +32,8 @@ public class AllegroOIPanel extends OIPanel {
     private int climb_up_exec_gadget_ ;                     // Perform the climb up
     private int shoot_gadget_ ;                             // Shoot the note
     private int abort_gadget_ ;                             // Abort mode
-    private int coast1_gadget_ ;
-    private int coast2_gadget_ ;
+    private int auto_manual1_gadget_ ;
+    private int auto_manual2_gadget_ ;
 
     private int climb_down_gadget_ ;                        // Prepare to climb down
     private int eject_gadget_ ;                             // Eject the note
@@ -126,11 +132,11 @@ public class AllegroOIPanel extends OIPanel {
         num = getSubsystem().getSettingsValue("panel:gadgets:target_toggle2").getInteger() ;
         target_toggle2_gadget_ = mapButton(num, ButtonType.Level) ;
 
-        num = getSubsystem().getSettingsValue("panel:gadgets:coast1").getInteger() ;
-        coast1_gadget_ = mapButton(num, ButtonType.Level) ;        
+        num = getSubsystem().getSettingsValue("panel:gadgets:auto_manual1").getInteger() ;
+        auto_manual1_gadget_ = mapButton(num, ButtonType.Level) ;        
 
-        num = getSubsystem().getSettingsValue("panel:gadgets:coast2").getInteger() ;
-        coast2_gadget_ = mapButton(num, ButtonType.Level) ;           
+        num = getSubsystem().getSettingsValue("panel:gadgets:auto_manual2").getInteger() ;
+        auto_manual2_gadget_ = mapButton(num, ButtonType.Level) ;           
 
         num = getSubsystem().getSettingsValue("panel:gadgets:climb_up_prep").getInteger() ;
         climb_up_prep_gadget_ = mapButton(num, ButtonType.LowToHigh) ;
@@ -152,6 +158,23 @@ public class AllegroOIPanel extends OIPanel {
         
         num = getSubsystem().getSettingsValue("panel:gadgets:eject").getInteger() ;
         eject_gadget_ = mapButton(num, ButtonType.LowToHigh) ;
+    }
+
+    public AutoManualMode getAutoManualMode() {
+        AutoManualMode ret = AutoManualMode.Auto ;
+
+        if (getValue(target_toggle1_gadget_) == 1 && getValue(target_toggle2_gadget_) == 0) {
+            ret = AutoManualMode.ManualPodium ;
+        }
+        else if (getValue(target_toggle1_gadget_) == 0 && getValue(target_toggle2_gadget_) == 0) {
+            ret = AutoManualMode.Auto ;
+        }
+        else if (getValue(target_toggle1_gadget_) == 0 && getValue(target_toggle2_gadget_) == 1) {
+            ret = AutoManualMode.ManualSubwoofer ;
+        }
+
+        return ret ;        
+
     }
 
     public NoteTarget getNoteTarget() {
@@ -196,9 +219,5 @@ public class AllegroOIPanel extends OIPanel {
 
     public boolean isTurtlePressed() {
         return getValue(turtle_gadget_) == 1 ;
-    }
-
-    public int getCoastValue() {
-        return getValue(coast1_gadget_) + getValue(coast2_gadget_) * 2 ;
     }
 }

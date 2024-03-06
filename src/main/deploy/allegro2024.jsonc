@@ -1138,8 +1138,8 @@
                     "turtle" : 8,
                     "abort" : 9,
                     "eject" : 10,
-                    "coast1" : 12,
-                    "coast2" : 13
+                    "auto_manual1" : 12,
+                    "auto_manual2" : 13
                 },
                 "leds" : {
                     "db-ready" : 1,

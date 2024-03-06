@@ -57,4 +57,6 @@ Item                                                                            
   o Determine best distance strategy                                                                  3/6
 - Mirrored 3 note auto mode                                                                           3/6
 - Better right side auto mode                                                                         3/6
-----------------------------------------------------------------------------------------------------------------
+- Test manual shoot mode                                                                              3/6
+- Test 25% drive base reduction                                                                       3/6
+----------------------------------------------------------------------------------------------------------
