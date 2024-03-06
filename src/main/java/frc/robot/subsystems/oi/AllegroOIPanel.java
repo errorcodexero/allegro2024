@@ -163,13 +163,13 @@ public class AllegroOIPanel extends OIPanel {
     public AutoManualMode getAutoManualMode() {
         AutoManualMode ret = AutoManualMode.Auto ;
 
-        if (getValue(target_toggle1_gadget_) == 1 && getValue(target_toggle2_gadget_) == 0) {
+        if (getValue(auto_manual1_gadget_) == 1 && getValue(auto_manual2_gadget_) == 0) {
             ret = AutoManualMode.ManualPodium ;
         }
-        else if (getValue(target_toggle1_gadget_) == 0 && getValue(target_toggle2_gadget_) == 0) {
+        else if (getValue(auto_manual1_gadget_) == 0 && getValue(auto_manual2_gadget_) == 0) {
             ret = AutoManualMode.Auto ;
         }
-        else if (getValue(target_toggle1_gadget_) == 0 && getValue(target_toggle2_gadget_) == 1) {
+        else if (getValue(auto_manual1_gadget_) == 0 && getValue(auto_manual2_gadget_) == 1) {
             ret = AutoManualMode.ManualSubwoofer ;
         }
 
