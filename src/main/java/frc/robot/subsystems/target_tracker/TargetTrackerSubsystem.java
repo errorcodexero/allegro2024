@@ -20,6 +20,8 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 public class TargetTrackerSubsystem extends Subsystem {
 
@@ -35,6 +37,8 @@ public class TargetTrackerSubsystem extends Subsystem {
     private double camera_height_ ;
     private double target_height_ ;
 
+    private boolean triangle_ ;
+
     public TargetTrackerSubsystem(Subsystem parent, LimeLightSubsystem ll) throws BadParameterTypeException, MissingParameterException {
         super(parent, "targettracker");
         sees_target_ = false ;
@@ -42,7 +46,14 @@ public class TargetTrackerSubsystem extends Subsystem {
 
         camera_angle_ = getSettingsValue("camera-angle").getDouble() ;
         camera_height_ = getSettingsValue("camera-height").getDouble() ;
-        target_height_ = getSettingsValue("target-height").getDouble() ;        
+        target_height_ = getSettingsValue("target-height").getDouble() ;
+
+        String strategy = getSettingsValue("strategy").getString() ;
+        if (strategy.equals("pose")) {
+            triangle_ = false ;
+        } else {
+            triangle_ = true ;
+        }
     }
 
     @Override
@@ -79,7 +90,7 @@ public class TargetTrackerSubsystem extends Subsystem {
             MessageLogger logger = getRobot().getMessageLogger() ;
 
             logger.startMessage(MessageType.Debug, getLoggerID()) ;
-            if (ll_.validTargets() && ll_.hasAprilTag(target_number_)) {
+            if (ll_.validTargets() && ll_.hasAprilTag(target_number_) && triangle_) {
                 logger.add("apriltag", true) ;
                 sees_target_ = true ;
                 angle_to_target_ = -ll_.getTX(target_number_);
@@ -95,10 +106,11 @@ public class TargetTrackerSubsystem extends Subsystem {
             logger.add("angle", angle_to_target_) ;
             logger.endMessage();
 
-            putDashboard("tt_distance", DisplayType.Always, distance_between_robot_and_target_);
-            putDashboard("tt_distance(no LL)", DisplayType.Verbose, calculateDistanceBetweenPoses(robot_pos_, target_pos_));
-            putDashboard("tt_rotation", DisplayType.Always, angle_to_target_);           
-            putDashboard("tt_tag", DisplayType.Always, sees_target_);
+            ShuffleboardTab tab = Shuffleboard.getTab("TargetTracking");
+            tab.addDouble("tt_dist-tri", ()->distance_between_robot_and_target_) ;
+            tab.addDouble("tt_dist-pose", ()->calculateDistanceBetweenPoses(robot_pos_, target_pos_)) ;
+            tab.addDouble("tt_rotation", ()->angle_to_target_);
+            tab.addBoolean("tt_tag", ()->sees_target_) ;
         }
     }
 

@@ -57,6 +57,8 @@ public class IntakeAutoShootAction extends Action {
     private double aim_threshold_ ;
     private double tilt_stow_value_ ;
 
+    private String strategy_ ;
+
     private double accel_threshold_ ;
     private double rotational_velocity_threshold_ ;
 
@@ -101,6 +103,14 @@ public class IntakeAutoShootAction extends Action {
             verbose_ = settings.get("system:verbose:auto-shoot").getBoolean() ;
         } 
 
+        String strategy = sub_.getRobot().getSettingsSupplier().get("subsystems:targettracker:strategy").getString() ;
+        if (strategy.equals("pose")) {
+            strategy_ = "pose" ;
+        }
+        else {
+            strategy_ = "triangle" ;
+        }
+        
         tilt_stow_value_ = sub_.getTilt().getSettingsValue("targets:stow").getDouble() ;
         aim_threshold_ = sub_.getSettingsValue("actions:auto-shoot:aim-threshold").getDouble() ;
         accel_threshold_ = sub_.getSettingsValue("actions:auto-shoot:gyro-accel-threshold").getDouble() ;
@@ -122,9 +132,9 @@ public class IntakeAutoShootAction extends Action {
             tilt_vel_threshold = 10.0 ;
         }
 
-        updown_pwl_ = new PieceWiseLinear(sub_.getRobot().getSettingsSupplier(), "subsystems:intake-shooter:pwls:updown") ;
-        tilt_pwl_ = new PieceWiseLinear(sub_.getRobot().getSettingsSupplier(), "subsystems:intake-shooter:pwls:tilt") ;
-        velocity_pwl_ = new PieceWiseLinear(sub_.getRobot().getSettingsSupplier(), "subsystems:intake-shooter:pwls:shooter") ;
+        updown_pwl_ = new PieceWiseLinear(sub_.getRobot().getSettingsSupplier(), "subsystems:intake-shooter:pwls-" + strategy_ + ":updown") ;
+        tilt_pwl_ = new PieceWiseLinear(sub_.getRobot().getSettingsSupplier(), "subsystems:intake-shooter:pwls-" + strategy_ + ":tilt") ;
+        velocity_pwl_ = new PieceWiseLinear(sub_.getRobot().getSettingsSupplier(), "subsystems:intake-shooter:pwls-" + strategy_ + ":shooter") ;
 
         shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", kVelocityStart, velthresh, false) ;
         shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", kVelocityStart, velthresh, false) ;
