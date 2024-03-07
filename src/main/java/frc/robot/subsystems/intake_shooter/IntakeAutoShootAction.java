@@ -46,6 +46,8 @@ public class IntakeAutoShootAction extends Action {
     private boolean shooting_ ;
     private boolean waiting_ ;
 
+    private boolean offset_set_ ;
+
     private XeroTimer wait_timer_ ;
 
     private boolean verbose_ ;
@@ -86,7 +88,8 @@ public class IntakeAutoShootAction extends Action {
         "dbready (bool)",
         "april-tag (bool)",
         "oiready (bool)",
-        "distance (m)"
+        "distance (m)",
+        "offset (deg)"
     } ;
 
     public IntakeAutoShootAction(IntakeShooterSubsystem intake, TargetTrackerSubsystem tracker, boolean initialDriveTeamReady, SwerveTrackAngle rotate) throws Exception {
@@ -122,7 +125,7 @@ public class IntakeAutoShootAction extends Action {
         double tilt_pos_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-pos-threshold").getDouble() ;
         double tilt_vel_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-velocity-threshold").getDouble() ;
 
-        wait_timer_ = new XeroTimer(intake.getRobot(), "wait-timer", 0.1);
+        wait_timer_ = new XeroTimer(intake.getRobot(), "wait-timer", 0.4);
 
         if (RobotBase.isSimulation()) {
             velthresh = 10.0 ;  
@@ -184,6 +187,7 @@ public class IntakeAutoShootAction extends Action {
     public void start() throws Exception {
         super.start();
 
+        offset_set_ = false ;
         shooting_ = false ;
         waiting_ = false ;
         drive_team_ready_ = initial_drive_team_ready_ ;
@@ -213,6 +217,12 @@ public class IntakeAutoShootAction extends Action {
     public void run() throws Exception {
         super.run();
 
+        AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;        
+
+        if (drive_team_ready_ && !offset_set_) {
+            offset_set_ = robot.getTargetTracker().setOffset();
+        }
+
         if (rotate_ != null) {
             db_ready_ = rotate_.isAtTarget() ;
         }
@@ -238,6 +248,7 @@ public class IntakeAutoShootAction extends Action {
                 if (plot_id_ != -1) {
                     sub_.endPlot(plot_id_);
                 }
+                robot.getTargetTracker().clearOffset();
                 setDone() ;
             }
         }
@@ -262,7 +273,7 @@ public class IntakeAutoShootAction extends Action {
             logger.add("updown", current_updown_).add("tilt", current_tilt_).add("velocity", current_velocity_) ;
             logger.endMessage();
 
-            AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;
+
             AllegroOIPanel oi = robot.getOI().getPanel() ;
 
             updown_.setTarget(current_updown_);
@@ -288,6 +299,7 @@ public class IntakeAutoShootAction extends Action {
                 data_[9] = aprilTagTest() ? 0.5 : 0.0 ;
                 data_[10] = drive_team_ready_ ? 1.5 : 0.0 ;
                 data_[11] = robot.getTargetTracker().getDistance() ;
+                data_[12] = robot.getTargetTracker().getOffset() ;
                 sub_.addPlotData(plot_id_, data_);
             }
 

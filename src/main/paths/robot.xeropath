@@ -309,8 +309,8 @@
                     "constraints": [
                     ],
                     "endvelocity": 0,
-                    "maxacceleration": 1,
-                    "maxvelocity": 1,
+                    "maxacceleration": 3.5,
+                    "maxvelocity": 2.5,
                     "name": "P1",
                     "points": [
                         {
@@ -324,15 +324,15 @@
                             "heading": 0,
                             "swrot": 0,
                             "swrotvel": 0,
-                            "x": 3.803118239252212,
-                            "y": 1.4652836221230574
+                            "x": 3.8670298957433613,
+                            "y": 0.8666964003522928
                         },
                         {
                             "heading": 0,
                             "swrot": 0,
                             "swrotvel": 0,
-                            "x": 7.8342290608646925,
-                            "y": 0.7357554455899402
+                            "x": 7.759405658143349,
+                            "y": 0.5409028343364355
                         }
                     ],
                     "startvelocity": 0
@@ -341,23 +341,23 @@
                     "constraints": [
                     ],
                     "endvelocity": 0,
-                    "maxacceleration": 4.3,
-                    "maxvelocity": 4.3,
+                    "maxacceleration": 2,
+                    "maxvelocity": 2,
                     "name": "P2",
                     "points": [
                         {
-                            "heading": 180,
+                            "heading": 140,
                             "swrot": 0,
                             "swrotvel": 0,
-                            "x": 7.57235,
-                            "y": 0.726403
+                            "x": 7.5364942708693405,
+                            "y": 0.7466671918201353
                         },
                         {
-                            "heading": 180,
+                            "heading": 140,
                             "swrot": -45,
                             "swrotvel": 0,
-                            "x": 3.195178092141281,
-                            "y": 2.7933990204269374
+                            "x": 3.146854644550413,
+                            "y": 2.718575617705591
                         }
                     ],
                     "startvelocity": 0

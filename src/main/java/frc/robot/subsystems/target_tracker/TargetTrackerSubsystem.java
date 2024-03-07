@@ -38,6 +38,7 @@ public class TargetTrackerSubsystem extends Subsystem {
     private double target_height_ ;
 
     private boolean triangle_ ;
+    private double offset_ ;
 
     public TargetTrackerSubsystem(Subsystem parent, LimeLightSubsystem ll) throws BadParameterTypeException, MissingParameterException {
         super(parent, "targettracker");
@@ -79,13 +80,84 @@ public class TargetTrackerSubsystem extends Subsystem {
         }
     }
 
+    public double getOffset() {
+        return offset_ ;
+    }
+
+    public void clearOffset() {
+        offset_ = 0 ;
+    }
+
+    public boolean setOffset() {
+        if (!ll_.validTargets() || !ll_.hasAprilTag(target_number_))
+            return false;
+
+        MessageLogger logger = getRobot().getMessageLogger() ;
+
+        AllegroRobot2024 robotSubsystem = (AllegroRobot2024) getRobot().getRobotSubsystem();        
+        Pose2d robot_pos = robotSubsystem.getSwerve().getPose();
+        double effective = robot_pos.getRotation().getDegrees() - ll_.getTX(target_number_) ;
+
+        logger.startMessage(MessageType.Info) ;
+        if (target_number_ == AprilTags.BLUE_SPEAKER_CENTER) {
+            if (effective <= 30 && effective >= -30) {
+                logger.add("case 1") ;
+                offset_ = 0 ;
+            }
+            else if (effective < -30 && effective >= -45) {
+                logger.add("case 2") ;                
+                offset_ = -5 ;
+            }
+            else if (effective < -45 && effective >= -60) {
+                logger.add("case 3") ;
+                offset_ = -10 ;
+            }
+            else if (effective > 30 && effective <= 45) {
+                logger.add("case 4") ;                
+                offset_ = 0 ;
+            }
+            else {
+                logger.add("case 5") ;                
+                offset_ = 0 ;
+            }
+        }
+        else {
+            if (effective >= 150 || effective <= -150) {
+                logger.add("case 6") ;                
+                offset_ = 0 ;
+            }
+            else if (effective < 150 && effective >= 135) {
+                logger.add("case 7") ;                
+                offset_ = 5 ;
+            }
+            else if (effective > -150 && effective <= -135) {
+                logger.add("case 8") ;                
+                offset_ = -5 ;
+            }
+            else if (effective < 135 && effective > 0) {
+                logger.add("case 9") ;                
+                offset_ = -9 ;
+            }
+            else {
+                logger.add("case 10") ;   
+                offset_ = 0 ;
+            }
+        }
+
+        logger.add("effective", effective) ;
+        logger.add("offset", offset_) ;
+        logger.endMessage();
+
+        return true ;
+    }
+
     @Override
     public void computeMyState() throws Exception {
         super.computeMyState();
 
         if (target_pos_ != null) {
             AllegroRobot2024 robotSubsystem = (AllegroRobot2024) getRobot().getRobotSubsystem();
-            Pose2d robot_pos_ = robotSubsystem.getSwerve().getPose();
+            Pose2d robot_pos = robotSubsystem.getSwerve().getPose();
 
             MessageLogger logger = getRobot().getMessageLogger() ;
 
@@ -93,24 +165,28 @@ public class TargetTrackerSubsystem extends Subsystem {
             if (ll_.validTargets() && ll_.hasAprilTag(target_number_) && triangle_) {
                 logger.add("apriltag", true) ;
                 sees_target_ = true ;
-                angle_to_target_ = -ll_.getTX(target_number_);
+                angle_to_target_ = -ll_.getTX(target_number_) + offset_ ;
                 distance_between_robot_and_target_ = (target_height_ - camera_height_) / Math.tan(Math.toRadians(camera_angle_ + ll_.getTY(target_number_))) + kCameraOffset ;
             }
             else {
                 logger.add("apriltag", false) ;
                 sees_target_ = false ;
-                distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos_, target_pos_);
-                angle_to_target_ = calculateAngleBetweenPoses(robot_pos_, target_pos_);
+                distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos, target_pos_);
+                angle_to_target_ = calculateAngleBetweenPoses(robot_pos, target_pos_);
             }
             logger.add("distance", distance_between_robot_and_target_) ;
             logger.add("angle", angle_to_target_) ;
             logger.endMessage();
 
-            ShuffleboardTab tab = Shuffleboard.getTab("TargetTracking");
-            tab.addDouble("tt_dist-tri", ()->distance_between_robot_and_target_) ;
-            tab.addDouble("tt_dist-pose", ()->calculateDistanceBetweenPoses(robot_pos_, target_pos_)) ;
-            tab.addDouble("tt_rotation", ()->angle_to_target_);
-            tab.addBoolean("tt_tag", ()->sees_target_) ;
+            try {
+                ShuffleboardTab tab = Shuffleboard.getTab("TargetTracking");
+                tab.addDouble("tt_dist-tri", ()->distance_between_robot_and_target_) ;
+                tab.addDouble("tt_dist-pose", ()->calculateDistanceBetweenPoses(robot_pos, target_pos_)) ;
+                tab.addDouble("tt_rotation", ()->angle_to_target_);
+                tab.addBoolean("tt_tag", ()->sees_target_) ;
+            }
+            catch(Exception ex) {
+            }
         }
     }
 
