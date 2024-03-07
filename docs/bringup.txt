@@ -53,4 +53,6 @@ Item                                                                            
 - Mirrored 3 note auto mode                                                                           Done
 - Test manual shoot mode                                                                              Done
 - Test 25% drive base reduction                                                                       Done
+- Reset position for absolute encoder                                                                 3/7
+- Update gear ratios for tilt                                                                         3/7
 ----------------------------------------------------------------------------------------------------------

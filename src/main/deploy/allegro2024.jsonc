@@ -719,7 +719,7 @@
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m": 0.008241034,
+                    "m": 0.007965088,
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
