@@ -50,8 +50,7 @@ Item                                                                            
 - Drive practice                                                                                      Done
 - No target tracking unless in speaker + have note                                                    Done
 - Disable coast mode switch                                                                           Done
-- Mirrored 3 note auto mode                                                                           3/6
-- Better right side auto mode                                                                         3/6
-- Test manual shoot mode                                                                              3/6
-- Test 25% drive base reduction                                                                       3/6
+- Mirrored 3 note auto mode                                                                           Done
+- Test manual shoot mode                                                                              Done
+- Test 25% drive base reduction                                                                       Done
 ----------------------------------------------------------------------------------------------------------
