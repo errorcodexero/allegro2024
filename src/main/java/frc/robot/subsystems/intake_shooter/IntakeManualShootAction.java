@@ -27,6 +27,8 @@ public class IntakeManualShootAction extends Action {
     private MCVelocityAction shooter2_action_ ;
     private MotorEncoderPowerAction feeder_action_ ;
 
+    private String location_ ;
+
     private boolean shooting_ ;
     private boolean tilt_ready_ ;
     private boolean updown_ready_ ;
@@ -34,6 +36,8 @@ public class IntakeManualShootAction extends Action {
     public IntakeManualShootAction(IntakeShooterSubsystem intake, String location) throws Exception {
         super(intake.getRobot().getMessageLogger());
         intake_ = intake;
+
+        location_ = location ;
 
         kTiltPosition = intake.getSettingsValue("actions:manual-shoot:" + location + ":tilt").getDouble();
         kTiltPositionThreshold = intake.getSettingsValue("actions:manual-shoot:" + location + ":tilt-pos-threshold").getDouble();
@@ -116,6 +120,6 @@ public class IntakeManualShootAction extends Action {
 
     @Override
     public String toString(int indent) {
-        return prefix(indent) + "ManualShootAction";
+        return prefix(indent) + "ManualShootAction " + location_ ;
     }
 }

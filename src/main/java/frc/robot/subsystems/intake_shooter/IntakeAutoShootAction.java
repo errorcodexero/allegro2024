@@ -221,6 +221,7 @@ public class IntakeAutoShootAction extends Action {
 
         if (drive_team_ready_ && !offset_set_) {
             offset_set_ = robot.getTargetTracker().setOffset();
+            robot.getIntakeShooter().syncEncoders() ;
         }
 
         if (rotate_ != null) {

@@ -133,6 +133,14 @@ public class IntakeShooterSubsystem extends Subsystem {
         return angle_;
     }
 
+    public void syncEncoders() {
+        try {
+            updateMotorPosition();     
+        }
+        catch(Exception ex) {
+        }
+    }
+
     @Override
     public void computeMyState() throws Exception {
         super.computeMyState();

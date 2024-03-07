@@ -350,7 +350,7 @@
                 },
                 "manual-shoot" : {
                     "subwoofer" : {
-                        "tilt" : -53.0,
+                        "tilt" : -65.0,
                         "tilt-pos-threshold" : 5.0,
                         "tilt-velocity-threshold" : 5.0,
 
@@ -358,11 +358,11 @@
                         "up-down-pos-threshold" : 5.0,
                         "up-down-velocity-threshold" : 5.0,
 
-                        "shooter-velocity" : 60.0,
+                        "shooter-velocity" : 65.0,
                         "shooter-velocity-threshold" : 5.0
                     },
                     "podium" : {
-                        "tilt" : -58.0,
+                        "tilt" : -67.0,
                         "tilt-pos-threshold" : 5.0,
                         "tilt-velocity-threshold" : 5.0,
 
@@ -370,7 +370,7 @@
                         "up-down-pos-threshold" : 5.0,
                         "up-down-velocity-threshold" : 5.0,
 
-                        "shooter-velocity" : 65.0,
+                        "shooter-velocity" : 70.0,
                         "shooter-velocity-threshold" : 5.0
                     }
                 },
@@ -411,19 +411,19 @@
                 "tilt" : {
                     "1" : {
                         "x" : 1.24,
-                        "y" : -63
+                        "y" : -64
                     },
                     "2" : {
                         "x" : 1.52,
-                        "y" : -58
+                        "y" : -60
                     },
                     "3" : {
                         "x" : 1.82,
-                        "y" : -53
+                        "y" : -57
                     },
                     "4" : {
                         "x" : 2.119,
-                        "y" : -47
+                        "y" : -57
                     },
                     "5" : {
                         "x" : 2.12,
@@ -1155,7 +1155,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 143,
+        "which": 10,
         "0": {
             "angle": 0,
             "power": 0.5,
@@ -1192,8 +1192,8 @@
             "name": "S2S2-Path1"
         },
         "10" : {
-            "power" : 0.2,
-            "duration" : 3.0
+            "power" : 0.5,
+            "duration" : 10.0
         },
         "11" : {
             "duration": 2.0

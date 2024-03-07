@@ -50,15 +50,14 @@ public class IntakeGotoNamedPositionAction extends Action {
         double updownstow = sub_.getUpDown().getSettingsValue("targets:stow").getDouble() ;
         double tiltstow = sub_.getTilt().getSettingsValue("targets:stow").getDouble() ;
 
-        if (updownpos < updownstow && updown_target_ > updownpos) {
+        if (updownpos < updownstow && updown_target_ < updownpos) {
             MessageLogger logger = sub_.getRobot().getMessageLogger();
-            logger.startMessage(MessageType.Info).add("pos < stow").add("pos", updownpos).add("stow", updownstow).endMessage() ;
-
             //
             // The updown is not in the stowed position, we must move the tilt to a compatible
             // position, before we start the synchronous movement.
             //
             double ttarget = tiltstow + updownstow - updownpos ;
+            logger.startMessage(MessageType.Info).add("pos < stow").add("pos", updownpos).add("stow", updownstow).add("ttarget", ttarget).endMessage() ;            
             tilt_only_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", ttarget, 3.0, 1.0) ;
             sub_.getTilt().setAction(tilt_only_action_, true) ;
             state_ = State.MovingTilt ;
