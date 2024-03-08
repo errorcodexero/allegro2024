@@ -118,7 +118,7 @@ public class TargetTrackerSubsystem extends Subsystem {
             }
             else {
                 logger.add("case 5") ;                
-                offset_ = 0 ;
+                offset_ = 5 ;
             }
         }
         else {
@@ -132,11 +132,15 @@ public class TargetTrackerSubsystem extends Subsystem {
             }
             else if (effective > -150 && effective <= -135) {
                 logger.add("case 8") ;                
-                offset_ = -5 ;
+                offset_ = 0 ;
+            }
+            else if (effective < 135 && effective >= 120) {
+                logger.add("case 9") ;
+                offset_ = -10 ;
             }
             else {
                 logger.add("case 10") ;   
-                offset_ = 0 ;
+                offset_ = 5 ;
             }
         }
 
