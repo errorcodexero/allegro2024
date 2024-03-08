@@ -13,7 +13,7 @@ import frc.robot.subsystems.intake_shooter.StopCollectAltAction;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class Start1Shoot3Action extends Action {
-    private static final double kRotatePosTol = 2.0 ;
+    private static final double kRotatePosTol = 5.0 ;
 
     private enum State {
         Idle,
@@ -103,6 +103,7 @@ public class Start1Shoot3Action extends Action {
             //
             // We missed the note, 
             //
+            robot_.getIntakeShooter().setAction(stow_, true) ;
             state_ = State.MissedCollect ;
         }
     }
@@ -119,13 +120,7 @@ public class Start1Shoot3Action extends Action {
     }
 
     private void missedCollectState() {
-        if (stop_collect_.isDone()) {
-            //
-            // We just stop here for now (maybe do more later)
-            //
-            robot_.getIntakeShooter().setAction(stow_, true) ;
-            state_ = State.MissedStow ;
-        }
+        state_ = State.MissedStow ;
     }
 
     private void missedStowState() {
@@ -154,6 +149,7 @@ public class Start1Shoot3Action extends Action {
             //
             // We missed the note, 
             //
+            robot_.getIntakeShooter().setAction(stow_, true);            
             state_ = State.MissedCollect ;
         }            
     }

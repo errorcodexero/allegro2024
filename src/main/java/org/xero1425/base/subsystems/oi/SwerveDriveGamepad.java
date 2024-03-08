@@ -116,7 +116,7 @@ public class SwerveDriveGamepad extends Gamepad {
 
     public void startDriveBaseX() {
         if (db_.getAction() != x_action_) {
-            db_.setAction(x_action_);
+            db_.setAction(x_action_, true);
         }
         action_.update(new ChassisSpeeds());
         holding_x_ = true ;
@@ -124,7 +124,7 @@ public class SwerveDriveGamepad extends Gamepad {
 
     public void stopDriveBaseX() {
         if (db_.getAction() != action_ && getSubsystem().getRobot().isTeleop()) {
-            db_.setAction(action_);
+            db_.setAction(action_, true);
         }
         holding_x_ = false ;
     }

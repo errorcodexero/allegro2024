@@ -12,13 +12,13 @@
 
             // Subsystem related messages
             "vision": false,
-            "swerve" : false,
+            "swerve" : true,
             "limelight" : false,
             "allegro2024oi": false,
             "limelight-edgar" : false,
             "oibuttons" : false,
             "intake-shooter" : true,
-            "superstructure" : false,
+            "superstructure" : true,
             "swerve-gamepad" : false,
             "targettracker" : false,
             "amp-trap" : true
@@ -86,7 +86,8 @@
                     //
                     "feeder-power" : 0.3,
                     "shooter-velocity" : 14,
-                    "shooter-length" : 1.15
+                    "shooter-length" : 1.15,
+                    "cont-length" : 0.5
                 }
             }
         },
@@ -102,7 +103,7 @@
                 "keepout-zone" : {
                     "min" : 5.0,
                     "max" : 75.0,
-                    "elevator-height" : 0.17
+                    "elevator-height" : 0.19
                 }
             },
             "actions" : {
@@ -332,10 +333,10 @@
                     "rmax" : 90.0,
                     "ecval" : { 
                         "PRACTICE" : 0.44311,
-                        "COMPETITION" : 1.33,
+                        "COMPETITION" : 4.294,
                         "SIMULATION": 0.0
                     },
-                    "rcval" : 0.0
+                    "rcval" : -72.0
                 }
             },
             "actions" : {
@@ -427,31 +428,31 @@
                     },
                     "5" : {
                         "x" : 2.12,
-                        "y" : -70
+                        "y" : -72
                     },
                     "6" : {
                         "x" : 2.43,
-                        "y" : -68
+                        "y" : -67
                     },
                     "7" : {
                         "x" : 2.73,
-                        "y" : -65
+                        "y" : -66
                     },
                     "8" : {
                         "x" : 3.04,
-                        "y" : -62
+                        "y" : -64
                     },
                     "9" : {
                         "x" : 3.34,
-                        "y" : -61
+                        "y" : -62
                     },
                     "10" : {
                         "x" : 3.64,
-                        "y" : -59
+                        "y" : -61
                     },
                     "11" : {
                         "x" : 3.94,
-                        "y" : -57.0
+                        "y" : -58.0
                     }        
                 },
                 "shooter" : {
@@ -681,7 +682,7 @@
                 }
             },
             "targets" : {
-                "collect" : -5,
+                "collect" : -10,
                 "shoot" : 118.0,
                 "stow" : 118.0
             },
@@ -754,9 +755,9 @@
                     "type" : "kraken",
                     "bus" : "",
                     "canid" : 3,
-                    "inverted" : true,
+                    "inverted" : false,
                     "neutral-mode" : "brake",
-                    "current-limit" : 80,
+                    "current-limit" : 60,
                     "position-important" : "High",
                     "velocity-important" : "High",
                     "acceleration-imporant" : "high"
@@ -792,9 +793,9 @@
                     "type" : "kraken",
                     "bus" : "",
                     "canid" : 4,
-                    "inverted" : true,
+                    "inverted" : false,
                     "neutral-mode" : "brake",
-                    "current-limit" : 80,
+                    "current-limit" : 60,
                     "position-important" : "High",
                     "velocity-important" : "High",
                     "acceleration-imporant" : "high"
@@ -1155,7 +1156,7 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 10,
+        "which": 42,
         "0": {
             "angle": 0,
             "power": 0.5,
@@ -1214,7 +1215,7 @@
             "duration" : 2.0
         },
         "32" : {
-            "velocity" : 80
+            "velocity" : 65
         },
         "40" : {
             "power" : 0.5,

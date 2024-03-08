@@ -138,9 +138,9 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                     addSubActionPair(intakeshooter.getShooter1(),
                             new MCVelocityAction(intakeshooter.getShooter1(), "pids:velocity", getDouble("velocity"), 1.0, true),
                             false);
-                    addSubActionPair(intakeshooter.getShooter2(),
-                            new MCVelocityAction(intakeshooter.getShooter2(), "pids:velocity", getDouble("velocity"), 1.0, true),
-                            true);                            
+                    // addSubActionPair(intakeshooter.getShooter2(),
+                    //         new MCVelocityAction(intakeshooter.getShooter2(), "pids:velocity", getDouble("velocity"), 1.0, true),
+                    //         true);                            
                 }
                 break;
 

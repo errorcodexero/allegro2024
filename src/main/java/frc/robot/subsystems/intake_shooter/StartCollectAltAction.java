@@ -72,7 +72,7 @@ public class StartCollectAltAction extends CollectBaseAltAction {
             double updownstow = getSubsystem().getUpDown().getSettingsValue("targets:stow").getDouble() ;
             double tiltstow = getSubsystem().getTilt().getSettingsValue("targets:stow").getDouble() ;
 
-            if (updownpos < updownstow && updown_target_ > updownpos) {
+            if (updownpos < updownstow && updown_target_ < updownpos) {
                 MessageLogger logger = getSubsystem().getRobot().getMessageLogger();
                 logger.startMessage(MessageType.Info).add("pos < stow").add("pos", updownpos).add("stow", updownstow).endMessage() ;
 

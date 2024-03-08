@@ -14,7 +14,8 @@ public class TransferIntakeToTrampAction extends Action {
         WaitingOnSensorNone1,
         WaitingOnSensorDetected,
         WaitingOnSensorNone2,
-        FinishingTransfer
+        FinishingTransfer,
+        ContinueShooter,
     } ;
 
     private SuperStructureSubsystem sub_ ;
@@ -25,6 +26,7 @@ public class TransferIntakeToTrampAction extends Action {
     private IntakeShooterXferAction intake_shooter_xfer_action_ ;
 
     private double xfer_length_ ;
+    private double cont_length_ ;
     private double start_pos_ ;
 
     private State state_ ;
@@ -52,6 +54,8 @@ public class TransferIntakeToTrampAction extends Action {
         intake_shooter_xfer_action_ = new IntakeShooterXferAction(sub_.getIntakeShooter(), v1, v2) ;
 
         xfer_length_ = sub_.getSettingsValue("actions:xfer:shooter-length").getDouble() ;
+        cont_length_ = sub_.getSettingsValue("actions:xfer:cont-length").getDouble() ;
+
     }
 
     @Override
@@ -102,13 +106,18 @@ public class TransferIntakeToTrampAction extends Action {
         case FinishingTransfer:
             if (sub_.getIntakeShooter().getShooter1().getPosition() - start_pos_ > xfer_length_) {
                 amp_trap_xfer_action_.cancel() ;
-                intake_shooter_xfer_action_.cancel();
-
                 sub_.getIntakeShooter().setHoldingNote(false);
                 sub_.getAmpTrap().setHoldingNote(true);
-                setDone();
+                state_ = State.ContinueShooter ;
             }        
             break; 
+
+        case ContinueShooter:
+            if (sub_.getIntakeShooter().getShooter1().getPosition() - start_pos_ - xfer_length_ > cont_length_) {
+                intake_shooter_xfer_action_.cancel();
+                setDone();
+            }
+            break ;
         }
 
         if (state_ != prev) {
