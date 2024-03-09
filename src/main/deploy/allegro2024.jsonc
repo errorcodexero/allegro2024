@@ -87,7 +87,7 @@
                     "feeder-power" : 0.3,
                     "shooter-velocity" : 14,
                     "shooter-length" : 1.15,
-                    "cont-length" : 0.5
+                    "cont-length" : 12
                 }
             }
         },
@@ -120,12 +120,12 @@
                     "pivot" : 180.0
                 },
                 "trap-up-1" : {
-                    "elevator" : 0.2411,
-                    "pivot" : 149.6
+                    "elevator" : 0.2558,
+                    "pivot" : 139.77
                 },
                 "trap-up-2" : {
-                    "elevator" : 0.2523,
-                    "pivot" : 149.6
+                    "elevator" : 0.2558,
+                    "pivot" : 139.77
                 },                
                 "climb" : {
                     "elevator" : 0.2411,
@@ -1208,8 +1208,8 @@
             "updown-target" : 90.0
         },
         "30" : {
-            "power" : 0.2,
-            "duration" : 5.0
+            "power" : 1.0,
+            "duration" : 0.5
         },
         "31" : {
             "duration" : 2.0

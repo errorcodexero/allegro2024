@@ -99,7 +99,14 @@ public class TargetTrackerSubsystem extends Subsystem {
         double effective = robot_pos.getRotation().getDegrees() - ll_.getTX(target_number_) ;
 
         logger.startMessage(MessageType.Info) ;
-        if (target_number_ == AprilTags.BLUE_SPEAKER_CENTER) {
+        if (Math.abs(robot_pos.getX()) < 0.01 && Math.abs(robot_pos.getY()) < 0.01 && Math.abs(robot_pos.getRotation().getDegrees()) < 1.0) {
+            if (target_number_ == AprilTags.BLUE_CENTER_STAGE) {
+                offset_ = 0.0 ;
+            }
+            else {
+                offset_ = 0.0 ;
+            }
+        } else if (target_number_ == AprilTags.BLUE_SPEAKER_CENTER) {
             if (effective <= 30 && effective >= -30) {
                 logger.add("case 1") ;
                 offset_ = 0 ;
@@ -162,7 +169,13 @@ public class TargetTrackerSubsystem extends Subsystem {
             MessageLogger logger = getRobot().getMessageLogger() ;
 
             logger.startMessage(MessageType.Debug, getLoggerID()) ;
-            if (ll_.validTargets() && ll_.hasAprilTag(target_number_) && triangle_) {
+            if (Math.abs(robot_pos.getX()) < 0.01 && Math.abs(robot_pos.getY()) < 0.01 && Math.abs(robot_pos.getRotation().getDegrees()) < 1.0) {
+                logger.add("fixed position") ;
+                sees_target_ = true ;
+                distance_between_robot_and_target_ = 1.52 ;
+                angle_to_target_ = 0.0 ;
+            }
+            else if (ll_.validTargets() && ll_.hasAprilTag(target_number_) && triangle_) {
                 logger.add("apriltag", true) ;
                 sees_target_ = true ;
                 angle_to_target_ = -ll_.getTX(target_number_) + offset_ ;

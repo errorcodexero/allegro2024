@@ -1,5 +1,6 @@
 package frc.robot.subsystems.toplevel;
 
+import org.xero1425.base.LoopType;
 import org.xero1425.base.XeroRobot;
 import org.xero1425.base.subsystems.RobotSubsystem;
 import org.xero1425.base.subsystems.swerve.SDSSwerveDriveSubsystem;
@@ -75,5 +76,11 @@ public class AllegroRobot2024 extends RobotSubsystem {
 
     public TargetTrackerSubsystem getTargetTracker() {
         return tt_ ;
+    }
+
+    @Override
+    public void init(LoopType prev, LoopType current) {
+        super.init(prev, current);
+        cancelAction();
     }
 }

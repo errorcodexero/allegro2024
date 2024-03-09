@@ -116,6 +116,8 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 if (intakeshooter != null && intakeshooter.getShooter1() != null) {
                     addSubActionPair(intakeshooter.getShooter1(), new MotorEncoderPowerAction(intakeshooter.getShooter1(),
                             getDouble("power"), getDouble("duration")), true);
+                    addSubActionPair(intakeshooter.getShooter2(), new MotorEncoderPowerAction(intakeshooter.getShooter2(),
+                            getDouble("power"), getDouble("duration")), true);                            
                 }
                 break;
 

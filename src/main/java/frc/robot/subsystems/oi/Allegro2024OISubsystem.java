@@ -238,13 +238,15 @@ public class Allegro2024OISubsystem extends OISubsystem {
         TargetTrackerSubsystem tracker = robot.getTargetTracker() ;
         SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;
 
-        if (enable) {
-            if (oipanel_.getNoteTarget() == NoteTarget.Speaker && robot.getIntakeShooter().isHoldingNote()) {
-                gp.setTrackingSupplier(() -> tracker.getRotation());
+        if (gp != null) {
+            if (enable) {
+                if (oipanel_.getNoteTarget() == NoteTarget.Speaker && robot.getIntakeShooter().isHoldingNote()) {
+                    gp.setTrackingSupplier(() -> tracker.getRotation());
+                }
             }
-        }
-        else {
-            gp.setTrackingSupplier(null);
+            else {
+                gp.setTrackingSupplier(null);
+            }
         }
     }
 
@@ -264,13 +266,18 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     public void scaleDriveBaseVelocities(double scale) {
         SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad();
-        gp.setScaleAmount(scale) ;
+        if (gp != null) {
+            gp.setScaleAmount(scale) ;
+        }
     }
 
     @Override
     protected void gamePadCreated(Gamepad gp) {
         SwerveDriveGamepad swgp = (SwerveDriveGamepad)gp ;
         if (swgp != null) {
+            MessageLogger logger = getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Info).add("Gamepad discovered").endMessage();
+
             //
             // These are all bound directoy to the gamepad as they deal with the drivebase only
             // Any other buttons that are used to control shooting or climbing are queried in the
@@ -283,12 +290,17 @@ public class Allegro2024OISubsystem extends OISubsystem {
             swgp.bindButton(Gamepad.Button.RTrigger, ()->targetLockMode(false), null);
 
             swgp.bindButton(Gamepad.Button.X, ()->scaleDriveBaseVelocities(0.25), ()->scaleDriveBaseVelocities(1.0));
+
         }
     }
 
     private void dispositionNoteInIntake() {
         AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
-        robot.getOI().getGamePad().rumble(1.0, 1.0) ;
+        SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;
+
+        if (gp != null) {
+            gp.rumble(1.0, 1.0) ;
+        }
         NoteTarget target = oipanel_.getNoteTarget() ;         
         if (target == NoteTarget.Speaker && oipanel_.getAutoManualMode() == AutoManualMode.Auto) {
             robot.getIntakeShooter().setAction(shoot_action_, true);         
@@ -312,7 +324,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     private boolean isShootPressed() {
         SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;
-        return oipanel_.isShootPressed() || gp.isAPressed() ;
+        return oipanel_.isShootPressed() || (gp != null && gp.isAPressed()) ;
     }
 
     private void manualShootState() {
@@ -346,20 +358,30 @@ public class Allegro2024OISubsystem extends OISubsystem {
         AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
         SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;
 
-        if (gp.isRBackButtonPressed()) {
-            robot.getSuperStructure().setAction(startCollectAction_) ;
-            state_ = OIState.Collect ;
+        if (gp != null) {
+            if (gp.isRBackButtonPressed()) {
+                robot.getSuperStructure().setAction(startCollectAction_) ;
+                state_ = OIState.Collect ;
+            }
+            else if (oipanel_.isClimbUpPrepPressed()) {
+                climb_only_ = true ;
+                robot.getAmpTrap().setAction(goto_climb_pos_action_, true) ;
+                state_ = OIState.GoToClimbPosition ;
+            }
         }
-        else if (oipanel_.isClimbUpPrepPressed()) {
-            climb_only_ = true ;
-            robot.getAmpTrap().setAction(goto_climb_pos_action_, true) ;
-            state_ = OIState.GoToClimbPosition ;
-        }
+    }
+
+    private boolean isRButtonReleased() {
+        SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;        
+
+        if (gp == null)
+            return true ;
+
+        return !gp.isRBackButtonPressed() ;
     }
 
     private void collectState() {
         AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
-        SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;
 
         if (startCollectAction_.isDone()) {
             if (robot.getIntakeShooter().isHoldingNote()) {
@@ -369,7 +391,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
                 state_ = OIState.Idle ;
             }
         }
-        else if (!gp.isRBackButtonPressed() && !startCollectAction_.isCollectingNote()) {
+        else if (isRButtonReleased() && !startCollectAction_.isCollectingNote()) {
             robot.getSuperStructure().setAction(stopCollectAction_) ;
             state_ = OIState.EndingCollect ;
         }
@@ -407,7 +429,9 @@ public class Allegro2024OISubsystem extends OISubsystem {
                 //
                 // Find the desired absolute angle for the robot to aim at the goal.
                 //
-                getGamePad().disable();
+                if (getGamePad() != null) {
+                    getGamePad().disable();
+                }
                 robot.getSwerve().setAction(rotate_action_) ;
                 state_ = OIState.Shooting ;
 
@@ -426,7 +450,9 @@ public class Allegro2024OISubsystem extends OISubsystem {
             // shot and return to the state where they can press the shoot button again.
             //
             state_ = OIState.WaitingToShoot ;
-            getGamePad().enable();
+            if (getGamePad() != null) {
+                getGamePad().enable();
+            }
         }
         else if (!shoot_action_.isShooting() && oipanel_.getNoteTarget() != NoteTarget.Speaker) {
             //
@@ -434,7 +460,9 @@ public class Allegro2024OISubsystem extends OISubsystem {
             // return deploy the note to the manipulator on the elevator/arm.
             //
             shoot_action_.cancel() ;
-            getGamePad().enable();
+            if (getGamePad() != null) {
+                getGamePad().enable();
+            }
             dispositionNoteInIntake() ;            
         }
         else if (shoot_action_.isDone()) {
@@ -448,7 +476,9 @@ public class Allegro2024OISubsystem extends OISubsystem {
             //
             // Enable the game pad
             //
-            getGamePad().enable();
+            if (getGamePad() != null) {
+                getGamePad().enable();
+            }
 
             //
             // Stop the rotate tracking action
@@ -700,9 +730,11 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
         if (oipanel_.isEjectPressed() && state_ != OIState.Eject) {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
-            robot.getSuperStructure().cancelAction();
+            robot.cancelAction();
 
-            getGamePad().enable() ;
+            if (getGamePad() != null) {
+                getGamePad().enable() ;
+            }
             
             robot.getSuperStructure().setAction(eject_action_);
             state_ = OIState.Eject ;
@@ -711,8 +743,10 @@ public class Allegro2024OISubsystem extends OISubsystem {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
             robot.getSuperStructure().cancelAction();
 
-            getGamePad().enable() ;
-            
+            if (getGamePad() != null) {
+                getGamePad().enable() ;
+            }
+
             robot.getSuperStructure().setAction(turtle_action_);
             state_ = OIState.Eject ;
         }

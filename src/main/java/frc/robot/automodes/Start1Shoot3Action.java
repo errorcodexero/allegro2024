@@ -39,7 +39,6 @@ public class Start1Shoot3Action extends Action {
     private IntakeAutoShootAction shoot_ ;
     private IntakeGotoNamedPositionAction stow_ ;
     private StartCollectAltAction start_collect_ ;
-    private StopCollectAltAction stop_collect_ ;
     private SwerveHolonomicPathFollower p1_ ;
     private SwerveHolonomicPathFollower p2_ ;  
     private SwerveHolonomicPathFollower p3_ ;
@@ -58,7 +57,6 @@ public class Start1Shoot3Action extends Action {
         double v2 = robot_.getIntakeShooter().getTilt().getSettingsValue("targets:stow").getDouble() ; 
         stow_ = new IntakeGotoNamedPositionAction(robot_.getIntakeShooter(), v1, v2) ;
         start_collect_ = new StartCollectAltAction(robot_.getIntakeShooter()) ;
-        stop_collect_ = new StopCollectAltAction(robot_.getIntakeShooter()) ;
 
         p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S1S3-P1", true, 0.2, mirror_, mvalue_);
         p2_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S1S3-P2", false, 0.2, mirror_, mvalue_);

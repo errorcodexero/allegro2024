@@ -39,6 +39,12 @@
                 },
                 {
                     "constraints": [
+                        {
+                            "after": 4,
+                            "before": 6,
+                            "type": "distancevelocity",
+                            "velocity": 2
+                        }
                     ],
                     "endvelocity": 0,
                     "maxacceleration": 4,
