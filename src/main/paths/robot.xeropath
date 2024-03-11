@@ -433,6 +433,36 @@
                     "startvelocity": 0
                 }
             ]
+        },
+        {
+            "name": "Line",
+            "paths": [
+                {
+                    "constraints": [
+                    ],
+                    "endvelocity": 0,
+                    "maxacceleration": 2,
+                    "maxvelocity": 2,
+                    "name": "P1",
+                    "points": [
+                        {
+                            "heading": 0,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 0.5919472057944739,
+                            "y": 2.1698706644157246
+                        },
+                        {
+                            "heading": 0,
+                            "swrot": 0,
+                            "swrotvel": 0,
+                            "x": 3.112560584969796,
+                            "y": 2.152723634625416
+                        }
+                    ],
+                    "startvelocity": 0
+                }
+            ]
         }
     ],
     "outdir": "C:/cygwin64/home/butch/robottools/robots/1425/2024/allegro2024/src/main/deploy/paths",

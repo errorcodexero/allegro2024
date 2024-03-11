@@ -99,7 +99,7 @@ public class TargetTrackerSubsystem extends Subsystem {
         double effective = robot_pos.getRotation().getDegrees() - ll_.getTX(target_number_) ;
 
         logger.startMessage(MessageType.Info) ;
-        if (Math.abs(robot_pos.getX()) < 0.01 && Math.abs(robot_pos.getY()) < 0.01 && Math.abs(robot_pos.getRotation().getDegrees()) < 1.0) {
+        if (Math.abs(robot_pos.getX()) < 0.2 && Math.abs(robot_pos.getY()) < 0.2 && Math.abs(robot_pos.getRotation().getDegrees()) < 5.0) {
             if (target_number_ == AprilTags.BLUE_CENTER_STAGE) {
                 offset_ = 0.0 ;
             }

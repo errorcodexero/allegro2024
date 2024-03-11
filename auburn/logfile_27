@@ -1,0 +1,61 @@
+001.1938:1: Info: global: ============================================================
+001.2111:1: Info: global: robot code starting
+001.2117:1: Info: global:  SerialNumber = '03223856'
+001.2574:1: Info: global:  enableMessageLogger time = 0.2761
+001.2579:1: Info: global: ============================================================
+001.2630:1: Info: global: reading params for bot 'COMPETITION'
+001.2639:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.4371:1: Info: global:  readParamsFile time = 0.1782
+001.4765:1: Info: global:  enableMessagesFromSettingsFile time = 0.002986
+001.9780:1: Info: global:  loadPathsFiles time = 0.5005
+004.4102:1: Info: global: initializing robot - no FMS
+004.4685:1: Info: global:  plotMgrInit time = 0.0003160
+005.1847:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.0.3', no faults
+005.3594:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.0.3', no faults
+005.4909:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.0.3', no faults
+005.6086:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.0.3', no faults
+005.7266:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.0.3', no faults
+005.8823:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.0.3', no faults
+006.0194:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.0.3', no faults
+006.1805:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+006.3164:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.0.3', no faults
+006.7326:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.0.3', no faults
+006.8725:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.0472:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.1538:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.2757:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.3936:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.5088:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.6258:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.8330:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+007.8669:1: Info: global:  hardwareInit time = 3.397
+007.9653:1: Info: global: Changed vision parameters to Single Near
+008.0959:1: Info: global:  computeInitalState time = 0.2278
+008.3180:1: Info: global:  postHWInit time = 0.2209
+008.3445:1: Info: global: changing robot loop type: Initialization -> Disabled
+012.7948:1: Info: global: alliance changed:null -> Red: recreated auto modes for new alliance value
+040.9248:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+040.9255:1: Info: global: Gamepad discovered
+047.7492:1: Info: global: changing robot loop type: Disabled -> Teleop
+047.8484:1: Debug: actions: 247:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: -0.00 m/s, Omega: 0.00 rad/s))
+047.9056:1: Info: global: changing robot loop type: Teleop -> Disabled
+047.9060:1: Info: global: Motor Faults Report
+047.9063:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+047.9477:1: Info: global: intake-updown:rio-2:NONE
+047.9652:1: Info: global: intake-feeder:rio-1:NONE
+047.9851:1: Info: global: intake-tilt:rio-5:NONE
+048.0050:1: Info: global: intake-shooter1:rio-3:NONE
+048.0266:1: Info: global: intake-shooter2:rio-4:NONE
+048.0464:1: Info: global: elevator:rio-6:NONE
+048.0654:1: Info: global: arm:rio-7:NONE
+048.0659:1: Info: global: manipulator:rio-9:NONE
+048.0851:1: Info: global: climber:rio-10:NONE
+048.1097:1: Info: global: fl-steer:DriveBase-11:NONE
+048.1294:1: Info: global: fl-drive:DriveBase-12:NONE
+048.1481:1: Info: global: fr-steer:DriveBase-21:NONE
+048.1672:1: Info: global: fr-drive:DriveBase-22:NONE
+048.1861:1: Info: global: bl-steer:DriveBase-41:NONE
+048.2069:1: Info: global: bl-drive:DriveBase-42:NONE
+048.2264:1: Info: global: br-steer:DriveBase-31:NONE
+048.2451:1: Info: global: br-drive:DriveBase-32:NONE
+048.2455:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

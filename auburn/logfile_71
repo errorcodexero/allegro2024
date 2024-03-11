@@ -1,0 +1,54 @@
+001.3303:1: Info: global: ============================================================
+001.3494:1: Info: global: robot code starting
+001.3502:1: Info: global:  SerialNumber = '03223856'
+001.4007:1: Info: global:  enableMessageLogger time = 0.3749
+001.4015:1: Info: global: ============================================================
+001.4064:1: Info: global: reading params for bot 'COMPETITION'
+001.4089:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.5960:1: Info: global:  readParamsFile time = 0.1936
+001.6500:1: Info: global:  enableMessagesFromSettingsFile time = 0.001818
+002.2515:1: Info: global:  loadPathsFiles time = 0.6006
+004.8309:1: Info: global: initializing robot - no FMS
+004.8952:1: Info: global:  plotMgrInit time = 0.0002230
+005.6874:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.0.3'
+005.6888:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+005.8953:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.0.3'
+005.8966:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+006.0650:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.0.3'
+006.0657:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+006.2030:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.0.3'
+006.2037:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+006.3281:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.0.3'
+006.3294:1: Info: global:     Faults: sticky-devicetemp sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+006.5196:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.0.3'
+006.5207:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+006.6670:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.0.3'
+006.6686:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+006.9138:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+007.0306:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.0.3'
+007.0312:1: Info: global:     Faults: sticky-bridge-brownout sticky-reverse-soft-limit sticky-stator-curr-limit
+007.5165:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.0.3'
+007.5173:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+007.6355:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.0.3'
+007.6363:1: Info: global:     Faults: sticky-devicetemp sticky-bridge-brownout sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+007.8083:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.0.3'
+007.8089:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+007.9053:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.0.3'
+007.9059:1: Info: global:     Faults: sticky-devicetemp sticky-boot-during-enable sticky-bridge-brownout sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+008.0046:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.0.3'
+008.0052:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+008.1097:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.0.3'
+008.1105:1: Info: global:     Faults: sticky-devicetemp sticky-boot-during-enable sticky-bridge-brownout sticky-over-supply sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+008.2096:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.0.3'
+008.2104:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+008.3124:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.0.3'
+008.3132:1: Info: global:     Faults: sticky-devicetemp sticky-bridge-brownout sticky-over-supply sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+008.5057:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+008.5064:1: Info: global: Gamepad discovered
+008.5606:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+008.5843:1: Info: global:  hardwareInit time = 3.688
+008.6905:1: Info: global: Changed vision parameters to Single Near
+008.8155:1: Info: global:  computeInitalState time = 0.2299
+009.0377:1: Info: global:  postHWInit time = 0.2209
+009.0743:1: Info: global: changing robot loop type: Initialization -> Disabled
+009.0767:1: Info: global: alliance changed:null -> Blue: recreated auto modes for new alliance value

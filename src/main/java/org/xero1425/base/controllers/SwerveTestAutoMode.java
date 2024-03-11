@@ -9,7 +9,8 @@ import org.xero1425.base.subsystems.swerve.SwerveSpeedAngleAction;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MissingParameterException;
 
-public class SwerveTestAutoMode extends TestAutoMode {
+public class 
+SwerveTestAutoMode extends TestAutoMode {
 
     public SwerveTestAutoMode(AutoController ctrl, String name)
             throws BadParameterTypeException, MissingParameterException {

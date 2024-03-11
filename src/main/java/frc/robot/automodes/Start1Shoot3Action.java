@@ -9,7 +9,6 @@ import org.xero1425.misc.MessageType;
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
 import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
 import frc.robot.subsystems.intake_shooter.StartCollectAltAction;
-import frc.robot.subsystems.intake_shooter.StopCollectAltAction;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class Start1Shoot3Action extends Action {

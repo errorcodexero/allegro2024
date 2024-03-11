@@ -739,16 +739,16 @@ public class Allegro2024OISubsystem extends OISubsystem {
             robot.getSuperStructure().setAction(eject_action_);
             state_ = OIState.Eject ;
         }
-        else if (oipanel_.isTurtlePressed() && state_ != OIState.Turtle) {
+        else if (oipanel_.isTurtlePressed() && state_ != OIState.Turtle && state_ != OIState.Eject) {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
-            robot.getSuperStructure().cancelAction();
+            robot.cancelAction();
 
             if (getGamePad() != null) {
                 getGamePad().enable() ;
             }
 
             robot.getSuperStructure().setAction(turtle_action_);
-            state_ = OIState.Eject ;
+            state_ = OIState.Turtle ;
         }
         else {
             runOIStateMachine();

@@ -174,7 +174,7 @@ public abstract class SwerveBaseSubsystem extends DriveBaseSubsystem {
             // These std devs are if we have no vision system.  When a vision system gets registered
             // we replace these placeholders with values read from the settings file.
             //
-            Vector<N3> vparams = VecBuilder.fill(0.9, 0.9, 0.9);
+            Vector<N3> vparams = VecBuilder.fill(0.02, 0.02, 0.02);
             estimator_ = new SwerveDrivePoseEstimator(kinematics_, heading, poss, last_pose_, oparams, vparams) ;
 
         } catch(Exception ex) {

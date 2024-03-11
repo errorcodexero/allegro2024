@@ -1,0 +1,36 @@
+001.0972:1: Info: global: ============================================================
+001.1147:1: Info: global: robot code starting
+001.1154:1: Info: global:  SerialNumber = '03223856'
+001.1616:1: Info: global:  enableMessageLogger time = 0.2821
+001.1622:1: Info: global: ============================================================
+001.1674:1: Info: global: reading params for bot 'COMPETITION'
+001.1684:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.3409:1: Info: global:  readParamsFile time = 0.1777
+001.3790:1: Info: global:  enableMessagesFromSettingsFile time = 0.001837
+001.8851:1: Info: global:  loadPathsFiles time = 0.5051
+004.3022:1: Info: global: initializing robot - no FMS
+004.3600:1: Info: global:  plotMgrInit time = 0.0002230
+005.0781:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.0.3', no faults
+005.8231:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.0.3', no faults
+005.9520:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.0.3', no faults
+006.0772:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.0.3', no faults
+006.2007:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.0.3', no faults
+006.3582:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.0.3', no faults
+006.4958:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.0.3', no faults
+006.6505:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+006.7954:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.0.3', no faults
+007.2291:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.3719:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.5600:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.6819:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.8079:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.9304:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.0551:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.1832:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.4008:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+008.4229:1: Info: global:  hardwareInit time = 4.062
+008.5180:1: Info: global: Changed vision parameters to Single Near
+008.6687:1: Info: global:  computeInitalState time = 0.2426
+008.9054:1: Info: global:  postHWInit time = 0.2355
+008.9410:1: Info: global: changing robot loop type: Initialization -> Disabled
+008.9431:1: Info: global: alliance changed:null -> Red: recreated auto modes for new alliance value
