@@ -3,7 +3,7 @@ area_min:0.07059117610000001
 area_similarity:0
 aspect_max:20.000000
 aspect_min:0.000000
-black_level:0
+black_level:18
 blue_balance:1975
 botfloorsnap:0
 botlength:0.8
@@ -35,7 +35,7 @@ dilation_steps:0
 direction_filter:0
 dual_close_sort_origin:0
 erosion_steps:0
-exposure:1691
+exposure:1612
 fiducial_backend:umich
 fiducial_decoder_strictness:strict
 fiducial_denoise:0.000000
@@ -48,7 +48,7 @@ fiducial_resdiv:2
 fiducial_size:152.4
 fiducial_skip3d:0
 fiducial_type:aprilClassic36h11
-fiducial_vis_mode:3dcamposetargspace
+fiducial_vis_mode:3dbotposetargspace
 flicker_correction:0
 force_convex:1
 hue_max:85
@@ -58,12 +58,12 @@ image_source:0
 img_to_show:0
 intersection_filter:0
 invert_hue:0
-lcgain:15.5
+lcgain:14.7
 multigroup_max:7
 multigroup_min:1
 multigroup_rejector:0
 pipeline_led_enabled:0
-pipeline_led_power:20
+pipeline_led_power:40
 pipeline_res:2
 pipeline_type:4
 python_snapscript_name:
