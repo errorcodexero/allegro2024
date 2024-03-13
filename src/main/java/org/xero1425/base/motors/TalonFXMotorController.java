@@ -272,6 +272,10 @@ public class TalonFXMotorController extends MotorController
         return results ;
     }
 
+    public void clearStickyFaults() {
+        ctrl_.clearStickyFaults() ;
+    }
+
     /// \brief Have the current motor follow another motor.
     /// \param leader if true, the leader is inverted versus normal operation
     /// \param invert if true, follow the other motor but with the power inverted.    

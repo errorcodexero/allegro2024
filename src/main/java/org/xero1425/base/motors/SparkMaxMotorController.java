@@ -50,6 +50,7 @@ public class SparkMaxMotorController extends MotorController
         public boolean getInverted() {
             return inverted_ ;
         }
+  
 
         public double getPosition() {
             return position_ ;
@@ -214,6 +215,10 @@ public class SparkMaxMotorController extends MotorController
 
         return faults ;
     }
+
+    public void clearStickyFaults() throws BadMotorRequestException, MotorRequestFailedException {
+        ctrl_.clearFaults() ;
+    }    
 
     /// \brief Returns the CAN ID of the motor
     /// \returns the CAN ID of the motor    

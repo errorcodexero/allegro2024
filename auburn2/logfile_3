@@ -1,0 +1,9 @@
+001.3598:1: Info: global: ============================================================
+001.3862:1: Info: global: robot code starting
+001.3870:1: Info: global:  SerialNumber = '03223856'
+001.4735:1: Info: global:  enableMessageLogger time = 0.4225
+001.4740:1: Info: global: ============================================================
+001.4788:1: Info: global: reading params for bot 'COMPETITION'
+001.4799:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.6683:1: Info: global:  readParamsFile time = 0.1933
+001.7213:1: Info: global:  enableMessagesFromSettingsFile time = 0.002300

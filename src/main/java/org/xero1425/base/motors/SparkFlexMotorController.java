@@ -207,6 +207,10 @@ public class SparkFlexMotorController extends MotorController {
         return faults ;
     }
 
+    public void clearStickyFaults() {
+        ctrl_.clearFaults() ;
+    }
+
     /// \brief Returns the CAN ID of the motor
     /// \returns the CAN ID of the motor    
     public int getCanID() throws BadMotorRequestException, MotorRequestFailedException {

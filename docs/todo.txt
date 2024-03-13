@@ -53,6 +53,18 @@ Item                                                                            
 - Mirrored 3 note auto mode                                                                           Done
 - Test manual shoot mode                                                                              Done
 - Test 25% drive base reduction                                                                       Done
-- Reset position for absolute encoder                                                                 3/7
-- Update gear ratios for tilt                                                                         3/7
+- Reset position for absolute encoder                                                                 Done
+- Update gear ratios for tilt                                                                         Done
+----------------------------------------------------------------------------------------------------------
+
+Auburn
+
+----------------------------------------------------------------------------------------------------------
+- Solve drive base problem                                                                            Test
+- Solve shooter wheel note stuck problem                                                              Test
+- Try 45 degree shot at subwoofer                                                                     Test
+- Transition automode initial shots to ManualShots                                                    Test
+- Four note auto mode                                                                                 Test/Tune
+- Wide side three note automode all at center                                                         Test/Tune
+- Investigate april tag based shooting vs pose based shooting
 ----------------------------------------------------------------------------------------------------------

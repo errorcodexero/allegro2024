@@ -181,7 +181,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
     private AmpTrapMoveNote move_note_action_ ;
 
     private IntakeManualShootAction manual_shoot_podium_action_ ;
-    private IntakeManualShootAction manual_shoot_subwoofer_action_ ;
+    private IntakeManualShootAction manual_shoot_subwoofer_center_action_ ;      
     private IntakeManualShootAction manual_shoot_current_ ;
 
     //
@@ -312,7 +312,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
                 manual_shoot_current_ = manual_shoot_podium_action_ ;
             }
             else if (oipanel_.getAutoManualMode() == AutoManualMode.ManualSubwoofer) {
-                manual_shoot_current_ = manual_shoot_subwoofer_action_ ;
+                manual_shoot_current_ = manual_shoot_subwoofer_center_action_ ;
             }
             state_ = OIState.ManualShoot ;
         }
@@ -912,7 +912,8 @@ public class Allegro2024OISubsystem extends OISubsystem {
         rotate_action_ = new SwerveTrackAngle(robot.getSwerve(), () -> robot.getTargetTracker().getRotation(), postol) ;
         shoot_action_ = new IntakeAutoShootAction(intake, tracker, false, rotate_action_) ;
         manual_shoot_podium_action_ = new IntakeManualShootAction(intake, "podium") ;
-        manual_shoot_subwoofer_action_ = new IntakeManualShootAction(intake, "subwoofer") ;
+        manual_shoot_subwoofer_center_action_ = new IntakeManualShootAction(intake, "subwoofer-center") ;
+               
 
         fwd_transfer_action_ = new TransferIntakeToTrampAction(robot.getSuperStructure()) ;
 

@@ -350,24 +350,60 @@
                     "updown-threshold" : 45.0
                 },
                 "manual-shoot" : {
-                    "subwoofer" : {
+                    "subwoofer-center" : {
                         "tilt" : -65.0,
                         "tilt-pos-threshold" : 5.0,
                         "tilt-velocity-threshold" : 5.0,
 
-                        "up-down-pos" : 100.0,
+                        "updown" : 100.0,
                         "up-down-pos-threshold" : 5.0,
                         "up-down-velocity-threshold" : 5.0,
 
                         "shooter-velocity" : 65.0,
                         "shooter-velocity-threshold" : 5.0
                     },
+                    "subwoofer-center-low" : {
+                        "tilt" : 30.0,
+                        "tilt-pos-threshold" : 5.0,
+                        "tilt-velocity-threshold" : 5.0,
+
+                        "updown" : 45.0,
+                        "up-down-pos-threshold" : 5.0,
+                        "up-down-velocity-threshold" : 5.0,
+
+                        "shooter-velocity" : 65.0,
+                        "shooter-velocity-threshold" : 5.0
+                    },                    
+                    "subwoofer-left" : {
+                        "tilt" : -65.0,
+                        "tilt-pos-threshold" : 5.0,
+                        "tilt-velocity-threshold" : 5.0,
+
+                        "updown" : 100.0,
+                        "up-down-pos-threshold" : 5.0,
+                        "up-down-velocity-threshold" : 5.0,
+
+                        "shooter-velocity" : 65.0,
+                        "shooter-velocity-threshold" : 5.0
+                    },
+                    "subwoofer-right" : {
+                        "tilt" : -65.0,
+                        "tilt-pos-threshold" : 5.0,
+                        "tilt-velocity-threshold" : 5.0,
+
+                        "updown" : 100.0,
+                        "up-down-pos-threshold" : 5.0,
+                        "up-down-velocity-threshold" : 5.0,
+
+                        "shooter-velocity" : 65.0,
+                        "shooter-velocity-threshold" : 5.0
+                    },                    
                     "podium" : {
                         "tilt" : -67.0,
                         "tilt-pos-threshold" : 5.0,
                         "tilt-velocity-threshold" : 5.0,
 
-                        "up-down-pos" : 118.0,
+                        "updown" : 118.0,
                         "up-down-pos-threshold" : 5.0,
                         "up-down-velocity-threshold" : 5.0,
 
@@ -976,7 +1012,12 @@
             // This section describes the params governing the angle tracking mode of the swerve
             //
             "angle-tracker" : {
-                "p" : 7.0
+                "gamepad" : {
+                    "p" : 7.0
+                },
+                "track" : {
+                    "p" : 7.0
+                }
             },
 
             //

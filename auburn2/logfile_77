@@ -1,0 +1,193 @@
+001.3113:1: Info: global: ============================================================
+001.3304:1: Info: global: robot code starting
+001.3310:1: Info: global:  SerialNumber = '03223856'
+001.3818:1: Info: global:  enableMessageLogger time = 0.3579
+001.3823:1: Info: global: ============================================================
+001.3875:1: Info: global: reading params for bot 'COMPETITION'
+001.3900:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.5767:1: Info: global:  readParamsFile time = 0.1935
+001.6312:1: Info: global:  enableMessagesFromSettingsFile time = 0.001855
+002.2217:1: Info: global:  loadPathsFiles time = 0.5896
+005.4403:1: Info: global: initializing robot - no FMS
+005.5081:1: Info: global:  plotMgrInit time = 0.0002230
+006.4322:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.0.3', no faults
+006.6961:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.0.3', no faults
+006.8612:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.0.3', no faults
+007.0271:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.0.3', no faults
+007.2006:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.0.3', no faults
+007.4113:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.0.3', no faults
+007.5479:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.0.3', no faults
+007.7721:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+007.9087:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.0.3', no faults
+008.4110:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.5483:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.7291:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.8451:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.9720:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.0.3', no faults
+009.0890:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.0.3', no faults
+009.2050:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.0.3', no faults
+009.3272:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.0.3', no faults
+009.5290:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+009.5297:1: Info: global: Gamepad discovered
+009.5734:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+009.5995:1: Info: global:  hardwareInit time = 4.091
+009.7070:1: Info: global: Changed vision parameters to Single Near
+009.8412:1: Info: global:  computeInitalState time = 0.2405
+010.0731:1: Info: global:  postHWInit time = 0.2307
+010.1093:1: Info: global: changing robot loop type: Initialization -> Disabled
+010.1113:1: Info: global: alliance changed:null -> Red: recreated auto modes for new alliance value
+013.4692:1: Info: global: changing robot loop type: Disabled -> Teleop
+013.5397:1: Debug: actions: 0:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: -0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+056.0940:1: Info: global: changing robot loop type: Teleop -> Disabled
+056.0946:1: Info: global: Motor Faults Report
+056.0950:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+056.1179:1: Info: global: intake-updown:rio-2:NONE
+056.1519:1: Info: global: intake-feeder:rio-1:NONE
+056.1726:1: Info: global: intake-tilt:rio-5:NONE
+056.1943:1: Info: global: intake-shooter1:rio-3:NONE
+056.2168:1: Info: global: intake-shooter2:rio-4:NONE
+056.2447:1: Info: global: elevator:rio-6:NONE
+056.2680:1: Info: global: arm:rio-7:NONE
+056.2688:1: Info: global: manipulator:rio-9:NONE
+056.2921:1: Info: global: climber:rio-10:NONE
+056.3139:1: Info: global: fl-steer:DriveBase-11:NONE
+056.3407:1: Info: global: fl-drive:DriveBase-12:NONE
+056.3628:1: Info: global: fr-steer:DriveBase-21:NONE
+056.3840:1: Info: global: fr-drive:DriveBase-22:NONE
+056.4107:1: Info: global: bl-steer:DriveBase-41:NONE
+056.4302:1: Info: global: bl-drive:DriveBase-42:NONE
+056.4556:1: Info: global: br-steer:DriveBase-31:NONE
+056.4765:1: Info: global: br-drive:DriveBase-32:NONE
+056.4768:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+325.8538:1: Info: global: changing robot loop type: Disabled -> Teleop
+336.7935:1: Info: global: changing robot loop type: Teleop -> Disabled
+336.7939:1: Info: global: Motor Faults Report
+336.7942:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+336.8109:1: Info: global: intake-updown:rio-2:NONE
+336.8414:1: Info: global: intake-feeder:rio-1:NONE
+336.8591:1: Info: global: intake-tilt:rio-5:NONE
+336.8744:1: Info: global: intake-shooter1:rio-3:NONE
+336.8908:1: Info: global: intake-shooter2:rio-4:NONE
+336.9068:1: Info: global: elevator:rio-6:NONE
+337.4853:1: Info: global: arm:rio-7:NONE
+337.4860:1: Info: global: manipulator:rio-9:NONE
+337.5055:1: Info: global: climber:rio-10:NONE
+337.5222:1: Info: global: fl-steer:DriveBase-11:NONE
+337.5425:1: Info: global: fl-drive:DriveBase-12:NONE
+337.5668:1: Info: global: fr-steer:DriveBase-21:NONE
+337.5842:1: Info: global: fr-drive:DriveBase-22:NONE
+337.6044:1: Info: global: bl-steer:DriveBase-41:NONE
+337.6238:1: Info: global: bl-drive:DriveBase-42:NONE
+337.6470:1: Info: global: br-steer:DriveBase-31:NONE
+337.6694:1: Info: global: br-drive:DriveBase-32:NONE
+337.6704:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+460.3528:1: Info: global: changing robot loop type: Disabled -> Teleop
+546.9936:1: Info: global: changing robot loop type: Teleop -> Disabled
+546.9939:1: Info: global: Motor Faults Report
+546.9944:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+547.0145:1: Info: global: intake-updown:rio-2:NONE
+547.0385:1: Info: global: intake-feeder:rio-1:NONE
+547.0552:1: Info: global: intake-tilt:rio-5:NONE
+547.0719:1: Info: global: intake-shooter1:rio-3:NONE
+547.0912:1: Info: global: intake-shooter2:rio-4:NONE
+547.1076:1: Info: global: elevator:rio-6:NONE
+547.1240:1: Info: global: arm:rio-7:NONE
+547.1245:1: Info: global: manipulator:rio-9:NONE
+547.1409:1: Info: global: climber:rio-10:NONE
+547.1564:1: Info: global: fl-steer:DriveBase-11:NONE
+547.1736:1: Info: global: fl-drive:DriveBase-12:NONE
+547.1932:1: Info: global: fr-steer:DriveBase-21:NONE
+547.2086:1: Info: global: fr-drive:DriveBase-22:NONE
+547.2253:1: Info: global: bl-steer:DriveBase-41:NONE
+547.2405:1: Info: global: bl-drive:DriveBase-42:NONE
+547.2571:1: Info: global: br-steer:DriveBase-31:NONE
+547.2743:1: Info: global: br-drive:DriveBase-32:NONE
+547.2747:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+634.3129:1: Info: global: changing robot loop type: Disabled -> Teleop
+672.0535:1: Info: global: changing robot loop type: Teleop -> Disabled
+672.0538:1: Info: global: Motor Faults Report
+672.0540:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+672.0718:1: Info: global: intake-updown:rio-2:NONE
+672.0967:1: Info: global: intake-feeder:rio-1:NONE
+672.1139:1: Info: global: intake-tilt:rio-5:NONE
+672.1305:1: Info: global: intake-shooter1:rio-3:NONE
+672.1469:1: Info: global: intake-shooter2:rio-4:NONE
+672.1634:1: Info: global: elevator:rio-6:NONE
+672.1806:1: Info: global: arm:rio-7:NONE
+672.1811:1: Info: global: manipulator:rio-9:NONE
+672.2025:1: Info: global: climber:rio-10:NONE
+672.2222:1: Info: global: fl-steer:DriveBase-11:NONE
+672.2394:1: Info: global: fl-drive:DriveBase-12:NONE
+672.2562:1: Info: global: fr-steer:DriveBase-21:NONE
+672.2742:1: Info: global: fr-drive:DriveBase-22:NONE
+672.2909:1: Info: global: bl-steer:DriveBase-41:NONE
+672.3137:1: Info: global: bl-drive:DriveBase-42:NONE
+672.3328:1: Info: global: br-steer:DriveBase-31:NONE
+672.3583:1: Info: global: br-drive:DriveBase-32:NONE
+672.3593:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+703.1337:1: Info: global: changing robot loop type: Disabled -> Teleop
+715.3738:1: Info: global: changing robot loop type: Teleop -> Disabled
+715.3741:1: Info: global: Motor Faults Report
+715.3743:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+715.3929:1: Info: global: intake-updown:rio-2:NONE
+715.4229:1: Info: global: intake-feeder:rio-1:NONE
+715.4451:1: Info: global: intake-tilt:rio-5:NONE
+715.4697:1: Info: global: intake-shooter1:rio-3:NONE
+715.5018:1: Info: global: intake-shooter2:rio-4:NONE
+715.5281:1: Info: global: elevator:rio-6:NONE
+715.5501:1: Info: global: arm:rio-7:NONE
+715.5509:1: Info: global: manipulator:rio-9:NONE
+715.5725:1: Info: global: climber:rio-10:NONE
+715.5962:1: Info: global: fl-steer:DriveBase-11:NONE
+715.6319:1: Info: global: fl-drive:DriveBase-12:NONE
+715.6536:1: Info: global: fr-steer:DriveBase-21:NONE
+715.6734:1: Info: global: fr-drive:DriveBase-22:NONE
+715.6960:1: Info: global: bl-steer:DriveBase-41:NONE
+715.7225:1: Info: global: bl-drive:DriveBase-42:NONE
+715.7455:1: Info: global: br-steer:DriveBase-31:NONE
+715.7776:1: Info: global: br-drive:DriveBase-32:NONE
+715.7779:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+986.1129:1: Info: global: changing robot loop type: Disabled -> Teleop
+1001.6733:1: Info: global: changing robot loop type: Teleop -> Disabled
+1001.6737:1: Info: global: Motor Faults Report
+1001.6742:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1001.6921:1: Info: global: intake-updown:rio-2:NONE
+1001.7206:1: Info: global: intake-feeder:rio-1:NONE
+1001.7397:1: Info: global: intake-tilt:rio-5:NONE
+1001.7585:1: Info: global: intake-shooter1:rio-3:NONE
+1001.7770:1: Info: global: intake-shooter2:rio-4:NONE
+1001.7972:1: Info: global: elevator:rio-6:NONE
+1001.8197:1: Info: global: arm:rio-7:NONE
+1001.8208:1: Info: global: manipulator:rio-9:NONE
+1001.8391:1: Info: global: climber:rio-10:NONE
+1001.8577:1: Info: global: fl-steer:DriveBase-11:NONE
+1001.8771:1: Info: global: fl-drive:DriveBase-12:NONE
+1001.8954:1: Info: global: fr-steer:DriveBase-21:NONE
+1001.9179:1: Info: global: fr-drive:DriveBase-22:NONE
+1001.9362:1: Info: global: bl-steer:DriveBase-41:NONE
+1001.9532:1: Info: global: bl-drive:DriveBase-42:NONE
+1001.9712:1: Info: global: br-steer:DriveBase-31:NONE
+1001.9879:1: Info: global: br-drive:DriveBase-32:NONE
+1001.9883:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1012.2928:1: Info: global: changing robot loop type: Disabled -> Teleop
+1022.3534:1: Info: global: changing robot loop type: Teleop -> Disabled
+1022.3538:1: Info: global: Motor Faults Report
+1022.3546:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1022.3868:1: Info: global: intake-updown:rio-2:NONE
+1022.4088:1: Info: global: intake-feeder:rio-1:NONE
+1022.4300:1: Info: global: intake-tilt:rio-5:NONE
+1022.4505:1: Info: global: intake-shooter1:rio-3:NONE
+1022.4714:1: Info: global: intake-shooter2:rio-4:NONE
+1022.4977:1: Info: global: elevator:rio-6:NONE
+1022.5214:1: Info: global: arm:rio-7:NONE
+1022.5224:1: Info: global: manipulator:rio-9:NONE
+1022.5438:1: Info: global: climber:rio-10:NONE
+1022.5649:1: Info: global: fl-steer:DriveBase-11:NONE
+1022.5899:1: Info: global: fl-drive:DriveBase-12:NONE
+1022.6123:1: Info: global: fr-steer:DriveBase-21:NONE
+1022.6383:1: Info: global: fr-drive:DriveBase-22:NONE
+1022.6605:1: Info: global: bl-steer:DriveBase-41:NONE
+1022.6868:1: Info: global: bl-drive:DriveBase-42:NONE
+1022.7083:1: Info: global: br-steer:DriveBase-31:NONE
+1022.7334:1: Info: global: br-drive:DriveBase-32:NONE
+1022.7338:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

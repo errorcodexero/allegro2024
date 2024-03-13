@@ -1,0 +1,1643 @@
+001.3076:1: Info: global: ============================================================
+001.3271:1: Info: global: robot code starting
+001.3277:1: Info: global:  SerialNumber = '03223856'
+001.3811:1: Info: global:  enableMessageLogger time = 0.3565
+001.3817:1: Info: global: ============================================================
+001.3869:1: Info: global: reading params for bot 'COMPETITION'
+001.3882:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.5991:1: Info: global:  readParamsFile time = 0.2165
+001.6553:1: Info: global:  enableMessagesFromSettingsFile time = 0.002115
+002.2322:1: Info: global:  loadPathsFiles time = 0.5760
+005.4845:1: Info: global: initializing robot - FMS connected
+005.5516:1: Info: global:  plotMgrInit time = 0.0002230
+006.3761:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.0.3'
+006.3771:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+006.6058:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.0.3'
+006.6071:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+006.7758:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.0.3'
+006.7779:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+006.9120:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.0.3'
+006.9130:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+007.0470:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.0.3'
+007.0479:1: Info: global:     Faults: sticky-devicetemp sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+007.2238:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.0.3'
+007.2246:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+007.3776:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.0.3'
+007.3786:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+007.6205:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+007.7428:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.0.3'
+007.7434:1: Info: global:     Faults: sticky-bridge-brownout sticky-reverse-soft-limit sticky-stator-curr-limit
+008.2429:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.0.3'
+008.2437:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+008.3692:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.0.3'
+008.3700:1: Info: global:     Faults: sticky-devicetemp sticky-bridge-brownout sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+008.5508:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.0.3'
+008.5517:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+008.6487:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.0.3'
+008.6495:1: Info: global:     Faults: sticky-devicetemp sticky-boot-during-enable sticky-bridge-brownout sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+008.7561:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.0.3'
+008.7570:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+008.8598:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.0.3'
+008.8604:1: Info: global:     Faults: sticky-devicetemp sticky-boot-during-enable sticky-bridge-brownout sticky-over-supply sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+008.9721:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.0.3'
+008.9729:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+009.0778:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.0.3'
+009.0784:1: Info: global:     Faults: sticky-devicetemp sticky-bridge-brownout sticky-over-supply sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+009.2738:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+009.2748:1: Info: global: Gamepad discovered
+009.3296:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+009.3530:1: Info: global:  hardwareInit time = 3.800
+009.4545:1: Info: global: Changed vision parameters to Single Near
+009.5749:1: Info: global:  computeInitalState time = 0.2196
+009.7878:1: Info: global:  postHWInit time = 0.2103
+009.8277:1: Info: global: changing robot loop type: Initialization -> Disabled
+009.8294:1: Info: global: alliance changed:null -> Red: recreated auto modes for new alliance value
+575.6915:1: Info: global: Entering Autonomous Mode
+575.6921:1: Info: global:     Automode Number: 0
+575.6924:1: Info: global:     Automode Name: Start1-Shoot3
+575.6929:1: Info: global:     Alliance: RED
+575.6932:1: Info: global:     Location: 3
+575.6937:1: Info: global:     GameData: ''
+575.6940:1: Info: global:     EventName: WAAHS
+575.6982:1: Info: global:     MatchType: QUALIFICATION
+575.6987:1: Info: global:     MatchNumber: 65
+575.6998:1: Info: global:     MatchTime: 15.0000
+575.7001:1: Info: global:     FMS Attached: YES
+575.7014:1: Info: global: changing robot loop type: Disabled -> Autonomous
+575.7672:1: Debug: actions: 144:starting action: 
+                   actions: 144: Sequence [
+                   actions:     170: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:         145: Start2Shoot3Action
+                   actions:     ]
+                   actions: ]
+575.7716:1: Debug: actions: 170:starting action: 
+                   actions: 170: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:     145: Start2Shoot3Action
+                   actions: ]
+575.7789:1: Debug: actions: 145:starting action: 145: Start2Shoot3Action
+575.7810:1: Debug: actions: 146:starting action: 146: SwerveTrackAngle
+575.7821:1: Debug: actions: 147:starting action: 147: IntakeShootAction
+575.7830:1: Debug: actions: 150:starting action: MCTrackPosAction (intake-updown) target=123.5
+575.8156:1: Debug: actions: 151:starting action: MCTrackPosAction (intake-tilt) target=-40.0
+575.8362:1: Debug: actions: 148:starting action: 148: MCVelocityAction (intake-shooter1), target = 45.0
+575.8518:1: Debug: actions: 149:starting action: 149: MCVelocityAction (intake-shooter2), target = 45.0
+575.8853:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+575.9061:1: Info: global: gyroinfo rate = 0.1328 ratelimit = 5.000 ax = 0.02777 ay = -0.01166 alimit = 0.05000
+575.9126:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = true gyro_stopped = true
+576.0917:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.1736:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.1791:1: Info: global: gyroinfo rate = 0.2422 ratelimit = 5.000 ax = 0.06439 ay = 0.05469 alimit = 0.05000
+576.1812:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+576.1830:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.1950:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.1990:1: Info: global: gyroinfo rate = -0.6328 ratelimit = 5.000 ax = -0.01099 ay = 0.000 alimit = 0.05000
+576.2009:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.2032:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.2168:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.2233:1: Info: global: gyroinfo rate = -0.6953 ratelimit = 5.000 ax = -0.009521 ay = 0.007568 alimit = 0.05000
+576.2241:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.2270:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.2470:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.2562:1: Info: global: gyroinfo rate = 0.05469 ratelimit = 5.000 ax = 0.02582 ay = -0.01312 alimit = 0.05000
+576.2580:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.2632:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.2873:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.2933:1: Info: global: gyroinfo rate = 0.5000 ratelimit = 5.000 ax = 0.04877 ay = -0.02972 alimit = 0.05000
+576.2943:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.2977:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.3261:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.3342:1: Info: global: gyroinfo rate = 0.3125 ratelimit = 5.000 ax = 0.002136 ay = -0.04071 alimit = 0.05000
+576.3354:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+576.3388:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.3568:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.3598:1: Info: global: gyroinfo rate = 0.05078 ratelimit = 5.000 ax = 0.009705 ay = 0.009033 alimit = 0.05000
+576.3610:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.3628:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.3815:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.3874:1: Info: global: gyroinfo rate = 0.2969 ratelimit = 5.000 ax = 0.02826 ay = -0.005066 alimit = 0.05000
+576.3883:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.3912:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.4111:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.4147:1: Info: global: gyroinfo rate = 0.2266 ratelimit = 5.000 ax = 0.01947 ay = -0.007996 alimit = 0.05000
+576.4154:1: Debug: intake-shooter:  updown = false tilt = true shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.4175:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.4349:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.4438:1: Info: global: gyroinfo rate = 0.4375 ratelimit = 5.000 ax = 0.01385 ay = -0.03143 alimit = 0.05000
+576.4444:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.4467:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.4645:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.4676:1: Info: global: gyroinfo rate = 0.4297 ratelimit = 5.000 ax = 0.02069 ay = -0.02924 alimit = 0.05000
+576.4683:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.4749:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.4980:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.5034:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000 ax = 0.02704 ay = 0.01172 alimit = 0.05000
+576.5041:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.5062:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.5226:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.5265:1: Info: global: gyroinfo rate = 0.3711 ratelimit = 5.000 ax = 0.03143 ay = -0.03021 alimit = 0.05000
+576.5271:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.5290:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.5441:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.5501:1: Info: global: gyroinfo rate = 0.2617 ratelimit = 5.000 ax = -0.009521 ay = -0.004578 alimit = 0.05000
+576.5508:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.5545:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.5740:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.5819:1: Info: global: gyroinfo rate = 0.3711 ratelimit = 5.000 ax = 0.02728 ay = 0.004883 alimit = 0.05000
+576.5827:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.5930:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.6295:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.6362:1: Info: global: gyroinfo rate = 0.1172 ratelimit = 5.000 ax = -0.01343 ay = -0.02118 alimit = 0.05000
+576.6369:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.6401:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.6550:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.6608:1: Info: global: gyroinfo rate = 0.5234 ratelimit = 5.000 ax = 0.03705 ay = -0.01630 alimit = 0.05000
+576.6619:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.6641:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.7078:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+576.7108:1: Info: global: gyroinfo rate = 0.3281 ratelimit = 5.000 ax = 0.01434 ay = -0.009216 alimit = 0.05000
+576.7116:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+576.7141:1: Info: global: gyroinfo rate = 0.3281 ratelimit = 5.000 ax = 0.01434 ay = -0.009216 alimit = 0.05000
+576.7160:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.7309:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.7473:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.7902:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.8224:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.8389:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.8554:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.8733:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.8928:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.9244:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.9448:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.9669:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+576.9850:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+577.0185:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+577.0399:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+577.0570:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+577.0735:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+577.0949:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+577.1100:1: Debug: swerve:  err = -161.6 postel = 5.000 isAt = false
+577.1279:1: Debug: actions: 146:canceling action: 146: SwerveTrackAngle
+577.1290:1: Debug: actions: 152:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+577.3453:1: Debug: actions: 152:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+577.3590:1: Debug: actions: 147:completing action: 147: IntakeShootAction
+577.3685:1: Debug: actions: 150:canceling action: MCTrackPosAction (intake-updown) target=100.0
+577.3693:1: Debug: actions: 151:canceling action: MCTrackPosAction (intake-tilt) target=-59.99999999999999
+577.3702:1: Debug: actions: 148:canceling action: 148: MCVelocityAction (intake-shooter1), target = 65.0
+577.3708:1: Debug: actions: 149:canceling action: 149: MCVelocityAction (intake-shooter2), target = 65.0
+577.3716:1: Debug: actions: 156:starting action: StartCollectAction
+577.3722:1: Debug: actions: 163:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+577.3733:1: Debug: actions: 163:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+577.3749:1: Info: global: pos < stow pos = 99.98 stow = 118.0
+577.3758:1: Debug: actions: 260:starting action: MCMotionMagicAction (intake-tilt) target=-46.984897432 posthresh=3.0 velthresh=1.0
+577.3783:1: Debug: actions: 167:starting action: SwerveHolonomicPathFollower S1S3-P1
+577.3811:1: Info: global:  SwerveHolonomicPathFollower: Initial Pose  = 15.678 6.854 125.0
+577.3815:1: Info: global: Start1Shoot3Action action changed states: Shoot1 -> Path1
+577.3969:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 0, target 15.6780 6.8544 125.0000,actual 15.6780 6.8544 125.0000
+577.4084:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 1, target 15.6761 6.8544 125.0062,actual 15.6777 6.8546 124.9918
+577.4188:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 2, target 15.6742 6.8544 125.0250,actual 15.6774 6.8548 124.9945
+577.4307:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 3, target 15.6723 6.8543 125.0561,actual 15.6773 6.8549 124.9973
+577.4427:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 4, target 15.6704 6.8543 125.0998,actual 15.6774 6.8547 125.0000
+577.4558:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 5, target 15.6685 6.8542 125.1560,actual 15.6775 6.8546 125.0000
+577.4752:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 6, target 15.6667 6.8542 125.2246,actual 15.6775 6.8545 124.9918
+577.4877:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 7, target 15.6648 6.8542 125.3057,actual 15.6776 6.8544 124.9808
+577.5005:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 8, target 15.6629 6.8541 125.3993,actual 15.6778 6.8541 124.9753
+577.5100:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 9, target 15.6610 6.8541 125.5053,actual 15.6779 6.8539 124.9698
+577.5233:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 10, target 15.6591 6.8540 125.6239,actual 15.6779 6.8539 124.9698
+577.5368:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 11, target 15.6572 6.8540 125.7549,actual 15.6778 6.8541 124.9863
+577.5463:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 12, target 15.6553 6.8540 125.8984,actual 15.6774 6.8544 124.9973
+577.5567:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 13, target 15.6535 6.8539 126.0543,actual 15.6772 6.8547 125.0055
+577.5731:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 14, target 15.6502 6.8539 126.2228,actual 15.6757 6.8560 125.0247
+577.5834:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 15, target 15.6456 6.8538 126.4037,actual 15.6749 6.8568 125.0330
+577.5930:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 16, target 15.6411 6.8537 126.5971,actual 15.6739 6.8574 125.0385
+577.6060:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 17, target 15.6365 6.8536 126.8030,actual 15.6728 6.8582 125.0439
+577.6161:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 18, target 15.6320 6.8535 127.0213,actual 15.6717 6.8590 125.0742
+577.6277:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 19, target 15.6274 6.8534 127.2521,actual 15.6702 6.8602 125.0934
+577.6378:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 20, target 15.6215 6.8534 127.4955,actual 15.6684 6.8614 125.1126
+577.6474:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 21, target 15.6156 6.8533 127.7512,actual 15.6668 6.8626 125.1401
+577.6569:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 22, target 15.6097 6.8532 128.0195,actual 15.6651 6.8638 125.1758
+577.6675:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 23, target 15.6037 6.8531 128.3002,actual 15.6631 6.8652 125.2225
+577.6773:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 24, target 15.5971 6.8530 128.5935,actual 15.6610 6.8667 125.2719
+577.6874:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 25, target 15.5900 6.8530 128.8991,actual 15.6586 6.8684 125.3241
+577.7025:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 26, target 15.5830 6.8530 129.2173,actual 15.6545 6.8710 125.3873
+577.7122:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 27, target 15.5759 6.8529 129.5480,actual 15.6515 6.8731 125.4614
+577.7220:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 28, target 15.5681 6.8530 129.8911,actual 15.6483 6.8753 125.5466
+577.7313:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 29, target 15.5602 6.8530 130.2467,actual 15.6455 6.8772 125.6427
+577.7448:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 30, target 15.5524 6.8530 130.6148,actual 15.6412 6.8801 125.7471
+577.7550:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 31, target 15.5443 6.8531 130.9953,actual 15.6373 6.8828 125.9860
+577.7645:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 32, target 15.5362 6.8532 131.3884,actual 15.6331 6.8853 126.1261
+577.7745:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 33, target 15.5281 6.8533 131.7939,actual 15.6286 6.8880 126.1261
+577.7854:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 34, target 15.5200 6.8535 132.2119,actual 15.6236 6.8900 126.4365
+577.7957:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 35, target 15.5119 6.8537 132.6423,actual 15.6182 6.8916 126.6040
+577.8071:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 36, target 15.5038 6.8540 133.0853,actual 15.6095 6.8941 126.7935
+577.8154:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 37, target 15.4956 6.8543 133.5407,actual 15.6066 6.8952 127.0023
+577.8262:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 38, target 15.4875 6.8547 134.0086,actual 15.5972 6.8977 127.2275
+577.8440:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 39, target 15.4794 6.8550 134.4890,actual 15.5941 6.8989 127.4582
+577.8537:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 40, target 15.4713 6.8555 134.9818,actual 15.5802 6.9011 127.7109
+577.8640:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 41, target 15.4632 6.8560 135.4871,actual 15.5729 6.9022 127.9883
+577.8739:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 42, target 15.4551 6.8565 136.0049,actual 15.5655 6.9033 128.6063
+577.8841:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 43, target 15.4470 6.8570 136.5352,actual 15.5580 6.9043 128.6063
+577.8942:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 44, target 15.4389 6.8576 137.0780,actual 15.5502 6.9053 129.4742
+577.9103:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 45, target 15.4308 6.8583 137.6332,actual 15.5421 6.9063 129.8642
+577.9264:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 46, target 15.4227 6.8589 138.2009,actual 15.5297 6.9078 130.2762
+577.9375:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 47, target 15.4146 6.8598 138.7811,actual 15.5128 6.9094 131.1661
+577.9481:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 48, target 15.4066 6.8606 139.3738,actual 15.5043 6.9101 131.6330
+577.9577:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 49, target 15.3985 6.8615 139.9790,actual 15.4957 6.9107 132.1082
+577.9672:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 50, target 15.3904 6.8625 140.5966,actual 15.4871 6.9113 132.5916
+577.9762:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 51, target 15.3824 6.8635 141.2204,actual 15.4809 6.9123 133.0914
+577.9861:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 52, target 15.3743 6.8646 141.8443,actual 15.4742 6.9118 133.6023
+577.9962:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 53, target 15.3663 6.8657 142.4682,actual 15.4656 6.9122 134.1159
+578.0050:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 54, target 15.3583 6.8669 143.0920,actual 15.4568 6.9124 134.6323
+578.0147:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 55, target 15.3502 6.8681 143.7159,actual 15.4480 6.9127 135.1569
+578.0259:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 56, target 15.3422 6.8695 144.3398,actual 15.4391 6.9129 135.6952
+578.0371:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 57, target 15.3342 6.8709 144.9636,actual 15.4282 6.9131 136.2418
+578.0521:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 58, target 15.3262 6.8723 145.5875,actual 15.4173 6.9110 136.7993
+578.0624:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 59, target 15.3183 6.8738 146.2114,actual 15.4053 6.9098 137.3624
+578.0758:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 60, target 15.3103 6.8754 146.8352,actual 15.3957 6.9086 138.5049
+578.0866:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 61, target 15.3023 6.8769 147.4591,actual 15.3850 6.9083 139.0845
+578.1000:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 62, target 15.2944 6.8786 148.0829,actual 15.3743 6.9059 139.6695
+578.1187:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 63, target 15.2864 6.8804 148.7068,actual 15.3658 6.9049 140.2600
+578.1286:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 64, target 15.2785 6.8821 149.3307,actual 15.3490 6.9025 141.4246
+578.1388:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 65, target 15.2706 6.8839 149.9545,actual 15.3407 6.9013 142.0123
+578.1486:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 66, target 15.2627 6.8858 150.5784,actual 15.3324 6.9000 142.6056
+578.1616:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 67, target 15.2548 6.8877 151.2023,actual 15.3212 6.8983 143.1961
+578.1712:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 68, target 15.2469 6.8897 151.8261,actual 15.3121 6.8967 143.7784
+578.1829:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 69, target 15.2391 6.8918 152.4500,actual 15.3039 6.8952 144.3524
+578.1934:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 70, target 15.2312 6.8938 153.0738,actual 15.2959 6.8936 144.9155
+578.2039:1: Debug: actions: 260:completing action: MCMotionMagicAction (intake-tilt) target=-46.984897432 posthresh=3.0 velthresh=1.0
+578.2059:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 71, target 15.2234 6.8959 153.6977,actual 15.2879 6.8918 146.2585
+578.2141:1: Debug: actions: 165:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+578.2170:1: Debug: actions: 166:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+578.2193:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+578.2259:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 72, target 15.2155 6.8980 154.3216,actual 15.2798 6.8900 146.7804
+578.2352:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 73, target 15.2077 6.9002 154.9454,actual 15.2640 6.8861 147.7856
+578.2452:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 74, target 15.1999 6.9023 155.5693,actual 15.2563 6.8842 148.2745
+578.2562:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 75, target 15.1921 6.9045 156.1932,actual 15.2487 6.8821 148.7469
+578.2704:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 76, target 15.1843 6.9067 156.8170,actual 15.2397 6.8824 149.2029
+578.2803:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 77, target 15.1764 6.9089 157.4409,actual 15.2312 6.8800 149.6451
+578.2970:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 78, target 15.1686 6.9112 158.0648,actual 15.2161 6.8809 150.4773
+578.3182:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 79, target 15.1608 6.9134 158.6886,actual 15.2016 6.8817 151.2656
+578.3382:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 80, target 15.1530 6.9156 159.3125,actual 15.1875 6.8823 152.0044
+578.3574:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 81, target 15.1452 6.9178 159.9363,actual 15.1769 6.8845 152.7185
+578.3783:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 82, target 15.1374 6.9200 160.5602,actual 15.1601 6.8876 153.4161
+578.3978:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 83, target 15.1296 6.9222 161.1841,actual 15.1471 6.8901 154.1000
+578.4178:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 84, target 15.1217 6.9243 161.8079,actual 15.1357 6.8929 154.7867
+578.4400:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 85, target 15.1139 6.9264 162.4318,actual 15.1235 6.8951 155.4843
+578.4654:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 86, target 15.1060 6.9285 163.0557,actual 15.1106 6.8966 156.1929
+578.4771:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 87, target 15.0982 6.9306 163.6795,actual 15.1016 6.8980 156.8906
+578.4986:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 88, target 15.0903 6.9326 164.3034,actual 15.0877 6.9002 157.5717
+578.5177:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 89, target 15.0824 6.9346 164.9229,actual 15.0794 6.9019 158.4259
+578.5366:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 90, target 15.0746 6.9366 165.5300,actual 15.0679 6.9063 159.1180
+578.5572:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 91, target 15.0667 6.9384 166.1247,actual 15.0580 6.9104 159.8047
+578.5765:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 92, target 15.0588 6.9403 166.7069,actual 15.0495 6.9145 160.4803
+578.5968:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 93, target 15.0509 6.9421 167.2766,actual 15.0414 6.9190 161.1478
+578.6308:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 94, target 15.0429 6.9438 167.8338,actual 15.0338 6.9232 161.7960
+578.6771:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 95, target 15.0350 6.9455 168.3786,actual 15.0127 6.9345 163.4769
+578.6900:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 96, target 15.0270 6.9472 168.9109,actual 15.0074 6.9373 164.1745
+578.7043:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 97, target 15.0191 6.9488 169.4307,actual 15.0017 6.9400 164.5316
+578.7144:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 98, target 15.0111 6.9503 169.9380,actual 14.9985 6.9416 164.8831
+578.7251:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 99, target 15.0031 6.9518 170.4329,actual 14.9951 6.9432 165.5725
+578.7378:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 100, target 14.9951 6.9532 170.9152,actual 14.9908 6.9456 165.9131
+578.7575:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 101, target 14.9871 6.9546 171.3851,actual 14.9836 6.9482 166.5942
+578.7778:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 102, target 14.9791 6.9559 171.8426,actual 14.9775 6.9507 167.2699
+578.8000:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 103, target 14.9711 6.9571 172.2875,actual 14.9706 6.9525 167.9373
+578.8187:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 104, target 14.9630 6.9583 172.7200,actual 14.9642 6.9545 168.7201
+578.8371:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 105, target 14.9550 6.9594 173.1400,actual 14.9578 6.9562 169.3106
+578.8581:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 106, target 14.9469 6.9604 173.5475,actual 14.9521 6.9577 169.8737
+578.8785:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 107, target 14.9389 6.9614 173.9425,actual 14.9457 6.9587 170.4065
+578.8973:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 108, target 14.9308 6.9624 174.3251,actual 14.9386 6.9591 170.9091
+578.9282:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 109, target 14.9227 6.9632 174.6951,actual 14.9327 6.9605 171.4063
+578.9394:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 110, target 14.9147 6.9640 175.0527,actual 14.9254 6.9607 171.8787
+578.9582:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 111, target 14.9066 6.9648 175.3979,actual 14.9189 6.9614 172.3236
+578.9778:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 112, target 14.8985 6.9656 175.7305,actual 14.9129 6.9627 172.7411
+579.0003:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 113, target 14.8904 6.9662 176.0507,actual 14.9056 6.9627 173.1448
+579.0178:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 114, target 14.8823 6.9669 176.3584,actual 14.8987 6.9630 173.5101
+579.0382:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 115, target 14.8742 6.9675 176.6536,actual 14.8922 6.9642 173.8699
+579.0575:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 116, target 14.8661 6.9680 176.9363,actual 14.8831 6.9644 174.2188
+579.0777:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 117, target 14.8580 6.9685 177.2066,actual 14.8747 6.9647 174.5566
+579.1010:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 118, target 14.8499 6.9690 177.4644,actual 14.8661 6.9653 174.8889
+579.1183:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 119, target 14.8418 6.9694 177.7097,actual 14.8573 6.9659 175.2927
+579.1390:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 120, target 14.8337 6.9697 177.9425,actual 14.8486 6.9664 175.6113
+579.1639:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 121, target 14.8256 6.9701 178.1629,actual 14.8396 6.9669 175.9299
+579.1771:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 122, target 14.8174 6.9703 178.3707,actual 14.8330 6.9673 176.2457
+579.2027:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 123, target 14.8093 6.9706 178.5661,actual 14.8220 6.9677 176.5451
+579.2174:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 124, target 14.8012 6.9708 178.7491,actual 14.8153 6.9680 176.8390
+579.2375:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 125, target 14.7931 6.9710 178.9195,actual 14.8053 6.9686 177.1136
+579.2584:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 126, target 14.7850 6.9712 179.0775,actual 14.7955 6.9685 177.3828
+579.2805:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 127, target 14.7769 6.9713 179.2230,actual 14.7869 6.9686 177.6355
+579.2984:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 128, target 14.7687 6.9714 179.3560,actual 14.7782 6.9687 177.8799
+579.3185:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 129, target 14.7606 6.9715 179.4765,actual 14.7704 6.9690 178.1052
+579.3392:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 130, target 14.7525 6.9715 179.5846,actual 14.7608 6.9690 178.3221
+579.3580:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 131, target 14.7444 6.9715 179.6801,actual 14.7533 6.9694 178.5172
+579.3779:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 132, target 14.7363 6.9715 179.7632,actual 14.7439 6.9695 178.7067
+579.3981:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 133, target 14.7281 6.9715 179.8339,actual 14.7357 6.9697 178.8797
+579.4171:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 134, target 14.7200 6.9715 179.8920,actual 14.7276 6.9698 179.0335
+579.4363:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 135, target 14.7119 6.9715 179.9377,actual 14.7204 6.9701 179.2120
+579.4569:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 136, target 14.7038 6.9714 179.9709,actual 14.7123 6.9703 179.3466
+579.4766:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 137, target 14.6957 6.9714 179.9916,actual 14.7033 6.9702 179.4702
+579.4981:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 138, target 14.6875 6.9713 179.9998,actual 14.6954 6.9703 179.5801
+579.5186:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 139, target 14.6794 6.9712 180.0000,actual 14.6876 6.9702 179.6817
+579.5370:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 140, target 14.6712 6.9711 180.0000,actual 14.6806 6.9704 179.7614
+579.5569:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 141, target 14.6626 6.9710 180.0000,actual 14.6726 6.9703 179.8410
+579.5802:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 142, target 14.6541 6.9709 180.0000,actual 14.6638 6.9702 179.8987
+579.5966:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 143, target 14.6453 6.9709 180.0000,actual 14.6567 6.9704 179.9454
+579.6170:1: Debug: actions: 166:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+579.6201:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 144, target 14.6359 6.9708 180.0000,actual 14.6486 6.9705 179.9838
+579.6363:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 145, target 14.6266 6.9707 180.0000,actual 14.6390 6.9705 -179.9942
+579.6574:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 146, target 14.6168 6.9706 180.0000,actual 14.6316 6.9707 -179.9695
+579.6767:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 147, target 14.6067 6.9706 180.0000,actual 14.6216 6.9708 -179.9612
+579.6952:1: Debug: actions: 165:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+579.6971:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 148, target 14.5966 6.9705 180.0000,actual 14.6128 6.9709 -179.9557
+579.7145:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+579.7159:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 149, target 14.5858 6.9705 180.0000,actual 14.6047 6.9710 -179.9585
+579.7417:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 150, target 14.5751 6.9705 180.0000,actual 14.5948 6.9712 -179.9557
+579.7562:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 151, target 14.5638 6.9705 180.0000,actual 14.5848 6.9713 -179.9503
+579.7763:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 152, target 14.5524 6.9706 180.0000,actual 14.5744 6.9713 -179.9557
+579.7965:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 153, target 14.5407 6.9708 180.0000,actual 14.5623 6.9713 -179.9585
+579.8164:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 154, target 14.5287 6.9710 180.0000,actual 14.5509 6.9713 -179.9612
+579.8370:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 155, target 14.5165 6.9712 180.0000,actual 14.5393 6.9712 -179.9667
+579.8570:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 156, target 14.5039 6.9716 180.0000,actual 14.5273 6.9713 -179.9750
+579.8780:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 157, target 14.4911 6.9720 180.0000,actual 14.5149 6.9713 -179.9860
+579.8993:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 158, target 14.4780 6.9727 180.0000,actual 14.5021 6.9714 -179.9942
+579.9176:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 159, target 14.4646 6.9733 180.0000,actual 14.4889 6.9714 -179.9969
+579.9395:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 160, target 14.4510 6.9740 180.0000,actual 14.4755 6.9715 -179.9997
+579.9570:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 161, target 14.4372 6.9749 180.0000,actual 14.4617 6.9715 179.9976
+579.9786:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 162, target 14.4232 6.9760 180.0000,actual 14.4493 6.9716 -179.9997
+579.9976:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 163, target 14.4093 6.9771 180.0000,actual 14.4330 6.9716 179.9921
+580.0171:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 164, target 14.3953 6.9782 180.0000,actual 14.4183 6.9718 179.9838
+580.0362:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 165, target 14.3814 6.9798 180.0000,actual 14.4053 6.9720 179.9673
+580.0579:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 166, target 14.3675 6.9814 180.0000,actual 14.3883 6.9724 179.9509
+580.0765:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 167, target 14.3536 6.9830 180.0000,actual 14.3730 6.9728 179.9344
+580.0981:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 168, target 14.3397 6.9847 180.0000,actual 14.3579 6.9734 179.9234
+580.1225:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 169, target 14.3259 6.9866 180.0000,actual 14.3425 6.9740 179.9179
+580.1448:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 170, target 14.3120 6.9886 180.0000,actual 14.3234 6.9748 179.8959
+580.1594:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 171, target 14.2981 6.9906 180.0000,actual 14.3122 6.9753 179.8877
+580.1764:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 172, target 14.2843 6.9927 180.0000,actual 14.2971 6.9759 179.8630
+580.1987:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 173, target 14.2705 6.9948 180.0000,actual 14.2818 6.9765 179.8438
+580.2164:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 174, target 14.2566 6.9970 180.0000,actual 14.2685 6.9771 179.8245
+580.2360:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 175, target 14.2428 6.9991 180.0000,actual 14.2534 6.9777 179.8108
+580.2571:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 176, target 14.2292 7.0011 180.0000,actual 14.2364 6.9784 179.7943
+580.2771:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 177, target 14.2156 7.0031 180.0000,actual 14.2215 6.9795 179.7861
+580.2973:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 178, target 14.2024 7.0050 180.0000,actual 14.2070 6.9816 179.7833
+580.3149:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+580.3161:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 179, target 14.1894 7.0068 180.0000,actual 14.1943 6.9833 179.7833
+580.3364:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 180, target 14.1767 7.0084 180.0000,actual 14.1782 6.9857 179.7916
+580.3572:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 181, target 14.1642 7.0099 180.0000,actual 14.1644 6.9881 179.8053
+580.3764:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 182, target 14.1521 7.0113 180.0000,actual 14.1509 6.9904 179.8273
+580.3998:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 183, target 14.1401 7.0127 180.0000,actual 14.1379 6.9927 179.8300
+580.4165:1: Debug: actions: 164:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+580.4171:1: Debug: actions: 164:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+580.4180:1: Debug: actions: 156:canceling action: StartCollectAction
+580.4188:1: Debug: actions: 157:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+580.4201:1: Debug: actions: 158:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+580.4225:1: Debug: actions: 159:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+580.4253:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+580.4311:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 184, target 14.1285 7.0137 180.0000,actual 14.1269 6.9946 179.8328
+580.4583:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 185, target 14.1170 7.0148 180.0000,actual 14.1039 6.9986 179.8273
+580.4732:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 186, target 14.1061 7.0157 180.0000,actual 14.0935 7.0004 179.8273
+580.5070:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 187, target 14.0951 7.0167 180.0000,actual 14.0863 7.0017 179.8383
+580.5241:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 188, target 14.0847 7.0174 180.0000,actual 14.0669 7.0052 179.8685
+580.5352:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 189, target 14.0743 7.0180 180.0000,actual 14.0587 7.0068 179.8795
+580.5474:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 190, target 14.0643 7.0186 180.0000,actual 14.0534 7.0078 179.8932
+580.5603:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 191, target 14.0547 7.0191 180.0000,actual 14.0458 7.0093 179.9014
+580.5765:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 192, target 14.0451 7.0197 180.0000,actual 14.0373 7.0110 179.9207
+580.5971:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 193, target 14.0360 7.0201 180.0000,actual 14.0290 7.0125 179.9261
+580.6168:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 194, target 14.0272 7.0205 180.0000,actual 14.0189 7.0144 179.9261
+580.6380:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 195, target 14.0183 7.0208 180.0000,actual 14.0094 7.0162 179.9124
+580.6576:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 196, target 14.0102 7.0210 180.0000,actual 14.0025 7.0175 179.8959
+580.6774:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 197, target 14.0022 7.0213 180.0000,actual 13.9948 7.0189 179.8685
+580.6980:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 198, target 13.9942 7.0215 180.0000,actual 13.9866 7.0205 179.8465
+580.7184:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 199, target 13.9868 7.0216 180.0000,actual 13.9794 7.0218 179.8273
+580.7395:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 200, target 13.9798 7.0218 180.0000,actual 13.9733 7.0230 179.8218
+580.7583:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 201, target 13.9727 7.0219 180.0000,actual 13.9675 7.0241 179.8163
+580.7795:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 202, target 13.9657 7.0220 180.0000,actual 13.9602 7.0250 179.8190
+580.7983:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 203, target 13.9598 7.0221 180.0000,actual 13.9539 7.0253 179.8273
+580.8263:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 204, target 13.9539 7.0222 180.0000,actual 13.9456 7.0256 179.8355
+580.8380:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 205, target 13.9479 7.0222 180.0000,actual 13.9412 7.0257 179.8438
+580.8649:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 206, target 13.9420 7.0223 180.0000,actual 13.9370 7.0256 179.8602
+580.8796:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 207, target 13.9371 7.0223 180.0000,actual 13.9306 7.0254 179.8740
+580.8971:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 208, target 13.9325 7.0223 180.0000,actual 13.9254 7.0253 179.8987
+580.9178:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 209, target 13.9280 7.0224 180.0000,actual 13.9204 7.0252 179.9152
+580.9408:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 210, target 13.9234 7.0224 180.0000,actual 13.9160 7.0251 179.9261
+580.9575:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 211, target 13.9188 7.0224 180.0000,actual 13.9129 7.0250 179.9399
+580.9784:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 212, target 13.9147 7.0224 180.0000,actual 13.9079 7.0249 179.9426
+581.0000:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 213, target 13.9128 7.0224 180.0000,actual 13.9040 7.0248 179.9426
+581.0173:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 214, target 13.9109 7.0224 180.0000,actual 13.9009 7.0246 179.9371
+581.0372:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 215, target 13.9090 7.0224 180.0000,actual 13.8975 7.0244 179.9371
+581.0590:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 216, target 13.9071 7.0224 180.0000,actual 13.8951 7.0242 179.9371
+581.0785:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 217, target 13.9053 7.0224 180.0000,actual 13.8928 7.0239 179.9371
+581.0984:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 218, target 13.9034 7.0225 180.0000,actual 13.8914 7.0238 179.9344
+581.1175:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 219, target 13.9015 7.0225 180.0000,actual 13.8896 7.0235 179.9289
+581.1373:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 220, target 13.8996 7.0225 180.0000,actual 13.8888 7.0234 179.9234
+581.1583:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 221, target 13.8977 7.0225 180.0000,actual 13.8883 7.0234 179.9207
+581.1777:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 222, target 13.8958 7.0225 180.0000,actual 13.8883 7.0234 179.9124
+581.1987:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 223, target 13.8939 7.0225 180.0000,actual 13.8883 7.0234 179.9042
+581.2188:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 224, target 13.8921 7.0225 180.0000,actual 13.8884 7.0234 179.8987
+581.2453:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 225, target 13.8902 7.0225 180.0000,actual 13.8883 7.0234 179.8987
+581.2587:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 226, target 13.8902 7.0225 180.0000,actual 13.8863 7.0232 179.9042
+581.2597:1: Debug: actions: 167:completing action: SwerveHolonomicPathFollower S1S3-P1
+581.2607:1: Info: global: finished path'S1S3-P1' pose = 13.886 7.023 179.9
+581.3017:1: Info: global:  holding note = true
+581.3035:1: Info: global: Start1Shoot3Action action changed states: Path1 -> FinishCollect1
+581.3132:1: Debug: actions: 146:starting action: 146: SwerveTrackAngle
+581.3138:1: Debug: actions: 157:canceling action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+581.3144:1: Debug: actions: 158:canceling action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+581.3153:1: Debug: actions: 159:canceling action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+581.3164:1: Debug: actions: 147:starting action: 147: IntakeShootAction
+581.3172:1: Debug: actions: 150:starting action: MCTrackPosAction (intake-updown) target=100.0
+581.3198:1: Debug: actions: 151:starting action: MCTrackPosAction (intake-tilt) target=-59.99999999999999
+581.3217:1: Debug: actions: 148:starting action: 148: MCVelocityAction (intake-shooter1), target = 65.0
+581.3234:1: Debug: actions: 149:starting action: 149: MCVelocityAction (intake-shooter2), target = 65.0
+581.3253:1: Info: global: Start1Shoot3Action action changed states: FinishCollect1 -> Shoot2
+581.3268:1: Info: global: case 7 effective = 149.7 offset = -5.000
+581.3325:1: Debug: intake-shooter: shooting distance = 2.472 updown = 118.0 tilt = -66.86 velocity = 70.00
+581.3360:1: Info: global: gyroinfo rate = -0.06250 ratelimit = 5.000 ax = 0.03241 ay = -0.1262 alimit = 0.05000
+581.3370:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = true gyro_stopped = false
+581.3384:1: Debug: swerve:  err = -24.05 postel = 5.000 isAt = false
+581.3514:1: Debug: intake-shooter: shooting distance = 2.471 updown = 118.0 tilt = -66.86 velocity = 70.00
+581.3535:1: Info: global: gyroinfo rate = 0.1484 ratelimit = 5.000 ax = -0.01709 ay = -0.04803 alimit = 0.05000
+581.3540:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = false gyro_stopped = true
+581.3551:1: Debug: swerve:  err = -29.05 postel = 5.000 isAt = false
+581.3651:1: Debug: intake-shooter: shooting distance = 2.470 updown = 118.0 tilt = -66.87 velocity = 70.00
+581.3674:1: Info: global: gyroinfo rate = -1.125 ratelimit = 5.000 ax = -0.02563 ay = 0.02881 alimit = 0.05000
+581.3680:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = false gyro_stopped = true
+581.3696:1: Debug: swerve:  err = -29.06 postel = 5.000 isAt = false
+581.3787:1: Debug: intake-shooter: shooting distance = 2.470 updown = 118.0 tilt = -66.87 velocity = 70.00
+581.3813:1: Info: global: gyroinfo rate = 12.10 ratelimit = 5.000 ax = 0.4767 ay = -0.02948 alimit = 0.05000
+581.3818:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.3833:1: Debug: swerve:  err = -29.06 postel = 5.000 isAt = false
+581.3954:1: Debug: intake-shooter: shooting distance = 2.468 updown = 118.0 tilt = -66.87 velocity = 70.00
+581.3971:1: Info: global: gyroinfo rate = 23.27 ratelimit = 5.000 ax = 0.4101 ay = 0.04639 alimit = 0.05000
+581.3976:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.3994:1: Debug: swerve:  err = -29.09 postel = 5.000 isAt = false
+581.4103:1: Debug: intake-shooter: shooting distance = 2.466 updown = 118.0 tilt = -66.88 velocity = 70.00
+581.4124:1: Info: global: gyroinfo rate = 23.57 ratelimit = 5.000 ax = 0.07928 ay = 0.01001 alimit = 0.05000
+581.4130:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.4141:1: Debug: swerve:  err = -29.11 postel = 5.000 isAt = false
+581.4226:1: Debug: intake-shooter: shooting distance = 2.466 updown = 118.0 tilt = -66.88 velocity = 70.00
+581.4242:1: Info: global: gyroinfo rate = 27.13 ratelimit = 5.000 ax = 0.1223 ay = -0.02582 alimit = 0.05000
+581.4250:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.4264:1: Debug: swerve:  err = -29.11 postel = 5.000 isAt = false
+581.4371:1: Debug: intake-shooter: shooting distance = 2.467 updown = 118.0 tilt = -66.88 velocity = 70.00
+581.4386:1: Info: global: gyroinfo rate = 29.70 ratelimit = 5.000 ax = 0.2089 ay = -0.04633 alimit = 0.05000
+581.4391:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.4428:1: Debug: swerve:  err = -28.94 postel = 5.000 isAt = false
+581.4582:1: Debug: intake-shooter: shooting distance = 2.477 updown = 118.0 tilt = -66.84 velocity = 70.00
+581.4597:1: Info: global: gyroinfo rate = 36.82 ratelimit = 5.000 ax = 0.2888 ay = 0.02832 alimit = 0.05000
+581.4603:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.4621:1: Debug: swerve:  err = -28.38 postel = 5.000 isAt = false
+581.4775:1: Debug: intake-shooter: shooting distance = 2.477 updown = 118.0 tilt = -66.84 velocity = 70.00
+581.4796:1: Info: global: gyroinfo rate = 43.93 ratelimit = 5.000 ax = 0.4250 ay = 0.03906 alimit = 0.05000
+581.4805:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.4817:1: Debug: swerve:  err = -28.38 postel = 5.000 isAt = false
+581.4965:1: Debug: intake-shooter: shooting distance = 3.020 updown = 118.0 tilt = -64.13 velocity = 70.00
+581.5039:1: Info: global: gyroinfo rate = 49.55 ratelimit = 5.000 ax = 0.1044 ay = 0.01514 alimit = 0.05000
+581.5045:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.5114:1: Debug: swerve:  err = -19.68 postel = 5.000 isAt = false
+581.5570:1: Debug: intake-shooter: shooting distance = 3.018 updown = 118.0 tilt = -64.14 velocity = 70.00
+581.5587:1: Info: global: gyroinfo rate = 85.22 ratelimit = 5.000 ax = 0.2536 ay = 0.009521 alimit = 0.05000
+581.5592:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.5613:1: Debug: swerve:  err = -15.88 postel = 5.000 isAt = false
+581.5689:1: Debug: intake-shooter: shooting distance = 3.018 updown = 118.0 tilt = -64.14 velocity = 70.00
+581.5706:1: Info: global: gyroinfo rate = 88.93 ratelimit = 5.000 ax = 0.02167 ay = -0.1257 alimit = 0.05000
+581.5712:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.5728:1: Debug: swerve:  err = -15.06 postel = 5.000 isAt = false
+581.5795:1: Debug: intake-shooter: shooting distance = 3.016 updown = 118.0 tilt = -64.16 velocity = 70.00
+581.5812:1: Info: global: gyroinfo rate = 89.78 ratelimit = 5.000 ax = 0.05170 ay = -0.1235 alimit = 0.05000
+581.5821:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.5834:1: Debug: swerve:  err = -14.22 postel = 5.000 isAt = false
+581.5993:1: Debug: intake-shooter: shooting distance = 3.017 updown = 118.0 tilt = -64.15 velocity = 70.00
+581.6017:1: Info: global: gyroinfo rate = 94.54 ratelimit = 5.000 ax = 0.009216 ay = -0.04828 alimit = 0.05000
+581.6025:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.6043:1: Debug: swerve:  err = -13.38 postel = 5.000 isAt = false
+581.6154:1: Debug: intake-shooter: shooting distance = 3.018 updown = 118.0 tilt = -64.14 velocity = 70.00
+581.6183:1: Info: global: gyroinfo rate = 91.54 ratelimit = 5.000 ax = -0.1284 ay = -0.03534 alimit = 0.05000
+581.6190:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.6201:1: Debug: swerve:  err = -10.28 postel = 5.000 isAt = false
+581.6298:1: Debug: intake-shooter: shooting distance = 3.018 updown = 118.0 tilt = -64.14 velocity = 70.00
+581.6316:1: Info: global: gyroinfo rate = 87.09 ratelimit = 5.000 ax = -0.1521 ay = -0.1071 alimit = 0.05000
+581.6321:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.6333:1: Debug: swerve:  err = -9.485 postel = 5.000 isAt = false
+581.6417:1: Debug: intake-shooter: shooting distance = 3.019 updown = 118.0 tilt = -64.13 velocity = 70.00
+581.6441:1: Info: global: gyroinfo rate = 85.52 ratelimit = 5.000 ax = -0.1250 ay = -0.1555 alimit = 0.05000
+581.6454:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.6483:1: Debug: swerve:  err = -8.641 postel = 5.000 isAt = false
+581.6623:1: Debug: intake-shooter: shooting distance = 3.019 updown = 118.0 tilt = -64.14 velocity = 70.00
+581.6642:1: Info: global: gyroinfo rate = 81.10 ratelimit = 5.000 ax = -0.2698 ay = -0.1896 alimit = 0.05000
+581.6649:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.6682:1: Debug: swerve:  err = -7.045 postel = 5.000 isAt = false
+581.6781:1: Debug: intake-shooter: shooting distance = 3.020 updown = 118.0 tilt = -64.13 velocity = 70.00
+581.6825:1: Info: global: gyroinfo rate = 72.16 ratelimit = 5.000 ax = -0.2954 ay = -0.1044 alimit = 0.05000
+581.6831:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.6841:1: Debug: swerve:  err = -5.517 postel = 5.000 isAt = false
+581.6952:1: Debug: intake-shooter: shooting distance = 3.019 updown = 118.0 tilt = -64.13 velocity = 70.00
+581.6970:1: Info: global: gyroinfo rate = 68.81 ratelimit = 5.000 ax = -0.2190 ay = -0.07758 alimit = 0.05000
+581.6974:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+581.6985:1: Debug: swerve:  err = -4.149 postel = 5.000 isAt = true
+581.7156:1: Debug: intake-shooter: shooting distance = 3.019 updown = 118.0 tilt = -64.13 velocity = 70.00
+581.7180:1: Info: global: gyroinfo rate = 63.58 ratelimit = 5.000 ax = -0.2300 ay = -0.05731 alimit = 0.05000
+581.7185:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = true swerve_stopped = false gyro_stopped = false
+581.7207:1: Debug: swerve:  err = -2.905 postel = 5.000 isAt = true
+581.7393:1: Debug: intake-shooter: shooting distance = 3.020 updown = 118.0 tilt = -64.13 velocity = 70.00
+581.7436:1: Info: global: gyroinfo rate = 47.02 ratelimit = 5.000 ax = -0.3386 ay = -0.01752 alimit = 0.05000
+581.7451:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = true swerve_stopped = false gyro_stopped = false
+581.7467:1: Debug: swerve:  err = -1.818 postel = 5.000 isAt = true
+581.7612:1: Debug: intake-shooter: shooting distance = 3.020 updown = 118.0 tilt = -64.13 velocity = 70.00
+581.7646:1: Info: global: gyroinfo rate = 37.57 ratelimit = 5.000 ax = -0.2249 ay = 0.02661 alimit = 0.05000
+581.7653:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = true swerve_stopped = false gyro_stopped = false
+581.7678:1: Debug: swerve:  err = -0.9335 postel = 5.000 isAt = true
+581.7840:1: Debug: intake-shooter: shooting distance = 3.020 updown = 118.0 tilt = -64.13 velocity = 70.00
+581.7852:1: Info: global: gyroinfo rate = 28.82 ratelimit = 5.000 ax = -0.1982 ay = 0.06152 alimit = 0.05000
+581.7860:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = true swerve_stopped = false gyro_stopped = false
+581.7870:1: Debug: swerve:  err = -0.2216 postel = 5.000 isAt = true
+581.7949:1: Debug: intake-shooter: shooting distance = 3.020 updown = 118.0 tilt = -64.13 velocity = 70.00
+581.7970:1: Info: global: gyroinfo rate = 23.89 ratelimit = 5.000 ax = -0.2041 ay = 0.03369 alimit = 0.05000
+581.7975:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = true swerve_stopped = false gyro_stopped = false
+581.7986:1: Debug: swerve:  err = 0.3213 postel = 5.000 isAt = true
+581.8148:1: Debug: intake-shooter: shooting distance = 3.020 updown = 118.0 tilt = -64.13 velocity = 70.00
+581.8163:1: Info: global: gyroinfo rate = 16.60 ratelimit = 5.000 ax = -0.1313 ay = -0.05145 alimit = 0.05000
+581.8170:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = false driveteam = true dbready = true swerve_stopped = false gyro_stopped = false
+581.8181:1: Debug: swerve:  err = 0.7047 postel = 5.000 isAt = true
+581.8354:1: Debug: intake-shooter: shooting distance = 2.713 updown = 118.0 tilt = -66.06 velocity = 70.00
+581.8376:1: Info: global: gyroinfo rate = 9.004 ratelimit = 5.000 ax = -0.1221 ay = -0.03021 alimit = 0.05000
+581.8381:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = false gyro_stopped = false
+581.8390:1: Debug: swerve:  err = -3.707 postel = 5.000 isAt = true
+581.8561:1: Debug: intake-shooter: shooting distance = 2.713 updown = 118.0 tilt = -66.06 velocity = 70.00
+581.8583:1: Info: global: gyroinfo rate = 2.523 ratelimit = 5.000 ax = -0.06421 ay = 0.01538 alimit = 0.05000
+581.8590:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = false gyro_stopped = false
+581.8605:1: Debug: swerve:  err = -3.707 postel = 5.000 isAt = true
+581.8774:1: Debug: intake-shooter: shooting distance = 2.713 updown = 118.0 tilt = -66.06 velocity = 70.00
+581.8789:1: Info: global: gyroinfo rate = -0.9141 ratelimit = 5.000 ax = -0.02979 ay = -0.04169 alimit = 0.05000
+581.8800:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = false gyro_stopped = true
+581.8811:1: Debug: swerve:  err = -3.179 postel = 5.000 isAt = true
+581.8964:1: Debug: intake-shooter: shooting distance = 2.714 updown = 118.0 tilt = -66.05 velocity = 70.00
+581.8977:1: Info: global: gyroinfo rate = -3.406 ratelimit = 5.000 ax = -0.03101 ay = -0.01434 alimit = 0.05000
+581.8982:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+581.8991:1: Debug: swerve:  err = -2.904 postel = 5.000 isAt = true
+581.9177:1: Debug: intake-shooter: shooting distance = 2.714 updown = 118.0 tilt = -66.05 velocity = 70.00
+581.9214:1: Info: global: gyroinfo rate = 3.578 ratelimit = 5.000 ax = 0.1010 ay = 0.008789 alimit = 0.05000
+581.9223:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+581.9233:1: Debug: swerve:  err = -2.841 postel = 5.000 isAt = true
+581.9394:1: Debug: intake-shooter: shooting distance = 2.714 updown = 118.0 tilt = -66.05 velocity = 70.00
+581.9411:1: Info: global: gyroinfo rate = 4.906 ratelimit = 5.000 ax = 0.01434 ay = 0.004150 alimit = 0.05000
+581.9415:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+581.9438:1: Debug: swerve:  err = -2.841 postel = 5.000 isAt = true
+581.9647:1: Debug: intake-shooter: shooting distance = 2.714 updown = 118.0 tilt = -66.05 velocity = 70.00
+581.9667:1: Info: global: gyroinfo rate = 6.863 ratelimit = 5.000 ax = 0.04022 ay = -0.01630 alimit = 0.05000
+581.9674:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+581.9697:1: Debug: swerve:  err = -2.885 postel = 5.000 isAt = true
+581.9885:1: Debug: intake-shooter: shooting distance = 2.714 updown = 118.0 tilt = -66.05 velocity = 70.00
+581.9900:1: Info: global: gyroinfo rate = 6.742 ratelimit = 5.000 ax = 0.02631 ay = -0.01776 alimit = 0.05000
+581.9906:1: Debug: intake-shooter:  updown = false tilt = true shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+581.9917:1: Debug: swerve:  err = -2.941 postel = 5.000 isAt = true
+582.0024:1: Debug: intake-shooter: shooting distance = 2.714 updown = 118.0 tilt = -66.05 velocity = 70.00
+582.0041:1: Info: global: gyroinfo rate = 6.984 ratelimit = 5.000 ax = 0.01434 ay = 0.0009766 alimit = 0.05000
+582.0044:1: Debug: intake-shooter:  updown = false tilt = true shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+582.0055:1: Debug: swerve:  err = -2.858 postel = 5.000 isAt = true
+582.0159:1: Debug: intake-shooter: shooting distance = 2.714 updown = 118.0 tilt = -66.05 velocity = 70.00
+582.0177:1: Info: global: gyroinfo rate = 7.105 ratelimit = 5.000 ax = 0.009705 ay = -0.007263 alimit = 0.05000
+582.0182:1: Debug: intake-shooter:  updown = false tilt = true shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+582.0192:1: Debug: swerve:  err = -2.858 postel = 5.000 isAt = true
+582.0369:1: Debug: intake-shooter: shooting distance = 2.714 updown = 118.0 tilt = -66.05 velocity = 70.00
+582.0390:1: Info: global: gyroinfo rate = 6.434 ratelimit = 5.000 ax = 0.02435 ay = -0.02509 alimit = 0.05000
+582.0394:1: Debug: intake-shooter:  updown = false tilt = true shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+582.0406:1: Debug: swerve:  err = -2.521 postel = 5.000 isAt = true
+582.0563:1: Debug: intake-shooter: shooting distance = 2.714 updown = 118.0 tilt = -66.05 velocity = 70.00
+582.0582:1: Info: global: gyroinfo rate = 6.926 ratelimit = 5.000 ax = 0.03851 ay = -0.02167 alimit = 0.05000
+582.0586:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+582.0604:1: Debug: swerve:  err = -2.521 postel = 5.000 isAt = true
+582.0767:1: Debug: intake-shooter: shooting distance = 2.715 updown = 118.0 tilt = -66.05 velocity = 70.00
+582.0781:1: Info: global: gyroinfo rate = 6.441 ratelimit = 5.000 ax = -0.01147 ay = -0.008240 alimit = 0.05000
+582.0785:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+582.0795:1: Debug: swerve:  err = -2.338 postel = 5.000 isAt = true
+582.0967:1: Debug: intake-shooter: shooting distance = 2.715 updown = 118.0 tilt = -66.05 velocity = 70.00
+582.0982:1: Info: global: gyroinfo rate = 5.277 ratelimit = 5.000 ax = -0.02881 ay = 0.003418 alimit = 0.05000
+582.0991:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+582.1004:1: Info: global: gyroinfo rate = 5.281 ratelimit = 5.000 ax = 0.0006714 ay = 0.009033 alimit = 0.05000
+582.1027:1: Debug: swerve:  err = -2.162 postel = 5.000 isAt = true
+582.1175:1: Debug: intake-shooter: shooting distance = 2.714 updown = 118.0 tilt = -66.05 velocity = 70.00
+582.1188:1: Info: global: gyroinfo rate = 5.277 ratelimit = 5.000 ax = 0.02338 ay = 0.006104 alimit = 0.05000
+582.1193:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+582.1202:1: Info: global: gyroinfo rate = 5.277 ratelimit = 5.000 ax = 0.01752 ay = -0.02167 alimit = 0.05000
+582.1213:1: Debug: swerve:  err = -1.985 postel = 5.000 isAt = true
+582.1405:1: Debug: intake-shooter: shooting distance = 2.714 updown = 118.0 tilt = -66.05 velocity = 70.00
+582.1425:1: Info: global: gyroinfo rate = 3.742 ratelimit = 5.000 ax = -0.02051 ay = -0.02289 alimit = 0.05000
+582.1432:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+582.1441:1: Info: global: gyroinfo rate = 3.742 ratelimit = 5.000 ax = -0.02051 ay = -0.02289 alimit = 0.05000
+582.1453:1: Debug: swerve:  err = -1.985 postel = 5.000 isAt = true
+582.1585:1: Debug: swerve:  err = -1.821 postel = 5.000 isAt = true
+582.1798:1: Debug: swerve:  err = -1.568 postel = 5.000 isAt = true
+582.1981:1: Debug: swerve:  err = -1.568 postel = 5.000 isAt = true
+582.2178:1: Debug: swerve:  err = -1.469 postel = 5.000 isAt = true
+582.2381:1: Debug: swerve:  err = -1.469 postel = 5.000 isAt = true
+582.2583:1: Debug: swerve:  err = -1.410 postel = 5.000 isAt = true
+582.2869:1: Debug: swerve:  err = -1.356 postel = 5.000 isAt = true
+582.3009:1: Debug: swerve:  err = -1.356 postel = 5.000 isAt = true
+582.3174:1: Debug: swerve:  err = -1.340 postel = 5.000 isAt = true
+582.3373:1: Debug: swerve:  err = -1.340 postel = 5.000 isAt = true
+582.3572:1: Debug: swerve:  err = -1.350 postel = 5.000 isAt = true
+582.3774:1: Debug: swerve:  err = -1.354 postel = 5.000 isAt = true
+582.3967:1: Debug: swerve:  err = -1.354 postel = 5.000 isAt = true
+582.4240:1: Debug: swerve:  err = -1.356 postel = 5.000 isAt = true
+582.4365:1: Debug: swerve:  err = -1.356 postel = 5.000 isAt = true
+582.4604:1: Debug: swerve:  err = -1.356 postel = 5.000 isAt = true
+582.4784:1: Debug: swerve:  err = -1.357 postel = 5.000 isAt = true
+582.4971:1: Debug: swerve:  err = -1.357 postel = 5.000 isAt = true
+582.5179:1: Debug: swerve:  err = -1.353 postel = 5.000 isAt = true
+582.5372:1: Debug: swerve:  err = -1.353 postel = 5.000 isAt = true
+582.5606:1: Debug: actions: 146:canceling action: 146: SwerveTrackAngle
+582.5611:1: Debug: actions: 152:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+582.7766:1: Debug: actions: 152:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+582.7987:1: Debug: actions: 147:completing action: 147: IntakeShootAction
+582.8168:1: Debug: actions: 150:canceling action: MCTrackPosAction (intake-updown) target=118.0
+582.8175:1: Debug: actions: 151:canceling action: MCTrackPosAction (intake-tilt) target=-66.05278191901692
+582.8180:1: Debug: actions: 148:canceling action: 148: MCVelocityAction (intake-shooter1), target = 70.0
+582.8183:1: Debug: actions: 149:canceling action: 149: MCVelocityAction (intake-shooter2), target = 70.0
+582.8185:1: Debug: actions: 156:starting action: StartCollectAction
+582.8187:1: Debug: actions: 163:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+582.8189:1: Debug: actions: 163:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+582.8197:1: Info: global: pos < stow pos = 118.0 stow = 118.0
+582.8201:1: Debug: actions: 261:starting action: MCMotionMagicAction (intake-tilt) target=-64.9864936 posthresh=3.0 velthresh=1.0
+582.8228:1: Debug: actions: 168:starting action: SwerveHolonomicPathFollower S1S3-P2
+582.8232:1: Info: global: Start1Shoot3Action action changed states: Shoot2 -> Path2
+582.8246:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 0, target 13.5728 7.1967 180.0000,actual 14.0765 7.0439 146.6396
+582.8375:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 1, target 13.5683 7.1967 180.0000,actual 14.0764 7.0432 146.6643
+582.8566:1: Debug: actions: 261:completing action: MCMotionMagicAction (intake-tilt) target=-64.9864936 posthresh=3.0 velthresh=1.0
+582.8574:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 2, target 13.5638 7.1967 180.0000,actual 14.0699 7.0465 146.6945
+582.8755:1: Debug: actions: 165:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+582.8792:1: Debug: actions: 166:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+582.8816:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+582.8832:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 3, target 13.5593 7.1967 180.0000,actual 14.0623 7.0512 146.6560
+582.8971:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 4, target 13.5548 7.1967 180.0000,actual 14.0457 7.0616 146.6396
+582.9163:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 5, target 13.5503 7.1967 180.0000,actual 14.0276 7.0721 146.5984
+582.9382:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 6, target 13.5435 7.1967 180.0000,actual 14.0039 7.0873 146.5819
+582.9567:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 7, target 13.5326 7.1967 180.0000,actual 13.9819 7.1009 146.5819
+582.9849:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 8, target 13.5216 7.1967 180.0000,actual 13.9605 7.1141 146.6121
+582.9975:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 9, target 13.5074 7.1967 180.0000,actual 13.9368 7.1296 146.7467
+583.0166:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 10, target 13.4926 7.1968 180.0000,actual 13.9120 7.1446 147.0131
+583.0366:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 11, target 13.4758 7.1968 180.0000,actual 13.8842 7.1577 147.4306
+583.0580:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 12, target 13.4573 7.1968 180.0000,actual 13.8590 7.1695 148.0046
+583.0795:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 13, target 13.4374 7.1968 180.0000,actual 13.8258 7.1824 148.7215
+583.0978:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 14, target 13.4159 7.1968 180.0000,actual 13.7914 7.1909 149.5372
+583.1198:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 15, target 13.3928 7.1968 180.0000,actual 13.7544 7.1997 150.4106
+583.1352:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 16, target 13.3680 7.1969 180.0000,actual 13.7276 7.2049 151.3994
+583.1558:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 17, target 13.3416 7.1969 180.0000,actual 13.6771 7.2156 152.7425
+583.1761:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 18, target 13.3135 7.1970 180.0000,actual 13.6488 7.2198 153.9208
+583.1965:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 19, target 13.2839 7.1971 180.0000,actual 13.5963 7.2291 155.2089
+583.2162:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 20, target 13.2527 7.1972 180.0000,actual 13.5538 7.2349 156.5822
+583.2362:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 21, target 13.2200 7.1974 180.0000,actual 13.5218 7.2375 158.0461
+583.2557:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 22, target 13.1856 7.1975 180.0000,actual 13.4779 7.2413 159.5979
+583.2759:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 23, target 13.1495 7.1978 180.0000,actual 13.4191 7.2432 161.2074
+583.2971:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 24, target 13.1120 7.1981 180.0000,actual 13.3778 7.2390 162.8499
+583.3151:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 25, target 13.0728 7.1984 180.0000,actual 13.3366 7.2297 164.5253
+583.3357:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 26, target 13.0320 7.1989 180.0000,actual 13.2756 7.2170 166.1760
+583.3559:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 27, target 12.9896 7.1994 180.0000,actual 13.2246 7.2072 167.8130
+583.3769:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 28, target 12.9456 7.2000 180.0000,actual 13.1781 7.1995 169.3977
+583.3976:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 29, target 12.9000 7.2008 180.0000,actual 13.1250 7.1864 170.9001
+583.4165:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 30, target 12.8528 7.2017 180.0000,actual 13.0715 7.1717 172.3393
+583.4365:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 31, target 12.8040 7.2027 180.0000,actual 13.0240 7.1555 173.6824
+583.4558:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 32, target 12.7537 7.2039 180.0000,actual 12.9690 7.1376 174.9294
+583.4757:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 33, target 12.7017 7.2053 180.0000,actual 12.9004 7.1130 176.3878
+583.4996:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 34, target 12.6481 7.2069 180.0000,actual 12.8571 7.0974 177.4370
+583.5156:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 35, target 12.5929 7.2088 180.0000,actual 12.7998 7.0787 178.4093
+583.5358:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 36, target 12.5362 7.2109 180.0000,actual 12.7382 7.0704 179.3102
+583.5561:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 37, target 12.4778 7.2134 180.0000,actual 12.6665 7.0680 -179.8988
+583.5777:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 38, target 12.4181 7.2161 180.0000,actual 12.6028 7.0639 -179.1737
+583.6012:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 39, target 12.3582 7.2192 180.0000,actual 12.5299 7.0709 -178.5530
+583.6168:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 40, target 12.2983 7.2226 180.0000,actual 12.4709 7.0773 -178.0531
+583.6366:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 41, target 12.2384 7.2263 180.0000,actual 12.4104 7.0829 -177.5807
+583.6576:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 42, target 12.1786 7.2302 180.0000,actual 12.3325 7.0889 -177.1715
+583.6775:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 43, target 12.1187 7.2346 180.0000,actual 12.2574 7.0937 -176.9023
+583.6983:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 44, target 12.0589 7.2392 180.0000,actual 12.1961 7.0986 -176.7183
+583.7165:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 45, target 11.9991 7.2442 180.0000,actual 12.1245 7.1034 -176.5727
+583.7376:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 46, target 11.9394 7.2496 180.0000,actual 12.0626 7.1076 -176.5590
+583.7575:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 47, target 11.8796 7.2553 180.0000,actual 11.9835 7.1125 -176.6524
+583.7776:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 48, target 11.8199 7.2614 180.0000,actual 11.9203 7.1184 -176.7979
+583.7978:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 49, target 11.7603 7.2678 180.0000,actual 11.8498 7.1328 -177.0973
+583.8163:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 50, target 11.7007 7.2745 180.0000,actual 11.7800 7.1475 -177.4406
+583.8358:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 51, target 11.6411 7.2816 180.0000,actual 11.7099 7.1627 -177.8114
+583.8554:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 52, target 11.5815 7.2890 180.0000,actual 11.6317 7.1826 -178.1877
+583.8756:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 53, target 11.5220 7.2967 180.0000,actual 11.5636 7.2006 -178.6024
+583.8965:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 54, target 11.4626 7.3048 180.0000,actual 11.4883 7.2214 -179.0309
+583.9167:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 55, target 11.4031 7.3130 180.0000,actual 11.4224 7.2398 -179.4237
+583.9385:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 56, target 11.3437 7.3215 180.0000,actual 11.3578 7.2584 -179.8027
+583.9566:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 57, target 11.2844 7.3302 180.0000,actual 11.3018 7.2747 179.8512
+583.9769:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 58, target 11.2250 7.3391 180.0000,actual 11.2375 7.2939 179.5766
+583.9977:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 59, target 11.1657 7.3481 180.0000,actual 11.1739 7.3133 179.3266
+584.0152:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 60, target 11.1064 7.3572 180.0000,actual 11.1103 7.3303 179.1179
+584.0361:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 61, target 11.0471 7.3663 180.0000,actual 11.0543 7.3424 178.9696
+584.0565:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 62, target 10.9878 7.3755 180.0000,actual 10.9822 7.3535 178.8680
+584.0769:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 63, target 10.9285 7.3846 180.0000,actual 10.9266 7.3627 178.7856
+584.0970:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 64, target 10.8692 7.3937 180.0000,actual 10.8631 7.3681 178.7499
+584.1185:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 65, target 10.8099 7.4026 180.0000,actual 10.7840 7.3750 178.7114
+584.1384:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 66, target 10.7505 7.4114 180.0000,actual 10.7209 7.3803 178.7608
+584.1577:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 67, target 10.6911 7.4200 180.0000,actual 10.6743 7.3839 178.8020
+584.1758:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 68, target 10.6317 7.4284 180.0000,actual 10.6053 7.3898 178.9119
+584.1957:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 69, target 10.5723 7.4366 180.0000,actual 10.5439 7.3948 179.0108
+584.2178:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 70, target 10.5128 7.4445 180.0000,actual 10.4750 7.4002 179.1069
+584.2358:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 71, target 10.4533 7.4521 180.0000,actual 10.4145 7.4048 179.1975
+584.2568:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 72, target 10.3938 7.4594 180.0000,actual 10.3550 7.4092 179.2937
+584.2766:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 73, target 10.3342 7.4665 180.0000,actual 10.3103 7.4122 179.3733
+584.2964:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 74, target 10.2745 7.4732 180.0000,actual 10.2443 7.4176 179.4640
+584.3161:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 75, target 10.2149 7.4795 180.0000,actual 10.1923 7.4215 179.5491
+584.3362:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 76, target 10.1557 7.4855 180.0000,actual 10.1257 7.4268 179.5903
+584.3565:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 77, target 10.0981 7.4910 180.0000,actual 10.0661 7.4325 179.6370
+584.3767:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 78, target 10.0419 7.4961 180.0000,actual 10.0005 7.4387 179.6837
+584.3954:1: Debug: actions: 166:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+584.3963:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 79, target 9.9874 7.5008 180.0000,actual 9.9581 7.4428 179.6974
+584.4156:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 80, target 9.9344 7.5051 180.0000,actual 9.9036 7.4480 179.7057
+584.4353:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 81, target 9.8830 7.5090 180.0000,actual 9.8346 7.4544 179.7029
+584.4566:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 82, target 9.8331 7.5126 180.0000,actual 9.7805 7.4595 179.6864
+584.4764:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 83, target 9.7849 7.5159 180.0000,actual 9.7412 7.4633 179.6672
+584.4960:1: Debug: actions: 165:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+584.4966:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 84, target 9.7383 7.5189 180.0000,actual 9.6780 7.4692 179.6700
+584.5146:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+584.5156:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 85, target 9.6932 7.5216 180.0000,actual 9.6350 7.4740 179.6727
+584.5352:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 86, target 9.6497 7.5241 180.0000,actual 9.5813 7.4806 179.6700
+584.5550:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 87, target 9.6078 7.5263 180.0000,actual 9.5463 7.4851 179.6645
+584.5749:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 88, target 9.5674 7.5284 180.0000,actual 9.5020 7.4910 179.6590
+584.5952:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 89, target 9.5275 7.5303 180.0000,actual 9.4596 7.4970 179.6535
+584.6147:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 90, target 9.4875 7.5321 180.0000,actual 9.4188 7.5027 179.6562
+584.6362:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 91, target 9.4475 7.5339 180.0000,actual 9.3688 7.5097 179.6590
+584.6552:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 92, target 9.4076 7.5355 180.0000,actual 9.3299 7.5152 179.6755
+584.6749:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 93, target 9.3676 7.5370 180.0000,actual 9.3018 7.5191 179.7002
+584.6947:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 94, target 9.3276 7.5384 180.0000,actual 9.2606 7.5249 179.7524
+584.7158:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 95, target 9.2877 7.5398 180.0000,actual 9.2194 7.5306 179.8045
+584.7393:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 96, target 9.2477 7.5411 180.0000,actual 9.1837 7.5355 179.8265
+584.7552:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 97, target 9.2077 7.5422 180.0000,actual 9.1573 7.5391 179.8567
+584.7760:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 98, target 9.1677 7.5434 180.0000,actual 9.1222 7.5430 179.8842
+584.8030:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 99, target 9.1277 7.5444 180.0000,actual 9.0776 7.5451 179.9007
+584.8153:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 100, target 9.0877 7.5454 180.0000,actual 9.0506 7.5467 179.9034
+584.8349:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 101, target 9.0479 7.5463 180.0000,actual 9.0146 7.5486 179.8952
+584.8551:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 102, target 9.0094 7.5471 180.0000,actual 8.9784 7.5494 179.8924
+584.8745:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 103, target 8.9724 7.5478 180.0000,actual 8.9423 7.5501 179.8814
+584.8945:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 104, target 8.9370 7.5485 180.0000,actual 8.9078 7.5509 179.8512
+584.9151:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 105, target 8.9033 7.5491 180.0000,actual 8.8660 7.5519 179.8100
+584.9372:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 106, target 8.8710 7.5497 180.0000,actual 8.8339 7.5527 179.7716
+584.9552:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 107, target 8.8404 7.5502 180.0000,actual 8.8109 7.5531 179.7386
+584.9761:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 108, target 8.8115 7.5506 180.0000,actual 8.7803 7.5539 179.7276
+584.9973:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 109, target 8.7841 7.5510 180.0000,actual 8.7459 7.5548 179.7386
+585.0149:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 110, target 8.7584 7.5514 180.0000,actual 8.7163 7.5552 179.7579
+585.0350:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 111, target 8.7342 7.5517 180.0000,actual 8.6915 7.5552 179.7908
+585.0549:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 112, target 8.7116 7.5521 180.0000,actual 8.6646 7.5549 179.8155
+585.0747:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 113, target 8.6904 7.5523 180.0000,actual 8.6365 7.5547 179.8320
+585.0946:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 114, target 8.6713 7.5526 180.0000,actual 8.6159 7.5543 179.8430
+585.1147:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 115, target 8.6537 7.5528 180.0000,actual 8.5914 7.5538 179.8402
+585.1344:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+585.1352:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 116, target 8.6372 7.5530 180.0000,actual 8.5695 7.5533 179.8375
+585.1549:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 117, target 8.6230 7.5532 180.0000,actual 8.5564 7.5531 179.8320
+585.1755:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 118, target 8.6100 7.5534 180.0000,actual 8.5388 7.5528 179.8265
+585.1953:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 119, target 8.5991 7.5535 180.0000,actual 8.5246 7.5525 179.8210
+585.2152:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 120, target 8.5883 7.5537 180.0000,actual 8.5112 7.5522 179.8293
+585.2351:1: Debug: actions: 164:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+585.2354:1: Debug: actions: 164:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+585.2360:1: Debug: actions: 156:canceling action: StartCollectAction
+585.2363:1: Debug: actions: 157:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+585.2367:1: Debug: actions: 158:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+585.2385:1: Debug: actions: 159:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+585.2412:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+585.2475:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 121, target 8.5838 7.5537 180.0000,actual 8.5013 7.5520 179.8457
+585.2846:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 122, target 8.5793 7.5538 180.0000,actual 8.4888 7.5516 179.9144
+585.2979:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 123, target 8.5748 7.5538 180.0000,actual 8.4866 7.5515 179.9391
+585.3069:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 124, target 8.5703 7.5539 180.0000,actual 8.4841 7.5513 179.9748
+585.3173:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 125, target 8.5658 7.5540 180.0000,actual 8.4834 7.5513 179.9886
+585.3353:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 126, target 8.5658 7.5540 180.0000,actual 8.4823 7.5512 179.9941
+585.3559:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 126, target 8.5658 7.5540 180.0000,actual 8.4827 7.5513 179.9776
+585.3754:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 126, target 8.5658 7.5540 180.0000,actual 8.4857 7.5514 179.9776
+585.3958:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 126, target 8.5658 7.5540 180.0000,actual 8.4898 7.5517 179.9831
+585.4164:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 126, target 8.5658 7.5540 180.0000,actual 8.4954 7.5520 -179.9977
+585.4391:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 126, target 8.5658 7.5540 180.0000,actual 8.4997 7.5523 -179.9895
+585.4564:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 126, target 8.5658 7.5540 180.0000,actual 8.5055 7.5527 -179.9757
+585.4764:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 126, target 8.5658 7.5540 180.0000,actual 8.5116 7.5531 -179.9647
+585.4957:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 126, target 8.5658 7.5540 180.0000,actual 8.5175 7.5535 -179.9565
+585.4960:1: Debug: actions: 168:completing action: SwerveHolonomicPathFollower S1S3-P2
+585.4964:1: Info: global: finished path'S1S3-P2' pose = 8.518 7.553 -180.0
+585.5142:1: Debug: actions: 169:starting action: SwerveHolonomicPathFollower S1S3-P3
+585.5146:1: Info: global: Start1Shoot3Action action changed states: Path2 -> Path3
+585.5164:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 0, target 8.8149 7.2994 180.0000,actual 8.5229 7.5538 -179.9510
+585.5363:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 1, target 8.8193 7.2987 180.0000,actual 8.5263 7.5539 -179.9400
+585.5562:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 2, target 8.8237 7.2979 180.0000,actual 8.5486 7.5545 -179.9263
+585.5766:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 3, target 8.8282 7.2971 180.0000,actual 8.5696 7.5548 -179.9345
+585.5978:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 4, target 8.8326 7.2963 180.0000,actual 8.5922 7.5547 -179.9565
+585.6259:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 5, target 8.8371 7.2955 180.0000,actual 8.6119 7.5544 179.9858
+585.6373:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 6, target 8.8438 7.2943 180.0000,actual 8.6288 7.5540 179.9584
+585.6559:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 7, target 8.8545 7.2924 180.0000,actual 8.6529 7.5536 179.9364
+585.6758:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 8, target 8.8653 7.2905 180.0000,actual 8.6787 7.5532 179.9364
+585.6958:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 9, target 8.8793 7.2881 180.0000,actual 8.7049 7.5528 179.9391
+585.7154:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 10, target 8.8939 7.2855 180.0000,actual 8.7305 7.5524 179.9391
+585.7364:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 11, target 8.9105 7.2826 180.0000,actual 8.7563 7.5519 179.9419
+585.7567:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 12, target 8.9287 7.2794 180.0000,actual 8.7832 7.5515 179.9281
+585.7773:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 13, target 8.9483 7.2760 180.0000,actual 8.8134 7.5461 179.9062
+585.7954:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 14, target 8.9695 7.2724 180.0000,actual 8.8196 7.5457 179.8842
+585.8158:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 15, target 8.9923 7.2685 180.0000,actual 8.8269 7.5403 179.8100
+585.8358:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 16, target 9.0167 7.2643 180.0000,actual 8.8350 7.5312 179.5491
+585.8555:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 17, target 9.0427 7.2599 180.0000,actual 8.8494 7.5215 179.3953
+585.8753:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 18, target 9.0704 7.2553 180.0000,actual 8.8723 7.5069 179.2305
+585.8959:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 19, target 9.0996 7.2505 180.0000,actual 8.8952 7.4922 179.0382
+585.9165:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 20, target 9.1304 7.2455 180.0000,actual 8.9161 7.4787 178.8817
+585.9384:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 21, target 9.1627 7.2404 180.0000,actual 8.9394 7.4635 178.7224
+585.9569:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 22, target 9.1968 7.2352 180.0000,actual 8.9552 7.4532 178.5109
+585.9758:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 23, target 9.2324 7.2298 180.0000,actual 8.9761 7.4394 178.3489
+585.9955:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 24, target 9.2695 7.2244 180.0000,actual 8.9993 7.4240 178.2005
+586.0163:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 25, target 9.3084 7.2189 180.0000,actual 9.0168 7.4083 178.0797
+586.0357:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 26, target 9.3488 7.2135 180.0000,actual 9.0307 7.3934 177.9698
+586.0555:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 27, target 9.3908 7.2081 180.0000,actual 9.0423 7.3744 177.8819
+586.0755:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 28, target 9.4345 7.2028 180.0000,actual 9.0545 7.3539 177.7968
+586.0959:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 29, target 9.4799 7.1977 180.0000,actual 9.0614 7.3366 177.7501
+586.1163:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 30, target 9.5268 7.1927 180.0000,actual 9.0702 7.3147 177.6924
+586.1360:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 31, target 9.5754 7.1881 180.0000,actual 9.0778 7.2955 177.7144
+586.1561:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 32, target 9.6256 7.1838 180.0000,actual 9.0865 7.2740 177.8352
+586.1758:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 33, target 9.6774 7.1799 180.0000,actual 9.0932 7.2569 177.9891
+586.1963:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 34, target 9.7309 7.1763 180.0000,actual 9.1025 7.2346 178.2115
+586.2170:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 35, target 9.7860 7.1732 180.0000,actual 9.1107 7.2146 178.4450
+586.2377:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 36, target 9.8427 7.1704 180.0000,actual 9.1182 7.1960 178.6730
+586.2582:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 37, target 9.9011 7.1680 180.0000,actual 9.1276 7.1736 178.9229
+586.2784:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 38, target 9.9608 7.1657 180.0000,actual 9.1374 7.1521 179.0794
+586.3015:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 39, target 10.0207 7.1635 180.0000,actual 9.1537 7.1288 179.1811
+586.3163:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 40, target 10.0807 7.1613 180.0000,actual 9.1653 7.1115 179.2168
+586.3353:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 41, target 10.1407 7.1589 180.0000,actual 9.1819 7.0872 179.2003
+586.3558:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 42, target 10.2006 7.1561 180.0000,actual 9.2079 7.0561 179.1289
+586.3757:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 43, target 10.2605 7.1528 180.0000,actual 9.2262 7.0358 179.0080
+586.3959:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 44, target 10.3204 7.1491 180.0000,actual 9.2543 7.0009 178.7883
+586.4157:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 45, target 10.3802 7.1448 180.0000,actual 9.2785 6.9737 178.4093
+586.4374:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 46, target 10.4400 7.1400 180.0000,actual 9.3082 6.9361 177.9094
+586.4564:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 47, target 10.4998 7.1346 180.0000,actual 9.3340 6.9062 177.3216
+586.4764:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 48, target 10.5595 7.1287 180.0000,actual 9.3635 6.8690 176.6158
+586.4962:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 49, target 10.6192 7.1223 180.0000,actual 9.3931 6.8310 175.8934
+586.5164:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 50, target 10.6788 7.1154 180.0000,actual 9.4404 6.7954 175.1820
+586.5365:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 51, target 10.7383 7.1082 180.0000,actual 9.4833 6.7733 174.4844
+586.5556:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 52, target 10.7975 7.1006 180.0000,actual 9.5193 6.7611 173.7895
+586.5774:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 53, target 10.8553 7.0930 180.0000,actual 9.5776 6.7445 173.1166
+586.5967:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 54, target 10.9115 7.0853 180.0000,actual 9.6404 6.7426 172.1910
+586.6170:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 55, target 10.9661 7.0777 180.0000,actual 9.6839 6.7419 171.4439
+586.6363:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 56, target 11.0191 7.0702 180.0000,actual 9.7495 6.7362 170.6227
+586.6564:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 57, target 11.0704 7.0628 180.0000,actual 9.8018 6.7342 169.8042
+586.6754:1: Debug: actions: 159:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+586.6764:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 58, target 11.1203 7.0556 179.9856,actual 9.8631 6.7289 169.0489
+586.6957:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 59, target 11.1696 7.0486 179.9423,actual 9.9234 6.7229 168.3458
+586.7153:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 60, target 11.2189 7.0415 179.8701,actual 9.9914 6.7136 167.7608
+586.7357:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 61, target 11.2682 7.0345 179.7691,actual 10.0606 6.7056 167.3268
+586.7551:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 62, target 11.3175 7.0274 179.6393,actual 10.1086 6.7010 167.0549
+586.7769:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 63, target 11.3668 7.0205 179.4805,actual 10.1717 6.7058 166.9725
+586.7964:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 64, target 11.4161 7.0135 179.2930,actual 10.2490 6.7307 167.0577
+586.8189:1: Debug: actions: 158:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+586.8196:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 65, target 11.4654 7.0066 179.0765,actual 10.3129 6.7499 167.2472
+586.8347:1: Debug: actions: 157:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+586.8364:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 66, target 11.5148 6.9998 178.8312,actual 10.3762 6.7696 167.5575
+586.8553:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 67, target 11.5641 6.9930 178.5571,actual 10.4297 6.7930 167.9393
+586.8749:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 68, target 11.6135 6.9863 178.2540,actual 10.4927 6.8198 168.4117
+586.8950:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 69, target 11.6628 6.9797 177.9222,actual 10.5565 6.8478 169.1917
+586.9150:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 70, target 11.7122 6.9731 177.5614,actual 10.6118 6.8719 169.9059
+586.9372:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 71, target 11.7616 6.9667 177.1718,actual 10.6913 6.9094 170.6749
+586.9552:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 72, target 11.8110 6.9603 176.7534,actual 10.7403 6.9333 171.4769
+586.9752:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 73, target 11.8604 6.9541 176.3061,actual 10.8040 6.9655 172.2981
+586.9957:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 74, target 11.9098 6.9480 175.8299,actual 10.8677 6.9988 173.2320
+587.0150:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 75, target 11.9592 6.9420 175.3248,actual 10.9355 7.0279 174.1850
+587.0352:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 76, target 12.0087 6.9361 174.7910,actual 11.0025 7.0502 175.1766
+587.0545:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 77, target 12.0581 6.9303 174.2282,actual 11.0726 7.0648 176.1653
+587.0750:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 78, target 12.1076 6.9247 173.6366,actual 11.1409 7.0801 177.0744
+587.0949:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 79, target 12.1571 6.9192 173.0161,actual 11.2094 7.0870 178.0165
+587.1145:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 80, target 12.2066 6.9139 172.3668,actual 11.2765 7.0947 178.9092
+587.1347:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 81, target 12.2562 6.9087 171.6886,actual 11.3431 7.1033 179.7304
+587.1552:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 82, target 12.3057 6.9036 170.9816,actual 11.4168 7.1156 -179.5940
+587.1766:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 83, target 12.3553 6.8987 170.2457,actual 11.4891 7.1264 -179.0199
+587.1959:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 84, target 12.4048 6.8939 169.4809,actual 11.5438 7.1357 -178.6134
+587.2174:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 85, target 12.4544 6.8893 168.6873,actual 11.5972 7.1432 -178.3086
+587.2368:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 86, target 12.5040 6.8847 167.8648,actual 11.6730 7.1577 -178.2811
+587.2544:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 87, target 12.5536 6.8802 167.0135,actual 11.7188 7.1643 -178.4514
+587.2752:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 88, target 12.6032 6.8758 166.1333,actual 11.7787 7.1628 -178.8441
+587.2959:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 89, target 12.6528 6.8715 165.2242,actual 11.8342 7.1449 -179.4264
+587.3160:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 90, target 12.7024 6.8672 164.2863,actual 11.8892 7.1266 179.7853
+587.3389:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 91, target 12.7520 6.8629 163.3195,actual 11.9514 7.1027 178.8515
+587.3570:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 92, target 12.8017 6.8586 162.3239,actual 12.0106 7.0792 177.6595
+587.3762:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 93, target 12.8513 6.8543 161.2994,actual 12.0627 7.0568 176.2203
+587.3959:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 94, target 12.9009 6.8500 160.2460,actual 12.1004 7.0396 174.6382
+587.4146:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 95, target 12.9505 6.8456 159.1809,actual 12.1500 7.0149 172.9189
+587.4350:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 96, target 13.0001 6.8412 158.1432,actual 12.1996 6.9886 171.0704
+587.4550:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 97, target 13.0497 6.8367 157.1343,actual 12.2480 6.9610 169.1780
+587.4763:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 98, target 13.0993 6.8321 156.1543,actual 12.3013 6.9280 167.3241
+587.4965:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 99, target 13.1489 6.8275 155.2031,actual 12.3520 6.8950 165.4976
+587.5166:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 100, target 13.1984 6.8228 154.2808,actual 12.3864 6.8739 163.2811
+587.5353:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 101, target 13.2479 6.8180 153.3873,actual 12.4347 6.8531 161.5645
+587.5548:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 102, target 13.2965 6.8133 152.5227,actual 12.4859 6.8349 159.8644
+587.5750:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 103, target 13.3435 6.8086 151.6870,actual 12.5370 6.8150 158.1807
+587.5960:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 104, target 13.3890 6.8041 150.8801,actual 12.6032 6.8023 156.5218
+587.6159:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 105, target 13.4329 6.7996 150.1021,actual 12.6565 6.7913 154.8711
+587.6357:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 106, target 13.4750 6.7953 149.3529,actual 12.7086 6.7790 153.2094
+587.6549:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 107, target 13.5157 6.7911 148.6326,actual 12.7474 6.7697 151.6219
+587.6753:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 108, target 13.5547 6.7870 147.9412,actual 12.8069 6.7500 150.0920
+587.6953:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 109, target 13.5921 6.7830 147.2786,actual 12.8529 6.7369 148.5347
+587.7147:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 110, target 13.6280 6.7792 146.6449,actual 12.9044 6.7185 147.0268
+587.7351:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 111, target 13.6623 6.7756 146.0400,actual 12.9561 6.6984 145.5547
+587.7560:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 112, target 13.6949 6.7721 145.4640,actual 13.0074 6.6768 144.1457
+587.7765:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 113, target 13.7259 6.7687 144.9168,actual 13.0687 6.6655 142.8081
+587.7953:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 114, target 13.7554 6.7655 144.3985,actual 13.1192 6.6720 141.5913
+587.8162:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 115, target 13.7834 6.7624 143.9091,actual 13.1768 6.6781 140.4927
+587.8348:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 116, target 13.8097 6.7596 143.4485,actual 13.2339 6.6829 139.3117
+587.8549:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 117, target 13.8344 6.7568 143.0168,actual 13.2881 6.6946 138.5179
+587.8750:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 118, target 13.8574 6.7543 142.6140,actual 13.3413 6.7053 137.8505
+587.8965:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 119, target 13.8788 6.7519 142.2400,actual 13.4002 6.7152 137.3726
+587.9175:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 120, target 13.8987 6.7498 141.8948,actual 13.4562 6.7262 137.0540
+587.9390:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 121, target 13.9171 6.7477 141.5786,actual 13.5049 6.7346 136.9222
+587.9571:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 122, target 13.9338 6.7459 141.2912,actual 13.5399 6.7409 137.0210
+587.9765:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 123, target 13.9487 6.7442 141.0326,actual 13.5851 6.7487 137.3451
+587.9951:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 124, target 13.9628 6.7427 140.8029,actual 13.6292 6.7565 137.7956
+588.0148:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 125, target 13.9738 6.7414 140.6021,actual 13.6710 6.7688 138.3174
+588.0349:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 126, target 13.9846 6.7402 140.4301,actual 13.7108 6.7787 138.9024
+588.0557:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 127, target 13.9916 6.7395 140.2869,actual 13.7512 6.7922 139.4847
+588.0754:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 128, target 13.9961 6.7390 140.1727,actual 13.7808 6.8014 140.0588
+588.0965:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 129, target 14.0006 6.7385 140.0873,actual 13.8165 6.8111 140.5696
+588.1148:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 130, target 14.0051 6.7380 140.0307,actual 13.8422 6.8168 141.0640
+588.1353:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 131, target 14.0095 6.7375 140.0030,actual 13.8706 6.8242 141.5804
+588.1563:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 132, target 14.0140 6.7370 140.0000,actual 13.9032 6.8336 141.9100
+588.1753:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 133, target 14.0140 6.7370 140.0000,actual 13.9216 6.8382 142.2011
+588.1953:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 133, target 14.0140 6.7370 140.0000,actual 13.9482 6.8464 142.4126
+588.2159:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 133, target 14.0140 6.7370 140.0000,actual 13.9697 6.8522 142.5664
+588.2350:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 133, target 14.0140 6.7370 140.0000,actual 13.9864 6.8562 142.7257
+588.2555:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 133, target 14.0140 6.7370 140.0000,actual 13.9995 6.8601 142.8987
+588.2774:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 133, target 14.0140 6.7370 140.0000,actual 14.0133 6.8612 143.0168
+588.2965:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 133, target 14.0140 6.7370 140.0000,actual 14.0218 6.8613 143.1047
+588.3159:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 133, target 14.0140 6.7370 140.0000,actual 14.0302 6.8613 143.1047
+588.3367:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 133, target 14.0140 6.7370 140.0000,actual 14.0401 6.8600 143.0141
+588.3583:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 133, target 14.0140 6.7370 140.0000,actual 14.0451 6.8578 142.9262
+588.3804:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 133, target 14.0140 6.7370 140.0000,actual 14.0473 6.8558 143.0003
+588.3807:1: Debug: actions: 169:completing action: SwerveHolonomicPathFollower S1S3-P3
+588.3810:1: Info: global: finished path'S1S3-P3' pose = 14.047 6.856 143.0
+588.3978:1: Debug: actions: 146:starting action: 146: SwerveTrackAngle
+588.3980:1: Debug: actions: 147:starting action: 147: IntakeShootAction
+588.3985:1: Debug: actions: 150:starting action: MCTrackPosAction (intake-updown) target=118.0
+588.4001:1: Debug: actions: 151:starting action: MCTrackPosAction (intake-tilt) target=-66.05278191901692
+588.4020:1: Debug: actions: 148:starting action: 148: MCVelocityAction (intake-shooter1), target = 70.0
+588.4041:1: Debug: actions: 149:starting action: 149: MCVelocityAction (intake-shooter2), target = 70.0
+588.4053:1: Info: global: Start1Shoot3Action action changed states: Path3 -> Shoot3
+588.4057:1: Info: global: case 7 effective = 145.7 offset = -5.000
+588.4103:1: Debug: intake-shooter: shooting distance = 2.676 updown = 118.0 tilt = -66.18 velocity = 70.00
+588.4140:1: Info: global: gyroinfo rate = -6.535 ratelimit = 5.000 ax = -0.1960 ay = 0.3574 alimit = 0.05000
+588.4148:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = false gyro_stopped = false
+588.4188:1: Debug: swerve:  err = 2.174 postel = 5.000 isAt = true
+588.4439:1: Debug: intake-shooter: shooting distance = 2.652 updown = 118.0 tilt = -66.26 velocity = 70.00
+588.4461:1: Info: global: gyroinfo rate = -4.281 ratelimit = 5.000 ax = 0.04340 ay = 0.1914 alimit = 0.05000
+588.4464:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = false gyro_stopped = false
+588.4479:1: Debug: swerve:  err = -3.080 postel = 5.000 isAt = true
+588.4695:1: Debug: intake-shooter: shooting distance = 2.654 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.4710:1: Info: global: gyroinfo rate = -4.227 ratelimit = 5.000 ax = 0.02411 ay = 0.1045 alimit = 0.05000
+588.4720:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = false gyro_stopped = false
+588.4732:1: Debug: swerve:  err = -3.291 postel = 5.000 isAt = true
+588.4875:1: Debug: intake-shooter: shooting distance = 2.653 updown = 118.0 tilt = -66.26 velocity = 70.00
+588.4893:1: Info: global: gyroinfo rate = -3.336 ratelimit = 5.000 ax = 0.04510 ay = 0.1111 alimit = 0.05000
+588.4897:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = false gyro_stopped = false
+588.4905:1: Debug: swerve:  err = -3.475 postel = 5.000 isAt = true
+588.5001:1: Debug: intake-shooter: shooting distance = 2.653 updown = 118.0 tilt = -66.26 velocity = 70.00
+588.5014:1: Info: global: gyroinfo rate = 1.441 ratelimit = 5.000 ax = 0.06219 ay = 0.08569 alimit = 0.05000
+588.5018:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = false gyro_stopped = false
+588.5032:1: Debug: swerve:  err = -3.475 postel = 5.000 isAt = true
+588.5135:1: Debug: intake-shooter: shooting distance = 2.653 updown = 118.0 tilt = -66.26 velocity = 70.00
+588.5150:1: Info: global: gyroinfo rate = 2.023 ratelimit = 5.000 ax = 0.01923 ay = 0.04468 alimit = 0.05000
+588.5155:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = false gyro_stopped = true
+588.5171:1: Debug: swerve:  err = -3.596 postel = 5.000 isAt = true
+588.5307:1: Debug: intake-shooter: shooting distance = 2.653 updown = 118.0 tilt = -66.26 velocity = 70.00
+588.5319:1: Info: global: gyroinfo rate = 3.613 ratelimit = 5.000 ax = -0.009277 ay = 0.03491 alimit = 0.05000
+588.5323:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = false gyro_stopped = true
+588.5335:1: Debug: swerve:  err = -3.596 postel = 5.000 isAt = true
+588.5435:1: Debug: intake-shooter: shooting distance = 2.653 updown = 118.0 tilt = -66.26 velocity = 70.00
+588.5450:1: Info: global: gyroinfo rate = 3.621 ratelimit = 5.000 ax = -0.03638 ay = -0.0004272 alimit = 0.05000
+588.5456:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = false gyro_stopped = true
+588.5466:1: Debug: swerve:  err = -3.700 postel = 5.000 isAt = true
+588.5580:1: Debug: intake-shooter: shooting distance = 2.653 updown = 118.0 tilt = -66.26 velocity = 70.00
+588.5600:1: Info: global: gyroinfo rate = 3.195 ratelimit = 5.000 ax = -0.04077 ay = -0.03998 alimit = 0.05000
+588.5607:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = false gyro_stopped = true
+588.5616:1: Debug: swerve:  err = -3.700 postel = 5.000 isAt = true
+588.5769:1: Debug: intake-shooter: shooting distance = 2.653 updown = 118.0 tilt = -66.26 velocity = 70.00
+588.5824:1: Info: global: gyroinfo rate = 2.082 ratelimit = 5.000 ax = 0.02728 ay = -0.01727 alimit = 0.05000
+588.5828:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.5841:1: Debug: swerve:  err = -3.717 postel = 5.000 isAt = true
+588.5969:1: Debug: intake-shooter: shooting distance = 2.655 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.6000:1: Info: global: gyroinfo rate = 1.785 ratelimit = 5.000 ax = 0.03436 ay = -0.02972 alimit = 0.05000
+588.6006:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.6015:1: Debug: swerve:  err = -3.649 postel = 5.000 isAt = true
+588.6184:1: Debug: intake-shooter: shooting distance = 2.655 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.6210:1: Info: global: gyroinfo rate = 0.9922 ratelimit = 5.000 ax = 0.01849 ay = -0.04144 alimit = 0.05000
+588.6215:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.6225:1: Debug: swerve:  err = -3.545 postel = 5.000 isAt = true
+588.6377:1: Debug: intake-shooter: shooting distance = 2.655 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.6390:1: Info: global: gyroinfo rate = 1.055 ratelimit = 5.000 ax = 0.03632 ay = -0.01410 alimit = 0.05000
+588.6395:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.6408:1: Debug: swerve:  err = -3.480 postel = 5.000 isAt = true
+588.6617:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.6637:1: Info: global: gyroinfo rate = 1.293 ratelimit = 5.000 ax = 0.02606 ay = -0.01581 alimit = 0.05000
+588.6642:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.6649:1: Debug: swerve:  err = -3.436 postel = 5.000 isAt = true
+588.6768:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.6784:1: Info: global: gyroinfo rate = 1.539 ratelimit = 5.000 ax = 0.01093 ay = -0.03680 alimit = 0.05000
+588.6795:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.6808:1: Debug: swerve:  err = -3.436 postel = 5.000 isAt = true
+588.6970:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.6985:1: Info: global: gyroinfo rate = 2.148 ratelimit = 5.000 ax = 0.01288 ay = -0.01190 alimit = 0.05000
+588.6990:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.6999:1: Debug: swerve:  err = -3.408 postel = 5.000 isAt = true
+588.7173:1: Debug: intake-shooter: shooting distance = 2.655 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.7185:1: Info: global: gyroinfo rate = 2.094 ratelimit = 5.000 ax = 0.02313 ay = -0.02142 alimit = 0.05000
+588.7189:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.7215:1: Debug: swerve:  err = -3.373 postel = 5.000 isAt = true
+588.7377:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.7393:1: Info: global: gyroinfo rate = 2.461 ratelimit = 5.000 ax = 0.03534 ay = 0.004395 alimit = 0.05000
+588.7396:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.7405:1: Debug: swerve:  err = -3.331 postel = 5.000 isAt = true
+588.7590:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.7607:1: Info: global: gyroinfo rate = 2.895 ratelimit = 5.000 ax = 0.04779 ay = -0.01337 alimit = 0.05000
+588.7611:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.7620:1: Debug: swerve:  err = -3.331 postel = 5.000 isAt = true
+588.7765:1: Debug: intake-shooter: shooting distance = 2.655 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.7776:1: Info: global: gyroinfo rate = 3.484 ratelimit = 5.000 ax = 0.06268 ay = -0.02313 alimit = 0.05000
+588.7779:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+588.7794:1: Debug: swerve:  err = -3.277 postel = 5.000 isAt = true
+588.8007:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.8027:1: Info: global: gyroinfo rate = 3.555 ratelimit = 5.000 ax = -0.006104 ay = -0.02289 alimit = 0.05000
+588.8033:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.8066:1: Debug: swerve:  err = -3.224 postel = 5.000 isAt = true
+588.8167:1: Debug: intake-shooter: shooting distance = 2.655 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.8181:1: Info: global: gyroinfo rate = 3.875 ratelimit = 5.000 ax = 0.01849 ay = -0.01312 alimit = 0.05000
+588.8186:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.8210:1: Debug: swerve:  err = -3.158 postel = 5.000 isAt = true
+588.8375:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.8389:1: Info: global: gyroinfo rate = 3.492 ratelimit = 5.000 ax = 0.009949 ay = -0.008484 alimit = 0.05000
+588.8396:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.8409:1: Debug: swerve:  err = -3.075 postel = 5.000 isAt = true
+588.8578:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.8591:1: Info: global: gyroinfo rate = 3.242 ratelimit = 5.000 ax = 0.007507 ay = 0.000 alimit = 0.05000
+588.8596:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.8610:1: Debug: swerve:  err = -3.075 postel = 5.000 isAt = true
+588.8775:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.8793:1: Info: global: gyroinfo rate = 3.809 ratelimit = 5.000 ax = 0.02338 ay = -0.001404 alimit = 0.05000
+588.8803:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.8814:1: Debug: swerve:  err = -2.986 postel = 5.000 isAt = true
+588.8994:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.9009:1: Info: global: gyroinfo rate = 3.555 ratelimit = 5.000 ax = 0.001892 ay = -0.02142 alimit = 0.05000
+588.9014:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.9022:1: Debug: swerve:  err = -2.889 postel = 5.000 isAt = true
+588.9181:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.9198:1: Info: global: gyroinfo rate = 3.680 ratelimit = 5.000 ax = 0.01410 ay = -0.01215 alimit = 0.05000
+588.9207:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.9229:1: Debug: swerve:  err = -2.889 postel = 5.000 isAt = true
+588.9401:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.9415:1: Info: global: gyroinfo rate = 3.434 ratelimit = 5.000 ax = 0.01508 ay = -0.005554 alimit = 0.05000
+588.9419:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.9430:1: Debug: swerve:  err = -2.701 postel = 5.000 isAt = true
+588.9588:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.9611:1: Info: global: gyroinfo rate = 3.617 ratelimit = 5.000 ax = 0.01947 ay = -0.008728 alimit = 0.05000
+588.9617:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.9626:1: Debug: swerve:  err = -2.608 postel = 5.000 isAt = true
+588.9778:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.9801:1: Info: global: gyroinfo rate = 3.563 ratelimit = 5.000 ax = 0.01410 ay = -0.01068 alimit = 0.05000
+588.9808:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+588.9819:1: Debug: swerve:  err = -2.506 postel = 5.000 isAt = true
+588.9978:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+588.9991:1: Info: global: gyroinfo rate = 3.434 ratelimit = 5.000 ax = 0.02972 ay = -0.006042 alimit = 0.05000
+588.9997:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+589.0008:1: Debug: swerve:  err = -2.506 postel = 5.000 isAt = true
+589.0169:1: Debug: intake-shooter: shooting distance = 2.656 updown = 118.0 tilt = -66.25 velocity = 70.00
+589.0185:1: Info: global: gyroinfo rate = 3.258 ratelimit = 5.000 ax = 0.004578 ay = -0.003601 alimit = 0.05000
+589.0195:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+589.0204:1: Info: global: gyroinfo rate = 3.258 ratelimit = 5.000 ax = 0.004578 ay = -0.008728 alimit = 0.05000
+589.0216:1: Debug: swerve:  err = -2.418 postel = 5.000 isAt = true
+589.0371:1: Debug: swerve:  err = -2.321 postel = 5.000 isAt = true
+589.0580:1: Debug: swerve:  err = -2.321 postel = 5.000 isAt = true
+589.0843:1: Debug: swerve:  err = -2.231 postel = 5.000 isAt = true
+589.0969:1: Debug: swerve:  err = -2.162 postel = 5.000 isAt = true
+589.1184:1: Debug: swerve:  err = -2.162 postel = 5.000 isAt = true
+589.1373:1: Debug: swerve:  err = -2.120 postel = 5.000 isAt = true
+589.1578:1: Debug: swerve:  err = -2.066 postel = 5.000 isAt = true
+589.1783:1: Debug: swerve:  err = -2.066 postel = 5.000 isAt = true
+589.1980:1: Debug: swerve:  err = -2.052 postel = 5.000 isAt = true
+589.2229:1: Debug: swerve:  err = -2.043 postel = 5.000 isAt = true
+589.2389:1: Debug: swerve:  err = -2.035 postel = 5.000 isAt = true
+589.2587:1: Debug: swerve:  err = -2.040 postel = 5.000 isAt = true
+589.2779:1: Debug: swerve:  err = -2.040 postel = 5.000 isAt = true
+589.2981:1: Debug: swerve:  err = -2.038 postel = 5.000 isAt = true
+589.3210:1: Debug: swerve:  err = -2.036 postel = 5.000 isAt = true
+589.3407:1: Debug: swerve:  err = -2.031 postel = 5.000 isAt = true
+589.3572:1: Debug: swerve:  err = -2.031 postel = 5.000 isAt = true
+589.3846:1: Debug: swerve:  err = -2.031 postel = 5.000 isAt = true
+589.3972:1: Debug: swerve:  err = -2.027 postel = 5.000 isAt = true
+589.4185:1: Debug: swerve:  err = -2.029 postel = 5.000 isAt = true
+589.4373:1: Debug: actions: 146:canceling action: 146: SwerveTrackAngle
+589.4377:1: Debug: actions: 152:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+589.6571:1: Debug: actions: 152:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+589.6783:1: Debug: actions: 147:completing action: 147: IntakeShootAction
+589.7034:1: Debug: actions: 150:canceling action: MCTrackPosAction (intake-updown) target=118.0
+589.7039:1: Debug: actions: 151:canceling action: MCTrackPosAction (intake-tilt) target=-66.24633606365943
+589.7043:1: Debug: actions: 148:canceling action: 148: MCVelocityAction (intake-shooter1), target = 70.0
+589.7046:1: Debug: actions: 149:canceling action: 149: MCVelocityAction (intake-shooter2), target = 70.0
+589.7048:1: Debug: actions: 153:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+589.7051:1: Debug: actions: 154:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+589.7069:1: Debug: actions: 155:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+589.7085:1: Info: global: Start1Shoot3Action action changed states: Shoot3 -> Stowing
+589.7100:1: Debug: actions: 154:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+589.7120:1: Debug: actions: 155:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+589.7590:1: Debug: actions: 153:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+589.7697:1: Info: global: Start1Shoot3Action action changed states: Stowing -> Done
+589.7810:1: Debug: actions: 145:completing action: 145: Start2Shoot3Action
+589.7897:1: Debug: actions: 170:completing action: 
+                   actions: 170: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:     145: Start2Shoot3Action
+                   actions: ]
+589.7906:1: Debug: actions: 144:completing action: 
+                   actions: 144: Sequence [
+                   actions:     170: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:         145: Start2Shoot3Action
+                   actions:     ]
+                   actions: ]
+591.0323:1: Info: global: changing robot loop type: Autonomous -> Disabled
+591.0327:1: Info: global: Motor Faults Report
+591.0371:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+591.0693:1: Info: global: intake-updown:rio-2:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+591.0913:1: Info: global: intake-feeder:rio-1:sticky-bridge-brownout sticky-stator-curr-limit
+591.1100:1: Info: global: intake-tilt:rio-5:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+591.1311:1: Info: global: intake-shooter1:rio-3:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+591.1524:1: Info: global: intake-shooter2:rio-4:sticky-devicetemp sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+591.1731:1: Info: global: elevator:rio-6:sticky-bridge-brownout sticky-stator-curr-limit
+591.1971:1: Info: global: arm:rio-7:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+591.2022:1: Info: global: manipulator:rio-9:NONE
+591.2246:1: Info: global: climber:rio-10:sticky-bridge-brownout sticky-reverse-soft-limit sticky-stator-curr-limit
+591.2462:1: Info: global: fl-steer:DriveBase-11:sticky-bridge-brownout sticky-stator-curr-limit
+591.2674:1: Info: global: fl-drive:DriveBase-12:sticky-devicetemp sticky-bridge-brownout sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+591.2927:1: Info: global: fr-steer:DriveBase-21:sticky-bridge-brownout sticky-stator-curr-limit
+591.3139:1: Info: global: fr-drive:DriveBase-22:sticky-devicetemp sticky-boot-during-enable sticky-bridge-brownout sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+591.3389:1: Info: global: bl-steer:DriveBase-41:sticky-bridge-brownout sticky-stator-curr-limit
+591.3695:1: Info: global: bl-drive:DriveBase-42:sticky-devicetemp sticky-boot-during-enable sticky-bridge-brownout sticky-over-supply sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+591.4011:1: Info: global: br-steer:DriveBase-31:sticky-bridge-brownout sticky-stator-curr-limit
+591.4268:1: Info: global: br-drive:DriveBase-32:sticky-devicetemp sticky-bridge-brownout sticky-over-supply sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+591.4271:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+593.7713:1: Info: global: changing robot loop type: Disabled -> Teleop
+593.8367:1: Debug: actions: 0:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: -2.92 m/s, Vy: 3.43 m/s, Omega: 6.28 rad/s))
+595.3158:1: Debug: actions: 120:starting action: StartCollectAction
+595.3160:1: Debug: actions: 127:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+595.3167:1: Debug: actions: 127:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+595.3182:1: Info: global: pos < stow pos = 118.0 stow = 118.0
+595.3187:1: Debug: actions: 262:starting action: MCMotionMagicAction (intake-tilt) target=-64.97850354399999 posthresh=3.0 velthresh=1.0
+595.3219:1: Debug: global: OI State changed : Idle -> Collect
+595.7159:1: Debug: actions: 262:completing action: MCMotionMagicAction (intake-tilt) target=-64.97850354399999 posthresh=3.0 velthresh=1.0
+595.7363:1: Debug: actions: 129:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+595.7385:1: Debug: actions: 130:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+595.7404:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+597.2774:1: Debug: actions: 130:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+597.3365:1: Debug: actions: 129:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+597.3555:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+597.6951:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+597.8147:1: Debug: actions: 128:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+597.8152:1: Debug: actions: 128:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+597.8159:1: Debug: actions: 121:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+597.8163:1: Debug: actions: 122:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+597.8189:1: Debug: actions: 123:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+597.8226:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+599.2558:1: Debug: actions: 123:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+599.3969:1: Debug: actions: 122:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+599.4146:1: Debug: actions: 121:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+599.4347:1: Debug: actions: 120:completing action: StartCollectAction
+599.4471:1: Debug: actions: 21:starting action: 21: TransferIntakeToTrampAction
+599.4516:1: Debug: actions: 22:starting action: AmpTrapPositionAction, angle=0.0, height 0.021
+599.4532:1: Error: global: armpos current = 7.739 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+599.4534:1: Debug: actions: 27:starting action: MCMotionMagicAction (elevator) target=0.021 posthresh=0.1 velthresh=0.05
+599.4692:1: Debug: actions: 26:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+599.4874:1: Debug: actions: 28:starting action: IntakeGotoNamedPositionAction updown 90.0, tilt 0.0
+599.4881:1: Info: global: pos < stow pos = 118.0 stow = 118.0 ttarget = -64.99
+599.4893:1: Debug: actions: 263:starting action: MCMotionMagicAction (intake-tilt) target=-64.991820304 posthresh=3.0 velthresh=1.0
+599.4920:1: Debug: global: OI State changed : Collect -> TransferToAmpTrap
+599.5102:1: Debug: actions: 27:completing action: MCMotionMagicAction (elevator) target=0.021 posthresh=0.1 velthresh=0.05
+599.8162:1: Debug: actions: 26:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+599.8355:1: Debug: actions: 22:completing action: AmpTrapPositionAction, angle=0.0, height 0.021
+599.9959:1: Debug: actions: 263:completing action: MCMotionMagicAction (intake-tilt) target=-64.991820304 posthresh=3.0 velthresh=1.0
+600.0158:1: Debug: actions: 29:starting action: MCMotionMagicAction (intake-updown) target=90.0 posthresh=3.0 velthresh=1.0
+600.0176:1: Debug: actions: 30:starting action: MCMotionMagicAction (intake-tilt) target=0.0 posthresh=3.0 velthresh=1.0
+600.7365:1: Debug: actions: 29:completing action: MCMotionMagicAction (intake-updown) target=90.0 posthresh=3.0 velthresh=1.0
+601.2151:1: Debug: actions: 30:completing action: MCMotionMagicAction (intake-tilt) target=0.0 posthresh=3.0 velthresh=1.0
+601.2349:1: Debug: actions: 28:completing action: IntakeGotoNamedPositionAction updown 90.0, tilt 0.0
+601.2552:1: Debug: actions: 31:starting action: AmpTrapXferAction
+601.2555:1: Debug: actions: 32:canceling action: MotorEncoderPowerAction manipulator power = -0.1
+601.2560:1: Debug: actions: 32:starting action: MotorEncoderPowerAction manipulator power = -0.1
+601.2563:1: Debug: actions: 32:completing action: MotorEncoderPowerAction manipulator power = -0.1
+601.2578:1: Debug: actions: 33:starting action: 33: NoteTransferAction
+601.2580:1: Debug: actions: 34:starting action: MotorEncoderPowerAction intake-feeder power = 0.3
+601.2583:1: Debug: actions: 34:completing action: MotorEncoderPowerAction intake-feeder power = 0.3
+601.2588:1: Debug: actions: 35:starting action: 35: MCVelocityAction (intake-shooter1), target = 14.0
+601.2606:1: Debug: actions: 36:starting action: 36: MCVelocityAction (intake-shooter2), target = 14.0
+601.2619:1: Debug: superstructure: transfer note state changed: MovingToPosition ->WaitingOnSensorNone1
+601.2750:1: Debug: superstructure: transfer note state changed: WaitingOnSensorNone1 ->WaitingOnSensorDetected
+601.5149:1: Debug: superstructure: transfer note state changed: WaitingOnSensorDetected ->WaitingOnSensorNone2
+601.5352:1: Debug: superstructure: transfer note state changed: WaitingOnSensorNone2 ->FinishingTransfer
+603.5158:1: Debug: superstructure: transfer note state changed: FinishingTransfer ->ContinueShooter
+604.5553:1: Debug: actions: 35:canceling action: 35: MCVelocityAction (intake-shooter1), target = 14.0
+604.5558:1: Debug: actions: 36:canceling action: 36: MCVelocityAction (intake-shooter2), target = 14.0
+604.5563:1: Debug: actions: 21:completing action: 21: TransferIntakeToTrampAction
+604.5574:1: Debug: actions: 40:starting action: AmpTrapPositionAction, angle=225.0, height 0.2
+604.5579:1: Error: global: armpos current = 0.5341 keepoutmax = 75.00 keepoutmin = 5.000 target = 225.0
+604.5582:1: Debug: actions: 45:starting action: MCMotionMagicAction (elevator) target=0.2 posthresh=0.1 velthresh=0.05
+604.5597:1: Debug: actions: 42:starting action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+604.5618:1: Debug: actions: 37:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+604.5623:1: Debug: actions: 38:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+604.5638:1: Debug: actions: 39:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+604.5661:1: Debug: global: OI State changed : TransferToAmpTrap -> NoteGoingToAmpPositon
+604.5821:1: Debug: actions: 42:completing action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+604.9557:1: Debug: actions: 44:starting action: MCMotionMagicAction (arm) target=225.0 posthresh=5.0 velthresh=1.0
+604.9574:1: Error: amp-trap: AmpTrapPositionState changed : CrossMinToMax -> DirectToTarget
+605.3377:1: Debug: actions: 38:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+605.3385:1: Debug: actions: 45:completing action: MCMotionMagicAction (elevator) target=0.2 posthresh=0.1 velthresh=0.05
+605.6350:1: Debug: actions: 39:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+605.6547:1: Debug: actions: 37:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+607.0980:1: Debug: actions: 44:completing action: MCMotionMagicAction (arm) target=225.0 posthresh=5.0 velthresh=1.0
+607.1147:1: Debug: actions: 40:completing action: AmpTrapPositionAction, angle=225.0, height 0.2
+607.1155:1: Debug: global: OI State changed : NoteGoingToAmpPositon -> NoteInAmpPosition
+607.1369:1: Debug: actions: 89:starting action: MotorEncoderPowerAction manipulator power = 1.0 1.0 1.5
+607.1377:1: Debug: global: OI State changed : NoteInAmpPosition -> ShootingAmp
+608.6547:1: Debug: actions: 89:completing action: MotorEncoderPowerAction manipulator power = 1.0 1.0 1.5
+608.6559:1: Debug: actions: 90:starting action: AmpTrapPositionAction, angle=0.0, height 0.05
+608.6570:1: Error: global: armpos current = 227.2 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+608.6572:1: Debug: actions: 91:starting action: MCMotionMagicAction (elevator) target=0.19 posthresh=0.05 velthresh=0.05
+608.6588:1: Debug: actions: 93:starting action: MCMotionMagicAction (arm) target=75.0 posthresh=5.0 velthresh=1.0
+608.6605:1: Debug: global: OI State changed : ShootingAmp -> StowingAmpTrap
+608.6747:1: Debug: actions: 93:canceling action: MCMotionMagicAction (arm) target=75.0 posthresh=5.0 velthresh=1.0
+608.6751:1: Debug: actions: 94:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+608.6772:1: Error: amp-trap: AmpTrapPositionState changed : CrossMaxToMin -> CrossMaxToMinWaitClear
+608.6808:1: Debug: actions: 91:completing action: MCMotionMagicAction (elevator) target=0.19 posthresh=0.05 velthresh=0.05
+610.5551:1: Debug: actions: 95:starting action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+610.5567:1: Error: amp-trap: AmpTrapPositionState changed : CrossMaxToMinWaitClear -> DirectToTarget
+610.8362:1: Debug: actions: 94:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+611.2365:1: Debug: actions: 95:completing action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+611.2548:1: Debug: actions: 90:completing action: AmpTrapPositionAction, angle=0.0, height 0.05
+611.2562:1: Debug: global: OI State changed : StowingAmpTrap -> Idle
+611.2748:1: Debug: actions: 120:starting action: StartCollectAction
+611.2750:1: Debug: actions: 127:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+611.2754:1: Debug: actions: 127:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+611.2761:1: Info: global: pos < stow pos = 118.0 stow = 118.0
+611.2767:1: Debug: actions: 264:starting action: MCMotionMagicAction (intake-tilt) target=-64.9864936 posthresh=3.0 velthresh=1.0
+611.2783:1: Debug: global: OI State changed : Idle -> Collect
+611.2967:1: Debug: actions: 264:completing action: MCMotionMagicAction (intake-tilt) target=-64.9864936 posthresh=3.0 velthresh=1.0
+611.3145:1: Debug: actions: 129:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+611.3171:1: Debug: actions: 130:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+611.3188:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+612.8953:1: Debug: actions: 129:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+612.8961:1: Debug: actions: 130:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+612.9147:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+612.9549:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+613.0560:1: Debug: actions: 128:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+613.0562:1: Debug: actions: 128:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+613.0570:1: Debug: actions: 121:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+613.0574:1: Debug: actions: 122:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+613.0589:1: Debug: actions: 123:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+613.0602:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+614.4958:1: Debug: actions: 123:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+614.6549:1: Debug: actions: 122:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+614.6749:1: Debug: actions: 121:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+614.6959:1: Debug: actions: 120:completing action: StartCollectAction
+614.6974:1: Debug: actions: 21:starting action: 21: TransferIntakeToTrampAction
+614.6978:1: Debug: actions: 22:starting action: AmpTrapPositionAction, angle=0.0, height 0.021
+614.6982:1: Error: global: armpos current = 0.6409 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+614.6984:1: Debug: actions: 27:starting action: MCMotionMagicAction (elevator) target=0.021 posthresh=0.1 velthresh=0.05
+614.7003:1: Debug: actions: 26:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+614.7028:1: Debug: actions: 28:starting action: IntakeGotoNamedPositionAction updown 90.0, tilt 0.0
+614.7032:1: Debug: actions: 29:starting action: MCMotionMagicAction (intake-updown) target=90.0 posthresh=3.0 velthresh=1.0
+614.7048:1: Debug: actions: 30:starting action: MCMotionMagicAction (intake-tilt) target=0.0 posthresh=3.0 velthresh=1.0
+614.7063:1: Debug: global: OI State changed : Collect -> TransferToAmpTrap
+614.7181:1: Debug: actions: 27:completing action: MCMotionMagicAction (elevator) target=0.021 posthresh=0.1 velthresh=0.05
+614.7381:1: Debug: actions: 26:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+614.7569:1: Debug: actions: 22:completing action: AmpTrapPositionAction, angle=0.0, height 0.021
+615.4562:1: Debug: actions: 29:completing action: MCMotionMagicAction (intake-updown) target=90.0 posthresh=3.0 velthresh=1.0
+615.7153:1: Debug: actions: 30:completing action: MCMotionMagicAction (intake-tilt) target=0.0 posthresh=3.0 velthresh=1.0
+615.7350:1: Debug: actions: 28:completing action: IntakeGotoNamedPositionAction updown 90.0, tilt 0.0
+615.7552:1: Debug: actions: 31:starting action: AmpTrapXferAction
+615.7558:1: Debug: actions: 32:starting action: MotorEncoderPowerAction manipulator power = -0.1
+615.7560:1: Debug: actions: 32:completing action: MotorEncoderPowerAction manipulator power = -0.1
+615.7565:1: Debug: actions: 33:starting action: 33: NoteTransferAction
+615.7567:1: Debug: actions: 34:starting action: MotorEncoderPowerAction intake-feeder power = 0.3
+615.7569:1: Debug: actions: 34:completing action: MotorEncoderPowerAction intake-feeder power = 0.3
+615.7575:1: Debug: actions: 35:starting action: 35: MCVelocityAction (intake-shooter1), target = 14.0
+615.7587:1: Debug: actions: 36:starting action: 36: MCVelocityAction (intake-shooter2), target = 14.0
+615.7597:1: Debug: superstructure: transfer note state changed: MovingToPosition ->WaitingOnSensorNone1
+615.7748:1: Debug: superstructure: transfer note state changed: WaitingOnSensorNone1 ->WaitingOnSensorDetected
+616.0351:1: Debug: superstructure: transfer note state changed: WaitingOnSensorDetected ->WaitingOnSensorNone2
+616.0554:1: Debug: superstructure: transfer note state changed: WaitingOnSensorNone2 ->FinishingTransfer
+616.2151:1: Debug: superstructure: transfer note state changed: FinishingTransfer ->ContinueShooter
+617.1158:1: Debug: actions: 35:canceling action: 35: MCVelocityAction (intake-shooter1), target = 14.0
+617.1162:1: Debug: actions: 36:canceling action: 36: MCVelocityAction (intake-shooter2), target = 14.0
+617.1164:1: Debug: actions: 21:completing action: 21: TransferIntakeToTrampAction
+617.1174:1: Debug: actions: 40:starting action: AmpTrapPositionAction, angle=225.0, height 0.2
+617.1177:1: Error: global: armpos current = 0.5935 keepoutmax = 75.00 keepoutmin = 5.000 target = 225.0
+617.1181:1: Debug: actions: 45:starting action: MCMotionMagicAction (elevator) target=0.2 posthresh=0.1 velthresh=0.05
+617.1195:1: Debug: actions: 42:starting action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+617.1215:1: Debug: actions: 37:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+617.1220:1: Debug: actions: 38:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+617.1233:1: Debug: actions: 39:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+617.1248:1: Debug: global: OI State changed : TransferToAmpTrap -> NoteGoingToAmpPositon
+617.1381:1: Debug: actions: 42:completing action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+617.4965:1: Debug: actions: 44:starting action: MCMotionMagicAction (arm) target=225.0 posthresh=5.0 velthresh=1.0
+617.4981:1: Error: amp-trap: AmpTrapPositionState changed : CrossMinToMax -> DirectToTarget
+617.8750:1: Debug: actions: 38:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+617.8960:1: Debug: actions: 45:completing action: MCMotionMagicAction (elevator) target=0.2 posthresh=0.1 velthresh=0.05
+618.1754:1: Debug: actions: 39:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+618.1953:1: Debug: actions: 37:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+619.8151:1: Debug: actions: 44:completing action: MCMotionMagicAction (arm) target=225.0 posthresh=5.0 velthresh=1.0
+619.8350:1: Debug: actions: 40:completing action: AmpTrapPositionAction, angle=225.0, height 0.2
+619.8360:1: Debug: global: OI State changed : NoteGoingToAmpPositon -> NoteInAmpPosition
+620.3563:1: Debug: actions: 89:starting action: MotorEncoderPowerAction manipulator power = 1.0 1.0 1.5
+620.3570:1: Debug: global: OI State changed : NoteInAmpPosition -> ShootingAmp
+621.8749:1: Debug: actions: 89:completing action: MotorEncoderPowerAction manipulator power = 1.0 1.0 1.5
+621.8761:1: Debug: actions: 90:starting action: AmpTrapPositionAction, angle=0.0, height 0.05
+621.8766:1: Error: global: armpos current = 227.1 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+621.8768:1: Debug: actions: 91:starting action: MCMotionMagicAction (elevator) target=0.19 posthresh=0.05 velthresh=0.05
+621.8787:1: Debug: actions: 93:starting action: MCMotionMagicAction (arm) target=75.0 posthresh=5.0 velthresh=1.0
+621.8815:1: Debug: global: OI State changed : ShootingAmp -> StowingAmpTrap
+621.8957:1: Debug: actions: 93:canceling action: MCMotionMagicAction (arm) target=75.0 posthresh=5.0 velthresh=1.0
+621.8961:1: Debug: actions: 94:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+621.8978:1: Error: amp-trap: AmpTrapPositionState changed : CrossMaxToMin -> CrossMaxToMinWaitClear
+621.9008:1: Debug: actions: 91:completing action: MCMotionMagicAction (elevator) target=0.19 posthresh=0.05 velthresh=0.05
+623.8155:1: Debug: actions: 95:starting action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+623.8170:1: Error: amp-trap: AmpTrapPositionState changed : CrossMaxToMinWaitClear -> DirectToTarget
+624.0347:1: Debug: actions: 94:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+624.4963:1: Debug: actions: 95:completing action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+624.5163:1: Debug: actions: 90:completing action: AmpTrapPositionAction, angle=0.0, height 0.05
+624.5175:1: Debug: global: OI State changed : StowingAmpTrap -> Idle
+635.3968:1: Debug: actions: 120:starting action: StartCollectAction
+635.3972:1: Debug: actions: 127:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+635.3975:1: Debug: actions: 127:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+635.3983:1: Debug: actions: 129:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+635.4003:1: Debug: actions: 130:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+635.4022:1: Debug: global: OI State changed : Idle -> Collect
+635.9173:1: Debug: actions: 120:canceling action: StartCollectAction
+635.9179:1: Debug: actions: 129:canceling action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+635.9186:1: Debug: actions: 130:canceling action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+635.9192:1: Debug: actions: 131:starting action: StopCollectAction
+635.9196:1: Debug: actions: 138:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+635.9207:1: Debug: actions: 138:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+635.9223:1: Debug: actions: 135:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+635.9228:1: Debug: actions: 136:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+635.9246:1: Debug: actions: 137:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+635.9265:1: Debug: global: OI State changed : Collect -> EndingCollect
+636.7361:1: Debug: actions: 137:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+637.6171:1: Debug: actions: 136:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+637.6375:1: Debug: actions: 135:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+637.6555:1: Debug: actions: 131:completing action: StopCollectAction
+637.6572:1: Debug: global: OI State changed : EndingCollect -> Idle
+645.4562:1: Debug: actions: 120:starting action: StartCollectAction
+645.4564:1: Debug: actions: 127:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+645.4574:1: Debug: actions: 127:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+645.4582:1: Debug: actions: 129:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+645.4596:1: Debug: actions: 130:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+645.4608:1: Debug: global: OI State changed : Idle -> Collect
+647.0370:1: Debug: actions: 130:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+647.0593:1: Debug: actions: 129:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+647.0750:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+647.9379:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+648.0546:1: Debug: actions: 128:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+648.0548:1: Debug: actions: 128:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+648.0556:1: Debug: actions: 121:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+648.0560:1: Debug: actions: 122:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+648.0578:1: Debug: actions: 123:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+648.0591:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+649.4550:1: Debug: actions: 123:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+649.6948:1: Debug: actions: 122:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+649.7142:1: Debug: actions: 121:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+649.7339:1: Debug: actions: 120:completing action: StartCollectAction
+649.7355:1: Debug: actions: 21:starting action: 21: TransferIntakeToTrampAction
+649.7359:1: Debug: actions: 22:starting action: AmpTrapPositionAction, angle=0.0, height 0.021
+649.7361:1: Error: global: armpos current = -0.09495 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+649.7364:1: Debug: actions: 27:starting action: MCMotionMagicAction (elevator) target=0.021 posthresh=0.1 velthresh=0.05
+649.7439:1: Debug: actions: 26:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+649.7452:1: Debug: actions: 28:starting action: IntakeGotoNamedPositionAction updown 90.0, tilt 0.0
+649.7459:1: Info: global: pos < stow pos = 118.0 stow = 118.0 ttarget = -64.98
+649.7464:1: Debug: actions: 265:starting action: MCMotionMagicAction (intake-tilt) target=-64.98383024799999 posthresh=3.0 velthresh=1.0
+649.7477:1: Debug: global: OI State changed : Collect -> TransferToAmpTrap
+649.7565:1: Debug: actions: 27:completing action: MCMotionMagicAction (elevator) target=0.021 posthresh=0.1 velthresh=0.05
+649.7955:1: Debug: actions: 26:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+649.8150:1: Debug: actions: 22:completing action: AmpTrapPositionAction, angle=0.0, height 0.021
+650.3356:1: Debug: actions: 265:completing action: MCMotionMagicAction (intake-tilt) target=-64.98383024799999 posthresh=3.0 velthresh=1.0
+650.3559:1: Debug: actions: 29:starting action: MCMotionMagicAction (intake-updown) target=90.0 posthresh=3.0 velthresh=1.0
+650.3574:1: Debug: actions: 30:starting action: MCMotionMagicAction (intake-tilt) target=0.0 posthresh=3.0 velthresh=1.0
+651.1147:1: Debug: actions: 29:completing action: MCMotionMagicAction (intake-updown) target=90.0 posthresh=3.0 velthresh=1.0
+651.5766:1: Debug: actions: 30:completing action: MCMotionMagicAction (intake-tilt) target=0.0 posthresh=3.0 velthresh=1.0
+651.5942:1: Debug: actions: 28:completing action: IntakeGotoNamedPositionAction updown 90.0, tilt 0.0
+651.6142:1: Debug: actions: 31:starting action: AmpTrapXferAction
+651.6148:1: Debug: actions: 32:starting action: MotorEncoderPowerAction manipulator power = -0.1
+651.6151:1: Debug: actions: 32:completing action: MotorEncoderPowerAction manipulator power = -0.1
+651.6160:1: Debug: actions: 33:starting action: 33: NoteTransferAction
+651.6165:1: Debug: actions: 34:starting action: MotorEncoderPowerAction intake-feeder power = 0.3
+651.6168:1: Debug: actions: 34:completing action: MotorEncoderPowerAction intake-feeder power = 0.3
+651.6175:1: Debug: actions: 35:starting action: 35: MCVelocityAction (intake-shooter1), target = 14.0
+651.6188:1: Debug: actions: 36:starting action: 36: MCVelocityAction (intake-shooter2), target = 14.0
+651.6200:1: Debug: superstructure: transfer note state changed: MovingToPosition ->WaitingOnSensorNone1
+651.6346:1: Debug: superstructure: transfer note state changed: WaitingOnSensorNone1 ->WaitingOnSensorDetected
+651.8946:1: Debug: superstructure: transfer note state changed: WaitingOnSensorDetected ->WaitingOnSensorNone2
+652.3350:1: Debug: superstructure: transfer note state changed: WaitingOnSensorNone2 ->FinishingTransfer
+654.1549:1: Debug: superstructure: transfer note state changed: FinishingTransfer ->ContinueShooter
+655.0755:1: Debug: actions: 35:canceling action: 35: MCVelocityAction (intake-shooter1), target = 14.0
+655.0763:1: Debug: actions: 36:canceling action: 36: MCVelocityAction (intake-shooter2), target = 14.0
+655.0767:1: Debug: actions: 21:completing action: 21: TransferIntakeToTrampAction
+655.0774:1: Debug: actions: 40:starting action: AmpTrapPositionAction, angle=225.0, height 0.2
+655.0777:1: Error: global: armpos current = 0.4866 keepoutmax = 75.00 keepoutmin = 5.000 target = 225.0
+655.0779:1: Debug: actions: 45:starting action: MCMotionMagicAction (elevator) target=0.2 posthresh=0.1 velthresh=0.05
+655.0796:1: Debug: actions: 42:starting action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+655.0819:1: Debug: actions: 37:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+655.0822:1: Debug: actions: 38:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+655.0837:1: Debug: actions: 39:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+655.0854:1: Debug: global: OI State changed : TransferToAmpTrap -> NoteGoingToAmpPositon
+655.1018:1: Debug: actions: 42:completing action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+655.4754:1: Debug: actions: 44:starting action: MCMotionMagicAction (arm) target=225.0 posthresh=5.0 velthresh=1.0
+655.4770:1: Error: amp-trap: AmpTrapPositionState changed : CrossMinToMax -> DirectToTarget
+655.8342:1: Debug: actions: 38:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+655.8751:1: Debug: actions: 45:completing action: MCMotionMagicAction (elevator) target=0.2 posthresh=0.1 velthresh=0.05
+656.2553:1: Debug: actions: 39:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+656.2751:1: Debug: actions: 37:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+657.6147:1: Debug: actions: 44:completing action: MCMotionMagicAction (arm) target=225.0 posthresh=5.0 velthresh=1.0
+657.6341:1: Debug: actions: 40:completing action: AmpTrapPositionAction, angle=225.0, height 0.2
+657.6349:1: Debug: global: OI State changed : NoteGoingToAmpPositon -> NoteInAmpPosition
+661.5547:1: Debug: actions: 89:starting action: MotorEncoderPowerAction manipulator power = 1.0 1.0 1.5
+661.5556:1: Debug: global: OI State changed : NoteInAmpPosition -> ShootingAmp
+663.0746:1: Debug: actions: 89:completing action: MotorEncoderPowerAction manipulator power = 1.0 1.0 1.5
+663.0767:1: Debug: actions: 90:starting action: AmpTrapPositionAction, angle=0.0, height 0.05
+663.0772:1: Error: global: armpos current = 226.8 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+663.0774:1: Debug: actions: 91:starting action: MCMotionMagicAction (elevator) target=0.19 posthresh=0.05 velthresh=0.05
+663.0787:1: Debug: actions: 93:starting action: MCMotionMagicAction (arm) target=75.0 posthresh=5.0 velthresh=1.0
+663.0801:1: Debug: global: OI State changed : ShootingAmp -> StowingAmpTrap
+663.0948:1: Debug: actions: 93:canceling action: MCMotionMagicAction (arm) target=75.0 posthresh=5.0 velthresh=1.0
+663.0953:1: Debug: actions: 94:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+663.0973:1: Error: amp-trap: AmpTrapPositionState changed : CrossMaxToMin -> CrossMaxToMinWaitClear
+663.0998:1: Debug: actions: 91:completing action: MCMotionMagicAction (elevator) target=0.19 posthresh=0.05 velthresh=0.05
+665.0345:1: Debug: actions: 95:starting action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+665.0362:1: Error: amp-trap: AmpTrapPositionState changed : CrossMaxToMinWaitClear -> DirectToTarget
+665.2756:1: Debug: actions: 94:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+665.7364:1: Debug: actions: 95:completing action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+665.7541:1: Debug: actions: 90:completing action: AmpTrapPositionAction, angle=0.0, height 0.05
+665.7549:1: Debug: global: OI State changed : StowingAmpTrap -> Idle
+688.0160:1: Debug: actions: 120:starting action: StartCollectAction
+688.0164:1: Debug: actions: 127:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+688.0167:1: Debug: actions: 127:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+688.0175:1: Debug: actions: 129:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+688.0190:1: Debug: actions: 130:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+688.0204:1: Debug: global: OI State changed : Idle -> Collect
+689.5965:1: Debug: actions: 130:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+689.6349:1: Debug: actions: 129:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+689.6566:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+690.0956:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+690.2149:1: Debug: actions: 128:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+690.2155:1: Debug: actions: 128:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+690.2164:1: Debug: actions: 121:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+690.2168:1: Debug: actions: 122:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+690.2188:1: Debug: actions: 123:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+690.2210:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+691.6561:1: Debug: actions: 123:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+691.7962:1: Debug: actions: 122:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+691.8157:1: Debug: actions: 121:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+691.8382:1: Debug: actions: 120:completing action: StartCollectAction
+691.8418:1: Debug: actions: 21:starting action: 21: TransferIntakeToTrampAction
+691.8421:1: Debug: actions: 22:starting action: AmpTrapPositionAction, angle=0.0, height 0.021
+691.8424:1: Error: global: armpos current = -0.09495 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+691.8425:1: Debug: actions: 27:starting action: MCMotionMagicAction (elevator) target=0.021 posthresh=0.1 velthresh=0.05
+691.8441:1: Debug: actions: 26:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+691.8476:1: Debug: actions: 28:starting action: IntakeGotoNamedPositionAction updown 90.0, tilt 0.0
+691.8480:1: Info: global: pos < stow pos = 118.0 stow = 118.0 ttarget = -65.00
+691.8483:1: Debug: actions: 266:starting action: MCMotionMagicAction (intake-tilt) target=-64.99981036 posthresh=3.0 velthresh=1.0
+691.8497:1: Debug: global: OI State changed : Collect -> TransferToAmpTrap
+691.8589:1: Debug: actions: 27:completing action: MCMotionMagicAction (elevator) target=0.021 posthresh=0.1 velthresh=0.05
+691.8961:1: Debug: actions: 26:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+691.9157:1: Debug: actions: 22:completing action: AmpTrapPositionAction, angle=0.0, height 0.021
+692.3765:1: Debug: actions: 266:completing action: MCMotionMagicAction (intake-tilt) target=-64.99981036 posthresh=3.0 velthresh=1.0
+692.3960:1: Debug: actions: 29:starting action: MCMotionMagicAction (intake-updown) target=90.0 posthresh=3.0 velthresh=1.0
+692.3978:1: Debug: actions: 30:starting action: MCMotionMagicAction (intake-tilt) target=0.0 posthresh=3.0 velthresh=1.0
+693.1362:1: Debug: actions: 29:completing action: MCMotionMagicAction (intake-updown) target=90.0 posthresh=3.0 velthresh=1.0
+693.5748:1: Debug: actions: 30:completing action: MCMotionMagicAction (intake-tilt) target=0.0 posthresh=3.0 velthresh=1.0
+693.5950:1: Debug: actions: 28:completing action: IntakeGotoNamedPositionAction updown 90.0, tilt 0.0
+693.6152:1: Debug: actions: 31:starting action: AmpTrapXferAction
+693.6157:1: Debug: actions: 32:starting action: MotorEncoderPowerAction manipulator power = -0.1
+693.6160:1: Debug: actions: 32:completing action: MotorEncoderPowerAction manipulator power = -0.1
+693.6167:1: Debug: actions: 33:starting action: 33: NoteTransferAction
+693.6168:1: Debug: actions: 34:starting action: MotorEncoderPowerAction intake-feeder power = 0.3
+693.6170:1: Debug: actions: 34:completing action: MotorEncoderPowerAction intake-feeder power = 0.3
+693.6177:1: Debug: actions: 35:starting action: 35: MCVelocityAction (intake-shooter1), target = 14.0
+693.6188:1: Debug: actions: 36:starting action: 36: MCVelocityAction (intake-shooter2), target = 14.0
+693.6198:1: Debug: superstructure: transfer note state changed: MovingToPosition ->WaitingOnSensorNone1
+693.6345:1: Debug: superstructure: transfer note state changed: WaitingOnSensorNone1 ->WaitingOnSensorDetected
+693.8539:1: Debug: superstructure: transfer note state changed: WaitingOnSensorDetected ->WaitingOnSensorNone2
+693.8780:1: Debug: superstructure: transfer note state changed: WaitingOnSensorNone2 ->FinishingTransfer
+696.8350:1: Debug: superstructure: transfer note state changed: FinishingTransfer ->ContinueShooter
+697.7146:1: Debug: actions: 35:canceling action: 35: MCVelocityAction (intake-shooter1), target = 14.0
+697.7153:1: Debug: actions: 36:canceling action: 36: MCVelocityAction (intake-shooter2), target = 14.0
+697.7158:1: Debug: actions: 21:completing action: 21: TransferIntakeToTrampAction
+697.7168:1: Debug: actions: 46:starting action: AmpTrapPositionAction, angle=180.0, height 0.2411
+697.7172:1: Error: global: armpos current = -0.8308 keepoutmax = 75.00 keepoutmin = 5.000 target = 180.0
+697.7178:1: Debug: actions: 51:starting action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.1 velthresh=0.05
+697.7192:1: Debug: actions: 48:starting action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+697.7210:1: Debug: actions: 37:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+697.7214:1: Debug: actions: 38:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+697.7231:1: Debug: actions: 39:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+697.7243:1: Debug: global: OI State changed : TransferToAmpTrap -> NoteGoingToTrapPosition
+698.0577:1: Debug: actions: 48:completing action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+698.0959:1: Debug: actions: 50:starting action: MCMotionMagicAction (arm) target=180.0 posthresh=5.0 velthresh=1.0
+698.0973:1: Error: amp-trap: AmpTrapPositionState changed : CrossMinToMax -> DirectToTarget
+698.4753:1: Debug: actions: 38:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+698.5554:1: Debug: actions: 51:completing action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.1 velthresh=0.05
+698.8949:1: Debug: actions: 39:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+698.9151:1: Debug: actions: 37:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+700.4387:1: Debug: actions: 50:completing action: MCMotionMagicAction (arm) target=180.0 posthresh=5.0 velthresh=1.0
+700.4545:1: Debug: actions: 46:completing action: AmpTrapPositionAction, angle=180.0, height 0.2411
+700.4562:1: Debug: actions: 139:starting action: AmpTrapMoveNote 0.8
+700.4565:1: Debug: actions: 140:starting action: MotorEncoderPowerAction manipulator power = 0.05
+700.4568:1: Debug: actions: 140:completing action: MotorEncoderPowerAction manipulator power = 0.05
+700.4577:1: Debug: global:  start = 206.0 dist = 0.8000 target = 206.8
+700.4579:1: Debug: global: OI State changed : NoteGoingToTrapPosition -> MoveNoteToBack
+700.4757:1: Debug: global:  current = 206.1 target = 206.8
+700.4954:1: Debug: global:  current = 206.1 target = 206.8
+700.5143:1: Debug: global:  current = 206.1 target = 206.8
+700.5346:1: Debug: global:  current = 206.1 target = 206.8
+700.5553:1: Debug: global:  current = 206.1 target = 206.8
+700.5751:1: Debug: global:  current = 206.2 target = 206.8
+700.5955:1: Debug: global:  current = 206.2 target = 206.8
+700.6159:1: Debug: global:  current = 206.2 target = 206.8
+700.6343:1: Debug: global:  current = 206.3 target = 206.8
+700.6540:1: Debug: global:  current = 206.3 target = 206.8
+700.6749:1: Debug: global:  current = 206.3 target = 206.8
+700.6944:1: Debug: global:  current = 206.4 target = 206.8
+700.7142:1: Debug: global:  current = 206.5 target = 206.8
+700.7350:1: Debug: global:  current = 206.5 target = 206.8
+700.7549:1: Debug: global:  current = 206.6 target = 206.8
+700.7747:1: Debug: global:  current = 206.6 target = 206.8
+700.7951:1: Debug: global:  current = 206.7 target = 206.8
+700.8146:1: Debug: global:  current = 206.7 target = 206.8
+700.8381:1: Debug: global:  current = 206.7 target = 206.8
+700.8553:1: Debug: global:  current = 206.8 target = 206.8
+700.8742:1: Debug: global:  current = 206.8 target = 206.8
+700.8943:1: Debug: global:  current = 206.8 target = 206.8
+700.9142:1: Debug: global:  current = 206.8 target = 206.8
+700.9361:1: Debug: global:  current = 206.9 target = 206.8
+700.9364:1: Debug: actions: 139:completing action: AmpTrapMoveNote 0.8
+700.9366:1: Debug: global: AmpTrapMoveNote Done dist_ > 0
+700.9374:1: Debug: global: OI State changed : MoveNoteToBack -> NoteInTrapPosition
+701.0365:1: Debug: actions: 52:starting action: AmpTrapPositionAction, angle=180.0, height 0.2411
+701.0370:1: Error: global: armpos current = 181.5 keepoutmax = 75.00 keepoutmin = 5.000 target = 180.0
+701.0372:1: Debug: actions: 57:starting action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.1 velthresh=0.05
+701.0387:1: Debug: actions: 56:starting action: MCMotionMagicAction (arm) target=180.0 posthresh=5.0 velthresh=1.0
+701.0401:1: Debug: global: OI State changed : NoteInTrapPosition -> GoToClimbPosition
+701.0572:1: Debug: actions: 57:completing action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.1 velthresh=0.05
+701.0583:1: Debug: actions: 56:completing action: MCMotionMagicAction (arm) target=180.0 posthresh=5.0 velthresh=1.0
+701.0741:1: Debug: actions: 52:completing action: AmpTrapPositionAction, angle=180.0, height 0.2411
+701.0767:1: Debug: actions: 96:starting action: ClimbAction HooksUp, target = 0.5746
+701.0772:1: Debug: global: OI State changed : GoToClimbPosition -> WaitForHooksUp
+703.4562:1: Debug: actions: 96:completing action: ClimbAction HooksUp, target = 0.5746
+703.4571:1: Debug: global: OI State changed : WaitForHooksUp -> WaitForClimbButton
+708.6164:1: Debug: actions: 98:starting action: ClimbAction HooksDownWithRobot, target = 0.0
+708.6167:1: Debug: global: OI State changed : WaitForClimbButton -> ClimbingUp
+711.1744:1: Debug: actions: 98:completing action: ClimbAction HooksDownWithRobot, target = 0.0
+711.1755:1: Debug: actions: 64:starting action: AmpTrapPositionAction, angle=120.0, height 0.3322
+711.1759:1: Error: global: armpos current = 179.7 keepoutmax = 75.00 keepoutmin = 5.000 target = 120.0
+711.1763:1: Debug: actions: 69:starting action: MCMotionMagicAction (elevator) target=0.3322 posthresh=0.1 velthresh=0.05
+711.1796:1: Debug: actions: 68:starting action: MCMotionMagicAction (arm) target=120.0 posthresh=5.0 velthresh=1.0
+711.1812:1: Debug: global: OI State changed : ClimbingUp -> MovingTrapWhileUp1
+711.1967:1: Debug: actions: 69:completing action: MCMotionMagicAction (elevator) target=0.3322 posthresh=0.1 velthresh=0.05
+712.1946:1: Debug: actions: 68:completing action: MCMotionMagicAction (arm) target=120.0 posthresh=5.0 velthresh=1.0
+712.2142:1: Debug: actions: 64:completing action: AmpTrapPositionAction, angle=120.0, height 0.3322
+712.2151:1: Debug: actions: 70:starting action: AmpTrapPositionAction, angle=120.0, height 0.3322
+712.2156:1: Error: global: armpos current = 120.6 keepoutmax = 75.00 keepoutmin = 5.000 target = 120.0
+712.2159:1: Debug: actions: 75:starting action: MCMotionMagicAction (elevator) target=0.3322 posthresh=0.1 velthresh=0.05
+712.2176:1: Debug: actions: 74:starting action: MCMotionMagicAction (arm) target=120.0 posthresh=5.0 velthresh=1.0
+712.2190:1: Debug: global: OI State changed : MovingTrapWhileUp1 -> MovingTrapWhileUp2
+712.2356:1: Debug: actions: 75:completing action: MCMotionMagicAction (elevator) target=0.3322 posthresh=0.1 velthresh=0.05
+712.3547:1: Debug: actions: 74:completing action: MCMotionMagicAction (arm) target=120.0 posthresh=5.0 velthresh=1.0
+712.3746:1: Debug: actions: 70:completing action: AmpTrapPositionAction, angle=120.0, height 0.3322
+712.3756:1: Debug: actions: 88:starting action: MotorEncoderPowerAction manipulator power = -1.0 -1.0 1.5
+712.3763:1: Debug: global: OI State changed : MovingTrapWhileUp2 -> ShootingTrap
+713.8942:1: Debug: actions: 88:completing action: MotorEncoderPowerAction manipulator power = -1.0 -1.0 1.5
+713.8955:1: Debug: actions: 76:starting action: AmpTrapPositionAction, angle=149.6, height 0.2411
+713.8960:1: Error: global: armpos current = 124.6 keepoutmax = 75.00 keepoutmin = 5.000 target = 149.6
+713.8962:1: Debug: actions: 81:starting action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.1 velthresh=0.05
+713.8978:1: Debug: actions: 80:starting action: MCMotionMagicAction (arm) target=149.6 posthresh=5.0 velthresh=1.0
+713.8991:1: Debug: global: OI State changed : ShootingTrap -> BendBack1
+713.9171:1: Debug: actions: 81:completing action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.1 velthresh=0.05
+714.7951:1: Debug: actions: 80:completing action: MCMotionMagicAction (arm) target=149.6 posthresh=5.0 velthresh=1.0
+714.8149:1: Debug: actions: 76:completing action: AmpTrapPositionAction, angle=149.6, height 0.2411
+714.8161:1: Debug: actions: 82:starting action: AmpTrapPositionAction, angle=225.0, height 0.2411
+714.8166:1: Error: global: armpos current = 153.1 keepoutmax = 75.00 keepoutmin = 5.000 target = 225.0
+714.8168:1: Debug: actions: 87:starting action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.1 velthresh=0.05
+714.8185:1: Debug: actions: 86:starting action: MCMotionMagicAction (arm) target=225.0 posthresh=5.0 velthresh=1.0
+714.8201:1: Debug: global: OI State changed : BendBack1 -> BendBack2
+714.8359:1: Debug: actions: 87:completing action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.1 velthresh=0.05
+716.0347:1: Debug: actions: 86:completing action: MCMotionMagicAction (arm) target=225.0 posthresh=5.0 velthresh=1.0
+716.0540:1: Debug: actions: 82:completing action: AmpTrapPositionAction, angle=225.0, height 0.2411
+716.0548:1: Debug: global: OI State changed : BendBack2 -> Climbed
+729.0723:1: Info: global: changing robot loop type: Teleop -> Disabled
+729.0726:1: Info: global: Motor Faults Report
+729.0727:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+729.0952:1: Info: global: intake-updown:rio-2:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+729.1195:1: Info: global: intake-feeder:rio-1:sticky-bridge-brownout sticky-stator-curr-limit
+729.1425:1: Info: global: intake-tilt:rio-5:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+729.1663:1: Info: global: intake-shooter1:rio-3:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+729.1876:1: Info: global: intake-shooter2:rio-4:sticky-devicetemp sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+729.2088:1: Info: global: elevator:rio-6:sticky-bridge-brownout sticky-stator-curr-limit
+729.2300:1: Info: global: arm:rio-7:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+729.2304:1: Info: global: manipulator:rio-9:NONE
+729.2524:1: Info: global: climber:rio-10:sticky-bridge-brownout sticky-reverse-soft-limit sticky-stator-curr-limit
+729.2742:1: Info: global: fl-steer:DriveBase-11:sticky-bridge-brownout sticky-stator-curr-limit
+729.2960:1: Info: global: fl-drive:DriveBase-12:sticky-devicetemp sticky-bridge-brownout sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+729.3164:1: Info: global: fr-steer:DriveBase-21:sticky-bridge-brownout sticky-stator-curr-limit
+729.3374:1: Info: global: fr-drive:DriveBase-22:sticky-devicetemp sticky-boot-during-enable sticky-bridge-brownout sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+729.3604:1: Info: global: bl-steer:DriveBase-41:sticky-bridge-brownout sticky-stator-curr-limit
+729.3828:1: Info: global: bl-drive:DriveBase-42:sticky-devicetemp sticky-boot-during-enable sticky-bridge-brownout sticky-over-supply sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+729.4041:1: Info: global: br-steer:DriveBase-31:sticky-bridge-brownout sticky-stator-curr-limit
+729.4248:1: Info: global: br-drive:DriveBase-32:sticky-devicetemp sticky-bridge-brownout sticky-over-supply sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+729.4250:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

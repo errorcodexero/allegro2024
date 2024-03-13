@@ -10,19 +10,20 @@ public abstract class CollectBaseAltAction extends Action {
     private IntakeGotoNamedPositionAction shoot_ ;
     private IntakeGotoNamedPositionAction act_ ;
 
-    public CollectBaseAltAction(IntakeShooterSubsystem sub) throws Exception {
+    public CollectBaseAltAction(IntakeShooterSubsystem sub, double updown, double tilt) throws Exception {
         super(sub.getRobot().getMessageLogger());
-        double v1, v2 ;
 
         sub_ = sub;
 
-        v1 = sub_.getTilt().getSettingsValue("targets:stow-note").getDouble() ;
-        v2 = sub_.getUpDown().getSettingsValue("targets:stow").getDouble() ;
-        shoot_ = new IntakeGotoNamedPositionAction(sub_, v2, v1) ;
+        if (Double.isNaN(updown) || Double.isNaN(tilt)) {
+            tilt = sub_.getTilt().getSettingsValue("targets:stow-note").getDouble() ;
+            updown = sub_.getUpDown().getSettingsValue("targets:stow").getDouble() ;
+        }
+        shoot_ = new IntakeGotoNamedPositionAction(sub_, updown, tilt) ;
 
-        v1 = sub_.getTilt().getSettingsValue("targets:stow").getDouble() ;
-        v2 = sub_.getUpDown().getSettingsValue("targets:stow").getDouble() ;
-        stow_ = new IntakeGotoNamedPositionAction(sub_, v2, v1) ;
+        tilt = sub_.getTilt().getSettingsValue("targets:stow").getDouble() ;
+        updown = sub_.getUpDown().getSettingsValue("targets:stow").getDouble() ;
+        stow_ = new IntakeGotoNamedPositionAction(sub_, updown, tilt) ;
     }
 
     protected IntakeShooterSubsystem getSubsystem() {

@@ -8,7 +8,7 @@ public class StopCollectAltAction extends CollectBaseAltAction {
     private MotorEncoderPowerAction feeder_off_ ;
 
     public StopCollectAltAction(IntakeShooterSubsystem sub) throws Exception {
-        super(sub) ;
+        super(sub, Double.NaN, Double.NaN) ;
 
         sub_ = sub ;
         feeder_off_ = new MotorEncoderPowerAction(sub.getFeeder(), 0.0) ;

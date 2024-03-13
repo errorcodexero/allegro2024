@@ -1,0 +1,208 @@
+001.2903:1: Info: global: ============================================================
+001.3100:1: Info: global: robot code starting
+001.3108:1: Info: global:  SerialNumber = '03223856'
+001.3613:1: Info: global:  enableMessageLogger time = 0.3509
+001.3618:1: Info: global: ============================================================
+001.3666:1: Info: global: reading params for bot 'COMPETITION'
+001.3691:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.5572:1: Info: global:  readParamsFile time = 0.1945
+001.6114:1: Info: global:  enableMessagesFromSettingsFile time = 0.001948
+002.1945:1: Info: global:  loadPathsFiles time = 0.5822
+005.4560:1: Info: global: initializing robot - no FMS
+005.5072:1: Info: global:  plotMgrInit time = 0.0002040
+006.4638:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.0.3', no faults
+006.7330:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.0.3', no faults
+006.9081:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.0.3', no faults
+007.0723:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.0.3', no faults
+007.2393:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.0.3', no faults
+007.4160:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.0.3', no faults
+007.5455:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.0.3', no faults
+007.7660:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+007.9022:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.0.3', no faults
+008.3954:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.5291:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.7127:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.8303:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.9550:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.0.3', no faults
+009.0691:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.0.3', no faults
+009.1913:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.0.3', no faults
+009.3154:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.0.3', no faults
+009.5190:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+009.5201:1: Info: global: Gamepad discovered
+009.5802:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+009.6039:1: Info: global:  hardwareInit time = 4.096
+009.7333:1: Info: global: Changed vision parameters to Single Near
+009.8484:1: Info: global:  computeInitalState time = 0.2427
+010.0658:1: Info: global:  postHWInit time = 0.2163
+010.1036:1: Info: global: changing robot loop type: Initialization -> Disabled
+010.1055:1: Info: global: alliance changed:null -> Red: recreated auto modes for new alliance value
+029.4635:1: Info: global: changing robot loop type: Disabled -> Teleop
+029.5270:1: Debug: actions: 0:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: -0.00 m/s, Omega: 0.00 rad/s))
+033.1073:1: Debug: actions: 120:starting action: StartCollectAction
+033.1081:1: Debug: actions: 127:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+033.1089:1: Debug: actions: 127:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+033.1114:1: Debug: actions: 129:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+033.1472:1: Debug: actions: 130:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+033.1683:1: Debug: global: OI State changed : Idle -> Collect
+034.7233:1: Debug: actions: 129:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+034.7573:1: Debug: actions: 130:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+034.7690:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+036.4260:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+036.5458:1: Debug: actions: 128:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+036.5464:1: Debug: actions: 128:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+036.5478:1: Debug: actions: 121:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+036.5485:1: Debug: actions: 122:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+036.5622:1: Debug: actions: 123:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+036.5760:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+038.0137:1: Debug: actions: 123:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+038.1484:1: Debug: actions: 122:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+038.1660:1: Debug: actions: 121:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+038.1861:1: Debug: actions: 120:completing action: StartCollectAction
+038.1954:1: Debug: actions: 21:starting action: 21: TransferIntakeToTrampAction
+038.1989:1: Debug: actions: 22:starting action: AmpTrapPositionAction, angle=0.0, height 0.021
+038.2009:1: Error: global: armpos current = 0.000 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+038.2016:1: Debug: actions: 27:starting action: MCMotionMagicAction (elevator) target=0.021 posthresh=0.1 velthresh=0.05
+038.2266:1: Debug: actions: 26:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+038.2408:1: Debug: actions: 28:starting action: IntakeGotoNamedPositionAction updown 90.0, tilt 0.0
+038.2416:1: Debug: actions: 29:starting action: MCMotionMagicAction (intake-updown) target=90.0 posthresh=3.0 velthresh=1.0
+038.2459:1: Debug: actions: 30:starting action: MCMotionMagicAction (intake-tilt) target=0.0 posthresh=3.0 velthresh=1.0
+038.2512:1: Debug: global: OI State changed : Collect -> TransferToAmpTrap
+038.2897:1: Debug: actions: 27:completing action: MCMotionMagicAction (elevator) target=0.021 posthresh=0.1 velthresh=0.05
+038.2999:1: Debug: actions: 26:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+038.3102:1: Debug: actions: 22:completing action: AmpTrapPositionAction, angle=0.0, height 0.021
+039.0235:1: Debug: actions: 29:completing action: MCMotionMagicAction (intake-updown) target=90.0 posthresh=3.0 velthresh=1.0
+039.3098:1: Debug: actions: 30:completing action: MCMotionMagicAction (intake-tilt) target=0.0 posthresh=3.0 velthresh=1.0
+039.3282:1: Debug: actions: 28:completing action: IntakeGotoNamedPositionAction updown 90.0, tilt 0.0
+039.3505:1: Debug: actions: 31:starting action: AmpTrapXferAction
+039.3525:1: Debug: actions: 32:canceling action: MotorEncoderPowerAction manipulator power = -0.1
+039.3537:1: Debug: actions: 32:starting action: MotorEncoderPowerAction manipulator power = -0.1
+039.3554:1: Debug: actions: 32:completing action: MotorEncoderPowerAction manipulator power = -0.1
+039.3571:1: Debug: actions: 33:starting action: 33: NoteTransferAction
+039.3590:1: Debug: actions: 34:starting action: MotorEncoderPowerAction intake-feeder power = 0.3
+039.3601:1: Debug: actions: 34:completing action: MotorEncoderPowerAction intake-feeder power = 0.3
+039.3615:1: Debug: actions: 35:starting action: 35: MCVelocityAction (intake-shooter1), target = 14.0
+039.3824:1: Debug: actions: 36:starting action: 36: MCVelocityAction (intake-shooter2), target = 14.0
+039.3986:1: Debug: superstructure: transfer note state changed: MovingToPosition ->WaitingOnSensorNone1
+039.4727:1: Debug: superstructure: transfer note state changed: WaitingOnSensorNone1 ->WaitingOnSensorDetected
+039.5456:1: Debug: superstructure: transfer note state changed: WaitingOnSensorDetected ->WaitingOnSensorNone2
+039.5659:1: Debug: superstructure: transfer note state changed: WaitingOnSensorNone2 ->FinishingTransfer
+039.7101:1: Debug: superstructure: transfer note state changed: FinishingTransfer ->ContinueShooter
+040.0070:1: Debug: actions: 35:canceling action: 35: MCVelocityAction (intake-shooter1), target = 14.0
+040.0078:1: Debug: actions: 36:canceling action: 36: MCVelocityAction (intake-shooter2), target = 14.0
+040.0084:1: Debug: actions: 21:completing action: 21: TransferIntakeToTrampAction
+040.0101:1: Debug: actions: 46:starting action: AmpTrapPositionAction, angle=180.0, height 0.2411
+040.0117:1: Error: global: armpos current = -0.01187 keepoutmax = 75.00 keepoutmin = 5.000 target = 180.0
+040.0121:1: Debug: actions: 51:starting action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.1 velthresh=0.05
+040.0192:1: Debug: actions: 48:starting action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+040.0231:1: Debug: actions: 37:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+040.0238:1: Debug: actions: 38:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+040.0267:1: Debug: actions: 39:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+040.0292:1: Debug: global: OI State changed : TransferToAmpTrap -> NoteGoingToTrapPosition
+040.3113:1: Debug: actions: 48:completing action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+040.4104:1: Debug: actions: 50:starting action: MCMotionMagicAction (arm) target=180.0 posthresh=5.0 velthresh=1.0
+040.4184:1: Error: amp-trap: AmpTrapPositionState changed : CrossMinToMax -> DirectToTarget
+040.7697:1: Debug: actions: 38:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+040.8990:1: Debug: actions: 51:completing action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.1 velthresh=0.05
+041.2143:1: Debug: actions: 39:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+041.2317:1: Debug: actions: 37:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+042.3081:1: Debug: actions: 50:completing action: MCMotionMagicAction (arm) target=180.0 posthresh=5.0 velthresh=1.0
+042.3257:1: Debug: actions: 46:completing action: AmpTrapPositionAction, angle=180.0, height 0.2411
+042.3272:1: Debug: actions: 139:starting action: AmpTrapMoveNote 0.8
+042.3278:1: Debug: actions: 140:starting action: MotorEncoderPowerAction manipulator power = 0.05
+042.3287:1: Debug: actions: 140:completing action: MotorEncoderPowerAction manipulator power = 0.05
+042.3308:1: Debug: global:  start = -3.812 dist = 0.8000 target = -3.012
+042.3312:1: Debug: global: OI State changed : NoteGoingToTrapPosition -> MoveNoteToBack
+042.3469:1: Debug: global:  current = -3.812 target = -3.012
+042.3668:1: Debug: global:  current = -3.801 target = -3.012
+042.3865:1: Debug: global:  current = -3.773 target = -3.012
+042.4066:1: Debug: global:  current = -3.742 target = -3.012
+042.4263:1: Debug: global:  current = -3.705 target = -3.012
+042.4463:1: Debug: global:  current = -3.671 target = -3.012
+042.4665:1: Debug: global:  current = -3.636 target = -3.012
+042.4865:1: Debug: global:  current = -3.603 target = -3.012
+042.5069:1: Debug: global:  current = -3.572 target = -3.012
+042.5268:1: Debug: global:  current = -3.535 target = -3.012
+042.5479:1: Debug: global:  current = -3.500 target = -3.012
+042.5670:1: Debug: global:  current = -3.459 target = -3.012
+042.5917:1: Debug: global:  current = -3.415 target = -3.012
+042.6067:1: Debug: global:  current = -3.371 target = -3.012
+042.6268:1: Debug: global:  current = -3.317 target = -3.012
+042.6461:1: Debug: global:  current = -3.266 target = -3.012
+042.6692:1: Debug: global:  current = -3.217 target = -3.012
+042.6868:1: Debug: global:  current = -3.167 target = -3.012
+042.7074:1: Debug: global:  current = -3.113 target = -3.012
+042.7264:1: Debug: global:  current = -3.062 target = -3.012
+042.7464:1: Debug: global:  current = -3.015 target = -3.012
+042.7711:1: Debug: global:  current = -2.963 target = -3.012
+042.7723:1: Debug: actions: 139:completing action: AmpTrapMoveNote 0.8
+042.7730:1: Debug: global: AmpTrapMoveNote Done dist_ > 0
+042.7746:1: Debug: global: OI State changed : MoveNoteToBack -> NoteInTrapPosition
+051.8805:1: Debug: actions: 99:starting action: 99: EjectAction
+051.8814:1: Debug: actions: 100:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+051.8825:1: Debug: actions: 101:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+051.8883:1: Debug: actions: 102:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+051.9155:1: Debug: global: OI State changed : NoteInTrapPosition -> Eject
+051.9637:1: Debug: actions: 101:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+051.9743:1: Debug: actions: 102:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+051.9986:1: Debug: actions: 100:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+052.0467:1: Debug: actions: 103:starting action: IntakeEjectAction
+052.0481:1: Debug: actions: 104:starting action: MotorEncoderPowerAction intake-feeder power = -0.5
+052.0506:1: Debug: actions: 104:completing action: MotorEncoderPowerAction intake-feeder power = -0.5
+052.0533:1: Debug: actions: 105:starting action: 105: MCVelocityAction (intake-shooter1), target = -25.0
+052.0581:1: Debug: actions: 106:starting action: 106: MCVelocityAction (intake-shooter2), target = -25.0
+052.0623:1: Debug: actions: 107:starting action: AmpTrapEjectAction
+052.0634:1: Debug: actions: 108:starting action: MotorEncoderPowerAction manipulator power = -0.5
+052.0645:1: Debug: actions: 108:completing action: MotorEncoderPowerAction manipulator power = -0.5
+053.0666:1: Debug: actions: 103:completing action: IntakeEjectAction
+053.0676:1: Debug: actions: 107:completing action: AmpTrapEjectAction
+053.0858:1: Debug: actions: 99:completing action: 99: EjectAction
+053.0878:1: Debug: global: OI State changed : Eject -> Idle
+054.4636:1: Debug: superstructure: Subsystem cancelAction() called with no active action
+054.4646:1: Debug: actions: 105:canceling action: 105: MCVelocityAction (intake-shooter1), target = -25.0
+054.4655:1: Debug: actions: 106:canceling action: 106: MCVelocityAction (intake-shooter2), target = -25.0
+054.4665:1: Debug: actions: 109:starting action: TurtleAction
+054.4682:1: Debug: actions: 110:starting action: ClimbAction HooksDown, target = 0.0
+054.4694:1: Debug: global: OI State changed : Idle -> Eject
+054.4904:1: Debug: global: OI State changed : Eject -> Idle
+054.5054:1: Debug: actions: 110:completing action: ClimbAction HooksDown, target = 0.0
+054.5228:1: Debug: actions: 111:starting action: AmpTrapPositionAction, angle=0.0, height 0.05
+054.5325:1: Error: global: armpos current = 181.4 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+054.5668:1: Debug: actions: 112:starting action: MCMotionMagicAction (elevator) target=0.19 posthresh=0.05 velthresh=0.05
+054.5882:1: Debug: actions: 114:starting action: MCMotionMagicAction (arm) target=75.0 posthresh=5.0 velthresh=1.0
+054.6062:1: Debug: actions: 114:canceling action: MCMotionMagicAction (arm) target=75.0 posthresh=5.0 velthresh=1.0
+054.6109:1: Debug: actions: 115:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+054.6257:1: Error: amp-trap: AmpTrapPositionState changed : CrossMaxToMin -> CrossMaxToMinWaitClear
+055.0247:1: Debug: actions: 112:completing action: MCMotionMagicAction (elevator) target=0.19 posthresh=0.05 velthresh=0.05
+056.3129:1: Debug: actions: 116:starting action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+056.3213:1: Error: amp-trap: AmpTrapPositionState changed : CrossMaxToMinWaitClear -> DirectToTarget
+056.5181:1: Debug: actions: 115:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+057.0215:1: Debug: actions: 116:completing action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+057.0658:1: Debug: actions: 111:completing action: AmpTrapPositionAction, angle=0.0, height 0.05
+057.0785:1: Debug: actions: 117:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+057.0792:1: Debug: actions: 118:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+057.0843:1: Debug: actions: 119:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+057.1083:1: Debug: actions: 118:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+057.1236:1: Debug: actions: 119:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+057.1427:1: Debug: actions: 117:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+057.1536:1: Debug: actions: 109:completing action: TurtleAction
+060.4441:1: Info: global: changing robot loop type: Teleop -> Disabled
+060.4446:1: Info: global: Motor Faults Report
+060.4451:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+060.4645:1: Info: global: intake-updown:rio-2:NONE
+060.4859:1: Info: global: intake-feeder:rio-1:NONE
+060.5056:1: Info: global: intake-tilt:rio-5:NONE
+060.5243:1: Info: global: intake-shooter1:rio-3:NONE
+060.5420:1: Info: global: intake-shooter2:rio-4:NONE
+060.5604:1: Info: global: elevator:rio-6:NONE
+060.5799:1: Info: global: arm:rio-7:NONE
+060.5807:1: Info: global: manipulator:rio-9:NONE
+060.5996:1: Info: global: climber:rio-10:NONE
+060.6233:1: Info: global: fl-steer:DriveBase-11:NONE
+060.6386:1: Info: global: fl-drive:DriveBase-12:NONE
+060.6538:1: Info: global: fr-steer:DriveBase-21:NONE
+060.6698:1: Info: global: fr-drive:DriveBase-22:NONE
+060.6856:1: Info: global: bl-steer:DriveBase-41:NONE
+060.7021:1: Info: global: bl-drive:DriveBase-42:NONE
+060.7239:1: Info: global: br-steer:DriveBase-31:NONE
+060.7439:1: Info: global: br-drive:DriveBase-32:NONE
+060.7446:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

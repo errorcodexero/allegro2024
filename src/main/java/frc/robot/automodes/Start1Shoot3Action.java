@@ -8,12 +8,11 @@ import org.xero1425.misc.MessageType;
 
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
 import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
+import frc.robot.subsystems.intake_shooter.IntakeManualShootAction;
 import frc.robot.subsystems.intake_shooter.StartCollectAltAction;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class Start1Shoot3Action extends Action {
-    private static final double kRotatePosTol = 5.0 ;
-
     private enum State {
         Idle,
         Shoot1,
@@ -29,13 +28,12 @@ public class Start1Shoot3Action extends Action {
         Done
     }
 
-    private boolean mirror_ ;
-    private double mvalue_ ;
     private AllegroRobot2024 robot_ ;
     private State state_ ;
 
     private SwerveTrackAngle rotate_ ;
     private IntakeAutoShootAction shoot_ ;
+    private IntakeManualShootAction manual_shoot_current_ ; 
     private IntakeGotoNamedPositionAction stow_ ;
     private StartCollectAltAction start_collect_ ;
     private SwerveHolonomicPathFollower p1_ ;
@@ -46,20 +44,26 @@ public class Start1Shoot3Action extends Action {
         super(robot.getRobot().getMessageLogger()) ;
 
         robot_ = robot ;
-        mirror_ = mirror ;
-        mvalue_ = mvalue ;
         state_ = State.Idle ;
 
-        rotate_ = new SwerveTrackAngle(robot.getSwerve(), () -> robot_.getTargetTracker().getRotation(), kRotatePosTol) ;
+        double rottol = robot.getIntakeShooter().getSettingsValue("actions:auto-shoot:rotational-position-tolerance").getDouble() ;        
+
+        rotate_ = new SwerveTrackAngle(robot.getSwerve(), () -> robot_.getTargetTracker().getRotation(), rottol) ;
         shoot_ = new IntakeAutoShootAction(robot_.getIntakeShooter(), robot_.getTargetTracker(), true, rotate_) ;
+        if (mirror) {
+            manual_shoot_current_ = new IntakeManualShootAction(robot.getIntakeShooter(), "subwoofer-right") ;             
+        }
+        else {
+            manual_shoot_current_ = new IntakeManualShootAction(robot_.getIntakeShooter(), "subwoofer-left") ;        
+        }
         double v1 = robot_.getIntakeShooter().getUpDown().getSettingsValue("targets:stow").getDouble() ;
         double v2 = robot_.getIntakeShooter().getTilt().getSettingsValue("targets:stow").getDouble() ; 
         stow_ = new IntakeGotoNamedPositionAction(robot_.getIntakeShooter(), v1, v2) ;
         start_collect_ = new StartCollectAltAction(robot_.getIntakeShooter()) ;
 
-        p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S1S3-P1", true, 0.2, mirror_, mvalue_);
-        p2_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S1S3-P2", false, 0.2, mirror_, mvalue_);
-        p3_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S1S3-P3", false, 0.2, mirror_, mvalue_);
+        p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S1S3-P1", true, 0.2, mirror, mvalue);
+        p2_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S1S3-P2", false, 0.2, mirror, mvalue);
+        p3_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S1S3-P3", false, 0.2, mirror, mvalue);
     }
 
     @Override
@@ -67,8 +71,8 @@ public class Start1Shoot3Action extends Action {
         super.start() ;
 
         state_ = State.Shoot1 ;
-        robot_.getSwerve().setAction(rotate_, true) ;
-        robot_.getIntakeShooter().setAction(shoot_, true) ;
+        robot_.getIntakeShooter().setHoldingNote(true);
+        robot_.getIntakeShooter().setAction(manual_shoot_current_, true) ;
     }
 
     private void idleState() {        
@@ -79,7 +83,7 @@ public class Start1Shoot3Action extends Action {
     }
 
     private void shoot1State() {
-        if (shoot_.isDone()) {
+        if (manual_shoot_current_.isDone()) {
             robot_.getIntakeShooter().setAction(start_collect_, true) ;            
             robot_.getSwerve().setAction(p1_, true) ;
             state_ = State.Path1 ;
@@ -87,12 +91,6 @@ public class Start1Shoot3Action extends Action {
     }
 
     private void path1State() {
-        
-        if (p1_.isDone()) {
-            MessageLogger logger = robot_.getRobot().getMessageLogger() ;
-            logger.startMessage(MessageType.Info).add("holding note", robot_.getIntakeShooter().isHoldingNote()).endMessage();
-        }
-
         if (p1_.isDone() && robot_.getIntakeShooter().isHoldingNote()) {
             state_ = State.FinishCollect1 ;
         }
@@ -100,7 +98,6 @@ public class Start1Shoot3Action extends Action {
             //
             // We missed the note, 
             //
-            robot_.getIntakeShooter().setAction(stow_, true) ;
             state_ = State.MissedCollect ;
         }
     }
@@ -117,6 +114,7 @@ public class Start1Shoot3Action extends Action {
     }
 
     private void missedCollectState() {
+        robot_.getIntakeShooter().setAction(stow_, true) ;        
         state_ = State.MissedStow ;
     }
 
@@ -146,7 +144,6 @@ public class Start1Shoot3Action extends Action {
             //
             // We missed the note, 
             //
-            robot_.getIntakeShooter().setAction(stow_, true);            
             state_ = State.MissedCollect ;
         }            
     }

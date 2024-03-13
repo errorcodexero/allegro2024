@@ -81,6 +81,9 @@ public class AllegroRobot2024 extends RobotSubsystem {
     @Override
     public void init(LoopType prev, LoopType current) {
         super.init(prev, current);
-        cancelAction();
+
+        if (prev == LoopType.Disabled && current == LoopType.Teleop) {
+            cancelAction();
+        }
     }
 }

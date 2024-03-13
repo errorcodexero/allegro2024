@@ -6,6 +6,7 @@ import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
 import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
+import frc.robot.subsystems.intake_shooter.IntakeManualShootAction;
 import frc.robot.subsystems.intake_shooter.StartCollectAltAction;
 import frc.robot.subsystems.intake_shooter.StopCollectAltAction;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
@@ -35,7 +36,8 @@ public class Start3Shoot3Action extends Action {
     private SwerveHolonomicPathFollower p1_ ;    
     private SwerveHolonomicPathFollower p2_ ;    
     private SwerveHolonomicPathFollower p3_ ;
-    private SwerveHolonomicPathFollower p4_ ;    
+    private SwerveHolonomicPathFollower p4_ ;
+    private IntakeManualShootAction manual_shoot_ ;    
     private SwerveTrackAngle rotate_ ;
     private IntakeAutoShootAction shoot_ ;    
     private StartCollectAltAction start_collect_ ;
@@ -57,7 +59,14 @@ public class Start3Shoot3Action extends Action {
 
         double v1 = robot_.getIntakeShooter().getUpDown().getSettingsValue("targets:stow").getDouble() ;
         double v2 = robot_.getIntakeShooter().getTilt().getSettingsValue("targets:stow").getDouble() ; 
-        stow_ = new IntakeGotoNamedPositionAction(robot_.getIntakeShooter(), v1, v2) ;        
+        stow_ = new IntakeGotoNamedPositionAction(robot_.getIntakeShooter(), v1, v2) ;     
+        
+        if (mirror) {
+            manual_shoot_ = new IntakeManualShootAction(robot.getIntakeShooter(), "subwoofer-left") ;             
+        }
+        else {
+            manual_shoot_ = new IntakeManualShootAction(robot_.getIntakeShooter(), "subwoofer-right") ;        
+        }
 
         p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P1", true, 0.2, mirror_, mvalue_);
         p2_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P2", true, 0.2, mirror_, mvalue_); 
@@ -68,12 +77,11 @@ public class Start3Shoot3Action extends Action {
     @Override
     public void start() {
         state_ = State.Shoot1 ;
-        robot_.getSwerve().setAction(rotate_, true) ;
-        robot_.getIntakeShooter().setAction(shoot_, true) ;
+        robot_.getIntakeShooter().setAction(manual_shoot_, true) ;
     }
 
     private void shoot1State() {
-        if (shoot_.isDone()) {
+        if (manual_shoot_.isDone()) {
             robot_.getIntakeShooter().setAction(start_collect_, true) ;
             robot_.getSwerve().setAction(p1_, true) ;
             state_ = State.Path1 ;

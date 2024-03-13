@@ -1,0 +1,365 @@
+001.3006:1: Info: global: ============================================================
+001.3205:1: Info: global: robot code starting
+001.3212:1: Info: global:  SerialNumber = '03223856'
+001.3742:1: Info: global:  enableMessageLogger time = 0.3515
+001.3752:1: Info: global: ============================================================
+001.3802:1: Info: global: reading params for bot 'COMPETITION'
+001.3827:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.5743:1: Info: global:  readParamsFile time = 0.1982
+001.6288:1: Info: global:  enableMessagesFromSettingsFile time = 0.001911
+002.1957:1: Info: global:  loadPathsFiles time = 0.5660
+004.8062:1: Info: global: initializing robot - FMS connected
+004.8577:1: Info: global:  plotMgrInit time = 0.0002040
+005.6994:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.0.3'
+005.7008:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+005.9277:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.0.3'
+005.9286:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+006.0908:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.0.3'
+006.0920:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+006.2182:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.0.3'
+006.2192:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+006.3595:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.0.3'
+006.3604:1: Info: global:     Faults: sticky-devicetemp sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+006.5503:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.0.3'
+006.5515:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+006.6985:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.0.3'
+006.6991:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+006.9005:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+007.0316:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.0.3'
+007.0324:1: Info: global:     Faults: sticky-bridge-brownout sticky-reverse-soft-limit sticky-stator-curr-limit
+007.5075:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.0.3'
+007.5082:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+007.6284:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.0.3'
+007.6293:1: Info: global:     Faults: sticky-devicetemp sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+007.8086:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.0.3'
+007.8093:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+007.9065:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.0.3'
+007.9074:1: Info: global:     Faults: sticky-bridge-brownout sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+008.0027:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.0.3'
+008.0039:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+008.0994:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.0.3'
+008.1000:1: Info: global:     Faults: sticky-boot-during-enable sticky-bridge-brownout sticky-over-supply sticky-stator-curr-limit sticky-supply-curr-limit
+008.2044:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.0.3'
+008.2051:1: Info: global:     Faults: sticky-bridge-brownout sticky-stator-curr-limit
+008.3135:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.0.3'
+008.3142:1: Info: global:     Faults: sticky-devicetemp sticky-bridge-brownout sticky-over-supply sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+008.5089:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+008.5095:1: Info: global: Gamepad discovered
+008.5618:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+008.5842:1: Info: global:  hardwareInit time = 3.726
+008.6948:1: Info: global: Changed vision parameters to Single Near
+008.8243:1: Info: global:  computeInitalState time = 0.2380
+009.0438:1: Info: global:  postHWInit time = 0.2181
+009.0792:1: Info: global: changing robot loop type: Initialization -> Disabled
+009.0816:1: Info: global: alliance changed:null -> Blue: recreated auto modes for new alliance value
+060.5551:1: Info: global: Entering Autonomous Mode
+060.5560:1: Info: global:     Automode Number: 0
+060.5563:1: Info: global:     Automode Name: Start1-Shoot3
+060.5570:1: Info: global:     Alliance: BLUE
+060.5574:1: Info: global:     Location: 2
+060.5576:1: Info: global:     GameData: ''
+060.5580:1: Info: global:     EventName: WAAHS
+060.5622:1: Info: global:     MatchType: QUALIFICATION
+060.5629:1: Info: global:     MatchNumber: 27
+060.5644:1: Info: global:     MatchTime: 15.0000
+060.5648:1: Info: global:     FMS Attached: YES
+060.5653:1: Info: global: changing robot loop type: Disabled -> Autonomous
+060.6412:1: Debug: actions: 144:starting action: 
+                   actions: 144: Sequence [
+                   actions:     170: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:         145: Start2Shoot3Action
+                   actions:     ]
+                   actions: ]
+060.6483:1: Debug: actions: 170:starting action: 
+                   actions: 170: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:     145: Start2Shoot3Action
+                   actions: ]
+060.6519:1: Debug: actions: 145:starting action: 145: Start2Shoot3Action
+060.6544:1: Debug: actions: 146:starting action: 146: SwerveTrackAngle
+060.6593:1: Debug: actions: 147:starting action: 147: IntakeShootAction
+060.6615:1: Debug: actions: 150:starting action: MCTrackPosAction (intake-updown) target=123.5
+060.7164:1: Debug: actions: 151:starting action: MCTrackPosAction (intake-tilt) target=-40.0
+060.7382:1: Debug: actions: 148:starting action: 148: MCVelocityAction (intake-shooter1), target = 45.0
+060.7610:1: Debug: actions: 149:starting action: 149: MCVelocityAction (intake-shooter2), target = 45.0
+060.7938:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+060.8130:1: Info: global: gyroinfo rate = 0.04688 ratelimit = 5.000 ax = 0.02240 ay = 0.0009766 alimit = 0.05000
+060.8173:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = true gyro_stopped = true
+061.1153:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.2448:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+061.2517:1: Info: global: gyroinfo rate = -0.02734 ratelimit = 5.000 ax = 0.004822 ay = 0.006836 alimit = 0.05000
+061.2525:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+061.2544:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.2694:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+061.2734:1: Info: global: gyroinfo rate = -0.2617 ratelimit = 5.000 ax = 0.02631 ay = -0.01044 alimit = 0.05000
+061.2742:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+061.2761:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.2932:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+061.3125:1: Info: global: gyroinfo rate = -0.01172 ratelimit = 5.000 ax = -0.0002441 ay = 0.01270 alimit = 0.05000
+061.3148:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+061.3195:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.3457:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+061.3497:1: Info: global: gyroinfo rate = 0.4609 ratelimit = 5.000 ax = 0.008240 ay = -0.03583 alimit = 0.05000
+061.3505:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+061.3530:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.3712:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+061.3773:1: Info: global: gyroinfo rate = -0.09375 ratelimit = 5.000 ax = 0.02020 ay = -0.03412 alimit = 0.05000
+061.3783:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+061.3820:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.4041:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+061.4135:1: Info: global: gyroinfo rate = -0.08203 ratelimit = 5.000 ax = 0.01752 ay = -0.01678 alimit = 0.05000
+061.4145:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+061.4181:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.4413:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+061.4469:1: Info: global: gyroinfo rate = -0.08594 ratelimit = 5.000 ax = 0.01703 ay = -0.001648 alimit = 0.05000
+061.4476:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+061.4501:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.4658:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+061.4695:1: Info: global: gyroinfo rate = 0.1523 ratelimit = 5.000 ax = 0.009949 ay = -0.002380 alimit = 0.05000
+061.4702:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+061.4734:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.5009:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+061.5054:1: Info: global: gyroinfo rate = 0.1055 ratelimit = 5.000 ax = 0.01776 ay = -0.01654 alimit = 0.05000
+061.5063:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+061.5080:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.5253:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+061.5322:1: Info: global: gyroinfo rate = -0.07422 ratelimit = 5.000 ax = 0.01752 ay = -0.008728 alimit = 0.05000
+061.5331:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+061.5355:1: Info: global: gyroinfo rate = 0.01953 ratelimit = 5.000 ax = 0.02802 ay = -0.01849 alimit = 0.05000
+061.5374:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.5527:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.5691:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.5894:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.6083:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.6259:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.6612:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.6763:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.6941:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.7148:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.7302:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.7503:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.7687:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.7997:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.8159:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.8340:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.8545:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.8716:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.8892:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.9055:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.9252:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+061.9375:1: Debug: actions: 146:canceling action: 146: SwerveTrackAngle
+061.9389:1: Debug: actions: 152:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+062.1184:1: Debug: actions: 145:canceling action: 145: Start2Shoot3Action
+062.1187:1: Info: global: changing robot loop type: Autonomous -> Disabled
+062.1190:1: Info: global: Motor Faults Report
+062.1192:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+062.1507:1: Info: global: intake-updown:rio-2:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+062.1749:1: Info: global: intake-feeder:rio-1:sticky-bridge-brownout sticky-stator-curr-limit
+062.1961:1: Info: global: intake-tilt:rio-5:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+062.2176:1: Info: global: intake-shooter1:rio-3:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+062.2389:1: Info: global: intake-shooter2:rio-4:sticky-devicetemp sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+062.2672:1: Info: global: elevator:rio-6:sticky-bridge-brownout sticky-stator-curr-limit
+062.2890:1: Info: global: arm:rio-7:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+062.2898:1: Info: global: manipulator:rio-9:NONE
+062.3123:1: Info: global: climber:rio-10:sticky-bridge-brownout sticky-reverse-soft-limit sticky-stator-curr-limit
+062.3345:1: Info: global: fl-steer:DriveBase-11:sticky-bridge-brownout sticky-stator-curr-limit
+062.3576:1: Info: global: fl-drive:DriveBase-12:sticky-devicetemp sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+062.3882:1: Info: global: fr-steer:DriveBase-21:sticky-bridge-brownout sticky-stator-curr-limit
+062.4133:1: Info: global: fr-drive:DriveBase-22:sticky-bridge-brownout sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+062.4355:1: Info: global: bl-steer:DriveBase-41:sticky-bridge-brownout sticky-stator-curr-limit
+062.4602:1: Info: global: bl-drive:DriveBase-42:sticky-boot-during-enable sticky-bridge-brownout sticky-over-supply sticky-stator-curr-limit sticky-supply-curr-limit
+062.4888:1: Info: global: br-steer:DriveBase-31:sticky-bridge-brownout sticky-stator-curr-limit
+062.5133:1: Info: global: br-drive:DriveBase-32:sticky-devicetemp sticky-bridge-brownout sticky-over-supply sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+062.5143:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+078.9746:1: Info: global: changing robot loop type: Disabled -> Teleop
+079.0453:1: Debug: actions: 0:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 4.50 m/s, Vy: 0.20 m/s, Omega: 0.00 rad/s))
+079.0556:1: Debug: actions: 152:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+079.1252:1: Debug: actions: 147:completing action: 147: IntakeShootAction
+079.6985:1: Debug: superstructure: Subsystem cancelAction() called with no active action
+079.6992:1: Debug: actions: 150:canceling action: MCTrackPosAction (intake-updown) target=100.0
+079.6998:1: Debug: actions: 151:canceling action: MCTrackPosAction (intake-tilt) target=-59.99999999999999
+079.7004:1: Debug: actions: 148:canceling action: 148: MCVelocityAction (intake-shooter1), target = 65.0
+079.7012:1: Debug: actions: 149:canceling action: 149: MCVelocityAction (intake-shooter2), target = 65.0
+079.7020:1: Debug: actions: 109:starting action: TurtleAction
+079.7026:1: Debug: actions: 110:starting action: ClimbAction HooksDown, target = 0.0
+079.7040:1: Debug: global: OI State changed : Idle -> Eject
+079.7196:1: Debug: actions: 110:completing action: ClimbAction HooksDown, target = 0.0
+079.7372:1: Debug: actions: 111:starting action: AmpTrapPositionAction, angle=0.0, height 0.05
+079.7395:1: Error: global: armpos current = -0.02374 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+079.7400:1: Debug: actions: 116:starting action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+079.7560:1: Debug: actions: 115:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+079.7895:1: Debug: actions: 116:completing action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+079.8010:1: Debug: actions: 115:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+079.8138:1: Debug: actions: 111:completing action: AmpTrapPositionAction, angle=0.0, height 0.05
+079.8221:1: Debug: actions: 117:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+079.8234:1: Debug: actions: 118:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+079.8257:1: Debug: actions: 119:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+079.8476:1: Debug: actions: 119:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+080.4175:1: Debug: actions: 118:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+080.4365:1: Debug: actions: 117:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+080.4561:1: Debug: actions: 109:completing action: TurtleAction
+080.6359:1: Info: global: Changed vision parameters to Single Far
+080.7543:1: Info: global: Changed vision parameters to Multi Far
+080.7940:1: Info: global: Changed vision parameters to Single Far
+080.8542:1: Info: global: Changed vision parameters to Multi Far
+080.8744:1: Info: global: Changed vision parameters to Single Far
+080.9136:1: Info: global: Changed vision parameters to Multi Far
+080.9540:1: Info: global: Changed vision parameters to Single Far
+081.4745:1: Info: global: Changed vision parameters to Multi Far
+081.6342:1: Info: global: Changed vision parameters to Single Far
+085.9982:1: Debug: superstructure: Subsystem cancelAction() called with no active action
+085.9986:1: Debug: actions: 109:starting action: TurtleAction
+085.9991:1: Debug: actions: 110:starting action: ClimbAction HooksDown, target = 0.0
+085.9994:1: Debug: actions: 110:completing action: ClimbAction HooksDown, target = 0.0
+086.0213:1: Debug: actions: 111:starting action: AmpTrapPositionAction, angle=0.0, height 0.05
+086.0232:1: Error: global: armpos current = -0.02374 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+086.0237:1: Debug: actions: 116:starting action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+086.0274:1: Debug: actions: 115:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+086.0320:1: Debug: actions: 116:completing action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+086.0379:1: Debug: actions: 115:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+086.0705:1: Debug: actions: 111:completing action: AmpTrapPositionAction, angle=0.0, height 0.05
+086.0809:1: Debug: actions: 117:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+086.0817:1: Debug: actions: 118:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+086.0835:1: Debug: actions: 119:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+086.0877:1: Debug: actions: 118:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+086.0922:1: Debug: actions: 119:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+086.1098:1: Debug: actions: 117:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+086.1175:1: Debug: actions: 109:completing action: TurtleAction
+110.3383:1: Debug: superstructure: Subsystem cancelAction() called with no active action
+110.3389:1: Debug: actions: 109:starting action: TurtleAction
+110.3392:1: Debug: actions: 110:starting action: ClimbAction HooksDown, target = 0.0
+110.3395:1: Debug: actions: 110:completing action: ClimbAction HooksDown, target = 0.0
+110.3585:1: Debug: actions: 111:starting action: AmpTrapPositionAction, angle=0.0, height 0.05
+110.3600:1: Error: global: armpos current = 0.5104 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+110.3607:1: Debug: actions: 116:starting action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+110.3625:1: Debug: actions: 115:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+110.3685:1: Debug: actions: 116:completing action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+110.4370:1: Debug: actions: 115:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+110.4562:1: Debug: actions: 111:completing action: AmpTrapPositionAction, angle=0.0, height 0.05
+110.4764:1: Debug: actions: 117:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+110.4773:1: Debug: actions: 118:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+110.4793:1: Debug: actions: 119:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+110.4828:1: Debug: actions: 118:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+110.4854:1: Debug: actions: 119:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+110.4971:1: Debug: actions: 117:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+110.5177:1: Debug: actions: 109:completing action: TurtleAction
+130.4738:1: Info: global: Changed vision parameters to Multi Far
+130.5339:1: Info: global: Changed vision parameters to Single Far
+130.5937:1: Info: global: Changed vision parameters to Multi Far
+130.8340:1: Info: global: Changed vision parameters to Single Far
+131.0941:1: Info: global: Changed vision parameters to Multi Far
+131.3336:1: Info: global: Changed vision parameters to Single Far
+131.3737:1: Info: global: Changed vision parameters to Multi Far
+132.0536:1: Info: global: Changed vision parameters to Single Far
+132.0737:1: Info: global: Changed vision parameters to Multi Far
+132.1138:1: Info: global: Changed vision parameters to Single Far
+132.2539:1: Info: global: Changed vision parameters to Multi Far
+132.2940:1: Info: global: Changed vision parameters to Single Far
+132.3142:1: Info: global: Changed vision parameters to Multi Far
+132.3343:1: Info: global: Changed vision parameters to Single Far
+132.7347:1: Info: global: Changed vision parameters to Multi Far
+132.7540:1: Info: global: Changed vision parameters to Single Far
+132.9945:1: Info: global: Changed vision parameters to Multi Far
+133.0136:1: Info: global: Changed vision parameters to Single Far
+135.3138:1: Info: global: Changed vision parameters to Multi Far
+135.3739:1: Info: global: Changed vision parameters to Single Far
+135.8141:1: Info: global: Changed vision parameters to Multi Far
+135.8337:1: Info: global: Changed vision parameters to Single Far
+136.1737:1: Info: global: Changed vision parameters to Multi Far
+136.2145:1: Info: global: Changed vision parameters to Single Far
+136.2342:1: Info: global: Changed vision parameters to Multi Far
+136.2537:1: Info: global: Changed vision parameters to Single Far
+136.2939:1: Info: global: Changed vision parameters to Multi Far
+136.5770:1: Info: global: Changed vision parameters to Single Far
+136.5950:1: Info: global: Changed vision parameters to Multi Far
+139.0339:1: Info: global: Changed vision parameters to Single Far
+139.2137:1: Info: global: Changed vision parameters to Multi Far
+139.6538:1: Info: global: Changed vision parameters to Single Far
+140.1143:1: Info: global: Changed vision parameters to Multi Far
+141.2344:1: Info: global: Changed vision parameters to Single Far
+141.3740:1: Info: global: Changed vision parameters to Multi Far
+142.0937:1: Info: global: Changed vision parameters to Single Far
+142.2751:1: Info: global: Changed vision parameters to Multi Far
+142.9949:1: Info: global: Changed vision parameters to Single Far
+143.2338:1: Info: global: Changed vision parameters to Multi Far
+143.3540:1: Info: global: Changed vision parameters to Single Far
+143.3737:1: Info: global: Changed vision parameters to Multi Far
+144.4737:1: Info: global: Changed vision parameters to Single Far
+145.6540:1: Info: global: Changed vision parameters to Multi Far
+145.7541:1: Info: global: Changed vision parameters to Single Far
+145.8544:1: Info: global: Changed vision parameters to Single Near
+145.9541:1: Info: global: Changed vision parameters to Multi Near
+146.0947:1: Info: global: Changed vision parameters to Single Near
+146.1543:1: Info: global: Changed vision parameters to Multi Near
+146.3745:1: Info: global: Changed vision parameters to Single Near
+146.4139:1: Info: global: Changed vision parameters to Multi Near
+146.5141:1: Info: global: Changed vision parameters to Single Near
+148.1738:1: Info: global: Changed vision parameters to Multi Near
+148.5942:1: Info: global: Changed vision parameters to Single Near
+149.4338:1: Info: global: Changed vision parameters to Single Far
+160.0743:1: Info: global: Changed vision parameters to Single Near
+160.5539:1: Info: global: Changed vision parameters to Multi Near
+160.6942:1: Info: global: Changed vision parameters to Single Near
+160.7738:1: Info: global: Changed vision parameters to Multi Near
+161.4741:1: Info: global: Changed vision parameters to Single Near
+161.5738:1: Info: global: Changed vision parameters to Multi Near
+161.8941:1: Info: global: Changed vision parameters to Single Near
+161.9140:1: Info: global: Changed vision parameters to Multi Near
+162.8141:1: Info: global: Changed vision parameters to Single Near
+162.8343:1: Info: global: Changed vision parameters to Multi Near
+164.7542:1: Info: global: Changed vision parameters to Single Near
+164.8141:1: Info: global: Changed vision parameters to Multi Near
+166.5937:1: Info: global: Changed vision parameters to Single Near
+166.9362:1: Info: global: Changed vision parameters to Single Far
+167.7143:1: Info: global: Changed vision parameters to Multi Far
+167.8739:1: Info: global: Changed vision parameters to Single Far
+168.1140:1: Info: global: Changed vision parameters to Multi Far
+170.0536:1: Info: global: Changed vision parameters to Single Far
+170.1737:1: Info: global: Changed vision parameters to Multi Far
+170.2137:1: Info: global: Changed vision parameters to Single Far
+170.2337:1: Info: global: Changed vision parameters to Multi Far
+170.2738:1: Info: global: Changed vision parameters to Single Far
+170.2943:1: Info: global: Changed vision parameters to Multi Far
+170.3356:1: Info: global: Changed vision parameters to Single Far
+170.3537:1: Info: global: Changed vision parameters to Multi Far
+170.4138:1: Info: global: Changed vision parameters to Single Far
+170.4538:1: Info: global: Changed vision parameters to Multi Far
+171.0337:1: Info: global: Changed vision parameters to Single Far
+183.3004:1: Debug: superstructure: Subsystem cancelAction() called with no active action
+183.3017:1: Debug: actions: 109:starting action: TurtleAction
+183.3021:1: Debug: actions: 110:starting action: ClimbAction HooksDown, target = 0.0
+183.3024:1: Debug: actions: 110:completing action: ClimbAction HooksDown, target = 0.0
+183.3171:1: Debug: actions: 111:starting action: AmpTrapPositionAction, angle=0.0, height 0.05
+183.3188:1: Error: global: armpos current = -0.02374 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+183.3193:1: Debug: actions: 116:starting action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+183.3231:1: Debug: actions: 115:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+183.3282:1: Debug: actions: 116:completing action: MCMotionMagicAction (elevator) target=0.05 posthresh=0.1 velthresh=0.05
+183.3297:1: Debug: actions: 115:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+183.3374:1: Debug: actions: 111:completing action: AmpTrapPositionAction, angle=0.0, height 0.05
+183.3610:1: Debug: actions: 117:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+183.3617:1: Debug: actions: 118:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+183.3639:1: Debug: actions: 119:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+183.3676:1: Debug: actions: 118:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+183.3701:1: Debug: actions: 119:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+183.3932:1: Debug: actions: 117:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+183.4002:1: Debug: actions: 109:completing action: TurtleAction
+214.2944:1: Info: global: changing robot loop type: Teleop -> Disabled
+214.2947:1: Info: global: Motor Faults Report
+214.2950:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+214.3295:1: Info: global: intake-updown:rio-2:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+214.3588:1: Info: global: intake-feeder:rio-1:sticky-bridge-brownout sticky-stator-curr-limit
+214.3954:1: Info: global: intake-tilt:rio-5:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+214.4259:1: Info: global: intake-shooter1:rio-3:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+214.4514:1: Info: global: intake-shooter2:rio-4:sticky-devicetemp sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+214.4810:1: Info: global: elevator:rio-6:sticky-bridge-brownout sticky-stator-curr-limit
+214.5257:1: Info: global: arm:rio-7:sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+214.5270:1: Info: global: manipulator:rio-9:NONE
+214.5551:1: Info: global: climber:rio-10:sticky-bridge-brownout sticky-reverse-soft-limit sticky-stator-curr-limit
+214.5806:1: Info: global: fl-steer:DriveBase-11:sticky-bridge-brownout sticky-stator-curr-limit
+214.6064:1: Info: global: fl-drive:DriveBase-12:sticky-devicetemp sticky-bridge-brownout sticky-stator-curr-limit sticky-supply-curr-limit
+214.6321:1: Info: global: fr-steer:DriveBase-21:sticky-bridge-brownout sticky-stator-curr-limit
+214.6346:1: Info: global: fr-drive:DriveBase-22:sticky-devicetemp sticky-boot-during-enable sticky-bridge-brownout sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+214.6615:1: Info: global: bl-steer:DriveBase-41:sticky-bridge-brownout sticky-stator-curr-limit
+214.6907:1: Info: global: bl-drive:DriveBase-42:sticky-boot-during-enable sticky-bridge-brownout sticky-over-supply sticky-stator-curr-limit sticky-supply-curr-limit
+214.7167:1: Info: global: br-steer:DriveBase-31:sticky-bridge-brownout sticky-stator-curr-limit
+214.7426:1: Info: global: br-drive:DriveBase-32:sticky-devicetemp sticky-bridge-brownout sticky-over-supply sticky-unstable-supply sticky-stator-curr-limit sticky-supply-curr-limit
+214.7432:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

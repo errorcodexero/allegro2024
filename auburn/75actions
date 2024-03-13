@@ -1,0 +1,289 @@
+181.6451:1: Debug: actions: 169:starting action: 
+                   actions: 169: Sequence [
+                   actions:     201: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:         170: Start3Shoot2Action
+                   actions:     ]
+                   actions: ]
+181.6602:1: Debug: actions: 201:starting action: 
+                   actions: 201: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:     170: Start3Shoot2Action
+                   actions: ]
+181.6825:1: Debug: actions: 170:starting action: 170: Start3Shoot2Action
+181.6954:1: Debug: actions: 171:starting action: 171: SwerveTrackAngle
+181.6986:1: Debug: actions: 172:starting action: 172: IntakeShootAction
+181.7043:1: Debug: actions: 175:starting action: MCTrackPosAction (intake-updown) target=123.5
+181.7573:1: Debug: actions: 176:starting action: MCTrackPosAction (intake-tilt) target=-40.0
+181.7787:1: Debug: actions: 173:starting action: 173: MCVelocityAction (intake-shooter1), target = 45.0
+181.8073:1: Debug: actions: 174:starting action: 174: MCVelocityAction (intake-shooter2), target = 45.0
+183.3182:1: Debug: actions: 171:canceling action: 171: SwerveTrackAngle
+183.3189:1: Debug: actions: 177:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+183.5231:1: Debug: actions: 177:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+183.5347:1: Debug: actions: 172:completing action: 172: IntakeShootAction
+183.5437:1: Debug: actions: 175:canceling action: MCTrackPosAction (intake-updown) target=100.0
+183.5449:1: Debug: actions: 176:canceling action: MCTrackPosAction (intake-tilt) target=-61.61452638937345
+183.5457:1: Debug: actions: 173:canceling action: 173: MCVelocityAction (intake-shooter1), target = 65.0
+183.5464:1: Debug: actions: 174:canceling action: 174: MCVelocityAction (intake-shooter2), target = 65.0
+183.5477:1: Debug: actions: 181:starting action: StartCollectAction
+183.5484:1: Debug: actions: 188:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+183.5489:1: Debug: actions: 188:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+183.5516:1: Debug: actions: 250:starting action: MCMotionMagicAction (intake-tilt) target=-46.984897432 posthresh=3.0 velthresh=1.0
+183.5543:1: Debug: actions: 200:starting action: SwerveHolonomicPathFollower S3S2-P1
+183.5569:1: Info: global: Start2Shoot4Action action changed states: Shoot1 -> Path1
+184.2729:1: Debug: actions: 250:completing action: MCMotionMagicAction (intake-tilt) target=-46.984897432 posthresh=3.0 velthresh=1.0
+184.2815:1: Debug: actions: 190:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+184.2838:1: Debug: actions: 191:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+185.7584:1: Debug: actions: 191:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+185.7774:1: Debug: actions: 190:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+188.3375:1: Debug: actions: 200:completing action: SwerveHolonomicPathFollower S3S2-P1
+188.3587:1: Info: global: Start2Shoot4Action action changed states: Path1 -> MissedCollect
+197.0129:1: Debug: actions: 170:canceling action: 170: Start3Shoot2Action
+199.8343:1: Debug: actions: 248:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: -4.51 m/s, Vy: 0.10 m/s, Omega: -6.28 rad/s))
+199.8362:1: Debug: actions: 181:canceling action: StartCollectAction
+199.8365:1: Debug: actions: 118:starting action: StartCollectAction
+199.8378:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+199.8389:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+199.8557:1: Debug: actions: 251:starting action: MCMotionMagicAction (intake-tilt) target=62.460226304 posthresh=3.0 velthresh=1.0
+199.9332:1: Debug: actions: 118:canceling action: StartCollectAction
+199.9338:1: Debug: actions: 251:canceling action: MCMotionMagicAction (intake-tilt) target=62.460226304 posthresh=3.0 velthresh=1.0
+199.9378:1: Debug: actions: 129:starting action: StopCollectAction
+199.9383:1: Debug: actions: 136:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+199.9386:1: Debug: actions: 136:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+199.9417:1: Debug: actions: 133:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+199.9424:1: Debug: actions: 134:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+199.9454:1: Debug: actions: 135:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+201.4987:1: Debug: actions: 135:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+201.5779:1: Debug: actions: 134:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+201.5987:1: Debug: actions: 133:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+201.6173:1: Debug: actions: 129:completing action: StopCollectAction
+201.6372:1: Debug: actions: 118:starting action: StartCollectAction
+201.6376:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+201.6379:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+201.6388:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+201.6410:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+203.2167:1: Debug: actions: 127:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+203.2563:1: Debug: actions: 128:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+205.6173:1: Debug: actions: 126:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+205.6178:1: Debug: actions: 126:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+205.6187:1: Debug: actions: 119:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+205.6194:1: Debug: actions: 120:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+205.6216:1: Debug: actions: 121:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+207.0576:1: Debug: actions: 121:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+207.1962:1: Debug: actions: 120:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+207.2156:1: Debug: actions: 119:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+207.2359:1: Debug: actions: 118:completing action: StartCollectAction
+207.2469:1: Debug: actions: 1:starting action: 1: IntakeShootAction
+207.2472:1: Debug: actions: 4:starting action: MCTrackPosAction (intake-updown) target=123.5
+207.2497:1: Debug: actions: 5:starting action: MCTrackPosAction (intake-tilt) target=-40.0
+207.2604:1: Debug: actions: 2:starting action: 2: MCVelocityAction (intake-shooter1), target = 45.0
+207.2654:1: Debug: actions: 3:starting action: 3: MCVelocityAction (intake-shooter2), target = 45.0
+207.4243:1: Debug: actions: 248:canceling action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+207.4247:1: Debug: actions: 0:starting action: 0: SwerveTrackAngle
+208.9585:1: Debug: actions: 0:canceling action: 0: SwerveTrackAngle
+208.9589:1: Debug: actions: 6:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+209.1607:1: Debug: actions: 6:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+209.1817:1: Debug: actions: 1:completing action: 1: IntakeShootAction
+209.1840:1: Debug: actions: 4:canceling action: MCTrackPosAction (intake-updown) target=118.0
+209.1850:1: Debug: actions: 5:canceling action: MCTrackPosAction (intake-tilt) target=-71.5347305311218
+209.1856:1: Debug: actions: 2:canceling action: 2: MCVelocityAction (intake-shooter1), target = 70.0
+209.1859:1: Debug: actions: 3:canceling action: 3: MCVelocityAction (intake-shooter2), target = 70.0
+209.1862:1: Debug: actions: 35:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+209.1866:1: Debug: actions: 36:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+209.1894:1: Debug: actions: 37:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+209.2237:1: Debug: actions: 248:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+209.2272:1: Debug: actions: 36:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+209.7386:1: Debug: actions: 37:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+209.7569:1: Debug: actions: 35:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+211.6766:1: Debug: actions: 118:starting action: StartCollectAction
+211.6769:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+211.6772:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+211.6783:1: Debug: actions: 252:starting action: MCMotionMagicAction (intake-tilt) target=-64.9864936 posthresh=3.0 velthresh=1.0
+211.6976:1: Debug: actions: 252:completing action: MCMotionMagicAction (intake-tilt) target=-64.9864936 posthresh=3.0 velthresh=1.0
+211.7168:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+211.7195:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+213.2367:1: Debug: actions: 128:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+213.3176:1: Debug: actions: 127:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+213.7758:1: Debug: actions: 126:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+213.7782:1: Debug: actions: 126:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+213.7792:1: Debug: actions: 119:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+213.7800:1: Debug: actions: 120:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+213.7820:1: Debug: actions: 121:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+215.2811:1: Debug: actions: 121:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+215.3769:1: Debug: actions: 120:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+215.3952:1: Debug: actions: 119:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+215.4152:1: Debug: actions: 118:completing action: StartCollectAction
+215.4173:1: Debug: actions: 1:starting action: 1: IntakeShootAction
+215.4177:1: Debug: actions: 4:starting action: MCTrackPosAction (intake-updown) target=118.0
+215.4194:1: Debug: actions: 5:starting action: MCTrackPosAction (intake-tilt) target=-71.5347305311218
+215.4217:1: Debug: actions: 2:starting action: 2: MCVelocityAction (intake-shooter1), target = 70.0
+215.4229:1: Debug: actions: 3:starting action: 3: MCVelocityAction (intake-shooter2), target = 70.0
+217.3857:1: Debug: actions: 248:canceling action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+217.3859:1: Debug: actions: 0:starting action: 0: SwerveTrackAngle
+218.6206:1: Debug: actions: 0:canceling action: 0: SwerveTrackAngle
+218.6210:1: Debug: actions: 6:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+218.8383:1: Debug: actions: 6:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+218.8577:1: Debug: actions: 1:completing action: 1: IntakeShootAction
+218.8602:1: Debug: actions: 4:canceling action: MCTrackPosAction (intake-updown) target=118.0
+218.8606:1: Debug: actions: 5:canceling action: MCTrackPosAction (intake-tilt) target=-62.449021725248
+218.8612:1: Debug: actions: 2:canceling action: 2: MCVelocityAction (intake-shooter1), target = 70.0
+218.8614:1: Debug: actions: 3:canceling action: 3: MCVelocityAction (intake-shooter2), target = 70.0
+218.8616:1: Debug: actions: 35:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+218.8621:1: Debug: actions: 36:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+218.8643:1: Debug: actions: 37:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+218.8813:1: Debug: actions: 248:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+218.8832:1: Debug: actions: 36:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+219.0827:1: Debug: actions: 37:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+219.0971:1: Debug: actions: 35:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+225.0385:1: Debug: actions: 118:starting action: StartCollectAction
+225.0388:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+225.0393:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+225.0409:1: Debug: actions: 253:starting action: MCMotionMagicAction (intake-tilt) target=-64.954533376 posthresh=3.0 velthresh=1.0
+225.0586:1: Debug: actions: 253:completing action: MCMotionMagicAction (intake-tilt) target=-64.954533376 posthresh=3.0 velthresh=1.0
+225.0766:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+225.0786:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+225.4392:1: Debug: actions: 118:canceling action: StartCollectAction
+225.4395:1: Debug: actions: 127:canceling action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+225.4400:1: Debug: actions: 128:canceling action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+225.4406:1: Debug: actions: 129:starting action: StopCollectAction
+225.4408:1: Debug: actions: 136:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+225.4411:1: Debug: actions: 136:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+225.4416:1: Debug: actions: 133:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+225.4420:1: Debug: actions: 134:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+225.4445:1: Debug: actions: 135:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+226.1774:1: Debug: actions: 135:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+226.7565:1: Debug: actions: 134:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+226.7752:1: Debug: actions: 133:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+226.7958:1: Debug: actions: 129:completing action: StopCollectAction
+226.8177:1: Debug: actions: 118:starting action: StartCollectAction
+226.8180:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+226.8182:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+226.8194:1: Debug: actions: 254:starting action: MCMotionMagicAction (intake-tilt) target=-64.98383024799999 posthresh=3.0 velthresh=1.0
+226.8362:1: Debug: actions: 254:completing action: MCMotionMagicAction (intake-tilt) target=-64.98383024799999 posthresh=3.0 velthresh=1.0
+226.8555:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+226.8575:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+228.4377:1: Debug: actions: 128:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+228.4575:1: Debug: actions: 127:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+228.9559:1: Debug: actions: 126:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+228.9562:1: Debug: actions: 126:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+228.9570:1: Debug: actions: 119:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+228.9573:1: Debug: actions: 120:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+228.9595:1: Debug: actions: 121:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+230.3971:1: Debug: actions: 121:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+230.5359:1: Debug: actions: 120:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+230.5551:1: Debug: actions: 119:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+230.5751:1: Debug: actions: 118:completing action: StartCollectAction
+230.5767:1: Debug: actions: 1:starting action: 1: IntakeShootAction
+230.5769:1: Debug: actions: 4:starting action: MCTrackPosAction (intake-updown) target=118.0
+230.5782:1: Debug: actions: 5:starting action: MCTrackPosAction (intake-tilt) target=-62.449021725248
+230.5806:1: Debug: actions: 2:starting action: 2: MCVelocityAction (intake-shooter1), target = 70.0
+230.5818:1: Debug: actions: 3:starting action: 3: MCVelocityAction (intake-shooter2), target = 70.0
+236.9218:1: Debug: actions: 248:canceling action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+236.9220:1: Debug: actions: 0:starting action: 0: SwerveTrackAngle
+238.0774:1: Debug: actions: 0:canceling action: 0: SwerveTrackAngle
+238.0777:1: Debug: actions: 6:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+238.2971:1: Debug: actions: 6:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+238.3175:1: Debug: actions: 1:completing action: 1: IntakeShootAction
+238.3188:1: Debug: actions: 4:canceling action: MCTrackPosAction (intake-updown) target=118.0
+238.3192:1: Debug: actions: 5:canceling action: MCTrackPosAction (intake-tilt) target=-63.07399064895285
+238.3196:1: Debug: actions: 2:canceling action: 2: MCVelocityAction (intake-shooter1), target = 70.0
+238.3198:1: Debug: actions: 3:canceling action: 3: MCVelocityAction (intake-shooter2), target = 70.0
+238.3201:1: Debug: actions: 35:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+238.3205:1: Debug: actions: 36:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+238.3229:1: Debug: actions: 37:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+238.3393:1: Debug: actions: 248:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+238.3776:1: Debug: actions: 36:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+238.4983:1: Debug: actions: 37:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+238.5176:1: Debug: actions: 35:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+244.3168:1: Debug: actions: 118:starting action: StartCollectAction
+244.3172:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+244.3175:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+244.3188:1: Debug: actions: 255:starting action: MCMotionMagicAction (intake-tilt) target=-64.994483656 posthresh=3.0 velthresh=1.0
+244.3379:1: Debug: actions: 255:completing action: MCMotionMagicAction (intake-tilt) target=-64.994483656 posthresh=3.0 velthresh=1.0
+244.3559:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+244.3596:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+245.8605:1: Debug: actions: 128:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+245.9565:1: Debug: actions: 127:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+246.6376:1: Debug: actions: 126:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+246.6381:1: Debug: actions: 126:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+246.6394:1: Debug: actions: 119:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+246.6398:1: Debug: actions: 120:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+246.6419:1: Debug: actions: 121:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+248.0575:1: Debug: actions: 121:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+248.2578:1: Debug: actions: 120:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+248.2759:1: Debug: actions: 119:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+248.2953:1: Debug: actions: 118:completing action: StartCollectAction
+248.2968:1: Debug: actions: 1:starting action: 1: IntakeShootAction
+248.2971:1: Debug: actions: 4:starting action: MCTrackPosAction (intake-updown) target=118.0
+248.2986:1: Debug: actions: 5:starting action: MCTrackPosAction (intake-tilt) target=-63.07399064895285
+248.3002:1: Debug: actions: 2:starting action: 2: MCVelocityAction (intake-shooter1), target = 70.0
+248.3017:1: Debug: actions: 3:starting action: 3: MCVelocityAction (intake-shooter2), target = 70.0
+253.2032:1: Debug: actions: 248:canceling action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+253.2034:1: Debug: actions: 0:starting action: 0: SwerveTrackAngle
+254.0968:1: Debug: actions: 0:canceling action: 0: SwerveTrackAngle
+254.0973:1: Debug: actions: 6:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+254.3222:1: Debug: actions: 6:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+254.3815:1: Debug: actions: 1:completing action: 1: IntakeShootAction
+254.3849:1: Debug: actions: 4:canceling action: MCTrackPosAction (intake-updown) target=118.0
+254.3861:1: Debug: actions: 5:canceling action: MCTrackPosAction (intake-tilt) target=-63.51436817496027
+254.3865:1: Debug: actions: 2:canceling action: 2: MCVelocityAction (intake-shooter1), target = 70.0
+254.3880:1: Debug: actions: 3:canceling action: 3: MCVelocityAction (intake-shooter2), target = 70.0
+254.3883:1: Debug: actions: 35:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+254.3887:1: Debug: actions: 36:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+254.3910:1: Debug: actions: 37:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+254.4082:1: Debug: actions: 248:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+254.4095:1: Debug: actions: 36:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+254.4784:1: Debug: actions: 37:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+254.4974:1: Debug: actions: 35:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+271.5763:1: Debug: actions: 118:starting action: StartCollectAction
+271.5768:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.5
+271.5771:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.5
+271.5781:1: Debug: actions: 256:starting action: MCMotionMagicAction (intake-tilt) target=-64.9864936 posthresh=3.0 velthresh=1.0
+271.5982:1: Debug: actions: 256:completing action: MCMotionMagicAction (intake-tilt) target=-64.9864936 posthresh=3.0 velthresh=1.0
+271.6155:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+271.6174:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+273.1770:1: Debug: actions: 128:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+273.1967:1: Debug: actions: 127:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+277.4156:1: Debug: actions: 126:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+277.4159:1: Debug: actions: 126:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+277.4241:1: Debug: actions: 119:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+277.4252:1: Debug: actions: 120:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+277.4323:1: Debug: actions: 121:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+278.8365:1: Debug: actions: 121:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=3.0 velthresh=1.0
+279.0974:1: Debug: actions: 120:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+279.1197:1: Debug: actions: 119:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -50.0
+279.1360:1: Debug: actions: 118:completing action: StartCollectAction
+279.1379:1: Debug: actions: 1:starting action: 1: IntakeShootAction
+279.1381:1: Debug: actions: 4:starting action: MCTrackPosAction (intake-updown) target=118.0
+279.1402:1: Debug: actions: 5:starting action: MCTrackPosAction (intake-tilt) target=-63.51436817496027
+279.1414:1: Debug: actions: 2:starting action: 2: MCVelocityAction (intake-shooter1), target = 70.0
+279.1429:1: Debug: actions: 3:starting action: 3: MCVelocityAction (intake-shooter2), target = 70.0
+289.1611:1: Debug: actions: 248:canceling action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: -0.00 m/s, Omega: 0.00 rad/s))
+289.1614:1: Debug: actions: 0:starting action: 0: SwerveTrackAngle
+291.3977:1: Debug: actions: 0:canceling action: 0: SwerveTrackAngle
+291.3981:1: Debug: actions: 6:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+291.5994:1: Debug: actions: 6:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+291.6177:1: Debug: actions: 1:completing action: 1: IntakeShootAction
+291.6193:1: Debug: actions: 4:canceling action: MCTrackPosAction (intake-updown) target=118.0
+291.6198:1: Debug: actions: 5:canceling action: MCTrackPosAction (intake-tilt) target=-63.76042661923837
+291.6201:1: Debug: actions: 2:canceling action: 2: MCVelocityAction (intake-shooter1), target = 70.0
+291.6203:1: Debug: actions: 3:canceling action: 3: MCVelocityAction (intake-shooter2), target = 70.0
+291.6205:1: Debug: actions: 35:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+291.6208:1: Debug: actions: 36:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+291.6222:1: Debug: actions: 37:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+291.6412:1: Debug: actions: 248:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+291.6428:1: Debug: actions: 36:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+291.7650:1: Debug: actions: 37:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+291.7776:1: Debug: actions: 35:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+317.8781:1: Debug: actions: 248:canceling action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: -0.00 m/s, Vy: 0.00 m/s, Omega: 0.53 rad/s))
+317.8790:1: Debug: actions: 249:starting action: SwerveDriveXPatternAction
+317.8950:1: Debug: actions: 249:canceling action: SwerveDriveXPatternAction
+317.8973:1: Debug: actions: 248:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+328.0174:1: Debug: actions: 50:starting action: AmpTrapPositionAction, angle=180.0, height 0.2411
+328.0183:1: Debug: actions: 55:starting action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.1 velthresh=0.05
+328.0332:1: Debug: actions: 52:starting action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+328.3380:1: Debug: actions: 52:completing action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+328.4771:1: Debug: actions: 54:starting action: MCMotionMagicAction (arm) target=180.0 posthresh=5.0 velthresh=1.0
+328.9189:1: Debug: actions: 55:completing action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.1 velthresh=0.05
+330.4372:1: Debug: actions: 54:completing action: MCMotionMagicAction (arm) target=180.0 posthresh=5.0 velthresh=1.0
+330.4582:1: Debug: actions: 50:completing action: AmpTrapPositionAction, angle=180.0, height 0.2411
+330.4596:1: Debug: actions: 94:starting action: ClimbAction HooksUp, target = 0.5746
+332.8583:1: Debug: actions: 94:completing action: ClimbAction HooksUp, target = 0.5746

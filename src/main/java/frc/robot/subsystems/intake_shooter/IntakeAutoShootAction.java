@@ -61,7 +61,6 @@ public class IntakeAutoShootAction extends Action {
 
     private String strategy_ ;
 
-    private double accel_threshold_ ;
     private double rotational_velocity_threshold_ ;
 
     private SwerveTrackAngle rotate_ ;
@@ -116,7 +115,6 @@ public class IntakeAutoShootAction extends Action {
         
         tilt_stow_value_ = sub_.getTilt().getSettingsValue("targets:stow").getDouble() ;
         aim_threshold_ = sub_.getSettingsValue("actions:auto-shoot:aim-threshold").getDouble() ;
-        accel_threshold_ = sub_.getSettingsValue("actions:auto-shoot:gyro-accel-threshold").getDouble() ;
         rotational_velocity_threshold_ = sub_.getSettingsValue("actions:auto-shoot:rotational-velocity-threshold").getDouble() ;
 
         double velthresh = sub_.getSettingsValue("actions:auto-shoot:shooter-velocity-threshold").getDouble() ;
@@ -125,7 +123,7 @@ public class IntakeAutoShootAction extends Action {
         double tilt_pos_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-pos-threshold").getDouble() ;
         double tilt_vel_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-velocity-threshold").getDouble() ;
 
-        wait_timer_ = new XeroTimer(intake.getRobot(), "wait-timer", 0.4);
+        wait_timer_ = new XeroTimer(intake.getRobot(), "wait-timer", 0.1);
 
         if (RobotBase.isSimulation()) {
             velthresh = 10.0 ;  
@@ -187,22 +185,28 @@ public class IntakeAutoShootAction extends Action {
     public void start() throws Exception {
         super.start();
 
-        offset_set_ = false ;
-        shooting_ = false ;
-        waiting_ = false ;
-        drive_team_ready_ = initial_drive_team_ready_ ;
-        db_ready_ = false ;
-
-        sub_.getUpDown().setAction(updown_, true);
-        sub_.getTilt().setAction(tilt_, true);
-        sub_.getShooter1().setAction(shooter1_, true);
-        sub_.getShooter2().setAction(shooter2_, true);
-
-        if (plot_id_ != -1) {
-            start_time_ = sub_.getRobot().getTime() ;
-            sub_.startPlot(plot_id_, columns_) ;
+        if (!sub_.isHoldingNote()) {
+            MessageLogger logger = sub_.getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Error).add("ManualShootAction started with no note in intake").endMessage();
+            setDone() ;
         }
+        else {        
+            offset_set_ = false ;
+            shooting_ = false ;
+            waiting_ = false ;
+            drive_team_ready_ = initial_drive_team_ready_ ;
+            db_ready_ = false ;
 
+            sub_.getUpDown().setAction(updown_, true);
+            sub_.getTilt().setAction(tilt_, true);
+            sub_.getShooter1().setAction(shooter1_, true);
+            sub_.getShooter2().setAction(shooter2_, true);
+
+            if (plot_id_ != -1) {
+                start_time_ = sub_.getRobot().getTime() ;
+                sub_.startPlot(plot_id_, columns_) ;
+            }
+        }
     }
 
     private boolean aprilTagTest() {
@@ -319,17 +323,12 @@ public class IntakeAutoShootAction extends Action {
         AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;
 
         swerve_stopped_ = robot.getSwerve().isStopped() ;
-        gyro_stopped_ =     Math.abs(gyro.getRate()) < rotational_velocity_threshold_ && 
-                            Math.abs(gyro.getAccelX()) < accel_threshold_ && 
-                            Math.abs(gyro.getAccelY()) < accel_threshold_ ; 
+        gyro_stopped_ =     Math.abs(gyro.getRate()) < rotational_velocity_threshold_ ;
 
         MessageLogger logger = robot.getRobot().getMessageLogger() ;
         logger.startMessage(MessageType.Info).add("gyroinfo");
         logger.add("rate", gyro.getRate()) ;
         logger.add("ratelimit", rotational_velocity_threshold_) ;
-        logger.add("ax", gyro.getAccelX()) ;
-        logger.add("ay", gyro.getAccelY()) ;
-        logger.add("alimit", accel_threshold_) ;
         logger.endMessage();
 
         return  db_ready_ && swerve_stopped_ && gyro_stopped_ ;
@@ -369,6 +368,6 @@ public class IntakeAutoShootAction extends Action {
 
     @Override
     public String toString(int indent) {
-        return prefix(indent) + "IntakeShootAction";
+        return prefix(indent) + "IntakeAutoShootAction";
     }
 }

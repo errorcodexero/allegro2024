@@ -94,6 +94,9 @@ public class SwerveModule {
         addDashBoardEntries(container);
     }
 
+    //
+    // Converts ticks to an angle between 0 and 2 * PI radians
+    //
     public double ticks2Angle(double ticks) {
         double angle = ticks * ticksToRadians_ ;
         angle %= 2.0 * Math.PI ;
@@ -166,12 +169,12 @@ public class SwerveModule {
         return target_angle_ ;
     }
 
-    public void set(double voltage, double angle) throws BadMotorRequestException, MotorRequestFailedException {
+    public void set(int which, double voltage, double angle) throws BadMotorRequestException, MotorRequestFailedException {
 
-        angle %= 2.0 * Math.PI ;
+        angle %= (2.0 * Math.PI) ;
         if (angle < 0.0) {
             angle += 2.0 * Math.PI ;
-        }    
+        }       
 
         double diff = angle - getStateAngle() ;
         if (diff >= Math.PI) {
@@ -180,8 +183,7 @@ public class SwerveModule {
         else if (diff < -Math.PI) {
             angle += 2.0 * Math.PI ;
         }
-        diff = angle - getStateAngle() ;          
-
+        diff = angle - getStateAngle() ;
         if (diff > Math.PI / 2.0 || diff < -Math.PI / 2.0) {
             angle += Math.PI ;
             voltage *= -1.0 ;
@@ -192,9 +194,28 @@ public class SwerveModule {
             angle += 2.0 * Math.PI ;
         }
 
-        target_angle_ = angle ;
-        steer_.set(XeroPidType.Position, angle / ticksToRadians_);
+        setSteerAngle(which, angle);
         drive_.set(XeroPidType.Power, voltage) ;
+    }
+
+    private void setSteerAngle(int which, double angle) throws BadMotorRequestException, MotorRequestFailedException {
+        double current = getStateAngle() ;
+
+        double currentmod = current % (2.0 * Math.PI) ;
+        if (currentmod < 0.0) {
+            currentmod += 2.0 * Math.PI ;
+        }
+
+        double adj = angle + current - currentmod ;
+        if (angle - currentmod > Math.PI) {
+            adj -= 2.0 * Math.PI ;
+        }
+        else if (angle - currentmod < -Math.PI) {
+            adj += 2.0 * Math.PI ;
+        }
+
+        target_angle_ = angle ;
+        steer_.set(XeroPidType.Position, adj / ticksToRadians_);        
     }
 
     /// \brief Return the absolute encoder angle in radians

@@ -31,8 +31,8 @@ public class StartCollectAltAction extends CollectBaseAltAction {
     private MotorEncoderPowerAction spinner_feeder_on_ ;
     private MotorEncoderPowerAction spinner_feeder_off_ ;
 
-    public StartCollectAltAction(IntakeShooterSubsystem sub) throws Exception {
-        super(sub) ;
+    public StartCollectAltAction(IntakeShooterSubsystem sub, double stowupdown, double stowtilt) throws Exception {
+        super(sub, stowupdown, stowtilt) ;
 
         feeder_power_ = sub.getSettingsValue("actions:butch-start-collect:feeder-power").getDouble() ;
 
@@ -41,12 +41,17 @@ public class StartCollectAltAction extends CollectBaseAltAction {
 
         updown_target_ = sub.getUpDown().getSettingsValue("targets:collect").getDouble() ;
         tilt_target_ = sub.getTilt().getSettingsValue("targets:collect").getDouble() ;
+
         updown_action_ = new MCMotionMagicAction(sub.getUpDown(), "pids:position" , updown_target_, 3.0 , 1);
         tilt_action_ = new MCMotionMagicAction(sub.getTilt(), "pids:position" , tilt_target_, 3.0 , 1);
 
         double t = sub.getSettingsValue("actions:butch-start-collect:delay-time").getDouble() ;
         timer_ = new XeroTimer(sub.getRobot(), "collect-timer", t) ;
         state_ = CollectState.Idle ;
+    }
+
+    public StartCollectAltAction(IntakeShooterSubsystem sub) throws Exception {
+        this(sub, Double.NaN, Double.NaN) ;
     }
 
     public boolean isCollectingNote() {

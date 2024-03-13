@@ -1,0 +1,327 @@
+001.1775:1: Info: global: ============================================================
+001.1938:1: Info: global: robot code starting
+001.1945:1: Info: global:  SerialNumber = '03223856'
+001.2393:1: Info: global:  enableMessageLogger time = 0.2660
+001.2399:1: Info: global: ============================================================
+001.2450:1: Info: global: reading params for bot 'COMPETITION'
+001.2461:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.4260:1: Info: global:  readParamsFile time = 0.1853
+001.4654:1: Info: global:  enableMessagesFromSettingsFile time = 0.001929
+001.9618:1: Info: global:  loadPathsFiles time = 0.4955
+004.2709:1: Info: global: initializing robot - no FMS
+004.3388:1: Info: global:  plotMgrInit time = 0.0002410
+005.0071:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.0.3', no faults
+005.1713:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.0.3', no faults
+005.2986:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.0.3', no faults
+005.4148:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.0.3', no faults
+005.5344:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.0.3', no faults
+005.6909:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.0.3', no faults
+005.8213:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.0.3', no faults
+005.9721:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+006.1028:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.0.3', no faults
+006.5154:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.0.3', no faults
+006.6561:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.0.3', no faults
+006.8339:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.0.3', no faults
+006.9499:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.0700:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.1831:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.2960:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.4129:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.0.3', no faults
+007.6152:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+007.6373:1: Info: global:  hardwareInit time = 3.298
+007.7270:1: Info: global: Changed vision parameters to Single Near
+007.8519:1: Info: global:  computeInitalState time = 0.2134
+008.0432:1: Info: global:  postHWInit time = 0.1901
+008.0698:1: Info: global: changing robot loop type: Initialization -> Disabled
+034.6731:1: Info: global: alliance changed:null -> Red: recreated auto modes for new alliance value
+035.0475:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+035.0510:1: Info: global: Gamepad discovered
+083.6721:1: Info: global: Entering Autonomous Mode
+083.6727:1: Info: global:     Automode Number: 4
+083.6730:1: Info: global:     Automode Name: Allegro-Test-Mode
+083.6755:1: Info: global:     TestMode: 42, mode parameters: velocity=[Integer 65]
+083.6760:1: Info: global:     Alliance: RED
+083.6763:1: Info: global:     Location: 2
+083.6766:1: Info: global:     GameData: ''
+083.6770:1: Info: global:     EventName: 
+083.6820:1: Info: global:     MatchType: NONE
+083.6824:1: Info: global:     MatchNumber: 0
+083.6834:1: Info: global:     MatchTime: -1.0000
+083.6839:1: Info: global:     FMS Attached: NO
+083.6941:1: Info: global: changing robot loop type: Disabled -> Autonomous
+083.7622:1: Debug: actions: 139:starting action: 
+                   actions: 139: Sequence [
+                   actions:     141: DispatchAction, intake-shooter2, BLOCKING  [
+                   actions:         140: MCVelocityAction (intake-shooter2), target = 65.0
+                   actions:     ]
+                   actions: ]
+083.7655:1: Debug: actions: 141:starting action: 
+                   actions: 141: DispatchAction, intake-shooter2, BLOCKING  [
+                   actions:     140: MCVelocityAction (intake-shooter2), target = 65.0
+                   actions: ]
+083.7665:1: Debug: actions: 140:starting action: 140: MCVelocityAction (intake-shooter2), target = 65.0
+087.3930:1: Info: global: changing robot loop type: Autonomous -> Disabled
+087.3936:1: Info: global: Motor Faults Report
+087.3938:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+087.4143:1: Info: global: intake-updown:rio-2:NONE
+087.4365:1: Info: global: intake-feeder:rio-1:NONE
+087.4670:1: Info: global: intake-tilt:rio-5:NONE
+087.4862:1: Info: global: intake-shooter1:rio-3:NONE
+087.5050:1: Info: global: intake-shooter2:rio-4:NONE
+087.5231:1: Info: global: elevator:rio-6:NONE
+087.5415:1: Info: global: arm:rio-7:NONE
+087.5425:1: Info: global: manipulator:rio-9:NONE
+087.5595:1: Info: global: climber:rio-10:NONE
+087.5788:1: Info: global: fl-steer:DriveBase-11:NONE
+087.5986:1: Info: global: fl-drive:DriveBase-12:NONE
+087.6169:1: Info: global: fr-steer:DriveBase-21:NONE
+087.6363:1: Info: global: fr-drive:DriveBase-22:NONE
+087.6638:1: Info: global: bl-steer:DriveBase-41:NONE
+087.6896:1: Info: global: bl-drive:DriveBase-42:NONE
+087.7130:1: Info: global: br-steer:DriveBase-31:NONE
+087.7422:1: Info: global: br-drive:DriveBase-32:NONE
+087.7431:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+097.4721:1: Info: global: Entering Autonomous Mode
+097.4725:1: Info: global:     Automode Number: 4
+097.4728:1: Info: global:     Automode Name: JustShoot
+097.4731:1: Info: global:     Alliance: RED
+097.4734:1: Info: global:     Location: 3
+097.4739:1: Info: global:     GameData: ''
+097.4741:1: Info: global:     EventName: 
+097.4743:1: Info: global:     MatchType: NONE
+097.4745:1: Info: global:     MatchNumber: 0
+097.4754:1: Info: global:     MatchTime: -1.0000
+097.4756:1: Info: global:     FMS Attached: NO
+097.4760:1: Info: global: changing robot loop type: Disabled -> Autonomous
+097.5260:1: Debug: actions: 248:starting action: 
+                   actions: 248: Sequence [
+                   actions:     250: DispatchAction, swerve, NONBLOCKING  [
+                   actions:         249: SwerveTrackAngle
+                   actions:     ],
+                   actions:     257: DispatchAction, intake-shooter, BLOCKING  [
+                   actions:         251: IntakeShootAction
+                   actions:     ]
+                   actions: ]
+097.5282:1: Debug: actions: 250:starting action: 
+                   actions: 250: DispatchAction, swerve, NONBLOCKING  [
+                   actions:     249: SwerveTrackAngle
+                   actions: ]
+097.5295:1: Debug: actions: 249:starting action: 249: SwerveTrackAngle
+097.5310:1: Debug: actions: 250:completing action: 
+                   actions: 250: DispatchAction, swerve, NONBLOCKING  [
+                   actions:     249: SwerveTrackAngle
+                   actions: ]
+097.5327:1: Debug: actions: 257:starting action: 
+                   actions: 257: DispatchAction, intake-shooter, BLOCKING  [
+                   actions:     251: IntakeShootAction
+                   actions: ]
+097.5382:1: Debug: actions: 140:canceling action: 140: MCVelocityAction (intake-shooter2), target = 65.0
+097.5395:1: Debug: actions: 251:starting action: 251: IntakeShootAction
+097.5427:1: Debug: actions: 254:starting action: MCTrackPosAction (intake-updown) target=123.5
+097.5653:1: Debug: actions: 255:starting action: MCTrackPosAction (intake-tilt) target=-40.0
+097.5818:1: Debug: actions: 252:starting action: 252: MCVelocityAction (intake-shooter1), target = 45.0
+097.5919:1: Debug: actions: 253:starting action: 253: MCVelocityAction (intake-shooter2), target = 45.0
+097.6102:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.6159:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000 ax = 0.02899 ay = -0.01288 alimit = 0.05000
+097.6172:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = false swerve_stopped = true gyro_stopped = true
+097.6539:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.7171:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.7218:1: Info: global: gyroinfo rate = 0.01172 ratelimit = 5.000 ax = 0.001404 ay = -0.02777 alimit = 0.05000
+097.7227:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.7246:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.7370:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.7395:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000 ax = 0.01605 ay = -0.003113 alimit = 0.05000
+097.7409:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.7429:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.7555:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.7586:1: Info: global: gyroinfo rate = -0.1211 ratelimit = 5.000 ax = 0.04242 ay = 0.002686 alimit = 0.05000
+097.7594:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.7616:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.7733:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.7767:1: Info: global: gyroinfo rate = 0.3086 ratelimit = 5.000 ax = 0.02411 ay = -0.03510 alimit = 0.05000
+097.7775:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.7796:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.7924:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.7954:1: Info: global: gyroinfo rate = -0.1406 ratelimit = 5.000 ax = -0.004395 ay = 0.01245 alimit = 0.05000
+097.7960:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.7976:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.8113:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.8143:1: Info: global: gyroinfo rate = -0.1055 ratelimit = 5.000 ax = 0.02191 ay = -0.02606 alimit = 0.05000
+097.8153:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.8169:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.8297:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.8328:1: Info: global: gyroinfo rate = 0.1445 ratelimit = 5.000 ax = 0.02557 ay = -0.008240 alimit = 0.05000
+097.8386:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.8417:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.8562:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.8604:1: Info: global: gyroinfo rate = -0.07813 ratelimit = 5.000 ax = 0.01117 ay = 0.004883 alimit = 0.05000
+097.8612:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.8628:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.8740:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.8770:1: Info: global: gyroinfo rate = -0.06641 ratelimit = 5.000 ax = 0.04120 ay = -0.03363 alimit = 0.05000
+097.8776:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.8797:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.8909:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.8934:1: Info: global: gyroinfo rate = -0.003906 ratelimit = 5.000 ax = 0.03656 ay = -0.01971 alimit = 0.05000
+097.8943:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.8958:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.9071:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.9115:1: Info: global: gyroinfo rate = 0.04297 ratelimit = 5.000 ax = -0.01880 ay = -0.02753 alimit = 0.05000
+097.9124:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.9144:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.9266:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.9298:1: Info: global: gyroinfo rate = -0.06641 ratelimit = 5.000 ax = 0.03168 ay = -0.02094 alimit = 0.05000
+097.9308:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.9326:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.9448:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.9471:1: Info: global: gyroinfo rate = 0.03516 ratelimit = 5.000 ax = 0.0004272 ay = -0.02289 alimit = 0.05000
+097.9477:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.9495:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.9634:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.9663:1: Info: global: gyroinfo rate = 0.01563 ratelimit = 5.000 ax = 0.02484 ay = 0.003662 alimit = 0.05000
+097.9670:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+097.9685:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.9808:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.9835:1: Info: global: gyroinfo rate = 0.08984 ratelimit = 5.000 ax = 0.01581 ay = -0.05219 alimit = 0.05000
+097.9843:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+097.9859:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+097.9970:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+097.9999:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000 ax = 0.001892 ay = -0.04291 alimit = 0.05000
+098.0012:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.0029:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.0166:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.0196:1: Info: global: gyroinfo rate = -0.1602 ratelimit = 5.000 ax = 0.04950 ay = 0.003174 alimit = 0.05000
+098.0207:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.0223:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.0366:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.0396:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000 ax = 0.03021 ay = 0.003174 alimit = 0.05000
+098.0408:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.0426:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.0556:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.0586:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000 ax = 0.000 ay = -0.001160 alimit = 0.05000
+098.0595:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = false april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.0617:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.0734:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.0759:1: Info: global: gyroinfo rate = -0.03516 ratelimit = 5.000 ax = -0.001953 ay = -0.005066 alimit = 0.05000
+098.0770:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.0787:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.0907:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.0938:1: Info: global: gyroinfo rate = -0.1680 ratelimit = 5.000 ax = 0.03900 ay = -0.01483 alimit = 0.05000
+098.0947:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.0966:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.1113:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.1137:1: Info: global: gyroinfo rate = 0.05859 ratelimit = 5.000 ax = 0.04926 ay = -0.02753 alimit = 0.05000
+098.1144:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.1159:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.1277:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.1304:1: Info: global: gyroinfo rate = 0.01172 ratelimit = 5.000 ax = -0.007813 ay = -0.003357 alimit = 0.05000
+098.1313:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.1332:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.1465:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.1512:1: Info: global: gyroinfo rate = -0.09766 ratelimit = 5.000 ax = -0.005859 ay = -0.03143 alimit = 0.05000
+098.1520:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.1555:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.1766:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.1792:1: Info: global: gyroinfo rate = -0.1133 ratelimit = 5.000 ax = 0.003113 ay = 0.01294 alimit = 0.05000
+098.1805:1: Debug: intake-shooter:  updown = false tilt = true shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.1823:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.1923:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.1949:1: Info: global: gyroinfo rate = 0.05078 ratelimit = 5.000 ax = 0.04584 ay = 0.02197 alimit = 0.05000
+098.1965:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.1987:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.2097:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.2126:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000 ax = 0.01459 ay = -0.03510 alimit = 0.05000
+098.2135:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.2149:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.2257:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.2280:1: Info: global: gyroinfo rate = 0.1797 ratelimit = 5.000 ax = -0.01294 ay = -0.03949 alimit = 0.05000
+098.2288:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.2304:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.2494:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.2519:1: Info: global: gyroinfo rate = -0.07031 ratelimit = 5.000 ax = 0.04364 ay = -0.04095 alimit = 0.05000
+098.2525:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.2544:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.2668:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.2702:1: Info: global: gyroinfo rate = -0.007813 ratelimit = 5.000 ax = 0.01190 ay = -0.07245 alimit = 0.05000
+098.2711:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = false
+098.2726:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.2846:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.2869:1: Info: global: gyroinfo rate = -0.01172 ratelimit = 5.000 ax = -0.02197 ay = -0.04364 alimit = 0.05000
+098.2875:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.2895:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.3018:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.3054:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000 ax = 0.01874 ay = -0.003113 alimit = 0.05000
+098.3061:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.3073:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.3185:1: Debug: intake-shooter: shooting distance = 1.520 updown = 100.0 tilt = -60.00 velocity = 65.00
+098.3219:1: Info: global: gyroinfo rate = -0.1953 ratelimit = 5.000 ax = 0.02557 ay = -0.01654 alimit = 0.05000
+098.3226:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = true shooter2 = true april = true driveteam = true dbready = true swerve_stopped = true gyro_stopped = true
+098.3250:1: Info: global: gyroinfo rate = -0.1953 ratelimit = 5.000 ax = 0.02557 ay = -0.01654 alimit = 0.05000
+098.3264:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.3399:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.3526:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.3655:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.3802:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.3915:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.4054:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.4178:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.4295:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.4429:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.4555:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.4667:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.4783:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.4901:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.5027:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.5142:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.5266:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.5386:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.5554:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.5676:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.5822:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.5996:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.6121:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.6246:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.6349:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.6510:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.6650:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.6800:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.7012:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.7209:1: Debug: swerve:  err = 0.000 postel = 5.000 isAt = true
+098.7400:1: Debug: actions: 249:canceling action: 249: SwerveTrackAngle
+098.7421:1: Debug: actions: 256:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+098.9606:1: Debug: actions: 256:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.2
+098.9783:1: Debug: actions: 251:completing action: 251: IntakeShootAction
+098.9948:1: Debug: actions: 257:completing action: 
+                   actions: 257: DispatchAction, intake-shooter, BLOCKING  [
+                   actions:     251: IntakeShootAction
+                   actions: ]
+098.9961:1: Debug: actions: 248:completing action: 
+                   actions: 248: Sequence [
+                   actions:     250: DispatchAction, swerve, NONBLOCKING  [
+                   actions:         249: SwerveTrackAngle
+                   actions:     ],
+                   actions:     257: DispatchAction, intake-shooter, BLOCKING  [
+                   actions:         251: IntakeShootAction
+                   actions:     ]
+                   actions: ]
+101.9929:1: Info: global: changing robot loop type: Autonomous -> Disabled
+101.9934:1: Info: global: Motor Faults Report
+101.9937:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+102.0139:1: Info: global: intake-updown:rio-2:NONE
+102.0464:1: Info: global: intake-feeder:rio-1:NONE
+102.0720:1: Info: global: intake-tilt:rio-5:NONE
+102.0946:1: Info: global: intake-shooter1:rio-3:NONE
+102.1270:1: Info: global: intake-shooter2:rio-4:NONE
+102.1500:1: Info: global: elevator:rio-6:NONE
+102.1757:1: Info: global: arm:rio-7:NONE
+102.1764:1: Info: global: manipulator:rio-9:NONE
+102.1987:1: Info: global: climber:rio-10:NONE
+102.2335:1: Info: global: fl-steer:DriveBase-11:NONE
+102.2559:1: Info: global: fl-drive:DriveBase-12:NONE
+102.2791:1: Info: global: fr-steer:DriveBase-21:NONE
+102.3041:1: Info: global: fr-drive:DriveBase-22:NONE
+102.3267:1: Info: global: bl-steer:DriveBase-41:NONE
+102.3510:1: Info: global: bl-drive:DriveBase-42:NONE
+102.3823:1: Info: global: br-steer:DriveBase-31:NONE
+102.4048:1: Info: global: br-drive:DriveBase-32:NONE
+102.4051:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

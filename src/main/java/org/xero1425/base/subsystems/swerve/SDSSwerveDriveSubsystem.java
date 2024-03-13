@@ -254,10 +254,10 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
                 modules_[BR].hw.setNeutralMode(XeroNeutralMode.Coast);      
                 coast_mode_ = true ;                              
 
-                modules_[FL].hw.set(0.0, modules_[FL].hw.getStateAngle());
-                modules_[FR].hw.set(0.0, modules_[FR].hw.getStateAngle());
-                modules_[BL].hw.set(0.0, modules_[BL].hw.getStateAngle());
-                modules_[BR].hw.set(0.0, modules_[BR].hw.getStateAngle());
+                modules_[FL].hw.set(FL, 0.0, modules_[FL].hw.getStateAngle());
+                modules_[FR].hw.set(FR, 0.0, modules_[FR].hw.getStateAngle());
+                modules_[BL].hw.set(BL, 0.0, modules_[BL].hw.getStateAngle());
+                modules_[BR].hw.set(BR, 0.0, modules_[BR].hw.getStateAngle());
 
                 disabled_init_ = true ;
             }
@@ -304,10 +304,6 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
 
         if (mode_ == Mode.Chassis) {
 
-            if (Math.abs(chassis_speed_.omegaRadiansPerSecond) < kOneDegreeInRadians) {
-                chassis_speed_.omegaRadiansPerSecond = 0.0 ;
-            }
-
             // Convert chassis speeds to module speeds and angles
             SwerveModuleState[] states = getKinematics().toSwerveModuleStates(chassis_speed_);
             
@@ -318,7 +314,7 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
             angles_[BL] = states[BL].angle.getDegrees() ;
             speeds_[BL] = states[BL].speedMetersPerSecond ;
             angles_[BR] = states[BR].angle.getDegrees() ;
-            speeds_[BR] = states[BR].speedMetersPerSecond ;   
+            speeds_[BR] = states[BR].speedMetersPerSecond ;
         }
 
         if (mode_ == Mode.Chassis || mode_ == Mode.RawSpeed)
@@ -330,10 +326,10 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         }
 
         if (allModulesSynchronized()) {            
-            modules_[FL].hw.set(powers_[FL], Math.toRadians(angles_[FL])) ;
-            modules_[FR].hw.set(powers_[FR], Math.toRadians(angles_[FR])) ;
-            modules_[BL].hw.set(powers_[BL], Math.toRadians(angles_[BL])) ;
-            modules_[BR].hw.set(powers_[BR], Math.toRadians(angles_[BR])) ;
+            modules_[FL].hw.set(FL, powers_[FL], Math.toRadians(angles_[FL])) ;
+            modules_[FR].hw.set(FR, powers_[FR], Math.toRadians(angles_[FR])) ;
+            modules_[BL].hw.set(BL, powers_[BL], Math.toRadians(angles_[BL])) ;
+            modules_[BR].hw.set(BR, powers_[BR], Math.toRadians(angles_[BR])) ;
 
             history_[FL].addData(powers_[FL]);
             history_[FR].addData(powers_[FR]);

@@ -62,6 +62,12 @@ public class MotorGroupController extends MotorController
         return faults ;
     }
 
+    public void clearStickyFaults() throws BadMotorRequestException, MotorRequestFailedException {
+        for(IMotorController motor: motors_) {
+            motor.clearStickyFaults() ;
+        }
+    }    
+
     public Object getNativeController() throws BadMotorRequestException, MotorRequestFailedException {
         if (motors_.size() == 0)
             throw new BadMotorRequestException(this, "request made to empty MotorGroupController") ;

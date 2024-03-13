@@ -50,6 +50,9 @@ public interface IMotorController {
     /// \returns list of faults detected by the motor controller
     public List<String> getFaults() throws BadMotorRequestException, MotorRequestFailedException ;
 
+    /// \brief clear sticky faults detected by the motor controller
+    public void clearStickyFaults() throws BadMotorRequestException, MotorRequestFailedException ;
+
     /// \Brief Return the native motor controller for this controller.  This is used like
     /// TalonFX fx = (TalonFX)ctrl.getNativeController() ;
     /// This will return null if the motor controller is not a talon FX, or it will return the controller if it is

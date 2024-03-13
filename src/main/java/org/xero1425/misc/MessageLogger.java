@@ -668,5 +668,4 @@ public final class MessageLogger
         public StringBuilder message_ ;
         public int serial_ ;
     } ;
-
 }

@@ -1,0 +1,212 @@
+001.3737:1: Info: global: ============================================================
+001.3971:1: Info: global: robot code starting
+001.3979:1: Info: global:  SerialNumber = '03223856'
+001.4545:1: Info: global:  enableMessageLogger time = 0.3524
+001.4550:1: Info: global: ============================================================
+001.4598:1: Info: global: reading params for bot 'COMPETITION'
+001.4608:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.6579:1: Info: global:  readParamsFile time = 0.2019
+001.7071:1: Info: global:  enableMessagesFromSettingsFile time = 0.001892
+002.2946:1: Info: global:  loadPathsFiles time = 0.5866
+005.5560:1: Info: global: initializing robot - no FMS
+005.6212:1: Info: global:  plotMgrInit time = 0.0002040
+006.5248:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.0.3', no faults
+006.7980:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.0.3', no faults
+006.9500:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.0.3', no faults
+007.1260:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.0.3', no faults
+007.2933:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.0.3', no faults
+007.5169:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.0.3', no faults
+007.6775:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.0.3', no faults
+007.8806:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+008.0228:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.0.3', no faults
+008.5281:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.6701:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.8581:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.0.3', no faults
+008.9844:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.0.3', no faults
+009.1103:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.0.3', no faults
+009.2262:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.0.3', no faults
+009.3544:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.0.3', no faults
+009.4801:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.0.3', no faults
+009.7103:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+009.7350:1: Info: global:  hardwareInit time = 4.113
+009.8417:1: Info: global: Changed vision parameters to Single Near
+009.9905:1: Info: global:  computeInitalState time = 0.2545
+010.1993:1: Info: global:  postHWInit time = 0.2072
+010.2375:1: Info: global: changing robot loop type: Initialization -> Disabled
+010.2397:1: Info: global: alliance changed:null -> Blue: recreated auto modes for new alliance value
+010.4562:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+010.4583:1: Info: global: Gamepad discovered
+014.5890:1: Info: global: Entering Autonomous Mode
+014.5897:1: Info: global:     Automode Number: 3
+014.5901:1: Info: global:     Automode Name: Line
+014.5905:1: Info: global:     Alliance: BLUE
+014.5908:1: Info: global:     Location: 3
+014.5911:1: Info: global:     GameData: ''
+014.5915:1: Info: global:     EventName: 
+014.5956:1: Info: global:     MatchType: NONE
+014.5961:1: Info: global:     MatchNumber: 0
+014.5973:1: Info: global:     MatchTime: -1.0000
+014.5978:1: Info: global:     FMS Attached: NO
+014.5989:1: Info: global: changing robot loop type: Disabled -> Autonomous
+014.6607:1: Debug: actions: 247:starting action: 
+                   actions: 247: Sequence [
+                   actions:     249: DispatchAction, swerve, BLOCKING  [
+                   actions:         SwerveHolonomicPathFollower Line-P1
+                   actions:     ]
+                   actions: ]
+014.6653:1: Debug: actions: 249:starting action: 
+                   actions: 249: DispatchAction, swerve, BLOCKING  [
+                   actions:     SwerveHolonomicPathFollower Line-P1
+                   actions: ]
+014.6665:1: Debug: actions: 248:starting action: SwerveHolonomicPathFollower Line-P1
+014.6703:1: Info: global:  SwerveHolonomicPathFollower: Initial Pose  = 0.592 2.170 0.0
+014.6814:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 0, target 0.5919 2.1699 0.0000,actual 0.5919 2.1699 0.0000
+014.7403:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 1, target 0.5951 2.1699 0.0000,actual 0.5919 2.1699 0.0055
+014.7523:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 2, target 0.5983 2.1699 0.0000,actual 0.5919 2.1699 0.0027
+014.7631:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 3, target 0.6015 2.1699 0.0000,actual 0.5919 2.1699 0.0027
+014.7753:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 4, target 0.6047 2.1699 0.0000,actual 0.5921 2.1698 0.0000
+014.7867:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 5, target 0.6079 2.1699 0.0000,actual 0.5925 2.1698 0.0000
+014.8026:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 6, target 0.6111 2.1699 0.0000,actual 0.5932 2.1697 -0.0027
+014.8177:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 7, target 0.6143 2.1699 0.0000,actual 0.5945 2.1693 0.0000
+014.8289:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 8, target 0.6176 2.1699 0.0000,actual 0.5964 2.1690 0.0027
+014.8396:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 9, target 0.6253 2.1699 0.0000,actual 0.5980 2.1687 0.0027
+014.8507:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 10, target 0.6330 2.1699 0.0000,actual 0.5996 2.1683 0.0055
+014.8621:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 11, target 0.6407 2.1699 0.0000,actual 0.6014 2.1679 0.0110
+014.8754:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 12, target 0.6501 2.1699 0.0000,actual 0.6047 2.1669 0.0137
+014.8898:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 13, target 0.6601 2.1699 0.0000,actual 0.6073 2.1663 0.0165
+014.9010:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 14, target 0.6705 2.1699 0.0000,actual 0.6118 2.1656 0.0220
+014.9119:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 15, target 0.6824 2.1699 0.0000,actual 0.6153 2.1648 0.0220
+014.9267:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 16, target 0.6944 2.1699 0.0000,actual 0.6211 2.1631 0.0192
+014.9375:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 17, target 0.7079 2.1699 0.0000,actual 0.6264 2.1621 0.0192
+014.9486:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 18, target 0.7217 2.1699 0.0000,actual 0.6358 2.1609 0.0192
+014.9578:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 19, target 0.7366 2.1699 0.0000,actual 0.6449 2.1595 0.0137
+014.9694:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 20, target 0.7522 2.1699 0.0000,actual 0.6558 2.1579 0.0110
+014.9805:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 21, target 0.7684 2.1698 0.0000,actual 0.6708 2.1556 0.0110
+014.9911:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 22, target 0.7857 2.1698 0.0000,actual 0.6834 2.1537 0.0082
+015.0061:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 23, target 0.8037 2.1698 0.0000,actual 0.6968 2.1518 0.0082
+015.0209:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 24, target 0.8224 2.1698 0.0000,actual 0.7178 2.1483 0.0082
+015.0322:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 25, target 0.8420 2.1698 0.0000,actual 0.7403 2.1457 0.0110
+015.0445:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 26, target 0.8625 2.1698 0.0000,actual 0.7594 2.1403 0.0137
+015.0562:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 27, target 0.8837 2.1697 0.0000,actual 0.7730 2.1344 0.0165
+015.0695:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 28, target 0.9057 2.1697 0.0000,actual 0.7946 2.1270 0.0220
+015.0800:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 29, target 0.9284 2.1697 0.0000,actual 0.8130 2.1203 0.0247
+015.0928:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 30, target 0.9520 2.1696 0.0000,actual 0.8277 2.1151 0.0247
+015.1103:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 31, target 0.9764 2.1696 0.0000,actual 0.8447 2.1053 0.0247
+015.1209:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 32, target 1.0016 2.1695 0.0000,actual 0.8752 2.0983 0.0247
+015.1328:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 33, target 1.0276 2.1694 0.0000,actual 0.8939 2.0875 0.0220
+015.1457:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 34, target 1.0544 2.1693 0.0000,actual 0.9112 2.0814 0.0220
+015.1566:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 35, target 1.0820 2.1692 0.0000,actual 0.9338 2.0729 0.0220
+015.1808:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 36, target 1.1104 2.1691 0.0000,actual 0.9656 2.0616 0.0247
+015.2021:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 37, target 1.1396 2.1690 0.0000,actual 1.0170 2.0452 0.0247
+015.2198:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 38, target 1.1696 2.1689 0.0000,actual 1.0460 2.0327 0.0247
+015.2327:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 39, target 1.2004 2.1687 0.0000,actual 1.0848 2.0237 0.0247
+015.2459:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 40, target 1.2320 2.1685 0.0000,actual 1.1074 2.0106 0.0247
+015.2587:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 41, target 1.2644 2.1683 0.0000,actual 1.1334 2.0024 0.0247
+015.2697:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 42, target 1.2976 2.1681 0.0000,actual 1.1597 1.9984 0.0247
+015.2914:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 43, target 1.3316 2.1678 0.0000,actual 1.1870 1.9932 0.0247
+015.3453:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 44, target 1.3664 2.1675 0.0000,actual 1.2357 1.9629 0.0302
+015.3572:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 45, target 1.4020 2.1672 0.0000,actual 1.2771 1.9872 0.0385
+015.3689:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 46, target 1.4384 2.1669 0.0000,actual 1.2979 2.0083 0.0439
+015.3789:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 47, target 1.4756 2.1665 0.0000,actual 1.3122 2.0278 0.0522
+015.3891:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 48, target 1.5136 2.1661 0.0000,actual 1.3267 2.0460 0.0522
+015.4005:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 49, target 1.5524 2.1656 0.0000,actual 1.3496 2.0611 0.0549
+015.4240:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 50, target 1.5919 2.1651 0.0000,actual 1.3920 2.0809 0.0439
+015.4334:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 51, target 1.6319 2.1646 0.0000,actual 1.4139 2.0861 0.0385
+015.4483:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 52, target 1.6719 2.1640 0.0000,actual 1.4364 2.0914 0.0357
+015.4590:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 53, target 1.7119 2.1634 0.0000,actual 1.4702 2.0917 0.0247
+015.4714:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 54, target 1.7519 2.1628 0.0000,actual 1.5013 2.1006 0.0247
+015.4815:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 55, target 1.7919 2.1622 0.0000,actual 1.5244 2.1064 0.0220
+015.4938:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 56, target 1.8319 2.1616 0.0000,actual 1.5514 2.1205 0.0220
+015.5124:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 57, target 1.8719 2.1610 0.0000,actual 1.6001 2.1295 0.0302
+015.5219:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 58, target 1.9119 2.1604 0.0000,actual 1.6253 2.1342 0.0357
+015.5335:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 59, target 1.9519 2.1598 0.0000,actual 1.6504 2.1387 0.0385
+015.5540:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 60, target 1.9919 2.1592 0.0000,actual 1.6737 2.1383 0.0412
+015.5708:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 61, target 2.0318 2.1586 0.0000,actual 1.7351 2.1333 0.0357
+015.5800:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 62, target 2.0718 2.1580 0.0000,actual 1.7593 2.1332 0.0302
+015.5903:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 63, target 2.1118 2.1575 0.0000,actual 1.7865 2.1349 0.0275
+015.5999:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 64, target 2.1512 2.1570 0.0000,actual 1.8154 2.1420 0.0192
+015.6135:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 65, target 2.1900 2.1566 0.0000,actual 1.8466 2.1530 0.0137
+015.6240:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 66, target 2.2278 2.1561 0.0000,actual 1.8902 2.1705 0.0082
+015.6350:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 67, target 2.2649 2.1557 0.0000,actual 1.9256 2.1858 0.0027
+015.6461:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 68, target 2.3012 2.1554 0.0000,actual 1.9612 2.2011 -0.0055
+015.6563:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 69, target 2.3367 2.1551 0.0000,actual 2.0008 2.2256 -0.0110
+015.6676:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 70, target 2.3714 2.1548 0.0000,actual 2.0355 2.2402 -0.0165
+015.6771:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 71, target 2.4053 2.1545 0.0000,actual 2.0795 2.2558 -0.0192
+015.6879:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 72, target 2.4384 2.1543 0.0000,actual 2.1128 2.2699 -0.0192
+015.6984:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 73, target 2.4707 2.1541 0.0000,actual 2.1457 2.2838 -0.0192
+015.7092:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 74, target 2.5022 2.1539 0.0000,actual 2.1783 2.2977 -0.0165
+015.7192:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 75, target 2.5328 2.1537 0.0000,actual 2.2202 2.3116 -0.0137
+015.7295:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 76, target 2.5627 2.1536 0.0000,actual 2.2521 2.3252 -0.0082
+015.7395:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 77, target 2.5918 2.1535 0.0000,actual 2.2836 2.3386 0.0000
+015.7510:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 78, target 2.6201 2.1534 0.0000,actual 2.3147 2.3487 0.0055
+015.7687:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 79, target 2.6477 2.1533 0.0000,actual 2.3577 2.3700 0.0082
+015.7786:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 80, target 2.6744 2.1532 0.0000,actual 2.3968 2.3777 0.0110
+015.7891:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 81, target 2.7003 2.1531 0.0000,actual 2.4267 2.3874 0.0110
+015.8046:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 82, target 2.7254 2.1530 0.0000,actual 2.4697 2.3857 0.0055
+015.8149:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 83, target 2.7496 2.1530 0.0000,actual 2.5113 2.3809 0.0027
+015.8259:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 84, target 2.7731 2.1529 0.0000,actual 2.5443 2.3790 -0.0027
+015.8367:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 85, target 2.7957 2.1529 0.0000,actual 2.5839 2.3757 -0.0055
+015.8475:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 86, target 2.8176 2.1529 0.0000,actual 2.6144 2.3701 -0.0110
+015.8574:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 87, target 2.8387 2.1528 0.0000,actual 2.6512 2.3628 -0.0165
+015.8696:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 88, target 2.8590 2.1528 0.0000,actual 2.6861 2.3543 -0.0247
+015.8793:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 89, target 2.8786 2.1528 0.0000,actual 2.7130 2.3494 -0.0247
+015.8892:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 90, target 2.8972 2.1528 0.0000,actual 2.7385 2.3447 -0.0275
+015.9012:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 91, target 2.9150 2.1528 0.0000,actual 2.7630 2.3401 -0.0275
+015.9112:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 92, target 2.9322 2.1528 0.0000,actual 2.7864 2.3358 -0.0275
+015.9230:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 93, target 2.9484 2.1528 0.0000,actual 2.8088 2.3317 -0.0275
+015.9328:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 94, target 2.9638 2.1527 0.0000,actual 2.8357 2.3259 -0.0247
+015.9436:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 95, target 2.9787 2.1527 0.0000,actual 2.8564 2.3221 -0.0247
+015.9523:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 96, target 2.9923 2.1527 0.0000,actual 2.8762 2.3185 -0.0275
+015.9618:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 97, target 3.0057 2.1527 0.0000,actual 2.8954 2.3150 -0.0275
+015.9775:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 98, target 3.0176 2.1527 0.0000,actual 2.9225 2.3120 -0.0275
+015.9878:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 99, target 3.0295 2.1527 0.0000,actual 2.9394 2.3089 -0.0275
+016.0089:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 100, target 3.0396 2.1527 0.0000,actual 2.9629 2.3011 -0.0220
+016.0348:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 101, target 3.0497 2.1527 0.0000,actual 3.0046 2.2892 -0.0137
+016.0482:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 102, target 3.0588 2.1527 0.0000,actual 3.0223 2.2780 -0.0110
+016.0591:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 103, target 3.0665 2.1527 0.0000,actual 3.0333 2.2709 -0.0082
+016.0761:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 104, target 3.0741 2.1527 0.0000,actual 3.0462 2.2631 -0.0055
+016.0885:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 105, target 3.0814 2.1527 0.0000,actual 3.0594 2.2532 -0.0055
+016.0992:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 106, target 3.0846 2.1527 0.0000,actual 3.0690 2.2457 -0.0082
+016.1153:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 107, target 3.0878 2.1527 0.0000,actual 3.0774 2.2386 -0.0082
+016.1243:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 108, target 3.0909 2.1527 0.0000,actual 3.0849 2.2326 -0.0110
+016.1335:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 109, target 3.0941 2.1527 0.0000,actual 3.0904 2.2283 -0.0110
+016.1437:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 110, target 3.0973 2.1527 0.0000,actual 3.0955 2.2243 -0.0110
+016.1545:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 111, target 3.1005 2.1527 0.0000,actual 3.1002 2.2206 -0.0110
+016.1681:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 112, target 3.1037 2.1527 0.0000,actual 3.1045 2.2173 -0.0110
+016.1835:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 113, target 3.1037 2.1527 0.0000,actual 3.1121 2.2113 -0.0137
+016.1990:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 113, target 3.1037 2.1527 0.0000,actual 3.1164 2.2082 -0.0137
+016.2106:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 113, target 3.1037 2.1527 0.0000,actual 3.1209 2.2045 -0.0137
+016.2216:1: Debug: swerve: SwerveHolonomicPathFollower Target: index = 113, target 3.1037 2.1527 0.0000,actual 3.1238 2.2023 -0.0137
+016.2225:1: Debug: actions: 248:completing action: SwerveHolonomicPathFollower Line-P1
+016.2246:1: Info: global: finished path'Line-P1' pose = 3.124 2.202 -0.0
+016.2338:1: Debug: actions: 249:completing action: 
+                   actions: 249: DispatchAction, swerve, BLOCKING  [
+                   actions:     SwerveHolonomicPathFollower Line-P1
+                   actions: ]
+016.2350:1: Debug: actions: 247:completing action: 
+                   actions: 247: Sequence [
+                   actions:     249: DispatchAction, swerve, BLOCKING  [
+                   actions:         SwerveHolonomicPathFollower Line-P1
+                   actions:     ]
+                   actions: ]
+026.0876:1: Info: global: changing robot loop type: Autonomous -> Disabled
+026.0883:1: Info: global: Motor Faults Report
+026.0887:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+026.1081:1: Info: global: intake-updown:rio-2:NONE
+026.1331:1: Info: global: intake-feeder:rio-1:NONE
+026.1510:1: Info: global: intake-tilt:rio-5:NONE
+026.1725:1: Info: global: intake-shooter1:rio-3:NONE
+026.1904:1: Info: global: intake-shooter2:rio-4:NONE
+026.2079:1: Info: global: elevator:rio-6:NONE
+026.2236:1: Info: global: arm:rio-7:NONE
+026.2257:1: Info: global: manipulator:rio-9:NONE
+026.2417:1: Info: global: climber:rio-10:NONE
+026.2650:1: Info: global: fl-steer:DriveBase-11:NONE
+026.2816:1: Info: global: fl-drive:DriveBase-12:NONE
+026.2995:1: Info: global: fr-steer:DriveBase-21:NONE
+026.3167:1: Info: global: fr-drive:DriveBase-22:NONE
+026.3340:1: Info: global: bl-steer:DriveBase-41:NONE
+026.3522:1: Info: global: bl-drive:DriveBase-42:NONE
+026.3734:1: Info: global: br-steer:DriveBase-31:NONE
+026.3901:1: Info: global: br-drive:DriveBase-32:NONE
+026.3904:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

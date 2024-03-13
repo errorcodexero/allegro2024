@@ -562,6 +562,7 @@ public abstract class XeroRobot extends TimedRobot {
         if (ltype == LoopType.Disabled && prev != LoopType.Initialization) {
             try {
                 motors_.printFaults() ;
+                motors_.clearStickyFaults() ;
             }
             catch(Exception ex) {
                 logger_.startMessage(MessageType.Error);

@@ -44,7 +44,7 @@ public class IntakeManualShootAction extends Action {
         kTiltVelocityThreshold  = intake.getSettingsValue("actions:manual-shoot:" + location + ":tilt-velocity-threshold").getDouble();
         tilt_action_ = new MCMotionMagicAction(intake.getTilt(), "pids:position", kTiltPosition, kTiltPositionThreshold, kTiltVelocityThreshold);
 
-        kUpDownPosition = intake.getSettingsValue("actions:manual-shoot:" + location + ":up-down-pos").getDouble();
+        kUpDownPosition = intake.getSettingsValue("actions:manual-shoot:" + location + ":updown").getDouble();
         kUpDownPositionThreshold = intake.getSettingsValue("actions:manual-shoot:" + location + ":up-down-pos-threshold").getDouble();
         kUpDownVelocityThreshold = intake.getSettingsValue("actions:manual-shoot:" + location + ":up-down-velocity-threshold").getDouble();
         up_down_action_ = new MCMotionMagicAction(intake_.getUpDown(), "pids:position", kUpDownPosition, kUpDownPositionThreshold, kUpDownVelocityThreshold) ;
@@ -54,7 +54,7 @@ public class IntakeManualShootAction extends Action {
         shooter1_action_ = new MCVelocityAction(intake_.getShooter1(), "pids:velocity", kShooterVelocity, kShooterThreshold, false) ;
         shooter2_action_ = new MCVelocityAction(intake_.getShooter2(), "pids:velocity", kShooterVelocity, kShooterThreshold, false) ;
 
-        feeder_action_ = new MotorEncoderPowerAction(intake_.getFeeder(), 0.5, 1.0) ;
+        feeder_action_ = new MotorEncoderPowerAction(intake_.getFeeder(), 0.5, 0.2) ;
     }
 
     @Override

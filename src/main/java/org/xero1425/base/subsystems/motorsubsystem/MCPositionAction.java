@@ -86,7 +86,7 @@ public class MCPositionAction extends MotorAction {
         double g = enc.mapPhysicalToMotor(getSubsystem().getSettingsValue(name_ + ":kg").getDouble()) ;
         double outmax = getSubsystem().getSettingsValue(name_ + ":outmax").getDouble() ;
 
-        getSubsystem().getMotorController().setPID(XeroPidType.Velocity, p, i, d, v, a, g, s, outmax) ;
+        getSubsystem().getMotorController().setPID(XeroPidType.Position, p, i, d, v, a, g, s, outmax) ;
         setTarget(target_);        
     }
 

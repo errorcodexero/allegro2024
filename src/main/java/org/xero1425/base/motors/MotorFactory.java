@@ -221,6 +221,12 @@ public class MotorFactory {
         logger_.endMessage();          
     }
 
+    public void clearStickyFaults() throws BadMotorRequestException, MotorRequestFailedException {
+        for(IMotorController ctrl : motor_list_) {
+            ctrl.clearStickyFaults() ;
+        }        
+    }
+
     //
     // Print an error message with the motor ID given
     //
