@@ -32,12 +32,18 @@ public class IntakeManualShootAction extends Action {
     private boolean shooting_ ;
     private boolean tilt_ready_ ;
     private boolean updown_ready_ ;
+    private boolean keep_ ;
 
-    public IntakeManualShootAction(IntakeShooterSubsystem intake, String location) throws Exception {
+    public IntakeManualShootAction(IntakeShooterSubsystem intake, String location) throws Exception {    
+        this(intake, location,false) ;
+    }
+
+    public IntakeManualShootAction(IntakeShooterSubsystem intake, String location, boolean keep) throws Exception {
         super(intake.getRobot().getMessageLogger());
         intake_ = intake;
 
         location_ = location ;
+        keep_ = keep ;
 
         kTiltPosition = intake.getSettingsValue("actions:manual-shoot:" + location + ":tilt").getDouble();
         kTiltPositionThreshold = intake.getSettingsValue("actions:manual-shoot:" + location + ":tilt-pos-threshold").getDouble();
@@ -94,18 +100,35 @@ public class IntakeManualShootAction extends Action {
             }
 
             if (shooter1_action_.isAtVelocity() && shooter2_action_.isAtVelocity() && tilt_ready_ && updown_ready_) {
+                MessageLogger logger = intake_.getRobot().getMessageLogger() ;
+                logger.startMessage(MessageType.Debug) ;
+                logger.add("shot: ") ;
+                logger.add("tilt", intake_.getTilt().getPosition()) ;
+                logger.add("updown", intake_.getUpDown().getPosition()) ;
+                logger.add("shooter1", intake_.getShooter1().getVelocity()) ;
+                logger.add("shooter2", intake_.getShooter2().getVelocity()) ;
+                logger.endMessage();
                 shooting_ = true ;
                 intake_.getFeeder().setAction(feeder_action_, true) ;
             }
         }
         else {
+            MessageLogger logger = intake_.getRobot().getMessageLogger() ;            
+            logger.startMessage(MessageType.Debug) ;
+            logger.add("shot/2: ") ;
+            logger.add("tilt", intake_.getTilt().getPosition()) ;
+            logger.add("updown", intake_.getUpDown().getPosition()) ;
+            logger.add("shooter1", intake_.getShooter1().getVelocity()) ;
+            logger.add("shooter2", intake_.getShooter2().getVelocity()) ;
+            logger.endMessage();           
+
             if (feeder_action_.isDone()) {
                 intake_.setHoldingNote(false) ;
-                intake_.getShooter1().setPower(0.0) ;
-                intake_.getShooter2().setPower(0.0) ;
+                if (!keep_) {
+                    intake_.getShooter1().setPower(0.0) ;
+                    intake_.getShooter2().setPower(0.0) ;
+                }
                 setDone() ;
-
-                MessageLogger logger = intake_.getRobot().getMessageLogger() ;
                 logger.startMessage(MessageType.Info) ;
                 logger.add("duration", intake_.getRobot().getTime() - start_) ;
                 logger.endMessage();

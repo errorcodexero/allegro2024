@@ -95,6 +95,8 @@ public class IntakeShooterSubsystem extends Subsystem {
         // Set the motor position in ticks
         //
         updown_.getMotorController().setPosition(initpos);
+
+        note_present_ = true ;
     }
 
     public MotorEncoderSubsystem getUpDown() {

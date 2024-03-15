@@ -170,58 +170,58 @@ public class SwerveDriveGamepad extends Gamepad {
         lyscaled *= scale_amount_ ;
         rxscaled *= scale_amount_ ;
 
-        // if (tracking_supplier_ == null || driving_straight_) {
-        //     //
-        //     // If the tracking supplier is null or if we are already driving straight, then we want to process the driving straight
-        //     // code while moving along. 
-        //     //
-        //     if (Math.abs(rxscaled) < deadband_rotate_ && (Math.abs(lxscaled) > deadband_pos_x_ || Math.abs(lyscaled) > deadband_pos_y_)) {
-        //         //
-        //         // The rotation stick is set to zero, so we want to maintain the current angle.
-        //         //
-        //         if (!driving_straight_) {
-        //             //
-        //             // This is the first robot loop with the rotation stick at zero.  Setup the mode to
-        //             // hold the angle and remember the current robot angle.
-        //             //
-        //             tracking_angle_ = XeroMath.normalizeAngleDegrees(db_.getGyro().getYaw()) ;
-        //             driving_straight_ = true ;
-        //             tracking_supplier_ = () -> getGyroTrackingValue() ;
+        if (tracking_supplier_ == null || driving_straight_) {
+            //
+            // If the tracking supplier is null or if we are already driving straight, then we want to process the driving straight
+            // code while moving along. 
+            //
+            if (Math.abs(rxscaled) < deadband_rotate_ && (Math.abs(lxscaled) > deadband_pos_x_ || Math.abs(lyscaled) > deadband_pos_y_)) {
+                //
+                // The rotation stick is set to zero, so we want to maintain the current angle.
+                //
+                if (!driving_straight_) {
+                    //
+                    // This is the first robot loop with the rotation stick at zero.  Setup the mode to
+                    // hold the angle and remember the current robot angle.
+                    //
+                    tracking_angle_ = XeroMath.normalizeAngleDegrees(db_.getGyro().getYaw()) ;
+                    driving_straight_ = true ;
+                    tracking_supplier_ = () -> getGyroTrackingValue() ;
 
-        //             MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
-        //             logger.startMessage(MessageType.Debug, getSubsystem().getLoggerID()) ;
-        //             logger.add("swerve gamepad, locking rotation") ;
-        //             logger.add("rotation", tracking_angle_) ;
-        //             logger.endMessage();
-        //         }
-        //     }
-        //     else {
-        //         //
-        //         // The rotation stick is not zero, so we want to rotate the robot.  Turn off the angle
-        //         // control mechanism in the drive base and get this data from the joystick.
-        //         //
-        //         tracking_angle_ = 0.0 ;
-        //         driving_straight_ = false ;
-        //         tracking_supplier_ = null ;
-        //     }
-        // }
+                    MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+                    logger.startMessage(MessageType.Debug, getSubsystem().getLoggerID()) ;
+                    logger.add("swerve gamepad, locking rotation") ;
+                    logger.add("rotation", tracking_angle_) ;
+                    logger.endMessage();
+                }
+            }
+            else {
+                //
+                // The rotation stick is not zero, so we want to rotate the robot.  Turn off the angle
+                // control mechanism in the drive base and get this data from the joystick.
+                //
+                tracking_angle_ = 0.0 ;
+                driving_straight_ = false ;
+                tracking_supplier_ = null ;
+            }
+        }
 
         // //
         // // Now, if I have a tracking supplier, I want to use it to set the rotational velocity instead of the
         // // stick value.  This tracking supplier could be local and be about the gyro or it could be an external
         // // supplier that is tracking a target.
         // //
-        // if (tracking_supplier_ != null) {
-        //     double err = tracking_supplier_.getAsDouble() ;
-        //     rxscaled = err * tracking_p_ ;            
-        //     MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
-        //     logger.startMessage(MessageType.Debug, logger_id_) ;
-        //     logger.add("Swerve: tracking: ") ;
-        //     logger.add("drive_straight", driving_straight_) ;
-        //     logger.add("err", err) ;
-        //     logger.add("rxscaled", rxscaled) ;
-        //     logger.endMessage();
-        // }
+        if (tracking_supplier_ != null) {
+            double err = tracking_supplier_.getAsDouble() ;
+            rxscaled = err * tracking_p_ ;            
+            MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Debug, logger_id_) ;
+            logger.add("Swerve: tracking: ") ;
+            logger.add("drive_straight", driving_straight_) ;
+            logger.add("err", err) ;
+            logger.add("rxscaled", rxscaled) ;
+            logger.endMessage();
+        }
 
         //
         // The rotational velocity is given by rxscaled
@@ -232,9 +232,38 @@ public class SwerveDriveGamepad extends Gamepad {
         // gamepad is pushed forward (negative value from the gamepad), the driver expects the robot to move along
         // the positive X axis of the field.
         //
-        ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(-lyscaled, -lxscaled, Math.toRadians(rxscaled), db_.getHeading()) ;
-        action_.update(speeds) ;
 
+        double orlx = lxscaled ;
+        double orly = lyscaled ;
+
+        // if (Math.abs(rxscaled) > 0.1) {
+        //     lyscaled = 0.0 ;
+        //     lxscaled = 0.0 ;
+        // }
+        // else {
+        //     if (Math.abs(lxscaled) > Math.abs(lyscaled)) {
+        //         lyscaled = 0.0 ;
+        //     }
+        //     else {
+        //         lxscaled = 0.0 ;
+        //     }
+        //     rxscaled = 0.0 ;
+        // }
+        ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(-lyscaled, -lxscaled, Math.toRadians(rxscaled), db_.getHeading()) ;
+
+        MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Info) ;
+        logger.add("gamepad") ;
+        logger.add("orlx", orlx);
+        logger.add("orly", orly) ;
+        logger.add("lxscaled", lxscaled) ;
+        logger.add("lyscaled", lyscaled) ;
+        logger.add("vx", speeds.vxMetersPerSecond) ;
+        logger.add("vy", speeds.vyMetersPerSecond) ;
+        logger.add("rot", Math.toDegrees(speeds.omegaRadiansPerSecond)) ;
+        logger.endMessage();
+
+        action_.update(speeds) ;
         if (db_.getAction() != action_)
             db_.setAction(action_) ;
     }

@@ -1,7 +1,10 @@
 package frc.robot.automodes;
 
 import org.xero1425.base.actions.Action;
+import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollower;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 
 import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
 import frc.robot.subsystems.intake_shooter.IntakeManualShootAction;
@@ -12,6 +15,7 @@ public class Start2Shoot4Action extends Action {
 
     private enum State {
         Idle,
+        Delay,
         Shoot1,
         Shoot2,
         Shoot3,
@@ -28,6 +32,7 @@ public class Start2Shoot4Action extends Action {
 
     private AllegroRobot2024 robot_ ;
     private State state_ ;
+    private XeroTimer delay_timer_ ;
 
     private IntakeGotoNamedPositionAction stow_ ;
     private IntakeManualShootAction manual_shoot_ ;
@@ -55,12 +60,14 @@ public class Start2Shoot4Action extends Action {
         start_collect_ = new StartCollectAltAction(robot_.getIntakeShooter(), updown, tilt) ;
         manual_shoot_ = new IntakeManualShootAction(robot_.getIntakeShooter(), "subwoofer-center-low") ;
 
-        p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P1", true, 0.2, mirror, mvalue);
+        p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P1", false, 0.2, mirror, mvalue);
         p2_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P2", false, 0.2, mirror, mvalue);
-        p3_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P3", false, 0.2, mirror, mvalue);
-        p4_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P4", true, 0.2, mirror, mvalue);
+        p3_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P3", true, 0.2, mirror, mvalue);
+        p4_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P4", false, 0.2, mirror, mvalue);
         p5_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P5", false, 0.2, mirror, mvalue);
         p6_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P6", false, 0.2, mirror, mvalue);                
+
+        delay_timer_ = new XeroTimer(robot.getRobot(), "auto-delay", 0.25) ;
     }
 
     @Override
@@ -77,8 +84,15 @@ public class Start2Shoot4Action extends Action {
     //
     private void shoot1State() {
         if (manual_shoot_.isDone()) {
-            robot_.getIntakeShooter().setAction(start_collect_, true) ;            
-            robot_.getSwerve().setAction(p1_, true) ;
+            robot_.getIntakeShooter().setAction(start_collect_, true) ;              
+            delay_timer_.start() ;
+            state_ = State.Delay ;
+        }
+    }
+
+    private void delayState() {
+        if (delay_timer_.isExpired()) {
+            robot_.getSwerve().setAction(p3_, true) ;
             state_ = State.Path1 ;            
         }
     }
@@ -87,8 +101,8 @@ public class Start2Shoot4Action extends Action {
     // Driving from the subwoofer to collect a second note (the first collected note)
     //
     private void path1State() {
-        if (p1_.isDone()) {
-            robot_.getSwerve().setAction(p2_, true) ;
+        if (p3_.isDone()) {
+            robot_.getSwerve().setAction(p4_, true) ;
             state_ = State.Path2 ;
         }
     }
@@ -97,7 +111,7 @@ public class Start2Shoot4Action extends Action {
     // Driving back to the subwoofer after collecting the second note (first collected note)
     //
     private void path2State() {
-        if (p2_.isDone() && start_collect_.isDone() ) {
+        if (p4_.isDone() && start_collect_.isDone() ) {
             robot_.getIntakeShooter().setAction(manual_shoot_, true) ;
             state_ = State.Shoot2 ;
         }
@@ -109,7 +123,7 @@ public class Start2Shoot4Action extends Action {
     private void shoot2State() {
         if (manual_shoot_.isDone()) {
             robot_.getIntakeShooter().setAction(start_collect_, true) ;            
-            robot_.getSwerve().setAction(p3_, true) ;
+            robot_.getSwerve().setAction(p1_, true) ;
             state_ = State.Path3 ;            
         }
     }
@@ -118,8 +132,8 @@ public class Start2Shoot4Action extends Action {
     // Driving to collect a third note (the second collected note)
     //
     private void path3State() {
-        if (p3_.isDone()) {
-            robot_.getSwerve().setAction(p4_, true) ;
+        if (p1_.isDone()) {
+            robot_.getSwerve().setAction(p2_, true) ;
             state_ = State.Path4 ;
         }
     }
@@ -128,7 +142,7 @@ public class Start2Shoot4Action extends Action {
     // Driving back to the subwoofer after collecting the third note (the second collected note)
     //
     private void path4State() {
-        if (p4_.isDone() && start_collect_.isDone()) {
+        if (p2_.isDone() && start_collect_.isDone()) {
             robot_.getIntakeShooter().setAction(manual_shoot_, true) ;
             state_ = State.Shoot3 ;
         }
@@ -184,8 +198,15 @@ public class Start2Shoot4Action extends Action {
     public void run() throws Exception {
         super.run() ;
 
+        State prev = state_ ;
+
         switch(state_) {
         case Idle:
+            break ;
+        
+        case Delay:
+            delayState() ;
+            break ;
 
         case Shoot1:
             shoot1State() ;
@@ -233,6 +254,13 @@ public class Start2Shoot4Action extends Action {
 
         case Done:
             break ;
+        }
+
+        if (state_ != prev) {
+            MessageLogger logger = robot_.getRobot().getMessageLogger();
+            logger.startMessage(MessageType.Info) ;
+            logger.add("automode: " + prev.toString() + " -> " + state_.toString()) ;
+            logger.endMessage();
         }
     }
 

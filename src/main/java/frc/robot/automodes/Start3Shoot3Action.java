@@ -3,6 +3,8 @@ package frc.robot.automodes;
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollower;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
 import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
@@ -117,6 +119,7 @@ public class Start3Shoot3Action extends Action {
 
     private void shoot2State() {
         if (shoot_.isDone()) {
+            robot_.getIntakeShooter().setAction(start_collect_, true) ;            
             robot_.getSwerve().setAction(p3_, true) ;
             state_ = State.Path3 ;
         }
@@ -176,6 +179,8 @@ public class Start3Shoot3Action extends Action {
 
     @Override
     public void run() {
+        State prev = state_ ;
+
         switch(state_) {
             case Done:
                 setDone() ;
@@ -219,6 +224,13 @@ public class Start3Shoot3Action extends Action {
             case MissedStow:
                 missedStowState();
                 break ;
+        }
+
+        if (state_ != prev) {
+            MessageLogger logger = robot_.getRobot().getMessageLogger();
+            logger.startMessage(MessageType.Info) ;
+            logger.add("automode: " + prev.toString() + " -> " + state_.toString()) ;
+            logger.endMessage();            
         }
     }
 

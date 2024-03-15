@@ -1,14 +1,19 @@
 package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.actions.Action;
+import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 
 public abstract class CollectBaseAltAction extends Action {
 
     private IntakeShooterSubsystem sub_;
 
-    private IntakeGotoNamedPositionAction stow_ ;
-    private IntakeGotoNamedPositionAction shoot_ ;
-    private IntakeGotoNamedPositionAction act_ ;
+    private MCMotionMagicAction tilt_action_shoot_;
+    private MCMotionMagicAction updown_action_shoot_ ;
+    private MCMotionMagicAction tilt_action_stow_;
+    private MCMotionMagicAction updown_action_stow_ ;    
+
+    private MCMotionMagicAction tilt_act_ ;
+    private MCMotionMagicAction updown_act_ ;
 
     public CollectBaseAltAction(IntakeShooterSubsystem sub, double updown, double tilt) throws Exception {
         super(sub.getRobot().getMessageLogger());
@@ -16,14 +21,17 @@ public abstract class CollectBaseAltAction extends Action {
         sub_ = sub;
 
         if (Double.isNaN(updown) || Double.isNaN(tilt)) {
-            tilt = sub_.getTilt().getSettingsValue("targets:stow-note").getDouble() ;
+            tilt = sub_.getTilt().getSettingsValue("targets:shoot").getDouble() ;
             updown = sub_.getUpDown().getSettingsValue("targets:stow").getDouble() ;
         }
-        shoot_ = new IntakeGotoNamedPositionAction(sub_, updown, tilt) ;
+        tilt_action_shoot_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", tilt, 1, 1) ;
+        updown_action_shoot_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", updown, 1, 1) ;
 
         tilt = sub_.getTilt().getSettingsValue("targets:stow").getDouble() ;
         updown = sub_.getUpDown().getSettingsValue("targets:stow").getDouble() ;
-        stow_ = new IntakeGotoNamedPositionAction(sub_, updown, tilt) ;
+
+        tilt_action_stow_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", tilt, 1, 1) ;
+        updown_action_stow_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", updown, 1, 1) ;
     }
 
     protected IntakeShooterSubsystem getSubsystem() {
@@ -31,16 +39,20 @@ public abstract class CollectBaseAltAction extends Action {
     }
 
     protected void startStow() {
-        if (sub_.isHoldingNote())
-            act_ = shoot_ ;
-        else
-            act_ = stow_ ;
-
-        getSubsystem().setAction(act_, true);
+        if (sub_.isHoldingNote()) {
+            tilt_act_ = tilt_action_shoot_ ;
+            updown_act_ = updown_action_shoot_ ;
+        }
+        else {
+            tilt_act_ = tilt_action_stow_ ;
+            updown_act_ = updown_action_stow_ ;
+        }
+        getSubsystem().getTilt().setAction(tilt_act_, true);
+        getSubsystem().getUpDown().setAction(updown_act_, true) ;
     }
 
     protected void runStow() {
-        if (act_.isDone()) {
+        if (tilt_act_.isDone() && updown_act_.isDone()) {
             setDone() ;
         }
     }

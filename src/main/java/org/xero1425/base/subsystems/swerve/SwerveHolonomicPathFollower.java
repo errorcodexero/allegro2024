@@ -135,6 +135,12 @@ public class SwerveHolonomicPathFollower extends SwerveHolonomicControllerAction
             logger.add("SwerveHolonomicPathFollower: Initial Pose ", getSubsystem().getPose());
             logger.endMessage();
         }
+        else {
+            MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Info) ;
+            logger.add("SwerveHolonomicPathFollower: Did note set pose") ;
+            logger.endMessage();            
+        }
 
         index_ = 0 ;
     }

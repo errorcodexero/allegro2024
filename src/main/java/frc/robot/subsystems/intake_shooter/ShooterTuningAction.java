@@ -24,7 +24,7 @@ public class ShooterTuningAction extends Action {
 
     private final double kFeederPowerLevel = 0.4 ;
     private final double kTiltLowerLimit = -70.0 ;
-    private final double kTiltUpperLimit = 0.0 ;
+    private final double kTiltUpperLimit = 45.0 ;
     private final double kShooterVelocityLimit = 100 ;
 
     private final double kTiltPositionTolerance = 2.0 ;
@@ -60,6 +60,7 @@ public class ShooterTuningAction extends Action {
     private Double [] plot_data_ ;
 
     private double updown_ ;
+    private boolean wait_tilt_ ;
 
     private static final String[] plot_columns_ = { 
         "time (s)",
@@ -72,14 +73,14 @@ public class ShooterTuningAction extends Action {
         "fire (bool)"
     } ;    
 
-    public ShooterTuningAction(IntakeShooterSubsystem sub, double updown) throws Exception {
+    public ShooterTuningAction(IntakeShooterSubsystem sub, double updown, double init) throws Exception {
         super(sub.getRobot().getMessageLogger()) ;
         sub_ = sub ;
         updown_ = updown ;
 
         velocity1_action_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", 0.0, kVelocityFireTolerance, false);
         velocity2_action_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", 0.0, kVelocityFireTolerance, false);
-        tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", -65.0, kTiltPositionTolerance, kTiltVelocityTolerance) ;
+        tilt_action_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", init, kTiltPositionTolerance, kTiltVelocityTolerance) ;
         feeder_start_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), kFeederPowerLevel);
         feeder_stop_action_ = new MotorEncoderPowerAction(sub_.getFeeder(), 0.0);
         updown_action_ = new MCTrackPosAction(sub_.getUpDown(), "pids:position", updown_, 2, 1, false) ;
@@ -95,6 +96,7 @@ public class ShooterTuningAction extends Action {
         last_apply_value_ = false ;
         last_plot_value_ = false ;
         plotting_ = false ;
+        wait_tilt_ = true ;
         tab_ = Shuffleboard.getTab("Tuning");
         tilt_widget_ = tab_.add("Tilt Input", 0.0).withWidget(BuiltInWidgets.kTextView) ;
         velocity_widget_ = tab_.add("Velocity Input", 0.0).withWidget(BuiltInWidgets.kTextView) ;
@@ -107,7 +109,6 @@ public class ShooterTuningAction extends Action {
         sub_.getShooter1().setAction(velocity1_action_, true) ;
         sub_.getShooter2().setAction(velocity2_action_, true) ;
         sub_.getTilt().setAction(tilt_action_, true) ;
-        sub_.getUpDown().setAction(updown_action_, true) ;
     }
 
     private PlotStatus checkPlot() {
@@ -138,6 +139,7 @@ public class ShooterTuningAction extends Action {
         PlotStatus st = checkPlot() ;
         boolean fire = false ;
 
+
         if (st == PlotStatus.Start) {
             plot_id_ = sub_.initPlot("ShooterTuning-" + plot_number_++) ;
             sub_.startPlot(plot_id_, plot_columns_);
@@ -149,7 +151,11 @@ public class ShooterTuningAction extends Action {
             plotting_ = false ;
         }
 
-        if (applySettings()) {
+        if (wait_tilt_) {
+            sub_.getUpDown().setAction(updown_action_, true) ;
+            wait_tilt_ = false ;
+        }
+        else if (applySettings()) {
             double v ;
 
             //

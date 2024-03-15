@@ -640,19 +640,17 @@ public final class MessageLogger
     private ThreadData getPerThreadData() {
         ThreadData per = null;
 
-        synchronized(lock_) {
-            final long id = Thread.currentThread().getId();
-            if (per_thread_data_.containsKey(id))
-            {
-                per = per_thread_data_.get(id) ;
-            }
-            else
-            {
-                per = new ThreadData() ;
-                per.id_ = id ;
-                per.in_message_ = false ;
-                per_thread_data_.put(id, per) ;
-            }
+        final long id = Thread.currentThread().getId();
+        if (per_thread_data_.containsKey(id))
+        {
+            per = per_thread_data_.get(id) ;
+        }
+        else
+        {
+            per = new ThreadData() ;
+            per.id_ = id ;
+            per.in_message_ = false ;
+            per_thread_data_.put(id, per) ;
         }
 
         return per ;

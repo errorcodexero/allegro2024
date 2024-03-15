@@ -12,16 +12,18 @@
 
             // Subsystem related messages
             "vision": false,
-            "swerve" : true,
+            "swerve" : false,
             "limelight" : false,
             "allegro2024oi": false,
             "limelight-edgar" : false,
             "oibuttons" : false,
-            "intake-shooter" : true,
-            "superstructure" : true,
+            "intake-shooter" : false,
+            "superstructure" : false,
             "swerve-gamepad" : false,
             "targettracker" : false,
-            "amp-trap" : true
+            "amp-trap" : false,
+            "manual-shoot" : true
+            
         },
         "verbose": {
             "swerve" : false,
@@ -218,16 +220,17 @@
             },
             "pids" : {
                 "position" : {
-                    "kp" : 0.18,
+                    "kp" : 0.18,        
                     "ki" : 0.0,
                     "kd" : 0.0,
-                    "kv" : 0.02,
+                    "kv" : 0.02
+                    ,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 180.0,
-                    "maxa" : 180.0,
+                    "maxv" : 360.0,
+                    "maxa" : 360.0,
                     "jerk" : 0.0
                 }
             }
@@ -343,8 +346,8 @@
                 "butch-start-collect" : {
                     "tilt-down-threshold" : -75.0,
                     "updown-up-threshold" : 30,
-                    "delay-time" : 0.10,
-                    "feeder-power" : 0.5
+                    "delay-time" : 0.1,
+                    "feeder-power" : 0.4
                 },
                 "butch-stop-collect" : {
                     "updown-threshold" : 45.0
@@ -363,11 +366,11 @@
                         "shooter-velocity-threshold" : 5.0
                     },
                     "subwoofer-center-low" : {
-                        "tilt" : 30.0,
+                        "tilt" : 5,
                         "tilt-pos-threshold" : 5.0,
                         "tilt-velocity-threshold" : 5.0,
 
-                        "updown" : 45.0,
+                        "updown" : 35.0,
                         "up-down-pos-threshold" : 5.0,
                         "up-down-velocity-threshold" : 5.0,
 
@@ -733,7 +736,7 @@
                     "ks" : 0.0,
                     "outmax" : 12.0,
                     "maxv" : 270,                   // 270
-                    "maxa" : 180,                   // 270
+                    "maxa" : 270,                   // 270
                     "jerk" : 0.0
                 }                
             }
@@ -764,9 +767,8 @@
                 }
             },
             "targets" : {
-                "stow-no-note" : -65.0,
                 "stow" : -65.0,
-                "stow-note" : -50,
+                "shoot" : -50,
                 "collect" : 50.0
             },
             "pids" : {
@@ -780,7 +782,7 @@
                     "ks" : 0.0,
                     "outmax" : 12.0,
                     "maxv" : 270,
-                    "maxa" : 180,
+                    "maxa" : 270,
                     "jerk" : 0.0
                 }
             }
@@ -873,10 +875,10 @@
                 "gyro" : {
                     "start-time" : 3.0,
 
-                    // "type" : "navx"
-                    "type" : "pigeon2",
-                    "bus" : "DriveBase",
-                    "canid" : 51
+                    "type" : "navx"
+                    // "type" : "pigeon2",
+                    // "bus" : "DriveBase",
+                    // "canid" : 51
                 },
                 "fl" : {
                     "motors" : {
@@ -897,7 +899,7 @@
                             "bus" : "DriveBase",
                             "inverted" : false,
                             "neutral-mode": "brake",
-                            "current-limit" : 40.0
+                            "current-limit" : 60.0
                         }
                     },
                     "encoder" : {
@@ -929,7 +931,7 @@
                             "bus" : "DriveBase",
                             "inverted" : false,
                             "neutral-mode": "brake",
-                            "current-limit" : 40.0
+                            "current-limit" : 60.0
                         }
                     },
                     "encoder" : {
@@ -961,7 +963,7 @@
                             "bus" : "DriveBase",
                             "inverted" : false,
                             "neutral-mode": "brake",
-                            "current-limit" : 40.0
+                            "current-limit" : 60.0
                         }
                     },
                     "encoder" : {
@@ -993,7 +995,7 @@
                             "bus" : "DriveBase",
                             "inverted" : false,
                             "neutral-mode": "brake",
-                            "current-limit" : 40.0
+                            "current-limit" : 60.0
                         }
                     },
                     "encoder" : {
@@ -1049,7 +1051,7 @@
                 "vision-reject-threshold" : 100.0,              // Reject vision samples that are more than this distance from the current robot pose
                 "single-threshold" : 2.0,                       // When we see a single target, and we are greater than this distance, use the single-far std devs
                                                                 // Otherwise use the single-near std devs
-                "multi-threshold" : 2.0,                        // When we see multiple targets, and we are greater than this distance, use the multi-far std devs
+                "multi-threshold" : 2.5,                        // When we see multiple targets, and we are greater than this distance, use the multi-far std devs
                                                                 // Otherwise use the multi-near std devs
                 "single-tag-ignore-reject-threshold" : 2.0,     // If we see a single tag and the pose from the tag is greater than the vision-reject-threshold from the
                                                                 // current robot pose, we normally reject the vision sample.  However, if the distance to the tag is
@@ -1065,24 +1067,24 @@
                 //
                 "vision" : {
                     "single-far" : {
-                        "x" : 9.0,
-                        "y" : 9.0,
+                        "x" : 19.0,
+                        "y" : 19.0,
                         "heading" : 9.0
                     },
                     "single-near" : {
                         "x" : 0.1,
                         "y" : 0.1,
-                        "heading" : 0.1
+                        "heading" : 9.0
                     },
                     "multi-far" : {
-                        "x" : 0.1,
-                        "y" : 0.1,
-                        "heading" : 0.1
+                        "x" : 9.0,
+                        "y" : 9.0,
+                        "heading" : 9.0
                     },
                     "multi-near" : {
                         "x" : 0.1,
                         "y" : 0.1,
-                        "heading" : 0.1
+                        "heading" : 9.0
                     }
                 }
             },
@@ -1136,17 +1138,17 @@
                 "xy-tolerance": 0.05,
                 "angle-tolerance": 2.0,
                 "xctrl": {
-                    "kp": 6.0,
+                    "kp": 6.0,         // 6
                     "ki": 0,
                     "kd": 0
                 },
                 "yctrl": {
-                    "kp": 6.0,
+                    "kp": 6.0,         // 6
                     "ki": 0,
                     "kd": 0
                 },
                 "rotation": {
-                    "kp": 8.0,
+                    "kp": 7.0,         // 8
                     "ki": 0,
                     "kd": 0
                 }
@@ -1196,17 +1198,17 @@
         }
     },
     "testmode" : {
-        "enabled": true,
-        "which": 42,
+        "enabled": false,
+        "which": 4,
         "0": {
             "angle": 0,
             "power": 0.5,
             "duration": 2.0         // optional, if missing will run forever
         },
         "1": {
-            "angle": 45.0,
-            "speed": 1.0,
-            "duration" : 3.0        // optional, if missing will run forever
+            "angle": 0.0,
+            "speed": 2.0,
+            "duration" : 2.0        // optional, if missing will run forever
         },
         "2" : {
             "duration" : 3.0,
@@ -1231,7 +1233,7 @@
             "speed-br" : 2.5
         },
         "4": {
-            "name": "S2S2-Path1"
+            "name": "Test-P1"
         },
         "10" : {
             "power" : 0.5,
@@ -1256,7 +1258,7 @@
             "duration" : 2.0
         },
         "32" : {
-            "velocity" : 65
+            "velocity" : 80
         },
         "40" : {
             "power" : 0.5,
@@ -1292,14 +1294,14 @@
             "position" : 0.2411
         },
         "70" : {
-            "power" : -0.3,
-            "duration" : 2.0
+            "power" : 0.1,
+            "duration" : 0.75
         },
         "71" : {
             "duration" : 2.0
         },
         "72" : {
-            "target": -90.0
+            "target": 180.0
         },
         "80" : {
             "power" : 0.5,
@@ -1329,7 +1331,8 @@
             "duration" : 5.0
         },
         "118" : {
-            "up-down" : 100
+            "up-down" : 45,
+            "tilt" : 0
         },
         "119" : {
             "shooter-power" : 0.5,

@@ -12,9 +12,10 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 public class IntakeEjectAction extends Action {
 
-    private final double kPeriod1 = 2.0 ;
+    private final double kPeriod1 = 1.0 ;
     private final double kPeriod2 = 0.5 ;
     private final double kPeriod3 = 1.0 ;
+    private final double kPower = 0.7 ;
 
     private enum State {
         Forward,
@@ -41,10 +42,10 @@ public class IntakeEjectAction extends Action {
         sub_ = sub ;
         start_ = new MotorEncoderPowerAction(sub_.getFeeder(), -0.5) ;
 
-        power1f_ = new MotorEncoderPowerAction(sub_.getShooter1(), -1.0) ;
-        power2f_ = new MotorEncoderPowerAction(sub_.getShooter2(), -1.0) ;      
-        power1r_ = new MotorEncoderPowerAction(sub_.getShooter1(), 1.0) ;
-        power2r_ = new MotorEncoderPowerAction(sub_.getShooter2(), 1.0) ;           
+        power1f_ = new MotorEncoderPowerAction(sub_.getShooter1(), -kPower) ;
+        power2f_ = new MotorEncoderPowerAction(sub_.getShooter2(), -kPower) ;      
+        power1r_ = new MotorEncoderPowerAction(sub_.getShooter1(), kPower) ;
+        power2r_ = new MotorEncoderPowerAction(sub_.getShooter2(), kPower) ;           
 
         curlim1_ = sub_.getShooter1().getMotorController().getCurrentLimit() ;
         curlim2_ = sub_.getShooter2().getMotorController().getCurrentLimit() ;

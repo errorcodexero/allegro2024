@@ -20,8 +20,8 @@ public class IntakeShooterStowAction  extends Action{
         super(sub.getRobot().getMessageLogger());
 
         sub_ = sub;
-        stow_updown_ = new MCMotionMagicAction(sub.getUpDown(), "pids:position", "targets:stow", 0, 1);
-        stow_tilt_ = new MCMotionMagicAction(sub.getTilt(), "pids:position" , "targets:stow" , 0 , 1);
+        stow_updown_ = new MCMotionMagicAction(sub.getUpDown(), "pids:position", "targets:stow", 1, 1);
+        stow_tilt_ = new MCMotionMagicAction(sub.getTilt(), "pids:position" , "targets:stow" , 1 , 1);
         stow_feeder_ = new MotorEncoderPowerAction(sub.getFeeder(), 0);
         stow_shooter1_ = new MotorEncoderPowerAction(sub.getShooter1(), 0);
         stow_shooter2_ = new MotorEncoderPowerAction(sub.getShooter2(), 0);

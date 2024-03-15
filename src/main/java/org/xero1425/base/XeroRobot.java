@@ -610,6 +610,8 @@ public abstract class XeroRobot extends TimedRobot {
         if (current_controller_ != null)
             current_controller_.init();
 
+        robot_subsystem_.cancelAction();            
+
         changeLoopType(LoopType.Teleop);
     }
 

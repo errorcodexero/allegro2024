@@ -912,7 +912,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
         rotate_action_ = new SwerveTrackAngle(robot.getSwerve(), () -> robot.getTargetTracker().getRotation(), postol) ;
         shoot_action_ = new IntakeAutoShootAction(intake, tracker, false, rotate_action_) ;
         manual_shoot_podium_action_ = new IntakeManualShootAction(intake, "podium") ;
-        manual_shoot_subwoofer_center_action_ = new IntakeManualShootAction(intake, "subwoofer-center") ;
+        manual_shoot_subwoofer_center_action_ = new IntakeManualShootAction(intake, "subwoofer-center-low") ;
                
 
         fwd_transfer_action_ = new TransferIntakeToTrampAction(robot.getSuperStructure()) ;

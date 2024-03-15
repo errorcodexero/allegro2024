@@ -4,6 +4,8 @@ import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.motors.IMotorController.XeroNeutralMode;
 import org.xero1425.base.motors.IMotorController.XeroPidType;
 import org.xero1425.base.subsystems.Subsystem;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.StatusSignal;
@@ -51,7 +53,7 @@ public class SwerveModule {
         double i = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:i").getDouble() ;
         double d = subsys_.getRobot().getSettingsSupplier().get(id + ":motors:steer:d").getDouble() ;
         steer_.setPID(XeroPidType.Position, p, i, d, 0, 0, 0, 0, 0.1);
-        steer_.setPositionImportant(IMotorController.ImportantType.Low);
+        steer_.setPositionImportant(IMotorController.ImportantType.High);
         steer_.setVelocityImportant(IMotorController.ImportantType.Low);
         target_angle_ = 0.0 ;
 
@@ -171,51 +173,72 @@ public class SwerveModule {
 
     public void set(int which, double voltage, double angle) throws BadMotorRequestException, MotorRequestFailedException {
 
+        MessageLogger logger = subsys_.getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Info, 1) ;
+        logger.add("which", which);
+        logger.add("request", angle) ;
+
         angle %= (2.0 * Math.PI) ;
         if (angle < 0.0) {
             angle += 2.0 * Math.PI ;
-        }       
+        }
+
+        logger.add("clipped", angle) ;
 
         double diff = angle - getStateAngle() ;
+        logger.add("diff", diff) ;
         if (diff >= Math.PI) {
             angle -= 2.0 * Math.PI ;
         }
         else if (diff < -Math.PI) {
             angle += 2.0 * Math.PI ;
         }
+        logger.add("angle2", angle) ;
         diff = angle - getStateAngle() ;
+        logger.add("diff2", diff) ;
         if (diff > Math.PI / 2.0 || diff < -Math.PI / 2.0) {
             angle += Math.PI ;
             voltage *= -1.0 ;
         }
 
-        angle %= 2.0 * Math.PI ;
+        angle %= (2.0 * Math.PI) ;
         if (angle < 0.0) {
             angle += 2.0 * Math.PI ;
         }
+        logger.add("angle3", angle) ;
 
         setSteerAngle(which, angle);
+        logger.endMessage();
+
         drive_.set(XeroPidType.Power, voltage) ;
     }
 
     private void setSteerAngle(int which, double angle) throws BadMotorRequestException, MotorRequestFailedException {
-        double current = getStateAngle() ;
+        double current = steer_.getPosition() * ticksToRadians_ ;
+
+        MessageLogger logger = subsys_.getRobot().getMessageLogger() ;
+        logger.add("current", current) ;
 
         double currentmod = current % (2.0 * Math.PI) ;
         if (currentmod < 0.0) {
             currentmod += 2.0 * Math.PI ;
         }
+        logger.add("mod", currentmod) ;
 
         double adj = angle + current - currentmod ;
+        logger.add("adj", adj) ;
         if (angle - currentmod > Math.PI) {
             adj -= 2.0 * Math.PI ;
         }
         else if (angle - currentmod < -Math.PI) {
             adj += 2.0 * Math.PI ;
         }
+        logger.add("adj2", adj) ;
 
-        target_angle_ = angle ;
-        steer_.set(XeroPidType.Position, adj / ticksToRadians_);        
+        if (Math.abs(target_angle_ - angle) > 0.1) {
+            target_angle_ = angle ;
+            steer_.set(XeroPidType.Position, adj / ticksToRadians_);
+        }
     }
 
     /// \brief Return the absolute encoder angle in radians
@@ -224,7 +247,6 @@ public class SwerveModule {
         double v = absolute_encoder_.getAbsolutePosition().getValue() ;
         return v * 2.0 * Math.PI ;
     }
-
 
     public void synchronizeEncoders(boolean force) throws BadMotorRequestException, MotorRequestFailedException {
         if (!synchronized_ || force) {

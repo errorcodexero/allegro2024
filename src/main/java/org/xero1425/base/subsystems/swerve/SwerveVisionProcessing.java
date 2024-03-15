@@ -152,8 +152,6 @@ public class SwerveVisionProcessing {
 
     private void setVisionParams(VisionParamsType vtype)
     {
-        vtype = VisionParamsType.SingleNear ;
-        
         MessageLogger logger = sub_.getRobot().getMessageLogger();
         if (params_type_ != vtype) {
             switch(vtype) {

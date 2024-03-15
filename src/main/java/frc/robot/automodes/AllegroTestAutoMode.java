@@ -140,9 +140,9 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                     addSubActionPair(intakeshooter.getShooter1(),
                             new MCVelocityAction(intakeshooter.getShooter1(), "pids:velocity", getDouble("velocity"), 1.0, true),
                             false);
-                    // addSubActionPair(intakeshooter.getShooter2(),
-                    //         new MCVelocityAction(intakeshooter.getShooter2(), "pids:velocity", getDouble("velocity"), 1.0, true),
-                    //         true);                            
+                    addSubActionPair(intakeshooter.getShooter2(),
+                            new MCVelocityAction(intakeshooter.getShooter2(), "pids:velocity", getDouble("velocity"), 1.0, true),
+                            true);                            
                 }
                 break;
 
@@ -286,7 +286,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 72:
                 if (amptrap != null && amptrap.getArm() != null) {
                     addSubActionPair(amptrap.getArm(),
-                            new MCMotionMagicAction(amptrap.getArm(), "pids:position", getDouble("target"), 1,1), true) ;
+                            new MCMotionMagicAction(amptrap.getArm(), "pids:position", getDouble("target"), 5,5), true) ;
                 }
                 break;
 
@@ -389,7 +389,8 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 118:
                 if (intakeshooter != null) {
                     double v = getDouble("up-down") ;
-                    addSubActionPair(intakeshooter, new ShooterTuningAction(intakeshooter, v), true);
+                    double i = getDouble("tilt") ;
+                    addSubActionPair(intakeshooter, new ShooterTuningAction(intakeshooter, v, i), true);
                 }
                 break ;
 
