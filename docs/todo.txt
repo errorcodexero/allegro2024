@@ -1,4 +1,6 @@
-Item                                                                                                  Status
+Item        
+
+Auburn                                                                                          Status
 ------------------------------------------------------------------------------------------------------------
 - Make sure drivebase drives ok with angle-tracker P set to zero                                      Done
 - Tune/Debug angle-tracker P                                                                          Done
@@ -57,14 +59,17 @@ Item                                                                            
 - Update gear ratios for tilt                                                                         Done
 ----------------------------------------------------------------------------------------------------------
 
-Auburn
-
+Wilsonville
 ----------------------------------------------------------------------------------------------------------
-- Solve drive base problem                                                                            Test
-- Solve shooter wheel note stuck problem                                                              Test
-- Try 45 degree shot at subwoofer                                                                     Test
-- Transition automode initial shots to ManualShots                                                    Test
-- Four note auto mode                                                                                 Test/Tune
-- Wide side three note automode all at center                                                         Test/Tune
-- Investigate april tag based shooting vs pose based shooting
+- Solve drive base problem                                                                            Done
+- Solve shooter wheel note stuck problem                                                              Done
+- Try 35 degree shot at subwoofer                                                                     Done
+- Transition automode initial shots to ManualShots                                                    Done
+- Four note auto mode                                                                                 Done
+- Wide side three note automode all at center                                                         Tune
+- Investigate april tag based shooting vs pose based shooting                                         
+- Speed up elevator more
+- Speed up arm more
+- Normal climb - climb down
+- Trap climb - climb down
 ----------------------------------------------------------------------------------------------------------

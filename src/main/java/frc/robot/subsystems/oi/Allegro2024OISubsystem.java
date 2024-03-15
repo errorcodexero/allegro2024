@@ -55,7 +55,8 @@ public class Allegro2024OISubsystem extends OISubsystem {
         WaitForHooksUp,
         WaitForHooksDown,
         WaitForClimbButton,
-        WaitForHooksReset,
+        WaitForHooksResetUp,
+        WaitForHooksResetDown,
         ClimbingUp,
         MovingTrapWhileUp1,
         MovingTrapWhileUp2,
@@ -128,7 +129,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
     //
     // This actions moves the hooks down without the robot when a climb is aborted
     //
-    private ClimbAction hooks_down_ ;
+    private ClimbAction hooks_down_action_ ;
 
     //
     // This action moves the climber hooks down to cause the robot to climb.
@@ -358,6 +359,8 @@ public class Allegro2024OISubsystem extends OISubsystem {
         AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
         SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;
 
+        oipanel_.setClimbUpPrepLED(LEDState.ON);        
+
         if (gp != null) {
             if (gp.isRBackButtonPressed()) {
                 robot.getSuperStructure().setAction(startCollectAction_) ;
@@ -366,6 +369,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
             else if (oipanel_.isClimbUpPrepPressed()) {
                 climb_only_ = true ;
                 robot.getAmpTrap().setAction(goto_climb_pos_action_, true) ;
+                oipanel_.setClimbUpPrepLED(LEDState.BLINK_FAST);                
                 state_ = OIState.GoToClimbPosition ;
             }
         }
@@ -579,14 +583,14 @@ public class Allegro2024OISubsystem extends OISubsystem {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;            
             oipanel_.setClimbUpPrepLED(LEDState.BLINK_FAST);
             robot.getAmpTrap().setAction(goto_climb_pos_action_, true) ;
-
+            climb_only_ = false ;
             state_ = OIState.GoToClimbPosition ;
         }
     }
 
     private void gotoClimbPositionState() {
         if (goto_climb_pos_action_.isDone()) {
-            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;            
+            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
             robot.getSuperStructure().getClimber().setAction(hooks_up_action_, true) ;
             state_ = OIState.WaitForHooksUp ;
         }
@@ -604,7 +608,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
         if (oipanel_.isAbortPressed()) {
             oipanel_.setClimbUpExecLED(LEDState.OFF);
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
-            robot.getSuperStructure().getClimber().setAction(hooks_down_, true) ;
+            robot.getSuperStructure().getClimber().setAction(hooks_down_action_, true) ;
             state_ = OIState.WaitForHooksDown ;
             climb_only_ = false ;
         }
@@ -617,7 +621,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
     }
 
     private void waitingForHooksDown() {
-        if (hooks_down_.isDone()) {
+        if (hooks_down_action_.isDone()) {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
 
             if (climb_only_) {
@@ -635,7 +639,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
         if (oipanel_.isAbortPressed()) {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;            
             robot.getSuperStructure().getClimber().setAction(hooks_up_action_, true) ;
-            state_ = OIState.WaitForHooksReset ;
+            state_ = OIState.WaitForHooksResetUp ;
         }
         else if (hooks_down_with_robot_action_.isDone()) {
             oipanel_.setClimbUpExecLED(LEDState.OFF);
@@ -652,11 +656,17 @@ public class Allegro2024OISubsystem extends OISubsystem {
         }
     }
 
-    private void waitForHooksResetState() {
+    private void waitForHooksResetUpState() {
         if (hooks_up_action_.isDone()) {
             state_ = OIState.WaitForClimbButton ;
         }
     }
+
+    private void waitForHooksResetDownState() {
+        if (hooks_down_action_.isDone()) {
+            state_ = OIState.Idle ;
+        }
+    }    
 
     private void movingTrapWhileUp1State() {
         if (goto_trap_up1_action_.isDone()) {
@@ -848,8 +858,12 @@ public class Allegro2024OISubsystem extends OISubsystem {
             waitForClimbButtonState() ;
             break ;
 
-        case WaitForHooksReset:
-            waitForHooksResetState() ;
+        case WaitForHooksResetUp:
+            waitForHooksResetUpState() ;
+            break ;
+
+        case WaitForHooksResetDown:
+            waitForHooksResetDownState() ;
             break ;
 
         case ClimbingUp:
@@ -938,7 +952,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
         stow_amp_trap_action_ = new AmpTrapPositionAction(robot.getAmpTrap(), "actions:stow:pivot", "actions:stow:elevator") ;
 
         hooks_up_action_ = new ClimbAction(robot.getSuperStructure().getClimber(), ClimbAction.ClimbType.HooksUp) ;
-        hooks_down_ = new ClimbAction(robot.getSuperStructure().getClimber(), ClimbAction.ClimbType.HooksDown);
+        hooks_down_action_ = new ClimbAction(robot.getSuperStructure().getClimber(), ClimbAction.ClimbType.HooksDown);
         hooks_down_with_robot_action_ = new ClimbAction(robot.getSuperStructure().getClimber(), ClimbAction.ClimbType.HooksDownWithRobot);
 
         eject_action_ = new EjectAction(robot.getSuperStructure());
