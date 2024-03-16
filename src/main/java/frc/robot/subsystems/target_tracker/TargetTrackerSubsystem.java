@@ -25,7 +25,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 public class TargetTrackerSubsystem extends Subsystem {
 
-    private static final double kCameraOffset = 0.4;
+    private static final double kCameraOffset = 0.3575 ;
     private Pose2d target_pos_;
     private double distance_between_robot_and_target_;
     private double angle_to_target_;
@@ -37,7 +37,6 @@ public class TargetTrackerSubsystem extends Subsystem {
     private double camera_height_ ;
     private double target_height_ ;
 
-    private boolean triangle_ ;
     private double offset_ ;
 
     public TargetTrackerSubsystem(Subsystem parent, LimeLightSubsystem ll) throws BadParameterTypeException, MissingParameterException {
@@ -48,13 +47,6 @@ public class TargetTrackerSubsystem extends Subsystem {
         camera_angle_ = getSettingsValue("camera-angle").getDouble() ;
         camera_height_ = getSettingsValue("camera-height").getDouble() ;
         target_height_ = getSettingsValue("target-height").getDouble() ;
-
-        String strategy = getSettingsValue("strategy").getString() ;
-        if (strategy.equals("pose")) {
-            triangle_ = false ;
-        } else {
-            triangle_ = true ;
-        }
     }
 
     @Override
@@ -162,15 +154,15 @@ public class TargetTrackerSubsystem extends Subsystem {
             MessageLogger logger = getRobot().getMessageLogger() ;
 
             logger.startMessage(MessageType.Debug, getLoggerID()) ;
-            if (ll_.validTargets() && ll_.hasAprilTag(target_number_) && triangle_) {
+            if (ll_.hasAprilTag(target_number_)) {
                 logger.add("apriltag", true) ;
                 sees_target_ = true ;
                 angle_to_target_ = -ll_.getTX(target_number_) + offset_ ;
                 distance_between_robot_and_target_ = (target_height_ - camera_height_) / Math.tan(Math.toRadians(camera_angle_ + ll_.getTY(target_number_))) + kCameraOffset ;
             }
             else {
-                logger.add("apriltag", false) ;
-                sees_target_ = false ;
+                sees_target_ = false ;                
+                logger.add("pose", false) ;
                 distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos, target_pos_);
                 angle_to_target_ = calculateAngleBetweenPoses(robot_pos, target_pos_);
             }

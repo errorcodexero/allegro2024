@@ -62,7 +62,6 @@
         // actions - describes parameters and target locations that are specific to an action for the subsystem
         //
         "targettracker" : {
-            "strategy" : "triangle",        // or "pose"
             "camera-angle" : 40,            // In degrees
             "camera-height" : 0.165,        // In meters
             "target-height" : 1.4511        // In meters
