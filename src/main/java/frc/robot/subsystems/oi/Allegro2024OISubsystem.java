@@ -562,8 +562,14 @@ public class Allegro2024OISubsystem extends OISubsystem {
     private void shootingAmpState() {
         if (amp_shoot_action_.isDone()) {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
-            robot.getAmpTrap().setAction(stow_amp_trap_action_, true) ;            
-            state_ = OIState.StowingAmpTrap ;
+            robot.getAmpTrap().setAction(stow_amp_trap_action_, true) ; 
+
+            state_ = OIState.Idle ;
+            //
+            // As soon as we start to stow the amp, we are done with the amp action and
+            // can allow for collect
+            //
+            // state_ = OIState.StowingAmpTrap ;
         }
     }
 
