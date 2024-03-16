@@ -32,18 +32,18 @@ public class IntakeManualShootAction extends Action {
     private boolean shooting_ ;
     private boolean tilt_ready_ ;
     private boolean updown_ready_ ;
-    private boolean keep_ ;
+    private boolean force_ ;
 
-    public IntakeManualShootAction(IntakeShooterSubsystem intake, String location) throws Exception {    
-        this(intake, location,false) ;
+    public IntakeManualShootAction(IntakeShooterSubsystem intake, String location) throws Exception {
+        this(intake, location, false) ;
     }
 
-    public IntakeManualShootAction(IntakeShooterSubsystem intake, String location, boolean keep) throws Exception {
+    public IntakeManualShootAction(IntakeShooterSubsystem intake, String location, boolean force) throws Exception {
         super(intake.getRobot().getMessageLogger());
-        intake_ = intake;
 
+        intake_ = intake;
         location_ = location ;
-        keep_ = keep ;
+        force_ = force ;
 
         kTiltPosition = intake.getSettingsValue("actions:manual-shoot:" + location + ":tilt").getDouble();
         kTiltPositionThreshold = intake.getSettingsValue("actions:manual-shoot:" + location + ":tilt-pos-threshold").getDouble();
@@ -69,7 +69,7 @@ public class IntakeManualShootAction extends Action {
 
         start_ = intake_.getRobot().getTime() ;
 
-        if (!intake_.isHoldingNote()) {
+        if (!intake_.isHoldingNote() && !force_) {
             MessageLogger logger = intake_.getRobot().getMessageLogger() ;
             logger.startMessage(MessageType.Error).add("ManualShootAction started with no note in intake").endMessage();
             setDone() ;
@@ -124,10 +124,8 @@ public class IntakeManualShootAction extends Action {
 
             if (feeder_action_.isDone()) {
                 intake_.setHoldingNote(false) ;
-                if (!keep_) {
-                    intake_.getShooter1().setPower(0.0) ;
-                    intake_.getShooter2().setPower(0.0) ;
-                }
+                intake_.getShooter1().setPower(0.0) ;
+                intake_.getShooter2().setPower(0.0) ;
                 setDone() ;
                 logger.startMessage(MessageType.Info) ;
                 logger.add("duration", intake_.getRobot().getTime() - start_) ;

@@ -68,8 +68,8 @@ Wilsonville
 - Four note auto mode                                                                                 Done
 - Wide side three note automode all at center                                                         Tune
 - Investigate april tag based shooting vs pose based shooting                                         
-- Speed up elevator more
-- Speed up arm more
+- Speed up elevator more                                                                              Done
+- Speed up arm more                                                                                   Done
 - Normal climb - climb down
 - Trap climb - climb down
 ----------------------------------------------------------------------------------------------------------

@@ -47,7 +47,7 @@ public class AmpTrapPositionAction extends Action {
         arm_goto_max_action_ = new MCMotionMagicAction(sub_.getArm(), "pids:position", keep_out_max_, 5.0, 1.0) ;
 
         arm_goto_target_action_ = new MCMotionMagicAction(sub_.getArm(), "pids:position", target_angle_, 5.0, 1.0) ;
-        elevator_goto_target_action_ = new MCMotionMagicAction(sub_.getElevator(), "pids:position", target_height_, 0.1, 0.05) ;
+        elevator_goto_target_action_ = new MCMotionMagicAction(sub_.getElevator(), "pids:position", target_height_, 0.03, 0.05) ;
 
         state_ = State.Idle ;
     }

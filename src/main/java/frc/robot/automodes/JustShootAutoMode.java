@@ -11,7 +11,7 @@ public class JustShootAutoMode extends AllegroGameAutoMode {
         super(ctrl, "JustShoot-" + pos) ;
 
         AllegroRobot2024 robot = (AllegroRobot2024)ctrl.getRobot().getRobotSubsystem() ;
-        IntakeManualShootAction action = new IntakeManualShootAction(robot.getIntakeShooter(), pos) ;
+        IntakeManualShootAction action = new IntakeManualShootAction(robot.getIntakeShooter(), pos, true) ;
         addSubActionPair(robot.getIntakeShooter(), action, true);
     }
 }

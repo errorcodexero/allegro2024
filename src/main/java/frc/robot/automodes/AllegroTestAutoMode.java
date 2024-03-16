@@ -256,7 +256,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 if (amptrap != null) {
                     addSubActionPair(amptrap.getElevator(),
                             new MCMotionMagicAction(amptrap.getElevator(), "pids:position", 
-                                getDouble("position"), 1, 1), true) ;
+                                getDouble("position"), .03, 0.05), true) ;
                 }
                 break;
 

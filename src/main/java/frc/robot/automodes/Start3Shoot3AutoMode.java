@@ -6,7 +6,7 @@ import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class Start3Shoot3AutoMode extends AllegroGameAutoMode {
     public Start3Shoot3AutoMode(AutoController ctrl, boolean mirror, double mvalue) throws Exception {
-        super(ctrl, "Start3-Shoot3") ;
+        super(ctrl, "3 Note: Far Side: All Far") ;
 
         AllegroRobot2024 robot = (AllegroRobot2024)ctrl.getRobot().getRobotSubsystem() ;
         Start3Shoot3Action action = new Start3Shoot3Action(robot, mirror, mvalue) ;

@@ -58,10 +58,10 @@ public class AllegroRobotAutoController extends AutoController {
                 addAutoMode(new Start2Shoot2AutoMode(this, mirror, mvalue));
                 addAutoMode(new Start2Shoot4AutoMode(this, mirror, mvalue)) ;
                 addAutoMode(new Start3Shoot3AutoMode(this, mirror, mvalue));
-                // addAutoMode(new NothingAutoMode(this, mirror, mvalue)) ;
-                // addAutoMode(new JustShootAutoMode(this, "subwoofer-left")) ;
-                // addAutoMode(new JustShootAutoMode(this, "subwoofer-right")) ;
-                // addAutoMode(new JustShootAutoMode(this, "subwoofer-center-low")) ;
+                addAutoMode(new JustShootAutoMode(this, "subwoofer-left")) ;
+                addAutoMode(new JustShootAutoMode(this, "subwoofer-right")) ;
+                addAutoMode(new JustShootAutoMode(this, "subwoofer-center-low")) ;
+                addAutoMode(new NothingAutoMode(this, mirror, mvalue)) ;                
             }
             catch(Exception ex) {
                 logger.startMessage(MessageType.Error).add("Exception thrown creating automodes - ") ;
