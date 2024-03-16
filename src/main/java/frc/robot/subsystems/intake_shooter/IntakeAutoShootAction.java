@@ -335,6 +335,7 @@ public class IntakeAutoShootAction extends Action {
     }
 
     private boolean readyToShoot() {
+        AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;        
         MessageLogger logger = sub_.getRobot().getMessageLogger() ;
         logger.startMessage(MessageType.Debug, sub_.getLoggerID()) ;
         logger.add("updown", updown_.isAtTarget()) ;
@@ -346,6 +347,7 @@ public class IntakeAutoShootAction extends Action {
         logger.add("dbready", db_ready_);
         logger.add("swerve_stopped", swerve_stopped_);
         logger.add("gyro_stopped", gyro_stopped_) ;
+        logger.add("offset", robot.getTargetTracker().getOffset()) ;
         logger.endMessage();
 
         return  updown_.isAtTarget() && 

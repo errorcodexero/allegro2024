@@ -63,9 +63,9 @@
         //
         "targettracker" : {
             "strategy" : "triangle",        // or "pose"
-            "camera-angle" : 40,
-            "camera-height" : 0.17145,      // In meters
-            "target-height" : 1.432         // In meters (56.375 inches per game manual)
+            "camera-angle" : 40,            // In degrees
+            "camera-height" : 0.165,        // In meters
+            "target-height" : 1.4511        // In meters
         },
         "superstructure" : {
             "actions" : {
