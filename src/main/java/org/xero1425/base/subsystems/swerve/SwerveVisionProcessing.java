@@ -37,8 +37,6 @@ public class SwerveVisionProcessing {
     private Vector<N3> multi_tag_far_params_ ;
 
     private double vision_reject_threshold_;
-    private double single_tag_distance_threshold_;
-    private boolean advanced_rejection_ ;
 
     private Pose2d vision_pose_ ;
 
@@ -46,11 +44,9 @@ public class SwerveVisionProcessing {
         vision_ = vision ;
         sub_ = sub ;
 
-        advanced_rejection_ = sub_.getSettingsValue("estimator:advanced-rejection").getBoolean();
         single_tag_threshold_ = sub_.getSettingsValue("estimator:single-threshold").getDouble();
         multi_tag_threshold_ = sub_.getSettingsValue("estimator:single-threshold").getDouble();
         vision_reject_threshold_ = sub_.getSettingsValue("estimator:vision-reject-threshold").getDouble();
-        single_tag_distance_threshold_ = sub_.getSettingsValue("estimator:single-tag-ignore-reject-threshold").getDouble();
 
         single_tag_near_params_ = getParams(sub, "vision:single-near");
         single_tag_far_params_ = getParams(sub, "vision:single-far");
@@ -93,34 +89,6 @@ public class SwerveVisionProcessing {
             double dist = vision_pose_.getTranslation().getDistance(sub_.getPose().getTranslation());
             if (dist >= vision_reject_threshold_) {
                 ignore = true ;
-            }
-
-            //
-            // Ok, some special rules about when to apply the vision samples even if they are
-            // more than the threshold away from the current drive pose.  This is usedful if the
-            // drive pose gets way off, or if for instance, the drive team sets up the robot on the
-            // wrong automode.
-            //
-            if (advanced_rejection_ && vision_.getTagCount() > 1) {
-                //
-                // If we see multi tags, we take the value from vision
-                //
-                ignore = false;
-
-                logger.startMessage(MessageType.Info) ;
-                logger.add("added back vision sample");
-                logger.add("distance", dist) ;
-                logger.add("tag count", vision_.getTagCount());
-                logger.endMessage();
-
-            } else if (advanced_rejection_ && vision_.getTagCount() == 1 && vision_.getDistance() < single_tag_distance_threshold_) {
-                ignore = false ;
-
-                logger.startMessage(MessageType.Info) ;
-                logger.add("added back vision sample");
-                logger.add("distance", dist) ;
-                logger.add("tag count", vision_.getTagCount());
-                logger.endMessage();
             }
 
             if (!ignore) {

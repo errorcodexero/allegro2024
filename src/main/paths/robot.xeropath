@@ -441,7 +441,7 @@
                     "constraints": [
                     ],
                     "endvelocity": 0,
-                    "maxacceleration": 1.8,
+                    "maxacceleration": 2,
                     "maxvelocity": 3,
                     "name": "P1",
                     "points": [

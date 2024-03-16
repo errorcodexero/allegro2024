@@ -3,6 +3,7 @@ package frc.robot.subsystems.intake_shooter;
 import org.xero1425.base.misc.XeroTimer;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
+import org.xero1425.base.subsystems.oi.Gamepad;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
@@ -99,6 +100,13 @@ public class StartCollectAltAction extends CollectBaseAltAction {
         }
     }
 
+    private void rumbleGamepad() {
+        Gamepad gp = getSubsystem().getRobot().getRobotSubsystem().getOI().getGamePad();
+        if (gp != null) {
+            gp.rumble(1.0, 2.0);
+        }
+    }
+
     @Override
     public void run() throws Exception {
         super.run() ;
@@ -120,6 +128,7 @@ public class StartCollectAltAction extends CollectBaseAltAction {
             case Moving:
                 if (getSubsystem().isNoteCurrentlyDetected()) {
                     getSubsystem().setHoldingNote(true);                    
+                    rumbleGamepad() ;
                     timer_.start();
                     state_ = CollectState.WaitingForCollect;
                 }
@@ -130,7 +139,8 @@ public class StartCollectAltAction extends CollectBaseAltAction {
 
             case WaitingForNote:
                 if (getSubsystem().isNoteCurrentlyDetected()) {
-                    getSubsystem().setHoldingNote(true);                    
+                    getSubsystem().setHoldingNote(true);
+                    rumbleGamepad() ;
                     collecting_note_ = true ;
                     state_ = CollectState.WaitingForCollect ;
                     timer_.start() ;

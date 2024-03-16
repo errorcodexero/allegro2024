@@ -233,8 +233,8 @@ public class SwerveDriveGamepad extends Gamepad {
         // the positive X axis of the field.
         //
 
-        double orlx = lxscaled ;
-        double orly = lyscaled ;
+        // double orlx = lxscaled ;
+        // double orly = lyscaled ;
 
         // if (Math.abs(rxscaled) > 0.1) {
         //     lyscaled = 0.0 ;
@@ -250,19 +250,6 @@ public class SwerveDriveGamepad extends Gamepad {
         //     rxscaled = 0.0 ;
         // }
         ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(-lyscaled, -lxscaled, Math.toRadians(rxscaled), db_.getHeading()) ;
-
-        MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Info) ;
-        logger.add("gamepad") ;
-        logger.add("orlx", orlx);
-        logger.add("orly", orly) ;
-        logger.add("lxscaled", lxscaled) ;
-        logger.add("lyscaled", lyscaled) ;
-        logger.add("vx", speeds.vxMetersPerSecond) ;
-        logger.add("vy", speeds.vyMetersPerSecond) ;
-        logger.add("rot", Math.toDegrees(speeds.omegaRadiansPerSecond)) ;
-        logger.endMessage();
-
         action_.update(speeds) ;
         if (db_.getAction() != action_)
             db_.setAction(action_) ;

@@ -67,7 +67,7 @@ public class Start2Shoot4Action extends Action {
         p5_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P5", false, 0.2, mirror, mvalue);
         p6_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P6", false, 0.2, mirror, mvalue);                
 
-        delay_timer_ = new XeroTimer(robot.getRobot(), "auto-delay", 0.25) ;
+        delay_timer_ = new XeroTimer(robot.getRobot(), "auto-delay", 0.5) ;
     }
 
     @Override

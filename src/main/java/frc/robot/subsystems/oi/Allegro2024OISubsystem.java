@@ -297,11 +297,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     private void dispositionNoteInIntake() {
         AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
-        SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;
 
-        if (gp != null) {
-            gp.rumble(1.0, 1.0) ;
-        }
         NoteTarget target = oipanel_.getNoteTarget() ;         
         if (target == NoteTarget.Speaker && oipanel_.getAutoManualMode() == AutoManualMode.Auto) {
             robot.getIntakeShooter().setAction(shoot_action_, true);         
@@ -580,7 +576,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
     private void noteInTrapPositionState() {
         oipanel_.setClimbUpPrepLED(LEDState.ON);
         if (oipanel_.isClimbUpPrepPressed()) {
-            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;            
+            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
             oipanel_.setClimbUpPrepLED(LEDState.BLINK_FAST);
             robot.getAmpTrap().setAction(goto_climb_pos_action_, true) ;
             climb_only_ = false ;

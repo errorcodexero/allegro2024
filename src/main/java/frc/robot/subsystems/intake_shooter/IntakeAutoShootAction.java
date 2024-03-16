@@ -59,8 +59,6 @@ public class IntakeAutoShootAction extends Action {
     private double aim_threshold_ ;
     private double tilt_stow_value_ ;
 
-    private String strategy_ ;
-
     private double rotational_velocity_threshold_ ;
 
     private SwerveTrackAngle rotate_ ;
@@ -105,14 +103,6 @@ public class IntakeAutoShootAction extends Action {
             verbose_ = settings.get("system:verbose:auto-shoot").getBoolean() ;
         } 
 
-        String strategy = sub_.getRobot().getSettingsSupplier().get("subsystems:targettracker:strategy").getString() ;
-        if (strategy.equals("pose")) {
-            strategy_ = "pose" ;
-        }
-        else {
-            strategy_ = "triangle" ;
-        }
-        
         tilt_stow_value_ = sub_.getTilt().getSettingsValue("targets:stow").getDouble() ;
         aim_threshold_ = sub_.getSettingsValue("actions:auto-shoot:aim-threshold").getDouble() ;
         rotational_velocity_threshold_ = sub_.getSettingsValue("actions:auto-shoot:rotational-velocity-threshold").getDouble() ;
@@ -133,9 +123,9 @@ public class IntakeAutoShootAction extends Action {
             tilt_vel_threshold = 10.0 ;
         }
 
-        updown_pwl_ = new PieceWiseLinear(sub_.getRobot().getSettingsSupplier(), "subsystems:intake-shooter:pwls-" + strategy_ + ":updown") ;
-        tilt_pwl_ = new PieceWiseLinear(sub_.getRobot().getSettingsSupplier(), "subsystems:intake-shooter:pwls-" + strategy_ + ":tilt") ;
-        velocity_pwl_ = new PieceWiseLinear(sub_.getRobot().getSettingsSupplier(), "subsystems:intake-shooter:pwls-" + strategy_ + ":shooter") ;
+        updown_pwl_ = new PieceWiseLinear(sub_.getRobot().getSettingsSupplier(), "subsystems:intake-shooter:pwls:updown") ;
+        tilt_pwl_ = new PieceWiseLinear(sub_.getRobot().getSettingsSupplier(), "subsystems:intake-shooter:pwls:tilt") ;
+        velocity_pwl_ = new PieceWiseLinear(sub_.getRobot().getSettingsSupplier(), "subsystems:intake-shooter:pwls:shooter") ;
 
         shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", kVelocityStart, velthresh, false) ;
         shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", kVelocityStart, velthresh, false) ;
@@ -272,15 +262,15 @@ public class IntakeAutoShootAction extends Action {
             }
 
             MessageLogger logger = sub_.getRobot().getMessageLogger();
-            logger.startMessage(MessageType.Debug, sub_.getLoggerID()) ;
+            logger.startMessage(MessageType.Debug) ;
             logger.add("shooting") ;
             logger.add("distance", dist) ;
             logger.add("updown", current_updown_).add("tilt", current_tilt_).add("velocity", current_velocity_) ;
+            logger.add("pose", robot.getSwerve().getPose().toString()) ;
+            logger.add("offset", robot.getTargetTracker().getOffset());
             logger.endMessage();
 
-
             AllegroOIPanel oi = robot.getOI().getPanel() ;
-
             updown_.setTarget(current_updown_);
             tilt_.setTarget(current_tilt_);
             shooter1_.setTarget(current_velocity_);

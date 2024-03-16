@@ -32,6 +32,7 @@ public class TargetTrackerSubsystem extends Subsystem {
     private boolean sees_target_ ;
     private int target_number_ ;
     private LimeLightSubsystem ll_ ;
+    private Pose2d robot_pos_ ;
 
     private double camera_angle_ ;
     private double camera_height_ ;
@@ -87,8 +88,8 @@ public class TargetTrackerSubsystem extends Subsystem {
         MessageLogger logger = getRobot().getMessageLogger() ;
 
         AllegroRobot2024 robotSubsystem = (AllegroRobot2024) getRobot().getRobotSubsystem();        
-        Pose2d robot_pos = robotSubsystem.getSwerve().getPose();
-        double effective = robot_pos.getRotation().getDegrees() - ll_.getTX(target_number_) ;
+        robot_pos_ = robotSubsystem.getSwerve().getPose();
+        double effective = robot_pos_.getRotation().getDegrees() - ll_.getTX(target_number_) ;
 
         logger.startMessage(MessageType.Info) ;
         if (target_number_ == AprilTags.BLUE_SPEAKER_CENTER) {
@@ -149,12 +150,11 @@ public class TargetTrackerSubsystem extends Subsystem {
 
         if (target_pos_ != null) {
             AllegroRobot2024 robotSubsystem = (AllegroRobot2024) getRobot().getRobotSubsystem();
-            Pose2d robot_pos = robotSubsystem.getSwerve().getPose();
-
+            robot_pos_ = robotSubsystem.getSwerve().getPose();
             MessageLogger logger = getRobot().getMessageLogger() ;
 
             logger.startMessage(MessageType.Debug, getLoggerID()) ;
-            if (ll_.hasAprilTag(target_number_)) {
+            if (ll_.validTargets() && ll_.hasAprilTag(target_number_)) {
                 logger.add("apriltag", true) ;
                 sees_target_ = true ;
                 angle_to_target_ = -ll_.getTX(target_number_) + offset_ ;
@@ -163,8 +163,9 @@ public class TargetTrackerSubsystem extends Subsystem {
             else {
                 sees_target_ = false ;                
                 logger.add("pose", false) ;
-                distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos, target_pos_);
-                angle_to_target_ = calculateAngleBetweenPoses(robot_pos, target_pos_);
+                distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos_, target_pos_) ;
+
+                angle_to_target_ = calculateAngleBetweenPoses(robot_pos_, target_pos_);
             }
             logger.add("distance", distance_between_robot_and_target_) ;
             logger.add("angle", angle_to_target_) ;
@@ -173,7 +174,7 @@ public class TargetTrackerSubsystem extends Subsystem {
             try {
                 ShuffleboardTab tab = Shuffleboard.getTab("TargetTracking");
                 tab.addDouble("tt_dist-tri", ()->distance_between_robot_and_target_) ;
-                tab.addDouble("tt_dist-pose", ()->calculateDistanceBetweenPoses(robot_pos, target_pos_)) ;
+                tab.addDouble("tt_dist-pose", ()->calculateDistanceBetweenPoses(robot_pos_, target_pos_)) ;
                 tab.addDouble("tt_rotation", ()->angle_to_target_);
                 tab.addBoolean("tt_tag", ()->sees_target_) ;
             }
@@ -198,7 +199,8 @@ public class TargetTrackerSubsystem extends Subsystem {
         double dist = Double.POSITIVE_INFINITY ;
 
         if (target != null) {
-            dist = robot.getTranslation().getDistance(target.getTranslation());
+            dist = robot.getTranslation().getDistance(target.getTranslation()) ;
+            dist = dist * 0.8925 + 0.0236 ;
         }
 
         return dist;
