@@ -70,7 +70,7 @@ python_snapscript_name:
 red_balance:1200
 roi_x:0.000000
 roi_y:0.000000
-rsf:-0.4
+rsf:-0.3575
 rspitch:40
 rsroll:0.000000
 rss:0.000000
@@ -90,7 +90,7 @@ solve3d_iterations:50
 solve3d_precise:0
 solve3d_zoffset:0.000000
 tsf:0
-tss:0
+tss:0.085
 tsu:0
 val_max:255
 val_min:70
