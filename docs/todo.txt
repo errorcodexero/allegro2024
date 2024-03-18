@@ -72,4 +72,5 @@ Wilsonville
 - Speed up arm more                                                                                   Done
 - Normal climb - climb down
 - Trap climb - climb down
+- Look at # 39
 ----------------------------------------------------------------------------------------------------------

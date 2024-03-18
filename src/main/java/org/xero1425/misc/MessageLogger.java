@@ -54,7 +54,7 @@ public final class MessageLogger
     private int subsystem_index_ ;
 
     // The lock for the serial number
-    private Object lock_ ;
+    // private Object lock_ ;
 
     // the list of subsystem to be enabled if ethey are created
     private List<String> to_be_enabled_ ;
@@ -90,7 +90,7 @@ public final class MessageLogger
         enabled_subsystems_ = new ArrayList<Integer>() ;
         to_be_enabled_ = new ArrayList<String>() ;
 
-        lock_ = new Object() ;
+        // lock_ = new Object() ;
 
         format_ = new DecimalFormat("000.0000") ;
 

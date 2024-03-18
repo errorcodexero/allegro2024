@@ -14,8 +14,6 @@ import frc.robot.subsystems.intake_shooter.StopCollectAltAction;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class Start3Shoot3Action extends Action {
-    private static final double kRotatePosTol = 2.0 ;
-
     private enum State {
         Idle,
         Shoot1,
@@ -23,7 +21,9 @@ public class Start3Shoot3Action extends Action {
         Shoot3,
         Path1,
         Path2,
+        Path2WaitCollect,
         Path3,
+        Path4WaitCollect,
         Path4,
         MissedCollect,
         MissedStow,
@@ -54,7 +54,9 @@ public class Start3Shoot3Action extends Action {
         mvalue_ = mvalue ;
         state_ = State.Idle ;
 
-        rotate_ = new SwerveTrackAngle(robot.getSwerve(), () -> robot_.getTargetTracker().getRotation(), kRotatePosTol) ;
+        double rottol = robot.getIntakeShooter().getSettingsValue("actions:auto-shoot:rotational-position-tolerance").getDouble() ;
+
+        rotate_ = new SwerveTrackAngle(robot.getSwerve(), () -> robot_.getTargetTracker().getRotation(), rottol) ;
         shoot_ = new IntakeAutoShootAction(robot_.getIntakeShooter(), robot_.getTargetTracker(), true, rotate_) ;
         start_collect_ = new StartCollectAltAction(robot_.getIntakeShooter()) ;
         stop_collect_ = new StopCollectAltAction(robot_.getIntakeShooter()) ;
@@ -71,9 +73,9 @@ public class Start3Shoot3Action extends Action {
         }
 
         p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P1", true, 0.2, mirror_, mvalue_);
-        p2_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P2", true, 0.2, mirror_, mvalue_); 
-        p3_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P3", true, 0.2, mirror_, mvalue_);
-        p4_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P4", true, 0.2, mirror_, mvalue_);        
+        p2_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P2", false, 0.2, mirror_, mvalue_); 
+        p3_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P3", false, 0.2, mirror_, mvalue_);
+        p4_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P4", false, 0.2, mirror_, mvalue_);        
     }
 
     @Override
@@ -92,74 +94,47 @@ public class Start3Shoot3Action extends Action {
     }
 
     private void path1State() {
-        if (p1_.isDone() && robot_.getIntakeShooter().isHoldingNote()) {
+        if (p1_.isDone()) {
             //
             // We got the note, drive back
             //
             robot_.getSwerve().setAction(p2_, true) ;
             state_ = State.Path2 ;
         }
-        else if (p1_.isDone()) {
-            //
-            // We missed the note, 
-            //
-            state_ = State.MissedCollect ;
-        }
     }
 
     private void path2State() {
-        if (p2_.isDone()) {
+        if (p2_.isDone() && start_collect_.isDone()) {
             //
             // We have arrived, shoot the note
             //
+            robot_.getIntakeShooter().setAction(shoot_, true) ;             
             robot_.getSwerve().setAction(rotate_, true) ;
-            robot_.getIntakeShooter().setAction(shoot_, true) ;
             state_ = State.Shoot2 ;
         }
     }
 
     private void shoot2State() {
         if (shoot_.isDone()) {
-            robot_.getIntakeShooter().setAction(start_collect_, true) ;            
             robot_.getSwerve().setAction(p3_, true) ;
             state_ = State.Path3 ;
         }
     }
 
     private void path3State() {
-        if (p3_.isDone() && robot_.getIntakeShooter().isHoldingNote()) {
+        if (p3_.isDone()) {
             //
             // We got the note, drive back
             //
             robot_.getSwerve().setAction(p4_, true) ;
             state_ = State.Path4 ;
         }
-        else if (p3_.isDone()) {
-            //
-            // We missed the note, 
-            //
-            state_ = State.MissedCollect ;
-        }
     }
 
     private void path4State() {
         if (p4_.isDone()) {
-            //
-            // We have arrived, shoot the note
-            //
-            robot_.getSwerve().setAction(rotate_, true) ;
-            robot_.getIntakeShooter().setAction(shoot_, true) ;
-            state_ = State.Shoot3 ;
+            state_ = State.Done ;
         }        
-    }
-
-    private void shoot3State() {
-        if (shoot_.isDone()) {
-            //
-            // This will stow the intake if possible (time)
-            //
-            state_ = State.MissedCollect ;
-        }
     }
 
     private void missedCollect1State() {
@@ -198,10 +173,6 @@ public class Start3Shoot3Action extends Action {
                 shoot2State() ;
                 break ;
 
-            case Shoot3:
-                shoot3State() ;
-                break ;                
-
             case Path1:
                 path1State();
                 break ;
@@ -216,8 +187,8 @@ public class Start3Shoot3Action extends Action {
                 
             case Path4:
                 path4State() ;
-                break ;                
-
+                break ;     
+                
             case MissedCollect:
                 missedCollect1State();
                 break ;

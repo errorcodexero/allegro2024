@@ -1,0 +1,77 @@
+001.1674:1: Info: global: ============================================================
+001.1868:1: Info: global: robot code starting
+001.1875:1: Info: global:  SerialNumber = '03223856'
+001.2374:1: Info: global:  enableMessageLogger time = 0.3331
+001.2379:1: Info: global: ============================================================
+001.2442:1: Info: global: reading params for bot 'COMPETITION'
+001.2473:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.4642:1: Info: global:  readParamsFile time = 0.2253
+001.5145:1: Info: global:  enableMessagesFromSettingsFile time = 0.002504
+002.3098:1: Info: global:  loadPathsFiles time = 0.7939
+004.6919:1: Info: global: initializing robot - no FMS
+004.7503:1: Info: global:  plotMgrInit time = 0.0002040
+005.5103:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.2.2', no faults
+005.6773:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.2.2', no faults
+005.8100:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.2.2', no faults
+005.9405:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.2.2', no faults
+006.0659:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.2.2', no faults
+006.2340:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.2.2', no faults
+006.3759:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.2.2', no faults
+006.5405:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+006.6892:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.2.2', no faults
+007.2576:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.4031:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.6057:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.7430:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.8768:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.0055:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.1399:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.2716:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.4848:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+008.4858:1: Info: global: Gamepad discovered
+008.5389:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+008.5632:1: Info: global:  hardwareInit time = 3.811
+008.6486:1: Info: global: Changed vision parameters to Single Near
+008.7927:1: Info: global:  computeInitalState time = 0.2283
+009.0162:1: Info: global:  postHWInit time = 0.2225
+009.0684:1: Info: global: changing robot loop type: Initialization -> Disabled
+009.0705:1: Info: global: alliance changed:null -> Red: recreated auto modes for new alliance value
+009.3428:1: Info: global: Changed vision parameters to Multi Far
+010.7570:1: Info: global: changing robot loop type: Disabled -> Teleop
+010.8376:1: Debug: actions: 0:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: -0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+016.0291:1: Info: global: Changed vision parameters to Single Far
+020.3237:1: Info: global: Changed vision parameters to Single Near
+021.5792:1: Info: global: Changed vision parameters to Multi Near
+022.5936:1: Info: global: Changed vision parameters to Single Near
+029.7950:1: Info: global: Changed vision parameters to Multi Near
+030.0745:1: Info: global: Changed vision parameters to Single Near
+030.1199:1: Info: global: Changed vision parameters to Multi Near
+034.2546:1: Info: global: Changed vision parameters to Single Near
+034.8547:1: Info: global: Changed vision parameters to Multi Near
+037.5150:1: Info: global: Changed vision parameters to Multi Far
+037.5348:1: Info: global: Changed vision parameters to Single Near
+039.1145:1: Info: global: Changed vision parameters to Single Far
+039.3329:1: Info: global: Changed vision parameters to Multi Near
+304.2143:1: Info: global: changing robot loop type: Teleop -> Disabled
+304.2149:1: Info: global: Motor Faults Report
+304.2153:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+304.2473:1: Info: global: intake-updown:rio-2:NONE
+304.2787:1: Info: global: intake-feeder:rio-1:NONE
+304.3182:1: Info: global: intake-tilt:rio-5:NONE
+304.3454:1: Info: global: intake-shooter1:rio-3:NONE
+304.4745:1: Info: global: intake-shooter2:rio-4:NONE
+304.6137:1: Info: global: elevator:rio-6:NONE
+304.6981:1: Info: global: arm:rio-7:NONE
+304.6991:1: Info: global: manipulator:rio-9:NONE
+304.8860:1: Info: global: climber:rio-10:NONE
+304.9151:1: Info: global: fl-steer:DriveBase-11:NONE
+305.0522:1: Info: global: fl-drive:DriveBase-12:NONE
+305.1306:1: Info: global: fr-steer:DriveBase-21:NONE
+305.2136:1: Info: global: fr-drive:DriveBase-22:NONE
+305.4014:1: Info: global: bl-steer:DriveBase-41:NONE
+305.4804:1: Info: global: bl-drive:DriveBase-42:NONE
+305.5576:1: Info: global: br-steer:DriveBase-31:NONE
+305.6438:1: Info: global: br-drive:DriveBase-32:NONE
+305.6442:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+368.4343:1: Info: global: Changed vision parameters to Single Near
+368.5153:1: Info: global: Changed vision parameters to Multi Near

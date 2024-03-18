@@ -81,57 +81,81 @@ public class TargetTrackerSubsystem extends Subsystem {
         offset_ = 0 ;
     }
 
+    private double getTargetAngle() {
+        if (target_pos_ == null)
+            return 0.0 ;
+
+        AllegroRobot2024 robotSubsystem = (AllegroRobot2024) getRobot().getRobotSubsystem();        
+        robot_pos_ = robotSubsystem.getSwerve().getPose();
+
+        double angle = Math.atan2(target_pos_.getY() - robot_pos_.getY(), target_pos_.getX() - robot_pos_.getX()) ;
+        return XeroMath.normalizeAngleDegrees(Math.toDegrees(angle) + 180) ;
+    }
+
     public boolean setOffset() {
         if (!ll_.validTargets() || !ll_.hasAprilTag(target_number_))
             return false;
 
         MessageLogger logger = getRobot().getMessageLogger() ;
 
-        AllegroRobot2024 robotSubsystem = (AllegroRobot2024) getRobot().getRobotSubsystem();        
-        robot_pos_ = robotSubsystem.getSwerve().getPose();
-        double effective = robot_pos_.getRotation().getDegrees() - ll_.getTX(target_number_) ;
+        double effective = getTargetAngle() ;
+        String zone = "" ;
 
         logger.startMessage(MessageType.Info) ;
         if (target_number_ == AprilTags.BLUE_SPEAKER_CENTER) {
-            if (effective <= 30 && effective >= -30) {
+            if (effective <= 20 && effective >= -20) {
+                zone = "1" ;
                 logger.add("case 1") ;
                 offset_ = 0 ;
             }
-            else if (effective < -30 && effective >= -45) {
+            else if (effective < -20 && effective >= -40) {
+                zone = "2" ;
                 logger.add("case 2") ;                
-                offset_ = -5 ;
+                offset_ = -7.5 ;
             }
-            else if (effective < -45 && effective >= -60) {
+            else if (effective < -40 && effective >= -60) {
+                zone = "3" ;
                 logger.add("case 3") ;
                 offset_ = -10 ;
             }
-            else if (effective > 30 && effective <= 45) {
+            else if (effective > 20 && effective <= 40) {
+                zone = "4" ;                
                 logger.add("case 4") ;                
                 offset_ = 0 ;
             }
             else {
+                zone = "5" ;
                 logger.add("case 5") ;                
-                offset_ = 5 ;
+                offset_ = 0 ;
             }
         }
         else {
-            if (effective >= 150 || effective <= -150) {
+            if (effective >= 160 || effective <= -160) {
+                zone = "6" ;                
                 logger.add("case 6") ;                
                 offset_ = 0 ;
             }
-            else if (effective < 150 && effective >= 135) {
+            else if (effective < 160 && effective >= 140) {
+                // Checked
+                zone = "7" ;                
                 logger.add("case 7") ;                
                 offset_ = -5 ;
             }
-            else if (effective > -150 && effective <= -135) {
+            else if (effective > -160 && effective <= -140) {
+                // Checked
+                zone = "8" ;                
                 logger.add("case 8") ;                
                 offset_ = 0 ;
-            }
-            else if (effective < 135 && effective >= 120) {
+            }            
+            else if (effective < 140 && effective >= 120) {
+                // Checked
+                zone = "9" ;                
                 logger.add("case 9") ;
-                offset_ = -10 ;
+                offset_ = -5 ;
             }
             else {
+                //  Checked
+                zone = "10" ;                
                 logger.add("case 10") ;   
                 offset_ = 5 ;
             }
@@ -140,13 +164,16 @@ public class TargetTrackerSubsystem extends Subsystem {
         logger.add("effective", effective) ;
         logger.add("offset", offset_) ;
         logger.endMessage();
-
+        
         return true ;
     }
 
     @Override
     public void computeMyState() throws Exception {
         super.computeMyState();
+
+        double angle = getTargetAngle() ;
+        putDashboard("targetangle", DisplayType.Always, angle);
 
         if (target_pos_ != null) {
             AllegroRobot2024 robotSubsystem = (AllegroRobot2024) getRobot().getRobotSubsystem();
@@ -161,7 +188,7 @@ public class TargetTrackerSubsystem extends Subsystem {
                 distance_between_robot_and_target_ = (target_height_ - camera_height_) / Math.tan(Math.toRadians(camera_angle_ + ll_.getTY(target_number_))) + kCameraOffset ;
             }
             else {
-                sees_target_ = false ;                
+                sees_target_ = true ;                
                 logger.add("pose", false) ;
                 distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos_, target_pos_) ;
 

@@ -1,0 +1,43 @@
+001.0774:1: Info: global: ============================================================
+001.0945:1: Info: global: robot code starting
+001.0952:1: Info: global:  SerialNumber = '03223856'
+001.1422:1: Info: global:  enableMessageLogger time = 0.2790
+001.1428:1: Info: global: ============================================================
+001.1481:1: Info: global: reading params for bot 'COMPETITION'
+001.1490:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.3173:1: Info: global:  readParamsFile time = 0.1735
+001.3568:1: Info: global:  enableMessagesFromSettingsFile time = 0.002115
+001.9467:1: Info: global:  loadPathsFiles time = 0.5888
+004.2894:1: Info: global: initializing robot - no FMS
+004.3451:1: Info: global:  plotMgrInit time = 0.0002780
+005.0468:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.2.2', no faults
+005.2228:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.2.2', no faults
+005.3533:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.2.2', no faults
+005.4762:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.2.2', no faults
+005.6022:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.2.2', no faults
+005.7664:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.2.2', no faults
+005.9097:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.2.2', no faults
+006.0651:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+006.2063:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.2.2', no faults
+006.9206:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.0587:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.2579:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.3837:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.5168:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.6406:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.7677:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.9039:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.1179:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+008.1188:1: Info: global: Gamepad discovered
+008.1716:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+008.1954:1: Info: global:  hardwareInit time = 3.849
+008.2900:1: Info: global: Changed vision parameters to Single Near
+008.4080:1: Info: global:  computeInitalState time = 0.2113
+008.6398:1: Info: global:  postHWInit time = 0.2305
+008.6900:1: Info: global: changing robot loop type: Initialization -> Disabled
+008.6925:1: Info: global: alliance changed:null -> Blue: recreated auto modes for new alliance value
+009.0909:1: Info: global: Changed vision parameters to Multi Near
+009.5538:1: Info: global: Changed vision parameters to Single Near
+009.5789:1: Info: global: Changed vision parameters to Multi Near
+020.1939:1: Info: global: Changed vision parameters to Single Near
+020.2275:1: Info: global: Changed vision parameters to Multi Near

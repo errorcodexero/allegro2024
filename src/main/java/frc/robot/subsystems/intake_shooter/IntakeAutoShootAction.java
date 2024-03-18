@@ -257,8 +257,10 @@ public class IntakeAutoShootAction extends Action {
             }
             else {
                 current_updown_ = updown_pwl_.getValue(dist);
-                current_tilt_ = tilt_pwl_.getValue(dist);
-                current_velocity_ = velocity_pwl_.getValue(dist);
+                if (!dbReadyToShoot()) {
+                    current_tilt_ = tilt_pwl_.getValue(dist);
+                    current_velocity_ = velocity_pwl_.getValue(dist);
+                }
             }
 
             MessageLogger logger = sub_.getRobot().getMessageLogger();
@@ -268,6 +270,7 @@ public class IntakeAutoShootAction extends Action {
             logger.add("updown", current_updown_).add("tilt", current_tilt_).add("velocity", current_velocity_) ;
             logger.add("pose", robot.getSwerve().getPose().toString()) ;
             logger.add("offset", robot.getTargetTracker().getOffset());
+            logger.add("angle", tracker_.getRotation()) ;
             logger.endMessage();
 
             AllegroOIPanel oi = robot.getOI().getPanel() ;
@@ -313,7 +316,7 @@ public class IntakeAutoShootAction extends Action {
         AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;
 
         swerve_stopped_ = robot.getSwerve().isStopped() ;
-        gyro_stopped_ =     Math.abs(gyro.getRate()) < rotational_velocity_threshold_ ;
+        gyro_stopped_ =  Math.abs(gyro.getRate()) < rotational_velocity_threshold_ ;
 
         MessageLogger logger = robot.getRobot().getMessageLogger() ;
         logger.startMessage(MessageType.Info).add("gyroinfo");

@@ -1,0 +1,176 @@
+001.1294:1: Info: global: ============================================================
+001.1472:1: Info: global: robot code starting
+001.1478:1: Info: global:  SerialNumber = '03223856'
+001.1968:1: Info: global:  enableMessageLogger time = 0.3056
+001.1973:1: Info: global: ============================================================
+001.2023:1: Info: global: reading params for bot 'COMPETITION'
+001.2034:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.3827:1: Info: global:  readParamsFile time = 0.1842
+001.4248:1: Info: global:  enableMessagesFromSettingsFile time = 0.002059
+002.0571:1: Info: global:  loadPathsFiles time = 0.6314
+004.4573:1: Info: global: initializing robot - no FMS
+004.5125:1: Info: global:  plotMgrInit time = 0.0002600
+005.2180:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.2.2', no faults
+005.3932:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.2.2', no faults
+005.5312:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.2.2', no faults
+005.6578:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.2.2', no faults
+005.7908:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.2.2', no faults
+005.9650:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.2.2', no faults
+006.1064:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.2.2', no faults
+006.2626:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+006.4000:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.2.2', no faults
+007.1243:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.2681:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.4651:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.6000:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.7292:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.8593:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.9892:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.1162:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.3310:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+008.3325:1: Info: global: Gamepad discovered
+008.3833:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+008.4088:1: Info: global:  hardwareInit time = 3.895
+008.5033:1: Info: global: Changed vision parameters to Single Near
+008.6354:1: Info: global:  computeInitalState time = 0.2256
+008.8745:1: Info: global:  postHWInit time = 0.2378
+008.9290:1: Info: global: changing robot loop type: Initialization -> Disabled
+008.9312:1: Info: global: alliance changed:null -> Blue: recreated auto modes for new alliance value
+034.3999:1: Info: global: Entering Autonomous Mode
+034.4003:1: Info: global:     Automode Number: 3
+034.4007:1: Info: global:     Automode Name: 3 Note: Far Side: All Far
+034.4013:1: Info: global:     Alliance: BLUE
+034.4016:1: Info: global:     Location: 1
+034.4019:1: Info: global:     GameData: ''
+034.4024:1: Info: global:     EventName: 
+034.4081:1: Info: global:     MatchType: NONE
+034.4091:1: Info: global:     MatchNumber: 0
+034.4103:1: Info: global:     MatchTime: 14.9870
+034.4106:1: Info: global:     FMS Attached: NO
+034.4112:1: Info: global: changing robot loop type: Disabled -> Autonomous
+034.4829:1: Debug: actions: 230:starting action: 
+                   actions: 230: Sequence [
+                   actions:     267: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:         Start3Shoot3Action
+                   actions:     ]
+                   actions: ]
+034.4982:1: Debug: actions: 267:starting action: 
+                   actions: 267: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:     Start3Shoot3Action
+                   actions: ]
+034.5060:1: Debug: actions: 257:starting action: 257: ManualShootAction subwoofer-right
+034.5154:1: Debug: actions: 258:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=5.0 velthresh=5.0
+034.5758:1: Debug: actions: 259:starting action: MCMotionMagicAction (intake-updown) target=100.0 posthresh=5.0 velthresh=5.0
+034.6104:1: Debug: actions: 260:starting action: 260: MCVelocityAction (intake-shooter1), target = 65.0
+034.6241:1: Debug: actions: 261:starting action: 261: MCVelocityAction (intake-shooter2), target = 65.0
+034.9074:1: Debug: actions: 258:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=5.0 velthresh=5.0
+035.0894:1: Debug: actions: 259:completing action: MCMotionMagicAction (intake-updown) target=100.0 posthresh=5.0 velthresh=5.0
+035.1031:1: Debug: global: shot:  tilt = -65.04 updown = 100.0 shooter1 = 66.74 shooter2 = 66.04
+035.1038:1: Debug: actions: 262:starting action: MotorEncoderPowerAction intake-feeder power = 0.5 0.5 0.2
+035.1230:1: Debug: global: shot/2:  tilt = -65.04 updown = 100.0 shooter1 = 66.01 shooter2 = 64.95
+035.1363:1: Debug: global: shot/2:  tilt = -65.06 updown = 100.0 shooter1 = 65.53 shooter2 = 67.29
+035.1507:1: Debug: global: shot/2:  tilt = -65.07 updown = 100.0 shooter1 = 66.67 shooter2 = 66.54
+035.1678:1: Debug: global: shot/2:  tilt = -65.08 updown = 100.0 shooter1 = 64.72 shooter2 = 65.62
+035.1808:1: Debug: global: shot/2:  tilt = -65.11 updown = 100.0 shooter1 = 66.35 shooter2 = 65.87
+035.1946:1: Debug: global: shot/2:  tilt = -65.14 updown = 99.99 shooter1 = 66.40 shooter2 = 66.38
+035.2146:1: Debug: global: shot/2:  tilt = -65.15 updown = 99.98 shooter1 = 65.74 shooter2 = 66.64
+035.2272:1: Debug: global: shot/2:  tilt = -65.16 updown = 99.97 shooter1 = 65.76 shooter2 = 67.57
+035.2393:1: Debug: global: shot/2:  tilt = -65.16 updown = 99.97 shooter1 = 66.90 shooter2 = 66.85
+035.2516:1: Debug: global: shot/2:  tilt = -65.16 updown = 99.97 shooter1 = 60.70 shooter2 = 59.46
+035.2631:1: Debug: global: shot/2:  tilt = -65.23 updown = 99.94 shooter1 = 49.26 shooter2 = 48.44
+035.2805:1: Debug: global: shot/2:  tilt = -65.27 updown = 99.99 shooter1 = 46.69 shooter2 = 46.52
+035.2944:1: Debug: global: shot/2:  tilt = -65.27 updown = 99.99 shooter1 = 49.26 shooter2 = 47.68
+035.3082:1: Debug: global: shot/2:  tilt = -65.25 updown = 99.98 shooter1 = 51.28 shooter2 = 51.44
+035.3089:1: Debug: actions: 262:completing action: MotorEncoderPowerAction intake-feeder power = 0.5 0.5 0.2
+035.3236:1: Debug: global: shot/2:  tilt = -65.22 updown = 99.97 shooter1 = 53.54 shooter2 = 52.56
+035.3244:1: Debug: actions: 257:completing action: 257: ManualShootAction subwoofer-right
+035.3251:1: Info: global:  duration = 0.8113
+035.3355:1: Debug: actions: 260:canceling action: 260: MCVelocityAction (intake-shooter1), target = 65.0
+035.3363:1: Debug: actions: 261:canceling action: 261: MCVelocityAction (intake-shooter2), target = 65.0
+035.3369:1: Debug: actions: 239:starting action: StartCollectAction
+035.3375:1: Debug: actions: 244:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+035.3382:1: Debug: actions: 244:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+035.3404:1: Info: global: pos < stow pos = 99.99 stow = 118.0
+035.3417:1: Debug: actions: 293:starting action: MCMotionMagicAction (intake-tilt) target=-46.987560783999996 posthresh=3.0 velthresh=1.0
+035.3458:1: Debug: actions: 263:starting action: SwerveHolonomicPathFollower S3S3-P1
+035.3496:1: Info: global:  SwerveHolonomicPathFollower: Set Initial Pose  = 0.745 4.252 -60.0
+035.3501:1: Info: global: automode: Shoot1 -> Path1
+035.8495:1: Debug: actions: 293:completing action: MCMotionMagicAction (intake-tilt) target=-46.987560783999996 posthresh=3.0 velthresh=1.0
+035.8663:1: Debug: actions: 246:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+035.8702:1: Debug: actions: 247:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+035.8750:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+037.0953:1: Debug: actions: 247:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+037.1338:1: Debug: actions: 246:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+037.1467:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+039.8069:1: Debug: actions: 263:completing action: SwerveHolonomicPathFollower S3S3-P1
+039.8100:1: Info: global: finished path'S3S3-P1' pose = 8.143 0.352 0.1
+039.8231:1: Debug: actions: 264:starting action: SwerveHolonomicPathFollower S3S3-P2
+039.8245:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+039.8249:1: Info: global: automode: Path1 -> Path2
+044.7110:1: Debug: actions: 264:completing action: SwerveHolonomicPathFollower S3S3-P2
+044.7201:1: Info: global: finished path'S3S3-P2' pose = 1.055 4.105 -55.5
+049.4012:1: Info: global: changing robot loop type: Autonomous -> Disabled
+049.4016:1: Info: global: Motor Faults Report
+049.4019:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+049.4235:1: Info: global: intake-updown:rio-2:NONE
+049.4466:1: Info: global: intake-feeder:rio-1:NONE
+049.4691:1: Info: global: intake-tilt:rio-5:NONE
+049.4925:1: Info: global: intake-shooter1:rio-3:NONE
+049.5190:1: Info: global: intake-shooter2:rio-4:NONE
+049.5468:1: Info: global: elevator:rio-6:NONE
+049.5688:1: Info: global: arm:rio-7:NONE
+049.5696:1: Info: global: manipulator:rio-9:NONE
+049.5898:1: Info: global: climber:rio-10:NONE
+049.6125:1: Info: global: fl-steer:DriveBase-11:NONE
+049.6333:1: Info: global: fl-drive:DriveBase-12:NONE
+049.6548:1: Info: global: fr-steer:DriveBase-21:NONE
+049.6746:1: Info: global: fr-drive:DriveBase-22:NONE
+049.6935:1: Info: global: bl-steer:DriveBase-41:NONE
+049.7157:1: Info: global: bl-drive:DriveBase-42:NONE
+049.7349:1: Info: global: br-steer:DriveBase-31:NONE
+049.7577:1: Info: global: br-drive:DriveBase-32:NONE
+049.7584:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+050.8995:1: Debug: actions: 231:canceling action: Start3Shoot3Action
+050.9002:1: Info: global: changing robot loop type: Disabled -> Teleop
+050.9700:1: Debug: actions: 0:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: -0.00 m/s, Omega: 0.02 rad/s))
+051.8072:1: Debug: actions: 239:canceling action: StartCollectAction
+051.8078:1: Debug: actions: 111:starting action: TurtleAction
+051.8085:1: Debug: actions: 112:starting action: ClimbAction HooksDown, target = 0.0
+051.8110:1: Debug: global: OI State changed : Idle -> Turtle
+051.8260:1: Debug: actions: 112:completing action: ClimbAction HooksDown, target = 0.0
+051.8508:1: Debug: actions: 113:starting action: AmpTrapPositionAction, angle=0.0, height 0.0
+051.8528:1: Error: global: armpos current = 0.03561 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+051.8534:1: Debug: actions: 118:starting action: MCMotionMagicAction (elevator) target=0.0 posthresh=0.03 velthresh=0.05
+051.8798:1: Debug: actions: 117:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+051.9045:1: Debug: actions: 118:completing action: MCMotionMagicAction (elevator) target=0.0 posthresh=0.03 velthresh=0.05
+052.0086:1: Debug: actions: 117:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+052.0226:1: Debug: actions: 113:completing action: AmpTrapPositionAction, angle=0.0, height 0.0
+052.0325:1: Debug: actions: 119:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+052.0335:1: Debug: actions: 120:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+052.0384:1: Debug: actions: 121:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+053.3750:1: Debug: actions: 121:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+053.4027:1: Debug: actions: 120:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+053.5704:1: Debug: actions: 119:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+053.5897:1: Debug: actions: 111:completing action: TurtleAction
+053.5913:1: Debug: global: OI State changed : Turtle -> Idle
+069.2605:1: Info: global: changing robot loop type: Teleop -> Disabled
+069.2608:1: Info: global: Motor Faults Report
+069.2613:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+069.2789:1: Info: global: intake-updown:rio-2:NONE
+069.3074:1: Info: global: intake-feeder:rio-1:NONE
+069.3234:1: Info: global: intake-tilt:rio-5:NONE
+069.3392:1: Info: global: intake-shooter1:rio-3:NONE
+069.3542:1: Info: global: intake-shooter2:rio-4:NONE
+069.3699:1: Info: global: elevator:rio-6:NONE
+069.3852:1: Info: global: arm:rio-7:NONE
+069.3881:1: Info: global: manipulator:rio-9:NONE
+069.4039:1: Info: global: climber:rio-10:NONE
+069.4201:1: Info: global: fl-steer:DriveBase-11:NONE
+069.4422:1: Info: global: fl-drive:DriveBase-12:NONE
+069.4649:1: Info: global: fr-steer:DriveBase-21:NONE
+069.4872:1: Info: global: fr-drive:DriveBase-22:NONE
+069.5138:1: Info: global: bl-steer:DriveBase-41:NONE
+069.5345:1: Info: global: bl-drive:DriveBase-42:NONE
+069.5568:1: Info: global: br-steer:DriveBase-31:NONE
+069.5784:1: Info: global: br-drive:DriveBase-32:NONE
+069.5787:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

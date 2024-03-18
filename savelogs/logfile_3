@@ -1,0 +1,424 @@
+001.1314:1: Info: global: ============================================================
+001.1498:1: Info: global: robot code starting
+001.1504:1: Info: global:  SerialNumber = '03223856'
+001.2017:1: Info: global:  enableMessageLogger time = 0.3184
+001.2023:1: Info: global: ============================================================
+001.2083:1: Info: global: reading params for bot 'COMPETITION'
+001.2094:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.3942:1: Info: global:  readParamsFile time = 0.1907
+001.4365:1: Info: global:  enableMessagesFromSettingsFile time = 0.001966
+002.0853:1: Info: global:  loadPathsFiles time = 0.6478
+004.4891:1: Info: global: initializing robot - no FMS
+004.5451:1: Info: global:  plotMgrInit time = 0.0002780
+005.2630:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.2.2', no faults
+005.4305:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.2.2', no faults
+005.5586:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.2.2', no faults
+005.6868:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.2.2', no faults
+005.8063:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.2.2', no faults
+005.9726:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.2.2', no faults
+006.1094:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.2.2', no faults
+006.2638:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+006.3975:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.2.2', no faults
+006.9614:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.0986:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.2994:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.4286:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.5594:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.6817:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.8165:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.9445:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.1576:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+008.1585:1: Info: global: Gamepad discovered
+008.2083:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+008.2349:1: Info: global:  hardwareInit time = 3.689
+008.3306:1: Info: global: Changed vision parameters to Single Near
+008.4444:1: Info: global:  computeInitalState time = 0.2080
+008.6768:1: Info: global:  postHWInit time = 0.2316
+008.7181:1: Info: global: changing robot loop type: Initialization -> Disabled
+008.7206:1: Info: global: alliance changed:null -> Blue: recreated auto modes for new alliance value
+010.0895:1: Info: global: changing robot loop type: Disabled -> Teleop
+010.1859:1: Debug: actions: 0:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: -0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+017.1481:1: Info: global: Changed vision parameters to Multi Near
+017.1800:1: Info: global: Changed vision parameters to Single Near
+017.2744:1: Info: global: Changed vision parameters to Multi Near
+017.3143:1: Info: global: Changed vision parameters to Single Near
+017.3433:1: Info: global: Changed vision parameters to Multi Near
+017.5273:1: Info: global: Changed vision parameters to Single Near
+017.6300:1: Info: global: Changed vision parameters to Multi Near
+017.7018:1: Info: global: Changed vision parameters to Single Near
+017.7471:1: Info: global: Changed vision parameters to Multi Near
+017.7762:1: Info: global: Changed vision parameters to Single Near
+019.4278:1: Info: global: Changed vision parameters to Multi Near
+020.3462:1: Info: global: Changed vision parameters to Multi Far
+022.2853:1: Info: global: Changed vision parameters to Multi Near
+022.8577:1: Info: global: Changed vision parameters to Single Far
+023.5957:1: Info: global: Changed vision parameters to Multi Near
+024.0956:1: Info: global: Changed vision parameters to Single Near
+029.1053:1: Debug: actions: 122:starting action: StartCollectAction
+029.1058:1: Debug: actions: 127:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+029.1065:1: Debug: actions: 127:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+029.1088:1: Debug: actions: 129:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+029.1427:1: Debug: actions: 130:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+029.1577:1: Debug: global: OI State changed : Idle -> Collect
+029.3486:1: Debug: intake-shooter: state changed: Moving ->WaitingForCollect
+029.4598:1: Debug: actions: 128:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+029.4605:1: Debug: actions: 128:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+029.4615:1: Debug: actions: 130:canceling action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+029.4623:1: Debug: actions: 123:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+029.4647:1: Debug: actions: 129:canceling action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+029.4656:1: Debug: actions: 124:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+029.4679:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+029.6480:1: Debug: actions: 123:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+030.2069:1: Debug: actions: 122:canceling action: StartCollectAction
+030.2078:1: Debug: actions: 124:canceling action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+030.2088:1: Debug: actions: 131:starting action: StopCollectAction
+030.2093:1: Debug: actions: 136:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+030.2099:1: Debug: actions: 136:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+030.2112:1: Debug: actions: 132:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+030.2129:1: Debug: actions: 133:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+030.2269:1: Debug: global: OI State changed : Collect -> EndingCollect
+030.2861:1: Debug: actions: 132:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+030.6397:1: Debug: actions: 133:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+030.6608:1: Debug: actions: 131:completing action: StopCollectAction
+030.6663:1: Debug: actions: 3:starting action: 3: IntakeAutoShootAction
+030.6668:1: Debug: actions: 6:starting action: MCTrackPosAction (intake-updown) target=123.5
+030.6693:1: Debug: actions: 7:starting action: MCTrackPosAction (intake-tilt) target=-40.0
+030.6715:1: Debug: actions: 4:starting action: 4: MCVelocityAction (intake-shooter1), target = 45.0
+030.6830:1: Debug: actions: 5:starting action: 5: MCVelocityAction (intake-shooter2), target = 45.0
+030.6932:1: Debug: global: OI State changed : EndingCollect -> WaitingToShoot
+030.7075:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+030.7155:1: Debug: global: shooting distance = 1.390 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+030.7181:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+030.7195:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+030.7318:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.7376:1: Debug: global: shooting distance = 1.390 updown = 100.0 tilt = -61.86 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.35)) offset = 0.000
+030.7400:1: Info: global: gyroinfo rate = 0.01000 ratelimit = 5.000
+030.7408:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+030.7508:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.7568:1: Debug: global: shooting distance = 1.390 updown = 100.0 tilt = -61.86 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.22), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+030.7586:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.7599:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+030.7705:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+030.7754:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.22), Rotation2d(Rads: -1.04, Deg: -59.34)) offset = 0.000
+030.7773:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+030.7784:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+030.7889:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.7945:1: Debug: global: shooting distance = 1.392 updown = 100.0 tilt = -61.83 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.33)) offset = 0.000
+030.7959:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.7967:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+030.8079:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.8145:1: Debug: global: shooting distance = 1.392 updown = 100.0 tilt = -61.83 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.35)) offset = 0.000
+030.8159:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+030.8167:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+030.8297:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.8436:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.35)) offset = 0.000
+030.8460:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.8470:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+030.8591:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.8648:1: Debug: global: shooting distance = 1.390 updown = 100.0 tilt = -61.86 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.35)) offset = 0.000
+030.8664:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.8683:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+030.8795:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.8854:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.20), Rotation2d(Rads: -1.04, Deg: -59.35)) offset = 0.000
+030.8871:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.8879:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+030.8969:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.9016:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+030.9037:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.9045:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+030.9160:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.9229:1: Debug: global: shooting distance = 1.390 updown = 100.0 tilt = -61.86 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+030.9252:1: Info: global: gyroinfo rate = -0.009995 ratelimit = 5.000
+030.9259:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+030.9458:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.9514:1: Debug: global: shooting distance = 1.389 updown = 100.0 tilt = -61.87 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+030.9530:1: Info: global: gyroinfo rate = 0.009995 ratelimit = 5.000
+030.9540:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+030.9639:1: Info: global: gyroinfo rate = -0.009995 ratelimit = 5.000
+030.9716:1: Debug: global: shooting distance = 1.389 updown = 100.0 tilt = -61.87 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+030.9740:1: Info: global: gyroinfo rate = -0.009995 ratelimit = 5.000
+030.9749:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+030.9847:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.9906:1: Debug: global: shooting distance = 1.389 updown = 100.0 tilt = -61.88 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+030.9921:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+030.9929:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.0031:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+031.0086:1: Debug: global: shooting distance = 1.390 updown = 100.0 tilt = -61.86 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.35)) offset = 0.000
+031.0104:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.0114:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.0224:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.0276:1: Debug: global: shooting distance = 1.390 updown = 100.0 tilt = -61.86 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.34)) offset = 0.000
+031.0293:1: Info: global: gyroinfo rate = 0.01000 ratelimit = 5.000
+031.0300:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.0414:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.0456:1: Debug: global: shooting distance = 1.390 updown = 100.0 tilt = -61.86 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.35)) offset = 0.000
+031.0471:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.0480:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.0600:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+031.0643:1: Debug: global: shooting distance = 1.390 updown = 100.0 tilt = -61.86 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.33)) offset = 0.000
+031.0660:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+031.0679:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.0775:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+031.0870:1: Debug: global: shooting distance = 1.390 updown = 100.0 tilt = -61.86 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.33)) offset = 0.000
+031.0887:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.0894:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.0991:1: Info: global: gyroinfo rate = 0.01000 ratelimit = 5.000
+031.1030:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.33)) offset = 0.000
+031.1050:1: Info: global: gyroinfo rate = 0.01000 ratelimit = 5.000
+031.1059:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.1157:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+031.1216:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.35)) offset = 0.000
+031.1230:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+031.1243:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.1340:1: Info: global: gyroinfo rate = 0.02000 ratelimit = 5.000
+031.1394:1: Debug: global: shooting distance = 1.390 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+031.1408:1: Info: global: gyroinfo rate = 0.02000 ratelimit = 5.000
+031.1416:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.1687:1: Info: global: gyroinfo rate = -0.04000 ratelimit = 5.000
+031.1732:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.35)) offset = 0.000
+031.1751:1: Info: global: gyroinfo rate = -0.03000 ratelimit = 5.000
+031.1759:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.1869:1: Info: global: gyroinfo rate = 0.01000 ratelimit = 5.000
+031.1909:1: Debug: global: shooting distance = 1.392 updown = 100.0 tilt = -61.83 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.32)) offset = 0.000
+031.1926:1: Info: global: gyroinfo rate = 0.01000 ratelimit = 5.000
+031.1936:1: Debug: intake-shooter:  updown = false tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.2047:1: Info: global: gyroinfo rate = 0.009995 ratelimit = 5.000
+031.2086:1: Debug: global: shooting distance = 1.392 updown = 100.0 tilt = -61.83 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.33)) offset = 0.000
+031.2124:1: Info: global: gyroinfo rate = 0.009995 ratelimit = 5.000
+031.2131:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.2232:1: Info: global: gyroinfo rate = 0.01000 ratelimit = 5.000
+031.2276:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+031.2301:1: Info: global: gyroinfo rate = 0.01000 ratelimit = 5.000
+031.2314:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.2487:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.2526:1: Debug: global: shooting distance = 1.390 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.35)) offset = 0.000
+031.2541:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.2550:1: Debug: intake-shooter:  updown = false tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.2910:1: Info: global: gyroinfo rate = -0.009995 ratelimit = 5.000
+031.2952:1: Debug: global: shooting distance = 1.390 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.34)) offset = 0.000
+031.2975:1: Info: global: gyroinfo rate = 0.009995 ratelimit = 5.000
+031.2982:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.3098:1: Info: global: gyroinfo rate = 0.009995 ratelimit = 5.000
+031.3145:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.20), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+031.3159:1: Info: global: gyroinfo rate = -0.009995 ratelimit = 5.000
+031.3167:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.3275:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.3375:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+031.3400:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.3408:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.3614:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.3654:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+031.3666:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.3674:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.3777:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.3836:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+031.3851:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.3859:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.3949:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+031.3987:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.35)) offset = 0.000
+031.4000:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+031.4008:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.4100:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.4147:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+031.4164:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.4171:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.4277:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.4321:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+031.4339:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.4348:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.4470:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.4505:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.38)) offset = 0.000
+031.4518:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.4531:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.4742:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.4868:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.38)) offset = 0.000
+031.4884:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.4891:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.4996:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.5036:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.38)) offset = 0.000
+031.5049:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.5058:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.5150:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.5189:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+031.5206:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.5216:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.5320:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.5357:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+031.5371:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.5391:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.5520:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+031.5568:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.38)) offset = 0.000
+031.5594:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+031.5608:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.5801:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.5844:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.38)) offset = 0.000
+031.5856:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.5861:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.6060:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.6370:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.38)) offset = 0.000
+031.6433:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.6456:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.6647:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.6700:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.38)) offset = 0.000
+031.6725:1: Info: global: gyroinfo rate = -0.009995 ratelimit = 5.000
+031.6733:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.6889:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.6930:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.38)) offset = 0.000
+031.6953:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.6964:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.7214:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.7276:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+031.7289:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.7296:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.7397:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.7446:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+031.7458:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+031.7464:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.7619:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.7667:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+031.7686:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.7704:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.8016:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.8068:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+031.8082:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.8088:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.8177:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.8219:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+031.8232:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.8244:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.8466:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.8508:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+031.8520:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.8526:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.8656:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.8854:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+031.8878:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+031.8900:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.9045:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.9080:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+031.9096:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.9101:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.9210:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.9275:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+031.9308:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.9318:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.9425:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.9544:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+031.9559:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.9657:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+031.9812:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+031.9856:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+031.9868:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+031.9876:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.0001:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.0041:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+032.0057:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.0066:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.0167:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.0211:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+032.0223:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.0229:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.0319:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.0355:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+032.0367:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.0372:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.0476:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.0509:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+032.0521:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.0528:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.0640:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.0670:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.38)) offset = 0.000
+032.0720:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.0729:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.0844:1: Info: global: gyroinfo rate = -0.009995 ratelimit = 5.000
+032.0896:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+032.0929:1: Info: global: gyroinfo rate = -0.009995 ratelimit = 5.000
+032.0943:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.1138:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.1171:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.36)) offset = 0.000
+032.1187:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.1196:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.1285:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.1320:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+032.1333:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.1344:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.1467:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.1499:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.38)) offset = 0.000
+032.1513:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.1519:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.1627:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.1659:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.38)) offset = 0.000
+032.1712:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.1733:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.1929:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+032.1992:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.38)) offset = 0.000
+032.2017:1: Info: global: gyroinfo rate = -0.01000 ratelimit = 5.000
+032.2027:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.2154:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.2199:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+032.2211:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.2224:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.2312:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.2351:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.69, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+032.2363:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.2371:1: Debug: intake-shooter:  updown = true tilt = false shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.2476:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.2523:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.84 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.37)) offset = 0.000
+032.2539:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.2548:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.3012:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.3048:1: Debug: global: shooting distance = 1.391 updown = 100.0 tilt = -61.85 velocity = 65.00 pose = Pose2d(Translation2d(X: 0.68, Y: 4.21), Rotation2d(Rads: -1.04, Deg: -59.38)) offset = 0.000
+032.3064:1: Info: global: gyroinfo rate = 0.000 ratelimit = 5.000
+032.3071:1: Debug: intake-shooter:  updown = true tilt = true shooter1 = false shooter2 = false april = true driveteam = false dbready = false swerve_stopped = true gyro_stopped = true offset = 0.000
+032.3098:1: Debug: actions: 3:canceling action: 3: IntakeAutoShootAction
+032.3109:1: Debug: actions: 6:canceling action: MCTrackPosAction (intake-updown) target=100.0
+032.3122:1: Debug: actions: 7:canceling action: MCTrackPosAction (intake-tilt) target=-61.84629969221473
+032.3131:1: Debug: actions: 4:canceling action: 4: MCVelocityAction (intake-shooter1), target = 65.0
+032.3223:1: Debug: actions: 5:canceling action: 5: MCVelocityAction (intake-shooter2), target = 65.0
+032.3241:1: Debug: actions: 99:starting action: 99: EjectAction
+032.3272:1: Debug: actions: 100:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+032.3280:1: Debug: actions: 101:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+032.3320:1: Debug: actions: 102:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+032.3374:1: Debug: global: OI State changed : WaitingToShoot -> Eject
+032.5328:1: Debug: actions: 102:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+032.8376:1: Debug: actions: 101:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+032.8465:1: Debug: actions: 100:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+032.8597:1: Debug: actions: 103:starting action: IntakeEjectAction
+032.8602:1: Debug: actions: 104:starting action: MotorEncoderPowerAction intake-feeder power = -0.5
+032.8607:1: Debug: actions: 104:completing action: MotorEncoderPowerAction intake-feeder power = -0.5
+032.8732:1: Debug: actions: 105:starting action: MotorEncoderPowerAction intake-shooter1 power = -0.7
+032.8739:1: Debug: actions: 105:completing action: MotorEncoderPowerAction intake-shooter1 power = -0.7
+032.8747:1: Debug: actions: 106:starting action: MotorEncoderPowerAction intake-shooter2 power = -0.7
+032.8751:1: Debug: actions: 106:completing action: MotorEncoderPowerAction intake-shooter2 power = -0.7
+032.8766:1: Debug: actions: 109:starting action: AmpTrapEjectAction
+032.8770:1: Debug: actions: 110:starting action: MotorEncoderPowerAction manipulator power = -0.5
+032.8775:1: Debug: actions: 110:completing action: MotorEncoderPowerAction manipulator power = -0.5
+033.8809:1: Debug: actions: 109:completing action: AmpTrapEjectAction
+034.3681:1: Debug: actions: 107:starting action: MotorEncoderPowerAction intake-shooter1 power = 0.7
+034.3694:1: Debug: actions: 107:completing action: MotorEncoderPowerAction intake-shooter1 power = 0.7
+034.3707:1: Debug: actions: 108:starting action: MotorEncoderPowerAction intake-shooter2 power = 0.7
+034.3712:1: Debug: actions: 108:completing action: MotorEncoderPowerAction intake-shooter2 power = 0.7
+035.3920:1: Debug: actions: 103:completing action: IntakeEjectAction
+035.4075:1: Debug: actions: 99:completing action: 99: EjectAction
+035.4091:1: Debug: global: OI State changed : Eject -> Idle
+039.0155:1: Info: global: changing robot loop type: Teleop -> Disabled
+039.0161:1: Info: global: Motor Faults Report
+039.0170:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+039.0495:1: Info: global: intake-updown:rio-2:NONE
+039.0885:1: Info: global: intake-feeder:rio-1:NONE
+039.1174:1: Info: global: intake-tilt:rio-5:NONE
+039.1435:1: Info: global: intake-shooter1:rio-3:NONE
+039.1678:1: Info: global: intake-shooter2:rio-4:NONE
+039.2089:1: Info: global: elevator:rio-6:NONE
+039.2428:1: Info: global: arm:rio-7:NONE
+039.2438:1: Info: global: manipulator:rio-9:NONE
+039.2676:1: Info: global: climber:rio-10:NONE
+039.2958:1: Info: global: fl-steer:DriveBase-11:NONE
+039.3224:1: Info: global: fl-drive:DriveBase-12:NONE
+039.3451:1: Info: global: fr-steer:DriveBase-21:NONE
+039.3714:1: Info: global: fr-drive:DriveBase-22:NONE
+039.4041:1: Info: global: bl-steer:DriveBase-41:NONE
+039.4289:1: Info: global: bl-drive:DriveBase-42:NONE
+039.4530:1: Info: global: br-steer:DriveBase-31:NONE
+039.4852:1: Info: global: br-drive:DriveBase-32:NONE
+039.4859:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

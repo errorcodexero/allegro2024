@@ -1,0 +1,421 @@
+001.3713:1: Info: global: ============================================================
+001.3908:1: Info: global: robot code starting
+001.3915:1: Info: global:  SerialNumber = '03223856'
+001.4433:1: Info: global:  enableMessageLogger time = 0.3388
+001.4439:1: Info: global: ============================================================
+001.4494:1: Info: global: reading params for bot 'COMPETITION'
+001.4505:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.6340:1: Info: global:  readParamsFile time = 0.1892
+001.6888:1: Info: global:  enableMessagesFromSettingsFile time = 0.001818
+002.4425:1: Info: global:  loadPathsFiles time = 0.7528
+005.0044:1: Info: global: initializing robot - no FMS
+005.0574:1: Info: global:  plotMgrInit time = 0.0002230
+005.8864:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.2.2'
+005.8875:1: Info: global:     Faults: sticky-stator-curr-limit
+006.1048:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.2.2'
+006.1056:1: Info: global:     Faults: sticky-stator-curr-limit
+006.2276:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.2.2'
+006.2293:1: Info: global:     Faults: sticky-stator-curr-limit
+006.3741:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.2.2'
+006.3750:1: Info: global:     Faults: sticky-stator-curr-limit
+006.4974:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.2.2'
+006.4985:1: Info: global:     Faults: sticky-stator-curr-limit
+006.6792:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.2.2'
+006.6805:1: Info: global:     Faults: sticky-stator-curr-limit
+006.8335:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.2.2'
+006.8345:1: Info: global:     Faults: sticky-stator-curr-limit
+007.0855:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+007.2016:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.2.2'
+007.2024:1: Info: global:     Faults: sticky-stator-curr-limit
+007.8752:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.9974:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.1693:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.2763:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.3774:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.4851:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.5915:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.6944:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.9202:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+008.9447:1: Info: global:  hardwareInit time = 3.886
+009.0466:1: Info: global: Changed vision parameters to Single Near
+009.2197:1: Info: global:  computeInitalState time = 0.2737
+009.4377:1: Info: global:  postHWInit time = 0.2167
+009.4736:1: Info: global: changing robot loop type: Initialization -> Disabled
+009.4819:1: Info: global: Changed vision parameters to Multi Near
+009.7248:1: Info: global: Changed vision parameters to Single Near
+009.7961:1: Info: global: Changed vision parameters to Multi Near
+010.1718:1: Info: global: Changed vision parameters to Single Near
+010.2084:1: Info: global: Changed vision parameters to Multi Near
+012.5474:1: Info: global: Changed vision parameters to Single Near
+012.5940:1: Info: global: Changed vision parameters to Multi Near
+013.2838:1: Info: global: Changed vision parameters to Single Near
+013.3262:1: Info: global: Changed vision parameters to Multi Near
+014.6283:1: Info: global: Changed vision parameters to Single Near
+014.6551:1: Info: global: Changed vision parameters to Multi Near
+014.8049:1: Info: global: Changed vision parameters to Single Near
+014.8402:1: Info: global: Changed vision parameters to Multi Near
+015.1677:1: Info: global: Changed vision parameters to Single Near
+015.2001:1: Info: global: Changed vision parameters to Multi Near
+015.3306:1: Info: global: Changed vision parameters to Single Near
+015.3627:1: Info: global: Changed vision parameters to Multi Near
+016.0717:1: Info: global: Changed vision parameters to Single Near
+016.1560:1: Info: global: Changed vision parameters to Multi Near
+016.7079:1: Info: global: Changed vision parameters to Single Near
+016.7466:1: Info: global: Changed vision parameters to Multi Near
+017.1136:1: Info: global: Changed vision parameters to Single Near
+017.1672:1: Info: global: Changed vision parameters to Multi Near
+017.8292:1: Info: global: Changed vision parameters to Single Near
+017.8751:1: Info: global: Changed vision parameters to Multi Near
+019.5360:1: Info: global: Changed vision parameters to Single Near
+019.6121:1: Info: global: Changed vision parameters to Multi Near
+019.7972:1: Info: global: Changed vision parameters to Single Near
+019.8361:1: Info: global: Changed vision parameters to Multi Near
+022.2200:1: Info: global: Changed vision parameters to Single Near
+022.2382:1: Info: global: Changed vision parameters to Multi Near
+022.4366:1: Info: global: Changed vision parameters to Single Near
+022.4936:1: Info: global: Changed vision parameters to Multi Near
+023.0202:1: Info: global: Changed vision parameters to Single Near
+023.0563:1: Info: global: Changed vision parameters to Multi Near
+023.1415:1: Info: global: Changed vision parameters to Single Near
+023.1588:1: Info: global: Changed vision parameters to Multi Near
+024.7152:1: Info: global: alliance changed:null -> Blue: recreated auto modes for new alliance value
+024.9358:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+024.9366:1: Info: global: Gamepad discovered
+030.1161:1: Info: global: Changed vision parameters to Single Near
+030.1562:1: Info: global: Changed vision parameters to Multi Near
+030.1947:1: Info: global: Entering Autonomous Mode
+030.1953:1: Info: global:     Automode Number: 2
+030.1956:1: Info: global:     Automode Name: 4 Note: Center: All Close-fast
+030.1961:1: Info: global:     Alliance: BLUE
+030.1964:1: Info: global:     Location: 1
+030.1969:1: Info: global:     GameData: ''
+030.1972:1: Info: global:     EventName: 
+030.2017:1: Info: global:     MatchType: NONE
+030.2027:1: Info: global:     MatchNumber: 0
+030.2040:1: Info: global:     MatchTime: 14.9850
+030.2044:1: Info: global:     FMS Attached: NO
+030.2169:1: Info: global: changing robot loop type: Disabled -> Autonomous
+030.3763:1: Debug: actions: 200:starting action: 
+                   actions: 200: Sequence [
+                   actions:     227: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:         Start2Shoot4ActionFast
+                   actions:     ]
+                   actions: ]
+030.3865:1: Debug: actions: 227:starting action: 
+                   actions: 227: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:     Start2Shoot4ActionFast
+                   actions: ]
+030.3894:1: Debug: actions: 201:starting action: Start2Shoot4ActionFast
+030.4282:1: Debug: actions: 214:starting action: 214: ManualShootAction subwoofer-center-low
+030.4322:1: Debug: actions: 215:starting action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=5.0 velthresh=5.0
+030.4769:1: Debug: actions: 216:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+030.5190:1: Debug: actions: 217:starting action: 217: MCVelocityAction (intake-shooter1), target = 65.0
+030.5343:1: Debug: actions: 218:starting action: 218: MCVelocityAction (intake-shooter2), target = 65.0
+031.4757:1: Debug: actions: 215:completing action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=5.0 velthresh=5.0
+031.5451:1: Debug: actions: 216:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+031.5791:1: Debug: global: shot:  tilt = 4.767 updown = 34.92 shooter1 = 66.99 shooter2 = 65.65
+031.5798:1: Debug: actions: 219:starting action: MotorEncoderPowerAction intake-feeder power = 0.5 0.5 0.2
+031.6165:1: Debug: global: shot/2:  tilt = 4.751 updown = 34.93 shooter1 = 65.49 shooter2 = 66.80
+031.6370:1: Debug: global: shot/2:  tilt = 4.751 updown = 34.93 shooter1 = 66.67 shooter2 = 65.40
+031.6552:1: Debug: global: shot/2:  tilt = 4.815 updown = 34.96 shooter1 = 65.00 shooter2 = 66.62
+031.6740:1: Debug: global: shot/2:  tilt = 4.879 updown = 34.96 shooter1 = 66.66 shooter2 = 64.75
+031.7021:1: Debug: global: shot/2:  tilt = 4.903 updown = 34.97 shooter1 = 65.20 shooter2 = 66.99
+031.7276:1: Debug: global: shot/2:  tilt = 4.926 updown = 34.97 shooter1 = 66.44 shooter2 = 60.80
+031.7511:1: Debug: global: shot/2:  tilt = 4.926 updown = 34.91 shooter1 = 54.07 shooter2 = 51.93
+031.7712:1: Debug: global: shot/2:  tilt = 4.831 updown = 34.97 shooter1 = 50.06 shooter2 = 51.43
+031.7899:1: Debug: global: shot/2:  tilt = 4.799 updown = 34.94 shooter1 = 51.22 shooter2 = 53.80
+031.7915:1: Debug: actions: 219:completing action: MotorEncoderPowerAction intake-feeder power = 0.5 0.5 0.2
+031.8105:1: Debug: global: shot/2:  tilt = 4.799 updown = 34.93 shooter1 = 55.14 shooter2 = 58.39
+031.8127:1: Debug: actions: 214:completing action: 214: ManualShootAction subwoofer-center-low
+031.8143:1: Info: global:  duration = 1.383
+031.8243:1: Debug: actions: 217:canceling action: 217: MCVelocityAction (intake-shooter1), target = 65.0
+031.8253:1: Debug: actions: 218:canceling action: 218: MCVelocityAction (intake-shooter2), target = 65.0
+031.8263:1: Debug: actions: 205:starting action: StartCollectAction
+031.8268:1: Debug: actions: 210:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+031.8273:1: Debug: actions: 210:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+031.8296:1: Info: global: pos < stow pos = 34.95 stow = 118.0
+031.8307:1: Debug: actions: 293:starting action: MCMotionMagicAction (intake-tilt) target=18.054158408 posthresh=3.0 velthresh=1.0
+031.8426:1: Info: global: automode: Shoot1 -> Delay
+032.2887:1: Debug: actions: 293:completing action: MCMotionMagicAction (intake-tilt) target=18.054158408 posthresh=3.0 velthresh=1.0
+032.3081:1: Debug: actions: 212:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+032.3286:1: Debug: actions: 213:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+032.3368:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+032.4520:1: Debug: actions: 222:starting action: SwerveHolonomicPathFollower S2S4-P3
+032.4567:1: Info: global:  SwerveHolonomicPathFollower: Set Initial Pose  = 1.434 5.555 0.0
+032.4571:1: Info: global: automode: Delay -> Path1
+032.9843:1: Debug: actions: 213:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+033.1269:1: Debug: actions: 212:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+033.1509:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+033.6599:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+033.7681:1: Debug: actions: 211:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+033.7690:1: Debug: actions: 211:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+033.7700:1: Debug: actions: 206:starting action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=1.0 velthresh=1.0
+033.7759:1: Debug: actions: 207:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=1.0 velthresh=1.0
+033.7897:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+033.9571:1: Debug: actions: 222:completing action: SwerveHolonomicPathFollower S2S4-P3
+033.9591:1: Info: global: finished path'S2S4-P3' pose = 2.522 5.564 -0.5
+033.9680:1: Info: global: Changed vision parameters to Multi Far
+033.9965:1: Debug: actions: 223:starting action: SwerveHolonomicPathFollower S2S4-P4
+034.0105:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+034.0119:1: Info: global: automode: Path1 -> Path2
+034.5559:1: Debug: actions: 206:completing action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=1.0 velthresh=1.0
+034.5926:1: Debug: actions: 207:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=1.0 velthresh=1.0
+034.6056:1: Debug: actions: 205:completing action: StartCollectAction
+034.6217:1: Debug: actions: 214:starting action: 214: ManualShootAction subwoofer-center-low
+034.6242:1: Debug: actions: 215:starting action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=5.0 velthresh=5.0
+034.6318:1: Debug: actions: 216:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+034.6397:1: Debug: actions: 217:starting action: 217: MCVelocityAction (intake-shooter1), target = 65.0
+034.6413:1: Debug: actions: 218:starting action: 218: MCVelocityAction (intake-shooter2), target = 65.0
+034.6564:1: Info: global: automode: Path2 -> Shoot2
+034.6620:1: Debug: actions: 216:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+034.6689:1: Debug: actions: 215:completing action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=5.0 velthresh=5.0
+035.1846:1: Debug: global: shot:  tilt = 4.863 updown = 34.95 shooter1 = 61.47 shooter2 = 67.12
+035.1852:1: Debug: actions: 219:starting action: MotorEncoderPowerAction intake-feeder power = 0.5 0.5 0.2
+035.2061:1: Debug: global: shot/2:  tilt = 4.863 updown = 34.95 shooter1 = 64.38 shooter2 = 65.84
+035.2273:1: Debug: global: shot/2:  tilt = 4.863 updown = 34.95 shooter1 = 66.27 shooter2 = 65.67
+035.2519:1: Debug: global: shot/2:  tilt = 4.863 updown = 34.96 shooter1 = 65.66 shooter2 = 66.73
+035.2760:1: Debug: global: shot/2:  tilt = 4.863 updown = 34.94 shooter1 = 67.02 shooter2 = 65.86
+035.2999:1: Debug: global: shot/2:  tilt = 4.871 updown = 34.98 shooter1 = 65.52 shooter2 = 66.54
+035.3159:1: Debug: global: shot/2:  tilt = 4.871 updown = 34.97 shooter1 = 67.45 shooter2 = 65.67
+035.3295:1: Debug: global: shot/2:  tilt = 4.871 updown = 34.96 shooter1 = 66.19 shooter2 = 66.35
+035.3420:1: Debug: global: shot/2:  tilt = 4.871 updown = 34.96 shooter1 = 66.00 shooter2 = 66.16
+035.3591:1: Debug: global: shot/2:  tilt = 4.871 updown = 34.94 shooter1 = 54.44 shooter2 = 51.76
+035.3749:1: Debug: global: shot/2:  tilt = 4.871 updown = 34.94 shooter1 = 47.80 shooter2 = 49.31
+035.3870:1: Debug: global: shot/2:  tilt = 4.839 updown = 34.97 shooter1 = 46.32 shooter2 = 50.09
+035.3879:1: Debug: actions: 219:completing action: MotorEncoderPowerAction intake-feeder power = 0.5 0.5 0.2
+035.3996:1: Debug: global: shot/2:  tilt = 4.815 updown = 34.98 shooter1 = 48.97 shooter2 = 49.63
+035.4006:1: Debug: actions: 214:completing action: 214: ManualShootAction subwoofer-center-low
+035.4019:1: Info: global:  duration = 0.7791
+035.4044:1: Debug: actions: 223:completing action: SwerveHolonomicPathFollower S2S4-P4
+035.4057:1: Info: global: finished path'S2S4-P4' pose = 1.441 5.567 0.2
+035.4110:1: Info: global: Changed vision parameters to Single Near
+035.4146:1: Debug: actions: 217:canceling action: 217: MCVelocityAction (intake-shooter1), target = 65.0
+035.4153:1: Debug: actions: 218:canceling action: 218: MCVelocityAction (intake-shooter2), target = 65.0
+035.4164:1: Debug: actions: 205:starting action: StartCollectAction
+035.4169:1: Debug: actions: 210:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+035.4176:1: Debug: actions: 210:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+035.4196:1: Info: global: pos < stow pos = 34.98 stow = 118.0
+035.4207:1: Debug: actions: 294:starting action: MCMotionMagicAction (intake-tilt) target=18.024861536000003 posthresh=3.0 velthresh=1.0
+035.4249:1: Debug: actions: 220:starting action: SwerveHolonomicPathFollower S2S4-P1
+035.4259:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+035.4263:1: Info: global: automode: Shoot2 -> Path3
+035.8853:1: Debug: actions: 294:completing action: MCMotionMagicAction (intake-tilt) target=18.024861536000003 posthresh=3.0 velthresh=1.0
+035.9016:1: Debug: actions: 212:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+035.9067:1: Debug: actions: 213:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+035.9097:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+036.5843:1: Debug: actions: 213:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+036.7114:1: Debug: actions: 212:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+036.7493:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+037.1902:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+037.2909:1: Debug: actions: 211:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+037.2917:1: Debug: actions: 211:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+037.2930:1: Debug: actions: 206:starting action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=1.0 velthresh=1.0
+037.2962:1: Debug: actions: 207:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=1.0 velthresh=1.0
+037.2991:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+037.3752:1: Debug: actions: 220:completing action: SwerveHolonomicPathFollower S2S4-P1
+037.3769:1: Info: global: finished path'S2S4-P1' pose = 2.587 7.032 -0.0
+037.3846:1: Info: global: Changed vision parameters to Multi Near
+037.3897:1: Debug: actions: 221:starting action: SwerveHolonomicPathFollower S2S4-P2
+037.3910:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+037.3915:1: Info: global: automode: Path3 -> Path4
+038.0792:1: Debug: actions: 206:completing action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=1.0 velthresh=1.0
+038.1051:1: Debug: actions: 207:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=1.0 velthresh=1.0
+038.1200:1: Debug: actions: 205:completing action: StartCollectAction
+038.2109:1: Debug: actions: 214:starting action: 214: ManualShootAction subwoofer-center-low
+038.2123:1: Debug: actions: 215:starting action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=5.0 velthresh=5.0
+038.2152:1: Debug: actions: 216:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+038.2181:1: Debug: actions: 217:starting action: 217: MCVelocityAction (intake-shooter1), target = 65.0
+038.2204:1: Debug: actions: 218:starting action: 218: MCVelocityAction (intake-shooter2), target = 65.0
+038.2243:1: Info: global: automode: Path4 -> Shoot3
+038.2255:1: Debug: actions: 216:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+038.2270:1: Debug: actions: 215:completing action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=5.0 velthresh=5.0
+038.9399:1: Debug: global: shot:  tilt = 4.863 updown = 34.96 shooter1 = 63.62 shooter2 = 62.96
+038.9407:1: Debug: actions: 219:starting action: MotorEncoderPowerAction intake-feeder power = 0.5 0.5 0.2
+038.9897:1: Debug: global: shot/2:  tilt = 4.863 updown = 34.96 shooter1 = 66.95 shooter2 = 65.50
+039.0124:1: Debug: global: shot/2:  tilt = 4.895 updown = 34.98 shooter1 = 65.10 shooter2 = 66.25
+039.0268:1: Debug: global: shot/2:  tilt = 4.895 updown = 34.98 shooter1 = 65.53 shooter2 = 64.54
+039.0407:1: Debug: global: shot/2:  tilt = 4.895 updown = 34.98 shooter1 = 66.28 shooter2 = 65.94
+039.0551:1: Debug: global: shot/2:  tilt = 4.895 updown = 34.98 shooter1 = 65.82 shooter2 = 66.55
+039.0702:1: Debug: global: shot/2:  tilt = 4.895 updown = 34.98 shooter1 = 65.70 shooter2 = 65.62
+039.0848:1: Debug: global: shot/2:  tilt = 4.895 updown = 34.98 shooter1 = 66.34 shooter2 = 66.32
+039.1081:1: Debug: global: shot/2:  tilt = 4.895 updown = 34.97 shooter1 = 65.08 shooter2 = 66.09
+039.1248:1: Debug: global: shot/2:  tilt = 4.895 updown = 34.96 shooter1 = 66.62 shooter2 = 65.23
+039.1446:1: Debug: global: shot/2:  tilt = 4.879 updown = 34.96 shooter1 = 54.42 shooter2 = 51.03
+039.1452:1: Debug: actions: 219:completing action: MotorEncoderPowerAction intake-feeder power = 0.5 0.5 0.2
+039.1575:1: Debug: global: shot/2:  tilt = 4.879 updown = 34.88 shooter1 = 49.91 shooter2 = 50.37
+039.1583:1: Debug: actions: 214:completing action: 214: ManualShootAction subwoofer-center-low
+039.1591:1: Info: global:  duration = 0.9467
+039.1701:1: Debug: actions: 217:canceling action: 217: MCVelocityAction (intake-shooter1), target = 65.0
+039.1717:1: Debug: actions: 218:canceling action: 218: MCVelocityAction (intake-shooter2), target = 65.0
+039.1721:1: Debug: actions: 205:starting action: StartCollectAction
+039.1726:1: Debug: actions: 210:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+039.1731:1: Debug: actions: 210:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+039.1750:1: Info: global: pos < stow pos = 34.99 stow = 118.0
+039.1759:1: Debug: actions: 295:starting action: MCMotionMagicAction (intake-tilt) target=18.011544776 posthresh=3.0 velthresh=1.0
+039.1792:1: Debug: actions: 224:starting action: SwerveHolonomicPathFollower S2S4-P5
+039.1802:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+039.1807:1: Info: global: automode: Shoot3 -> Path5
+039.6294:1: Debug: actions: 295:completing action: MCMotionMagicAction (intake-tilt) target=18.011544776 posthresh=3.0 velthresh=1.0
+039.6513:1: Debug: actions: 212:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+039.6578:1: Debug: actions: 213:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+039.6626:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+040.2985:1: Debug: actions: 213:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+040.4713:1: Debug: actions: 212:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+040.4847:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+041.0455:1: Debug: actions: 224:completing action: SwerveHolonomicPathFollower S2S4-P5
+041.0478:1: Info: global: finished path'S2S4-P5' pose = 2.482 4.163 -0.6
+041.0578:1: Info: global: Changed vision parameters to Single Far
+041.0632:1: Debug: actions: 225:starting action: SwerveHolonomicPathFollower S2S4-P6
+041.0655:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+041.0661:1: Info: global: automode: Path5 -> Path6
+043.1966:1: Debug: actions: 225:completing action: SwerveHolonomicPathFollower S2S4-P6
+043.1983:1: Info: global: finished path'S2S4-P6' pose = 1.461 5.454 3.1
+043.2055:1: Info: global: Changed vision parameters to Single Near
+043.2463:1: Info: global: Changed vision parameters to Multi Near
+043.2959:1: Info: global: Changed vision parameters to Single Near
+043.6759:1: Info: global: Changed vision parameters to Multi Near
+043.7364:1: Info: global: Changed vision parameters to Single Near
+043.9754:1: Info: global: Changed vision parameters to Multi Near
+043.9964:1: Info: global: Changed vision parameters to Single Near
+044.1365:1: Info: global: Changed vision parameters to Multi Near
+044.1755:1: Info: global: Changed vision parameters to Single Near
+044.5555:1: Info: global: Changed vision parameters to Multi Near
+044.5755:1: Info: global: Changed vision parameters to Single Near
+045.0553:1: Info: global: Changed vision parameters to Multi Near
+045.0956:1: Info: global: Changed vision parameters to Single Near
+045.1960:1: Info: global: changing robot loop type: Autonomous -> Disabled
+045.1968:1: Info: global: Motor Faults Report
+045.1971:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+045.2294:1: Info: global: intake-updown:rio-2:sticky-stator-curr-limit
+045.2549:1: Info: global: intake-feeder:rio-1:sticky-stator-curr-limit
+045.2785:1: Info: global: intake-tilt:rio-5:sticky-stator-curr-limit
+045.3090:1: Info: global: intake-shooter1:rio-3:sticky-stator-curr-limit
+045.3334:1: Info: global: intake-shooter2:rio-4:sticky-stator-curr-limit
+045.3571:1: Info: global: elevator:rio-6:sticky-stator-curr-limit
+045.3849:1: Info: global: arm:rio-7:sticky-stator-curr-limit
+045.3857:1: Info: global: manipulator:rio-9:NONE
+045.4149:1: Info: global: climber:rio-10:sticky-stator-curr-limit
+045.4397:1: Info: global: fl-steer:DriveBase-11:NONE
+045.4648:1: Info: global: fl-drive:DriveBase-12:NONE
+045.4893:1: Info: global: fr-steer:DriveBase-21:NONE
+045.5180:1: Info: global: fr-drive:DriveBase-22:NONE
+045.5415:1: Info: global: bl-steer:DriveBase-41:NONE
+045.5636:1: Info: global: bl-drive:DriveBase-42:NONE
+045.5851:1: Info: global: br-steer:DriveBase-31:NONE
+045.6071:1: Info: global: br-drive:DriveBase-32:NONE
+045.6075:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+046.4755:1: Info: global: Changed vision parameters to Multi Near
+046.4970:1: Info: global: Changed vision parameters to Single Near
+046.5961:1: Info: global: Changed vision parameters to Multi Near
+046.6758:1: Info: global: Changed vision parameters to Single Near
+046.6946:1: Debug: actions: 201:canceling action: Start2Shoot4ActionFast
+046.6954:1: Info: global: changing robot loop type: Disabled -> Teleop
+046.7720:1: Debug: actions: 291:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: -0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+047.1966:1: Info: global: Changed vision parameters to Multi Near
+047.2754:1: Info: global: Changed vision parameters to Single Near
+047.7554:1: Info: global: Changed vision parameters to Multi Near
+047.8155:1: Info: global: Changed vision parameters to Single Near
+048.0171:1: Info: global: Changed vision parameters to Multi Near
+048.0356:1: Info: global: Changed vision parameters to Single Near
+048.2962:1: Info: global: Changed vision parameters to Multi Near
+048.3356:1: Info: global: Changed vision parameters to Single Near
+048.5969:1: Info: global: Changed vision parameters to Multi Near
+048.6357:1: Info: global: Changed vision parameters to Single Near
+049.4752:1: Info: global: Changed vision parameters to Multi Near
+049.4969:1: Info: global: Changed vision parameters to Single Near
+049.5353:1: Info: global: Changed vision parameters to Multi Near
+049.5772:1: Info: global: Changed vision parameters to Single Near
+049.6555:1: Info: global: Changed vision parameters to Multi Near
+069.1155:1: Info: global: Changed vision parameters to Single Near
+069.1358:1: Info: global: Changed vision parameters to Multi Near
+075.5751:1: Info: global: changing robot loop type: Teleop -> Disabled
+075.5755:1: Info: global: Motor Faults Report
+075.5758:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+075.6144:1: Info: global: intake-updown:rio-2:sticky-stator-curr-limit
+075.6511:1: Info: global: intake-feeder:rio-1:sticky-stator-curr-limit
+075.6797:1: Info: global: intake-tilt:rio-5:sticky-stator-curr-limit
+075.7111:1: Info: global: intake-shooter1:rio-3:sticky-stator-curr-limit
+075.7500:1: Info: global: intake-shooter2:rio-4:sticky-stator-curr-limit
+075.7892:1: Info: global: elevator:rio-6:sticky-stator-curr-limit
+075.8169:1: Info: global: arm:rio-7:sticky-stator-curr-limit
+075.8181:1: Info: global: manipulator:rio-9:NONE
+075.8540:1: Info: global: climber:rio-10:sticky-stator-curr-limit
+075.8801:1: Info: global: fl-steer:DriveBase-11:NONE
+075.9124:1: Info: global: fl-drive:DriveBase-12:NONE
+075.9373:1: Info: global: fr-steer:DriveBase-21:NONE
+075.9735:1: Info: global: fr-drive:DriveBase-22:NONE
+075.9984:1: Info: global: bl-steer:DriveBase-41:NONE
+076.0286:1: Info: global: bl-drive:DriveBase-42:NONE
+076.0627:1: Info: global: br-steer:DriveBase-31:NONE
+076.0959:1: Info: global: br-drive:DriveBase-32:NONE
+076.0963:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+090.9566:1: Info: global: Changed vision parameters to Single Near
+090.9756:1: Info: global: Changed vision parameters to Multi Near
+092.5354:1: Info: global: Changed vision parameters to Single Near
+092.5757:1: Info: global: Changed vision parameters to Multi Near
+092.9758:1: Info: global: Changed vision parameters to Single Near
+093.0195:1: Info: global: Changed vision parameters to Multi Near
+093.4555:1: Info: global: Changed vision parameters to Single Near
+093.4955:1: Info: global: Changed vision parameters to Multi Near
+096.2365:1: Info: global: Changed vision parameters to Single Near
+096.2556:1: Info: global: Changed vision parameters to Multi Near
+103.6756:1: Info: global: Changed vision parameters to Single Near
+103.7164:1: Info: global: Changed vision parameters to Multi Near
+112.1574:1: Info: global: Changed vision parameters to Single Near
+112.1759:1: Info: global: Changed vision parameters to Multi Near
+118.3154:1: Info: global: Changed vision parameters to Single Near
+118.3554:1: Info: global: Changed vision parameters to Multi Near
+123.5154:1: Info: global: Changed vision parameters to Single Near
+123.5556:1: Info: global: Changed vision parameters to Multi Near
+124.0956:1: Info: global: Changed vision parameters to Single Near
+124.1354:1: Info: global: Changed vision parameters to Multi Near
+126.0352:1: Info: global: Changed vision parameters to Single Near
+126.0753:1: Info: global: Changed vision parameters to Multi Near
+127.0169:1: Info: global: Changed vision parameters to Single Near
+127.0562:1: Info: global: Changed vision parameters to Multi Near
+127.8563:1: Info: global: Changed vision parameters to Single Near
+127.9156:1: Info: global: Changed vision parameters to Multi Near
+128.2154:1: Info: global: Changed vision parameters to Single Near
+128.2555:1: Info: global: Changed vision parameters to Multi Near
+128.2975:1: Info: global: Changed vision parameters to Single Near
+128.3159:1: Info: global: Changed vision parameters to Multi Near
+128.4101:1: Info: global: Changed vision parameters to Single Near
+128.4421:1: Info: global: Changed vision parameters to Multi Near
+128.8358:1: Info: global: Changed vision parameters to Single Near
+128.8557:1: Info: global: Changed vision parameters to Multi Near
+129.8754:1: Info: global: Changed vision parameters to Single Near
+129.9161:1: Info: global: Changed vision parameters to Multi Near
+132.0566:1: Info: global: Changed vision parameters to Single Near
+132.0752:1: Info: global: Changed vision parameters to Multi Near
+135.3155:1: Info: global: Changed vision parameters to Single Near
+135.3555:1: Info: global: Changed vision parameters to Multi Near
+136.4963:1: Info: global: Changed vision parameters to Single Near
+136.5559:1: Info: global: Changed vision parameters to Multi Near
+139.6787:1: Info: global: Changed vision parameters to Single Near
+139.7156:1: Info: global: Changed vision parameters to Multi Near
+147.7956:1: Info: global: Changed vision parameters to Single Near
+147.8354:1: Info: global: Changed vision parameters to Multi Near
+148.6975:1: Info: global: Changed vision parameters to Single Near
+148.7356:1: Info: global: Changed vision parameters to Multi Near
+153.8958:1: Info: global: Changed vision parameters to Single Near
+153.9162:1: Info: global: Changed vision parameters to Multi Near
+154.1171:1: Info: global: Changed vision parameters to Single Near
+154.1360:1: Info: global: Changed vision parameters to Multi Near
+167.0758:1: Info: global: Changed vision parameters to Single Near
+184.0356:1: Info: global: Changed vision parameters to Multi Near
+186.4355:1: Info: global: Changed vision parameters to Single Near
+186.4557:1: Info: global: Changed vision parameters to Multi Near
+188.6555:1: Info: global: Changed vision parameters to Single Near
+188.6962:1: Info: global: Changed vision parameters to Multi Near
+191.8957:1: Info: global: Changed vision parameters to Single Near
+191.9354:1: Info: global: Changed vision parameters to Multi Near
+195.6557:1: Info: global: Changed vision parameters to Single Near
+195.6770:1: Info: global: Changed vision parameters to Multi Near
+201.9757:1: Info: global: Changed vision parameters to Single Near
+202.0170:1: Info: global: Changed vision parameters to Multi Near
+203.2234:1: Info: global: Changed vision parameters to Single Near
+203.2376:1: Info: global: Changed vision parameters to Multi Near
+203.4557:1: Info: global: Changed vision parameters to Single Near
+203.4954:1: Info: global: Changed vision parameters to Multi Near
+203.8585:1: Info: global: Changed vision parameters to Single Near
+203.8911:1: Info: global: Changed vision parameters to Multi Near

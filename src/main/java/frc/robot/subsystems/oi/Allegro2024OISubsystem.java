@@ -359,7 +359,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
         if (gp != null) {
             if (gp.isRBackButtonPressed()) {
-                robot.getSuperStructure().setAction(startCollectAction_) ;
+                robot.getIntakeShooter().setAction(startCollectAction_) ;
                 state_ = OIState.Collect ;
             }
             else if (oipanel_.isClimbUpPrepPressed()) {
