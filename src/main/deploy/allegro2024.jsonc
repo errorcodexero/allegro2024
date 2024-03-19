@@ -424,7 +424,7 @@
                     "tilt-pos-threshold" : 2.0,
                     "tilt-velocity-threshold" : 2.0,
                     "feeder-power" : 1.0,
-                    "feeder-time" : 0.2
+                    "feeder-time" : 0.4
                 }
             },
             "pwls" : {

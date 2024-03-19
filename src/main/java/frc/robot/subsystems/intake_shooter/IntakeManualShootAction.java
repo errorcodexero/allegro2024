@@ -60,7 +60,7 @@ public class IntakeManualShootAction extends Action {
         shooter1_action_ = new MCVelocityAction(intake_.getShooter1(), "pids:velocity", kShooterVelocity, kShooterThreshold, false) ;
         shooter2_action_ = new MCVelocityAction(intake_.getShooter2(), "pids:velocity", kShooterVelocity, kShooterThreshold, false) ;
 
-        feeder_action_ = new MotorEncoderPowerAction(intake_.getFeeder(), 0.5, 0.2) ;
+        feeder_action_ = new MotorEncoderPowerAction(intake_.getFeeder(), 1.0, 0.4) ;
     }
 
     @Override
