@@ -4,6 +4,7 @@ import org.xero1425.base.XeroRobot;
 import org.xero1425.base.subsystems.RobotSubsystem;
 import org.xero1425.base.subsystems.swerve.SDSSwerveDriveSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
+import org.xero1425.base.subsystems.vision.LimeLightSubsystem.LedMode;
 
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
@@ -43,6 +44,8 @@ public class AllegroRobot2024 extends RobotSubsystem {
         addChild(lidar_) ;
 
         db_.setVision(ll_);
+
+        ll_.setLedMode(LedMode.ForceOff);
     }
 
     public SuperStructureSubsystem getSuperStructure() {

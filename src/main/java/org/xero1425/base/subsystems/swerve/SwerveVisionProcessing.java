@@ -165,7 +165,7 @@ public class SwerveVisionProcessing {
             }                
         }
         else if (vision_.getTagCount() == 0) {
-            setVisionParams(VisionParamsType.SingleNear);
+            setVisionParams(VisionParamsType.SingleFar);
         }
     }
 

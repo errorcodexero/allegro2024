@@ -8,6 +8,7 @@ import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.oi.OILed.LEDState;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
+import org.xero1425.base.subsystems.vision.LimeLightSubsystem.LedMode;
 import org.xero1425.base.utils.PieceWiseLinear;
 import org.xero1425.misc.ISettingsSupplier;
 import org.xero1425.misc.MessageLogger;
@@ -57,6 +58,7 @@ public class IntakeAutoShootAction extends Action {
     private boolean gyro_stopped_ ;
 
     private double aim_threshold_ ;
+    private double max_distance_ ;
     private double tilt_stow_value_ ;
 
     private double rotational_velocity_threshold_ ;
@@ -105,6 +107,7 @@ public class IntakeAutoShootAction extends Action {
 
         tilt_stow_value_ = sub_.getTilt().getSettingsValue("targets:stow").getDouble() ;
         aim_threshold_ = sub_.getSettingsValue("actions:auto-shoot:aim-threshold").getDouble() ;
+        max_distance_ = sub_.getSettingsValue("actions:auto-shoot:max-distance").getDouble() ;        
         rotational_velocity_threshold_ = sub_.getSettingsValue("actions:auto-shoot:rotational-velocity-threshold").getDouble() ;
 
         double velthresh = sub_.getSettingsValue("actions:auto-shoot:shooter-velocity-threshold").getDouble() ;
@@ -113,7 +116,7 @@ public class IntakeAutoShootAction extends Action {
         double tilt_pos_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-pos-threshold").getDouble() ;
         double tilt_vel_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-velocity-threshold").getDouble() ;
 
-        wait_timer_ = new XeroTimer(intake.getRobot(), "wait-timer", 0.1);
+        wait_timer_ = new XeroTimer(intake.getRobot(), "wait-timer", 0.4);
 
         if (RobotBase.isSimulation()) {
             velthresh = 10.0 ;  
@@ -150,6 +153,7 @@ public class IntakeAutoShootAction extends Action {
             tab.addBoolean("shooter1", ()->shooter1_.isAtVelocity());
             tab.addBoolean("shooter2", ()->shooter2_.isAtVelocity()) ;
             tab.addBoolean("dbangle", ()-> { return db_ready_ ; }) ;
+            tab.addBoolean("dbready", ()-> { return dbReadyToShoot() ; }) ;            
             tab.addBoolean("swerve", ()-> { return swerve_stopped_ ; }) ;
             tab.addBoolean("gyro", ()-> { return gyro_stopped_ ; }) ;                        
             tab.addBoolean("apriltag", ()->aprilTagTest()) ;
@@ -180,7 +184,10 @@ public class IntakeAutoShootAction extends Action {
             logger.startMessage(MessageType.Error).add("ManualShootAction started with no note in intake").endMessage();
             setDone() ;
         }
-        else {        
+        else {
+            AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;
+            robot.getLimelight().setLedMode(LedMode.ForceOn);
+
             offset_set_ = false ;
             shooting_ = false ;
             waiting_ = false ;
@@ -244,6 +251,7 @@ public class IntakeAutoShootAction extends Action {
                     sub_.endPlot(plot_id_);
                 }
                 robot.getTargetTracker().clearOffset();
+                robot.getLimelight().setLedMode(LedMode.ForceOff) ;
                 setDone() ;
             }
         }
@@ -281,7 +289,12 @@ public class IntakeAutoShootAction extends Action {
 
             oi.setTiltLED(tilt_.isAtTarget() ? LEDState.ON : LEDState.OFF);
             oi.setAprilTagLED(aprilTagTest() ? LEDState.ON : LEDState.OFF);
-            oi.setDBLED(dbReadyToShoot() ? LEDState.ON : LEDState.OFF);
+            if (dist > max_distance_) {
+                oi.setDBLED(LEDState.BLINK_FAST) ;
+            }
+            else {
+                oi.setDBLED(dbReadyToShoot() ? LEDState.ON : LEDState.OFF);
+            }
             oi.setVelocityLED((shooter1_.isAtVelocity() && shooter2_.isAtVelocity()) ? LEDState.ON : LEDState.OFF);
 
             if (plot_id_ != -1) {
@@ -301,7 +314,7 @@ public class IntakeAutoShootAction extends Action {
                 sub_.addPlotData(plot_id_, data_);
             }
 
-            if (readyToShoot()) {
+            if (readyToShoot() && dist < max_distance_) {
                 waiting_ = true ;
                 wait_timer_.start() ;
             }
@@ -356,9 +369,12 @@ public class IntakeAutoShootAction extends Action {
     public void cancel() {
         super.cancel();
 
+        AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;              
+
         sub_.getFeeder().setPower(0.0);
         sub_.getShooter1().setPower(0.0);
-        sub_.getShooter2().setPower(0.0);        
+        sub_.getShooter2().setPower(0.0);
+        robot.getLimelight().setLedMode(LedMode.ForceOff) ;        
     }
 
     @Override

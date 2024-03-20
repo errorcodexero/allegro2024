@@ -188,7 +188,7 @@ public class TargetTrackerSubsystem extends Subsystem {
                 distance_between_robot_and_target_ = (target_height_ - camera_height_) / Math.tan(Math.toRadians(camera_angle_ + ll_.getTY(target_number_))) + kCameraOffset ;
             }
             else {
-                sees_target_ = true ;                
+                sees_target_ = false ;                
                 logger.add("pose", false) ;
                 distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos_, target_pos_) ;
 
