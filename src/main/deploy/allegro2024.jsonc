@@ -784,9 +784,9 @@
                             "inverted" : false,
                             "neutral-mode": "brake",
                             "current-limit" : 40.0,
-                            "p" : 0.002346041055718470,
+                            "p" : 0.002150538,
                             "i" : 0.0,
-                            "d" :  0.000001172851562500
+                            "d" : 0.0000010752
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -816,9 +816,9 @@
                             "inverted" : false,
                             "neutral-mode": "brake",
                             "current-limit" : 40.0,
-                            "p" : 0.002346041055718470,
+                            "p" : 0.002150538,
                             "i" : 0.0,
-                            "d" :  0.000001172851562500
+                            "d" : 0.0000010752
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -848,9 +848,9 @@
                             "neutral-mode": "brake",
                             "pdp-channel" : 4,
                             "current-limit" : 40.0,
-                            "p" : 0.002346041055718470,
+                            "p" : 0.002150538,
                             "i" : 0.0,
-                            "d" :  0.000001172851562500
+                            "d" : 0.0000010752
                         },
                         "drive" : {
                             "type": "talon-fx",
@@ -880,9 +880,9 @@
                             "inverted" : false,
                             "neutral-mode": "brake",
                             "current-limit" : 40.0,
-                            "p" : 0.002346041055718470,
+                            "p" : 0.002150538,
                             "i" : 0.0,
-                            "d" :  0.000001172851562500
+                            "d" : 0.0000010752
                         },
                         "drive" : {
                             "type": "talon-fx",
