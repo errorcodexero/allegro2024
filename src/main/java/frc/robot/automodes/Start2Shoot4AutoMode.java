@@ -8,7 +8,7 @@ import frc.robot.subsystems.toplevel.AllegroRobot2024;
 public class Start2Shoot4AutoMode extends AllegroGameAutoMode {
 
     public Start2Shoot4AutoMode(AutoController ctrl, boolean mirror, double mvalue, boolean fast) throws Exception {
-        super(ctrl, "4 Note: Center: All Close" + (fast ? "-fast" : "-slow")) ;
+        super(ctrl, "Center Four Note" + (fast ? "-fast" : "-slow")) ;
 
         Action action ;
         AllegroRobot2024 robot = (AllegroRobot2024)ctrl.getRobot().getRobotSubsystem() ;

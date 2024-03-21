@@ -14,7 +14,7 @@ import frc.robot.subsystems.toplevel.AllegroRobot2024;
 public class Start2Shoot4ActionFast extends Action {
 
     private static final double kPath4Delay = 0.0; 
-    private static final double kPath2Delay = 0.8 ;
+    private static final double kPath2Delay = 1.2 ;
     private static final double kPath6Delay = 1.2 ;
 
     private enum State {
