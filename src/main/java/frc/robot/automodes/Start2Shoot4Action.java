@@ -60,11 +60,11 @@ public class Start2Shoot4Action extends Action {
         start_collect_ = new StartCollectAltAction(robot_.getIntakeShooter(), updown, tilt) ;
         manual_shoot_ = new IntakeManualShootAction(robot_.getIntakeShooter(), "subwoofer-center-low") ;
 
-        p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P1", false, 0.2, mirror, mvalue);
+        p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P1", true, 0.2, mirror, mvalue);
         p2_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P2", false, 0.2, mirror, mvalue);
         p3_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P3", true, 0.2, mirror, mvalue);
         p4_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P4", false, 0.2, mirror, mvalue);
-        p5_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P5", false, 0.2, mirror, mvalue);
+        p5_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P5", true, 0.2, mirror, mvalue);
         p6_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P6", false, 0.2, mirror, mvalue);                
 
         delay_timer_ = new XeroTimer(robot.getRobot(), "auto-delay", 0.5) ;
