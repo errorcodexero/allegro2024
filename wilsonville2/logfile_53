@@ -1,0 +1,76 @@
+001.1644:1: Info: global: ============================================================
+001.1819:1: Info: global: robot code starting
+001.1825:1: Info: global:  SerialNumber = '03223856'
+001.2300:1: Info: global:  enableMessageLogger time = 0.2713
+001.2306:1: Info: global: ============================================================
+001.2360:1: Info: global: reading params for bot 'COMPETITION'
+001.2369:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.4135:1: Info: global:  readParamsFile time = 0.1819
+001.4550:1: Info: global:  enableMessagesFromSettingsFile time = 0.001984
+002.0805:1: Info: global:  loadPathsFiles time = 0.6246
+004.3916:1: Info: global: initializing robot - no FMS
+004.4458:1: Info: global:  plotMgrInit time = 0.0002590
+005.1264:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.2.2', no faults
+005.2850:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.2.2', no faults
+005.4059:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.2.2', no faults
+005.5229:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.2.2', no faults
+005.6424:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.2.2', no faults
+005.7934:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.2.2', no faults
+005.9233:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.2.2', no faults
+006.0737:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+006.2086:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.2.2', no faults
+006.6464:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.2.2', no faults
+006.7854:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.2.2', no faults
+006.9626:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.0823:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.1974:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.3084:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.4324:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.5554:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.7695:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+007.7915:1: Info: global:  hardwareInit time = 3.345
+007.8884:1: Info: global: Changed vision parameters to Single Far
+008.0145:1: Info: global:  computeInitalState time = 0.2217
+008.1151:1: Error: global: Exception caught in postHWInit() - org.xero1425.misc.MissingParameterException: missing parameter 'subsystems:intake-tilt:pids:abs-position:kf'
+008.1164:1: Error: global:     org.xero1425.misc.JsonSettingsParser.get(JsonSettingsParser.java:82)
+008.1172:1: Error: global:     org.xero1425.misc.PIDCtrl.init(PIDCtrl.java:100)
+008.1177:1: Error: global:     org.xero1425.misc.PIDCtrl.<init>(PIDCtrl.java:86)
+008.1183:1: Error: global:     frc.robot.subsystems.intake_shooter.TiltTrackTargetAction.<init>(TiltTrackTargetAction.java:28)
+008.1189:1: Error: global:     frc.robot.subsystems.intake_shooter.IntakeAutoShootAction.<init>(IntakeAutoShootAction.java:142)
+008.1197:1: Error: global:     frc.robot.subsystems.oi.Allegro2024OISubsystem.postHWInit(Allegro2024OISubsystem.java:941)
+008.1204:1: Error: global:     org.xero1425.base.subsystems.Subsystem.postHWInit(Subsystem.java:329)
+008.1210:1: Error: global:     org.xero1425.base.XeroRobot.robotInit(XeroRobot.java:503)
+008.1216:1: Error: global:     edu.wpi.first.wpilibj.TimedRobot.startCompetition(TimedRobot.java:107)
+008.1223:1: Error: global:     edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:365)
+008.1229:1: Error: global:     edu.wpi.first.wpilibj.RobotBase.startRobot(RobotBase.java:453)
+008.1234:1: Error: global:     frc.robot.Main.main(Main.java:23)
+008.1245:1: Info: global:  postHWInit time = 0.1088
+008.1510:1: Info: global: changing robot loop type: Initialization -> Disabled
+073.0564:1: Info: global: alliance changed:null -> Blue: recreated auto modes for new alliance value
+073.1669:1: Error: global: Exception thrown creating automodes - missing parameter 'subsystems:intake-tilt:pids:abs-position:kf'
+073.1680:1: Error: global:     org.xero1425.misc.JsonSettingsParser.get(JsonSettingsParser.java:82)
+073.1685:1: Error: global:     org.xero1425.misc.PIDCtrl.init(PIDCtrl.java:100)
+073.1688:1: Error: global:     org.xero1425.misc.PIDCtrl.<init>(PIDCtrl.java:86)
+073.1690:1: Error: global:     frc.robot.subsystems.intake_shooter.TiltTrackTargetAction.<init>(TiltTrackTargetAction.java:28)
+073.1693:1: Error: global:     frc.robot.subsystems.intake_shooter.IntakeAutoShootAction.<init>(IntakeAutoShootAction.java:142)
+073.1696:1: Error: global:     frc.robot.automodes.Start3Shoot3Action.<init>(Start3Shoot3Action.java:60)
+073.1698:1: Error: global:     frc.robot.automodes.Start3Shoot3AutoMode.<init>(Start3Shoot3AutoMode.java:12)
+073.1701:1: Error: global:     frc.robot.automodes.AllegroRobotAutoController.updateAutoMode(AllegroRobotAutoController.java:60)
+073.1704:1: Error: global:     org.xero1425.base.XeroRobot.updateAutoMode(XeroRobot.java:1054)
+073.1706:1: Error: global:     org.xero1425.base.XeroRobot.disabledPeriodic(XeroRobot.java:691)
+073.1709:1: Error: global:     edu.wpi.first.wpilibj.IterativeRobotBase.loopFunc(IterativeRobotBase.java:365)
+073.1712:1: Error: global:     edu.wpi.first.wpilibj.TimedRobot.startCompetition(TimedRobot.java:131)
+073.1715:1: Error: global:     edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:365)
+073.1717:1: Error: global:     edu.wpi.first.wpilibj.RobotBase.startRobot(RobotBase.java:453)
+073.1720:1: Error: global:     frc.robot.Main.main(Main.java:23)
+073.5500:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+073.5508:1: Info: global: Gamepad discovered
+082.9681:1: Info: global: changing robot loop type: Disabled -> Teleop
+083.0856:1: Debug: actions: 47:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: -0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+094.5965:1: Info: global: Changed vision parameters to Single Near
+094.6167:1: Info: global: Changed vision parameters to Single Far
+094.6362:1: Info: global: Changed vision parameters to Single Near
+094.6766:1: Info: global: Changed vision parameters to Single Far
+094.8560:1: Info: global: Changed vision parameters to Single Near
+096.4770:1: Info: global: Changed vision parameters to Single Far
+096.8362:1: Info: global: Changed vision parameters to Single Near

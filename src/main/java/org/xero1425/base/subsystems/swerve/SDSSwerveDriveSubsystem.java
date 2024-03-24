@@ -84,7 +84,6 @@ public class SDSSwerveDriveSubsystem extends SwerveBaseSubsystem {
         modules_[BL] = createModule(cfg, "bl", shuffleboardTab) ;
         modules_[BR] = createModule(cfg, "br", shuffleboardTab) ;
         
-
         createOdometry();
     }
 

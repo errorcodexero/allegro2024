@@ -87,10 +87,6 @@ public class PIDCtrl
         is_angle_ = isangle ;
     }
 
-    public void setP(double p) {
-        kp_ = p ;
-    }
-
     /// \brief create a new object by reading parameters from the settings parser.
     /// The kv parameter is found by looking up the basename + ":kv".  The ka parameters is
     /// found by looking up the basename + ":ka".  The kp parameter is found by looking up

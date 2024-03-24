@@ -1,0 +1,1892 @@
+001.3626:1: Info: global: ============================================================
+001.3814:1: Info: global: robot code starting
+001.3825:1: Info: global:  SerialNumber = '03223856'
+001.4357:1: Info: global:  enableMessageLogger time = 0.3338
+001.4362:1: Info: global: ============================================================
+001.4410:1: Info: global: reading params for bot 'COMPETITION'
+001.4420:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.6299:1: Info: global:  readParamsFile time = 0.1928
+001.6843:1: Info: global:  enableMessagesFromSettingsFile time = 0.002022
+002.3642:1: Info: global:  loadPathsFiles time = 0.6791
+004.8677:1: Info: global: initializing robot - no FMS
+004.9201:1: Info: global:  plotMgrInit time = 0.0002040
+005.7352:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.2.2'
+005.7361:1: Info: global:     Faults: sticky-stator-curr-limit
+005.9366:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.2.2'
+005.9377:1: Info: global:     Faults: sticky-stator-curr-limit
+006.0678:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.2.2'
+006.0688:1: Info: global:     Faults: sticky-stator-curr-limit
+006.2129:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.2.2'
+006.2146:1: Info: global:     Faults: sticky-stator-curr-limit
+006.3345:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.2.2'
+006.3357:1: Info: global:     Faults: sticky-stator-curr-limit
+006.5207:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.2.2'
+006.5223:1: Info: global:     Faults: sticky-stator-curr-limit
+006.6650:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.2.2'
+006.6660:1: Info: global:     Faults: sticky-stator-curr-limit
+006.8960:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+007.0263:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.2.2'
+007.0269:1: Info: global:     Faults: sticky-stator-curr-limit
+007.4954:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.6087:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.7889:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.8988:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.9978:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.1037:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.2097:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.3065:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.5247:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+008.5478:1: Info: global:  hardwareInit time = 3.627
+008.6577:1: Info: global: Changed vision parameters to Single Far
+008.8229:1: Info: global:  computeInitalState time = 0.2738
+009.0299:1: Info: global:  postHWInit time = 0.2055
+009.0544:1: Info: global: changing robot loop type: Initialization -> Disabled
+009.0629:1: Info: global: Changed vision parameters to Multi Near
+018.2824:1: Info: global: alliance changed:null -> Red: recreated auto modes for new alliance value
+018.4873:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+018.4882:1: Info: global: Gamepad discovered
+324.0516:1: Info: global: Entering Autonomous Mode
+324.0522:1: Info: global:     Automode Number: 0
+324.0525:1: Info: global:     Automode Name: Center Four Note-fast
+324.0531:1: Info: global:     Alliance: RED
+324.0536:1: Info: global:     Location: 1
+324.0543:1: Info: global:     GameData: ''
+324.0546:1: Info: global:     EventName: ORWIL
+324.0593:1: Info: global:     MatchType: ELIMINATION
+324.0600:1: Info: global:     MatchNumber: 2
+324.0609:1: Info: global:     MatchTime: 15.0000
+324.0614:1: Info: global:     FMS Attached: YES
+324.0705:1: Info: global: changing robot loop type: Disabled -> Autonomous
+324.2006:1: Debug: actions: 140:starting action: 
+                   actions: 140: Sequence [
+                   actions:     167: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:         Start2Shoot4ActionFast
+                   actions:     ]
+                   actions: ]
+324.2105:1: Debug: actions: 167:starting action: 
+                   actions: 167: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:     Start2Shoot4ActionFast
+                   actions: ]
+324.2165:1: Debug: actions: 141:starting action: Start2Shoot4ActionFast
+324.2356:1: Debug: actions: 154:starting action: 154: ManualShootAction subwoofer-center-low
+324.2367:1: Debug: actions: 155:starting action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+324.2780:1: Debug: actions: 156:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+324.2983:1: Debug: actions: 157:starting action: 157: MCVelocityAction (intake-shooter1), target = 65.0
+324.3101:1: Debug: actions: 158:starting action: 158: MCVelocityAction (intake-shooter2), target = 65.0
+325.2918:1: Debug: actions: 155:completing action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+325.3316:1: Debug: actions: 156:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+325.3464:1: Debug: global: shot:  tilt = 6.762 updown = 34.93 shooter1 = 65.78 shooter2 = 65.40
+325.3471:1: Debug: actions: 159:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+325.3662:1: Debug: global: shot/2:  tilt = 6.754 updown = 34.94 shooter1 = 65.69 shooter2 = 66.24
+325.3817:1: Debug: global: shot/2:  tilt = 6.746 updown = 34.95 shooter1 = 65.17 shooter2 = 66.76
+325.3954:1: Debug: global: shot/2:  tilt = 6.746 updown = 34.94 shooter1 = 65.57 shooter2 = 64.71
+325.4152:1: Debug: global: shot/2:  tilt = 6.810 updown = 34.95 shooter1 = 65.44 shooter2 = 66.32
+325.4304:1: Debug: global: shot/2:  tilt = 6.818 updown = 34.98 shooter1 = 66.14 shooter2 = 66.18
+325.4457:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.96 shooter1 = 60.66 shooter2 = 53.54
+325.4684:1: Debug: global: shot/2:  tilt = 6.906 updown = 34.96 shooter1 = 46.72 shooter2 = 49.17
+325.4943:1: Debug: global: shot/2:  tilt = 6.818 updown = 34.99 shooter1 = 49.90 shooter2 = 53.92
+325.5163:1: Debug: global: shot/2:  tilt = 6.866 updown = 34.94 shooter1 = 54.54 shooter2 = 55.86
+325.5406:1: Debug: global: shot/2:  tilt = 6.890 updown = 34.96 shooter1 = 56.93 shooter2 = 60.89
+325.5538:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.97 shooter1 = 57.62 shooter2 = 63.00
+325.5666:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.96 shooter1 = 58.94 shooter2 = 64.45
+325.5799:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.95 shooter1 = 62.46 shooter2 = 65.05
+325.5953:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.95 shooter1 = 64.01 shooter2 = 64.81
+325.6152:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.97 shooter1 = 66.09 shooter2 = 65.64
+325.6277:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.96 shooter1 = 65.63 shooter2 = 66.50
+325.6410:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.95 shooter1 = 66.28 shooter2 = 65.99
+325.6532:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.95 shooter1 = 66.82 shooter2 = 66.32
+325.6542:1: Debug: actions: 159:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+325.6669:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.95 shooter1 = 65.93 shooter2 = 66.70
+325.6685:1: Debug: actions: 154:completing action: 154: ManualShootAction subwoofer-center-low
+325.6693:1: Info: global:  duration = 1.432
+325.6798:1: Debug: actions: 157:canceling action: 157: MCVelocityAction (intake-shooter1), target = 65.0
+325.6808:1: Debug: actions: 158:canceling action: 158: MCVelocityAction (intake-shooter2), target = 65.0
+325.6818:1: Debug: actions: 145:starting action: StartCollectAction
+325.6825:1: Debug: actions: 150:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+325.6833:1: Debug: actions: 150:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+325.6854:1: Info: global: pos < stow pos = 34.96 stow = 118.0
+325.6862:1: Debug: actions: 217:starting action: MCMotionMagicAction (intake-tilt) target=18.035514944 posthresh=3.0 velthresh=1.0
+325.6885:1: Info: global: automode: Shoot1 -> Delay
+326.0605:1: Debug: actions: 217:completing action: MCMotionMagicAction (intake-tilt) target=18.035514944 posthresh=3.0 velthresh=1.0
+326.0695:1: Debug: actions: 152:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+326.0730:1: Debug: actions: 153:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+326.0751:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+326.2973:1: Debug: actions: 162:starting action: SwerveHolonomicPathFollower S2S4-P3
+326.3004:1: Info: global:  SwerveHolonomicPathFollower: Set Initial Pose  = 15.107 5.555 180.0
+326.3008:1: Info: global: automode: Delay -> Path1
+326.6991:1: Debug: actions: 153:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+326.8647:1: Debug: actions: 152:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+326.8765:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+327.3037:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+327.4180:1: Debug: actions: 151:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+327.4192:1: Debug: actions: 151:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+327.4203:1: Debug: actions: 146:starting action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=1.0 velthresh=1.0
+327.4229:1: Debug: actions: 147:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=1.0 velthresh=1.0
+327.4248:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+327.7609:1: Debug: actions: 162:completing action: SwerveHolonomicPathFollower S2S4-P3
+327.7629:1: Info: global: finished path'S2S4-P3' pose = 13.979 5.569 -179.9
+327.7726:1: Info: global: Changed vision parameters to Multi Far
+327.8061:1: Debug: actions: 163:starting action: SwerveHolonomicPathFollower S2S4-P4
+327.8073:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+327.8077:1: Info: global: automode: Path1 -> Path2
+328.2046:1: Debug: actions: 146:completing action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=1.0 velthresh=1.0
+328.2388:1: Debug: actions: 147:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=1.0 velthresh=1.0
+328.2592:1: Debug: actions: 145:completing action: StartCollectAction
+328.2756:1: Debug: actions: 154:starting action: 154: ManualShootAction subwoofer-center-low
+328.2766:1: Debug: actions: 155:starting action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+328.2799:1: Debug: actions: 156:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+328.2829:1: Debug: actions: 157:starting action: 157: MCVelocityAction (intake-shooter1), target = 65.0
+328.2846:1: Debug: actions: 158:starting action: 158: MCVelocityAction (intake-shooter2), target = 65.0
+328.2863:1: Info: global: automode: Path2 -> Shoot2
+328.2874:1: Debug: actions: 156:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+328.2885:1: Debug: actions: 155:completing action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+328.8385:1: Debug: global: shot:  tilt = 6.842 updown = 34.95 shooter1 = 61.34 shooter2 = 62.07
+328.8393:1: Debug: actions: 159:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+328.8641:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.96 shooter1 = 64.65 shooter2 = 64.51
+328.9163:1: Debug: global: shot/2:  tilt = 6.858 updown = 34.98 shooter1 = 66.69 shooter2 = 66.32
+328.9287:1: Debug: global: shot/2:  tilt = 6.858 updown = 34.96 shooter1 = 66.12 shooter2 = 66.02
+328.9403:1: Debug: global: shot/2:  tilt = 6.858 updown = 34.95 shooter1 = 65.74 shooter2 = 67.11
+328.9517:1: Debug: global: shot/2:  tilt = 6.858 updown = 34.95 shooter1 = 65.06 shooter2 = 65.93
+328.9636:1: Debug: global: shot/2:  tilt = 6.858 updown = 34.96 shooter1 = 65.80 shooter2 = 65.76
+328.9792:1: Debug: global: shot/2:  tilt = 6.858 updown = 34.92 shooter1 = 58.68 shooter2 = 53.15
+329.0033:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.93 shooter1 = 47.62 shooter2 = 51.24
+329.0196:1: Debug: global: shot/2:  tilt = 6.778 updown = 34.96 shooter1 = 50.89 shooter2 = 51.52
+329.0378:1: Debug: global: shot/2:  tilt = 6.778 updown = 34.95 shooter1 = 51.84 shooter2 = 55.32
+329.0599:1: Debug: global: shot/2:  tilt = 6.794 updown = 34.95 shooter1 = 56.03 shooter2 = 58.47
+329.0786:1: Debug: global: shot/2:  tilt = 6.810 updown = 34.96 shooter1 = 59.50 shooter2 = 61.85
+329.0980:1: Debug: global: shot/2:  tilt = 6.826 updown = 34.98 shooter1 = 61.98 shooter2 = 65.58
+329.1188:1: Debug: global: shot/2:  tilt = 6.882 updown = 34.96 shooter1 = 64.66 shooter2 = 66.40
+329.1382:1: Debug: global: shot/2:  tilt = 6.890 updown = 34.98 shooter1 = 65.53 shooter2 = 66.01
+329.1598:1: Debug: global: shot/2:  tilt = 6.890 updown = 34.98 shooter1 = 66.76 shooter2 = 67.22
+329.1613:1: Debug: actions: 159:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+329.1843:1: Debug: global: shot/2:  tilt = 6.890 updown = 34.97 shooter1 = 66.00 shooter2 = 65.62
+329.1855:1: Debug: actions: 154:completing action: 154: ManualShootAction subwoofer-center-low
+329.1860:1: Info: global:  duration = 0.9096
+329.1976:1: Debug: actions: 157:canceling action: 157: MCVelocityAction (intake-shooter1), target = 65.0
+329.1988:1: Debug: actions: 158:canceling action: 158: MCVelocityAction (intake-shooter2), target = 65.0
+329.1993:1: Debug: actions: 145:starting action: StartCollectAction
+329.1998:1: Debug: actions: 150:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+329.2003:1: Debug: actions: 150:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+329.2026:1: Info: global: pos < stow pos = 34.97 stow = 118.0
+329.2033:1: Debug: actions: 218:starting action: MCMotionMagicAction (intake-tilt) target=18.03018824 posthresh=3.0 velthresh=1.0
+329.2052:1: Debug: actions: 164:starting action: SwerveHolonomicPathFollower S2S4-P5
+329.2056:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+329.2062:1: Info: global: automode: Shoot2 -> Path5
+329.5872:1: Debug: actions: 218:completing action: MCMotionMagicAction (intake-tilt) target=18.03018824 posthresh=3.0 velthresh=1.0
+329.6005:1: Debug: actions: 152:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+329.6030:1: Debug: actions: 153:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+329.6046:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+330.2972:1: Debug: actions: 153:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+330.3990:1: Debug: actions: 152:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+330.4168:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+332.0563:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+332.1566:1: Debug: actions: 151:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+332.1578:1: Debug: actions: 151:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+332.1589:1: Debug: actions: 146:starting action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=1.0 velthresh=1.0
+332.1607:1: Debug: actions: 147:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=1.0 velthresh=1.0
+332.1629:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+332.5970:1: Debug: actions: 164:completing action: SwerveHolonomicPathFollower S2S4-P5
+332.5983:1: Info: global: finished path'S2S4-P5' pose = 14.124 4.152 179.1
+332.6128:1: Info: global: Changed vision parameters to Single Far
+332.6178:1: Debug: actions: 165:starting action: SwerveHolonomicPathFollower S2S4-P6
+332.6182:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+332.6187:1: Info: global: automode: Path5 -> Path6
+332.9597:1: Debug: actions: 147:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=1.0 velthresh=1.0
+332.9608:1: Debug: actions: 146:completing action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=1.0 velthresh=1.0
+332.9758:1: Debug: actions: 145:completing action: StartCollectAction
+333.8366:1: Debug: actions: 154:starting action: 154: ManualShootAction subwoofer-center-low
+333.8375:1: Debug: actions: 155:starting action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+333.8396:1: Debug: actions: 156:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+333.8417:1: Debug: actions: 157:starting action: 157: MCVelocityAction (intake-shooter1), target = 65.0
+333.8435:1: Debug: actions: 158:starting action: 158: MCVelocityAction (intake-shooter2), target = 65.0
+333.8478:1: Info: global: automode: Path6 -> Shoot4
+333.8502:1: Debug: actions: 156:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+333.8511:1: Debug: actions: 155:completing action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+334.3389:1: Debug: global: shot:  tilt = 6.850 updown = 34.96 shooter1 = 62.00 shooter2 = 63.71
+334.3395:1: Debug: actions: 159:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+334.3576:1: Debug: global: shot/2:  tilt = 6.850 updown = 34.96 shooter1 = 65.05 shooter2 = 64.22
+334.3801:1: Debug: global: shot/2:  tilt = 6.850 updown = 34.95 shooter1 = 65.65 shooter2 = 65.27
+334.3987:1: Debug: global: shot/2:  tilt = 6.850 updown = 34.96 shooter1 = 66.18 shooter2 = 66.72
+334.4191:1: Debug: global: shot/2:  tilt = 6.850 updown = 34.97 shooter1 = 66.57 shooter2 = 66.64
+334.4406:1: Debug: global: shot/2:  tilt = 6.850 updown = 34.96 shooter1 = 66.05 shooter2 = 66.13
+334.4591:1: Debug: global: shot/2:  tilt = 6.850 updown = 34.96 shooter1 = 66.14 shooter2 = 66.52
+334.4835:1: Debug: global: shot/2:  tilt = 6.850 updown = 34.96 shooter1 = 65.76 shooter2 = 65.44
+334.4971:1: Debug: global: shot/2:  tilt = 6.850 updown = 34.96 shooter1 = 57.03 shooter2 = 51.93
+334.5169:1: Debug: global: shot/2:  tilt = 6.850 updown = 34.96 shooter1 = 49.03 shooter2 = 50.14
+334.5183:1: Debug: actions: 165:completing action: SwerveHolonomicPathFollower S2S4-P6
+334.5193:1: Info: global: finished path'S2S4-P6' pose = 15.037 5.455 179.8
+334.5326:1: Info: global: Changed vision parameters to Multi Near
+334.5392:1: Debug: global: shot/2:  tilt = 6.770 updown = 34.97 shooter1 = 51.31 shooter2 = 52.35
+334.5639:1: Debug: global: shot/2:  tilt = 6.770 updown = 34.95 shooter1 = 52.33 shooter2 = 56.55
+334.5786:1: Debug: global: shot/2:  tilt = 6.770 updown = 34.95 shooter1 = 54.37 shooter2 = 56.80
+334.5998:1: Debug: global: shot/2:  tilt = 6.786 updown = 34.96 shooter1 = 57.69 shooter2 = 61.60
+334.6203:1: Debug: global: shot/2:  tilt = 6.874 updown = 34.98 shooter1 = 60.91 shooter2 = 64.35
+334.6400:1: Debug: global: shot/2:  tilt = 6.914 updown = 34.98 shooter1 = 64.92 shooter2 = 65.68
+334.6406:1: Debug: actions: 159:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+334.6601:1: Debug: global: shot/2:  tilt = 6.922 updown = 34.97 shooter1 = 65.77 shooter2 = 66.97
+334.6609:1: Debug: actions: 154:completing action: 154: ManualShootAction subwoofer-center-low
+334.6614:1: Info: global:  duration = 0.8240
+334.6777:1: Debug: actions: 166:starting action: SwerveHolonomicPathFollower S2S4-P7
+334.6795:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+334.6800:1: Debug: actions: 157:canceling action: 157: MCVelocityAction (intake-shooter1), target = 65.0
+334.6807:1: Debug: actions: 158:canceling action: 158: MCVelocityAction (intake-shooter2), target = 65.0
+334.6817:1: Debug: actions: 142:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+334.6826:1: Debug: actions: 143:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+334.6844:1: Debug: actions: 144:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+334.6862:1: Info: global: automode: Shoot4 -> StowState
+335.6983:1: Debug: actions: 144:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+335.7996:1: Debug: actions: 143:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+335.8187:1: Debug: actions: 142:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+335.8398:1: Info: global: automode: StowState -> Done
+337.7922:1: Info: global: changing robot loop type: Autonomous -> Disabled
+337.7928:1: Info: global: Motor Faults Report
+337.7931:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+337.8329:1: Info: global: intake-updown:rio-2:sticky-stator-curr-limit
+337.8586:1: Info: global: intake-feeder:rio-1:sticky-stator-curr-limit
+337.8841:1: Info: global: intake-tilt:rio-5:sticky-stator-curr-limit
+337.9160:1: Info: global: intake-shooter1:rio-3:sticky-stator-curr-limit
+337.9433:1: Info: global: intake-shooter2:rio-4:sticky-stator-curr-limit
+337.9693:1: Info: global: elevator:rio-6:sticky-stator-curr-limit
+337.9994:1: Info: global: arm:rio-7:sticky-stator-curr-limit
+338.0003:1: Info: global: manipulator:rio-9:NONE
+338.0327:1: Info: global: climber:rio-10:sticky-stator-curr-limit
+338.0575:1: Info: global: fl-steer:DriveBase-11:NONE
+338.0820:1: Info: global: fl-drive:DriveBase-12:NONE
+338.1146:1: Info: global: fr-steer:DriveBase-21:NONE
+338.1460:1: Info: global: fr-drive:DriveBase-22:NONE
+338.1699:1: Info: global: bl-steer:DriveBase-41:NONE
+338.1993:1: Info: global: bl-drive:DriveBase-42:NONE
+338.2244:1: Info: global: br-steer:DriveBase-31:NONE
+338.2552:1: Info: global: br-drive:DriveBase-32:NONE
+338.2556:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+342.3313:1: Debug: actions: 141:canceling action: Start2Shoot4ActionFast
+342.3319:1: Info: global: changing robot loop type: Disabled -> Teleop
+342.4159:1: Debug: actions: 215:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: -4.29 m/s, Vy: -0.77 m/s, Omega: -5.33 rad/s))
+344.0564:1: Debug: actions: 120:starting action: StartCollectAction
+344.0567:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+344.0581:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+344.0595:1: Info: global: pos < stow pos = 116.1 stow = 118.0
+344.0602:1: Debug: actions: 219:starting action: MCMotionMagicAction (intake-tilt) target=-63.132800608 posthresh=3.0 velthresh=1.0
+344.0620:1: Debug: global: OI State changed : Idle -> Collect
+344.3973:1: Debug: actions: 219:completing action: MCMotionMagicAction (intake-tilt) target=-63.132800608 posthresh=3.0 velthresh=1.0
+344.4161:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+344.4194:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+344.4219:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+345.6965:1: Debug: actions: 128:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+345.8565:1: Debug: actions: 127:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+345.8758:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+346.6965:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+346.8147:1: Debug: actions: 126:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+346.8154:1: Debug: actions: 126:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+346.8162:1: Debug: actions: 121:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+346.8184:1: Debug: actions: 122:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+346.8204:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+348.0189:1: Debug: actions: 121:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+348.1608:1: Debug: actions: 122:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+348.1752:1: Debug: actions: 120:completing action: StartCollectAction
+348.1803:1: Debug: global: OI State changed : Collect -> ManualShoot
+348.1983:1: Debug: global:  gamepad shoot button = false
+348.2160:1: Debug: global:  gamepad shoot button = false
+348.2364:1: Debug: global:  gamepad shoot button = false
+348.2562:1: Debug: global:  gamepad shoot button = false
+348.2774:1: Debug: global:  gamepad shoot button = false
+348.2976:1: Debug: global:  gamepad shoot button = false
+348.3165:1: Debug: global:  gamepad shoot button = false
+348.3375:1: Debug: global:  gamepad shoot button = false
+348.3582:1: Debug: global:  gamepad shoot button = false
+348.3770:1: Debug: global:  gamepad shoot button = false
+348.3968:1: Debug: global:  gamepad shoot button = false
+348.4194:1: Debug: global:  gamepad shoot button = false
+348.4389:1: Debug: global:  gamepad shoot button = false
+348.4577:1: Debug: global:  gamepad shoot button = false
+348.4786:1: Debug: global:  gamepad shoot button = false
+348.4968:1: Debug: global:  gamepad shoot button = false
+348.5174:1: Debug: global:  gamepad shoot button = false
+348.5370:1: Debug: global:  gamepad shoot button = false
+348.5590:1: Debug: global:  gamepad shoot button = false
+348.5785:1: Debug: global:  gamepad shoot button = false
+348.5970:1: Debug: global:  gamepad shoot button = false
+348.6181:1: Debug: global:  gamepad shoot button = false
+348.6371:1: Debug: global:  gamepad shoot button = false
+348.6590:1: Debug: global:  gamepad shoot button = false
+348.6811:1: Debug: global:  gamepad shoot button = false
+348.6978:1: Debug: global:  gamepad shoot button = false
+348.7211:1: Debug: global:  gamepad shoot button = false
+348.7372:1: Debug: global:  gamepad shoot button = false
+348.7566:1: Debug: global:  gamepad shoot button = false
+348.7765:1: Debug: global:  gamepad shoot button = false
+348.7969:1: Debug: global:  gamepad shoot button = false
+348.8167:1: Debug: global:  gamepad shoot button = false
+348.8373:1: Debug: global:  gamepad shoot button = false
+348.8600:1: Debug: global:  gamepad shoot button = false
+348.8781:1: Debug: global:  gamepad shoot button = false
+348.8958:1: Debug: global:  gamepad shoot button = false
+348.9213:1: Debug: global:  gamepad shoot button = false
+348.9358:1: Debug: global:  gamepad shoot button = false
+348.9565:1: Debug: global:  gamepad shoot button = false
+348.9759:1: Debug: global:  gamepad shoot button = false
+348.9959:1: Debug: global:  gamepad shoot button = false
+349.0192:1: Debug: global:  gamepad shoot button = false
+349.0376:1: Debug: global:  gamepad shoot button = false
+349.0660:1: Debug: global:  gamepad shoot button = false
+349.1216:1: Debug: global:  gamepad shoot button = false
+349.1374:1: Debug: global:  gamepad shoot button = false
+349.1466:1: Debug: global:  gamepad shoot button = false
+349.1557:1: Debug: global:  gamepad shoot button = false
+349.1660:1: Debug: global:  gamepad shoot button = false
+349.1778:1: Debug: global:  gamepad shoot button = true
+349.1783:1: Debug: actions: 13:starting action: 13: ManualShootAction subwoofer-center-low
+349.1787:1: Debug: actions: 14:starting action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+349.1807:1: Debug: actions: 15:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+349.1821:1: Debug: actions: 16:starting action: 16: MCVelocityAction (intake-shooter1), target = 65.0
+349.1842:1: Debug: actions: 17:starting action: 17: MCVelocityAction (intake-shooter2), target = 65.0
+349.1858:1: Debug: global: OI State changed : ManualShoot -> ManualShooting
+350.0992:1: Debug: actions: 14:completing action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+350.2194:1: Debug: actions: 15:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+350.2403:1: Debug: global: shot:  tilt = 6.754 updown = 34.92 shooter1 = 65.02 shooter2 = 65.54
+350.2419:1: Debug: actions: 18:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+350.2576:1: Debug: global: shot/2:  tilt = 6.746 updown = 34.92 shooter1 = 65.40 shooter2 = 66.89
+350.2804:1: Debug: global: shot/2:  tilt = 6.738 updown = 34.92 shooter1 = 65.55 shooter2 = 64.61
+350.2965:1: Debug: global: shot/2:  tilt = 6.738 updown = 34.93 shooter1 = 65.67 shooter2 = 66.04
+350.3172:1: Debug: global: shot/2:  tilt = 6.826 updown = 34.97 shooter1 = 65.04 shooter2 = 65.33
+350.3379:1: Debug: global: shot/2:  tilt = 6.890 updown = 34.97 shooter1 = 65.93 shooter2 = 65.82
+350.3590:1: Debug: global: shot/2:  tilt = 6.946 updown = 34.96 shooter1 = 66.39 shooter2 = 66.38
+350.3795:1: Debug: global: shot/2:  tilt = 6.946 updown = 34.94 shooter1 = 52.22 shooter2 = 57.39
+350.3979:1: Debug: global: shot/2:  tilt = 6.946 updown = 34.96 shooter1 = 51.36 shooter2 = 50.80
+350.4180:1: Debug: global: shot/2:  tilt = 6.858 updown = 34.98 shooter1 = 49.81 shooter2 = 52.21
+350.4398:1: Debug: global: shot/2:  tilt = 6.810 updown = 34.94 shooter1 = 53.06 shooter2 = 54.74
+350.4571:1: Debug: global: shot/2:  tilt = 6.810 updown = 34.94 shooter1 = 54.98 shooter2 = 57.51
+350.4777:1: Debug: global: shot/2:  tilt = 6.794 updown = 34.94 shooter1 = 58.25 shooter2 = 61.75
+350.4972:1: Debug: global: shot/2:  tilt = 6.778 updown = 34.94 shooter1 = 59.58 shooter2 = 64.52
+350.5192:1: Debug: global: shot/2:  tilt = 6.778 updown = 34.94 shooter1 = 64.94 shooter2 = 64.58
+350.5385:1: Debug: global: shot/2:  tilt = 6.794 updown = 34.95 shooter1 = 65.63 shooter2 = 65.39
+350.5584:1: Debug: global: shot/2:  tilt = 6.834 updown = 34.96 shooter1 = 65.85 shooter2 = 66.72
+350.5590:1: Debug: actions: 18:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+350.5782:1: Debug: global: shot/2:  tilt = 6.890 updown = 34.96 shooter1 = 66.62 shooter2 = 67.20
+350.5790:1: Debug: actions: 13:completing action: 13: ManualShootAction subwoofer-center-low
+350.5797:1: Info: global:  duration = 1.401
+350.5810:1: Debug: actions: 16:canceling action: 16: MCVelocityAction (intake-shooter1), target = 65.0
+350.5815:1: Debug: actions: 17:canceling action: 17: MCVelocityAction (intake-shooter2), target = 65.0
+350.5818:1: Debug: actions: 35:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+350.5825:1: Debug: actions: 36:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+350.5873:1: Debug: actions: 37:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+350.5939:1: Debug: global: OI State changed : ManualShooting -> StowIntake
+351.5969:1: Debug: actions: 37:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+351.6776:1: Debug: actions: 36:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+351.6960:1: Debug: actions: 35:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+351.6982:1: Debug: global: OI State changed : StowIntake -> Idle
+351.7163:1: Debug: actions: 120:starting action: StartCollectAction
+351.7195:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+351.7199:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+351.7211:1: Info: global: pos < stow pos = 118.0 stow = 118.0
+351.7215:1: Debug: actions: 220:starting action: MCMotionMagicAction (intake-tilt) target=-64.970513488 posthresh=3.0 velthresh=1.0
+351.7236:1: Debug: global: OI State changed : Idle -> Collect
+351.7390:1: Debug: actions: 220:completing action: MCMotionMagicAction (intake-tilt) target=-64.970513488 posthresh=3.0 velthresh=1.0
+351.7545:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+351.7629:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+351.7651:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+353.0361:1: Debug: actions: 128:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+353.1178:1: Debug: actions: 127:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+353.1349:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+356.7170:1: Debug: actions: 120:canceling action: StartCollectAction
+356.7181:1: Debug: actions: 129:starting action: StopCollectAction
+356.7186:1: Debug: actions: 134:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+356.7189:1: Debug: actions: 134:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+356.7198:1: Debug: actions: 132:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=1.0 velthresh=1.0
+356.7215:1: Debug: actions: 133:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+356.7233:1: Debug: global: OI State changed : Collect -> EndingCollect
+357.9562:1: Debug: actions: 132:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=1.0 velthresh=1.0
+358.0951:1: Debug: actions: 133:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+358.1147:1: Debug: actions: 129:completing action: StopCollectAction
+358.1161:1: Debug: global: OI State changed : EndingCollect -> Idle
+358.1356:1: Debug: actions: 120:starting action: StartCollectAction
+358.1362:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+358.1365:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+358.1382:1: Info: global: pos < stow pos = 118.0 stow = 118.0
+358.1390:1: Debug: actions: 221:starting action: MCMotionMagicAction (intake-tilt) target=-64.98383024799999 posthresh=3.0 velthresh=1.0
+358.1410:1: Debug: global: OI State changed : Idle -> Collect
+358.1548:1: Debug: actions: 221:completing action: MCMotionMagicAction (intake-tilt) target=-64.98383024799999 posthresh=3.0 velthresh=1.0
+358.1751:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+358.1771:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+358.1797:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+359.4563:1: Debug: actions: 128:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+359.5405:1: Debug: actions: 127:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+359.5562:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+360.6773:1: Debug: actions: 120:canceling action: StartCollectAction
+360.6779:1: Debug: actions: 129:starting action: StopCollectAction
+360.6784:1: Debug: actions: 134:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+360.6790:1: Debug: actions: 134:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+360.6800:1: Debug: actions: 132:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=1.0 velthresh=1.0
+360.6816:1: Debug: actions: 133:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+360.6831:1: Debug: global: OI State changed : Collect -> EndingCollect
+361.9002:1: Debug: actions: 132:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=1.0 velthresh=1.0
+362.0762:1: Debug: actions: 133:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+362.0946:1: Debug: actions: 129:completing action: StopCollectAction
+362.0958:1: Debug: global: OI State changed : EndingCollect -> Idle
+366.5158:1: Debug: actions: 97:starting action: 97: EjectAction
+366.5165:1: Debug: actions: 98:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+366.5170:1: Debug: actions: 99:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+366.5188:1: Debug: actions: 100:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+366.5206:1: Debug: global: OI State changed : Idle -> Eject
+366.5486:1: Debug: actions: 100:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+366.5822:1: Debug: actions: 99:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+366.5954:1: Debug: actions: 98:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+366.6162:1: Debug: actions: 101:starting action: IntakeEjectAction
+366.6166:1: Debug: actions: 102:starting action: MotorEncoderPowerAction intake-feeder power = -0.5
+366.6169:1: Debug: actions: 102:completing action: MotorEncoderPowerAction intake-feeder power = -0.5
+366.6296:1: Debug: actions: 103:starting action: MotorEncoderPowerAction intake-shooter1 power = -0.7
+366.6306:1: Debug: actions: 103:completing action: MotorEncoderPowerAction intake-shooter1 power = -0.7
+366.6391:1: Debug: actions: 104:starting action: MotorEncoderPowerAction intake-shooter2 power = -0.7
+366.6395:1: Debug: actions: 104:completing action: MotorEncoderPowerAction intake-shooter2 power = -0.7
+366.6415:1: Debug: actions: 107:starting action: AmpTrapEjectAction
+366.6418:1: Debug: actions: 108:starting action: MotorEncoderPowerAction manipulator power = -0.5
+366.6423:1: Debug: actions: 108:completing action: MotorEncoderPowerAction manipulator power = -0.5
+367.6566:1: Debug: actions: 107:completing action: AmpTrapEjectAction
+368.1348:1: Debug: actions: 105:starting action: MotorEncoderPowerAction intake-shooter1 power = 0.7
+368.1354:1: Debug: actions: 105:completing action: MotorEncoderPowerAction intake-shooter1 power = 0.7
+368.1361:1: Debug: actions: 106:starting action: MotorEncoderPowerAction intake-shooter2 power = 0.7
+368.1367:1: Debug: actions: 106:completing action: MotorEncoderPowerAction intake-shooter2 power = 0.7
+369.1430:1: Debug: actions: 101:completing action: IntakeEjectAction
+369.1550:1: Debug: actions: 97:completing action: 97: EjectAction
+369.1558:1: Debug: global: OI State changed : Eject -> Idle
+369.1770:1: Debug: actions: 120:starting action: StartCollectAction
+369.1782:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+369.1787:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+369.1796:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+369.1814:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+369.1829:1: Debug: global: OI State changed : Idle -> Collect
+370.4355:1: Debug: actions: 128:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+370.5365:1: Debug: actions: 127:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+370.5569:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+370.8549:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+370.9757:1: Debug: actions: 126:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+370.9762:1: Debug: actions: 126:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+370.9775:1: Debug: actions: 121:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+370.9794:1: Debug: actions: 122:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+370.9822:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+372.1765:1: Debug: actions: 121:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+372.3795:1: Debug: actions: 122:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+372.3959:1: Debug: actions: 120:completing action: StartCollectAction
+372.3970:1: Debug: global: OI State changed : Collect -> ManualShoot
+372.4167:1: Debug: global:  gamepad shoot button = false
+372.4369:1: Debug: global:  gamepad shoot button = false
+372.4572:1: Debug: global:  gamepad shoot button = false
+372.4770:1: Debug: global:  gamepad shoot button = false
+372.4978:1: Debug: global:  gamepad shoot button = false
+372.5220:1: Debug: global:  gamepad shoot button = false
+372.5363:1: Debug: global:  gamepad shoot button = false
+372.5554:1: Debug: global:  gamepad shoot button = false
+372.5758:1: Debug: global:  gamepad shoot button = false
+372.5961:1: Debug: global:  gamepad shoot button = false
+372.6158:1: Debug: global:  gamepad shoot button = false
+372.6371:1: Debug: global:  gamepad shoot button = false
+372.6555:1: Debug: global:  gamepad shoot button = false
+372.6762:1: Debug: global:  gamepad shoot button = false
+372.6959:1: Debug: global:  gamepad shoot button = false
+372.7174:1: Debug: global:  gamepad shoot button = false
+372.7370:1: Debug: global:  gamepad shoot button = false
+372.7584:1: Debug: global:  gamepad shoot button = false
+372.7771:1: Debug: global:  gamepad shoot button = false
+372.7982:1: Debug: global:  gamepad shoot button = false
+372.8177:1: Debug: global:  gamepad shoot button = false
+372.8380:1: Debug: global:  gamepad shoot button = false
+372.8572:1: Debug: global:  gamepad shoot button = false
+372.8777:1: Debug: global:  gamepad shoot button = false
+372.8978:1: Debug: global:  gamepad shoot button = false
+372.9216:1: Debug: global:  gamepad shoot button = false
+372.9370:1: Debug: global:  gamepad shoot button = false
+372.9576:1: Debug: global:  gamepad shoot button = false
+372.9788:1: Debug: global:  gamepad shoot button = false
+373.0002:1: Debug: global:  gamepad shoot button = false
+373.0202:1: Debug: global:  gamepad shoot button = false
+373.0377:1: Debug: global:  gamepad shoot button = false
+373.0565:1: Debug: global:  gamepad shoot button = false
+373.0773:1: Debug: global:  gamepad shoot button = false
+373.0966:1: Debug: global:  gamepad shoot button = false
+373.1175:1: Debug: global:  gamepad shoot button = false
+373.1369:1: Debug: global:  gamepad shoot button = false
+373.1573:1: Debug: global:  gamepad shoot button = false
+373.1769:1: Debug: global:  gamepad shoot button = true
+373.1778:1: Debug: actions: 13:starting action: 13: ManualShootAction subwoofer-center-low
+373.1787:1: Debug: actions: 14:starting action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+373.1811:1: Debug: actions: 15:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+373.1832:1: Debug: actions: 16:starting action: 16: MCVelocityAction (intake-shooter1), target = 65.0
+373.1848:1: Debug: actions: 17:starting action: 17: MCVelocityAction (intake-shooter2), target = 65.0
+373.1867:1: Debug: global: OI State changed : ManualShoot -> ManualShooting
+374.0971:1: Debug: actions: 14:completing action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+374.2430:1: Debug: actions: 15:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+374.2584:1: Debug: global: shot:  tilt = 6.730 updown = 34.93 shooter1 = 65.04 shooter2 = 65.06
+374.2588:1: Debug: actions: 18:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+374.2791:1: Debug: global: shot/2:  tilt = 6.730 updown = 34.93 shooter1 = 66.06 shooter2 = 66.02
+374.3042:1: Debug: global: shot/2:  tilt = 6.834 updown = 34.94 shooter1 = 65.61 shooter2 = 64.92
+374.3182:1: Debug: global: shot/2:  tilt = 6.866 updown = 34.95 shooter1 = 65.14 shooter2 = 65.22
+374.3391:1: Debug: global: shot/2:  tilt = 6.922 updown = 34.97 shooter1 = 66.06 shooter2 = 65.77
+374.3618:1: Debug: global: shot/2:  tilt = 6.938 updown = 34.98 shooter1 = 66.51 shooter2 = 65.83
+374.3774:1: Debug: global: shot/2:  tilt = 6.954 updown = 34.98 shooter1 = 65.78 shooter2 = 63.67
+374.3981:1: Debug: global: shot/2:  tilt = 6.969 updown = 34.92 shooter1 = 51.04 shooter2 = 51.35
+374.4188:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.97 shooter1 = 49.05 shooter2 = 52.33
+374.4395:1: Debug: global: shot/2:  tilt = 6.794 updown = 34.95 shooter1 = 53.06 shooter2 = 54.94
+374.4568:1: Debug: global: shot/2:  tilt = 6.794 updown = 34.94 shooter1 = 53.75 shooter2 = 56.31
+374.4769:1: Debug: global: shot/2:  tilt = 6.762 updown = 34.93 shooter1 = 55.41 shooter2 = 60.56
+374.4977:1: Debug: global: shot/2:  tilt = 6.754 updown = 34.93 shooter1 = 58.83 shooter2 = 63.43
+374.5168:1: Debug: global: shot/2:  tilt = 6.754 updown = 34.93 shooter1 = 62.21 shooter2 = 65.05
+374.5389:1: Debug: global: shot/2:  tilt = 6.794 updown = 34.95 shooter1 = 64.81 shooter2 = 67.23
+374.5631:1: Debug: global: shot/2:  tilt = 6.866 updown = 34.96 shooter1 = 66.46 shooter2 = 66.34
+374.5639:1: Debug: actions: 18:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+374.5803:1: Debug: global: shot/2:  tilt = 6.874 updown = 34.96 shooter1 = 66.49 shooter2 = 66.67
+374.5814:1: Debug: actions: 13:completing action: 13: ManualShootAction subwoofer-center-low
+374.5825:1: Info: global:  duration = 1.403
+374.5842:1: Debug: actions: 16:canceling action: 16: MCVelocityAction (intake-shooter1), target = 65.0
+374.5849:1: Debug: actions: 17:canceling action: 17: MCVelocityAction (intake-shooter2), target = 65.0
+374.5867:1: Debug: actions: 35:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+374.5872:1: Debug: actions: 36:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+374.5890:1: Debug: actions: 37:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+374.5910:1: Debug: global: OI State changed : ManualShooting -> StowIntake
+375.5584:1: Debug: actions: 37:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+375.9150:1: Debug: actions: 36:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+375.9351:1: Debug: actions: 35:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+375.9363:1: Debug: global: OI State changed : StowIntake -> Idle
+379.5352:1: Debug: actions: 120:starting action: StartCollectAction
+379.5355:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+379.5359:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+379.5372:1: Info: global: pos < stow pos = 118.0 stow = 118.0
+379.5383:1: Debug: actions: 222:starting action: MCMotionMagicAction (intake-tilt) target=-64.991820304 posthresh=3.0 velthresh=1.0
+379.5402:1: Debug: global: OI State changed : Idle -> Collect
+379.5571:1: Debug: actions: 222:completing action: MCMotionMagicAction (intake-tilt) target=-64.991820304 posthresh=3.0 velthresh=1.0
+379.5764:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+379.5794:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+379.5820:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+380.9350:1: Debug: actions: 127:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+380.9358:1: Debug: actions: 128:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+380.9540:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+381.1751:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+381.2946:1: Debug: actions: 126:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+381.2951:1: Debug: actions: 126:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+381.2962:1: Debug: actions: 121:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+381.2991:1: Debug: actions: 122:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+381.3006:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+382.4756:1: Debug: actions: 121:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+382.6556:1: Debug: actions: 122:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+382.6755:1: Debug: actions: 120:completing action: StartCollectAction
+382.6766:1: Debug: global: OI State changed : Collect -> ManualShoot
+382.6955:1: Debug: global:  gamepad shoot button = false
+382.7151:1: Debug: global:  gamepad shoot button = false
+382.7362:1: Debug: global:  gamepad shoot button = false
+382.7564:1: Debug: global:  gamepad shoot button = false
+382.7746:1: Debug: global:  gamepad shoot button = false
+382.7950:1: Debug: global:  gamepad shoot button = false
+382.8153:1: Debug: global:  gamepad shoot button = false
+382.8356:1: Debug: global:  gamepad shoot button = false
+382.8557:1: Debug: global:  gamepad shoot button = false
+382.8753:1: Debug: global:  gamepad shoot button = false
+382.8962:1: Debug: global:  gamepad shoot button = false
+382.9152:1: Debug: global:  gamepad shoot button = false
+382.9351:1: Debug: global:  gamepad shoot button = false
+382.9557:1: Debug: global:  gamepad shoot button = false
+382.9811:1: Debug: global:  gamepad shoot button = false
+382.9955:1: Debug: global:  gamepad shoot button = false
+383.0173:1: Debug: global:  gamepad shoot button = false
+383.0373:1: Debug: global:  gamepad shoot button = false
+383.0563:1: Debug: global:  gamepad shoot button = false
+383.0766:1: Debug: global:  gamepad shoot button = false
+383.0970:1: Debug: global:  gamepad shoot button = false
+383.1167:1: Debug: global:  gamepad shoot button = false
+383.1356:1: Debug: global:  gamepad shoot button = false
+383.1555:1: Debug: global:  gamepad shoot button = false
+383.1753:1: Debug: global:  gamepad shoot button = false
+383.1965:1: Debug: global:  gamepad shoot button = false
+383.2161:1: Debug: global:  gamepad shoot button = false
+383.2371:1: Debug: global:  gamepad shoot button = false
+383.2569:1: Debug: global:  gamepad shoot button = false
+383.2762:1: Debug: global:  gamepad shoot button = false
+383.2957:1: Debug: global:  gamepad shoot button = false
+383.3150:1: Debug: global:  gamepad shoot button = false
+383.3353:1: Debug: global:  gamepad shoot button = false
+383.3554:1: Debug: global:  gamepad shoot button = false
+383.3751:1: Debug: global:  gamepad shoot button = false
+383.3953:1: Debug: global:  gamepad shoot button = false
+383.4151:1: Debug: global:  gamepad shoot button = false
+383.4360:1: Debug: global:  gamepad shoot button = false
+383.4596:1: Debug: global:  gamepad shoot button = false
+383.4767:1: Debug: global:  gamepad shoot button = false
+383.4986:1: Debug: global:  gamepad shoot button = false
+383.5152:1: Debug: global:  gamepad shoot button = false
+383.5355:1: Debug: global:  gamepad shoot button = false
+383.5550:1: Debug: global:  gamepad shoot button = false
+383.5754:1: Debug: global:  gamepad shoot button = false
+383.5993:1: Debug: global:  gamepad shoot button = false
+383.6150:1: Debug: global:  gamepad shoot button = false
+383.6349:1: Debug: global:  gamepad shoot button = false
+383.6555:1: Debug: global:  gamepad shoot button = false
+383.6764:1: Debug: global:  gamepad shoot button = false
+383.6971:1: Debug: global:  gamepad shoot button = false
+383.7158:1: Debug: global:  gamepad shoot button = false
+383.7364:1: Debug: global:  gamepad shoot button = false
+383.7561:1: Debug: global:  gamepad shoot button = false
+383.7774:1: Debug: global:  gamepad shoot button = false
+383.7953:1: Debug: global:  gamepad shoot button = false
+383.8157:1: Debug: global:  gamepad shoot button = false
+383.8350:1: Debug: global:  gamepad shoot button = false
+383.8553:1: Debug: global:  gamepad shoot button = false
+383.8761:1: Debug: global:  gamepad shoot button = false
+383.8956:1: Debug: global:  gamepad shoot button = false
+383.9153:1: Debug: global:  gamepad shoot button = false
+383.9353:1: Debug: global:  gamepad shoot button = false
+383.9574:1: Debug: global:  gamepad shoot button = false
+383.9798:1: Debug: global:  gamepad shoot button = false
+383.9957:1: Debug: global:  gamepad shoot button = false
+384.0187:1: Debug: global:  gamepad shoot button = false
+384.0354:1: Debug: global:  gamepad shoot button = false
+384.0585:1: Debug: global:  gamepad shoot button = false
+384.0754:1: Debug: global:  gamepad shoot button = false
+384.0958:1: Debug: global:  gamepad shoot button = false
+384.1198:1: Debug: global:  gamepad shoot button = false
+384.1355:1: Debug: global:  gamepad shoot button = false
+384.1552:1: Debug: global:  gamepad shoot button = false
+384.1751:1: Debug: global:  gamepad shoot button = false
+384.1955:1: Debug: global:  gamepad shoot button = false
+384.2160:1: Debug: global:  gamepad shoot button = false
+384.2371:1: Debug: global:  gamepad shoot button = false
+384.2551:1: Debug: global:  gamepad shoot button = false
+384.2754:1: Debug: global:  gamepad shoot button = false
+384.2952:1: Debug: global:  gamepad shoot button = false
+384.3161:1: Debug: global:  gamepad shoot button = false
+384.3359:1: Debug: global:  gamepad shoot button = false
+384.3552:1: Debug: global:  gamepad shoot button = false
+384.3755:1: Debug: global:  gamepad shoot button = false
+384.3951:1: Debug: global:  gamepad shoot button = false
+384.4157:1: Debug: global:  gamepad shoot button = false
+384.4362:1: Debug: global:  gamepad shoot button = false
+384.4562:1: Debug: global:  gamepad shoot button = false
+384.4756:1: Debug: global:  gamepad shoot button = false
+384.5007:1: Debug: global:  gamepad shoot button = false
+384.5167:1: Debug: global:  gamepad shoot button = false
+384.5351:1: Debug: global:  gamepad shoot button = false
+384.5554:1: Debug: global:  gamepad shoot button = false
+384.5753:1: Debug: global:  gamepad shoot button = false
+384.5956:1: Debug: global:  gamepad shoot button = false
+384.6158:1: Debug: global:  gamepad shoot button = false
+384.6367:1: Debug: global:  gamepad shoot button = false
+384.6554:1: Debug: global:  gamepad shoot button = false
+384.6748:1: Debug: global:  gamepad shoot button = false
+384.6946:1: Debug: global:  gamepad shoot button = false
+384.7147:1: Debug: global:  gamepad shoot button = false
+384.7360:1: Debug: global:  gamepad shoot button = false
+384.7558:1: Debug: global:  gamepad shoot button = false
+384.7760:1: Debug: global:  gamepad shoot button = false
+384.7963:1: Debug: global:  gamepad shoot button = false
+384.8155:1: Debug: global:  gamepad shoot button = false
+384.8349:1: Debug: global:  gamepad shoot button = false
+384.8562:1: Debug: global:  gamepad shoot button = false
+384.8765:1: Debug: global:  gamepad shoot button = false
+384.8957:1: Debug: global:  gamepad shoot button = false
+384.9147:1: Debug: global:  gamepad shoot button = false
+384.9348:1: Debug: global:  gamepad shoot button = false
+384.9553:1: Debug: global:  gamepad shoot button = false
+384.9754:1: Debug: global:  gamepad shoot button = false
+384.9972:1: Debug: global:  gamepad shoot button = false
+385.0248:1: Debug: global:  gamepad shoot button = false
+385.0356:1: Debug: global:  gamepad shoot button = false
+385.0561:1: Debug: global:  gamepad shoot button = false
+385.0764:1: Debug: global:  gamepad shoot button = false
+385.0950:1: Debug: global:  gamepad shoot button = false
+385.1153:1: Debug: global:  gamepad shoot button = false
+385.1351:1: Debug: global:  gamepad shoot button = false
+385.1576:1: Debug: global:  gamepad shoot button = false
+385.1757:1: Debug: global:  gamepad shoot button = false
+385.1957:1: Debug: global:  gamepad shoot button = false
+385.2164:1: Debug: global:  gamepad shoot button = false
+385.2355:1: Debug: global:  gamepad shoot button = false
+385.2578:1: Debug: global:  gamepad shoot button = false
+385.2753:1: Debug: global:  gamepad shoot button = false
+385.2953:1: Debug: global:  gamepad shoot button = false
+385.3151:1: Debug: global:  gamepad shoot button = false
+385.3356:1: Debug: global:  gamepad shoot button = false
+385.3557:1: Debug: global:  gamepad shoot button = false
+385.3762:1: Debug: global:  gamepad shoot button = false
+385.3957:1: Debug: global:  gamepad shoot button = false
+385.4166:1: Debug: global:  gamepad shoot button = false
+385.4354:1: Debug: global:  gamepad shoot button = false
+385.4559:1: Debug: global:  gamepad shoot button = false
+385.4765:1: Debug: global:  gamepad shoot button = false
+385.4953:1: Debug: global:  gamepad shoot button = false
+385.5154:1: Debug: global:  gamepad shoot button = false
+385.5420:1: Debug: global:  gamepad shoot button = false
+385.5558:1: Debug: global:  gamepad shoot button = false
+385.5754:1: Debug: global:  gamepad shoot button = false
+385.5957:1: Debug: global:  gamepad shoot button = false
+385.6156:1: Debug: global:  gamepad shoot button = false
+385.6352:1: Debug: global:  gamepad shoot button = false
+385.6554:1: Debug: global:  gamepad shoot button = false
+385.6758:1: Debug: global:  gamepad shoot button = false
+385.6960:1: Debug: global:  gamepad shoot button = false
+385.7166:1: Debug: global:  gamepad shoot button = false
+385.7375:1: Debug: global:  gamepad shoot button = false
+385.7557:1: Debug: global:  gamepad shoot button = false
+385.7795:1: Debug: global:  gamepad shoot button = false
+385.7956:1: Debug: global:  gamepad shoot button = false
+385.8162:1: Debug: global:  gamepad shoot button = false
+385.8356:1: Debug: global:  gamepad shoot button = false
+385.8574:1: Debug: global:  gamepad shoot button = false
+385.8757:1: Debug: global:  gamepad shoot button = false
+385.8952:1: Debug: global:  gamepad shoot button = false
+385.9153:1: Debug: global:  gamepad shoot button = false
+385.9357:1: Debug: global:  gamepad shoot button = false
+385.9566:1: Debug: global:  gamepad shoot button = false
+385.9764:1: Debug: global:  gamepad shoot button = false
+385.9965:1: Debug: global:  gamepad shoot button = false
+386.0173:1: Debug: global:  gamepad shoot button = false
+386.0358:1: Debug: global:  gamepad shoot button = false
+386.0606:1: Debug: global:  gamepad shoot button = false
+386.0751:1: Debug: global:  gamepad shoot button = false
+386.0946:1: Debug: global:  gamepad shoot button = false
+386.1157:1: Debug: global:  gamepad shoot button = false
+386.1347:1: Debug: global:  gamepad shoot button = false
+386.1555:1: Debug: global:  gamepad shoot button = false
+386.1756:1: Debug: global:  gamepad shoot button = false
+386.1967:1: Debug: global:  gamepad shoot button = false
+386.2171:1: Debug: global:  gamepad shoot button = false
+386.2352:1: Debug: global:  gamepad shoot button = false
+386.2563:1: Debug: global:  gamepad shoot button = false
+386.2763:1: Debug: global:  gamepad shoot button = false
+386.2964:1: Debug: global:  gamepad shoot button = false
+386.3160:1: Debug: global:  gamepad shoot button = false
+386.3355:1: Debug: global:  gamepad shoot button = false
+386.3561:1: Debug: global:  gamepad shoot button = false
+386.3755:1: Debug: global:  gamepad shoot button = false
+386.3957:1: Debug: global:  gamepad shoot button = false
+386.4161:1: Debug: global:  gamepad shoot button = false
+386.4371:1: Debug: global:  gamepad shoot button = false
+386.4592:1: Debug: global:  gamepad shoot button = false
+386.4767:1: Debug: global:  gamepad shoot button = false
+386.4964:1: Debug: global:  gamepad shoot button = false
+386.5174:1: Debug: global:  gamepad shoot button = false
+386.5362:1: Debug: global:  gamepad shoot button = false
+386.5601:1: Debug: global:  gamepad shoot button = false
+386.5749:1: Debug: global:  gamepad shoot button = false
+386.5957:1: Debug: global:  gamepad shoot button = false
+386.6161:1: Debug: global:  gamepad shoot button = false
+386.6359:1: Debug: global:  gamepad shoot button = false
+386.6572:1: Debug: global:  gamepad shoot button = false
+386.6759:1: Debug: global:  gamepad shoot button = false
+386.6976:1: Debug: global:  gamepad shoot button = false
+386.7164:1: Debug: global:  gamepad shoot button = false
+386.7352:1: Debug: global:  gamepad shoot button = false
+386.7564:1: Debug: global:  gamepad shoot button = false
+386.7750:1: Debug: global:  gamepad shoot button = false
+386.7953:1: Debug: global:  gamepad shoot button = false
+386.8167:1: Debug: global:  gamepad shoot button = false
+386.8359:1: Debug: global:  gamepad shoot button = false
+386.8560:1: Debug: global:  gamepad shoot button = false
+386.8750:1: Debug: global:  gamepad shoot button = false
+386.8952:1: Debug: global:  gamepad shoot button = false
+386.9183:1: Debug: global:  gamepad shoot button = false
+386.9353:1: Debug: global:  gamepad shoot button = false
+386.9561:1: Debug: global:  gamepad shoot button = false
+386.9757:1: Debug: global:  gamepad shoot button = false
+386.9955:1: Debug: global:  gamepad shoot button = false
+387.0175:1: Debug: global:  gamepad shoot button = false
+387.0357:1: Debug: global:  gamepad shoot button = false
+387.0567:1: Debug: global:  gamepad shoot button = false
+387.0747:1: Debug: global:  gamepad shoot button = false
+387.0953:1: Debug: global:  gamepad shoot button = false
+387.1153:1: Debug: global:  gamepad shoot button = false
+387.1347:1: Debug: global:  gamepad shoot button = false
+387.1564:1: Debug: global:  gamepad shoot button = false
+387.1761:1: Debug: global:  gamepad shoot button = false
+387.1990:1: Debug: global:  gamepad shoot button = false
+387.2185:1: Debug: global:  gamepad shoot button = false
+387.2378:1: Debug: global:  gamepad shoot button = false
+387.2579:1: Debug: global:  gamepad shoot button = false
+387.2774:1: Debug: global:  gamepad shoot button = false
+387.2980:1: Debug: global:  gamepad shoot button = false
+387.3170:1: Debug: global:  gamepad shoot button = false
+387.3372:1: Debug: global:  gamepad shoot button = false
+387.3568:1: Debug: global:  gamepad shoot button = false
+387.3777:1: Debug: global:  gamepad shoot button = false
+387.3983:1: Debug: global:  gamepad shoot button = false
+387.4184:1: Debug: global:  gamepad shoot button = false
+387.4420:1: Debug: global:  gamepad shoot button = false
+387.4599:1: Debug: global:  gamepad shoot button = false
+387.4769:1: Debug: global:  gamepad shoot button = false
+387.4967:1: Debug: global:  gamepad shoot button = false
+387.5166:1: Debug: global:  gamepad shoot button = false
+387.5364:1: Debug: global:  gamepad shoot button = false
+387.5576:1: Debug: global:  gamepad shoot button = false
+387.5772:1: Debug: global:  gamepad shoot button = false
+387.5969:1: Debug: global:  gamepad shoot button = false
+387.6166:1: Debug: global:  gamepad shoot button = false
+387.6372:1: Debug: global:  gamepad shoot button = false
+387.6584:1: Debug: global:  gamepad shoot button = false
+387.6773:1: Debug: global:  gamepad shoot button = false
+387.6980:1: Debug: global:  gamepad shoot button = false
+387.7175:1: Debug: global:  gamepad shoot button = false
+387.7366:1: Debug: global:  gamepad shoot button = false
+387.7587:1: Debug: global:  gamepad shoot button = false
+387.7823:1: Debug: global:  gamepad shoot button = false
+387.7970:1: Debug: global:  gamepad shoot button = false
+387.8163:1: Debug: global:  gamepad shoot button = false
+387.8362:1: Debug: global:  gamepad shoot button = false
+387.8578:1: Debug: global:  gamepad shoot button = false
+387.8769:1: Debug: global:  gamepad shoot button = false
+387.8991:1: Debug: global:  gamepad shoot button = false
+387.9168:1: Debug: global:  gamepad shoot button = false
+387.9367:1: Debug: global:  gamepad shoot button = false
+387.9598:1: Debug: global:  gamepad shoot button = false
+387.9786:1: Debug: global:  gamepad shoot button = false
+387.9982:1: Debug: global:  gamepad shoot button = false
+388.0207:1: Debug: global:  gamepad shoot button = false
+388.0375:1: Debug: global:  gamepad shoot button = false
+388.0573:1: Debug: global:  gamepad shoot button = false
+388.0768:1: Debug: global:  gamepad shoot button = false
+388.0962:1: Debug: global:  gamepad shoot button = false
+388.1226:1: Debug: global:  gamepad shoot button = false
+388.1363:1: Debug: global:  gamepad shoot button = false
+388.1579:1: Debug: global:  gamepad shoot button = false
+388.1769:1: Debug: global:  gamepad shoot button = false
+388.1978:1: Debug: global:  gamepad shoot button = false
+388.2175:1: Debug: global:  gamepad shoot button = false
+388.2364:1: Debug: global:  gamepad shoot button = false
+388.2593:1: Debug: global:  gamepad shoot button = false
+388.2775:1: Debug: global:  gamepad shoot button = false
+388.2988:1: Debug: global:  gamepad shoot button = false
+388.3188:1: Debug: global:  gamepad shoot button = false
+388.3367:1: Debug: global:  gamepad shoot button = false
+388.3588:1: Debug: global:  gamepad shoot button = false
+388.3803:1: Debug: global:  gamepad shoot button = false
+388.3963:1: Debug: global:  gamepad shoot button = false
+388.4168:1: Debug: global:  gamepad shoot button = false
+388.4375:1: Debug: global:  gamepad shoot button = false
+388.4586:1: Debug: global:  gamepad shoot button = false
+388.4803:1: Debug: global:  gamepad shoot button = false
+388.4979:1: Debug: global:  gamepad shoot button = false
+388.5184:1: Debug: global:  gamepad shoot button = false
+388.5372:1: Debug: global:  gamepad shoot button = false
+388.5598:1: Debug: global:  gamepad shoot button = false
+388.5825:1: Debug: global:  gamepad shoot button = false
+388.5963:1: Debug: global:  gamepad shoot button = false
+388.6159:1: Debug: global:  gamepad shoot button = false
+388.6372:1: Debug: global:  gamepad shoot button = false
+388.6585:1: Debug: global:  gamepad shoot button = false
+388.6783:1: Debug: global:  gamepad shoot button = false
+388.6974:1: Debug: global:  gamepad shoot button = false
+388.7174:1: Debug: global:  gamepad shoot button = false
+388.7371:1: Debug: global:  gamepad shoot button = false
+388.7591:1: Debug: global:  gamepad shoot button = false
+388.7826:1: Debug: global:  gamepad shoot button = false
+388.7967:1: Debug: global:  gamepad shoot button = false
+388.8193:1: Debug: global:  gamepad shoot button = false
+388.8365:1: Debug: global:  gamepad shoot button = false
+388.8603:1: Debug: global:  gamepad shoot button = false
+388.8766:1: Debug: global:  gamepad shoot button = false
+388.8968:1: Debug: global:  gamepad shoot button = false
+388.9166:1: Debug: global:  gamepad shoot button = false
+388.9366:1: Debug: global:  gamepad shoot button = false
+388.9577:1: Debug: global:  gamepad shoot button = false
+388.9769:1: Debug: global:  gamepad shoot button = false
+389.0000:1: Debug: global:  gamepad shoot button = false
+389.0215:1: Debug: global:  gamepad shoot button = false
+389.0372:1: Debug: global:  gamepad shoot button = false
+389.0569:1: Debug: global:  gamepad shoot button = false
+389.0766:1: Debug: global:  gamepad shoot button = false
+389.1003:1: Debug: global:  gamepad shoot button = false
+389.1200:1: Debug: global:  gamepad shoot button = true
+389.1204:1: Debug: actions: 13:starting action: 13: ManualShootAction subwoofer-center-low
+389.1207:1: Debug: actions: 14:starting action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+389.1241:1: Debug: actions: 15:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+389.1258:1: Debug: actions: 16:starting action: 16: MCVelocityAction (intake-shooter1), target = 65.0
+389.1269:1: Debug: actions: 17:starting action: 17: MCVelocityAction (intake-shooter2), target = 65.0
+389.1280:1: Debug: global: OI State changed : ManualShoot -> ManualShooting
+390.0204:1: Debug: actions: 14:completing action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+390.1770:1: Debug: actions: 15:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+390.1975:1: Debug: global: shot:  tilt = 6.730 updown = 34.92 shooter1 = 66.17 shooter2 = 66.63
+390.1979:1: Debug: actions: 18:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+390.2176:1: Debug: global: shot/2:  tilt = 6.730 updown = 34.93 shooter1 = 64.83 shooter2 = 66.69
+390.2401:1: Debug: global: shot/2:  tilt = 6.730 updown = 34.94 shooter1 = 64.80 shooter2 = 64.60
+390.2579:1: Debug: global: shot/2:  tilt = 6.842 updown = 34.95 shooter1 = 65.78 shooter2 = 66.31
+390.2765:1: Debug: global: shot/2:  tilt = 6.906 updown = 34.96 shooter1 = 65.57 shooter2 = 66.15
+390.2968:1: Debug: global: shot/2:  tilt = 6.930 updown = 34.98 shooter1 = 66.23 shooter2 = 66.16
+390.3208:1: Debug: global: shot/2:  tilt = 6.977 updown = 34.94 shooter1 = 52.45 shooter2 = 49.72
+390.3415:1: Debug: global: shot/2:  tilt = 6.882 updown = 34.97 shooter1 = 48.72 shooter2 = 50.14
+390.3591:1: Debug: global: shot/2:  tilt = 6.818 updown = 34.98 shooter1 = 50.71 shooter2 = 52.63
+390.3780:1: Debug: global: shot/2:  tilt = 6.810 updown = 34.95 shooter1 = 53.78 shooter2 = 55.57
+390.3980:1: Debug: global: shot/2:  tilt = 6.810 updown = 34.94 shooter1 = 56.26 shooter2 = 60.16
+390.4236:1: Debug: global: shot/2:  tilt = 6.778 updown = 34.94 shooter1 = 57.74 shooter2 = 61.54
+390.4367:1: Debug: global: shot/2:  tilt = 6.770 updown = 34.94 shooter1 = 60.91 shooter2 = 64.19
+390.4600:1: Debug: global: shot/2:  tilt = 6.770 updown = 34.94 shooter1 = 63.22 shooter2 = 65.93
+390.4779:1: Debug: global: shot/2:  tilt = 6.818 updown = 34.95 shooter1 = 65.60 shooter2 = 67.12
+390.4970:1: Debug: global: shot/2:  tilt = 6.834 updown = 34.96 shooter1 = 66.53 shooter2 = 66.31
+390.5169:1: Debug: global: shot/2:  tilt = 6.882 updown = 34.96 shooter1 = 66.18 shooter2 = 67.05
+390.5173:1: Debug: actions: 18:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+390.5378:1: Debug: global: shot/2:  tilt = 6.890 updown = 34.96 shooter1 = 65.84 shooter2 = 64.84
+390.5387:1: Debug: actions: 13:completing action: 13: ManualShootAction subwoofer-center-low
+390.5395:1: Info: global:  duration = 1.418
+390.5407:1: Debug: actions: 16:canceling action: 16: MCVelocityAction (intake-shooter1), target = 65.0
+390.5410:1: Debug: actions: 17:canceling action: 17: MCVelocityAction (intake-shooter2), target = 65.0
+390.5414:1: Debug: actions: 35:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+390.5417:1: Debug: actions: 36:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+390.5434:1: Debug: actions: 37:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+390.5448:1: Debug: global: OI State changed : ManualShooting -> StowIntake
+391.6149:1: Debug: actions: 36:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+391.6157:1: Debug: actions: 37:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+391.6343:1: Debug: actions: 35:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+391.6356:1: Debug: global: OI State changed : StowIntake -> Idle
+396.2149:1: Debug: actions: 120:starting action: StartCollectAction
+396.2153:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+396.2157:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+396.2169:1: Info: global: pos < stow pos = 118.0 stow = 118.0
+396.2173:1: Debug: actions: 223:starting action: MCMotionMagicAction (intake-tilt) target=-64.97317684 posthresh=3.0 velthresh=1.0
+396.2187:1: Debug: global: OI State changed : Idle -> Collect
+396.2371:1: Debug: actions: 223:completing action: MCMotionMagicAction (intake-tilt) target=-64.97317684 posthresh=3.0 velthresh=1.0
+396.2544:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+396.2567:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+396.2590:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+397.4562:1: Debug: actions: 128:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+397.6152:1: Debug: actions: 127:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+397.6338:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+397.7969:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+397.9145:1: Debug: actions: 126:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+397.9150:1: Debug: actions: 126:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+397.9157:1: Debug: actions: 121:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+397.9173:1: Debug: actions: 122:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+397.9189:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+399.1158:1: Debug: actions: 121:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+399.2949:1: Debug: actions: 122:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+399.3144:1: Debug: actions: 120:completing action: StartCollectAction
+399.3163:1: Debug: global: OI State changed : Collect -> ManualShoot
+399.3354:1: Debug: global:  gamepad shoot button = false
+399.3550:1: Debug: global:  gamepad shoot button = false
+399.3752:1: Debug: global:  gamepad shoot button = false
+399.3953:1: Debug: global:  gamepad shoot button = false
+399.4162:1: Debug: global:  gamepad shoot button = false
+399.4355:1: Debug: global:  gamepad shoot button = false
+399.4556:1: Debug: global:  gamepad shoot button = false
+399.4770:1: Debug: global:  gamepad shoot button = false
+399.5023:1: Debug: global:  gamepad shoot button = false
+399.5154:1: Debug: global:  gamepad shoot button = false
+399.5361:1: Debug: global:  gamepad shoot button = false
+399.5552:1: Debug: global:  gamepad shoot button = false
+399.5811:1: Debug: global:  gamepad shoot button = false
+399.5952:1: Debug: global:  gamepad shoot button = false
+399.6147:1: Debug: global:  gamepad shoot button = false
+399.6348:1: Debug: global:  gamepad shoot button = false
+399.6553:1: Debug: global:  gamepad shoot button = false
+399.6809:1: Debug: global:  gamepad shoot button = false
+399.6962:1: Debug: global:  gamepad shoot button = false
+399.7159:1: Debug: global:  gamepad shoot button = false
+399.7365:1: Debug: global:  gamepad shoot button = false
+399.7560:1: Debug: global:  gamepad shoot button = false
+399.7757:1: Debug: global:  gamepad shoot button = false
+399.7958:1: Debug: global:  gamepad shoot button = false
+399.8152:1: Debug: global:  gamepad shoot button = false
+399.8357:1: Debug: global:  gamepad shoot button = false
+399.8554:1: Debug: global:  gamepad shoot button = false
+399.8759:1: Debug: global:  gamepad shoot button = false
+399.8951:1: Debug: global:  gamepad shoot button = false
+399.9156:1: Debug: global:  gamepad shoot button = false
+399.9357:1: Debug: global:  gamepad shoot button = false
+399.9555:1: Debug: global:  gamepad shoot button = false
+399.9774:1: Debug: global:  gamepad shoot button = false
+399.9990:1: Debug: global:  gamepad shoot button = false
+400.0222:1: Debug: global:  gamepad shoot button = false
+400.0351:1: Debug: global:  gamepad shoot button = false
+400.0551:1: Debug: global:  gamepad shoot button = false
+400.0758:1: Debug: global:  gamepad shoot button = false
+400.0955:1: Debug: global:  gamepad shoot button = false
+400.1155:1: Debug: global:  gamepad shoot button = false
+400.1362:1: Debug: global:  gamepad shoot button = false
+400.1558:1: Debug: global:  gamepad shoot button = false
+400.1762:1: Debug: global:  gamepad shoot button = false
+400.1974:1: Debug: global:  gamepad shoot button = false
+400.2162:1: Debug: global:  gamepad shoot button = false
+400.2367:1: Debug: global:  gamepad shoot button = false
+400.2570:1: Debug: global:  gamepad shoot button = false
+400.2760:1: Debug: global:  gamepad shoot button = false
+400.2992:1: Debug: global:  gamepad shoot button = false
+400.3154:1: Debug: global:  gamepad shoot button = false
+400.3350:1: Debug: global:  gamepad shoot button = false
+400.3561:1: Debug: global:  gamepad shoot button = false
+400.3755:1: Debug: global:  gamepad shoot button = false
+400.3951:1: Debug: global:  gamepad shoot button = false
+400.4155:1: Debug: global:  gamepad shoot button = false
+400.4357:1: Debug: global:  gamepad shoot button = false
+400.4584:1: Debug: global:  gamepad shoot button = false
+400.4767:1: Debug: global:  gamepad shoot button = false
+400.4957:1: Debug: global:  gamepad shoot button = false
+400.5155:1: Debug: global:  gamepad shoot button = false
+400.5394:1: Debug: global:  gamepad shoot button = false
+400.5554:1: Debug: global:  gamepad shoot button = false
+400.5773:1: Debug: global:  gamepad shoot button = false
+400.5954:1: Debug: global:  gamepad shoot button = false
+400.6160:1: Debug: global:  gamepad shoot button = false
+400.6358:1: Debug: global:  gamepad shoot button = false
+400.6556:1: Debug: global:  gamepad shoot button = false
+400.6771:1: Debug: global:  gamepad shoot button = false
+400.6959:1: Debug: global:  gamepad shoot button = false
+400.7163:1: Debug: global:  gamepad shoot button = false
+400.7383:1: Debug: global:  gamepad shoot button = false
+400.7552:1: Debug: global:  gamepad shoot button = false
+400.7760:1: Debug: global:  gamepad shoot button = false
+400.7962:1: Debug: global:  gamepad shoot button = false
+400.8172:1: Debug: global:  gamepad shoot button = false
+400.8359:1: Debug: global:  gamepad shoot button = false
+400.8560:1: Debug: global:  gamepad shoot button = false
+400.8761:1: Debug: global:  gamepad shoot button = false
+400.8964:1: Debug: global:  gamepad shoot button = false
+400.9169:1: Debug: global:  gamepad shoot button = false
+400.9365:1: Debug: global:  gamepad shoot button = false
+400.9575:1: Debug: global:  gamepad shoot button = false
+400.9772:1: Debug: global:  gamepad shoot button = false
+400.9949:1: Debug: global:  gamepad shoot button = false
+401.0161:1: Debug: global:  gamepad shoot button = false
+401.0352:1: Debug: global:  gamepad shoot button = false
+401.0591:1: Debug: global:  gamepad shoot button = false
+401.0762:1: Debug: global:  gamepad shoot button = false
+401.0952:1: Debug: global:  gamepad shoot button = false
+401.1150:1: Debug: global:  gamepad shoot button = false
+401.1355:1: Debug: global:  gamepad shoot button = false
+401.1556:1: Debug: global:  gamepad shoot button = false
+401.1766:1: Debug: global:  gamepad shoot button = false
+401.1976:1: Debug: global:  gamepad shoot button = false
+401.2158:1: Debug: global:  gamepad shoot button = false
+401.2363:1: Debug: global:  gamepad shoot button = false
+401.2552:1: Debug: global:  gamepad shoot button = false
+401.2763:1: Debug: global:  gamepad shoot button = false
+401.2959:1: Debug: global:  gamepad shoot button = false
+401.3158:1: Debug: global:  gamepad shoot button = false
+401.3352:1: Debug: global:  gamepad shoot button = false
+401.3552:1: Debug: global:  gamepad shoot button = false
+401.3749:1: Debug: global:  gamepad shoot button = false
+401.3947:1: Debug: global:  gamepad shoot button = false
+401.4150:1: Debug: global:  gamepad shoot button = false
+401.4355:1: Debug: global:  gamepad shoot button = false
+401.4565:1: Debug: global:  gamepad shoot button = false
+401.4774:1: Debug: global:  gamepad shoot button = false
+401.4945:1: Debug: global:  gamepad shoot button = false
+401.5160:1: Debug: global:  gamepad shoot button = false
+401.5352:1: Debug: global:  gamepad shoot button = false
+401.5553:1: Debug: global:  gamepad shoot button = false
+401.5843:1: Debug: global:  gamepad shoot button = false
+401.5949:1: Debug: global:  gamepad shoot button = false
+401.6148:1: Debug: global:  gamepad shoot button = false
+401.6357:1: Debug: global:  gamepad shoot button = false
+401.6557:1: Debug: global:  gamepad shoot button = false
+401.6761:1: Debug: global:  gamepad shoot button = false
+401.6952:1: Debug: global:  gamepad shoot button = false
+401.7175:1: Debug: global:  gamepad shoot button = false
+401.7365:1: Debug: global:  gamepad shoot button = false
+401.7593:1: Debug: global:  gamepad shoot button = false
+401.7758:1: Debug: global:  gamepad shoot button = false
+401.7952:1: Debug: global:  gamepad shoot button = false
+401.8154:1: Debug: global:  gamepad shoot button = false
+401.8359:1: Debug: global:  gamepad shoot button = false
+401.8565:1: Debug: global:  gamepad shoot button = false
+401.8768:1: Debug: global:  gamepad shoot button = false
+401.8954:1: Debug: global:  gamepad shoot button = false
+401.9160:1: Debug: global:  gamepad shoot button = false
+401.9347:1: Debug: global:  gamepad shoot button = false
+401.9548:1: Debug: global:  gamepad shoot button = false
+401.9758:1: Debug: global:  gamepad shoot button = false
+401.9966:1: Debug: global:  gamepad shoot button = false
+402.0171:1: Debug: global:  gamepad shoot button = false
+402.0356:1: Debug: global:  gamepad shoot button = false
+402.0560:1: Debug: global:  gamepad shoot button = false
+402.0753:1: Debug: global:  gamepad shoot button = false
+402.0947:1: Debug: global:  gamepad shoot button = false
+402.1151:1: Debug: global:  gamepad shoot button = false
+402.1348:1: Debug: global:  gamepad shoot button = false
+402.1551:1: Debug: global:  gamepad shoot button = false
+402.1748:1: Debug: global:  gamepad shoot button = false
+402.1952:1: Debug: global:  gamepad shoot button = false
+402.2154:1: Debug: global:  gamepad shoot button = false
+402.2361:1: Debug: global:  gamepad shoot button = false
+402.2565:1: Debug: global:  gamepad shoot button = false
+402.2776:1: Debug: global:  gamepad shoot button = false
+402.2953:1: Debug: global:  gamepad shoot button = false
+402.3160:1: Debug: global:  gamepad shoot button = false
+402.3353:1: Debug: global:  gamepad shoot button = false
+402.3551:1: Debug: global:  gamepad shoot button = false
+402.3764:1: Debug: global:  gamepad shoot button = false
+402.3958:1: Debug: global:  gamepad shoot button = false
+402.4152:1: Debug: global:  gamepad shoot button = false
+402.4352:1: Debug: global:  gamepad shoot button = false
+402.4562:1: Debug: global:  gamepad shoot button = false
+402.4759:1: Debug: global:  gamepad shoot button = false
+402.4966:1: Debug: global:  gamepad shoot button = false
+402.5151:1: Debug: global:  gamepad shoot button = false
+402.5362:1: Debug: global:  gamepad shoot button = false
+402.5553:1: Debug: global:  gamepad shoot button = false
+402.5754:1: Debug: global:  gamepad shoot button = false
+402.5951:1: Debug: global:  gamepad shoot button = false
+402.6155:1: Debug: global:  gamepad shoot button = false
+402.6404:1: Debug: global:  gamepad shoot button = false
+402.6560:1: Debug: global:  gamepad shoot button = false
+402.6762:1: Debug: global:  gamepad shoot button = false
+402.6963:1: Debug: global:  gamepad shoot button = false
+402.7171:1: Debug: global:  gamepad shoot button = false
+402.7371:1: Debug: global:  gamepad shoot button = false
+402.7552:1: Debug: global:  gamepad shoot button = false
+402.7748:1: Debug: global:  gamepad shoot button = false
+402.7967:1: Debug: global:  gamepad shoot button = false
+402.8156:1: Debug: global:  gamepad shoot button = false
+402.8361:1: Debug: global:  gamepad shoot button = false
+402.8555:1: Debug: global:  gamepad shoot button = false
+402.8751:1: Debug: global:  gamepad shoot button = false
+402.8956:1: Debug: global:  gamepad shoot button = false
+402.9154:1: Debug: global:  gamepad shoot button = false
+402.9357:1: Debug: global:  gamepad shoot button = false
+402.9556:1: Debug: global:  gamepad shoot button = false
+402.9770:1: Debug: global:  gamepad shoot button = false
+402.9955:1: Debug: global:  gamepad shoot button = false
+403.0170:1: Debug: global:  gamepad shoot button = false
+403.0360:1: Debug: global:  gamepad shoot button = false
+403.0558:1: Debug: global:  gamepad shoot button = false
+403.0752:1: Debug: global:  gamepad shoot button = false
+403.0954:1: Debug: global:  gamepad shoot button = false
+403.1164:1: Debug: global:  gamepad shoot button = false
+403.1353:1: Debug: global:  gamepad shoot button = false
+403.1601:1: Debug: global:  gamepad shoot button = false
+403.1753:1: Debug: global:  gamepad shoot button = false
+403.1965:1: Debug: global:  gamepad shoot button = false
+403.2175:1: Debug: global:  gamepad shoot button = false
+403.2365:1: Debug: global:  gamepad shoot button = false
+403.2562:1: Debug: global:  gamepad shoot button = false
+403.2746:1: Debug: global:  gamepad shoot button = false
+403.2956:1: Debug: global:  gamepad shoot button = false
+403.3157:1: Debug: global:  gamepad shoot button = false
+403.3353:1: Debug: global:  gamepad shoot button = false
+403.3549:1: Debug: global:  gamepad shoot button = false
+403.3748:1: Debug: global:  gamepad shoot button = false
+403.3955:1: Debug: global:  gamepad shoot button = false
+403.4173:1: Debug: global:  gamepad shoot button = false
+403.4355:1: Debug: global:  gamepad shoot button = false
+403.4561:1: Debug: global:  gamepad shoot button = false
+403.4756:1: Debug: global:  gamepad shoot button = false
+403.4948:1: Debug: global:  gamepad shoot button = false
+403.5187:1: Debug: global:  gamepad shoot button = false
+403.5352:1: Debug: global:  gamepad shoot button = false
+403.5557:1: Debug: global:  gamepad shoot button = false
+403.5750:1: Debug: global:  gamepad shoot button = false
+403.5949:1: Debug: global:  gamepad shoot button = false
+403.6154:1: Debug: global:  gamepad shoot button = false
+403.6357:1: Debug: global:  gamepad shoot button = false
+403.6552:1: Debug: global:  gamepad shoot button = false
+403.6803:1: Debug: global:  gamepad shoot button = false
+403.6990:1: Debug: global:  gamepad shoot button = false
+403.7164:1: Debug: global:  gamepad shoot button = false
+403.7358:1: Debug: global:  gamepad shoot button = false
+403.7554:1: Debug: global:  gamepad shoot button = false
+403.7753:1: Debug: global:  gamepad shoot button = false
+403.7956:1: Debug: global:  gamepad shoot button = false
+403.8168:1: Debug: global:  gamepad shoot button = false
+403.8360:1: Debug: global:  gamepad shoot button = false
+403.8557:1: Debug: global:  gamepad shoot button = false
+403.8756:1: Debug: global:  gamepad shoot button = false
+403.8957:1: Debug: global:  gamepad shoot button = false
+403.9160:1: Debug: global:  gamepad shoot button = false
+403.9373:1: Debug: global:  gamepad shoot button = false
+403.9556:1: Debug: global:  gamepad shoot button = false
+403.9752:1: Debug: global:  gamepad shoot button = false
+403.9960:1: Debug: global:  gamepad shoot button = false
+404.0168:1: Debug: global:  gamepad shoot button = false
+404.0395:1: Debug: global:  gamepad shoot button = false
+404.0557:1: Debug: global:  gamepad shoot button = false
+404.0753:1: Debug: global:  gamepad shoot button = false
+404.0955:1: Debug: global:  gamepad shoot button = false
+404.1159:1: Debug: global:  gamepad shoot button = false
+404.1353:1: Debug: global:  gamepad shoot button = false
+404.1557:1: Debug: global:  gamepad shoot button = false
+404.1766:1: Debug: global:  gamepad shoot button = false
+404.1997:1: Debug: global:  gamepad shoot button = false
+404.2159:1: Debug: global:  gamepad shoot button = false
+404.2363:1: Debug: global:  gamepad shoot button = false
+404.2555:1: Debug: global:  gamepad shoot button = false
+404.2754:1: Debug: global:  gamepad shoot button = false
+404.2956:1: Debug: global:  gamepad shoot button = false
+404.3154:1: Debug: global:  gamepad shoot button = false
+404.3354:1: Debug: global:  gamepad shoot button = false
+404.3548:1: Debug: global:  gamepad shoot button = false
+404.3756:1: Debug: global:  gamepad shoot button = false
+404.3955:1: Debug: global:  gamepad shoot button = false
+404.4153:1: Debug: global:  gamepad shoot button = false
+404.4350:1: Debug: global:  gamepad shoot button = false
+404.4552:1: Debug: global:  gamepad shoot button = false
+404.4755:1: Debug: global:  gamepad shoot button = false
+404.4954:1: Debug: global:  gamepad shoot button = false
+404.5147:1: Debug: global:  gamepad shoot button = false
+404.5349:1: Debug: global:  gamepad shoot button = false
+404.5576:1: Debug: global:  gamepad shoot button = false
+404.5760:1: Debug: global:  gamepad shoot button = false
+404.5957:1: Debug: global:  gamepad shoot button = false
+404.6161:1: Debug: global:  gamepad shoot button = false
+404.6364:1: Debug: global:  gamepad shoot button = false
+404.6578:1: Debug: global:  gamepad shoot button = false
+404.6784:1: Debug: global:  gamepad shoot button = false
+404.6967:1: Debug: global:  gamepad shoot button = false
+404.7208:1: Debug: global:  gamepad shoot button = false
+404.7359:1: Debug: global:  gamepad shoot button = false
+404.7558:1: Debug: global:  gamepad shoot button = false
+404.7753:1: Debug: global:  gamepad shoot button = false
+404.7952:1: Debug: global:  gamepad shoot button = false
+404.8155:1: Debug: global:  gamepad shoot button = false
+404.8355:1: Debug: global:  gamepad shoot button = false
+404.8557:1: Debug: global:  gamepad shoot button = false
+404.8752:1: Debug: global:  gamepad shoot button = false
+404.8948:1: Debug: global:  gamepad shoot button = false
+404.9161:1: Debug: global:  gamepad shoot button = false
+404.9364:1: Debug: global:  gamepad shoot button = false
+404.9572:1: Debug: global:  gamepad shoot button = false
+404.9757:1: Debug: global:  gamepad shoot button = false
+404.9950:1: Debug: global:  gamepad shoot button = false
+405.0165:1: Debug: global:  gamepad shoot button = false
+405.0353:1: Debug: global:  gamepad shoot button = false
+405.0551:1: Debug: global:  gamepad shoot button = false
+405.0770:1: Debug: global:  gamepad shoot button = false
+405.0964:1: Debug: global:  gamepad shoot button = false
+405.1158:1: Debug: global:  gamepad shoot button = false
+405.1364:1: Debug: global:  gamepad shoot button = false
+405.1570:1: Debug: global:  gamepad shoot button = false
+405.1827:1: Debug: global:  gamepad shoot button = false
+405.1967:1: Debug: global:  gamepad shoot button = false
+405.2161:1: Debug: global:  gamepad shoot button = false
+405.2370:1: Debug: global:  gamepad shoot button = false
+405.2571:1: Debug: global:  gamepad shoot button = false
+405.2797:1: Debug: global:  gamepad shoot button = false
+405.2955:1: Debug: global:  gamepad shoot button = false
+405.3162:1: Debug: global:  gamepad shoot button = false
+405.3374:1: Debug: global:  gamepad shoot button = false
+405.3562:1: Debug: global:  gamepad shoot button = false
+405.3774:1: Debug: global:  gamepad shoot button = false
+405.3956:1: Debug: global:  gamepad shoot button = false
+405.4175:1: Debug: global:  gamepad shoot button = false
+405.4372:1: Debug: global:  gamepad shoot button = false
+405.4563:1: Debug: global:  gamepad shoot button = false
+405.4777:1: Debug: global:  gamepad shoot button = false
+405.4972:1: Debug: global:  gamepad shoot button = false
+405.5170:1: Debug: global:  gamepad shoot button = false
+405.5375:1: Debug: global:  gamepad shoot button = false
+405.5615:1: Debug: global:  gamepad shoot button = false
+405.5765:1: Debug: global:  gamepad shoot button = false
+405.5965:1: Debug: global:  gamepad shoot button = false
+405.6164:1: Debug: global:  gamepad shoot button = false
+405.6365:1: Debug: global:  gamepad shoot button = false
+405.6573:1: Debug: global:  gamepad shoot button = false
+405.6795:1: Debug: global:  gamepad shoot button = false
+405.7002:1: Debug: global:  gamepad shoot button = false
+405.7166:1: Debug: global:  gamepad shoot button = false
+405.7365:1: Debug: global:  gamepad shoot button = false
+405.7561:1: Debug: global:  gamepad shoot button = false
+405.7768:1: Debug: global:  gamepad shoot button = false
+405.7969:1: Debug: global:  gamepad shoot button = false
+405.8176:1: Debug: global:  gamepad shoot button = false
+405.8375:1: Debug: global:  gamepad shoot button = false
+405.8567:1: Debug: global:  gamepad shoot button = false
+405.8773:1: Debug: global:  gamepad shoot button = false
+405.9021:1: Debug: global:  gamepad shoot button = false
+405.9165:1: Debug: global:  gamepad shoot button = false
+405.9370:1: Debug: global:  gamepad shoot button = false
+405.9564:1: Debug: global:  gamepad shoot button = false
+405.9765:1: Debug: global:  gamepad shoot button = false
+405.9977:1: Debug: global:  gamepad shoot button = false
+406.0187:1: Debug: global:  gamepad shoot button = false
+406.0369:1: Debug: global:  gamepad shoot button = false
+406.0571:1: Debug: global:  gamepad shoot button = false
+406.0772:1: Debug: global:  gamepad shoot button = false
+406.0966:1: Debug: global:  gamepad shoot button = false
+406.1169:1: Debug: global:  gamepad shoot button = false
+406.1372:1: Debug: global:  gamepad shoot button = false
+406.1586:1: Debug: global:  gamepad shoot button = false
+406.1768:1: Debug: global:  gamepad shoot button = false
+406.1967:1: Debug: global:  gamepad shoot button = false
+406.2193:1: Debug: global:  gamepad shoot button = false
+406.2407:1: Debug: global:  gamepad shoot button = false
+406.2567:1: Debug: global:  gamepad shoot button = false
+406.2770:1: Debug: global:  gamepad shoot button = false
+406.2968:1: Debug: global:  gamepad shoot button = false
+406.3183:1: Debug: global:  gamepad shoot button = false
+406.3369:1: Debug: global:  gamepad shoot button = false
+406.3566:1: Debug: global:  gamepad shoot button = false
+406.3766:1: Debug: global:  gamepad shoot button = false
+406.3972:1: Debug: global:  gamepad shoot button = false
+406.4192:1: Debug: global:  gamepad shoot button = false
+406.4377:1: Debug: global:  gamepad shoot button = false
+406.4576:1: Debug: global:  gamepad shoot button = false
+406.4788:1: Debug: global:  gamepad shoot button = false
+406.4965:1: Debug: global:  gamepad shoot button = false
+406.5177:1: Debug: global:  gamepad shoot button = false
+406.5382:1: Debug: global:  gamepad shoot button = false
+406.5574:1: Debug: global:  gamepad shoot button = false
+406.5773:1: Debug: global:  gamepad shoot button = false
+406.5971:1: Debug: global:  gamepad shoot button = false
+406.6188:1: Debug: global:  gamepad shoot button = false
+406.6411:1: Debug: global:  gamepad shoot button = false
+406.6565:1: Debug: global:  gamepad shoot button = false
+406.6771:1: Debug: global:  gamepad shoot button = false
+406.6961:1: Debug: global:  gamepad shoot button = false
+406.7167:1: Debug: global:  gamepad shoot button = false
+406.7378:1: Debug: global:  gamepad shoot button = false
+406.7563:1: Debug: global:  gamepad shoot button = false
+406.7772:1: Debug: global:  gamepad shoot button = false
+406.7954:1: Debug: global:  gamepad shoot button = false
+406.8165:1: Debug: global:  gamepad shoot button = false
+406.8356:1: Debug: global:  gamepad shoot button = false
+406.8555:1: Debug: global:  gamepad shoot button = true
+406.8557:1: Debug: actions: 13:starting action: 13: ManualShootAction subwoofer-center-low
+406.8559:1: Debug: actions: 14:starting action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+406.8575:1: Debug: actions: 15:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+406.8599:1: Debug: actions: 16:starting action: 16: MCVelocityAction (intake-shooter1), target = 65.0
+406.8610:1: Debug: actions: 17:starting action: 17: MCVelocityAction (intake-shooter2), target = 65.0
+406.8620:1: Debug: global: OI State changed : ManualShoot -> ManualShooting
+407.6971:1: Debug: actions: 14:completing action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+407.9372:1: Debug: actions: 15:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+407.9575:1: Debug: global: shot:  tilt = 6.547 updown = 34.90 shooter1 = 66.34 shooter2 = 65.83
+407.9577:1: Debug: actions: 18:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+407.9770:1: Debug: global: shot/2:  tilt = 6.555 updown = 34.92 shooter1 = 65.81 shooter2 = 65.78
+407.9971:1: Debug: global: shot/2:  tilt = 6.778 updown = 34.93 shooter1 = 66.12 shooter2 = 65.73
+408.0201:1: Debug: global: shot/2:  tilt = 6.961 updown = 34.95 shooter1 = 64.80 shooter2 = 66.23
+408.0373:1: Debug: global: shot/2:  tilt = 7.017 updown = 34.98 shooter1 = 65.73 shooter2 = 64.97
+408.0568:1: Debug: global: shot/2:  tilt = 6.993 updown = 35.00 shooter1 = 66.68 shooter2 = 66.25
+408.0764:1: Debug: global: shot/2:  tilt = 7.057 updown = 34.98 shooter1 = 65.99 shooter2 = 66.00
+408.0987:1: Debug: global: shot/2:  tilt = 7.001 updown = 34.97 shooter1 = 66.99 shooter2 = 66.08
+408.1168:1: Debug: global: shot/2:  tilt = 6.993 updown = 34.98 shooter1 = 65.84 shooter2 = 64.65
+408.1373:1: Debug: global: shot/2:  tilt = 6.969 updown = 34.92 shooter1 = 50.55 shooter2 = 51.88
+408.1591:1: Debug: global: shot/2:  tilt = 6.850 updown = 34.95 shooter1 = 49.56 shooter2 = 51.71
+408.1813:1: Debug: global: shot/2:  tilt = 6.762 updown = 34.95 shooter1 = 53.54 shooter2 = 53.11
+408.1972:1: Debug: global: shot/2:  tilt = 6.746 updown = 34.91 shooter1 = 53.52 shooter2 = 57.21
+408.2173:1: Debug: global: shot/2:  tilt = 6.691 updown = 34.91 shooter1 = 55.75 shooter2 = 60.40
+408.2378:1: Debug: global: shot/2:  tilt = 6.667 updown = 34.92 shooter1 = 56.96 shooter2 = 61.73
+408.2574:1: Debug: global: shot/2:  tilt = 6.659 updown = 34.92 shooter1 = 60.99 shooter2 = 64.88
+408.2810:1: Debug: global: shot/2:  tilt = 6.730 updown = 34.93 shooter1 = 63.62 shooter2 = 67.00
+408.2813:1: Debug: actions: 18:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+408.2984:1: Debug: global: shot/2:  tilt = 6.858 updown = 34.96 shooter1 = 65.65 shooter2 = 65.68
+408.2992:1: Debug: actions: 13:completing action: 13: ManualShootAction subwoofer-center-low
+408.2996:1: Info: global:  duration = 1.444
+408.3007:1: Debug: actions: 16:canceling action: 16: MCVelocityAction (intake-shooter1), target = 65.0
+408.3010:1: Debug: actions: 17:canceling action: 17: MCVelocityAction (intake-shooter2), target = 65.0
+408.3013:1: Debug: actions: 35:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+408.3016:1: Debug: actions: 36:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+408.3032:1: Debug: actions: 37:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+408.3043:1: Debug: global: OI State changed : ManualShooting -> StowIntake
+409.2772:1: Debug: actions: 37:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+409.4168:1: Debug: actions: 36:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+409.4365:1: Debug: actions: 35:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+409.4374:1: Debug: global: OI State changed : StowIntake -> Idle
+414.1959:1: Debug: actions: 120:starting action: StartCollectAction
+414.1962:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+414.1965:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+414.1977:1: Info: global: pos < stow pos = 118.0 stow = 118.0
+414.1981:1: Debug: actions: 224:starting action: MCMotionMagicAction (intake-tilt) target=-64.97850354399999 posthresh=3.0 velthresh=1.0
+414.1998:1: Debug: global: OI State changed : Idle -> Collect
+414.2171:1: Debug: actions: 224:completing action: MCMotionMagicAction (intake-tilt) target=-64.97850354399999 posthresh=3.0 velthresh=1.0
+414.2348:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+414.2364:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+414.2379:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+415.4955:1: Debug: actions: 128:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+415.5951:1: Debug: actions: 127:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+415.6141:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+419.0550:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+419.1746:1: Debug: actions: 126:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+419.1749:1: Debug: actions: 126:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+419.1755:1: Debug: actions: 121:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+419.1775:1: Debug: actions: 122:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+419.1799:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+420.3956:1: Debug: actions: 121:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+420.5149:1: Debug: actions: 122:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+420.5344:1: Debug: actions: 120:completing action: StartCollectAction
+420.5356:1: Debug: global: OI State changed : Collect -> ManualShoot
+420.5552:1: Debug: global:  gamepad shoot button = false
+420.5799:1: Debug: global:  gamepad shoot button = false
+420.5952:1: Debug: global:  gamepad shoot button = false
+420.6153:1: Debug: global:  gamepad shoot button = false
+420.6357:1: Debug: global:  gamepad shoot button = false
+420.6564:1: Debug: global:  gamepad shoot button = false
+420.6762:1: Debug: global:  gamepad shoot button = false
+420.6973:1: Debug: global:  gamepad shoot button = false
+420.7171:1: Debug: global:  gamepad shoot button = false
+420.7350:1: Debug: global:  gamepad shoot button = false
+420.7553:1: Debug: global:  gamepad shoot button = false
+420.7752:1: Debug: global:  gamepad shoot button = false
+420.7961:1: Debug: global:  gamepad shoot button = false
+420.8164:1: Debug: global:  gamepad shoot button = false
+420.8359:1: Debug: global:  gamepad shoot button = false
+420.8583:1: Debug: global:  gamepad shoot button = false
+420.8751:1: Debug: global:  gamepad shoot button = false
+420.8951:1: Debug: global:  gamepad shoot button = false
+420.9172:1: Debug: global:  gamepad shoot button = false
+420.9370:1: Debug: global:  gamepad shoot button = false
+420.9552:1: Debug: global:  gamepad shoot button = false
+420.9757:1: Debug: global:  gamepad shoot button = false
+420.9988:1: Debug: global:  gamepad shoot button = false
+421.0173:1: Debug: global:  gamepad shoot button = false
+421.0356:1: Debug: global:  gamepad shoot button = false
+421.0557:1: Debug: global:  gamepad shoot button = false
+421.0750:1: Debug: global:  gamepad shoot button = false
+421.0998:1: Debug: global:  gamepad shoot button = false
+421.1155:1: Debug: global:  gamepad shoot button = false
+421.1348:1: Debug: global:  gamepad shoot button = false
+421.1564:1: Debug: global:  gamepad shoot button = false
+421.1772:1: Debug: global:  gamepad shoot button = false
+421.1968:1: Debug: global:  gamepad shoot button = false
+421.2156:1: Debug: global:  gamepad shoot button = false
+421.2352:1: Debug: global:  gamepad shoot button = false
+421.2552:1: Debug: global:  gamepad shoot button = false
+421.2752:1: Debug: global:  gamepad shoot button = false
+421.2951:1: Debug: global:  gamepad shoot button = false
+421.3150:1: Debug: global:  gamepad shoot button = false
+421.3353:1: Debug: global:  gamepad shoot button = false
+421.3552:1: Debug: global:  gamepad shoot button = false
+421.3770:1: Debug: global:  gamepad shoot button = false
+421.3950:1: Debug: global:  gamepad shoot button = false
+421.4157:1: Debug: global:  gamepad shoot button = false
+421.4363:1: Debug: global:  gamepad shoot button = false
+421.4558:1: Debug: global:  gamepad shoot button = false
+421.4795:1: Debug: global:  gamepad shoot button = false
+421.4955:1: Debug: global:  gamepad shoot button = false
+421.5154:1: Debug: global:  gamepad shoot button = false
+421.5357:1: Debug: global:  gamepad shoot button = false
+421.5571:1: Debug: global:  gamepad shoot button = false
+421.5761:1: Debug: global:  gamepad shoot button = false
+421.5957:1: Debug: global:  gamepad shoot button = false
+421.6199:1: Debug: global:  gamepad shoot button = false
+421.6350:1: Debug: global:  gamepad shoot button = false
+421.6549:1: Debug: global:  gamepad shoot button = false
+421.6750:1: Debug: global:  gamepad shoot button = false
+421.6976:1: Debug: global:  gamepad shoot button = false
+421.7168:1: Debug: global:  gamepad shoot button = false
+421.7354:1: Debug: global:  gamepad shoot button = false
+421.7552:1: Debug: global:  gamepad shoot button = false
+421.7760:1: Debug: global:  gamepad shoot button = false
+421.7953:1: Debug: global:  gamepad shoot button = false
+421.8150:1: Debug: global:  gamepad shoot button = false
+421.8346:1: Debug: global:  gamepad shoot button = false
+421.8550:1: Debug: global:  gamepad shoot button = false
+421.8749:1: Debug: global:  gamepad shoot button = false
+421.8953:1: Debug: global:  gamepad shoot button = false
+421.9151:1: Debug: global:  gamepad shoot button = false
+421.9353:1: Debug: global:  gamepad shoot button = false
+421.9563:1: Debug: global:  gamepad shoot button = false
+421.9760:1: Debug: global:  gamepad shoot button = false
+421.9991:1: Debug: global:  gamepad shoot button = false
+422.0175:1: Debug: global:  gamepad shoot button = false
+422.0356:1: Debug: global:  gamepad shoot button = false
+422.0550:1: Debug: global:  gamepad shoot button = false
+422.0747:1: Debug: global:  gamepad shoot button = false
+422.0953:1: Debug: global:  gamepad shoot button = false
+422.1155:1: Debug: global:  gamepad shoot button = false
+422.1350:1: Debug: global:  gamepad shoot button = false
+422.1557:1: Debug: global:  gamepad shoot button = false
+422.1755:1: Debug: global:  gamepad shoot button = false
+422.1968:1: Debug: global:  gamepad shoot button = false
+422.2174:1: Debug: global:  gamepad shoot button = false
+422.2355:1: Debug: global:  gamepad shoot button = false
+422.2553:1: Debug: global:  gamepad shoot button = false
+422.2751:1: Debug: global:  gamepad shoot button = false
+422.2953:1: Debug: global:  gamepad shoot button = false
+422.3165:1: Debug: global:  gamepad shoot button = false
+422.3354:1: Debug: global:  gamepad shoot button = false
+422.3559:1: Debug: global:  gamepad shoot button = false
+422.3761:1: Debug: global:  gamepad shoot button = false
+422.3975:1: Debug: global:  gamepad shoot button = false
+422.4165:1: Debug: global:  gamepad shoot button = false
+422.4352:1: Debug: global:  gamepad shoot button = false
+422.4565:1: Debug: global:  gamepad shoot button = false
+422.4754:1: Debug: global:  gamepad shoot button = false
+422.4963:1: Debug: global:  gamepad shoot button = false
+422.5166:1: Debug: global:  gamepad shoot button = false
+422.5352:1: Debug: global:  gamepad shoot button = false
+422.5556:1: Debug: global:  gamepad shoot button = false
+422.5753:1: Debug: global:  gamepad shoot button = false
+422.5951:1: Debug: global:  gamepad shoot button = false
+422.6192:1: Debug: global:  gamepad shoot button = false
+422.6351:1: Debug: global:  gamepad shoot button = false
+422.6554:1: Debug: global:  gamepad shoot button = false
+422.6813:1: Debug: global:  gamepad shoot button = false
+422.6974:1: Debug: global:  gamepad shoot button = false
+422.7169:1: Debug: global:  gamepad shoot button = false
+422.7349:1: Debug: global:  gamepad shoot button = false
+422.7549:1: Debug: global:  gamepad shoot button = false
+422.7750:1: Debug: global:  gamepad shoot button = false
+422.7952:1: Debug: global:  gamepad shoot button = false
+422.8149:1: Debug: global:  gamepad shoot button = false
+422.8353:1: Debug: global:  gamepad shoot button = false
+422.8552:1: Debug: global:  gamepad shoot button = false
+422.8753:1: Debug: global:  gamepad shoot button = false
+422.8958:1: Debug: global:  gamepad shoot button = false
+422.9155:1: Debug: global:  gamepad shoot button = false
+422.9354:1: Debug: global:  gamepad shoot button = false
+422.9558:1: Debug: global:  gamepad shoot button = false
+422.9763:1: Debug: global:  gamepad shoot button = false
+422.9955:1: Debug: global:  gamepad shoot button = false
+423.0170:1: Debug: global:  gamepad shoot button = false
+423.0347:1: Debug: global:  gamepad shoot button = false
+423.0554:1: Debug: global:  gamepad shoot button = false
+423.0758:1: Debug: global:  gamepad shoot button = false
+423.0964:1: Debug: global:  gamepad shoot button = false
+423.1163:1: Debug: global:  gamepad shoot button = false
+423.1378:1: Debug: global:  gamepad shoot button = false
+423.1549:1: Debug: global:  gamepad shoot button = false
+423.1747:1: Debug: global:  gamepad shoot button = false
+423.1991:1: Debug: global:  gamepad shoot button = false
+423.2171:1: Debug: global:  gamepad shoot button = false
+423.2392:1: Debug: global:  gamepad shoot button = false
+423.2550:1: Debug: global:  gamepad shoot button = false
+423.2752:1: Debug: global:  gamepad shoot button = false
+423.2957:1: Debug: global:  gamepad shoot button = false
+423.3156:1: Debug: global:  gamepad shoot button = false
+423.3355:1: Debug: global:  gamepad shoot button = false
+423.3555:1: Debug: global:  gamepad shoot button = false
+423.3758:1: Debug: global:  gamepad shoot button = false
+423.3953:1: Debug: global:  gamepad shoot button = false
+423.4153:1: Debug: global:  gamepad shoot button = false
+423.4350:1: Debug: global:  gamepad shoot button = false
+423.4566:1: Debug: global:  gamepad shoot button = false
+423.4757:1: Debug: global:  gamepad shoot button = false
+423.4955:1: Debug: global:  gamepad shoot button = false
+423.5167:1: Debug: global:  gamepad shoot button = false
+423.5354:1: Debug: global:  gamepad shoot button = false
+423.5558:1: Debug: global:  gamepad shoot button = false
+423.5750:1: Debug: global:  gamepad shoot button = false
+423.5987:1: Debug: global:  gamepad shoot button = false
+423.6156:1: Debug: global:  gamepad shoot button = false
+423.6348:1: Debug: global:  gamepad shoot button = false
+423.6552:1: Debug: global:  gamepad shoot button = false
+423.6749:1: Debug: global:  gamepad shoot button = false
+423.6957:1: Debug: global:  gamepad shoot button = false
+423.7205:1: Debug: global:  gamepad shoot button = false
+423.7355:1: Debug: global:  gamepad shoot button = false
+423.7574:1: Debug: global:  gamepad shoot button = false
+423.7751:1: Debug: global:  gamepad shoot button = false
+423.7950:1: Debug: global:  gamepad shoot button = false
+423.8157:1: Debug: global:  gamepad shoot button = false
+423.8349:1: Debug: global:  gamepad shoot button = false
+423.8558:1: Debug: global:  gamepad shoot button = false
+423.8758:1: Debug: global:  gamepad shoot button = false
+423.8957:1: Debug: global:  gamepad shoot button = false
+423.9157:1: Debug: global:  gamepad shoot button = false
+423.9353:1: Debug: global:  gamepad shoot button = false
+423.9547:1: Debug: global:  gamepad shoot button = false
+423.9755:1: Debug: global:  gamepad shoot button = false
+423.9981:1: Debug: global:  gamepad shoot button = false
+424.0203:1: Debug: global:  gamepad shoot button = false
+424.0366:1: Debug: global:  gamepad shoot button = false
+424.0559:1: Debug: global:  gamepad shoot button = false
+424.0757:1: Debug: global:  gamepad shoot button = false
+424.0953:1: Debug: global:  gamepad shoot button = false
+424.1156:1: Debug: global:  gamepad shoot button = false
+424.1353:1: Debug: global:  gamepad shoot button = false
+424.1552:1: Debug: global:  gamepad shoot button = false
+424.1771:1: Debug: global:  gamepad shoot button = false
+424.1959:1: Debug: global:  gamepad shoot button = false
+424.2171:1: Debug: global:  gamepad shoot button = false
+424.2383:1: Debug: global:  gamepad shoot button = false
+424.2558:1: Debug: global:  gamepad shoot button = false
+424.2802:1: Debug: global:  gamepad shoot button = false
+424.2958:1: Debug: global:  gamepad shoot button = false
+424.3156:1: Debug: global:  gamepad shoot button = false
+424.3362:1: Debug: global:  gamepad shoot button = false
+424.3551:1: Debug: global:  gamepad shoot button = false
+424.3748:1: Debug: global:  gamepad shoot button = false
+424.3962:1: Debug: global:  gamepad shoot button = false
+424.4187:1: Debug: global:  gamepad shoot button = false
+424.4369:1: Debug: global:  gamepad shoot button = false
+424.4575:1: Debug: global:  gamepad shoot button = false
+424.4771:1: Debug: global:  gamepad shoot button = false
+424.4972:1: Debug: global:  gamepad shoot button = false
+424.5166:1: Debug: global:  gamepad shoot button = false
+424.5362:1: Debug: global:  gamepad shoot button = false
+424.5567:1: Debug: global:  gamepad shoot button = false
+424.5766:1: Debug: global:  gamepad shoot button = false
+424.5959:1: Debug: global:  gamepad shoot button = false
+424.6159:1: Debug: global:  gamepad shoot button = false
+424.6356:1: Debug: global:  gamepad shoot button = false
+424.6587:1: Debug: global:  gamepad shoot button = false
+424.6759:1: Debug: global:  gamepad shoot button = false
+424.6991:1: Debug: global:  gamepad shoot button = false
+424.7154:1: Debug: global:  gamepad shoot button = false
+424.7351:1: Debug: global:  gamepad shoot button = false
+424.7555:1: Debug: global:  gamepad shoot button = false
+424.7764:1: Debug: global:  gamepad shoot button = false
+424.8003:1: Debug: global:  gamepad shoot button = false
+424.8172:1: Debug: global:  gamepad shoot button = false
+424.8373:1: Debug: global:  gamepad shoot button = false
+424.8573:1: Debug: global:  gamepad shoot button = false
+424.8782:1: Debug: global:  gamepad shoot button = false
+424.9016:1: Debug: global:  gamepad shoot button = false
+424.9173:1: Debug: global:  gamepad shoot button = false
+424.9396:1: Debug: global:  gamepad shoot button = false
+424.9595:1: Debug: global:  gamepad shoot button = false
+424.9802:1: Debug: global:  gamepad shoot button = false
+424.9981:1: Debug: global:  gamepad shoot button = false
+425.0192:1: Debug: global:  gamepad shoot button = false
+425.0410:1: Debug: global:  gamepad shoot button = false
+425.0575:1: Debug: global:  gamepad shoot button = false
+425.0768:1: Debug: global:  gamepad shoot button = false
+425.0980:1: Debug: global:  gamepad shoot button = false
+425.1215:1: Debug: global:  gamepad shoot button = false
+425.1369:1: Debug: global:  gamepad shoot button = false
+425.1574:1: Debug: global:  gamepad shoot button = false
+425.1772:1: Debug: global:  gamepad shoot button = false
+425.1966:1: Debug: global:  gamepad shoot button = false
+425.2178:1: Debug: global:  gamepad shoot button = false
+425.2358:1: Debug: global:  gamepad shoot button = false
+425.2567:1: Debug: global:  gamepad shoot button = false
+425.2766:1: Debug: global:  gamepad shoot button = false
+425.2967:1: Debug: global:  gamepad shoot button = false
+425.3207:1: Debug: global:  gamepad shoot button = false
+425.3365:1: Debug: global:  gamepad shoot button = false
+425.3624:1: Debug: global:  gamepad shoot button = false
+425.3780:1: Debug: global:  gamepad shoot button = false
+425.3976:1: Debug: global:  gamepad shoot button = false
+425.4213:1: Debug: global:  gamepad shoot button = false
+425.4362:1: Debug: global:  gamepad shoot button = false
+425.4566:1: Debug: global:  gamepad shoot button = false
+425.4767:1: Debug: global:  gamepad shoot button = false
+425.4962:1: Debug: global:  gamepad shoot button = false
+425.5164:1: Debug: global:  gamepad shoot button = false
+425.5366:1: Debug: global:  gamepad shoot button = false
+425.5577:1: Debug: global:  gamepad shoot button = false
+425.5770:1: Debug: global:  gamepad shoot button = false
+425.5976:1: Debug: global:  gamepad shoot button = false
+425.6207:1: Debug: global:  gamepad shoot button = false
+425.6362:1: Debug: global:  gamepad shoot button = false
+425.6589:1: Debug: global:  gamepad shoot button = false
+425.6760:1: Debug: global:  gamepad shoot button = false
+425.6964:1: Debug: global:  gamepad shoot button = false
+425.7201:1: Debug: global:  gamepad shoot button = false
+425.7357:1: Debug: global:  gamepad shoot button = false
+425.7565:1: Debug: global:  gamepad shoot button = false
+425.7755:1: Debug: global:  gamepad shoot button = false
+425.7956:1: Debug: global:  gamepad shoot button = false
+425.8165:1: Debug: global:  gamepad shoot button = false
+425.8374:1: Debug: global:  gamepad shoot button = false
+425.8585:1: Debug: global:  gamepad shoot button = false
+425.8774:1: Debug: global:  gamepad shoot button = false
+425.8963:1: Debug: global:  gamepad shoot button = false
+425.9166:1: Debug: global:  gamepad shoot button = false
+425.9364:1: Debug: global:  gamepad shoot button = false
+425.9559:1: Debug: global:  gamepad shoot button = false
+425.9772:1: Debug: global:  gamepad shoot button = false
+425.9964:1: Debug: global:  gamepad shoot button = false
+426.0174:1: Debug: global:  gamepad shoot button = false
+426.0378:1: Debug: global:  gamepad shoot button = false
+426.0562:1: Debug: global:  gamepad shoot button = false
+426.0811:1: Debug: global:  gamepad shoot button = false
+426.0966:1: Debug: global:  gamepad shoot button = false
+426.1168:1: Debug: global:  gamepad shoot button = false
+426.1365:1: Debug: global:  gamepad shoot button = false
+426.1565:1: Debug: global:  gamepad shoot button = false
+426.1770:1: Debug: global:  gamepad shoot button = false
+426.1972:1: Debug: global:  gamepad shoot button = false
+426.2176:1: Debug: global:  gamepad shoot button = false
+426.2374:1: Debug: global:  gamepad shoot button = false
+426.2575:1: Debug: global:  gamepad shoot button = false
+426.2774:1: Debug: global:  gamepad shoot button = false
+426.2970:1: Debug: global:  gamepad shoot button = false
+426.3168:1: Debug: global:  gamepad shoot button = false
+426.3371:1: Debug: global:  gamepad shoot button = false
+426.3553:1: Debug: global:  gamepad shoot button = false
+426.3760:1: Debug: global:  gamepad shoot button = false
+426.3966:1: Debug: global:  gamepad shoot button = false
+426.4167:1: Debug: global:  gamepad shoot button = true
+426.4174:1: Debug: actions: 13:starting action: 13: ManualShootAction subwoofer-center-low
+426.4185:1: Debug: actions: 14:starting action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+426.4209:1: Debug: actions: 15:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+426.4226:1: Debug: actions: 16:starting action: 16: MCVelocityAction (intake-shooter1), target = 65.0
+426.4236:1: Debug: actions: 17:starting action: 17: MCVelocityAction (intake-shooter2), target = 65.0
+426.4244:1: Debug: global: OI State changed : ManualShoot -> ManualShooting
+427.2966:1: Debug: actions: 14:completing action: MCMotionMagicAction (intake-tilt) target=7.0 posthresh=5.0 velthresh=5.0
+427.4563:1: Debug: actions: 15:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+427.4776:1: Debug: global: shot:  tilt = 6.730 updown = 34.92 shooter1 = 66.01 shooter2 = 65.75
+427.4780:1: Debug: actions: 18:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+427.4973:1: Debug: global: shot/2:  tilt = 6.723 updown = 34.93 shooter1 = 65.64 shooter2 = 66.97
+427.5182:1: Debug: global: shot/2:  tilt = 6.723 updown = 34.93 shooter1 = 65.69 shooter2 = 66.75
+427.5395:1: Debug: global: shot/2:  tilt = 6.810 updown = 34.95 shooter1 = 65.42 shooter2 = 66.03
+427.5575:1: Debug: global: shot/2:  tilt = 6.882 updown = 34.97 shooter1 = 66.24 shooter2 = 65.67
+427.5777:1: Debug: global: shot/2:  tilt = 6.922 updown = 34.97 shooter1 = 66.23 shooter2 = 64.84
+427.5977:1: Debug: global: shot/2:  tilt = 6.954 updown = 34.96 shooter1 = 65.38 shooter2 = 66.17
+427.6171:1: Debug: global: shot/2:  tilt = 6.961 updown = 34.91 shooter1 = 51.14 shooter2 = 50.85
+427.6371:1: Debug: global: shot/2:  tilt = 6.834 updown = 34.95 shooter1 = 47.62 shooter2 = 49.64
+427.6593:1: Debug: global: shot/2:  tilt = 6.810 updown = 34.97 shooter1 = 49.62 shooter2 = 54.04
+427.6773:1: Debug: global: shot/2:  tilt = 6.810 updown = 34.94 shooter1 = 52.28 shooter2 = 55.13
+427.6972:1: Debug: global: shot/2:  tilt = 6.770 updown = 34.93 shooter1 = 54.50 shooter2 = 58.12
+427.7195:1: Debug: global: shot/2:  tilt = 6.762 updown = 34.94 shooter1 = 57.31 shooter2 = 62.31
+427.7372:1: Debug: global: shot/2:  tilt = 6.762 updown = 34.94 shooter1 = 60.21 shooter2 = 64.43
+427.7613:1: Debug: global: shot/2:  tilt = 6.770 updown = 34.95 shooter1 = 62.79 shooter2 = 64.78
+427.7774:1: Debug: global: shot/2:  tilt = 6.826 updown = 34.95 shooter1 = 65.04 shooter2 = 66.52
+427.7973:1: Debug: global: shot/2:  tilt = 6.874 updown = 34.96 shooter1 = 66.22 shooter2 = 66.33
+427.7976:1: Debug: actions: 18:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+427.8179:1: Debug: global: shot/2:  tilt = 6.906 updown = 34.97 shooter1 = 65.96 shooter2 = 66.08
+427.8187:1: Debug: actions: 13:completing action: 13: ManualShootAction subwoofer-center-low
+427.8196:1: Info: global:  duration = 1.401
+427.8208:1: Debug: actions: 16:canceling action: 16: MCVelocityAction (intake-shooter1), target = 65.0
+427.8212:1: Debug: actions: 17:canceling action: 17: MCVelocityAction (intake-shooter2), target = 65.0
+427.8215:1: Debug: actions: 35:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+427.8217:1: Debug: actions: 36:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+427.8234:1: Debug: actions: 37:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+427.8247:1: Debug: global: OI State changed : ManualShooting -> StowIntake
+428.8615:1: Debug: actions: 37:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+428.9952:1: Debug: actions: 36:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+429.0175:1: Debug: actions: 35:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+429.0186:1: Debug: global: OI State changed : StowIntake -> Idle
+435.8559:1: Debug: actions: 120:starting action: StartCollectAction
+435.8561:1: Debug: actions: 125:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+435.8563:1: Debug: actions: 125:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+435.8575:1: Info: global: pos < stow pos = 118.0 stow = 118.0
+435.8578:1: Debug: actions: 225:starting action: MCMotionMagicAction (intake-tilt) target=-64.997147008 posthresh=3.0 velthresh=1.0
+435.8615:1: Debug: global: OI State changed : Idle -> Collect
+435.9151:1: Debug: actions: 225:completing action: MCMotionMagicAction (intake-tilt) target=-64.997147008 posthresh=3.0 velthresh=1.0
+435.9348:1: Debug: actions: 127:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+435.9362:1: Debug: actions: 128:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+435.9383:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+437.1552:1: Debug: actions: 128:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+437.2947:1: Debug: actions: 127:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+437.3146:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+438.1961:1: Debug: intake-shooter: state changed: WaitingForNote ->WaitingForCollect
+438.2970:1: Debug: actions: 126:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+438.2977:1: Debug: actions: 126:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+438.2984:1: Debug: actions: 121:starting action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+438.2999:1: Debug: actions: 122:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+438.3012:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+439.4966:1: Debug: actions: 121:completing action: MCMotionMagicAction (intake-tilt) target=-50.0 posthresh=1.0 velthresh=1.0
+439.6757:1: Debug: actions: 122:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+439.6989:1: Debug: actions: 120:completing action: StartCollectAction
+439.7005:1: Debug: actions: 19:starting action: 19: TransferIntakeToTrampAction
+439.7046:1: Debug: actions: 20:starting action: AmpTrapPositionAction, angle=0.0, height 0.021
+439.7059:1: Error: global: armpos current = 2.113 keepoutmax = 75.00 keepoutmin = 5.000 target = 0.000
+439.7062:1: Debug: actions: 25:starting action: MCMotionMagicAction (elevator) target=0.021 posthresh=0.03 velthresh=0.05
+439.7266:1: Debug: actions: 24:starting action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+439.7399:1: Debug: actions: 26:starting action: IntakeGotoNamedPositionAction updown 90.0, tilt 0.0
+439.7405:1: Debug: actions: 27:starting action: MCMotionMagicAction (intake-updown) target=90.0 posthresh=3.0 velthresh=1.0
+439.7424:1: Debug: actions: 28:starting action: MCMotionMagicAction (intake-tilt) target=0.0 posthresh=3.0 velthresh=1.0
+439.7443:1: Debug: global: OI State changed : Collect -> TransferToAmpTrap
+439.9565:1: Debug: actions: 25:completing action: MCMotionMagicAction (elevator) target=0.021 posthresh=0.03 velthresh=0.05
+439.9967:1: Debug: actions: 24:completing action: MCMotionMagicAction (arm) target=0.0 posthresh=5.0 velthresh=1.0
+440.0173:1: Debug: actions: 20:completing action: AmpTrapPositionAction, angle=0.0, height 0.021
+440.3559:1: Debug: actions: 27:completing action: MCMotionMagicAction (intake-updown) target=90.0 posthresh=3.0 velthresh=1.0
+440.6749:1: Debug: actions: 28:completing action: MCMotionMagicAction (intake-tilt) target=0.0 posthresh=3.0 velthresh=1.0
+440.6981:1: Debug: actions: 26:completing action: IntakeGotoNamedPositionAction updown 90.0, tilt 0.0
+440.7145:1: Debug: actions: 29:starting action: AmpTrapXferAction
+440.7148:1: Debug: actions: 30:canceling action: MotorEncoderPowerAction manipulator power = -0.1
+440.7151:1: Debug: actions: 30:starting action: MotorEncoderPowerAction manipulator power = -0.1
+440.7153:1: Debug: actions: 30:completing action: MotorEncoderPowerAction manipulator power = -0.1
+440.7160:1: Debug: actions: 31:starting action: 31: NoteTransferAction
+440.7162:1: Debug: actions: 32:starting action: MotorEncoderPowerAction intake-feeder power = 0.3
+440.7164:1: Debug: actions: 32:completing action: MotorEncoderPowerAction intake-feeder power = 0.3
+440.7172:1: Debug: actions: 33:starting action: 33: MCVelocityAction (intake-shooter1), target = 14.0
+440.7193:1: Debug: actions: 34:starting action: 34: MCVelocityAction (intake-shooter2), target = 14.0
+446.6952:1: Debug: actions: 33:canceling action: 33: MCVelocityAction (intake-shooter1), target = 14.0
+446.6956:1: Debug: actions: 34:canceling action: 34: MCVelocityAction (intake-shooter2), target = 14.0
+446.6960:1: Debug: actions: 19:completing action: 19: TransferIntakeToTrampAction
+446.6968:1: Debug: actions: 44:starting action: AmpTrapPositionAction, angle=180.0, height 0.2411
+446.6982:1: Error: global: armpos current = -0.03561 keepoutmax = 75.00 keepoutmin = 5.000 target = 180.0
+446.6987:1: Debug: actions: 49:starting action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.03 velthresh=0.05
+446.7007:1: Debug: actions: 46:starting action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+446.7042:1: Debug: actions: 35:starting action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+446.7045:1: Debug: actions: 36:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+446.7056:1: Debug: actions: 37:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+446.7072:1: Debug: global: OI State changed : TransferToAmpTrap -> NoteGoingToTrapPosition
+447.0195:1: Debug: actions: 46:completing action: MCMotionMagicAction (arm) target=5.0 posthresh=5.0 velthresh=1.0
+447.0769:1: Debug: actions: 48:starting action: MCMotionMagicAction (arm) target=180.0 posthresh=5.0 velthresh=1.0
+447.2973:1: Debug: actions: 36:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=3.0 velthresh=1.0
+447.5966:1: Debug: actions: 49:completing action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.03 velthresh=0.05
+447.7155:1: Debug: actions: 37:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=3.0 velthresh=1.0
+447.7359:1: Debug: actions: 35:completing action: IntakeGotoNamedPositionAction updown 118.0, tilt -65.0
+448.7153:1: Debug: actions: 48:completing action: MCMotionMagicAction (arm) target=180.0 posthresh=5.0 velthresh=1.0
+448.7355:1: Debug: actions: 44:completing action: AmpTrapPositionAction, angle=180.0, height 0.2411
+448.7366:1: Debug: actions: 135:starting action: AmpTrapMoveNote 0.8
+448.7372:1: Debug: actions: 136:starting action: MotorEncoderPowerAction manipulator power = 0.05
+448.7376:1: Debug: actions: 136:completing action: MotorEncoderPowerAction manipulator power = 0.05
+448.7390:1: Debug: global:  start = -134.9 dist = 0.8000 target = -134.1
+448.7393:1: Debug: global: OI State changed : NoteGoingToTrapPosition -> MoveNoteToBack
+448.7552:1: Debug: global:  current = -134.9 target = -134.1
+448.7754:1: Debug: global:  current = -134.9 target = -134.1
+448.7962:1: Debug: global:  current = -134.9 target = -134.1
+448.8153:1: Debug: global:  current = -134.8 target = -134.1
+448.8363:1: Debug: global:  current = -134.8 target = -134.1
+448.8551:1: Debug: global:  current = -134.7 target = -134.1
+448.8760:1: Debug: global:  current = -134.7 target = -134.1
+448.8958:1: Debug: global:  current = -134.6 target = -134.1
+448.9195:1: Debug: global:  current = -134.6 target = -134.1
+448.9361:1: Debug: global:  current = -134.5 target = -134.1
+448.9560:1: Debug: global:  current = -134.5 target = -134.1
+448.9758:1: Debug: global:  current = -134.4 target = -134.1
+448.9960:1: Debug: global:  current = -134.4 target = -134.1
+449.0199:1: Debug: global:  current = -134.2 target = -134.1
+449.0377:1: Debug: global:  current = -134.2 target = -134.1
+449.0612:1: Debug: global:  current = -134.1 target = -134.1
+449.0778:1: Debug: global:  current = -134.1 target = -134.1
+449.0789:1: Debug: actions: 135:completing action: AmpTrapMoveNote 0.8
+449.0792:1: Debug: global: AmpTrapMoveNote Done dist_ > 0
+449.0806:1: Debug: global: OI State changed : MoveNoteToBack -> NoteInTrapPosition
+449.3153:1: Debug: actions: 50:starting action: AmpTrapPositionAction, angle=180.0, height 0.2411
+449.3168:1: Error: global: armpos current = 180.2 keepoutmax = 75.00 keepoutmin = 5.000 target = 180.0
+449.3176:1: Debug: actions: 55:starting action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.03 velthresh=0.05
+449.3198:1: Debug: actions: 54:starting action: MCMotionMagicAction (arm) target=180.0 posthresh=5.0 velthresh=1.0
+449.3213:1: Debug: global: OI State changed : NoteInTrapPosition -> GoToClimbPosition
+449.3359:1: Debug: actions: 55:completing action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.03 velthresh=0.05
+449.3959:1: Debug: actions: 54:completing action: MCMotionMagicAction (arm) target=180.0 posthresh=5.0 velthresh=1.0
+449.4150:1: Debug: actions: 50:completing action: AmpTrapPositionAction, angle=180.0, height 0.2411
+449.4160:1: Debug: actions: 94:starting action: ClimbAction HooksUp, target = 0.5746
+449.4163:1: Debug: global: OI State changed : GoToClimbPosition -> WaitForHooksUp
+451.8158:1: Debug: actions: 94:completing action: ClimbAction HooksUp, target = 0.5746
+451.8169:1: Debug: global: OI State changed : WaitForHooksUp -> WaitForClimbButton
+464.8766:1: Debug: actions: 96:starting action: ClimbAction HooksDownWithRobot, target = 0.0
+464.8769:1: Debug: global: OI State changed : WaitForClimbButton -> ClimbingUp
+467.4747:1: Debug: actions: 96:completing action: ClimbAction HooksDownWithRobot, target = 0.0
+467.4758:1: Debug: actions: 62:starting action: AmpTrapPositionAction, angle=121.0, height 0.2522
+467.4767:1: Error: global: armpos current = 180.1 keepoutmax = 75.00 keepoutmin = 5.000 target = 121.0
+467.4770:1: Debug: actions: 67:starting action: MCMotionMagicAction (elevator) target=0.2522 posthresh=0.03 velthresh=0.05
+467.4787:1: Debug: actions: 66:starting action: MCMotionMagicAction (arm) target=121.0 posthresh=5.0 velthresh=1.0
+467.4805:1: Debug: global: OI State changed : ClimbingUp -> MovingTrapWhileUp1
+467.4976:1: Debug: actions: 67:completing action: MCMotionMagicAction (elevator) target=0.2522 posthresh=0.03 velthresh=0.05
+468.4354:1: Debug: actions: 66:completing action: MCMotionMagicAction (arm) target=121.0 posthresh=5.0 velthresh=1.0
+468.4548:1: Debug: actions: 62:completing action: AmpTrapPositionAction, angle=121.0, height 0.2522
+468.4580:1: Debug: actions: 68:starting action: AmpTrapPositionAction, angle=121.0, height 0.3222
+468.4606:1: Error: global: armpos current = 121.4 keepoutmax = 75.00 keepoutmin = 5.000 target = 121.0
+468.4608:1: Debug: actions: 73:starting action: MCMotionMagicAction (elevator) target=0.3222 posthresh=0.03 velthresh=0.05
+468.4627:1: Debug: actions: 72:starting action: MCMotionMagicAction (arm) target=121.0 posthresh=5.0 velthresh=1.0
+468.4642:1: Debug: global: OI State changed : MovingTrapWhileUp1 -> MovingTrapWhileUp2
+468.4765:1: Debug: actions: 72:completing action: MCMotionMagicAction (arm) target=121.0 posthresh=5.0 velthresh=1.0
+468.9371:1: Debug: actions: 73:completing action: MCMotionMagicAction (elevator) target=0.3222 posthresh=0.03 velthresh=0.05
+468.9567:1: Debug: actions: 68:completing action: AmpTrapPositionAction, angle=121.0, height 0.3222
+468.9578:1: Debug: actions: 86:starting action: MotorEncoderPowerAction manipulator power = -1.0 -1.0 1.5
+468.9585:1: Debug: global: OI State changed : MovingTrapWhileUp2 -> ShootingTrap
+470.4764:1: Debug: actions: 86:completing action: MotorEncoderPowerAction manipulator power = -1.0 -1.0 1.5
+470.4779:1: Debug: actions: 74:starting action: AmpTrapPositionAction, angle=149.6, height 0.2411
+470.4796:1: Error: global: armpos current = 121.2 keepoutmax = 75.00 keepoutmin = 5.000 target = 149.6
+470.4799:1: Debug: actions: 79:starting action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.03 velthresh=0.05
+470.4816:1: Debug: actions: 78:starting action: MCMotionMagicAction (arm) target=149.6 posthresh=5.0 velthresh=1.0
+470.4848:1: Debug: global: OI State changed : ShootingTrap -> BendBack1
+470.9953:1: Debug: actions: 79:completing action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.03 velthresh=0.05
+471.1396:1: Debug: actions: 78:completing action: MCMotionMagicAction (arm) target=149.6 posthresh=5.0 velthresh=1.0
+471.1560:1: Debug: actions: 74:completing action: AmpTrapPositionAction, angle=149.6, height 0.2411
+471.1568:1: Debug: actions: 80:starting action: AmpTrapPositionAction, angle=225.0, height 0.2411
+471.1577:1: Error: global: armpos current = 149.8 keepoutmax = 75.00 keepoutmin = 5.000 target = 225.0
+471.1579:1: Debug: actions: 85:starting action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.03 velthresh=0.05
+471.1595:1: Debug: actions: 84:starting action: MCMotionMagicAction (arm) target=225.0 posthresh=5.0 velthresh=1.0
+471.1609:1: Debug: global: OI State changed : BendBack1 -> BendBack2
+471.1758:1: Debug: actions: 85:completing action: MCMotionMagicAction (elevator) target=0.2411 posthresh=0.03 velthresh=0.05
+472.1149:1: Debug: actions: 84:completing action: MCMotionMagicAction (arm) target=225.0 posthresh=5.0 velthresh=1.0
+472.1354:1: Debug: actions: 80:completing action: AmpTrapPositionAction, angle=225.0, height 0.2411
+472.1365:1: Debug: global: OI State changed : BendBack2 -> Climbed
+477.6522:1: Info: global: changing robot loop type: Teleop -> Disabled
+477.6524:1: Info: global: Motor Faults Report
+477.6525:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+477.6722:1: Info: global: intake-updown:rio-2:sticky-stator-curr-limit
+477.7033:1: Info: global: intake-feeder:rio-1:sticky-stator-curr-limit
+477.7216:1: Info: global: intake-tilt:rio-5:sticky-stator-curr-limit
+477.7378:1: Info: global: intake-shooter1:rio-3:sticky-stator-curr-limit
+477.7558:1: Info: global: intake-shooter2:rio-4:sticky-stator-curr-limit
+477.7732:1: Info: global: elevator:rio-6:sticky-stator-curr-limit
+477.7938:1: Info: global: arm:rio-7:sticky-stator-curr-limit
+477.7941:1: Info: global: manipulator:rio-9:NONE
+477.8101:1: Info: global: climber:rio-10:sticky-stator-curr-limit
+477.8270:1: Info: global: fl-steer:DriveBase-11:NONE
+477.8430:1: Info: global: fl-drive:DriveBase-12:NONE
+477.8586:1: Info: global: fr-steer:DriveBase-21:NONE
+477.8767:1: Info: global: fr-drive:DriveBase-22:NONE
+477.8983:1: Info: global: bl-steer:DriveBase-41:NONE
+477.9187:1: Info: global: bl-drive:DriveBase-42:NONE
+477.9428:1: Info: global: br-steer:DriveBase-31:NONE
+477.9656:1: Info: global: br-drive:DriveBase-32:NONE
+477.9658:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -99,63 +99,52 @@ public class TargetTrackerSubsystem extends Subsystem {
         MessageLogger logger = getRobot().getMessageLogger() ;
 
         double effective = getTargetAngle() ;
-        String zone = "" ;
 
         logger.startMessage(MessageType.Info) ;
         if (target_number_ == AprilTags.BLUE_SPEAKER_CENTER) {
             if (effective <= 20 && effective >= -20) {
-                zone = "1" ;
                 logger.add("case 1") ;
                 offset_ = 0 ;
             }
             else if (effective < -20 && effective >= -40) {
-                zone = "2" ;
                 logger.add("case 2") ;                
                 offset_ = -7.5 ;
             }
             else if (effective < -40 && effective >= -60) {
-                zone = "3" ;
                 logger.add("case 3") ;
                 offset_ = -10 ;
             }
             else if (effective > 20 && effective <= 40) {
-                zone = "4" ;                
                 logger.add("case 4") ;                
                 offset_ = 0 ;
             }
             else {
-                zone = "5" ;
                 logger.add("case 5") ;                
                 offset_ = 0 ;
             }
         }
         else {
             if (effective >= 160 || effective <= -160) {
-                zone = "6" ;                
                 logger.add("case 6") ;                
                 offset_ = 0 ;
             }
             else if (effective < 160 && effective >= 140) {
                 // Checked
-                zone = "7" ;                
                 logger.add("case 7") ;                
                 offset_ = -5 ;
             }
             else if (effective > -160 && effective <= -140) {
                 // Checked
-                zone = "8" ;                
                 logger.add("case 8") ;                
                 offset_ = 0 ;
             }            
             else if (effective < 140 && effective >= 120) {
                 // Checked
-                zone = "9" ;                
                 logger.add("case 9") ;
                 offset_ = -5 ;
             }
             else {
                 //  Checked
-                zone = "10" ;                
                 logger.add("case 10") ;   
                 offset_ = 5 ;
             }

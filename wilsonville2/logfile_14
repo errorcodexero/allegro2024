@@ -1,0 +1,46 @@
+001.3202:1: Info: global: ============================================================
+001.3397:1: Info: global: robot code starting
+001.3403:1: Info: global:  SerialNumber = '03223856'
+001.3957:1: Info: global:  enableMessageLogger time = 0.3525
+001.3963:1: Info: global: ============================================================
+001.4012:1: Info: global: reading params for bot 'COMPETITION'
+001.4039:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.6193:1: Info: global:  readParamsFile time = 0.2221
+001.6737:1: Info: global:  enableMessagesFromSettingsFile time = 0.001744
+002.3855:1: Info: global:  loadPathsFiles time = 0.7109
+005.6966:1: Info: global: initializing robot - no FMS
+005.7515:1: Info: global:  plotMgrInit time = 0.0002040
+006.5922:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.2.2'
+006.5934:1: Info: global:     Faults: sticky-stator-curr-limit
+006.8039:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.2.2'
+006.8049:1: Info: global:     Faults: sticky-stator-curr-limit
+006.9651:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.2.2'
+006.9665:1: Info: global:     Faults: sticky-stator-curr-limit
+007.0917:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.2.2'
+007.0928:1: Info: global:     Faults: sticky-stator-curr-limit
+007.2326:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.2.2'
+007.2335:1: Info: global:     Faults: sticky-stator-curr-limit
+007.4197:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.2.2'
+007.4220:1: Info: global:     Faults: sticky-stator-curr-limit
+007.5743:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.2.2'
+007.5754:1: Info: global:     Faults: sticky-stator-curr-limit
+007.8140:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+007.9468:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.2.2'
+007.9477:1: Info: global:     Faults: sticky-stator-curr-limit
+008.4478:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.5664:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.7529:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.8559:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.9665:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.2.2', no faults
+009.0716:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.2.2', no faults
+009.1747:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.2.2', no faults
+009.2785:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.2.2', no faults
+009.4885:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+009.4895:1: Info: global: Gamepad discovered
+009.5363:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+009.5609:1: Info: global:  hardwareInit time = 3.809
+009.7000:1: Info: global: Changed vision parameters to Single Far
+009.8276:1: Info: global:  computeInitalState time = 0.2652
+010.0547:1: Info: global:  postHWInit time = 0.2257
+010.0917:1: Info: global: changing robot loop type: Initialization -> Disabled
+010.0945:1: Info: global: alliance changed:null -> Blue: recreated auto modes for new alliance value

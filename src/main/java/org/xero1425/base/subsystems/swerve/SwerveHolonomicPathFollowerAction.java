@@ -18,7 +18,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 
-public class SwerveHolonomicPathFollower extends SwerveHolonomicControllerAction {
+public class SwerveHolonomicPathFollowerAction extends SwerveHolonomicControllerAction {
 
     public interface Executor {
         void doit() ;
@@ -61,7 +61,7 @@ public class SwerveHolonomicPathFollower extends SwerveHolonomicControllerAction
         "ax (m)", "ay (m)", "aa (deg)"
     } ;
 
-    public SwerveHolonomicPathFollower(SwerveBaseSubsystem sub, String pathname, boolean setpose, double endtime, boolean mirror, double mvalue) throws BadParameterTypeException, MissingParameterException, MissingPathException {
+    public SwerveHolonomicPathFollowerAction(SwerveBaseSubsystem sub, String pathname, boolean setpose, double endtime, boolean mirror, double mvalue) throws BadParameterTypeException, MissingParameterException, MissingPathException {
         super(sub) ;
 
         pathname_ = pathname ;

@@ -1,7 +1,7 @@
 package frc.robot.automodes;
 
 import org.xero1425.base.actions.Action;
-import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollower;
+import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollowerAction;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
@@ -35,10 +35,10 @@ public class Start3Shoot3Action extends Action {
     private double mvalue_ ;
     private AllegroRobot2024 robot_ ;
 
-    private SwerveHolonomicPathFollower p1_ ;    
-    private SwerveHolonomicPathFollower p2_ ;    
-    private SwerveHolonomicPathFollower p3_ ;
-    private SwerveHolonomicPathFollower p4_ ;
+    private SwerveHolonomicPathFollowerAction p1_ ;    
+    private SwerveHolonomicPathFollowerAction p2_ ;    
+    private SwerveHolonomicPathFollowerAction p3_ ;
+    private SwerveHolonomicPathFollowerAction p4_ ;
     private IntakeManualShootAction manual_shoot_ ;    
     private SwerveTrackAngle rotate_ ;
     private IntakeAutoShootAction shoot_ ;    
@@ -72,10 +72,10 @@ public class Start3Shoot3Action extends Action {
             manual_shoot_ = new IntakeManualShootAction(robot_.getIntakeShooter(), "subwoofer-right") ;        
         }
 
-        p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P1", true, 0.2, mirror_, mvalue_);
-        p2_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P2", false, 0.2, mirror_, mvalue_); 
-        p3_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P3", false, 0.2, mirror_, mvalue_);
-        p4_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S3S3-P4", false, 0.2, mirror_, mvalue_);        
+        p1_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P1", true, 0.2, mirror_, mvalue_);
+        p2_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P2", false, 0.2, mirror_, mvalue_); 
+        p3_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P3", false, 0.2, mirror_, mvalue_);
+        p4_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P4", false, 0.2, mirror_, mvalue_);        
     }
 
     @Override

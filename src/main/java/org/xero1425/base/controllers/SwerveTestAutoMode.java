@@ -3,7 +3,7 @@ package org.xero1425.base.controllers;
 import org.xero1425.base.subsystems.DriveBaseSubsystem;
 import org.xero1425.base.subsystems.RobotSubsystem;
 import org.xero1425.base.subsystems.swerve.SwerveBaseSubsystem;
-import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollower;
+import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollowerAction;
 import org.xero1425.base.subsystems.swerve.SwervePowerAngleAction;
 import org.xero1425.base.subsystems.swerve.SwerveSpeedAngleAction;
 import org.xero1425.misc.BadParameterTypeException;
@@ -85,7 +85,7 @@ SwerveTestAutoMode extends TestAutoMode {
 
                 case 4:
                     // Run the path follower against the path given
-                    addSubActionPair(swerve, new SwerveHolonomicPathFollower(swerve, getString("name"), true, 3.0, false, 0.0), true);
+                    addSubActionPair(swerve, new SwerveHolonomicPathFollowerAction(swerve, getString("name"), true, 3.0, false, 0.0), true);
                     break;
             }
         }

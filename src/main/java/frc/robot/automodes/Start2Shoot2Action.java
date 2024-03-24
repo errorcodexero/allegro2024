@@ -1,7 +1,7 @@
 package frc.robot.automodes;
 
 import org.xero1425.base.actions.Action;
-import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollower;
+import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollowerAction;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
@@ -27,7 +27,7 @@ public class Start2Shoot2Action extends Action {
 
     private IntakeManualShootAction manual_shoot_ ;
     private StartCollectAltAction start_collect_ ;    
-    private SwerveHolonomicPathFollower p1_ ;    
+    private SwerveHolonomicPathFollowerAction p1_ ;    
     private SwerveTrackAngle rotate_ ;
     private IntakeAutoShootAction shoot_ ;
     private IntakeGotoNamedPositionAction stow_ ;    
@@ -43,7 +43,7 @@ public class Start2Shoot2Action extends Action {
         start_collect_ = new StartCollectAltAction(robot_.getIntakeShooter()) ;        
         rotate_ = new SwerveTrackAngle(robot.getSwerve(), () -> robot_.getTargetTracker().getRotation(), rottol) ;
         shoot_ = new IntakeAutoShootAction(robot_.getIntakeShooter(), robot_.getTargetTracker(), true, rotate_) ;        
-        p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S2-P1", true, 0.2, mirror, mvalue);
+        p1_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S2S2-P1", true, 0.2, mirror, mvalue);
         
         double v1 = robot_.getIntakeShooter().getUpDown().getSettingsValue("targets:stow").getDouble() ;
         double v2 = robot_.getIntakeShooter().getTilt().getSettingsValue("targets:stow").getDouble() ;         

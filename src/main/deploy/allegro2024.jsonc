@@ -679,6 +679,19 @@
                     "maxv" : 270,
                     "maxa" : 270,
                     "jerk" : 0.0
+                },
+                "abs-position" : {
+                    "kp" : 0.0,
+                    "ki" : 0.0,
+                    "kd" : 0.0,
+                    "kv" : 0.0,
+                    "ka" : 0.0,
+                    "kg" : 0.0,
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 270,
+                    "maxa" : 270,
+                    "jerk" : 0.0
                 }
             }
         },
@@ -928,8 +941,8 @@
             // This section descrdibes the physical characteristics of the robot
             //
             "physical": {
-                "width": 0.5715, // meters
-                "length": 0.5842, // meters
+                "width": 0.57785, // meters
+                "length": 0.67945, // meters
                 "path" : {
                     "maxv" : 2.0,
                     "maxa" : 2.0

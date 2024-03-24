@@ -1,0 +1,94 @@
+001.2906:1: Info: global: ============================================================
+001.3095:1: Info: global: robot code starting
+001.3102:1: Info: global:  SerialNumber = '03223856'
+001.3662:1: Info: global:  enableMessageLogger time = 0.3474
+001.3669:1: Info: global: ============================================================
+001.3721:1: Info: global: reading params for bot 'COMPETITION'
+001.3744:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.5615:1: Info: global:  readParamsFile time = 0.1937
+001.6153:1: Info: global:  enableMessagesFromSettingsFile time = 0.002152
+002.3085:1: Info: global:  loadPathsFiles time = 0.6923
+005.4880:1: Info: global: initializing robot - no FMS
+005.5424:1: Info: global:  plotMgrInit time = 0.0002230
+006.4661:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.2.2'
+006.4668:1: Info: global:     Faults: sticky-stator-curr-limit
+006.7070:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.2.2'
+006.7080:1: Info: global:     Faults: sticky-stator-curr-limit
+006.8529:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.2.2'
+006.8543:1: Info: global:     Faults: sticky-stator-curr-limit
+007.0020:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.2.2'
+007.0031:1: Info: global:     Faults: sticky-stator-curr-limit
+007.1331:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.2.2'
+007.1343:1: Info: global:     Faults: sticky-stator-curr-limit
+007.3146:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.2.2'
+007.3156:1: Info: global:     Faults: sticky-stator-curr-limit
+007.4450:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.2.2'
+007.4458:1: Info: global:     Faults: sticky-stator-curr-limit
+007.6680:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+007.7980:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.2.2'
+007.7985:1: Info: global:     Faults: sticky-stator-curr-limit
+008.2772:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.3992:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.5771:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.6855:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.7882:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.8894:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.2.2', no faults
+009.0004:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.2.2'
+009.0011:1: Info: global:     Faults: sticky-stator-curr-limit
+009.1118:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.2.2', no faults
+009.3177:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+009.3187:1: Info: global: Gamepad discovered
+009.3658:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+009.3890:1: Info: global:  hardwareInit time = 3.846
+009.5131:1: Info: global: Changed vision parameters to Single Far
+009.6584:1: Info: global:  computeInitalState time = 0.2682
+009.8947:1: Info: global:  postHWInit time = 0.2350
+009.9322:1: Info: global: changing robot loop type: Initialization -> Disabled
+009.9341:1: Info: global: alliance changed:null -> Red: recreated auto modes for new alliance value
+079.1205:1: Info: global: changing robot loop type: Disabled -> Teleop
+079.1957:1: Debug: actions: 0:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+081.2250:1: Debug: actions: 122:starting action: StartCollectAction
+081.2256:1: Debug: actions: 127:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+081.2262:1: Debug: actions: 127:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+081.2290:1: Info: global: pos < stow pos = 117.7 stow = 118.0
+081.2341:1: Debug: actions: 217:starting action: MCMotionMagicAction (intake-tilt) target=-64.728148456 posthresh=3.0 velthresh=1.0
+081.2678:1: Debug: global: OI State changed : Idle -> Collect
+081.5665:1: Debug: actions: 217:completing action: MCMotionMagicAction (intake-tilt) target=-64.728148456 posthresh=3.0 velthresh=1.0
+081.5865:1: Debug: actions: 129:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+081.6101:1: Debug: actions: 130:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+081.6226:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+082.8891:1: Debug: actions: 129:completing action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+082.8937:1: Debug: actions: 130:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+082.9287:1: Debug: intake-shooter: state changed: Moving ->WaitingForNote
+083.2244:1: Debug: actions: 122:canceling action: StartCollectAction
+083.2252:1: Debug: actions: 131:starting action: StopCollectAction
+083.2258:1: Debug: actions: 136:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+083.2262:1: Debug: actions: 136:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+083.2271:1: Debug: actions: 134:starting action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=1.0 velthresh=1.0
+083.2308:1: Debug: actions: 135:starting action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+083.2348:1: Debug: global: OI State changed : Collect -> EndingCollect
+084.4873:1: Debug: actions: 134:completing action: MCMotionMagicAction (intake-tilt) target=-65.0 posthresh=1.0 velthresh=1.0
+084.6115:1: Debug: actions: 135:completing action: MCMotionMagicAction (intake-updown) target=118.0 posthresh=1.0 velthresh=1.0
+084.6278:1: Debug: actions: 131:completing action: StopCollectAction
+084.6302:1: Debug: global: OI State changed : EndingCollect -> Idle
+114.7210:1: Info: global: changing robot loop type: Teleop -> Disabled
+114.7215:1: Info: global: Motor Faults Report
+114.7218:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+114.7480:1: Info: global: intake-updown:rio-2:sticky-stator-curr-limit
+114.7720:1: Info: global: intake-feeder:rio-1:sticky-stator-curr-limit
+114.7955:1: Info: global: intake-tilt:rio-5:sticky-stator-curr-limit
+114.8209:1: Info: global: intake-shooter1:rio-3:sticky-stator-curr-limit
+114.8423:1: Info: global: intake-shooter2:rio-4:sticky-stator-curr-limit
+114.8620:1: Info: global: elevator:rio-6:sticky-stator-curr-limit
+114.8913:1: Info: global: arm:rio-7:sticky-stator-curr-limit
+114.8937:1: Info: global: manipulator:rio-9:NONE
+114.9200:1: Info: global: climber:rio-10:sticky-stator-curr-limit
+114.9424:1: Info: global: fl-steer:DriveBase-11:NONE
+114.9627:1: Info: global: fl-drive:DriveBase-12:NONE
+114.9846:1: Info: global: fr-steer:DriveBase-21:NONE
+115.0068:1: Info: global: fr-drive:DriveBase-22:NONE
+115.0395:1: Info: global: bl-steer:DriveBase-41:NONE
+115.0624:1: Info: global: bl-drive:DriveBase-42:NONE
+115.0842:1: Info: global: br-steer:DriveBase-31:sticky-stator-curr-limit
+115.1073:1: Info: global: br-drive:DriveBase-32:NONE
+115.1078:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

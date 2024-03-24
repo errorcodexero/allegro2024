@@ -160,10 +160,16 @@ public class IntakeShooterSubsystem extends Subsystem {
     public void postHWInit() throws BadMotorRequestException, MotorRequestFailedException {
         updateMotorPosition();
     }
+
+    public double getAbsEncoderAngle() {
+        double eval = absoluteEncoder_.getVoltage();
+        double angle = encoderMapper_.toRobot(eval);
+
+        return angle ;
+    }
     
     private void updateMotorPosition() throws BadMotorRequestException, MotorRequestFailedException {
-        double eval = absoluteEncoder_.getVoltage();
-        angle_ = encoderMapper_.toRobot(eval);
+        angle_ =getAbsEncoderAngle() ;
 
         double m = tilt_.getEncoder().mapPhysicalToMotor(angle_) ;
         tilt_.getMotorController().setPosition(m);

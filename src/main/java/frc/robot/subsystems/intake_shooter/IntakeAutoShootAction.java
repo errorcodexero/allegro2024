@@ -1,5 +1,7 @@
 package frc.robot.subsystems.intake_shooter;
 
+import java.util.function.BooleanSupplier;
+
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.gyro.XeroGyro;
 import org.xero1425.base.misc.XeroTimer;
@@ -15,13 +17,12 @@ import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
 import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.subsystems.oi.AllegroOIPanel;
 import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class IntakeAutoShootAction extends Action {
+    private final static boolean kUseAbsoluteEncodersForPID = false ;
     private final static double kVelocityStart = 45.0 ;
     private final static double kUpDownStart = 123.5 ;
     private final static double kTiltStart = -40.0 ;   
@@ -39,8 +40,11 @@ public class IntakeAutoShootAction extends Action {
     private MCVelocityAction shooter1_ ;
     private MCVelocityAction shooter2_ ;
     private MCTrackPosAction updown_ ;
-    private MCTrackPosAction tilt_ ;
+    private MCTrackPosAction tilt_mc_ ;
+    // private TiltTrackTargetAction tilt_abs_ ;
     private MotorEncoderPowerAction feeder_on_ ;
+    private boolean absenc_ ;
+    private BooleanSupplier at_target_supplier_ ;
 
     private boolean drive_team_ready_ ;
     private boolean initial_drive_team_ready_ ;
@@ -99,6 +103,7 @@ public class IntakeAutoShootAction extends Action {
         initial_drive_team_ready_ = initialDriveTeamReady ;
         rotate_ = rotate ;
         verbose_ = false ;
+        absenc_ = kUseAbsoluteEncodersForPID ;
 
         ISettingsSupplier settings = sub_.getRobot().getSettingsSupplier() ;
         if (settings.isDefined("system:verbose:auto-shoot")) {
@@ -133,7 +138,8 @@ public class IntakeAutoShootAction extends Action {
         shooter1_ = new MCVelocityAction(sub_.getShooter1(), "pids:velocity", kVelocityStart, velthresh, false) ;
         shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", kVelocityStart, velthresh, false) ;
         updown_ = new MCTrackPosAction(sub_.getUpDown(), "pids:position", kUpDownStart, updown_pos_threshold, updown_vel_threshold, false) ;      
-        tilt_ = new MCTrackPosAction(sub_.getTilt(), "pids:position", kTiltStart, tilt_pos_threshold, tilt_vel_threshold,true) ;
+        tilt_mc_ = new MCTrackPosAction(sub_.getTilt(), "pids:position", kTiltStart, tilt_pos_threshold, tilt_vel_threshold ,true) ;
+        // tilt_abs_ = new TiltTrackTargetAction(sub_, kTiltStart, tilt_pos_threshold, tilt_vel_threshold) ;
 
         double feedpower = sub_.getSettingsValue("actions:auto-shoot:feeder-power").getDouble() ;
         double feedtime = sub_.getSettingsValue("actions:auto-shoot:feeder-time").getDouble() ;
@@ -145,22 +151,6 @@ public class IntakeAutoShootAction extends Action {
         } else {
             plot_id_ = -1 ;
         }
-
-        try {
-            ShuffleboardTab tab = Shuffleboard.getTab("Shooting");
-            tab.addBoolean("tilt", ()->tilt_.isAtTarget()) ;
-            tab.addBoolean("updown", ()->updown_.isAtTarget()) ;
-            tab.addBoolean("shooter1", ()->shooter1_.isAtVelocity());
-            tab.addBoolean("shooter2", ()->shooter2_.isAtVelocity()) ;
-            tab.addBoolean("dbangle", ()-> { return db_ready_ ; }) ;
-            tab.addBoolean("dbready", ()-> { return dbReadyToShoot() ; }) ;            
-            tab.addBoolean("swerve", ()-> { return swerve_stopped_ ; }) ;
-            tab.addBoolean("gyro", ()-> { return gyro_stopped_ ; }) ;                        
-            tab.addBoolean("apriltag", ()->aprilTagTest()) ;
-            tab.addBoolean("button", ()-> { return drive_team_ready_ ; });
-        }
-        catch(Exception ex) {
-        }  
     }
 
     public boolean isShooting() {
@@ -195,7 +185,14 @@ public class IntakeAutoShootAction extends Action {
             db_ready_ = false ;
 
             sub_.getUpDown().setAction(updown_, true);
-            sub_.getTilt().setAction(tilt_, true);
+            if (absenc_) {
+                // sub_.getTilt().setAction(tilt_abs_, true);
+                // at_target_supplier_ = () -> tilt_abs_.isAtTarget() ;
+            }
+            else {
+                sub_.getTilt().setAction(tilt_mc_, true);
+                at_target_supplier_ = () -> tilt_mc_.isAtTarget() ;
+            }
             sub_.getShooter1().setAction(shooter1_, true);
             sub_.getShooter2().setAction(shooter2_, true);
 
@@ -283,11 +280,16 @@ public class IntakeAutoShootAction extends Action {
 
             AllegroOIPanel oi = robot.getOI().getPanel() ;
             updown_.setTarget(current_updown_);
-            tilt_.setTarget(current_tilt_);
+            if (absenc_) {
+                // tilt_abs_.setTarget(current_tilt_);
+            }
+            else {              
+                tilt_mc_.setTarget(current_tilt_);
+            }
             shooter1_.setTarget(current_velocity_);
             shooter2_.setTarget(current_velocity_);
 
-            oi.setTiltLED(tilt_.isAtTarget() ? LEDState.ON : LEDState.OFF);
+            oi.setTiltLED(at_target_supplier_.getAsBoolean() ? LEDState.ON : LEDState.OFF);
             oi.setAprilTagLED(aprilTagTest() ? LEDState.ON : LEDState.OFF);
             if (dist > max_distance_) {
                 oi.setDBLED(LEDState.BLINK_FAST) ;
@@ -345,7 +347,7 @@ public class IntakeAutoShootAction extends Action {
         MessageLogger logger = sub_.getRobot().getMessageLogger() ;
         logger.startMessage(MessageType.Debug, sub_.getLoggerID()) ;
         logger.add("updown", updown_.isAtTarget()) ;
-        logger.add("tilt", tilt_.isAtTarget());
+        logger.add("tilt", at_target_supplier_.getAsBoolean()) ;
         logger.add("shooter1", shooter1_.isAtVelocity());
         logger.add("shooter2", shooter2_.isAtVelocity());
         logger.add("april", aprilTagTest());
@@ -357,7 +359,7 @@ public class IntakeAutoShootAction extends Action {
         logger.endMessage();
 
         return  updown_.isAtTarget() && 
-                tilt_.isAtTarget() && 
+                at_target_supplier_.getAsBoolean() && 
                 shooter1_.isAtVelocity() && 
                 shooter2_.isAtVelocity() && 
                 aprilTagTest() && 

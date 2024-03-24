@@ -1,7 +1,7 @@
 package frc.robot.automodes;
 
 import org.xero1425.base.actions.Action;
-import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollower;
+import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollowerAction;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
@@ -36,9 +36,9 @@ public class Start1Shoot3Action extends Action {
     private IntakeManualShootAction manual_shoot_current_ ; 
     private IntakeGotoNamedPositionAction stow_ ;
     private StartCollectAltAction start_collect_ ;
-    private SwerveHolonomicPathFollower p1_ ;
-    private SwerveHolonomicPathFollower p2_ ;  
-    private SwerveHolonomicPathFollower p3_ ;
+    private SwerveHolonomicPathFollowerAction p1_ ;
+    private SwerveHolonomicPathFollowerAction p2_ ;  
+    private SwerveHolonomicPathFollowerAction p3_ ;
 
     public Start1Shoot3Action(AllegroRobot2024 robot, boolean mirror, double mvalue) throws Exception {
         super(robot.getRobot().getMessageLogger()) ;
@@ -61,9 +61,9 @@ public class Start1Shoot3Action extends Action {
         stow_ = new IntakeGotoNamedPositionAction(robot_.getIntakeShooter(), v1, v2) ;
         start_collect_ = new StartCollectAltAction(robot_.getIntakeShooter()) ;
 
-        p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S1S3-P1", true, 0.2, mirror, mvalue);
-        p2_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S1S3-P2", false, 0.2, mirror, mvalue);
-        p3_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S1S3-P3", false, 0.2, mirror, mvalue);
+        p1_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S1S3-P1", true, 0.2, mirror, mvalue);
+        p2_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S1S3-P2", false, 0.2, mirror, mvalue);
+        p3_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S1S3-P3", false, 0.2, mirror, mvalue);
     }
 
     @Override

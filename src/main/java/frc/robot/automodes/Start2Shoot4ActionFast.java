@@ -2,7 +2,7 @@ package frc.robot.automodes;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.misc.XeroTimer;
-import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollower;
+import org.xero1425.base.subsystems.swerve.SwerveHolonomicPathFollowerAction;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
@@ -43,13 +43,13 @@ public class Start2Shoot4ActionFast extends Action {
     private IntakeManualShootAction manual_shoot_ ;
     private StartCollectAltAction start_collect_ ;
 
-    private SwerveHolonomicPathFollower p1_ ;
-    private SwerveHolonomicPathFollower p2_ ;
-    private SwerveHolonomicPathFollower p3_ ;
-    private SwerveHolonomicPathFollower p4_ ;
-    private SwerveHolonomicPathFollower p5_ ;
-    private SwerveHolonomicPathFollower p6_ ;    
-    private SwerveHolonomicPathFollower p7_ ;                 
+    private SwerveHolonomicPathFollowerAction p1_ ;
+    private SwerveHolonomicPathFollowerAction p2_ ;
+    private SwerveHolonomicPathFollowerAction p3_ ;
+    private SwerveHolonomicPathFollowerAction p4_ ;
+    private SwerveHolonomicPathFollowerAction p5_ ;
+    private SwerveHolonomicPathFollowerAction p6_ ;    
+    private SwerveHolonomicPathFollowerAction p7_ ;                 
     
     public Start2Shoot4ActionFast(AllegroRobot2024 robot, boolean mirror, double mvalue) throws Exception {
         super(robot.getRobot().getMessageLogger()) ;
@@ -66,13 +66,13 @@ public class Start2Shoot4ActionFast extends Action {
         start_collect_ = new StartCollectAltAction(robot_.getIntakeShooter(), updown, tilt) ;
         manual_shoot_ = new IntakeManualShootAction(robot_.getIntakeShooter(), "subwoofer-center-low") ;
 
-        p1_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P1", false, 0.2, mirror, mvalue);
-        p2_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P2", false, 0.2, mirror, mvalue);
-        p3_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P3", true, 0.2, mirror, mvalue);
-        p4_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P4", false, 0.2, mirror, mvalue);
-        p5_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P5", false, 0.2, mirror, mvalue);
-        p6_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P6", false, 0.2, mirror, mvalue);                
-        p7_ = new SwerveHolonomicPathFollower(robot.getSwerve(), "S2S4-P7", false, 0.2, mirror, mvalue);
+        p1_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S2S4-P1", false, 0.2, mirror, mvalue);
+        p2_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S2S4-P2", false, 0.2, mirror, mvalue);
+        p3_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S2S4-P3", true, 0.2, mirror, mvalue);
+        p4_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S2S4-P4", false, 0.2, mirror, mvalue);
+        p5_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S2S4-P5", false, 0.2, mirror, mvalue);
+        p6_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S2S4-P6", false, 0.2, mirror, mvalue);                
+        p7_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S2S4-P7", false, 0.2, mirror, mvalue);
 
         delay_timer_ = new XeroTimer(robot.getRobot(), "auto-delay", 0.6) ;
     }

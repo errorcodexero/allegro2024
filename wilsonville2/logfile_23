@@ -1,0 +1,69 @@
+001.3837:1: Info: global: ============================================================
+001.4036:1: Info: global: robot code starting
+001.4043:1: Info: global:  SerialNumber = '03223856'
+001.4594:1: Info: global:  enableMessageLogger time = 0.3466
+001.4599:1: Info: global: ============================================================
+001.4648:1: Info: global: reading params for bot 'COMPETITION'
+001.4672:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.6522:1: Info: global:  readParamsFile time = 0.1913
+001.7072:1: Info: global:  enableMessagesFromSettingsFile time = 0.001985
+002.3931:1: Info: global:  loadPathsFiles time = 0.6849
+005.6103:1: Info: global: initializing robot - no FMS
+005.6657:1: Info: global:  plotMgrInit time = 0.0002040
+006.6286:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.2.2'
+006.6301:1: Info: global:     Faults: sticky-stator-curr-limit
+006.8401:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.2.2'
+006.8473:1: Info: global:     Faults: sticky-stator-curr-limit
+007.0173:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.2.2'
+007.0182:1: Info: global:     Faults: sticky-stator-curr-limit
+007.1510:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.2.2'
+007.1524:1: Info: global:     Faults: sticky-stator-curr-limit
+007.3022:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.2.2'
+007.3033:1: Info: global:     Faults: sticky-stator-curr-limit
+007.4962:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.2.2'
+007.4977:1: Info: global:     Faults: sticky-stator-curr-limit
+007.6382:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.2.2'
+007.6394:1: Info: global:     Faults: sticky-stator-curr-limit
+007.8631:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+008.0022:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.2.2'
+008.0030:1: Info: global:     Faults: sticky-stator-curr-limit
+008.5422:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.6610:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.8461:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.9464:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.2.2', no faults
+009.0554:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.2.2', no faults
+009.1623:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.2.2', no faults
+009.2731:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.2.2', no faults
+009.3804:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.2.2', no faults
+009.6033:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+009.6264:1: Info: global:  hardwareInit time = 3.959
+009.7443:1: Info: global: Changed vision parameters to Single Far
+009.9085:1: Info: global:  computeInitalState time = 0.2784
+010.1143:1: Info: global:  postHWInit time = 0.2045
+010.1490:1: Info: global: changing robot loop type: Initialization -> Disabled
+010.1511:1: Info: global: alliance changed:null -> Blue: recreated auto modes for new alliance value
+010.3600:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+010.3609:1: Info: global: Gamepad discovered
+394.9999:1: Info: global: changing robot loop type: Disabled -> Teleop
+395.0656:1: Debug: actions: 215:starting action: SwerveDriveChassisSpeedAction(ChassisSpeeds(Vx: 0.00 m/s, Vy: 0.00 m/s, Omega: 0.00 rad/s))
+395.1354:1: Info: global: changing robot loop type: Teleop -> Disabled
+395.1358:1: Info: global: Motor Faults Report
+395.1374:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+395.2233:1: Info: global: intake-updown:rio-2:sticky-stator-curr-limit
+395.2431:1: Info: global: intake-feeder:rio-1:sticky-stator-curr-limit
+395.2631:1: Info: global: intake-tilt:rio-5:sticky-stator-curr-limit
+395.2866:1: Info: global: intake-shooter1:rio-3:sticky-stator-curr-limit
+395.3072:1: Info: global: intake-shooter2:rio-4:sticky-stator-curr-limit
+395.3271:1: Info: global: elevator:rio-6:sticky-stator-curr-limit
+395.3464:1: Info: global: arm:rio-7:sticky-stator-curr-limit
+395.3470:1: Info: global: manipulator:rio-9:NONE
+395.3656:1: Info: global: climber:rio-10:sticky-stator-curr-limit
+395.3849:1: Info: global: fl-steer:DriveBase-11:NONE
+395.4072:1: Info: global: fl-drive:DriveBase-12:NONE
+395.4271:1: Info: global: fr-steer:DriveBase-21:NONE
+395.4465:1: Info: global: fr-drive:DriveBase-22:NONE
+395.4656:1: Info: global: bl-steer:DriveBase-41:NONE
+395.4852:1: Info: global: bl-drive:DriveBase-42:NONE
+395.5096:1: Info: global: br-steer:DriveBase-31:NONE
+395.5288:1: Info: global: br-drive:DriveBase-32:NONE
+395.5294:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
