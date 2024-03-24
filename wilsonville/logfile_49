@@ -1,0 +1,1772 @@
+001.1281:1: Info: global: ============================================================
+001.1461:1: Info: global: robot code starting
+001.1467:1: Info: global:  SerialNumber = '03223856'
+001.1957:1: Info: global:  enableMessageLogger time = 0.2906
+001.1964:1: Info: global: ============================================================
+001.2016:1: Info: global: reading params for bot 'COMPETITION'
+001.2025:1: Info: global: reading JSON robots setting file '/home/lvuser/deploy/allegro2024.jsonc'
+001.3889:1: Info: global:  readParamsFile time = 0.1916
+001.4322:1: Info: global:  enableMessagesFromSettingsFile time = 0.001966
+002.0544:1: Info: global:  loadPathsFiles time = 0.6212
+004.3840:1: Info: global: initializing robot - no FMS
+004.4449:1: Info: global:  plotMgrInit time = 0.0002780
+005.1575:1: Info: global: create motor: name = 'intake-updown', bus = '', id = 2, type = 'kraken', firmware = '24.4.2.2', no faults
+005.7240:1: Info: global: create motor: name = 'intake-feeder', bus = '', id = 1, type = 'kraken', firmware = '24.4.2.2', no faults
+005.8623:1: Info: global: create motor: name = 'intake-tilt', bus = '', id = 5, type = 'kraken', firmware = '24.4.2.2', no faults
+005.9929:1: Info: global: create motor: name = 'intake-shooter1', bus = '', id = 3, type = 'kraken', firmware = '24.4.2.2', no faults
+006.1192:1: Info: global: create motor: name = 'intake-shooter2', bus = '', id = 4, type = 'kraken', firmware = '24.4.2.2', no faults
+006.2930:1: Info: global: create motor: name = 'elevator', bus = '', id = 6, type = 'kraken', firmware = '24.4.2.2', no faults
+006.4330:1: Info: global: create motor: name = 'arm', bus = '', id = 7, type = 'kraken', firmware = '24.4.2.2', no faults
+006.5876:1: Info: global: create motor: name = 'manipulator', bus = '', id = 9, type = 'SparkFlex', firmware = '24.0.0.5', no faults
+006.7358:1: Info: global: create motor: name = 'climber', bus = '', id = 10, type = 'kraken', firmware = '24.4.2.2', no faults
+007.1687:1: Info: global: create motor: name = 'fl-steer', bus = 'DriveBase', id = 11, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.3157:1: Info: global: create motor: name = 'fl-drive', bus = 'DriveBase', id = 12, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.5028:1: Info: global: create motor: name = 'fr-steer', bus = 'DriveBase', id = 21, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.6296:1: Info: global: create motor: name = 'fr-drive', bus = 'DriveBase', id = 22, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.7620:1: Info: global: create motor: name = 'bl-steer', bus = 'DriveBase', id = 41, type = 'talon-fx', firmware = '24.4.2.2', no faults
+007.8906:1: Info: global: create motor: name = 'bl-drive', bus = 'DriveBase', id = 42, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.0146:1: Info: global: create motor: name = 'br-steer', bus = 'DriveBase', id = 31, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.1448:1: Info: global: create motor: name = 'br-drive', bus = 'DriveBase', id = 32, type = 'talon-fx', firmware = '24.4.2.2', no faults
+008.3446:1: Info: global: using swerve gamepad,  index = 0, power 0.0, rotate:deadband 0.0, pos:deadband:x 0.0, pos:deadband:y 0.0
+008.3457:1: Info: global: Gamepad discovered
+008.3880:1: Info: global: created OI panel with 11 panel gadgets and 7 leds
+008.4110:1: Info: global:  hardwareInit time = 3.965
+008.5009:1: Info: global: Changed vision parameters to Single Far
+008.6287:1: Info: global:  computeInitalState time = 0.2166
+008.8567:1: Info: global:  postHWInit time = 0.2267
+008.8940:1: Info: global: changing robot loop type: Initialization -> Disabled
+008.8959:1: Info: global: alliance changed:null -> Blue: recreated auto modes for new alliance value
+009.1778:1: Info: global: Changed vision parameters to Multi Near
+009.3871:1: Info: global: gyroinfo rate = 0.07031 ratelimit = 5.000
+009.5893:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+009.6131:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+009.6378:1: Info: global: gyroinfo rate = 0.07031 ratelimit = 5.000
+009.6606:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+009.6834:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+009.7259:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+009.7463:1: Info: global: gyroinfo rate = 0.07031 ratelimit = 5.000
+009.7679:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+009.7874:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+009.8058:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+009.8212:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+009.8392:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+009.8574:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+009.8768:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+009.8959:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+009.9094:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+009.9256:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+009.9408:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+009.9560:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+009.9723:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+009.9885:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.0045:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+010.0354:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+010.0599:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+010.0736:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+010.0903:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+010.1088:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.1250:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.1390:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.1540:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.1812:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.2001:1: Info: global: gyroinfo rate = -0.04688 ratelimit = 5.000
+010.2137:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.2272:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.2431:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+010.2560:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.2702:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+010.2842:1: Info: global: gyroinfo rate = -0.1133 ratelimit = 5.000
+010.2982:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+010.3192:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+010.3338:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+010.3469:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+010.3628:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+010.3791:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+010.3945:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.4158:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+010.4321:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.4700:1: Info: global: gyroinfo rate = 0.07031 ratelimit = 5.000
+010.4875:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+010.5029:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.5212:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+010.5383:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.5547:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+010.5729:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.5886:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+010.6062:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+010.6302:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+010.6703:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+010.6990:1: Info: global: gyroinfo rate = 0.07031 ratelimit = 5.000
+010.7143:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+010.7305:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+010.7461:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.7603:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.7731:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.7860:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+010.7983:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+010.8111:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.8228:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+010.8354:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+010.8484:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.8618:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.8763:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+010.8920:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+010.9098:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+010.9268:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+010.9432:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+010.9568:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+010.9720:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+010.9828:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+010.9957:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+011.0076:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+011.0201:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+011.0352:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+011.0468:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+011.0579:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+011.0701:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.0824:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+011.0977:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+011.1097:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+011.1208:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+011.1372:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.1551:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.1703:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+011.1846:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+011.1963:1: Info: global: gyroinfo rate = 0.1289 ratelimit = 5.000
+011.2068:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+011.2184:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+011.2528:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.2659:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+011.2767:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.2878:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+011.2994:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+011.3112:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+011.3213:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.3358:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+011.3482:1: Info: global: gyroinfo rate = 0.1250 ratelimit = 5.000
+011.3595:1: Info: global: gyroinfo rate = 0.1250 ratelimit = 5.000
+011.3768:1: Info: global: gyroinfo rate = -0.1133 ratelimit = 5.000
+011.3876:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.3987:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.4112:1: Info: global: gyroinfo rate = 0.07031 ratelimit = 5.000
+011.4288:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+011.4402:1: Info: global: gyroinfo rate = -0.1133 ratelimit = 5.000
+011.4522:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+011.4646:1: Info: global: gyroinfo rate = -0.1133 ratelimit = 5.000
+011.4782:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+011.4891:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+011.5002:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+011.5134:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.5249:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.5367:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.5464:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+011.5587:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.5731:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.5910:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+011.6095:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+011.6238:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+011.6408:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+011.6515:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.6617:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.6781:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+011.6907:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+011.7048:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.7170:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.7317:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+011.7427:1: Info: global: gyroinfo rate = 0.1250 ratelimit = 5.000
+011.7534:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+011.7656:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+011.7764:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.7879:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.7993:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+011.8145:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.8247:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+011.8391:1: Info: global: gyroinfo rate = 0.1250 ratelimit = 5.000
+011.8507:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.8602:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.8701:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.9013:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.9379:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+011.9573:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.9713:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+011.9887:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+012.0021:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+012.0171:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+012.0310:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+012.0459:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+012.0599:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+012.0790:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+012.1195:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+012.1356:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+012.1470:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+012.1573:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+012.1772:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+012.1901:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+012.1948:1: Info: global: Entering Autonomous Mode
+012.1953:1: Info: global:     Automode Number: 0
+012.1957:1: Info: global:     Automode Name: Center Four Note-fast
+012.1963:1: Info: global:     Alliance: BLUE
+012.1968:1: Info: global:     Location: 3
+012.1972:1: Info: global:     GameData: ''
+012.1976:1: Info: global:     EventName: 
+012.2020:1: Info: global:     MatchType: NONE
+012.2027:1: Info: global:     MatchNumber: 0
+012.2039:1: Info: global:     MatchTime: 14.9830
+012.2044:1: Info: global:     FMS Attached: NO
+012.2050:1: Info: global: changing robot loop type: Disabled -> Autonomous
+012.2555:1: Debug: actions: 142:starting action: 
+                   actions: 142: Sequence [
+                   actions:     169: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:         Start2Shoot4ActionFast
+                   actions:     ]
+                   actions: ]
+012.2583:1: Debug: actions: 169:starting action: 
+                   actions: 169: DispatchAction, Allegro2024RobotSubsystem, BLOCKING  [
+                   actions:     Start2Shoot4ActionFast
+                   actions: ]
+012.2611:1: Debug: actions: 143:starting action: Start2Shoot4ActionFast
+012.2703:1: Debug: actions: 156:starting action: 156: ManualShootAction subwoofer-center-low
+012.2723:1: Debug: actions: 157:starting action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=5.0 velthresh=5.0
+012.3173:1: Debug: actions: 158:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+012.3568:1: Debug: actions: 159:starting action: 159: MCVelocityAction (intake-shooter1), target = 65.0
+012.3729:1: Debug: actions: 160:starting action: 160: MCVelocityAction (intake-shooter2), target = 65.0
+012.5283:1: Info: global: gyroinfo rate = 0.04297 ratelimit = 5.000
+012.5454:1: Info: global: gyroinfo rate = 0.09766 ratelimit = 5.000
+012.5606:1: Info: global: gyroinfo rate = -0.2070 ratelimit = 5.000
+012.5784:1: Info: global: gyroinfo rate = 0.01172 ratelimit = 5.000
+012.5965:1: Info: global: gyroinfo rate = 0.1289 ratelimit = 5.000
+012.6138:1: Info: global: gyroinfo rate = -0.07422 ratelimit = 5.000
+012.6280:1: Info: global: gyroinfo rate = 0.07422 ratelimit = 5.000
+012.6438:1: Info: global: gyroinfo rate = -0.1445 ratelimit = 5.000
+012.6848:1: Info: global: gyroinfo rate = 0.2969 ratelimit = 5.000
+012.7013:1: Info: global: gyroinfo rate = -0.1563 ratelimit = 5.000
+012.7187:1: Info: global: gyroinfo rate = 0.04688 ratelimit = 5.000
+012.7313:1: Info: global: gyroinfo rate = 0.1445 ratelimit = 5.000
+012.7464:1: Info: global: gyroinfo rate = -0.1953 ratelimit = 5.000
+012.7615:1: Info: global: gyroinfo rate = -0.06641 ratelimit = 5.000
+012.7751:1: Info: global: gyroinfo rate = 0.1250 ratelimit = 5.000
+012.7889:1: Info: global: gyroinfo rate = 0.1094 ratelimit = 5.000
+012.8041:1: Info: global: gyroinfo rate = -0.09375 ratelimit = 5.000
+012.8203:1: Info: global: gyroinfo rate = -0.2031 ratelimit = 5.000
+012.8350:1: Info: global: gyroinfo rate = 0.08203 ratelimit = 5.000
+012.8469:1: Info: global: gyroinfo rate = -0.07813 ratelimit = 5.000
+012.8603:1: Info: global: gyroinfo rate = -0.01563 ratelimit = 5.000
+012.8748:1: Info: global: gyroinfo rate = 0.08594 ratelimit = 5.000
+012.8874:1: Info: global: gyroinfo rate = 0.08203 ratelimit = 5.000
+012.8996:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+012.9201:1: Info: global: gyroinfo rate = 0.07813 ratelimit = 5.000
+012.9537:1: Info: global: gyroinfo rate = 0.01563 ratelimit = 5.000
+012.9669:1: Info: global: gyroinfo rate = -0.06250 ratelimit = 5.000
+012.9806:1: Info: global: gyroinfo rate = -0.2227 ratelimit = 5.000
+012.9927:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+013.0072:1: Info: global: gyroinfo rate = 0.1602 ratelimit = 5.000
+013.0202:1: Info: global: gyroinfo rate = 0.3320 ratelimit = 5.000
+013.0327:1: Info: global: gyroinfo rate = -0.2969 ratelimit = 5.000
+013.0480:1: Info: global: gyroinfo rate = -0.2188 ratelimit = 5.000
+013.0673:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+013.0797:1: Info: global: gyroinfo rate = 0.1992 ratelimit = 5.000
+013.0941:1: Info: global: gyroinfo rate = -0.2344 ratelimit = 5.000
+013.1069:1: Info: global: gyroinfo rate = -0.06250 ratelimit = 5.000
+013.1198:1: Info: global: gyroinfo rate = -0.1875 ratelimit = 5.000
+013.1347:1: Info: global: gyroinfo rate = -0.003906 ratelimit = 5.000
+013.1494:1: Info: global: gyroinfo rate = -0.08203 ratelimit = 5.000
+013.1634:1: Info: global: gyroinfo rate = 0.2227 ratelimit = 5.000
+013.1820:1: Info: global: gyroinfo rate = -0.2227 ratelimit = 5.000
+013.1957:1: Info: global: gyroinfo rate = -0.02344 ratelimit = 5.000
+013.2088:1: Info: global: gyroinfo rate = -0.1133 ratelimit = 5.000
+013.2197:1: Info: global: gyroinfo rate = 0.2617 ratelimit = 5.000
+013.2319:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+013.2481:1: Info: global: gyroinfo rate = -0.1328 ratelimit = 5.000
+013.2588:1: Info: global: gyroinfo rate = -0.2305 ratelimit = 5.000
+013.2730:1: Info: global: gyroinfo rate = 0.09375 ratelimit = 5.000
+013.2903:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+013.2997:1: Debug: actions: 157:completing action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=5.0 velthresh=5.0
+013.3048:1: Info: global: gyroinfo rate = -0.1133 ratelimit = 5.000
+013.3166:1: Info: global: gyroinfo rate = -0.1641 ratelimit = 5.000
+013.3290:1: Info: global: gyroinfo rate = -0.2383 ratelimit = 5.000
+013.3415:1: Info: global: gyroinfo rate = 0.03125 ratelimit = 5.000
+013.3573:1: Info: global: gyroinfo rate = -0.06250 ratelimit = 5.000
+013.3688:1: Info: global: gyroinfo rate = -0.08594 ratelimit = 5.000
+013.3811:1: Info: global: gyroinfo rate = 0.1484 ratelimit = 5.000
+013.4042:1: Debug: actions: 158:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+013.4080:1: Info: global: gyroinfo rate = -0.08984 ratelimit = 5.000
+013.4182:1: Debug: global: shot:  tilt = 4.755 updown = 34.93 shooter1 = 65.86 shooter2 = 67.12
+013.4190:1: Debug: actions: 161:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+013.4246:1: Info: global: gyroinfo rate = 0.1758 ratelimit = 5.000
+013.4346:1: Debug: global: shot/2:  tilt = 4.731 updown = 34.93 shooter1 = 64.49 shooter2 = 64.64
+013.4390:1: Info: global: gyroinfo rate = 0.4297 ratelimit = 5.000
+013.4505:1: Debug: global: shot/2:  tilt = 4.691 updown = 34.91 shooter1 = 65.56 shooter2 = 65.04
+013.4545:1: Info: global: gyroinfo rate = -0.5156 ratelimit = 5.000
+013.4653:1: Debug: global: shot/2:  tilt = 4.691 updown = 34.91 shooter1 = 64.80 shooter2 = 67.60
+013.4692:1: Info: global: gyroinfo rate = 0.09375 ratelimit = 5.000
+013.4789:1: Debug: global: shot/2:  tilt = 4.715 updown = 34.95 shooter1 = 65.07 shooter2 = 66.70
+013.4824:1: Info: global: gyroinfo rate = -0.2539 ratelimit = 5.000
+013.4914:1: Debug: global: shot/2:  tilt = 4.811 updown = 34.95 shooter1 = 66.02 shooter2 = 65.45
+013.4961:1: Info: global: gyroinfo rate = 0.4648 ratelimit = 5.000
+013.5111:1: Debug: global: shot/2:  tilt = 4.875 updown = 34.96 shooter1 = 65.38 shooter2 = 66.85
+013.5152:1: Info: global: gyroinfo rate = -0.08984 ratelimit = 5.000
+013.5257:1: Debug: global: shot/2:  tilt = 4.899 updown = 34.91 shooter1 = 56.46 shooter2 = 55.70
+013.5297:1: Info: global: gyroinfo rate = -0.6367 ratelimit = 5.000
+013.5391:1: Debug: global: shot/2:  tilt = 4.930 updown = 34.90 shooter1 = 51.95 shooter2 = 51.22
+013.5430:1: Info: global: gyroinfo rate = -0.7891 ratelimit = 5.000
+013.5552:1: Debug: global: shot/2:  tilt = 4.875 updown = 34.95 shooter1 = 49.45 shooter2 = 49.31
+013.5585:1: Info: global: gyroinfo rate = -0.2773 ratelimit = 5.000
+013.5695:1: Debug: global: shot/2:  tilt = 4.859 updown = 34.99 shooter1 = 49.70 shooter2 = 50.54
+013.5733:1: Info: global: gyroinfo rate = 1.816 ratelimit = 5.000
+013.5814:1: Debug: global: shot/2:  tilt = 4.851 updown = 34.96 shooter1 = 52.28 shooter2 = 53.26
+013.5864:1: Info: global: gyroinfo rate = 0.8945 ratelimit = 5.000
+013.5958:1: Debug: global: shot/2:  tilt = 4.883 updown = 34.94 shooter1 = 52.76 shooter2 = 54.24
+013.6002:1: Info: global: gyroinfo rate = -1.215 ratelimit = 5.000
+013.6104:1: Debug: global: shot/2:  tilt = 4.875 updown = 34.94 shooter1 = 55.73 shooter2 = 56.82
+013.6144:1: Info: global: gyroinfo rate = -0.8906 ratelimit = 5.000
+013.6252:1: Debug: global: shot/2:  tilt = 4.843 updown = 34.97 shooter1 = 55.65 shooter2 = 56.58
+013.6299:1: Info: global: gyroinfo rate = 0.8203 ratelimit = 5.000
+013.6461:1: Debug: global: shot/2:  tilt = 4.843 updown = 34.95 shooter1 = 58.11 shooter2 = 59.68
+013.6511:1: Info: global: gyroinfo rate = 0.2656 ratelimit = 5.000
+013.6640:1: Debug: global: shot/2:  tilt = 4.835 updown = 34.95 shooter1 = 59.53 shooter2 = 62.94
+013.6683:1: Info: global: gyroinfo rate = 0.1133 ratelimit = 5.000
+013.6769:1: Debug: global: shot/2:  tilt = 4.827 updown = 34.95 shooter1 = 62.67 shooter2 = 62.43
+013.6807:1: Info: global: gyroinfo rate = -0.04297 ratelimit = 5.000
+013.6907:1: Debug: global: shot/2:  tilt = 4.827 updown = 34.95 shooter1 = 63.04 shooter2 = 65.66
+013.6948:1: Info: global: gyroinfo rate = -0.1797 ratelimit = 5.000
+013.7059:1: Debug: global: shot/2:  tilt = 4.827 updown = 34.95 shooter1 = 64.74 shooter2 = 65.09
+013.7095:1: Info: global: gyroinfo rate = -0.1406 ratelimit = 5.000
+013.7183:1: Debug: global: shot/2:  tilt = 4.827 updown = 34.95 shooter1 = 65.26 shooter2 = 66.47
+013.7214:1: Info: global: gyroinfo rate = 0.3828 ratelimit = 5.000
+013.7320:1: Debug: global: shot/2:  tilt = 4.835 updown = 34.95 shooter1 = 66.29 shooter2 = 66.85
+013.7332:1: Debug: actions: 161:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+013.7376:1: Info: global: gyroinfo rate = 0.1094 ratelimit = 5.000
+013.7470:1: Debug: global: shot/2:  tilt = 4.851 updown = 34.97 shooter1 = 66.64 shooter2 = 68.77
+013.7487:1: Debug: actions: 156:completing action: 156: ManualShootAction subwoofer-center-low
+013.7495:1: Info: global:  duration = 1.477
+013.7534:1: Info: global: gyroinfo rate = -0.4023 ratelimit = 5.000
+013.7648:1: Debug: actions: 159:canceling action: 159: MCVelocityAction (intake-shooter1), target = 65.0
+013.7654:1: Debug: actions: 160:canceling action: 160: MCVelocityAction (intake-shooter2), target = 65.0
+013.7664:1: Debug: actions: 147:starting action: StartCollectAction
+013.7671:1: Debug: actions: 152:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+013.7702:1: Debug: actions: 152:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+013.7729:1: Info: global: pos < stow pos = 34.97 stow = 118.0
+013.7742:1: Debug: actions: 217:starting action: MCMotionMagicAction (intake-tilt) target=18.03018824 posthresh=3.0 velthresh=1.0
+013.7764:1: Info: global: automode: Shoot1 -> Delay
+013.7927:1: Info: global: gyroinfo rate = 0.1992 ratelimit = 5.000
+013.8078:1: Info: global: gyroinfo rate = -0.1875 ratelimit = 5.000
+013.8311:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+013.8500:1: Info: global: gyroinfo rate = 0.3984 ratelimit = 5.000
+013.8603:1: Info: global: gyroinfo rate = -0.1406 ratelimit = 5.000
+013.8778:1: Info: global: gyroinfo rate = 0.2578 ratelimit = 5.000
+013.8908:1: Info: global: gyroinfo rate = -0.01563 ratelimit = 5.000
+013.9041:1: Info: global: gyroinfo rate = -0.1055 ratelimit = 5.000
+013.9232:1: Info: global: gyroinfo rate = 0.2148 ratelimit = 5.000
+013.9381:1: Info: global: gyroinfo rate = 0.05859 ratelimit = 5.000
+013.9548:1: Info: global: gyroinfo rate = -0.01172 ratelimit = 5.000
+013.9695:1: Info: global: gyroinfo rate = -0.3906 ratelimit = 5.000
+013.9833:1: Info: global: gyroinfo rate = 0.3164 ratelimit = 5.000
+013.9949:1: Info: global: gyroinfo rate = 0.2305 ratelimit = 5.000
+014.0062:1: Info: global: gyroinfo rate = -0.01563 ratelimit = 5.000
+014.0177:1: Info: global: gyroinfo rate = -0.1328 ratelimit = 5.000
+014.0296:1: Info: global: gyroinfo rate = 0.1211 ratelimit = 5.000
+014.0411:1: Info: global: gyroinfo rate = -0.1602 ratelimit = 5.000
+014.0532:1: Info: global: gyroinfo rate = 0.1094 ratelimit = 5.000
+014.0648:1: Info: global: gyroinfo rate = 0.2031 ratelimit = 5.000
+014.0791:1: Info: global: gyroinfo rate = -0.02734 ratelimit = 5.000
+014.0909:1: Info: global: gyroinfo rate = -0.1172 ratelimit = 5.000
+014.1013:1: Info: global: gyroinfo rate = 0.1211 ratelimit = 5.000
+014.1138:1: Info: global: gyroinfo rate = -0.02344 ratelimit = 5.000
+014.1298:1: Info: global: gyroinfo rate = 0.1641 ratelimit = 5.000
+014.1445:1: Info: global: gyroinfo rate = -0.1055 ratelimit = 5.000
+014.1562:1: Info: global: gyroinfo rate = 0.07422 ratelimit = 5.000
+014.1673:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+014.1784:1: Info: global: gyroinfo rate = -0.06641 ratelimit = 5.000
+014.1930:1: Info: global: gyroinfo rate = 0.1055 ratelimit = 5.000
+014.2075:1: Info: global: gyroinfo rate = 0.1211 ratelimit = 5.000
+014.2148:1: Debug: actions: 217:completing action: MCMotionMagicAction (intake-tilt) target=18.03018824 posthresh=3.0 velthresh=1.0
+014.2188:1: Info: global: gyroinfo rate = -0.1484 ratelimit = 5.000
+014.2261:1: Debug: actions: 154:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+014.2283:1: Debug: actions: 155:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+014.2303:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+014.2341:1: Info: global: gyroinfo rate = 0.07031 ratelimit = 5.000
+014.2471:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+014.2613:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+014.2749:1: Info: global: gyroinfo rate = 0.05859 ratelimit = 5.000
+014.2913:1: Info: global: gyroinfo rate = 0.08203 ratelimit = 5.000
+014.3026:1: Info: global: gyroinfo rate = -0.07031 ratelimit = 5.000
+014.3141:1: Info: global: gyroinfo rate = 0.01953 ratelimit = 5.000
+014.3247:1: Info: global: gyroinfo rate = 0.1680 ratelimit = 5.000
+014.3422:1: Info: global: gyroinfo rate = 0.01172 ratelimit = 5.000
+014.3635:1: Info: global: gyroinfo rate = 0.1914 ratelimit = 5.000
+014.4111:1: Debug: actions: 164:starting action: SwerveHolonomicPathFollower S2S4-P3
+014.4136:1: Info: global:  SwerveHolonomicPathFollower: Set Initial Pose  = 1.434 5.555 0.0
+014.4140:1: Info: global: automode: Delay -> Path1
+014.4433:1: Info: global: gyroinfo rate = -0.03125 ratelimit = 5.000
+014.4765:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+014.5079:1: Info: global: gyroinfo rate = 0.02344 ratelimit = 5.000
+014.5497:1: Info: global: gyroinfo rate = 0.05469 ratelimit = 5.000
+014.5713:1: Info: global: gyroinfo rate = 0.4219 ratelimit = 5.000
+014.5909:1: Info: global: gyroinfo rate = -0.1523 ratelimit = 5.000
+014.6066:1: Info: global: gyroinfo rate = -0.01953 ratelimit = 5.000
+014.6242:1: Info: global: gyroinfo rate = -0.4492 ratelimit = 5.000
+014.6439:1: Info: global: gyroinfo rate = 0.3242 ratelimit = 5.000
+014.6571:1: Info: global: gyroinfo rate = 0.4102 ratelimit = 5.000
+014.6755:1: Info: global: gyroinfo rate = 0.4102 ratelimit = 5.000
+014.6890:1: Info: global: gyroinfo rate = 0.3828 ratelimit = 5.000
+014.7061:1: Info: global: gyroinfo rate = 0.5469 ratelimit = 5.000
+014.7193:1: Info: global: gyroinfo rate = 0.2813 ratelimit = 5.000
+014.7398:1: Info: global: gyroinfo rate = 0.5781 ratelimit = 5.000
+014.7591:1: Info: global: gyroinfo rate = 0.7539 ratelimit = 5.000
+014.7739:1: Info: global: gyroinfo rate = 0.9531 ratelimit = 5.000
+014.7870:1: Info: global: gyroinfo rate = 1.051 ratelimit = 5.000
+014.8013:1: Info: global: gyroinfo rate = 1.094 ratelimit = 5.000
+014.8167:1: Info: global: gyroinfo rate = 1.586 ratelimit = 5.000
+014.8285:1: Info: global: gyroinfo rate = 1.152 ratelimit = 5.000
+014.8422:1: Info: global: gyroinfo rate = 1.922 ratelimit = 5.000
+014.8551:1: Info: global: gyroinfo rate = 2.586 ratelimit = 5.000
+014.8661:1: Info: global: gyroinfo rate = 1.055 ratelimit = 5.000
+014.8785:1: Info: global: gyroinfo rate = 1.742 ratelimit = 5.000
+014.8913:1: Info: global: gyroinfo rate = 1.848 ratelimit = 5.000
+014.9061:1: Info: global: gyroinfo rate = 1.824 ratelimit = 5.000
+014.9244:1: Info: global: gyroinfo rate = 3.051 ratelimit = 5.000
+014.9372:1: Info: global: gyroinfo rate = 2.344 ratelimit = 5.000
+014.9470:1: Debug: actions: 155:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+014.9529:1: Info: global: gyroinfo rate = 2.180 ratelimit = 5.000
+014.9716:1: Info: global: gyroinfo rate = 2.090 ratelimit = 5.000
+014.9847:1: Info: global: gyroinfo rate = 3.438 ratelimit = 5.000
+014.9985:1: Info: global: gyroinfo rate = 2.445 ratelimit = 5.000
+015.0111:1: Info: global: gyroinfo rate = 3.082 ratelimit = 5.000
+015.0272:1: Info: global: gyroinfo rate = 2.758 ratelimit = 5.000
+015.0412:1: Info: global: gyroinfo rate = 2.930 ratelimit = 5.000
+015.0532:1: Info: global: gyroinfo rate = 2.547 ratelimit = 5.000
+015.0653:1: Info: global: gyroinfo rate = 2.707 ratelimit = 5.000
+015.0763:1: Info: global: gyroinfo rate = 3.211 ratelimit = 5.000
+015.0892:1: Info: global: gyroinfo rate = 3.363 ratelimit = 5.000
+015.1011:1: Info: global: gyroinfo rate = 3.449 ratelimit = 5.000
+015.1128:1: Info: global: gyroinfo rate = 4.262 ratelimit = 5.000
+015.1343:1: Info: global: gyroinfo rate = 3.129 ratelimit = 5.000
+015.1477:1: Info: global: gyroinfo rate = 3.832 ratelimit = 5.000
+015.1597:1: Info: global: gyroinfo rate = 4.172 ratelimit = 5.000
+015.1724:1: Info: global: gyroinfo rate = 3.813 ratelimit = 5.000
+015.1862:1: Info: global: gyroinfo rate = 4.137 ratelimit = 5.000
+015.2051:1: Info: global: gyroinfo rate = 3.723 ratelimit = 5.000
+015.2170:1: Info: global: gyroinfo rate = 3.270 ratelimit = 5.000
+015.2301:1: Info: global: gyroinfo rate = 3.516 ratelimit = 5.000
+015.2482:1: Info: global: gyroinfo rate = 2.613 ratelimit = 5.000
+015.2650:1: Info: global: gyroinfo rate = 4.031 ratelimit = 5.000
+015.2781:1: Info: global: gyroinfo rate = 3.480 ratelimit = 5.000
+015.2906:1: Info: global: gyroinfo rate = 2.969 ratelimit = 5.000
+015.3058:1: Info: global: gyroinfo rate = 3.180 ratelimit = 5.000
+015.3185:1: Info: global: gyroinfo rate = 2.398 ratelimit = 5.000
+015.3317:1: Info: global: gyroinfo rate = 2.059 ratelimit = 5.000
+015.3464:1: Info: global: gyroinfo rate = 1.969 ratelimit = 5.000
+015.3592:1: Info: global: gyroinfo rate = 1.645 ratelimit = 5.000
+015.3721:1: Debug: intake-shooter: state changed: Moving ->WaitingForCollect
+015.3772:1: Info: global: gyroinfo rate = 0.5664 ratelimit = 5.000
+015.4381:1: Info: global: gyroinfo rate = -6.746 ratelimit = 5.000
+015.4914:1: Info: global: gyroinfo rate = -8.512 ratelimit = 5.000
+015.5032:1: Debug: actions: 153:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+015.5039:1: Debug: actions: 153:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+015.5047:1: Debug: actions: 148:starting action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=1.0 velthresh=1.0
+015.5127:1: Debug: actions: 154:canceling action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+015.5221:1: Debug: actions: 149:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=1.0 velthresh=1.0
+015.5241:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+015.5308:1: Info: global: gyroinfo rate = -8.109 ratelimit = 5.000
+015.5453:1: Info: global: gyroinfo rate = -9.496 ratelimit = 5.000
+015.5669:1: Info: global: gyroinfo rate = -10.61 ratelimit = 5.000
+015.5785:1: Info: global: gyroinfo rate = -10.48 ratelimit = 5.000
+015.5921:1: Info: global: gyroinfo rate = -8.586 ratelimit = 5.000
+015.6041:1: Info: global: gyroinfo rate = -5.809 ratelimit = 5.000
+015.6168:1: Info: global: gyroinfo rate = -4.605 ratelimit = 5.000
+015.6290:1: Info: global: gyroinfo rate = -3.020 ratelimit = 5.000
+015.6408:1: Info: global: gyroinfo rate = -1.695 ratelimit = 5.000
+015.6577:1: Info: global: gyroinfo rate = -0.5781 ratelimit = 5.000
+015.6711:1: Info: global: gyroinfo rate = 0.1758 ratelimit = 5.000
+015.6825:1: Info: global: gyroinfo rate = 0.3633 ratelimit = 5.000
+015.6950:1: Info: global: gyroinfo rate = 0.3750 ratelimit = 5.000
+015.7078:1: Info: global: gyroinfo rate = 0.3359 ratelimit = 5.000
+015.7210:1: Info: global: gyroinfo rate = 0.1992 ratelimit = 5.000
+015.7338:1: Info: global: gyroinfo rate = -1.168 ratelimit = 5.000
+015.7509:1: Info: global: gyroinfo rate = -1.430 ratelimit = 5.000
+015.7743:1: Info: global: gyroinfo rate = -2.242 ratelimit = 5.000
+015.7881:1: Info: global: gyroinfo rate = -1.906 ratelimit = 5.000
+015.7995:1: Info: global: gyroinfo rate = -1.176 ratelimit = 5.000
+015.8137:1: Info: global: gyroinfo rate = -1.664 ratelimit = 5.000
+015.8213:1: Debug: actions: 164:completing action: SwerveHolonomicPathFollower S2S4-P3
+015.8224:1: Info: global: finished path'S2S4-P3' pose = 2.572 5.570 0.1
+015.8255:1: Info: global: gyroinfo rate = -1.172 ratelimit = 5.000
+015.8299:1: Info: global: Changed vision parameters to Multi Far
+015.8464:1: Debug: actions: 165:starting action: SwerveHolonomicPathFollower S2S4-P4
+015.8471:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+015.8474:1: Info: global: automode: Path1 -> Path2
+015.8545:1: Info: global: gyroinfo rate = -1.477 ratelimit = 5.000
+015.8703:1: Info: global: gyroinfo rate = -0.9727 ratelimit = 5.000
+015.8864:1: Info: global: gyroinfo rate = -0.7930 ratelimit = 5.000
+015.8989:1: Info: global: gyroinfo rate = -1.523 ratelimit = 5.000
+015.9120:1: Info: global: gyroinfo rate = -1.141 ratelimit = 5.000
+015.9264:1: Info: global: gyroinfo rate = -0.8945 ratelimit = 5.000
+015.9398:1: Info: global: gyroinfo rate = -1.047 ratelimit = 5.000
+015.9525:1: Info: global: gyroinfo rate = -0.1094 ratelimit = 5.000
+015.9655:1: Info: global: gyroinfo rate = 0.3945 ratelimit = 5.000
+015.9844:1: Info: global: gyroinfo rate = -0.2969 ratelimit = 5.000
+015.9977:1: Info: global: gyroinfo rate = 0.1367 ratelimit = 5.000
+016.0165:1: Info: global: gyroinfo rate = -0.6641 ratelimit = 5.000
+016.0299:1: Info: global: gyroinfo rate = -0.5234 ratelimit = 5.000
+016.0433:1: Info: global: gyroinfo rate = -0.2695 ratelimit = 5.000
+016.0583:1: Info: global: gyroinfo rate = 0.4570 ratelimit = 5.000
+016.0749:1: Info: global: gyroinfo rate = 0.8750 ratelimit = 5.000
+016.0880:1: Info: global: gyroinfo rate = 0.9648 ratelimit = 5.000
+016.0974:1: Debug: actions: 149:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=1.0 velthresh=1.0
+016.1016:1: Info: global: gyroinfo rate = 1.387 ratelimit = 5.000
+016.1133:1: Info: global: gyroinfo rate = 0.9219 ratelimit = 5.000
+016.1282:1: Info: global: gyroinfo rate = 0.8047 ratelimit = 5.000
+016.1402:1: Info: global: gyroinfo rate = 0.02734 ratelimit = 5.000
+016.1558:1: Info: global: gyroinfo rate = -0.2227 ratelimit = 5.000
+016.1703:1: Info: global: gyroinfo rate = -0.1953 ratelimit = 5.000
+016.1896:1: Info: global: gyroinfo rate = -0.2148 ratelimit = 5.000
+016.2055:1: Info: global: gyroinfo rate = -0.2305 ratelimit = 5.000
+016.2166:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+016.2318:1: Info: global: gyroinfo rate = -0.4609 ratelimit = 5.000
+016.2526:1: Info: global: gyroinfo rate = -1.605 ratelimit = 5.000
+016.2649:1: Info: global: gyroinfo rate = -2.270 ratelimit = 5.000
+016.2773:1: Info: global: gyroinfo rate = -2.922 ratelimit = 5.000
+016.2928:1: Info: global: gyroinfo rate = -2.652 ratelimit = 5.000
+016.3036:1: Info: global: gyroinfo rate = -2.121 ratelimit = 5.000
+016.3148:1: Debug: actions: 148:completing action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=1.0 velthresh=1.0
+016.3194:1: Info: global: gyroinfo rate = -1.453 ratelimit = 5.000
+016.3273:1: Debug: actions: 147:completing action: StartCollectAction
+016.3316:1: Info: global: gyroinfo rate = -0.8438 ratelimit = 5.000
+016.3398:1: Debug: actions: 156:starting action: 156: ManualShootAction subwoofer-center-low
+016.3404:1: Debug: actions: 157:starting action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=5.0 velthresh=5.0
+016.3430:1: Debug: actions: 158:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+016.3449:1: Debug: actions: 159:starting action: 159: MCVelocityAction (intake-shooter1), target = 65.0
+016.3473:1: Debug: actions: 160:starting action: 160: MCVelocityAction (intake-shooter2), target = 65.0
+016.3486:1: Info: global: automode: Path2 -> Shoot2
+016.3494:1: Debug: actions: 158:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+016.3548:1: Info: global: gyroinfo rate = 0.8164 ratelimit = 5.000
+016.3725:1: Info: global: gyroinfo rate = 0.7070 ratelimit = 5.000
+016.3822:1: Debug: actions: 157:completing action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=5.0 velthresh=5.0
+016.3904:1: Info: global: gyroinfo rate = 1.047 ratelimit = 5.000
+016.4033:1: Info: global: gyroinfo rate = 1.137 ratelimit = 5.000
+016.4158:1: Info: global: gyroinfo rate = 0.03516 ratelimit = 5.000
+016.4286:1: Info: global: gyroinfo rate = -0.03516 ratelimit = 5.000
+016.4389:1: Info: global: gyroinfo rate = -0.1914 ratelimit = 5.000
+016.4514:1: Info: global: gyroinfo rate = -0.2734 ratelimit = 5.000
+016.4708:1: Info: global: gyroinfo rate = -0.5156 ratelimit = 5.000
+016.4982:1: Info: global: gyroinfo rate = 1.027 ratelimit = 5.000
+016.5327:1: Info: global: gyroinfo rate = 1.883 ratelimit = 5.000
+016.5597:1: Info: global: gyroinfo rate = 2.805 ratelimit = 5.000
+016.5852:1: Info: global: gyroinfo rate = 3.895 ratelimit = 5.000
+016.6071:1: Info: global: gyroinfo rate = 1.621 ratelimit = 5.000
+016.6215:1: Info: global: gyroinfo rate = 0.7813 ratelimit = 5.000
+016.6405:1: Info: global: gyroinfo rate = 0.6289 ratelimit = 5.000
+016.6621:1: Info: global: gyroinfo rate = 0.5898 ratelimit = 5.000
+016.6772:1: Info: global: gyroinfo rate = -0.2266 ratelimit = 5.000
+016.6938:1: Info: global: gyroinfo rate = -0.7188 ratelimit = 5.000
+016.7117:1: Info: global: gyroinfo rate = -0.7422 ratelimit = 5.000
+016.7279:1: Info: global: gyroinfo rate = -1.473 ratelimit = 5.000
+016.7400:1: Info: global: gyroinfo rate = -1.059 ratelimit = 5.000
+016.7502:1: Info: global: gyroinfo rate = -1.516 ratelimit = 5.000
+016.7630:1: Info: global: gyroinfo rate = -0.9375 ratelimit = 5.000
+016.7748:1: Info: global: gyroinfo rate = -1.359 ratelimit = 5.000
+016.7915:1: Info: global: gyroinfo rate = -1.535 ratelimit = 5.000
+016.8026:1: Info: global: gyroinfo rate = 0.05469 ratelimit = 5.000
+016.8142:1: Info: global: gyroinfo rate = -0.3672 ratelimit = 5.000
+016.8272:1: Info: global: gyroinfo rate = -0.9297 ratelimit = 5.000
+016.8415:1: Info: global: gyroinfo rate = -0.2227 ratelimit = 5.000
+016.8543:1: Info: global: gyroinfo rate = -0.3047 ratelimit = 5.000
+016.8654:1: Info: global: gyroinfo rate = -0.007813 ratelimit = 5.000
+016.8764:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+016.8885:1: Info: global: gyroinfo rate = -0.8125 ratelimit = 5.000
+016.9009:1: Info: global: gyroinfo rate = -1.012 ratelimit = 5.000
+016.9143:1: Info: global: gyroinfo rate = -0.1328 ratelimit = 5.000
+016.9262:1: Info: global: gyroinfo rate = -1.320 ratelimit = 5.000
+016.9379:1: Info: global: gyroinfo rate = -1.313 ratelimit = 5.000
+016.9513:1: Info: global: gyroinfo rate = -0.8516 ratelimit = 5.000
+016.9611:1: Info: global: gyroinfo rate = -0.7344 ratelimit = 5.000
+016.9724:1: Info: global: gyroinfo rate = -0.8984 ratelimit = 5.000
+016.9917:1: Info: global: gyroinfo rate = -1.957 ratelimit = 5.000
+017.0098:1: Info: global: gyroinfo rate = -0.9141 ratelimit = 5.000
+017.0246:1: Info: global: gyroinfo rate = -0.5039 ratelimit = 5.000
+017.0401:1: Info: global: gyroinfo rate = -0.3711 ratelimit = 5.000
+017.0611:1: Debug: actions: 165:completing action: SwerveHolonomicPathFollower S2S4-P4
+017.0630:1: Info: global: finished path'S2S4-P4' pose = 1.540 5.540 0.2
+017.0708:1: Info: global: gyroinfo rate = -0.01172 ratelimit = 5.000
+017.0827:1: Debug: global: shot:  tilt = 4.843 updown = 34.96 shooter1 = 62.08 shooter2 = 66.34
+017.0832:1: Debug: actions: 161:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+017.0882:1: Info: global: gyroinfo rate = 0.4336 ratelimit = 5.000
+017.0908:1: Info: global: Changed vision parameters to Multi Near
+017.1002:1: Debug: global: shot/2:  tilt = 4.843 updown = 34.96 shooter1 = 64.61 shooter2 = 65.74
+017.1047:1: Info: global: gyroinfo rate = -1.066 ratelimit = 5.000
+017.1151:1: Debug: global: shot/2:  tilt = 4.843 updown = 34.96 shooter1 = 65.03 shooter2 = 66.73
+017.1246:1: Info: global: gyroinfo rate = -0.007813 ratelimit = 5.000
+017.1341:1: Debug: global: shot/2:  tilt = 4.843 updown = 34.96 shooter1 = 65.78 shooter2 = 66.20
+017.1369:1: Info: global: gyroinfo rate = 0.04297 ratelimit = 5.000
+017.1497:1: Debug: global: shot/2:  tilt = 4.859 updown = 34.96 shooter1 = 65.81 shooter2 = 64.80
+017.1534:1: Info: global: gyroinfo rate = 0.1406 ratelimit = 5.000
+017.1652:1: Debug: global: shot/2:  tilt = 4.859 updown = 34.96 shooter1 = 65.40 shooter2 = 67.23
+017.1685:1: Info: global: gyroinfo rate = -0.4648 ratelimit = 5.000
+017.1788:1: Debug: global: shot/2:  tilt = 4.859 updown = 34.97 shooter1 = 66.21 shooter2 = 66.18
+017.1815:1: Info: global: gyroinfo rate = -0.3359 ratelimit = 5.000
+017.1926:1: Debug: global: shot/2:  tilt = 4.883 updown = 34.97 shooter1 = 55.70 shooter2 = 55.79
+017.1959:1: Info: global: gyroinfo rate = 0.2969 ratelimit = 5.000
+017.2074:1: Debug: global: shot/2:  tilt = 4.883 updown = 34.90 shooter1 = 52.04 shooter2 = 51.35
+017.2103:1: Info: global: gyroinfo rate = -0.9844 ratelimit = 5.000
+017.2204:1: Debug: global: shot/2:  tilt = 4.811 updown = 34.91 shooter1 = 52.12 shooter2 = 52.44
+017.2269:1: Info: global: gyroinfo rate = -0.6523 ratelimit = 5.000
+017.2387:1: Debug: global: shot/2:  tilt = 4.787 updown = 34.98 shooter1 = 52.01 shooter2 = 52.81
+017.2433:1: Info: global: gyroinfo rate = 1.500 ratelimit = 5.000
+017.2603:1: Debug: global: shot/2:  tilt = 4.779 updown = 34.95 shooter1 = 53.30 shooter2 = 56.35
+017.2641:1: Info: global: gyroinfo rate = -0.8477 ratelimit = 5.000
+017.2794:1: Debug: global: shot/2:  tilt = 4.779 updown = 34.93 shooter1 = 55.96 shooter2 = 58.44
+017.2834:1: Info: global: gyroinfo rate = -1.180 ratelimit = 5.000
+017.2944:1: Debug: global: shot/2:  tilt = 4.779 updown = 34.93 shooter1 = 57.98 shooter2 = 59.69
+017.2980:1: Info: global: gyroinfo rate = 0.4922 ratelimit = 5.000
+017.3096:1: Debug: global: shot/2:  tilt = 4.779 updown = 34.94 shooter1 = 58.47 shooter2 = 60.88
+017.3134:1: Info: global: gyroinfo rate = 0.7188 ratelimit = 5.000
+017.3250:1: Debug: global: shot/2:  tilt = 4.795 updown = 34.94 shooter1 = 61.44 shooter2 = 63.49
+017.3284:1: Info: global: gyroinfo rate = -0.1758 ratelimit = 5.000
+017.3454:1: Debug: global: shot/2:  tilt = 4.835 updown = 34.94 shooter1 = 63.51 shooter2 = 64.28
+017.3630:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+017.3785:1: Debug: global: shot/2:  tilt = 4.883 updown = 34.97 shooter1 = 65.62 shooter2 = 66.54
+017.3815:1: Info: global: gyroinfo rate = 0.2148 ratelimit = 5.000
+017.3934:1: Debug: global: shot/2:  tilt = 4.906 updown = 34.97 shooter1 = 66.43 shooter2 = 65.75
+017.3941:1: Debug: actions: 161:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+017.4000:1: Info: global: gyroinfo rate = -0.1758 ratelimit = 5.000
+017.4144:1: Debug: global: shot/2:  tilt = 4.906 updown = 34.97 shooter1 = 66.31 shooter2 = 67.86
+017.4159:1: Debug: actions: 156:completing action: 156: ManualShootAction subwoofer-center-low
+017.4169:1: Info: global:  duration = 1.076
+017.4246:1: Info: global: gyroinfo rate = -0.3711 ratelimit = 5.000
+017.4345:1: Debug: actions: 159:canceling action: 159: MCVelocityAction (intake-shooter1), target = 65.0
+017.4350:1: Debug: actions: 160:canceling action: 160: MCVelocityAction (intake-shooter2), target = 65.0
+017.4353:1: Debug: actions: 147:starting action: StartCollectAction
+017.4356:1: Debug: actions: 152:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+017.4406:1: Debug: actions: 152:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+017.4422:1: Info: global: pos < stow pos = 34.96 stow = 118.0
+017.4430:1: Debug: actions: 218:starting action: MCMotionMagicAction (intake-tilt) target=18.035514944 posthresh=3.0 velthresh=1.0
+017.4451:1: Debug: actions: 162:starting action: SwerveHolonomicPathFollower S2S4-P1
+017.4454:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+017.4456:1: Info: global: automode: Shoot2 -> Path3
+017.4524:1: Info: global: gyroinfo rate = -0.003906 ratelimit = 5.000
+017.4673:1: Info: global: gyroinfo rate = 0.4688 ratelimit = 5.000
+017.4802:1: Info: global: gyroinfo rate = -0.2344 ratelimit = 5.000
+017.4958:1: Info: global: gyroinfo rate = 0.5195 ratelimit = 5.000
+017.5107:1: Info: global: gyroinfo rate = 2.023 ratelimit = 5.000
+017.5290:1: Info: global: gyroinfo rate = 2.297 ratelimit = 5.000
+017.5403:1: Info: global: gyroinfo rate = -0.4180 ratelimit = 5.000
+017.5577:1: Info: global: gyroinfo rate = 1.781 ratelimit = 5.000
+017.5765:1: Info: global: gyroinfo rate = 0.7305 ratelimit = 5.000
+017.5934:1: Info: global: gyroinfo rate = 1.227 ratelimit = 5.000
+017.6054:1: Info: global: gyroinfo rate = 2.008 ratelimit = 5.000
+017.6158:1: Info: global: gyroinfo rate = 2.242 ratelimit = 5.000
+017.6280:1: Info: global: gyroinfo rate = 1.680 ratelimit = 5.000
+017.6391:1: Info: global: gyroinfo rate = 1.008 ratelimit = 5.000
+017.6556:1: Info: global: gyroinfo rate = 1.508 ratelimit = 5.000
+017.6690:1: Info: global: gyroinfo rate = 1.695 ratelimit = 5.000
+017.6805:1: Info: global: gyroinfo rate = 0.8516 ratelimit = 5.000
+017.6935:1: Info: global: gyroinfo rate = 0.4258 ratelimit = 5.000
+017.7047:1: Info: global: gyroinfo rate = 0.5508 ratelimit = 5.000
+017.7182:1: Info: global: gyroinfo rate = 1.102 ratelimit = 5.000
+017.7289:1: Info: global: gyroinfo rate = 0.7891 ratelimit = 5.000
+017.7406:1: Info: global: gyroinfo rate = -0.2930 ratelimit = 5.000
+017.7592:1: Info: global: gyroinfo rate = -1.719 ratelimit = 5.000
+017.7707:1: Info: global: gyroinfo rate = -1.613 ratelimit = 5.000
+017.7820:1: Info: global: gyroinfo rate = -2.016 ratelimit = 5.000
+017.7924:1: Info: global: gyroinfo rate = -2.488 ratelimit = 5.000
+017.8138:1: Info: global: gyroinfo rate = -2.625 ratelimit = 5.000
+017.8485:1: Info: global: gyroinfo rate = -2.758 ratelimit = 5.000
+017.8625:1: Info: global: gyroinfo rate = -3.535 ratelimit = 5.000
+017.8723:1: Debug: actions: 218:completing action: MCMotionMagicAction (intake-tilt) target=18.035514944 posthresh=3.0 velthresh=1.0
+017.8760:1: Info: global: gyroinfo rate = -3.754 ratelimit = 5.000
+017.8893:1: Debug: actions: 154:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+017.8915:1: Debug: actions: 155:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+017.8936:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+017.9067:1: Info: global: gyroinfo rate = -5.996 ratelimit = 5.000
+017.9195:1: Info: global: gyroinfo rate = -6.129 ratelimit = 5.000
+017.9306:1: Info: global: gyroinfo rate = -5.594 ratelimit = 5.000
+017.9412:1: Info: global: gyroinfo rate = -5.836 ratelimit = 5.000
+017.9561:1: Info: global: gyroinfo rate = -6.289 ratelimit = 5.000
+017.9705:1: Info: global: gyroinfo rate = -5.902 ratelimit = 5.000
+017.9945:1: Info: global: gyroinfo rate = -6.215 ratelimit = 5.000
+018.0140:1: Info: global: gyroinfo rate = -6.078 ratelimit = 5.000
+018.0297:1: Info: global: gyroinfo rate = -5.906 ratelimit = 5.000
+018.0435:1: Info: global: gyroinfo rate = -5.277 ratelimit = 5.000
+018.0602:1: Info: global: gyroinfo rate = -5.578 ratelimit = 5.000
+018.0735:1: Info: global: gyroinfo rate = -6.887 ratelimit = 5.000
+018.0861:1: Info: global: gyroinfo rate = -6.848 ratelimit = 5.000
+018.0967:1: Info: global: gyroinfo rate = -6.949 ratelimit = 5.000
+018.1088:1: Info: global: gyroinfo rate = -6.797 ratelimit = 5.000
+018.1202:1: Info: global: gyroinfo rate = -6.539 ratelimit = 5.000
+018.1327:1: Info: global: gyroinfo rate = -7.078 ratelimit = 5.000
+018.1453:1: Info: global: gyroinfo rate = -7.371 ratelimit = 5.000
+018.1584:1: Info: global: gyroinfo rate = -6.871 ratelimit = 5.000
+018.1702:1: Info: global: gyroinfo rate = -7.371 ratelimit = 5.000
+018.1834:1: Info: global: gyroinfo rate = -5.832 ratelimit = 5.000
+018.1952:1: Info: global: gyroinfo rate = -4.051 ratelimit = 5.000
+018.2055:1: Info: global: gyroinfo rate = -3.637 ratelimit = 5.000
+018.2171:1: Info: global: gyroinfo rate = -2.477 ratelimit = 5.000
+018.2355:1: Info: global: gyroinfo rate = -1.531 ratelimit = 5.000
+018.2534:1: Info: global: gyroinfo rate = -2.813 ratelimit = 5.000
+018.2651:1: Info: global: gyroinfo rate = -3.094 ratelimit = 5.000
+018.2760:1: Info: global: gyroinfo rate = -4.762 ratelimit = 5.000
+018.2885:1: Info: global: gyroinfo rate = -4.520 ratelimit = 5.000
+018.2987:1: Info: global: gyroinfo rate = -2.680 ratelimit = 5.000
+018.3086:1: Info: global: gyroinfo rate = -3.738 ratelimit = 5.000
+018.3181:1: Info: global: gyroinfo rate = -3.754 ratelimit = 5.000
+018.3279:1: Info: global: gyroinfo rate = -0.3281 ratelimit = 5.000
+018.3377:1: Info: global: gyroinfo rate = 1.598 ratelimit = 5.000
+018.3495:1: Info: global: gyroinfo rate = -2.125 ratelimit = 5.000
+018.3601:1: Info: global: gyroinfo rate = -4.645 ratelimit = 5.000
+018.3715:1: Info: global: gyroinfo rate = -4.008 ratelimit = 5.000
+018.3884:1: Info: global: gyroinfo rate = 7.316 ratelimit = 5.000
+018.3972:1: Info: global: gyroinfo rate = 6.484 ratelimit = 5.000
+018.4095:1: Info: global: gyroinfo rate = 1.820 ratelimit = 5.000
+018.4190:1: Info: global: gyroinfo rate = -1.863 ratelimit = 5.000
+018.4342:1: Info: global: gyroinfo rate = 0.8438 ratelimit = 5.000
+018.4512:1: Info: global: gyroinfo rate = 1.613 ratelimit = 5.000
+018.4683:1: Info: global: gyroinfo rate = 0.5938 ratelimit = 5.000
+018.4800:1: Info: global: gyroinfo rate = -1.879 ratelimit = 5.000
+018.5002:1: Info: global: gyroinfo rate = 16.18 ratelimit = 5.000
+018.5204:1: Info: global: gyroinfo rate = 15.60 ratelimit = 5.000
+018.5382:1: Info: global: gyroinfo rate = 4.117 ratelimit = 5.000
+018.5743:1: Info: global: gyroinfo rate = 8.676 ratelimit = 5.000
+018.5930:1: Info: global: gyroinfo rate = 12.00 ratelimit = 5.000
+018.6065:1: Info: global: gyroinfo rate = 14.90 ratelimit = 5.000
+018.6211:1: Info: global: gyroinfo rate = 12.33 ratelimit = 5.000
+018.6377:1: Info: global: gyroinfo rate = 13.80 ratelimit = 5.000
+018.6493:1: Info: global: gyroinfo rate = 15.75 ratelimit = 5.000
+018.6633:1: Info: global: gyroinfo rate = 14.82 ratelimit = 5.000
+018.6752:1: Info: global: gyroinfo rate = 16.21 ratelimit = 5.000
+018.6960:1: Info: global: gyroinfo rate = 19.77 ratelimit = 5.000
+018.7111:1: Info: global: gyroinfo rate = 18.69 ratelimit = 5.000
+018.7210:1: Info: global: gyroinfo rate = 18.62 ratelimit = 5.000
+018.7326:1: Info: global: gyroinfo rate = 18.51 ratelimit = 5.000
+018.7428:1: Info: global: gyroinfo rate = 14.77 ratelimit = 5.000
+018.7549:1: Info: global: gyroinfo rate = 13.26 ratelimit = 5.000
+018.7674:1: Info: global: gyroinfo rate = 11.91 ratelimit = 5.000
+018.7792:1: Info: global: gyroinfo rate = 11.50 ratelimit = 5.000
+018.7895:1: Info: global: gyroinfo rate = 10.42 ratelimit = 5.000
+018.7990:1: Info: global: gyroinfo rate = 9.078 ratelimit = 5.000
+018.8116:1: Info: global: gyroinfo rate = 8.527 ratelimit = 5.000
+018.8215:1: Info: global: gyroinfo rate = 7.875 ratelimit = 5.000
+018.8316:1: Info: global: gyroinfo rate = 7.887 ratelimit = 5.000
+018.8434:1: Info: global: gyroinfo rate = 4.457 ratelimit = 5.000
+018.8558:1: Info: global: gyroinfo rate = 1.961 ratelimit = 5.000
+018.8650:1: Info: global: gyroinfo rate = 1.008 ratelimit = 5.000
+018.8736:1: Info: global: gyroinfo rate = 0.4180 ratelimit = 5.000
+018.8935:1: Info: global: gyroinfo rate = -0.02734 ratelimit = 5.000
+018.9417:1: Debug: intake-shooter: state changed: Moving ->WaitingForCollect
+018.9488:1: Info: global: gyroinfo rate = -8.172 ratelimit = 5.000
+018.9713:1: Info: global: gyroinfo rate = -6.348 ratelimit = 5.000
+018.9815:1: Info: global: gyroinfo rate = -3.777 ratelimit = 5.000
+018.9917:1: Info: global: gyroinfo rate = -4.289 ratelimit = 5.000
+019.0008:1: Info: global: gyroinfo rate = -4.297 ratelimit = 5.000
+019.0102:1: Info: global: gyroinfo rate = -4.238 ratelimit = 5.000
+019.0211:1: Info: global: gyroinfo rate = -6.094 ratelimit = 5.000
+019.0326:1: Info: global: gyroinfo rate = -5.660 ratelimit = 5.000
+019.0427:1: Info: global: gyroinfo rate = -3.230 ratelimit = 5.000
+019.0508:1: Debug: actions: 153:starting action: MotorEncoderPowerAction intake-feeder power = 0.0
+019.0513:1: Debug: actions: 153:completing action: MotorEncoderPowerAction intake-feeder power = 0.0
+019.0519:1: Debug: actions: 155:canceling action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+019.0527:1: Debug: actions: 148:starting action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=1.0 velthresh=1.0
+019.0598:1: Debug: actions: 154:canceling action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+019.0605:1: Debug: actions: 149:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=1.0 velthresh=1.0
+019.0625:1: Debug: intake-shooter: state changed: WaitingForCollect ->Stowing
+019.0676:1: Info: global: gyroinfo rate = -5.387 ratelimit = 5.000
+019.0776:1: Info: global: gyroinfo rate = -8.668 ratelimit = 5.000
+019.0866:1: Info: global: gyroinfo rate = -9.676 ratelimit = 5.000
+019.1013:1: Info: global: gyroinfo rate = -10.90 ratelimit = 5.000
+019.1117:1: Info: global: gyroinfo rate = -12.88 ratelimit = 5.000
+019.1228:1: Info: global: gyroinfo rate = -13.60 ratelimit = 5.000
+019.1319:1: Info: global: gyroinfo rate = -15.66 ratelimit = 5.000
+019.1446:1: Info: global: gyroinfo rate = -19.80 ratelimit = 5.000
+019.1510:1: Debug: actions: 162:completing action: SwerveHolonomicPathFollower S2S4-P1
+019.1516:1: Info: global: finished path'S2S4-P1' pose = 2.708 6.952 -1.2
+019.1544:1: Info: global: gyroinfo rate = -22.07 ratelimit = 5.000
+019.1574:1: Info: global: Changed vision parameters to Single Far
+019.1600:1: Debug: actions: 163:starting action: SwerveHolonomicPathFollower S2S4-P2
+019.1602:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+019.1604:1: Info: global: automode: Path3 -> Path4
+019.1655:1: Info: global: gyroinfo rate = -23.91 ratelimit = 5.000
+019.1736:1: Info: global: gyroinfo rate = -24.63 ratelimit = 5.000
+019.1837:1: Info: global: gyroinfo rate = -23.94 ratelimit = 5.000
+019.1921:1: Info: global: gyroinfo rate = -23.94 ratelimit = 5.000
+019.2054:1: Info: global: gyroinfo rate = -15.36 ratelimit = 5.000
+019.2154:1: Info: global: gyroinfo rate = -18.21 ratelimit = 5.000
+019.2335:1: Info: global: gyroinfo rate = -14.69 ratelimit = 5.000
+019.2437:1: Info: global: gyroinfo rate = -12.40 ratelimit = 5.000
+019.2531:1: Info: global: gyroinfo rate = -15.69 ratelimit = 5.000
+019.2615:1: Info: global: gyroinfo rate = -15.69 ratelimit = 5.000
+019.2699:1: Info: global: gyroinfo rate = -14.22 ratelimit = 5.000
+019.2785:1: Info: global: gyroinfo rate = -12.60 ratelimit = 5.000
+019.2887:1: Info: global: gyroinfo rate = -13.90 ratelimit = 5.000
+019.2972:1: Info: global: gyroinfo rate = -13.96 ratelimit = 5.000
+019.3099:1: Info: global: gyroinfo rate = -12.62 ratelimit = 5.000
+019.3185:1: Info: global: gyroinfo rate = -11.95 ratelimit = 5.000
+019.3335:1: Info: global: gyroinfo rate = -14.38 ratelimit = 5.000
+019.3428:1: Info: global: gyroinfo rate = -16.03 ratelimit = 5.000
+019.3547:1: Info: global: gyroinfo rate = -16.30 ratelimit = 5.000
+019.3648:1: Info: global: gyroinfo rate = -17.56 ratelimit = 5.000
+019.3752:1: Info: global: gyroinfo rate = -20.04 ratelimit = 5.000
+019.3851:1: Info: global: gyroinfo rate = -21.38 ratelimit = 5.000
+019.3960:1: Info: global: gyroinfo rate = -20.33 ratelimit = 5.000
+019.4065:1: Info: global: gyroinfo rate = -19.47 ratelimit = 5.000
+019.4179:1: Info: global: gyroinfo rate = -21.80 ratelimit = 5.000
+019.4278:1: Info: global: gyroinfo rate = -24.11 ratelimit = 5.000
+019.4401:1: Info: global: gyroinfo rate = -23.45 ratelimit = 5.000
+019.4509:1: Info: global: gyroinfo rate = -21.82 ratelimit = 5.000
+019.4606:1: Info: global: gyroinfo rate = -23.14 ratelimit = 5.000
+019.4732:1: Info: global: gyroinfo rate = -25.42 ratelimit = 5.000
+019.4857:1: Info: global: gyroinfo rate = -22.22 ratelimit = 5.000
+019.5007:1: Info: global: gyroinfo rate = -22.10 ratelimit = 5.000
+019.5112:1: Info: global: gyroinfo rate = -21.47 ratelimit = 5.000
+019.5211:1: Info: global: gyroinfo rate = -20.68 ratelimit = 5.000
+019.5300:1: Info: global: gyroinfo rate = -18.50 ratelimit = 5.000
+019.5422:1: Info: global: gyroinfo rate = -15.71 ratelimit = 5.000
+019.5598:1: Info: global: gyroinfo rate = -12.41 ratelimit = 5.000
+019.5704:1: Info: global: gyroinfo rate = -10.35 ratelimit = 5.000
+019.5783:1: Info: global: gyroinfo rate = -7.813 ratelimit = 5.000
+019.5886:1: Info: global: gyroinfo rate = -5.805 ratelimit = 5.000
+019.5968:1: Info: global: gyroinfo rate = -4.207 ratelimit = 5.000
+019.6049:1: Info: global: gyroinfo rate = -2.613 ratelimit = 5.000
+019.6154:1: Info: global: gyroinfo rate = -0.5234 ratelimit = 5.000
+019.6260:1: Info: global: gyroinfo rate = 2.031 ratelimit = 5.000
+019.6399:1: Info: global: gyroinfo rate = 4.281 ratelimit = 5.000
+019.6524:1: Info: global: gyroinfo rate = 5.324 ratelimit = 5.000
+019.6675:1: Info: global: gyroinfo rate = 6.828 ratelimit = 5.000
+019.6770:1: Info: global: gyroinfo rate = 8.754 ratelimit = 5.000
+019.6869:1: Info: global: gyroinfo rate = 11.52 ratelimit = 5.000
+019.6965:1: Info: global: gyroinfo rate = 13.19 ratelimit = 5.000
+019.7084:1: Info: global: gyroinfo rate = 14.06 ratelimit = 5.000
+019.7174:1: Info: global: gyroinfo rate = 15.41 ratelimit = 5.000
+019.7277:1: Info: global: gyroinfo rate = 16.41 ratelimit = 5.000
+019.7383:1: Info: global: gyroinfo rate = 20.05 ratelimit = 5.000
+019.7656:1: Info: global: gyroinfo rate = 21.76 ratelimit = 5.000
+019.7770:1: Info: global: gyroinfo rate = 27.41 ratelimit = 5.000
+019.7884:1: Info: global: gyroinfo rate = 31.47 ratelimit = 5.000
+019.7957:1: Debug: actions: 148:completing action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=1.0 velthresh=1.0
+019.7987:1: Info: global: gyroinfo rate = 25.11 ratelimit = 5.000
+019.8102:1: Info: global: gyroinfo rate = 22.19 ratelimit = 5.000
+019.8221:1: Info: global: gyroinfo rate = 24.17 ratelimit = 5.000
+019.8325:1: Info: global: gyroinfo rate = 22.71 ratelimit = 5.000
+019.8415:1: Info: global: gyroinfo rate = 19.92 ratelimit = 5.000
+019.8542:1: Info: global: gyroinfo rate = 25.37 ratelimit = 5.000
+019.8638:1: Info: global: gyroinfo rate = 25.87 ratelimit = 5.000
+019.8735:1: Info: global: gyroinfo rate = 24.25 ratelimit = 5.000
+019.8837:1: Info: global: gyroinfo rate = 23.40 ratelimit = 5.000
+019.8949:1: Info: global: gyroinfo rate = 26.58 ratelimit = 5.000
+019.9055:1: Info: global: gyroinfo rate = 27.69 ratelimit = 5.000
+019.9151:1: Info: global: gyroinfo rate = 28.00 ratelimit = 5.000
+019.9268:1: Info: global: gyroinfo rate = 27.97 ratelimit = 5.000
+019.9355:1: Info: global: gyroinfo rate = 28.05 ratelimit = 5.000
+019.9481:1: Info: global: gyroinfo rate = 29.05 ratelimit = 5.000
+019.9599:1: Info: global: gyroinfo rate = 29.64 ratelimit = 5.000
+019.9785:1: Info: global: gyroinfo rate = 27.46 ratelimit = 5.000
+019.9901:1: Info: global: gyroinfo rate = 27.96 ratelimit = 5.000
+019.9997:1: Info: global: gyroinfo rate = 27.57 ratelimit = 5.000
+020.0135:1: Info: global: gyroinfo rate = 23.32 ratelimit = 5.000
+020.0246:1: Info: global: gyroinfo rate = 17.25 ratelimit = 5.000
+020.0373:1: Info: global: gyroinfo rate = 14.20 ratelimit = 5.000
+020.0468:1: Info: global: gyroinfo rate = 14.65 ratelimit = 5.000
+020.0636:1: Info: global: gyroinfo rate = 16.46 ratelimit = 5.000
+020.0737:1: Info: global: gyroinfo rate = 14.62 ratelimit = 5.000
+020.0857:1: Info: global: gyroinfo rate = 14.77 ratelimit = 5.000
+020.0957:1: Info: global: gyroinfo rate = 16.06 ratelimit = 5.000
+020.1059:1: Info: global: gyroinfo rate = 17.87 ratelimit = 5.000
+020.1175:1: Info: global: gyroinfo rate = 18.33 ratelimit = 5.000
+020.1293:1: Info: global: gyroinfo rate = 18.95 ratelimit = 5.000
+020.1386:1: Info: global: gyroinfo rate = 17.81 ratelimit = 5.000
+020.1509:1: Info: global: gyroinfo rate = 15.17 ratelimit = 5.000
+020.1595:1: Info: global: gyroinfo rate = 16.05 ratelimit = 5.000
+020.1724:1: Info: global: gyroinfo rate = 16.70 ratelimit = 5.000
+020.1831:1: Info: global: gyroinfo rate = 12.88 ratelimit = 5.000
+020.1953:1: Info: global: gyroinfo rate = 12.31 ratelimit = 5.000
+020.2091:1: Info: global: gyroinfo rate = 13.07 ratelimit = 5.000
+020.2200:1: Info: global: gyroinfo rate = 10.90 ratelimit = 5.000
+020.2304:1: Info: global: gyroinfo rate = 9.047 ratelimit = 5.000
+020.2405:1: Info: global: gyroinfo rate = 8.355 ratelimit = 5.000
+020.2530:1: Info: global: gyroinfo rate = 6.871 ratelimit = 5.000
+020.2634:1: Info: global: gyroinfo rate = 4.168 ratelimit = 5.000
+020.2767:1: Info: global: gyroinfo rate = 1.762 ratelimit = 5.000
+020.2871:1: Info: global: gyroinfo rate = 0.8555 ratelimit = 5.000
+020.2962:1: Info: global: gyroinfo rate = -2.016 ratelimit = 5.000
+020.3070:1: Info: global: gyroinfo rate = -4.113 ratelimit = 5.000
+020.3180:1: Info: global: gyroinfo rate = -2.613 ratelimit = 5.000
+020.3311:1: Info: global: gyroinfo rate = -3.242 ratelimit = 5.000
+020.3403:1: Info: global: gyroinfo rate = -7.438 ratelimit = 5.000
+020.3541:1: Info: global: gyroinfo rate = -10.95 ratelimit = 5.000
+020.3647:1: Info: global: gyroinfo rate = -11.10 ratelimit = 5.000
+020.3746:1: Info: global: gyroinfo rate = -11.53 ratelimit = 5.000
+020.3860:1: Info: global: gyroinfo rate = -14.63 ratelimit = 5.000
+020.3972:1: Info: global: gyroinfo rate = -17.45 ratelimit = 5.000
+020.4066:1: Info: global: gyroinfo rate = -17.13 ratelimit = 5.000
+020.4193:1: Debug: actions: 163:completing action: SwerveHolonomicPathFollower S2S4-P2
+020.4201:1: Info: global: finished path'S2S4-P2' pose = 1.584 5.731 -3.9
+020.4236:1: Info: global: gyroinfo rate = -18.62 ratelimit = 5.000
+020.4486:1: Info: global: gyroinfo rate = -20.13 ratelimit = 5.000
+020.5131:1: Info: global: gyroinfo rate = -17.51 ratelimit = 5.000
+020.5235:1: Info: global: gyroinfo rate = -17.68 ratelimit = 5.000
+020.5291:1: Info: global: Changed vision parameters to Single Near
+020.5358:1: Debug: actions: 149:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=1.0 velthresh=1.0
+020.5388:1: Info: global: gyroinfo rate = -16.04 ratelimit = 5.000
+020.5467:1: Debug: actions: 147:completing action: StartCollectAction
+020.5527:1: Info: global: gyroinfo rate = -10.72 ratelimit = 5.000
+020.5594:1: Debug: actions: 156:starting action: 156: ManualShootAction subwoofer-center-low
+020.5599:1: Debug: actions: 157:starting action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=5.0 velthresh=5.0
+020.5614:1: Debug: actions: 158:starting action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+020.5636:1: Debug: actions: 159:starting action: 159: MCVelocityAction (intake-shooter1), target = 65.0
+020.5652:1: Debug: actions: 160:starting action: 160: MCVelocityAction (intake-shooter2), target = 65.0
+020.5665:1: Info: global: automode: Path4 -> Shoot3
+020.5675:1: Debug: actions: 158:completing action: MCMotionMagicAction (intake-updown) target=35.0 posthresh=5.0 velthresh=5.0
+020.5707:1: Info: global: gyroinfo rate = -6.355 ratelimit = 5.000
+020.6008:1: Info: global: gyroinfo rate = 12.84 ratelimit = 5.000
+020.6134:1: Info: global: gyroinfo rate = 26.15 ratelimit = 5.000
+020.6289:1: Info: global: gyroinfo rate = 31.08 ratelimit = 5.000
+020.6432:1: Info: global: gyroinfo rate = 28.25 ratelimit = 5.000
+020.6572:1: Info: global: gyroinfo rate = 23.33 ratelimit = 5.000
+020.6738:1: Info: global: gyroinfo rate = 12.15 ratelimit = 5.000
+020.6936:1: Info: global: gyroinfo rate = 1.258 ratelimit = 5.000
+020.7088:1: Debug: actions: 157:completing action: MCMotionMagicAction (intake-tilt) target=5.0 posthresh=5.0 velthresh=5.0
+020.7134:1: Info: global: gyroinfo rate = -5.652 ratelimit = 5.000
+020.7298:1: Info: global: gyroinfo rate = -7.223 ratelimit = 5.000
+020.7418:1: Info: global: gyroinfo rate = -6.383 ratelimit = 5.000
+020.7618:1: Info: global: gyroinfo rate = -5.387 ratelimit = 5.000
+020.7837:1: Info: global: gyroinfo rate = 2.430 ratelimit = 5.000
+020.7972:1: Info: global: gyroinfo rate = 3.285 ratelimit = 5.000
+020.8099:1: Info: global: gyroinfo rate = 3.234 ratelimit = 5.000
+020.8223:1: Info: global: gyroinfo rate = 3.492 ratelimit = 5.000
+020.8321:1: Info: global: gyroinfo rate = 3.281 ratelimit = 5.000
+020.8434:1: Info: global: gyroinfo rate = -0.09766 ratelimit = 5.000
+020.8559:1: Info: global: gyroinfo rate = -0.2773 ratelimit = 5.000
+020.8693:1: Info: global: gyroinfo rate = -0.9570 ratelimit = 5.000
+020.8796:1: Info: global: gyroinfo rate = -1.500 ratelimit = 5.000
+020.8919:1: Info: global: gyroinfo rate = -0.8750 ratelimit = 5.000
+020.9050:1: Info: global: gyroinfo rate = 0.4453 ratelimit = 5.000
+020.9166:1: Info: global: gyroinfo rate = 0.3594 ratelimit = 5.000
+020.9272:1: Info: global: gyroinfo rate = 0.6445 ratelimit = 5.000
+020.9361:1: Info: global: gyroinfo rate = 0.5156 ratelimit = 5.000
+020.9493:1: Info: global: gyroinfo rate = 0.2227 ratelimit = 5.000
+020.9582:1: Info: global: gyroinfo rate = 0.3281 ratelimit = 5.000
+020.9704:1: Info: global: gyroinfo rate = -0.007813 ratelimit = 5.000
+020.9848:1: Info: global: gyroinfo rate = 0.3281 ratelimit = 5.000
+020.9949:1: Info: global: gyroinfo rate = -0.1055 ratelimit = 5.000
+021.0053:1: Info: global: gyroinfo rate = -0.2109 ratelimit = 5.000
+021.0154:1: Info: global: gyroinfo rate = -0.2344 ratelimit = 5.000
+021.0258:1: Info: global: gyroinfo rate = -0.3945 ratelimit = 5.000
+021.0351:1: Info: global: gyroinfo rate = 0.1836 ratelimit = 5.000
+021.0445:1: Info: global: gyroinfo rate = -0.1367 ratelimit = 5.000
+021.0583:1: Info: global: gyroinfo rate = -0.2461 ratelimit = 5.000
+021.0707:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+021.0834:1: Info: global: gyroinfo rate = 0.1875 ratelimit = 5.000
+021.0946:1: Info: global: gyroinfo rate = 0.03516 ratelimit = 5.000
+021.1059:1: Info: global: gyroinfo rate = -0.2109 ratelimit = 5.000
+021.1163:1: Info: global: gyroinfo rate = 0.2695 ratelimit = 5.000
+021.1257:1: Info: global: gyroinfo rate = 0.03906 ratelimit = 5.000
+021.1356:1: Info: global: gyroinfo rate = -0.003906 ratelimit = 5.000
+021.1456:1: Info: global: gyroinfo rate = 0.03125 ratelimit = 5.000
+021.1588:1: Info: global: gyroinfo rate = -0.1406 ratelimit = 5.000
+021.1768:1: Info: global: gyroinfo rate = -0.06641 ratelimit = 5.000
+021.1875:1: Debug: global: shot:  tilt = 4.835 updown = 34.95 shooter1 = 62.24 shooter2 = 64.41
+021.1880:1: Debug: actions: 161:starting action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+021.1912:1: Info: global: gyroinfo rate = 0.07813 ratelimit = 5.000
+021.1994:1: Debug: global: shot/2:  tilt = 4.835 updown = 34.95 shooter1 = 62.56 shooter2 = 65.41
+021.2034:1: Info: global: gyroinfo rate = 0.1367 ratelimit = 5.000
+021.2108:1: Debug: global: shot/2:  tilt = 4.835 updown = 34.95 shooter1 = 64.09 shooter2 = 64.96
+021.2138:1: Info: global: gyroinfo rate = 0.05078 ratelimit = 5.000
+021.2219:1: Debug: global: shot/2:  tilt = 4.835 updown = 34.95 shooter1 = 65.55 shooter2 = 66.55
+021.2251:1: Info: global: gyroinfo rate = 0.08594 ratelimit = 5.000
+021.2356:1: Debug: global: shot/2:  tilt = 4.835 updown = 34.95 shooter1 = 64.41 shooter2 = 66.30
+021.2387:1: Info: global: gyroinfo rate = 0.03125 ratelimit = 5.000
+021.2469:1: Debug: global: shot/2:  tilt = 4.835 updown = 34.95 shooter1 = 65.32 shooter2 = 66.79
+021.2495:1: Info: global: gyroinfo rate = 0.2383 ratelimit = 5.000
+021.2625:1: Debug: global: shot/2:  tilt = 4.835 updown = 34.95 shooter1 = 66.35 shooter2 = 65.87
+021.2655:1: Info: global: gyroinfo rate = 0.1719 ratelimit = 5.000
+021.2742:1: Debug: global: shot/2:  tilt = 4.835 updown = 34.95 shooter1 = 66.16 shooter2 = 65.76
+021.2767:1: Info: global: gyroinfo rate = -0.1758 ratelimit = 5.000
+021.2859:1: Debug: global: shot/2:  tilt = 4.835 updown = 34.95 shooter1 = 66.12 shooter2 = 66.66
+021.2885:1: Info: global: gyroinfo rate = -0.3633 ratelimit = 5.000
+021.2961:1: Debug: global: shot/2:  tilt = 4.851 updown = 34.96 shooter1 = 65.74 shooter2 = 66.87
+021.2992:1: Info: global: gyroinfo rate = 0.01172 ratelimit = 5.000
+021.3082:1: Debug: global: shot/2:  tilt = 4.851 updown = 34.96 shooter1 = 65.34 shooter2 = 64.93
+021.3106:1: Info: global: gyroinfo rate = -0.3047 ratelimit = 5.000
+021.3190:1: Debug: global: shot/2:  tilt = 4.851 updown = 34.96 shooter1 = 66.42 shooter2 = 66.32
+021.3217:1: Info: global: gyroinfo rate = 0.03906 ratelimit = 5.000
+021.3365:1: Debug: global: shot/2:  tilt = 4.851 updown = 34.96 shooter1 = 65.39 shooter2 = 66.71
+021.3393:1: Info: global: gyroinfo rate = 0.09375 ratelimit = 5.000
+021.3486:1: Debug: global: shot/2:  tilt = 4.851 updown = 34.96 shooter1 = 65.68 shooter2 = 66.83
+021.3516:1: Info: global: gyroinfo rate = 0.3008 ratelimit = 5.000
+021.3602:1: Debug: global: shot/2:  tilt = 4.851 updown = 34.95 shooter1 = 52.86 shooter2 = 63.82
+021.3629:1: Info: global: gyroinfo rate = -0.4141 ratelimit = 5.000
+021.3720:1: Debug: global: shot/2:  tilt = 4.851 updown = 34.89 shooter1 = 51.42 shooter2 = 52.34
+021.3753:1: Info: global: gyroinfo rate = -0.3594 ratelimit = 5.000
+021.3893:1: Debug: global: shot/2:  tilt = 4.819 updown = 34.92 shooter1 = 48.41 shooter2 = 49.15
+021.3918:1: Info: global: gyroinfo rate = 0.6484 ratelimit = 5.000
+021.3999:1: Debug: global: shot/2:  tilt = 4.779 updown = 34.96 shooter1 = 50.35 shooter2 = 51.37
+021.4027:1: Info: global: gyroinfo rate = 0.9961 ratelimit = 5.000
+021.4105:1: Debug: global: shot/2:  tilt = 4.763 updown = 34.95 shooter1 = 51.42 shooter2 = 54.49
+021.4138:1: Info: global: gyroinfo rate = 0.3633 ratelimit = 5.000
+021.4205:1: Debug: global: shot/2:  tilt = 4.763 updown = 34.94 shooter1 = 52.19 shooter2 = 54.82
+021.4240:1: Info: global: gyroinfo rate = -0.3555 ratelimit = 5.000
+021.4314:1: Debug: global: shot/2:  tilt = 4.763 updown = 34.94 shooter1 = 53.88 shooter2 = 57.42
+021.4346:1: Info: global: gyroinfo rate = -1.145 ratelimit = 5.000
+021.4426:1: Debug: global: shot/2:  tilt = 4.763 updown = 34.94 shooter1 = 54.49 shooter2 = 57.93
+021.4465:1: Info: global: gyroinfo rate = -0.2461 ratelimit = 5.000
+021.4536:1: Debug: global: shot/2:  tilt = 4.763 updown = 34.94 shooter1 = 55.21 shooter2 = 57.80
+021.4564:1: Info: global: gyroinfo rate = 0.5000 ratelimit = 5.000
+021.4647:1: Debug: global: shot/2:  tilt = 4.779 updown = 34.94 shooter1 = 57.16 shooter2 = 60.59
+021.4675:1: Info: global: gyroinfo rate = 0.6758 ratelimit = 5.000
+021.4745:1: Debug: global: shot/2:  tilt = 4.787 updown = 34.94 shooter1 = 57.25 shooter2 = 60.57
+021.4781:1: Info: global: gyroinfo rate = 0.7734 ratelimit = 5.000
+021.5005:1: Debug: global: shot/2:  tilt = 4.819 updown = 34.95 shooter1 = 59.60 shooter2 = 63.65
+021.5018:1: Debug: actions: 161:completing action: MotorEncoderPowerAction intake-feeder power = 1.0 1.0 0.3
+021.5363:1: Info: global: gyroinfo rate = 0.1328 ratelimit = 5.000
+021.5708:1: Debug: global: shot/2:  tilt = 4.883 updown = 34.96 shooter1 = 66.71 shooter2 = 66.90
+021.5718:1: Debug: actions: 156:completing action: 156: ManualShootAction subwoofer-center-low
+021.5727:1: Info: global:  duration = 1.013
+021.5766:1: Info: global: gyroinfo rate = -0.2617 ratelimit = 5.000
+021.5883:1: Debug: actions: 159:canceling action: 159: MCVelocityAction (intake-shooter1), target = 65.0
+021.5888:1: Debug: actions: 160:canceling action: 160: MCVelocityAction (intake-shooter2), target = 65.0
+021.5897:1: Debug: actions: 147:starting action: StartCollectAction
+021.5899:1: Debug: actions: 152:starting action: MotorEncoderPowerAction intake-feeder power = 0.4
+021.5905:1: Debug: actions: 152:completing action: MotorEncoderPowerAction intake-feeder power = 0.4
+021.5932:1: Info: global: pos < stow pos = 34.96 stow = 118.0
+021.5937:1: Debug: actions: 219:starting action: MCMotionMagicAction (intake-tilt) target=18.040841648000004 posthresh=3.0 velthresh=1.0
+021.6037:1: Debug: actions: 166:starting action: SwerveHolonomicPathFollower S2S4-P5
+021.6055:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+021.6066:1: Info: global: automode: Shoot3 -> Path5
+021.6256:1: Info: global: gyroinfo rate = 0.2813 ratelimit = 5.000
+021.6415:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+021.6512:1: Info: global: gyroinfo rate = -0.4961 ratelimit = 5.000
+021.6618:1: Info: global: gyroinfo rate = -0.07813 ratelimit = 5.000
+021.6720:1: Info: global: gyroinfo rate = 0.04297 ratelimit = 5.000
+021.6826:1: Info: global: gyroinfo rate = -4.121 ratelimit = 5.000
+021.6975:1: Info: global: gyroinfo rate = -3.840 ratelimit = 5.000
+021.7075:1: Info: global: gyroinfo rate = -0.9648 ratelimit = 5.000
+021.7165:1: Info: global: gyroinfo rate = 0.2266 ratelimit = 5.000
+021.7261:1: Info: global: gyroinfo rate = -2.602 ratelimit = 5.000
+021.7372:1: Info: global: gyroinfo rate = -4.121 ratelimit = 5.000
+021.7504:1: Info: global: gyroinfo rate = -3.531 ratelimit = 5.000
+021.7642:1: Info: global: gyroinfo rate = -1.652 ratelimit = 5.000
+021.7736:1: Info: global: gyroinfo rate = -2.219 ratelimit = 5.000
+021.7833:1: Info: global: gyroinfo rate = -1.125 ratelimit = 5.000
+021.7939:1: Info: global: gyroinfo rate = -0.2383 ratelimit = 5.000
+021.8026:1: Info: global: gyroinfo rate = -0.2383 ratelimit = 5.000
+021.8117:1: Info: global: gyroinfo rate = -1.363 ratelimit = 5.000
+021.8250:1: Info: global: gyroinfo rate = -1.863 ratelimit = 5.000
+021.8344:1: Info: global: gyroinfo rate = -3.078 ratelimit = 5.000
+021.8441:1: Info: global: gyroinfo rate = -4.363 ratelimit = 5.000
+021.8557:1: Info: global: gyroinfo rate = -5.191 ratelimit = 5.000
+021.8670:1: Info: global: gyroinfo rate = -5.473 ratelimit = 5.000
+021.8776:1: Info: global: gyroinfo rate = -6.469 ratelimit = 5.000
+021.8893:1: Info: global: gyroinfo rate = -8.363 ratelimit = 5.000
+021.9074:1: Info: global: gyroinfo rate = -10.05 ratelimit = 5.000
+021.9178:1: Info: global: gyroinfo rate = -10.86 ratelimit = 5.000
+021.9300:1: Info: global: gyroinfo rate = -11.80 ratelimit = 5.000
+021.9402:1: Info: global: gyroinfo rate = -12.09 ratelimit = 5.000
+021.9508:1: Info: global: gyroinfo rate = -11.72 ratelimit = 5.000
+021.9639:1: Info: global: gyroinfo rate = -11.51 ratelimit = 5.000
+021.9745:1: Info: global: gyroinfo rate = -10.90 ratelimit = 5.000
+021.9846:1: Info: global: gyroinfo rate = -9.820 ratelimit = 5.000
+021.9948:1: Info: global: gyroinfo rate = -8.836 ratelimit = 5.000
+022.0069:1: Info: global: gyroinfo rate = -8.766 ratelimit = 5.000
+022.0163:1: Info: global: gyroinfo rate = -8.078 ratelimit = 5.000
+022.0285:1: Info: global: gyroinfo rate = -7.066 ratelimit = 5.000
+022.0385:1: Info: global: gyroinfo rate = -6.777 ratelimit = 5.000
+022.0462:1: Debug: actions: 219:completing action: MCMotionMagicAction (intake-tilt) target=18.040841648000004 posthresh=3.0 velthresh=1.0
+022.0492:1: Info: global: gyroinfo rate = -5.738 ratelimit = 5.000
+022.0560:1: Debug: actions: 154:starting action: MCMotionMagicAction (intake-updown) target=-10.0 posthresh=3.0 velthresh=1.0
+022.0579:1: Debug: actions: 155:starting action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+022.0595:1: Debug: intake-shooter: state changed: MovingTilt ->Moving
+022.0652:1: Info: global: gyroinfo rate = -3.668 ratelimit = 5.000
+022.0756:1: Info: global: gyroinfo rate = -2.992 ratelimit = 5.000
+022.0865:1: Info: global: gyroinfo rate = -1.973 ratelimit = 5.000
+022.1034:1: Info: global: gyroinfo rate = -1.652 ratelimit = 5.000
+022.1170:1: Info: global: gyroinfo rate = -0.9141 ratelimit = 5.000
+022.1273:1: Info: global: gyroinfo rate = -0.07422 ratelimit = 5.000
+022.1378:1: Info: global: gyroinfo rate = 0.5273 ratelimit = 5.000
+022.1478:1: Info: global: gyroinfo rate = 0.5547 ratelimit = 5.000
+022.1625:1: Info: global: gyroinfo rate = 0.4766 ratelimit = 5.000
+022.1763:1: Info: global: gyroinfo rate = 0.5742 ratelimit = 5.000
+022.1872:1: Info: global: gyroinfo rate = 1.844 ratelimit = 5.000
+022.1965:1: Info: global: gyroinfo rate = 2.391 ratelimit = 5.000
+022.2063:1: Info: global: gyroinfo rate = 1.180 ratelimit = 5.000
+022.2172:1: Info: global: gyroinfo rate = 1.051 ratelimit = 5.000
+022.2277:1: Info: global: gyroinfo rate = 1.633 ratelimit = 5.000
+022.2405:1: Info: global: gyroinfo rate = 0.8125 ratelimit = 5.000
+022.2517:1: Info: global: gyroinfo rate = -0.3789 ratelimit = 5.000
+022.2625:1: Info: global: gyroinfo rate = -1.051 ratelimit = 5.000
+022.2748:1: Info: global: gyroinfo rate = -2.066 ratelimit = 5.000
+022.2852:1: Info: global: gyroinfo rate = -1.770 ratelimit = 5.000
+022.3007:1: Info: global: gyroinfo rate = -1.434 ratelimit = 5.000
+022.3112:1: Info: global: gyroinfo rate = -1.109 ratelimit = 5.000
+022.3206:1: Info: global: gyroinfo rate = -0.4023 ratelimit = 5.000
+022.3335:1: Info: global: gyroinfo rate = -1.672 ratelimit = 5.000
+022.3444:1: Info: global: gyroinfo rate = -1.992 ratelimit = 5.000
+022.3557:1: Info: global: gyroinfo rate = -2.293 ratelimit = 5.000
+022.3662:1: Info: global: gyroinfo rate = -1.703 ratelimit = 5.000
+022.3757:1: Info: global: gyroinfo rate = -1.465 ratelimit = 5.000
+022.3893:1: Info: global: gyroinfo rate = -2.008 ratelimit = 5.000
+022.3995:1: Info: global: gyroinfo rate = -2.652 ratelimit = 5.000
+022.4096:1: Info: global: gyroinfo rate = -3.215 ratelimit = 5.000
+022.4194:1: Info: global: gyroinfo rate = -4.180 ratelimit = 5.000
+022.4302:1: Info: global: gyroinfo rate = -5.336 ratelimit = 5.000
+022.4401:1: Info: global: gyroinfo rate = -5.719 ratelimit = 5.000
+022.4499:1: Info: global: gyroinfo rate = -6.652 ratelimit = 5.000
+022.4622:1: Info: global: gyroinfo rate = -8.172 ratelimit = 5.000
+022.4779:1: Info: global: gyroinfo rate = -10.50 ratelimit = 5.000
+022.4928:1: Info: global: gyroinfo rate = -13.14 ratelimit = 5.000
+022.5035:1: Info: global: gyroinfo rate = -16.00 ratelimit = 5.000
+022.5152:1: Info: global: gyroinfo rate = -16.68 ratelimit = 5.000
+022.5257:1: Info: global: gyroinfo rate = -16.16 ratelimit = 5.000
+022.5368:1: Info: global: gyroinfo rate = -18.11 ratelimit = 5.000
+022.5454:1: Info: global: gyroinfo rate = -20.21 ratelimit = 5.000
+022.5536:1: Info: global: gyroinfo rate = -19.56 ratelimit = 5.000
+022.5638:1: Info: global: gyroinfo rate = -17.98 ratelimit = 5.000
+022.5728:1: Info: global: gyroinfo rate = -17.98 ratelimit = 5.000
+022.5894:1: Info: global: gyroinfo rate = -18.20 ratelimit = 5.000
+022.5977:1: Info: global: gyroinfo rate = -18.78 ratelimit = 5.000
+022.6104:1: Info: global: gyroinfo rate = -17.85 ratelimit = 5.000
+022.6237:1: Info: global: gyroinfo rate = -15.56 ratelimit = 5.000
+022.6384:1: Info: global: gyroinfo rate = -15.90 ratelimit = 5.000
+022.6548:1: Info: global: gyroinfo rate = -22.41 ratelimit = 5.000
+022.6704:1: Info: global: gyroinfo rate = -23.91 ratelimit = 5.000
+022.6833:1: Info: global: gyroinfo rate = -19.80 ratelimit = 5.000
+022.7037:1: Info: global: gyroinfo rate = -5.340 ratelimit = 5.000
+022.7420:1: Info: global: gyroinfo rate = -7.961 ratelimit = 5.000
+022.7585:1: Info: global: gyroinfo rate = -7.406 ratelimit = 5.000
+022.7738:1: Info: global: gyroinfo rate = -11.83 ratelimit = 5.000
+022.8082:1: Info: global: gyroinfo rate = 0.7109 ratelimit = 5.000
+022.8258:1: Info: global: gyroinfo rate = -4.230 ratelimit = 5.000
+022.8363:1: Info: global: gyroinfo rate = -8.332 ratelimit = 5.000
+022.8458:1: Info: global: gyroinfo rate = -11.71 ratelimit = 5.000
+022.8543:1: Info: global: gyroinfo rate = -5.949 ratelimit = 5.000
+022.8631:1: Info: global: gyroinfo rate = 0.4570 ratelimit = 5.000
+022.8724:1: Info: global: gyroinfo rate = 0.4570 ratelimit = 5.000
+022.8832:1: Info: global: gyroinfo rate = 2.156 ratelimit = 5.000
+022.8917:1: Info: global: gyroinfo rate = 4.020 ratelimit = 5.000
+022.9026:1: Info: global: gyroinfo rate = 7.215 ratelimit = 5.000
+022.9151:1: Info: global: gyroinfo rate = 10.34 ratelimit = 5.000
+022.9276:1: Info: global: gyroinfo rate = 10.54 ratelimit = 5.000
+022.9387:1: Info: global: gyroinfo rate = 11.00 ratelimit = 5.000
+022.9489:1: Info: global: gyroinfo rate = 13.03 ratelimit = 5.000
+022.9602:1: Info: global: gyroinfo rate = 14.19 ratelimit = 5.000
+022.9777:1: Info: global: gyroinfo rate = 16.70 ratelimit = 5.000
+022.9881:1: Info: global: gyroinfo rate = 18.46 ratelimit = 5.000
+023.0014:1: Info: global: gyroinfo rate = 18.76 ratelimit = 5.000
+023.0115:1: Info: global: gyroinfo rate = 19.06 ratelimit = 5.000
+023.0218:1: Info: global: gyroinfo rate = 19.99 ratelimit = 5.000
+023.0297:1: Debug: actions: 155:completing action: MCMotionMagicAction (intake-tilt) target=50.0 posthresh=3.0 velthresh=1.0
+023.0325:1: Info: global: gyroinfo rate = 19.94 ratelimit = 5.000
+023.0436:1: Info: global: gyroinfo rate = 21.07 ratelimit = 5.000
+023.0526:1: Info: global: gyroinfo rate = 21.07 ratelimit = 5.000
+023.0693:1: Info: global: gyroinfo rate = 20.35 ratelimit = 5.000
+023.0787:1: Info: global: gyroinfo rate = 21.75 ratelimit = 5.000
+023.0896:1: Info: global: gyroinfo rate = 22.92 ratelimit = 5.000
+023.0984:1: Info: global: gyroinfo rate = 23.03 ratelimit = 5.000
+023.1104:1: Info: global: gyroinfo rate = 22.95 ratelimit = 5.000
+023.1217:1: Info: global: gyroinfo rate = 23.23 ratelimit = 5.000
+023.1328:1: Info: global: gyroinfo rate = 20.08 ratelimit = 5.000
+023.1415:1: Info: global: gyroinfo rate = 20.08 ratelimit = 5.000
+023.1548:1: Info: global: gyroinfo rate = 16.23 ratelimit = 5.000
+023.1653:1: Info: global: gyroinfo rate = 16.58 ratelimit = 5.000
+023.1747:1: Info: global: gyroinfo rate = 18.96 ratelimit = 5.000
+023.1855:1: Info: global: gyroinfo rate = 21.64 ratelimit = 5.000
+023.1939:1: Info: global: gyroinfo rate = 23.04 ratelimit = 5.000
+023.2034:1: Info: global: gyroinfo rate = 20.50 ratelimit = 5.000
+023.2126:1: Info: global: gyroinfo rate = 20.50 ratelimit = 5.000
+023.2237:1: Info: global: gyroinfo rate = 17.01 ratelimit = 5.000
+023.2317:1: Info: global: gyroinfo rate = 17.01 ratelimit = 5.000
+023.2405:1: Info: global: gyroinfo rate = 18.34 ratelimit = 5.000
+023.2505:1: Info: global: gyroinfo rate = 19.29 ratelimit = 5.000
+023.2594:1: Info: global: gyroinfo rate = 20.30 ratelimit = 5.000
+023.2712:1: Info: global: gyroinfo rate = 20.38 ratelimit = 5.000
+023.2805:1: Info: global: gyroinfo rate = 19.18 ratelimit = 5.000
+023.2890:1: Info: global: gyroinfo rate = 19.69 ratelimit = 5.000
+023.3009:1: Info: global: gyroinfo rate = 19.17 ratelimit = 5.000
+023.3095:1: Info: global: gyroinfo rate = 18.04 ratelimit = 5.000
+023.3177:1: Info: global: gyroinfo rate = 17.27 ratelimit = 5.000
+023.3262:1: Info: global: gyroinfo rate = 16.29 ratelimit = 5.000
+023.3358:1: Info: global: gyroinfo rate = 16.64 ratelimit = 5.000
+023.3443:1: Info: global: gyroinfo rate = 16.38 ratelimit = 5.000
+023.3513:1: Info: global: gyroinfo rate = 16.38 ratelimit = 5.000
+023.3605:1: Info: global: gyroinfo rate = 15.45 ratelimit = 5.000
+023.3729:1: Info: global: gyroinfo rate = 16.52 ratelimit = 5.000
+023.3825:1: Info: global: gyroinfo rate = 16.52 ratelimit = 5.000
+023.3918:1: Info: global: gyroinfo rate = 15.73 ratelimit = 5.000
+023.4004:1: Info: global: gyroinfo rate = 14.66 ratelimit = 5.000
+023.4088:1: Info: global: gyroinfo rate = 15.25 ratelimit = 5.000
+023.4163:1: Info: global: gyroinfo rate = 10.57 ratelimit = 5.000
+023.4283:1: Info: global: gyroinfo rate = 9.652 ratelimit = 5.000
+023.4361:1: Info: global: gyroinfo rate = 11.05 ratelimit = 5.000
+023.4456:1: Info: global: gyroinfo rate = 9.629 ratelimit = 5.000
+023.4538:1: Info: global: gyroinfo rate = 7.621 ratelimit = 5.000
+023.4613:1: Info: global: gyroinfo rate = 7.621 ratelimit = 5.000
+023.4779:1: Info: global: gyroinfo rate = 6.734 ratelimit = 5.000
+023.4869:1: Info: global: gyroinfo rate = 6.523 ratelimit = 5.000
+023.4969:1: Info: global: gyroinfo rate = 7.434 ratelimit = 5.000
+023.5072:1: Info: global: gyroinfo rate = 7.285 ratelimit = 5.000
+023.5170:1: Info: global: gyroinfo rate = 7.801 ratelimit = 5.000
+023.5336:1: Info: global: gyroinfo rate = 11.37 ratelimit = 5.000
+023.5445:1: Info: global: gyroinfo rate = 11.82 ratelimit = 5.000
+023.5527:1: Info: global: gyroinfo rate = 11.86 ratelimit = 5.000
+023.5653:1: Info: global: gyroinfo rate = 11.51 ratelimit = 5.000
+023.5785:1: Info: global: gyroinfo rate = 11.67 ratelimit = 5.000
+023.5886:1: Info: global: gyroinfo rate = 12.26 ratelimit = 5.000
+023.5975:1: Info: global: gyroinfo rate = 13.51 ratelimit = 5.000
+023.6104:1: Info: global: gyroinfo rate = 12.89 ratelimit = 5.000
+023.6191:1: Info: global: gyroinfo rate = 10.46 ratelimit = 5.000
+023.6357:1: Info: global: gyroinfo rate = 7.281 ratelimit = 5.000
+023.6475:1: Info: global: gyroinfo rate = 6.133 ratelimit = 5.000
+023.6559:1: Info: global: gyroinfo rate = 4.883 ratelimit = 5.000
+023.6684:1: Info: global: gyroinfo rate = 3.125 ratelimit = 5.000
+023.6774:1: Info: global: gyroinfo rate = 1.227 ratelimit = 5.000
+023.6872:1: Info: global: gyroinfo rate = -0.8164 ratelimit = 5.000
+023.6978:1: Info: global: gyroinfo rate = -2.402 ratelimit = 5.000
+023.7075:1: Info: global: gyroinfo rate = -3.891 ratelimit = 5.000
+023.7203:1: Info: global: gyroinfo rate = -5.039 ratelimit = 5.000
+023.7330:1: Info: global: gyroinfo rate = -3.695 ratelimit = 5.000
+023.7417:1: Info: global: gyroinfo rate = -3.695 ratelimit = 5.000
+023.7556:1: Info: global: gyroinfo rate = -3.078 ratelimit = 5.000
+023.7668:1: Debug: actions: 166:completing action: SwerveHolonomicPathFollower S2S4-P5
+023.7673:1: Info: global: finished path'S2S4-P5' pose = 2.512 3.257 -6.3
+023.7699:1: Info: global: gyroinfo rate = -2.559 ratelimit = 5.000
+023.7720:1: Info: global: Changed vision parameters to Single Far
+023.7764:1: Debug: actions: 167:starting action: SwerveHolonomicPathFollower S2S4-P6
+023.7766:1: Info: global: SwerveHolonomicPathFollower: Did not set pose
+023.7772:1: Info: global: automode: Path5 -> Path6
+023.7816:1: Info: global: gyroinfo rate = -3.141 ratelimit = 5.000
+023.7912:1: Info: global: gyroinfo rate = -3.266 ratelimit = 5.000
+023.8011:1: Info: global: gyroinfo rate = -3.262 ratelimit = 5.000
+023.8113:1: Info: global: gyroinfo rate = -4.383 ratelimit = 5.000
+023.8214:1: Info: global: gyroinfo rate = -7.973 ratelimit = 5.000
+023.8365:1: Info: global: gyroinfo rate = -5.609 ratelimit = 5.000
+023.8500:1: Info: global: gyroinfo rate = -6.949 ratelimit = 5.000
+023.8607:1: Info: global: gyroinfo rate = -8.363 ratelimit = 5.000
+023.8727:1: Info: global: gyroinfo rate = -8.168 ratelimit = 5.000
+023.8819:1: Info: global: gyroinfo rate = -8.168 ratelimit = 5.000
+023.8922:1: Info: global: gyroinfo rate = -10.18 ratelimit = 5.000
+023.9012:1: Info: global: gyroinfo rate = -9.969 ratelimit = 5.000
+023.9104:1: Info: global: gyroinfo rate = -10.49 ratelimit = 5.000
+023.9242:1: Info: global: gyroinfo rate = -13.11 ratelimit = 5.000
+023.9362:1: Info: global: gyroinfo rate = -13.16 ratelimit = 5.000
+023.9705:1: Info: global: gyroinfo rate = -14.50 ratelimit = 5.000
+024.0012:1: Info: global: gyroinfo rate = -16.71 ratelimit = 5.000
+024.0167:1: Info: global: gyroinfo rate = -17.30 ratelimit = 5.000
+024.0284:1: Info: global: gyroinfo rate = -17.58 ratelimit = 5.000
+024.0375:1: Info: global: gyroinfo rate = -17.07 ratelimit = 5.000
+024.0489:1: Info: global: gyroinfo rate = -17.15 ratelimit = 5.000
+024.0587:1: Info: global: gyroinfo rate = -16.83 ratelimit = 5.000
+024.0699:1: Info: global: gyroinfo rate = -16.24 ratelimit = 5.000
+024.0816:1: Info: global: gyroinfo rate = -17.27 ratelimit = 5.000
+024.0929:1: Info: global: gyroinfo rate = -18.24 ratelimit = 5.000
+024.1015:1: Info: global: gyroinfo rate = -18.54 ratelimit = 5.000
+024.1119:1: Info: global: gyroinfo rate = -19.30 ratelimit = 5.000
+024.1216:1: Info: global: gyroinfo rate = -20.05 ratelimit = 5.000
+024.1357:1: Info: global: gyroinfo rate = -20.59 ratelimit = 5.000
+024.1521:1: Info: global: gyroinfo rate = -20.86 ratelimit = 5.000
+024.1662:1: Info: global: gyroinfo rate = -20.23 ratelimit = 5.000
+024.1758:1: Info: global: gyroinfo rate = -19.55 ratelimit = 5.000
+024.1866:1: Info: global: gyroinfo rate = -19.39 ratelimit = 5.000
+024.1977:1: Info: global: gyroinfo rate = -18.36 ratelimit = 5.000
+024.2068:1: Info: global: gyroinfo rate = -17.34 ratelimit = 5.000
+024.2163:1: Info: global: gyroinfo rate = -16.45 ratelimit = 5.000
+024.2304:1: Info: global: gyroinfo rate = -15.36 ratelimit = 5.000
+024.2401:1: Info: global: gyroinfo rate = -14.25 ratelimit = 5.000
+024.2505:1: Info: global: gyroinfo rate = -13.27 ratelimit = 5.000
+024.2617:1: Info: global: gyroinfo rate = -12.59 ratelimit = 5.000
+024.2787:1: Info: global: gyroinfo rate = -10.98 ratelimit = 5.000
+024.2875:1: Info: global: gyroinfo rate = -9.867 ratelimit = 5.000
+024.2973:1: Info: global: gyroinfo rate = -7.598 ratelimit = 5.000
+024.3070:1: Info: global: gyroinfo rate = -7.250 ratelimit = 5.000
+024.3187:1: Info: global: gyroinfo rate = -7.277 ratelimit = 5.000
+024.3320:1: Info: global: gyroinfo rate = -6.570 ratelimit = 5.000
+024.3438:1: Info: global: gyroinfo rate = -6.449 ratelimit = 5.000
+024.3556:1: Info: global: gyroinfo rate = -5.121 ratelimit = 5.000
+024.3755:1: Info: global: gyroinfo rate = -3.406 ratelimit = 5.000
+024.3917:1: Info: global: gyroinfo rate = -3.164 ratelimit = 5.000
+024.4001:1: Info: global: gyroinfo rate = -2.555 ratelimit = 5.000
+024.4099:1: Info: global: gyroinfo rate = -2.055 ratelimit = 5.000
+024.4188:1: Info: global: gyroinfo rate = -1.398 ratelimit = 5.000
+024.4303:1: Info: global: gyroinfo rate = -0.9883 ratelimit = 5.000
+024.4382:1: Info: global: gyroinfo rate = 0.4141 ratelimit = 5.000
+024.4493:1: Info: global: gyroinfo rate = 1.852 ratelimit = 5.000
+024.4619:1: Info: global: gyroinfo rate = 3.375 ratelimit = 5.000
+024.4772:1: Info: global: gyroinfo rate = 4.211 ratelimit = 5.000
+024.4870:1: Info: global: gyroinfo rate = 2.598 ratelimit = 5.000
+024.4972:1: Info: global: gyroinfo rate = 1.082 ratelimit = 5.000
+024.5075:1: Info: global: gyroinfo rate = -0.8516 ratelimit = 5.000
+024.5194:1: Info: global: gyroinfo rate = -3.059 ratelimit = 5.000
+024.5309:1: Info: global: gyroinfo rate = -4.547 ratelimit = 5.000
+024.5416:1: Info: global: gyroinfo rate = -4.441 ratelimit = 5.000
+024.5514:1: Info: global: gyroinfo rate = -3.695 ratelimit = 5.000
+024.5615:1: Info: global: gyroinfo rate = -2.043 ratelimit = 5.000
+024.5754:1: Info: global: gyroinfo rate = -1.938 ratelimit = 5.000
+024.5858:1: Info: global: gyroinfo rate = -1.934 ratelimit = 5.000
+024.5943:1: Info: global: gyroinfo rate = -0.9375 ratelimit = 5.000
+024.6049:1: Info: global: gyroinfo rate = -1.098 ratelimit = 5.000
+024.6122:1: Info: global: gyroinfo rate = -1.098 ratelimit = 5.000
+024.6228:1: Info: global: gyroinfo rate = 0.4688 ratelimit = 5.000
+024.6336:1: Info: global: gyroinfo rate = 2.199 ratelimit = 5.000
+024.6462:1: Info: global: gyroinfo rate = 3.355 ratelimit = 5.000
+024.6570:1: Info: global: gyroinfo rate = 3.293 ratelimit = 5.000
+024.6700:1: Info: global: gyroinfo rate = 4.090 ratelimit = 5.000
+024.6879:1: Info: global: gyroinfo rate = 5.293 ratelimit = 5.000
+024.7056:1: Info: global: gyroinfo rate = 5.867 ratelimit = 5.000
+024.7165:1: Info: global: gyroinfo rate = 4.941 ratelimit = 5.000
+024.7270:1: Info: global: gyroinfo rate = 4.246 ratelimit = 5.000
+024.7404:1: Info: global: gyroinfo rate = 4.262 ratelimit = 5.000
+024.7538:1: Info: global: gyroinfo rate = 2.582 ratelimit = 5.000
+024.7642:1: Info: global: gyroinfo rate = 2.000 ratelimit = 5.000
+024.7821:1: Info: global: gyroinfo rate = 1.953 ratelimit = 5.000
+024.7993:1: Info: global: gyroinfo rate = 3.047 ratelimit = 5.000
+024.8146:1: Info: global: gyroinfo rate = 2.438 ratelimit = 5.000
+024.8265:1: Info: global: gyroinfo rate = -0.1484 ratelimit = 5.000
+024.8367:1: Info: global: gyroinfo rate = -1.426 ratelimit = 5.000
+024.8463:1: Info: global: gyroinfo rate = -1.832 ratelimit = 5.000
+024.8564:1: Info: global: gyroinfo rate = -2.191 ratelimit = 5.000
+024.8674:1: Info: global: gyroinfo rate = -3.547 ratelimit = 5.000
+024.8792:1: Info: global: gyroinfo rate = -5.230 ratelimit = 5.000
+024.8910:1: Info: global: gyroinfo rate = -6.988 ratelimit = 5.000
+024.9002:1: Info: global: gyroinfo rate = -7.211 ratelimit = 5.000
+024.9119:1: Info: global: gyroinfo rate = -7.242 ratelimit = 5.000
+024.9214:1: Info: global: gyroinfo rate = -9.191 ratelimit = 5.000
+024.9325:1: Info: global: gyroinfo rate = -10.30 ratelimit = 5.000
+024.9435:1: Info: global: gyroinfo rate = -10.47 ratelimit = 5.000
+024.9526:1: Info: global: gyroinfo rate = -10.47 ratelimit = 5.000
+024.9639:1: Info: global: gyroinfo rate = -10.58 ratelimit = 5.000
+024.9764:1: Info: global: gyroinfo rate = -12.02 ratelimit = 5.000
+024.9918:1: Info: global: gyroinfo rate = -12.13 ratelimit = 5.000
+025.0010:1: Info: global: gyroinfo rate = -12.20 ratelimit = 5.000
+025.0114:1: Info: global: gyroinfo rate = -11.33 ratelimit = 5.000
+025.0208:1: Info: global: gyroinfo rate = -10.26 ratelimit = 5.000
+025.0316:1: Info: global: gyroinfo rate = -10.32 ratelimit = 5.000
+025.0418:1: Info: global: gyroinfo rate = -9.465 ratelimit = 5.000
+025.0535:1: Info: global: gyroinfo rate = -6.230 ratelimit = 5.000
+025.0601:1: Debug: actions: 167:completing action: SwerveHolonomicPathFollower S2S4-P6
+025.0605:1: Info: global: finished path'S2S4-P6' pose = 1.503 5.459 1.7
+025.0655:1: Info: global: gyroinfo rate = -5.379 ratelimit = 5.000
+025.0679:1: Info: global: Changed vision parameters to Single Near
+025.0843:1: Info: global: gyroinfo rate = -2.090 ratelimit = 5.000
+025.0955:1: Info: global: gyroinfo rate = -0.4727 ratelimit = 5.000
+025.1053:1: Info: global: gyroinfo rate = 1.418 ratelimit = 5.000
+025.1080:1: Info: global: Changed vision parameters to Multi Near
+025.1164:1: Info: global: gyroinfo rate = 2.066 ratelimit = 5.000
+025.1265:1: Info: global: gyroinfo rate = 2.504 ratelimit = 5.000
+025.1359:1: Info: global: gyroinfo rate = 3.602 ratelimit = 5.000
+025.1484:1: Info: global: gyroinfo rate = 4.551 ratelimit = 5.000
+025.1592:1: Info: global: gyroinfo rate = 6.270 ratelimit = 5.000
+025.1752:1: Info: global: gyroinfo rate = 7.746 ratelimit = 5.000
+025.1863:1: Info: global: gyroinfo rate = 8.891 ratelimit = 5.000
+025.1973:1: Info: global: gyroinfo rate = 8.180 ratelimit = 5.000
+025.2117:1: Info: global: gyroinfo rate = 7.211 ratelimit = 5.000
+025.2214:1: Info: global: gyroinfo rate = 7.082 ratelimit = 5.000
+025.2334:1: Info: global: gyroinfo rate = 5.027 ratelimit = 5.000
+025.2470:1: Info: global: gyroinfo rate = 4.301 ratelimit = 5.000
+025.2570:1: Info: global: gyroinfo rate = 3.891 ratelimit = 5.000
+025.2669:1: Info: global: gyroinfo rate = 2.664 ratelimit = 5.000
+025.2772:1: Info: global: gyroinfo rate = 1.703 ratelimit = 5.000
+025.2870:1: Info: global: gyroinfo rate = 1.371 ratelimit = 5.000
+025.2979:1: Info: global: gyroinfo rate = 0.8594 ratelimit = 5.000
+025.3118:1: Info: global: gyroinfo rate = 0.4141 ratelimit = 5.000
+025.3218:1: Info: global: gyroinfo rate = 0.8477 ratelimit = 5.000
+025.3318:1: Info: global: gyroinfo rate = 1.035 ratelimit = 5.000
+025.3507:1: Info: global: gyroinfo rate = 0.6992 ratelimit = 5.000
+025.3626:1: Info: global: gyroinfo rate = 0.6641 ratelimit = 5.000
+025.3721:1: Info: global: gyroinfo rate = 0.6836 ratelimit = 5.000
+025.3859:1: Info: global: gyroinfo rate = 0.1484 ratelimit = 5.000
+025.3954:1: Info: global: gyroinfo rate = 0.04297 ratelimit = 5.000
+025.4050:1: Info: global: gyroinfo rate = -0.04688 ratelimit = 5.000
+025.4194:1: Info: global: gyroinfo rate = -0.2383 ratelimit = 5.000
+025.4314:1: Info: global: gyroinfo rate = -0.3594 ratelimit = 5.000
+025.4407:1: Info: global: gyroinfo rate = -0.3516 ratelimit = 5.000
+025.4503:1: Info: global: gyroinfo rate = -0.3672 ratelimit = 5.000
+025.4594:1: Info: global: gyroinfo rate = -0.2813 ratelimit = 5.000
+025.4695:1: Info: global: gyroinfo rate = -0.1250 ratelimit = 5.000
+025.4782:1: Info: global: gyroinfo rate = -0.3984 ratelimit = 5.000
+025.4900:1: Info: global: gyroinfo rate = -0.4961 ratelimit = 5.000
+025.4998:1: Info: global: gyroinfo rate = -0.3438 ratelimit = 5.000
+025.5184:1: Info: global: gyroinfo rate = -0.4219 ratelimit = 5.000
+025.5271:1: Info: global: gyroinfo rate = -0.2422 ratelimit = 5.000
+025.5371:1: Info: global: gyroinfo rate = -0.2461 ratelimit = 5.000
+025.5469:1: Info: global: gyroinfo rate = -0.2969 ratelimit = 5.000
+025.5564:1: Info: global: gyroinfo rate = -0.2969 ratelimit = 5.000
+025.5677:1: Info: global: gyroinfo rate = -0.1836 ratelimit = 5.000
+025.5767:1: Info: global: gyroinfo rate = -0.1016 ratelimit = 5.000
+025.5903:1: Info: global: gyroinfo rate = -0.1094 ratelimit = 5.000
+025.6003:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+025.6107:1: Info: global: gyroinfo rate = 0.02344 ratelimit = 5.000
+025.6310:1: Info: global: gyroinfo rate = -0.03906 ratelimit = 5.000
+025.6758:1: Info: global: gyroinfo rate = 0.1719 ratelimit = 5.000
+025.6889:1: Info: global: gyroinfo rate = -0.1055 ratelimit = 5.000
+025.6975:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+025.7077:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+025.7221:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+025.7344:1: Info: global: gyroinfo rate = 0.07422 ratelimit = 5.000
+025.7446:1: Info: global: gyroinfo rate = 0.05469 ratelimit = 5.000
+025.7568:1: Info: global: gyroinfo rate = 0.01172 ratelimit = 5.000
+025.7679:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+025.7801:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+025.7914:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+025.8007:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+025.8129:1: Info: global: gyroinfo rate = 0.01563 ratelimit = 5.000
+025.8252:1: Info: global: gyroinfo rate = -0.04688 ratelimit = 5.000
+025.8396:1: Info: global: gyroinfo rate = -0.06250 ratelimit = 5.000
+025.8518:1: Info: global: gyroinfo rate = 0.01172 ratelimit = 5.000
+025.8710:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+025.8861:1: Info: global: gyroinfo rate = 0.1133 ratelimit = 5.000
+025.9100:1: Info: global: gyroinfo rate = 0.05859 ratelimit = 5.000
+025.9397:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+025.9509:1: Info: global: gyroinfo rate = 0.01563 ratelimit = 5.000
+025.9613:1: Info: global: gyroinfo rate = 0.1055 ratelimit = 5.000
+025.9731:1: Info: global: gyroinfo rate = -0.04297 ratelimit = 5.000
+025.9826:1: Info: global: gyroinfo rate = -0.1211 ratelimit = 5.000
+025.9945:1: Info: global: gyroinfo rate = -0.1016 ratelimit = 5.000
+026.0057:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+026.0158:1: Info: global: gyroinfo rate = 0.1367 ratelimit = 5.000
+026.0264:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+026.0370:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+026.0466:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+026.0558:1: Info: global: gyroinfo rate = -0.2266 ratelimit = 5.000
+026.0665:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+026.0767:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+026.0874:1: Info: global: gyroinfo rate = -0.1758 ratelimit = 5.000
+026.1025:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+026.1129:1: Info: global: gyroinfo rate = -0.1250 ratelimit = 5.000
+026.1225:1: Info: global: gyroinfo rate = -0.1250 ratelimit = 5.000
+026.1314:1: Info: global: gyroinfo rate = 0.07031 ratelimit = 5.000
+026.1409:1: Info: global: gyroinfo rate = -0.06641 ratelimit = 5.000
+026.1529:1: Info: global: gyroinfo rate = 0.07422 ratelimit = 5.000
+026.1639:1: Info: global: gyroinfo rate = -0.06250 ratelimit = 5.000
+026.1755:1: Info: global: gyroinfo rate = -0.04688 ratelimit = 5.000
+026.1866:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+026.1963:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+026.2064:1: Info: global: gyroinfo rate = 0.2305 ratelimit = 5.000
+026.2158:1: Info: global: gyroinfo rate = 0.08984 ratelimit = 5.000
+026.2257:1: Info: global: gyroinfo rate = -0.07422 ratelimit = 5.000
+026.2356:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+026.2563:1: Info: global: gyroinfo rate = -0.007813 ratelimit = 5.000
+026.2679:1: Info: global: gyroinfo rate = 0.1953 ratelimit = 5.000
+026.2786:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+026.2901:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+026.3063:1: Info: global: gyroinfo rate = 0.08594 ratelimit = 5.000
+026.3160:1: Info: global: gyroinfo rate = 0.03906 ratelimit = 5.000
+026.3266:1: Info: global: gyroinfo rate = -0.5234 ratelimit = 5.000
+026.3394:1: Info: global: gyroinfo rate = -0.2969 ratelimit = 5.000
+026.3528:1: Info: global: gyroinfo rate = 0.8789 ratelimit = 5.000
+026.3717:1: Info: global: gyroinfo rate = 0.9297 ratelimit = 5.000
+026.3821:1: Info: global: gyroinfo rate = -0.3633 ratelimit = 5.000
+026.3964:1: Info: global: gyroinfo rate = -0.6289 ratelimit = 5.000
+026.4060:1: Info: global: gyroinfo rate = 0.1367 ratelimit = 5.000
+026.4081:1: Info: global: changing robot loop type: Autonomous -> Disabled
+026.4084:1: Info: global: Motor Faults Report
+026.4086:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+026.4476:1: Info: global: intake-updown:rio-2:NONE
+026.4787:1: Info: global: intake-feeder:rio-1:NONE
+026.5059:1: Info: global: intake-tilt:rio-5:NONE
+026.5327:1: Info: global: intake-shooter1:rio-3:NONE
+026.5634:1: Info: global: intake-shooter2:rio-4:NONE
+026.5911:1: Info: global: elevator:rio-6:NONE
+026.6186:1: Info: global: arm:rio-7:NONE
+026.6194:1: Info: global: manipulator:rio-9:NONE
+026.6480:1: Info: global: climber:rio-10:NONE
+026.6849:1: Info: global: fl-steer:DriveBase-11:NONE
+026.7195:1: Info: global: fl-drive:DriveBase-12:NONE
+026.7495:1: Info: global: fr-steer:DriveBase-21:NONE
+026.7881:1: Info: global: fr-drive:DriveBase-22:NONE
+026.8115:1: Info: global: bl-steer:DriveBase-41:NONE
+026.8340:1: Info: global: bl-drive:DriveBase-42:NONE
+026.8603:1: Info: global: br-steer:DriveBase-31:NONE
+026.8884:1: Info: global: br-drive:DriveBase-32:NONE
+026.8886:1: Info: global: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+027.0053:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+027.0729:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+027.0941:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+027.1030:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+027.1130:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+027.1237:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+027.1337:1: Info: global: gyroinfo rate = -0.1094 ratelimit = 5.000
+027.1447:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+027.1541:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+027.1642:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+027.1751:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.1851:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+027.1947:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.2040:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+027.2137:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+027.2306:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+027.2448:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+027.2535:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+027.2626:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.2735:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+027.2821:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+027.2910:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.3040:1: Info: global: gyroinfo rate = -0.04688 ratelimit = 5.000
+027.3131:1: Info: global: gyroinfo rate = -0.04688 ratelimit = 5.000
+027.3242:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+027.3330:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.3409:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.3494:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+027.3566:1: Info: global: gyroinfo rate = -0.1172 ratelimit = 5.000
+027.3675:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+027.3767:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.3856:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+027.3996:1: Info: global: gyroinfo rate = -0.1172 ratelimit = 5.000
+027.4110:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.4192:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.4287:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+027.4380:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+027.4468:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+027.4564:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.4654:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+027.4752:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.4844:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.5010:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.5126:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+027.5235:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.5310:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.5403:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.5536:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+027.5643:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+027.5733:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.5828:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+027.5928:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+027.6010:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.6103:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+027.6234:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+027.6322:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+027.6404:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.6521:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.6619:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+027.6720:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+027.6806:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+027.6920:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.7314:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+027.7414:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+027.7500:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+027.7636:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+027.7785:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+027.7899:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+027.7979:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+027.8071:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.8157:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+027.8301:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.8373:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+027.8490:1: Info: global: gyroinfo rate = -0.1797 ratelimit = 5.000
+027.8574:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+027.8688:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+027.8769:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+027.8909:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.8998:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+027.9091:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+027.9180:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+027.9287:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.9370:1: Info: global: gyroinfo rate = -0.1094 ratelimit = 5.000
+027.9475:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+027.9591:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.9705:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+027.9808:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+027.9936:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+028.0055:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+028.0152:1: Info: global: gyroinfo rate = 0.1250 ratelimit = 5.000
+028.0253:1: Info: global: gyroinfo rate = -0.04688 ratelimit = 5.000
+028.0346:1: Info: global: gyroinfo rate = -0.1211 ratelimit = 5.000
+028.0481:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.0566:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+028.0661:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+028.0754:1: Info: global: gyroinfo rate = -0.1133 ratelimit = 5.000
+028.0877:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.0978:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+028.1065:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+028.1147:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+028.1249:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.1331:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.1416:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+028.1499:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+028.1607:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+028.1684:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.1777:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.1916:1: Info: global: gyroinfo rate = -0.1094 ratelimit = 5.000
+028.2005:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+028.2094:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+028.2178:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.2287:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.2410:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+028.2513:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.2610:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.2701:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+028.2811:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+028.2906:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+028.3039:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.3121:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.3209:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+028.3319:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+028.3487:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+028.3572:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+028.3670:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+028.3773:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+028.3894:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+028.3975:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+028.4060:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.4168:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.4256:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.4336:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.4416:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.4538:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+028.4619:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+028.4716:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.4808:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+028.4937:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+028.5026:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+028.5107:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+028.5190:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.5321:1: Info: global: gyroinfo rate = -0.1211 ratelimit = 5.000
+028.5398:1: Info: global: gyroinfo rate = -0.1133 ratelimit = 5.000
+028.5554:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.5721:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+028.5818:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+028.5917:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+028.6009:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+028.6126:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+028.6206:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+028.6289:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.6371:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.6509:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+028.6601:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.6720:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+028.6807:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+028.6905:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+028.6998:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+028.7089:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+028.7182:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+028.7268:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.7359:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.7440:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.7532:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+028.7652:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.7733:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.7851:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+028.7990:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+028.8096:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+028.8182:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+028.8305:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+028.8394:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.8531:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+028.8617:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+028.8721:1: Info: global: gyroinfo rate = -0.1172 ratelimit = 5.000
+028.8822:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.8984:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+028.9109:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.9247:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.9361:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+028.9534:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+028.9694:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.9874:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+028.9968:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.0089:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+029.0189:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+029.0303:1: Info: global: gyroinfo rate = -0.04688 ratelimit = 5.000
+029.0396:1: Info: global: gyroinfo rate = 0.007813 ratelimit = 5.000
+029.0500:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+029.0588:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+029.0715:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+029.0836:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.0975:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+029.1137:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+029.1241:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+029.1315:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+029.1393:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+029.1485:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+029.1617:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+029.1710:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.1840:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+029.1939:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.2038:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+029.2130:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+029.2243:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.2340:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.2439:1: Info: global: gyroinfo rate = -0.1133 ratelimit = 5.000
+029.2538:1: Info: global: gyroinfo rate = -0.1172 ratelimit = 5.000
+029.2618:1: Info: global: gyroinfo rate = -0.1172 ratelimit = 5.000
+029.2709:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.2808:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.2914:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+029.3011:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+029.3175:1: Info: global: gyroinfo rate = -0.1172 ratelimit = 5.000
+029.3280:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+029.3392:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.3516:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+029.3624:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+029.3707:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.3818:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.3934:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.4022:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.4106:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.4197:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+029.4282:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.4359:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.4452:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.4530:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+029.4672:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.4761:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+029.4889:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+029.4995:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.5105:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.5183:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+029.5305:1: Info: global: gyroinfo rate = -0.1172 ratelimit = 5.000
+029.5395:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.5500:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.5581:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+029.5671:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+029.5765:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+029.5857:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.6046:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+029.6132:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+029.6298:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+029.6380:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.6471:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.6674:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+029.6878:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+029.7068:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+029.7277:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+029.7457:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.7651:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.7879:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+029.8089:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+029.8278:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.8461:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+029.8652:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+029.8862:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+029.9099:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.9253:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.9466:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+029.9673:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+029.9871:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+030.0074:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+030.0256:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+030.0469:1: Info: global: gyroinfo rate = -0.05469 ratelimit = 5.000
+030.0658:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+030.0885:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+030.1051:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+030.1262:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+030.1463:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+030.1668:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+030.1887:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+030.2061:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+030.2349:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+030.2468:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+030.2670:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+030.2878:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+030.3059:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+030.3290:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+030.3452:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+030.3655:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+030.3873:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+030.4054:1: Info: global: gyroinfo rate = 0.06250 ratelimit = 5.000
+030.4358:1: Info: global: gyroinfo rate = -0.05078 ratelimit = 5.000
+030.4478:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+030.4678:1: Info: global: gyroinfo rate = -0.000 ratelimit = 5.000
+030.4881:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+030.5069:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+030.5253:1: Info: global: gyroinfo rate = -0.1172 ratelimit = 5.000
+030.5504:1: Info: global: gyroinfo rate = 0.003906 ratelimit = 5.000
+030.5663:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+030.5862:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000
+030.5997:1: Info: global: Changed vision parameters to Single Near
+030.6053:1: Info: global: gyroinfo rate = 0.06641 ratelimit = 5.000
+030.6253:1: Info: global: gyroinfo rate = -0.05859 ratelimit = 5.000

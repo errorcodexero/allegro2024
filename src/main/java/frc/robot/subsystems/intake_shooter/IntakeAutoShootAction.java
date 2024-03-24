@@ -331,11 +331,11 @@ public class IntakeAutoShootAction extends Action {
         swerve_stopped_ = robot.getSwerve().isStopped() ;
         gyro_stopped_ =  Math.abs(gyro.getRate()) < rotational_velocity_threshold_ ;
 
-        MessageLogger logger = robot.getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Info).add("gyroinfo");
-        logger.add("rate", gyro.getRate()) ;
-        logger.add("ratelimit", rotational_velocity_threshold_) ;
-        logger.endMessage();
+        // MessageLogger logger = robot.getRobot().getMessageLogger() ;
+        // logger.startMessage(MessageType.Info).add("gyroinfo");
+        // logger.add("rate", gyro.getRate()) ;
+        // logger.add("ratelimit", rotational_velocity_threshold_) ;
+        // logger.endMessage();
 
         return  db_ready_ && swerve_stopped_ && gyro_stopped_ ;
     }

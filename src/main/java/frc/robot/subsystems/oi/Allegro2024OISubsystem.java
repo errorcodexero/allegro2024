@@ -321,7 +321,19 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     private boolean isShootPressed() {
         SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;
-        return oipanel_.isShootPressed() || (gp != null && gp.isAPressed()) ;
+
+        MessageLogger logger = getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Debug) ;
+        if (gp != null) {
+            logger.add("gamepad shoot button", gp.isAPressed()) ;
+        }
+        else {
+            logger.add("gamepad is null") ;
+        }
+        logger.endMessage();
+
+        // return oipanel_.isShootPressed() || (gp != null && gp.isAPressed()) ;        
+        return (gp != null && gp.isAPressed()) ;
     }
 
     private void manualShootState() {

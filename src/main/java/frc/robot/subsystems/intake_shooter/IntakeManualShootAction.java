@@ -71,6 +71,8 @@ public class IntakeManualShootAction extends Action {
 
         start_ = intake_.getRobot().getTime() ;
 
+        intake_.syncEncoders();
+
         if (!intake_.isHoldingNote() && !force_) {
             MessageLogger logger = intake_.getRobot().getMessageLogger() ;
             logger.startMessage(MessageType.Error).add("ManualShootAction started with no note in intake").endMessage();
