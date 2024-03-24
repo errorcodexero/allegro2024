@@ -620,29 +620,29 @@
                     ],
                     "endvelocity": 0,
                     "maxacceleration": 2,
-                    "maxvelocity": 3,
+                    "maxvelocity": 2,
                     "name": "P7",
                     "points": [
                         {
-                            "heading": 0,
+                            "heading": -90,
                             "swrot": 0,
                             "swrotvel": 0,
                             "x": 1.44277,
                             "y": 5.47006
                         },
                         {
-                            "heading": 20.758146349675833,
+                            "heading": -53.74616226255517,
                             "swrot": 0,
                             "swrotvel": 0,
-                            "x": 4.541627808685388,
-                            "y": 6.7722045359056295
+                            "x": 2.4720598946128485,
+                            "y": 2.903719193674223
                         },
                         {
                             "heading": 0,
                             "swrot": 0,
                             "swrotvel": 0,
-                            "x": 8.210559115527731,
-                            "y": 7.562922489966478
+                            "x": 7.60286510169562,
+                            "y": 0.7132600475735016
                         }
                     ],
                     "startvelocity": 0

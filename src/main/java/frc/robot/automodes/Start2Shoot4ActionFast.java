@@ -132,8 +132,8 @@ public class Start2Shoot4ActionFast extends Action {
     private void shoot2State() {
         if (manual_shoot_.isDone()) {
             robot_.getIntakeShooter().setAction(start_collect_, true) ;            
-            robot_.getSwerve().setAction(p1_, true) ;
-            state_ = State.Path3 ;            
+            robot_.getSwerve().setAction(p5_, true) ;
+            state_ = State.Path5;
         }
     }
 
@@ -185,14 +185,14 @@ public class Start2Shoot4ActionFast extends Action {
         if (robot_.getRobot().getTime() - state_start_time_ > kPath6Delay && robot_.getIntakeShooter().getAction() != manual_shoot_ && start_collect_.isDone())  {
             robot_.getIntakeShooter().setAction(manual_shoot_, true) ;
             state_ = State.Shoot4 ;
-        }        
+        }
     }
 
     //
     // Shooting the fourth note (the third collected note)
     //
     private void shoot4State() {
-        if (manual_shoot_.isDone()) {
+        if (!robot_.getIntakeShooter().isHoldingNote()) {
             robot_.getSwerve().setAction(p7_, true) ;
             robot_.getIntakeShooter().setAction(stow_, true) ;
             state_ = State.StowState ;

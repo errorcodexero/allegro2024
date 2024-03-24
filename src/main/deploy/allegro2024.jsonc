@@ -352,7 +352,7 @@
                 },
                 "manual-shoot" : {
                     "subwoofer-center" : {
-                        "tilt" : -65.0,
+                        "tilt" : -67.0,
                         "tilt-pos-threshold" : 5.0,
                         "tilt-velocity-threshold" : 5.0,
 
@@ -364,7 +364,7 @@
                         "shooter-velocity-threshold" : 5.0
                     },
                     "subwoofer-center-low" : {
-                        "tilt" : 5,
+                        "tilt" : 7,
                         "tilt-pos-threshold" : 5.0,
                         "tilt-velocity-threshold" : 5.0,
 
