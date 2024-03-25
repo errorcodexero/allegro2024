@@ -18,16 +18,16 @@ public class Start2Shoot4DynamicAction extends AllegroAutoModeAction {
 
     private static final double kDelayForIntakeDownTime = 0.5 ;
     private static final double kPath2ShootDelay = 0.5 ;
-    private static final double kPath4ShootDelay = 1.0 ;
-    private static final double kPath6ShootDelay = 1.0 ;
+    private static final double kPath4ShootDelay = 1.4 ;
+    private static final double kPath6ShootDelay = 1.2 ;
 
     private static final double [] kPathMaxVelocity = { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 } ;
-    private static final double [] kPathMaxAccel = { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 } ;    
+    private static final double [] kPathMaxAccel = { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 } ;
 
-    private static final Pose2dWithRotation kShootPose = new Pose2dWithRotation(new Pose2d(1.46, 5.52, Rotation2d.fromDegrees(0.0)), Rotation2d.fromDegrees(0.0)) ;        
-    private static final Pose2dWithRotation kCollect1Pose = new Pose2dWithRotation(new Pose2d(2.32, 5.52, Rotation2d.fromDegrees(0.0)), Rotation2d.fromDegrees(0.0)) ;    
-    private static final Pose2dWithRotation kCollect2Pose = new Pose2dWithRotation(new Pose2d(2.36, 6.53, Rotation2d.fromDegrees(45.0)), Rotation2d.fromDegrees(45.0)) ;    
-    private static final Pose2dWithRotation kCollect3Pose = new Pose2dWithRotation(new Pose2d(2.36, 4.37, Rotation2d.fromDegrees(-45.0)), Rotation2d.fromDegrees(-45.0)) ;
+    private static final Pose2dWithRotation kShootPose = new Pose2dWithRotation(new Pose2d(1.46, 5.52, Rotation2d.fromDegrees(0.0)), Rotation2d.fromDegrees(128.0)) ;
+    private static final Pose2dWithRotation kCollect1Pose = new Pose2dWithRotation(new Pose2d(2.46, 5.32, Rotation2d.fromDegrees(0.0)), Rotation2d.fromDegrees(0.0)) ;
+    private static final Pose2dWithRotation kCollect2Pose = new Pose2dWithRotation(new Pose2d(2.46, 6.32, Rotation2d.fromDegrees(45.0)), Rotation2d.fromDegrees(45.0)) ;
+    private static final Pose2dWithRotation kCollect3Pose = new Pose2dWithRotation(new Pose2d(2.46, 4.07, Rotation2d.fromDegrees(-45.0)), Rotation2d.fromDegrees(-45.0)) ;
     private static final Pose2dWithRotation kNearSidePose = new Pose2dWithRotation(new Pose2d(7.42, 7.37, Rotation2d.fromDegrees(0.0)), Rotation2d.fromDegrees(0.0)) ;
     private static final Pose2dWithRotation kFarSidePose1 = new Pose2dWithRotation(new Pose2d(2.84, 2.63, Rotation2d.fromDegrees(0.0)), Rotation2d.fromDegrees(0.0)) ;
     private static final Pose2dWithRotation kFarSidePose2 = new Pose2dWithRotation(new Pose2d(7.42, 0.86, Rotation2d.fromDegrees(0.0)), Rotation2d.fromDegrees(0.0)) ;
@@ -37,6 +37,7 @@ public class Start2Shoot4DynamicAction extends AllegroAutoModeAction {
         Shoot1,
         DelayForIntakeDown,
         DrivingPath1,
+        Path1Delay,
         DrivingPath2,
         DrivingPath3,
         DrivingPath4,
@@ -90,16 +91,22 @@ public class Start2Shoot4DynamicAction extends AllegroAutoModeAction {
             case DrivingPath1:
                 if (isCurrentPathDone()) {
                     if (hasNote()) {
-                        gotoPoseWithRotationAndShoot("S2S4D-P2", kPathMaxVelocity[1], kPathMaxAccel[1], kShootPose, kPath2ShootDelay);
-                        state_ = State.DrivingPath2 ;
-                    } else {
+                        state_ = State.Path1Delay ;
+                    }
+                    else {
                         //
                         // TODO - test if it missing the note it does the right thing
                         //        or if we need more waypoints on the path between collect spots
                         //                        
                         gotoPoseWithRotationAndCollect("S2S4D-P3", kPathMaxVelocity[2], kPathMaxAccel[2], kCollect2Pose);
-                        state_ = State.DrivingPath3 ;                        
-                    }
+                        state_ = State.DrivingPath3 ;    
+                    }                    
+                }
+                break ;
+            case Path1Delay:
+                if (getRobot().getTime() - state_start_time_ > 1.0) {
+                    gotoPoseWithRotationAndShoot("S2S4D-P2", kPathMaxVelocity[1], kPathMaxAccel[1], kShootPose, kPath2ShootDelay);
+                    state_ = State.DrivingPath2 ;                    
                 }
                 break ;
             

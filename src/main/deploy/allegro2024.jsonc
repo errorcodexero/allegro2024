@@ -956,7 +956,7 @@
             //
             "estimator" : {
                 "advanced-rejection" : false,                   // If true, the advanced rejection of vision samples is used, see the code for more details
-                "vision-reject-threshold" : 5.0,                // Reject vision samples that are more than this distance from the current robot pose
+                "vision-reject-threshold" : 7.0,                // Reject vision samples that are more than this distance from the current robot pose
                 "single-threshold" : 2.0,                       // When we see a single target, and we are greater than this distance, use the single-far std devs
                                                                 // Otherwise use the single-near std devs
                 "multi-threshold" : 4.0,                        // When we see multiple targets, and we are greater than this distance, use the multi-far std devs
@@ -1056,7 +1056,7 @@
                     "kd": 0
                 },
                 "rotation": {
-                    "kp": 7.0,         // 8
+                    "kp": 1.0,         // 8
                     "ki": 0,
                     "kd": 0
                 }

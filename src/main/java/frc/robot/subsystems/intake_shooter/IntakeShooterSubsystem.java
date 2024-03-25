@@ -5,6 +5,8 @@ import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.misc.EncoderMapper;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -154,6 +156,13 @@ public class IntakeShooterSubsystem extends Subsystem {
         putDashboard("Angle", DisplayType.Verbose, angle_);
         putDashboard("note", DisplayType.Verbose, is_note_present_) ;
         putDashboard("hasnote", DisplayType.Always, note_present_);
+
+        MessageLogger logger = getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Info) ;
+        logger.add("tilt angle") ;
+        logger.add("motor", tilt_.getPosition()) ;
+        logger.add("encoder", getAbsEncoderAngle()) ;
+        logger.endMessage();
     }
     
     @Override

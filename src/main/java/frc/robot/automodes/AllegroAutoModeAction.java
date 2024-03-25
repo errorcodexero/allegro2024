@@ -111,7 +111,7 @@ public abstract class AllegroAutoModeAction extends Action {
 
     private Pose2dWithRotation getCurrentRobotPose() {
         Pose2d p = robot_.getSwerve().getPose() ;
-        return new Pose2dWithRotation(p, p.getRotation());
+        return new Pose2dWithRotation(p.getX(), p.getY(), p.getRotation());
     }
 
     private SwerveHolonomicDynamicPathAction createDynamicPath(String name, double maxv, double maxa, Pose2dWithRotation pts[]) throws Exception {
@@ -121,7 +121,7 @@ public abstract class AllegroAutoModeAction extends Action {
             allpts[i + 1] = pts[i] ;
         }
 
-        return new SwerveHolonomicDynamicPathAction(robot_.getSwerve(), name, maxv, maxa, allpts) ;
+        return new SwerveHolonomicDynamicPathAction(robot_.getSwerve(), name, maxv, maxa, 0.2, allpts) ;
     }
 
     protected boolean gotoPoseWithRotation(String name, double maxv, double maxa, Pose2dWithRotation pts[]) {
@@ -159,9 +159,7 @@ public abstract class AllegroAutoModeAction extends Action {
         if (!gotoPoseWithRotation(name, maxv, maxa, pts))
             return false ;
 
-        manual_shoot_low_.setDelay(delay) ;
-        robot_.getIntakeShooter().setAction(manual_shoot_low_, true) ;
-
+        current_path_.addDelayBasedAction(delay, ()->robot_.getIntakeShooter().setAction(manual_shoot_low_, true)) ;
         return true ;
     }
 

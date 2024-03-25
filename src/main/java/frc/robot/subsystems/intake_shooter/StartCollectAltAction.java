@@ -129,6 +129,7 @@ public class StartCollectAltAction extends CollectBaseAltAction {
                 if (getSubsystem().isNoteCurrentlyDetected()) {
                     getSubsystem().setHoldingNote(true);                    
                     rumbleGamepad() ;
+                    collecting_note_ = true ;                    
                     timer_.start();
                     state_ = CollectState.WaitingForCollect;
                 }
