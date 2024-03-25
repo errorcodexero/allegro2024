@@ -96,8 +96,6 @@ public class IntakeManualShootAction extends Action {
     }
 
     private void startShot() {
-        intake_.syncEncoders();
-
         intake_.getTilt().setAction(tilt_action_, true) ;
         intake_.getUpDown().setAction(up_down_action_, true) ;
         intake_.getShooter1().setAction(shooter1_action_, true) ;

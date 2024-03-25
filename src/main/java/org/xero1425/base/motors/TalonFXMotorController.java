@@ -84,6 +84,16 @@ public class TalonFXMotorController extends MotorController
         }
     }
 
+    public void setPIDv(double v) throws MotorRequestFailedException {
+        cfg_.Slot0.kV = v ;
+        checkError("setPID()", () -> ctrl_.getConfigurator().apply(cfg_.Slot0));        
+    }
+
+    public void setPIDp(double v) throws MotorRequestFailedException {
+        cfg_.Slot0.kP = v ;
+        checkError("setPID()", () -> ctrl_.getConfigurator().apply(cfg_.Slot0));        
+    }    
+
     /// \brief Returns the CAN ID of the motor
     /// \returns the CAN ID of the motor    
     public int getCanID() throws BadMotorRequestException, MotorRequestFailedException {

@@ -5,10 +5,13 @@ import org.xero1425.base.actions.Action;
 import org.xero1425.base.subsystems.swerve.SwerveHolonomicDynamicPathAction;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
 import org.xero1425.base.utils.Pose2dWithRotation;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 import org.xero1425.misc.XeroMath;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
 import frc.robot.subsystems.intake_shooter.IntakeGotoNamedPositionAction;
 import frc.robot.subsystems.intake_shooter.IntakeManualShootAction;
@@ -111,23 +114,28 @@ public abstract class AllegroAutoModeAction extends Action {
 
     private Pose2dWithRotation getCurrentRobotPose() {
         Pose2d p = robot_.getSwerve().getPose() ;
-        return new Pose2dWithRotation(p.getX(), p.getY(), p.getRotation());
+        MessageLogger logger = getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Info) ;
+        logger.add("getCurrentPose for path") ;
+        logger.add("pose", p.toString()) ;
+        logger.endMessage();
+        return new Pose2dWithRotation(p.getX(), p.getY(), p.getRotation(), p.getRotation());
     }
 
-    private SwerveHolonomicDynamicPathAction createDynamicPath(String name, double maxv, double maxa, Pose2dWithRotation pts[]) throws Exception {
+    private SwerveHolonomicDynamicPathAction createDynamicPath(String name, double maxv, double maxa, double pre, double post, Pose2dWithRotation pts[]) throws Exception {
         Pose2dWithRotation allpts[] = new Pose2dWithRotation[pts.length + 1] ;
         allpts[0] = getCurrentRobotPose() ;
         for(int i = 0 ; i < pts.length ; i++) {
             allpts[i + 1] = pts[i] ;
         }
 
-        return new SwerveHolonomicDynamicPathAction(robot_.getSwerve(), name, maxv, maxa, 0.2, allpts) ;
+        return new SwerveHolonomicDynamicPathAction(robot_.getSwerve(), name, maxv, maxa, 0.2, pre, post, allpts) ;
     }
 
-    protected boolean gotoPoseWithRotation(String name, double maxv, double maxa, Pose2dWithRotation pts[]) {
+    protected boolean gotoPoseWithRotation(String name, double maxv, double maxa, double pre, double post, Pose2dWithRotation pts[]) {
         boolean ret = true ;
         try {
-            current_path_ = createDynamicPath(name, maxv, maxa, pts) ;
+            current_path_ = createDynamicPath(name, maxv, maxa, pre, post, pts) ;
             robot_.getSwerve().setAction(current_path_, true) ;
         }
         catch(Exception ex) {
@@ -138,12 +146,12 @@ public abstract class AllegroAutoModeAction extends Action {
         return ret;
     }
 
-    protected boolean gotoPoseWithRotation(String name, double maxv, double maxa, Pose2dWithRotation dest) {
-        return gotoPoseWithRotation(name, maxv, maxa, new Pose2dWithRotation[] { dest });
+    protected boolean gotoPoseWithRotation(String name, double maxv, double maxa, double pre, double post, Pose2dWithRotation dest) {
+        return gotoPoseWithRotation(name, maxv, maxa, pre, post, new Pose2dWithRotation[] { dest });
     }
 
-    protected boolean gotoPoseWithRotationAndCollect(String name, double maxv, double maxa, Pose2dWithRotation pts[]) {
-        if (!gotoPoseWithRotation(name, maxv, maxa, pts))
+    protected boolean gotoPoseWithRotationAndCollect(String name, double maxv, double maxa, double pre, double post, Pose2dWithRotation pts[]) {
+        if (!gotoPoseWithRotation(name, maxv, maxa, pre, post, pts))
             return false ;
 
         robot_.getIntakeShooter().setAction(start_collect_, true) ;
@@ -151,20 +159,20 @@ public abstract class AllegroAutoModeAction extends Action {
         return true ;
     }
 
-    protected boolean gotoPoseWithRotationAndCollect(String name, double maxv, double maxa, Pose2dWithRotation dest) {
-        return gotoPoseWithRotationAndCollect(name, maxv, maxa, new Pose2dWithRotation[] { dest });
+    protected boolean gotoPoseWithRotationAndCollect(String name, double maxv, double maxa, double pre, double post, Pose2dWithRotation dest) {
+        return gotoPoseWithRotationAndCollect(name, maxv, maxa, pre, post, new Pose2dWithRotation[] { dest });
     }    
 
-    protected boolean gotoPoseWithRotationAndShoot(String name, double maxv, double maxa, Pose2dWithRotation pts[], double delay) {
-        if (!gotoPoseWithRotation(name, maxv, maxa, pts))
+    protected boolean gotoPoseWithRotationAndShoot(String name, double maxv, double maxa, double pre, double post, Pose2dWithRotation pts[], Translation2d loc, double dist) {
+        if (!gotoPoseWithRotation(name, maxv, maxa, pre, post, pts))
             return false ;
 
-        current_path_.addDelayBasedAction(delay, ()->robot_.getIntakeShooter().setAction(manual_shoot_low_, true)) ;
+        current_path_.addLocationBasedAction(loc, dist, ()->robot_.getIntakeShooter().setAction(manual_shoot_low_, true)) ;
         return true ;
     }
 
-    protected boolean gotoPoseWithRotationAndShoot(String name, double maxv, double maxa, Pose2dWithRotation dest, double delay) {
-        return gotoPoseWithRotationAndShoot(name, maxv, maxa, new Pose2dWithRotation[] { dest }, delay);
+    protected boolean gotoPoseWithRotationAndShoot(String name, double maxv, double maxa, double pre, double post, Pose2dWithRotation dest, Translation2d loc, double dist) {
+        return gotoPoseWithRotationAndShoot(name, maxv, maxa, pre, post, new Pose2dWithRotation[] { dest }, loc, dist);
     }      
 
     protected boolean isCurrentPathDone() {

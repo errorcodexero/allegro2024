@@ -12,6 +12,7 @@ import org.xero1425.misc.XeroMath;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
@@ -22,7 +23,6 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
     private Trajectory traj_ ;
     private TrajectoryConfig config_ ;
     private double start_ ;
-    private Rotation2d end_rot_ ;
     private String pathname_ ;
 
     private XeroTimer timer_ ;
@@ -39,24 +39,27 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
         "time",
         "tx (m)", "ty (m)", "th (deg)",
         "ax (m)", "ay (m)", "ah (deg)",
+        "tr (deg)", "ar (deg)"
     } ;    
 
     public interface Executor {
         void doit() ;
     } ;   
 
-    private class DelayBasedAction {
-        public final double Delay ;
+    private class LocationBasedAction {
+        public final Translation2d Location ;
+        public final double Distance ;
         public final Executor Function ;
         public boolean Executed ;
 
-        public DelayBasedAction(double delay, Executor fun) {
-            Delay = delay ;
+        public LocationBasedAction(Translation2d loc, double distance, Executor fun) {
+            Location = loc ;
+            Distance = distance ;
             Function = fun ;
         }
     }    
 
-    private List<DelayBasedAction> actions_ ;
+    private List<LocationBasedAction> actions_ ;
 
     public SwerveHolonomicDynamicPathAction(SwerveBaseSubsystem sub, String pathname, double maxv, double maxa, double to, Pose2dWithRotation pts[]) throws Exception {
         this(sub, pathname, maxv, maxa, to, 0.0, 0.0, pts) ;
@@ -69,48 +72,64 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
 
         double h = Math.atan2(pts[1].getY() - pts[0].getY(), pts[1].getX() - pts[0].getX()) ;
         Pose2d start = new Pose2d(pts[0].getTranslation(), Rotation2d.fromRadians(h)) ;
-        pts[0] = new Pose2dWithRotation(start, pts[0].getRotation()) ;
+        pts[0] = new Pose2dWithRotation(start, pts[0].getRobotRotation()) ;
 
-        traj_ = TrajectoryGenerator.generateTrajectory(Arrays.asList(pts), config_) ;
-        end_rot_ = pts[pts.length - 1].getRotation() ;
+        List<Pose2d> poses = Arrays.asList(pts) ;
+        traj_ = TrajectoryGenerator.generateTrajectory(poses, config_) ;
         pathname_ = pathname ;
-
-        MessageLogger logger = sub.getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Info) ;
-        logger.add("creating dynamic path") ;
-        logger.add("points", pts.length) ;
-        for(int i = 0 ; i < pts.length ; i++) {
-            logger.add(Integer.toString(i), pts[i].toString()) ;
-        }
-        logger.endMessage();
 
         plot_data_ = new Double[columns_.length] ;
         plot_id_ = getSubsystem().initPlot(pathname) ;
 
-        actions_ = new ArrayList<DelayBasedAction>() ;    
+        actions_ = new ArrayList<LocationBasedAction>() ;    
         
         timer_ = new XeroTimer(sub.getRobot(), "path", to);
 
         rot_pre_ = rotpre ;
         rot_post_ = rotpost ;
-        rot_start_ = pts[0].getRotation().getDegrees() ;
-        rot_travel_ = XeroMath.normalizeAngleDegrees(pts[pts.length - 1].getRotation().getDegrees() - rot_start_) ;
+        rot_start_ = pts[0].getRobotRotation().getDegrees() ;
+        rot_travel_ = XeroMath.normalizeAngleDegrees(pts[pts.length - 1].getRobotRotation().getDegrees() - rot_start_) ;
     }
 
     private Rotation2d rotatationValue(double elapsed) {
         if (elapsed < rot_pre_)
             return Rotation2d.fromDegrees(rot_start_) ;
         
-        if (elapsed > rot_pre_ + traj_.getTotalTimeSeconds())
+        if (elapsed > traj_.getTotalTimeSeconds() - rot_post_)
             return Rotation2d.fromDegrees(XeroMath.normalizeAngleDegrees(rot_start_ + rot_travel_)) ;
 
+        //
+        // The total time we are rotating
+        //
         double span = traj_.getTotalTimeSeconds() - rot_pre_ - rot_post_ ;
+
+        //
+        // How far we are along the ramp
+        //
         double pcnt = (elapsed - rot_pre_) / span ;
-        return Rotation2d.fromDegrees(XeroMath.normalizeAngleDegrees(rot_start_ + pcnt * rot_travel_)) ;
+
+        //
+        // The rotation where we should be
+        // 
+        double rv  = pcnt * rot_travel_ + rot_start_ ;
+
+        MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Info) ;
+        logger.add("compute rotation") ;
+        logger.add("pre", rot_pre_) ;
+        logger.add("post", rot_post_) ;
+        logger.add("rot_travel", rot_travel_) ;
+        logger.add("span", span) ;
+        logger.add("pcnt", pcnt) ;
+        logger.add("rv", rv) ;
+        logger.add("rvnorm", XeroMath.normalizeAngleDegrees(rv)) ;
+        logger.endMessage();
+
+        return Rotation2d.fromDegrees(XeroMath.normalizeAngleDegrees(rv)) ;
     }
 
-    public void addDelayBasedAction(double delay, Executor action) {
-        DelayBasedAction act = new DelayBasedAction(delay, action) ;
+    public void addLocationBasedAction(Translation2d loc, double dist, Executor action) {
+        LocationBasedAction act = new LocationBasedAction(loc, dist, action) ;
         actions_.add(act) ;
     }    
 
@@ -126,26 +145,22 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
         //
         // Initialize the actions that are executed based on distance
         //
-        for(DelayBasedAction item : actions_) {
+        for(LocationBasedAction item : actions_) {
             item.Executed = false ;
         }        
     }
 
     private void checkActions(double time) {
-        for(DelayBasedAction item : actions_) {
-            if (time > item.Delay && !item.Executed) {
-                MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
-                logger.startMessage(MessageType.Info);
-                logger.add("PathFollowing executing lambda") ;
-                logger.add("target", item.Delay);
-                logger.add("actual", time) ;
-                logger.endMessage();       
-                
+        Translation2d curloc = getSubsystem().getPose().getTranslation();
+
+        for(LocationBasedAction item : actions_) {
+            double act = curloc.getDistance(item.Location) ;
+            if (act < item.Distance && !item.Executed) {
                 item.Function.doit() ;
                 item.Executed = true ;
             }
         }
-    }    
+    }
 
     @Override
     public void run() throws Exception {
@@ -164,9 +179,13 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
         Pose2d actual = getSubsystem().getPose() ;
         MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
         logger.startMessage(MessageType.Info) ;
-        logger.add("SwerveHolonomicPathFollower Target:").add("time", now - start_) ;
+        logger.add("SwerveHolonomicPathFollower Target:") ;
+        logger.add("time", elapsed) ;
         logger.add("target ", target.poseMeters) ;
         logger.add("actual", actual) ;
+        logger.add("stangle", rot_start_) ;
+        logger.add("enangle", rot_start_ + rot_travel_) ;
+        logger.add("rotangle", rot) ;
         logger.endMessage();
 
         int i = 0 ;
@@ -177,6 +196,9 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
         plot_data_[i++] = actual.getX() ;
         plot_data_[i++] = actual.getY() ;
         plot_data_[i++] = actual.getRotation().getDegrees() ;
+        plot_data_[i++] = rot.getDegrees() ;
+        plot_data_[i++] = actual.getRotation().getDegrees();
+
         getSubsystem().addPlotData(plot_id_, plot_data_) ;   
 
         if (!waiting_ && elapsed >= traj_.getTotalTimeSeconds()) {

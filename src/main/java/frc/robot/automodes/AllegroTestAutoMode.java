@@ -416,6 +416,8 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
             case 120:
                 if (amptrap != null) {
                     addSubActionPair(amptrap, new AmpTrapPositionAction(amptrap, getDouble("angle"), getDouble("height")), true) ;
+                    addAction(new DelayAction(getAutoController().getRobot(), 1.0));
+                    addSubActionPair(amptrap, new AmpTrapPositionAction(amptrap, 0.0, 0.0), true) ;
                 }   
                 break;
 

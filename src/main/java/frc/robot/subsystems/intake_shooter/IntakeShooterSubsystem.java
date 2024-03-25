@@ -157,12 +157,12 @@ public class IntakeShooterSubsystem extends Subsystem {
         putDashboard("note", DisplayType.Verbose, is_note_present_) ;
         putDashboard("hasnote", DisplayType.Always, note_present_);
 
-        MessageLogger logger = getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Info) ;
-        logger.add("tilt angle") ;
-        logger.add("motor", tilt_.getPosition()) ;
-        logger.add("encoder", getAbsEncoderAngle()) ;
-        logger.endMessage();
+        // MessageLogger logger = getRobot().getMessageLogger() ;
+        // logger.startMessage(MessageType.Info) ;
+        // logger.add("tilt angle") ;
+        // logger.add("motor", tilt_.getPosition()) ;
+        // logger.add("encoder", getAbsEncoderAngle()) ;
+        // logger.endMessage();
     }
     
     @Override
@@ -171,10 +171,7 @@ public class IntakeShooterSubsystem extends Subsystem {
     }
 
     public double getAbsEncoderAngle() {
-        double eval = absoluteEncoder_.getVoltage();
-        double angle = encoderMapper_.toRobot(eval);
-
-        return angle ;
+        return angle_;
     }
     
     private void updateMotorPosition() throws BadMotorRequestException, MotorRequestFailedException {

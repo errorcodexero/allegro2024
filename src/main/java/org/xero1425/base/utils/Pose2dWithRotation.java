@@ -7,9 +7,9 @@ import edu.wpi.first.math.geometry.Translation2d;
 public class Pose2dWithRotation extends Pose2d {
     private Rotation2d rotation_ ;
     
-    public Pose2dWithRotation(double x, double y, Rotation2d heading) {
+    public Pose2dWithRotation(double x, double y, Rotation2d heading, Rotation2d rotation) {
         super(new Translation2d(x, y), heading) ;
-        rotation_ = new Rotation2d() ;
+        rotation_ = rotation ;
     }
 
     public Pose2dWithRotation(Pose2d pose, Rotation2d rotation) {
@@ -17,7 +17,7 @@ public class Pose2dWithRotation extends Pose2d {
         rotation_ = rotation ;
     }    
 
-    public Rotation2d getRotation() {
+    public Rotation2d getRobotRotation() {
         return rotation_ ;
     }
 }

@@ -1,9 +1,12 @@
 package frc.robot.subsystems.amp_trap;
 
 import org.xero1425.base.actions.Action;
+import org.xero1425.base.motors.TalonFXMotorController;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
+
+import com.ctre.phoenix6.hardware.TalonFX;
 
 public class AmpTrapPositionAction extends Action {
     private enum State {
@@ -30,8 +33,7 @@ public class AmpTrapPositionAction extends Action {
 
     private State state_ ;
 
-    public 
-    AmpTrapPositionAction(AmpTrapSubsystem sub, double angle, double height) throws Exception {
+    public AmpTrapPositionAction(AmpTrapSubsystem sub, double angle, double height) throws Exception {
         super(sub.getRobot().getMessageLogger()) ;
 
         sub_ = sub ;
@@ -134,6 +136,19 @@ public class AmpTrapPositionAction extends Action {
         super.run() ;
 
         State prev = state_ ;
+
+        TalonFXMotorController tfx = (TalonFXMotorController)sub_.getArm().getMotorController() ;
+        double pos = sub_.getArm().getPosition() ;
+        if (pos >= 0.0 && pos <= 180.0) {
+            // tfx.setPIDv(1.6);
+            // tfx.setPIDp(2.8) ;
+            tfx.setPIDv(0.2);
+            tfx.setPIDp(2.3) ;            
+        }
+        else if (pos > 180.0) {
+            tfx.setPIDv(0.2);
+            tfx.setPIDp(2.3) ;
+        }
 
         if (state_ == State.CrossMinToMax) {
             //
