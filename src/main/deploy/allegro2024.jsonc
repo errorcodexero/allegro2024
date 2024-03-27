@@ -219,16 +219,16 @@
             },
             "pids" : {
                 "position" : {
-                    "kp" : 2.8,        
+                    "kp" : 2.3,        
                     "ki" : 0.0,
                     "kd" : 0.0,
-                    "kv" : 1.6,
+                    "kv" : 0.2,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
                     "maxv" : 360.0,
-                    "maxa" : 325.0,
+                    "maxa" : 300.0,
                     "jerk" : 0.0
                 }               
             }
@@ -274,6 +274,15 @@
                 "move-note" : {
                     "power" : 0.05
                 }
+            },
+            "hold" : {
+                "kp" : 0.8,
+                "ki" : 0.0,
+                "kd" : 0.0,
+                "kf" : 0.0,
+                "min" : -1.0,
+                "max" : 1.0,
+                "imax" : 0.0
             }
         },
         "climber" : {
@@ -364,7 +373,7 @@
                         "shooter-velocity-threshold" : 5.0
                     },
                     "subwoofer-center-low" : {
-                        "tilt" : 8,
+                        "tilt" : 5,
                         "tilt-pos-threshold" : 5.0,
                         "tilt-velocity-threshold" : 5.0,
 
@@ -458,11 +467,11 @@
                     },
                     "3" : {
                         "x" : 1.82,
-                        "y" : -57
+                        "y" : -55
                     },
                     "4" : {
                         "x" : 2.119,
-                        "y" : -57
+                        "y" : -49
                     },
                     "5" : {
                         "x" : 2.12,
@@ -474,31 +483,31 @@
                     },
                     "7" : {
                         "x" : 2.73,
-                        "y" : -66
+                        "y" : -64
                     },
                     "8" : {
                         "x" : 3.04,
-                        "y" : -64
+                        "y" : -61
                     },
                     "9" : {
                         "x" : 3.34,
-                        "y" : -62
+                        "y" : -59.5
                     },
                     "10" : {
                         "x" : 3.64,
-                        "y" : -60
+                        "y" : -57.5
                     },
                     "11" : {
                         "x" : 3.94,
-                        "y" : -56.0
+                        "y" : -57.0
                     },
                     "12" : {
                         "x" : 4.17,
-                        "y" : -59.0
+                        "y" : -54.5
                     },
                     "13" : {
                         "x" : 4.38,
-                        "y" : -57.0
+                        "y" : -54.25
                     }                                                        
                 },
                 "shooter" : {
@@ -930,7 +939,7 @@
             // General properties used by the swerve drive
             //
             "props" : {
-                "stopped-threshold" : 0.05          // meters per second
+                "stopped-threshold" : 0.1          // meters per second
             },
 
             //
@@ -1103,16 +1112,16 @@
     },
     "testmode" : {
         "enabled": true,
-        "which": 120,
+        "which": 1,
         "0": {
             "angle": 0,
-            "power": 0.5,
-            "duration": 2.0         // optional, if missing will run forever
+            "power": 0.1,
+            "duration": 3.0         // optional, if missing will run forever
         },
         "1": {
             "angle": 0.0,
-            "speed": 2.0,
-            "duration" : 2.0        // optional, if missing will run forever
+            "speed": 1.0,
+            "duration" : 3.0        // optional, if missing will run forever
         },
         "2" : {
             "duration" : 3.0,
@@ -1137,7 +1146,7 @@
             "speed-br" : 2.5
         },
         "4": {
-            "name": "Test-P1"
+            "name": "Test-P2"
         },
         "10" : {
             "power" : 0.5,
@@ -1162,7 +1171,7 @@
             "duration" : 2.0
         },
         "32" : {
-            "velocity" : 80
+            "velocity" : 65
         },
         "40" : {
             "power" : 0.5,

@@ -58,14 +58,16 @@ public class SwerveTrackAngle extends Action {
             is_at_target_ = false ;
         }
 
+        double angvel = Math.toRadians(err_ * p_) ;        
+
         MessageLogger logger = swerve_.getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Debug, swerve_.getLoggerID());
+        logger.startMessage(MessageType.Debug);
         logger.add("err", err_) ;
         logger.add("postel", postol_) ;
         logger.add("isAt", is_at_target_) ;
+        logger.add("angvel", angvel) ;
         logger.endMessage();
 
-        double angvel = Math.toRadians(err_ * p_) ;
         ChassisSpeeds speeds = new ChassisSpeeds(0.0, 0.0, angvel) ;
         swerve_.drive(speeds) ;
     }

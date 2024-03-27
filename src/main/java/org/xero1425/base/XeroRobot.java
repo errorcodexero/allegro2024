@@ -1062,6 +1062,10 @@ public abstract class XeroRobot extends TimedRobot {
         }
     }
 
+    public boolean isTestMode() {
+        return auto_controller_.isTestMode() ;
+    }
+
     private void enableMessageLogger() {
         String logfile = SimArgs.LogFileName ;
         MessageDestination dest ;

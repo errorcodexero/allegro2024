@@ -75,7 +75,6 @@ public class Start2Shoot4Action extends Action {
         super.start() ;
 
         state_ = State.Shoot1 ;
-        robot_.getIntakeShooter().setHoldingNote(true);        
         robot_.getIntakeShooter().setAction(manual_shoot_, true) ;
     }
 

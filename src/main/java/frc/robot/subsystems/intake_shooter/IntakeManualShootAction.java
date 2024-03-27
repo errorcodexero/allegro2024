@@ -33,8 +33,6 @@ public class IntakeManualShootAction extends Action {
     private boolean tilt_ready_ ;
     private boolean updown_ready_ ;
     private boolean force_ ;
-    private double delay_ ;
-    private boolean started_ ;
 
     public IntakeManualShootAction(IntakeShooterSubsystem intake, String location) throws Exception {
         this(intake, location, false) ;
@@ -43,11 +41,9 @@ public class IntakeManualShootAction extends Action {
     public IntakeManualShootAction(IntakeShooterSubsystem intake, String location, boolean force) throws Exception {
         super(intake.getRobot().getMessageLogger());
 
-        delay_ = 0.0 ;
         intake_ = intake;
         location_ = location ;
         force_ = force ;
-        started_ = true ;
 
         kTiltPosition = intake.getSettingsValue("actions:manual-shoot:" + location + ":tilt").getDouble();
         kTiltPositionThreshold = intake.getSettingsValue("actions:manual-shoot:" + location + ":tilt-pos-threshold").getDouble();
@@ -69,10 +65,6 @@ public class IntakeManualShootAction extends Action {
         feeder_action_ = new MotorEncoderPowerAction(intake_.getFeeder(), feedpower, feedtime) ;
     }
 
-    public void setDelay(double delay) {
-        delay_ = delay ;
-    }
-
     @Override
     public void start() throws Exception {
         super.start();
@@ -85,13 +77,7 @@ public class IntakeManualShootAction extends Action {
             setDone() ;
         }
         else {
-            if (delay_ == 0.0) {
-                startShot() ;
-                started_ = true ;
-            }
-            else {
-                started_ = false ;
-            }
+            startShot() ;
         }
     }
 
@@ -110,14 +96,7 @@ public class IntakeManualShootAction extends Action {
     public void run() throws Exception {
         super.run();
 
-        if (!started_) {
-            if (intake_.getRobot().getTime() - start_ > delay_) {
-                startShot() ;
-                started_ = true ;
-            }
-            return ;
-        }
-        else if (!shooting_) {
+        if (!shooting_) {
             if (tilt_action_.isDone()) {
                 tilt_ready_ = true ;
             }
@@ -126,8 +105,18 @@ public class IntakeManualShootAction extends Action {
                 updown_ready_ = true ;
             }
 
+            MessageLogger logger = intake_.getRobot().getMessageLogger() ;
+            logger.startMessage(MessageType.Info) ;
+            logger.add("shot: ") ;
+            logger.add("tilt", intake_.getTilt().getPosition()) ;
+            logger.add("tiltabs", intake_.getAbsEncoderAngle());
+            logger.add("updown", intake_.getUpDown().getPosition()) ;
+            logger.add("shooter1", intake_.getShooter1().getVelocity()) ;
+            logger.add("shooter2", intake_.getShooter2().getVelocity()) ;
+            logger.endMessage();            
+
             if (shooter1_action_.isAtVelocity() && shooter2_action_.isAtVelocity() && tilt_ready_ && updown_ready_) {
-                MessageLogger logger = intake_.getRobot().getMessageLogger() ;
+                // MessageLogger logger = intake_.getRobot().getMessageLogger() ;
                 logger.startMessage(MessageType.Info) ;
                 logger.add("shot: ") ;
                 logger.add("tilt", intake_.getTilt().getPosition()) ;

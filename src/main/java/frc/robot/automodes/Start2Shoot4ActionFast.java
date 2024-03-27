@@ -84,7 +84,6 @@ public class Start2Shoot4ActionFast extends Action {
         state_start_time_ = robot_.getRobot().getTime() ;
 
         state_ = State.Shoot1 ;
-        robot_.getIntakeShooter().setHoldingNote(true);        
         robot_.getIntakeShooter().setAction(manual_shoot_, true) ;
     }
 

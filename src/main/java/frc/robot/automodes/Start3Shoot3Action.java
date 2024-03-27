@@ -81,7 +81,6 @@ public class Start3Shoot3Action extends Action {
     @Override
     public void start() {
         state_ = State.Shoot1 ;
-        robot_.getIntakeShooter().setHoldingNote(true);        
         robot_.getIntakeShooter().setAction(manual_shoot_, true) ;
     }
 

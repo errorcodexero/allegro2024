@@ -77,12 +77,13 @@ public abstract class AllegroAutoModeAction extends Action {
         return r ;
     }
 
-    protected Pose2d adjustPoseRedBlue(Pose2d pose) {
+    protected Pose2dWithRotation adjustPoseRedBlue(Pose2dWithRotation pose) {
         if (mirror_) {
             double h = XeroMath.normalizeAngleDegrees(180 - pose.getRotation().getDegrees()) ;
+            double r = XeroMath.normalizeAngleDegrees(180 - pose.getRobotRotation().getDegrees()) ;
             double x = mvalue_ - pose.getTranslation().getX() ;
             double y = pose.getTranslation().getY() ;
-            pose = new Pose2d(x, y, Rotation2d.fromDegrees(h)) ;
+            pose = new Pose2dWithRotation(x, y, Rotation2d.fromDegrees(h), Rotation2d.fromDegrees(r)) ;
         }
 
         return pose ;

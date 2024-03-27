@@ -131,10 +131,10 @@ public class SwerveModule {
     }
 
     private void addDashBoardEntries(ShuffleboardContainer container) {
-        container.addNumber("Velocity", () -> {
+        container.addNumber("Distance", () -> {
             double ret = 0 ;
             try {
-                ret = getDriveVelocity();
+                ret = getDistance();
             } catch (Exception e) {
                 ret = Double.MAX_VALUE ;
             }

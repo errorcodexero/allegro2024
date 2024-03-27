@@ -9,6 +9,8 @@ import org.xero1425.base.subsystems.swerve.SwerveSpeedAngleAction;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MissingParameterException;
 
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+
 public class 
 SwerveTestAutoMode extends TestAutoMode {
 

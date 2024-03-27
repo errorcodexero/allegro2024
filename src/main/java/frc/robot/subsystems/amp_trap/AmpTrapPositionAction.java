@@ -3,6 +3,7 @@ package frc.robot.subsystems.amp_trap;
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.motors.TalonFXMotorController;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
+import org.xero1425.base.subsystems.motorsubsystem.RioHoldAction;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
@@ -31,6 +32,8 @@ public class AmpTrapPositionAction extends Action {
     private MCMotionMagicAction arm_goto_target_action_ ;
     private MCMotionMagicAction elevator_goto_target_action_ ;
 
+    private RioHoldAction hold_game_piece_action_ ;
+
     private State state_ ;
 
     public AmpTrapPositionAction(AmpTrapSubsystem sub, double angle, double height) throws Exception {
@@ -51,6 +54,8 @@ public class AmpTrapPositionAction extends Action {
         arm_goto_target_action_ = new MCMotionMagicAction(sub_.getArm(), "pids:position", target_angle_, 5.0, 1.0) ;
         elevator_goto_target_action_ = new MCMotionMagicAction(sub_.getElevator(), "pids:position", target_height_, 0.03, 0.05) ;
 
+        hold_game_piece_action_ = new RioHoldAction(sub_.getManipulator());
+
         state_ = State.Idle ;
     }
 
@@ -70,6 +75,13 @@ public class AmpTrapPositionAction extends Action {
         logger.add("keepoutmin", keep_out_min_) ;
         logger.add("target", target_angle_) ;
         logger.endMessage();
+
+        if (sub_.isHoldingNote()) {
+            sub_.getManipulator().setAction(hold_game_piece_action_, true) ;
+        }
+        else {
+            sub_.getManipulator().cancelAction();
+        }
 
         if (current < keep_out_min_ && target_angle_ > keep_out_max_) {
             //
@@ -137,18 +149,18 @@ public class AmpTrapPositionAction extends Action {
 
         State prev = state_ ;
 
-        TalonFXMotorController tfx = (TalonFXMotorController)sub_.getArm().getMotorController() ;
-        double pos = sub_.getArm().getPosition() ;
-        if (pos >= 0.0 && pos <= 180.0) {
-            // tfx.setPIDv(1.6);
-            // tfx.setPIDp(2.8) ;
-            tfx.setPIDv(0.2);
-            tfx.setPIDp(2.3) ;            
-        }
-        else if (pos > 180.0) {
-            tfx.setPIDv(0.2);
-            tfx.setPIDp(2.3) ;
-        }
+        // TalonFXMotorController tfx = (TalonFXMotorController)sub_.getArm().getMotorController() ;
+        // double pos = sub_.getArm().getPosition() ;
+        // if (pos >= 0.0 && pos <= 180.0) {
+        //     // tfx.setPIDv(1.6);
+        //     // tfx.setPIDp(2.8) ;
+        //     tfx.setPIDv(0.2);
+        //     tfx.setPIDp(2.3) ;            
+        // }
+        // else if (pos > 180.0) {
+        //     tfx.setPIDv(0.2);
+        //     tfx.setPIDp(2.3) ;
+        // }
 
         if (state_ == State.CrossMinToMax) {
             //

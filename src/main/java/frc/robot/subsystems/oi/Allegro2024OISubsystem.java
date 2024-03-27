@@ -1,5 +1,6 @@
 package frc.robot.subsystems.oi;
 
+import org.xero1425.base.LoopType;
 import org.xero1425.base.subsystems.DriveBaseSubsystem;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
@@ -230,6 +231,22 @@ public class Allegro2024OISubsystem extends OISubsystem {
         climb_only_ = false ;
     }
 
+    @Override
+    public void init(LoopType prev, LoopType next) {
+        super.init(prev, next) ;
+        
+        AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem();
+
+        if (prev == LoopType.Disabled && next == LoopType.Teleop) {
+            if (robot.getIntakeShooter().isHoldingNote()) {
+                dispositionNoteInIntake();
+            }
+            else {
+                state_ = OIState.Idle ;
+            }
+        }
+    }
+
     public AllegroOIPanel getPanel() {
         return oipanel_ ;
     }
@@ -321,16 +338,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     private boolean isShootPressed() {
         SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;
-
-        MessageLogger logger = getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Debug) ;
-        if (gp != null) {
-            logger.add("gamepad shoot button", gp.isAPressed()) ;
-        }
-        else {
-            logger.add("gamepad is null") ;
-        }
-        logger.endMessage();
 
         // return oipanel_.isShootPressed() || (gp != null && gp.isAPressed()) ;        
         return (gp != null && gp.isAPressed()) ;
@@ -532,6 +539,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
             else {
                 state_ = OIState.NoteGoingToTrapPosition ;
                 robot.getAmpTrap().setAction(goto_trap_place_pos_action_, true) ;
+                robot.getSuperStructure().getClimber().setAction(hooks_up_action_, true) ;                
             }
 
             //
@@ -540,7 +548,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
             robot.getIntakeShooter().setAction(stow_intake_action_, true) ;
         }
     }
-
 
     private void noteGoingToAmpPositonState() {
         if (amp_prep_pos_action_.isDone()) {
@@ -593,7 +600,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     private void noteInTrapPositionState() {
         oipanel_.setClimbUpPrepLED(LEDState.ON);
-        if (oipanel_.isClimbUpPrepPressed()) {
+        if (oipanel_.isClimbUpPrepPressed() || true) {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
             oipanel_.setClimbUpPrepLED(LEDState.BLINK_FAST);
             robot.getAmpTrap().setAction(goto_climb_pos_action_, true) ;

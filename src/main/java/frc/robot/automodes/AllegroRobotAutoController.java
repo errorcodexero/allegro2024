@@ -62,8 +62,8 @@ public class AllegroRobotAutoController extends AutoController {
                 // addAutoMode(new JustShootAutoMode(this, "subwoofer-center-low")) ;
                 // addAutoMode(new NothingAutoMode(this, mirror, mvalue)) ;  
 
+                addAutoMode(new NothingAutoMode(this, mirror, mvalue)) ; 
                 addAutoMode(new Start3Shoot3AutoMode(this, mirror, mvalue));
-              
                 addAutoMode(new Start2Shoot4DynamicAutoMode(this, mirror, mvalue)) ;
             }
             catch(Exception ex) {

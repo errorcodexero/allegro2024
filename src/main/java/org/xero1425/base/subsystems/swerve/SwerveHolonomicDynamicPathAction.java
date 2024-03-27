@@ -113,17 +113,17 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
         // 
         double rv  = pcnt * rot_travel_ + rot_start_ ;
 
-        MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Info) ;
-        logger.add("compute rotation") ;
-        logger.add("pre", rot_pre_) ;
-        logger.add("post", rot_post_) ;
-        logger.add("rot_travel", rot_travel_) ;
-        logger.add("span", span) ;
-        logger.add("pcnt", pcnt) ;
-        logger.add("rv", rv) ;
-        logger.add("rvnorm", XeroMath.normalizeAngleDegrees(rv)) ;
-        logger.endMessage();
+        // MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
+        // logger.startMessage(MessageType.Info) ;
+        // logger.add("compute rotation") ;
+        // logger.add("pre", rot_pre_) ;
+        // logger.add("post", rot_post_) ;
+        // logger.add("rot_travel", rot_travel_) ;
+        // logger.add("span", span) ;
+        // logger.add("pcnt", pcnt) ;
+        // logger.add("rv", rv) ;
+        // logger.add("rvnorm", XeroMath.normalizeAngleDegrees(rv)) ;
+        // logger.endMessage();
 
         return Rotation2d.fromDegrees(XeroMath.normalizeAngleDegrees(rv)) ;
     }
@@ -178,15 +178,15 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
 
         Pose2d actual = getSubsystem().getPose() ;
         MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Info) ;
-        logger.add("SwerveHolonomicPathFollower Target:") ;
-        logger.add("time", elapsed) ;
-        logger.add("target ", target.poseMeters) ;
-        logger.add("actual", actual) ;
-        logger.add("stangle", rot_start_) ;
-        logger.add("enangle", rot_start_ + rot_travel_) ;
-        logger.add("rotangle", rot) ;
-        logger.endMessage();
+        // logger.startMessage(MessageType.Info) ;
+        // logger.add("SwerveHolonomicPathFollower Target:") ;
+        // logger.add("time", elapsed) ;
+        // logger.add("target ", target.poseMeters) ;
+        // logger.add("actual", actual) ;
+        // logger.add("stangle", rot_start_) ;
+        // logger.add("enangle", rot_start_ + rot_travel_) ;
+        // logger.add("rotangle", rot) ;
+        // logger.endMessage();
 
         int i = 0 ;
         plot_data_[i++] = getSubsystem().getRobot().getTime() - start_ ;

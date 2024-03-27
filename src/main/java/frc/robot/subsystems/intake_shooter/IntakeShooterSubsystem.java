@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 public class IntakeShooterSubsystem extends Subsystem {
 
+    private static final double kMaxTiltDifference = 4.0 ;
+
     // moves the intake roller straight up (0 degrees) to flat to the ground (90 degrees), actual range 15-75 degrees   
     private MotorEncoderSubsystem updown_;
 
@@ -135,12 +137,17 @@ public class IntakeShooterSubsystem extends Subsystem {
         return angle_;
     }
 
-    public void syncEncoders() {
+    public double syncEncoders() {
+        double ret ;
+
         try {
-            updateMotorPosition();     
+            ret = updateMotorPosition();     
         }
         catch(Exception ex) {
+            ret = Double.MAX_VALUE ;
         }
+
+        return ret ;
     }
 
     @Override
@@ -156,13 +163,21 @@ public class IntakeShooterSubsystem extends Subsystem {
         putDashboard("Angle", DisplayType.Verbose, angle_);
         putDashboard("note", DisplayType.Verbose, is_note_present_) ;
         putDashboard("hasnote", DisplayType.Always, note_present_);
+        putDashboard("shooter1", DisplayType.Always, getShooter1().getVelocity());
+        putDashboard("shooter2", DisplayType.Always, getShooter2().getVelocity());
 
-        // MessageLogger logger = getRobot().getMessageLogger() ;
-        // logger.startMessage(MessageType.Info) ;
-        // logger.add("tilt angle") ;
-        // logger.add("motor", tilt_.getPosition()) ;
-        // logger.add("encoder", getAbsEncoderAngle()) ;
-        // logger.endMessage();
+        // double tpos = tilt_.getPosition() ;
+        // double delta = tpos - getAbsEncoderAngle() ;
+        // if (Math.abs(delta) > kMaxTiltDifference) {
+        //     double absval = syncEncoders();
+
+        //     MessageLogger logger = getRobot().getMessageLogger() ;
+        //     logger.startMessage(MessageType.Info) ;
+        //     logger.add("resynced tilt angle") ;
+        //     logger.add("motor", tpos) ;
+        //     logger.add("encoder", absval) ;
+        //     logger.endMessage();
+        // }
     }
     
     @Override
@@ -174,10 +189,12 @@ public class IntakeShooterSubsystem extends Subsystem {
         return angle_;
     }
     
-    private void updateMotorPosition() throws BadMotorRequestException, MotorRequestFailedException {
-        angle_ =getAbsEncoderAngle() ;
+    private double updateMotorPosition() throws BadMotorRequestException, MotorRequestFailedException {
+        angle_ = getAbsEncoderAngle() ;
 
         double m = tilt_.getEncoder().mapPhysicalToMotor(angle_) ;
         tilt_.getMotorController().setPosition(m);
+
+        return angle_ ;
     }
 }

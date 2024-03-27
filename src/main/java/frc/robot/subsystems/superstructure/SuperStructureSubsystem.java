@@ -1,5 +1,6 @@
 package frc.robot.subsystems.superstructure;
 
+import org.xero1425.base.LoopType;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.misc.MessageLogger;
@@ -49,6 +50,15 @@ public class SuperStructureSubsystem extends Subsystem {
             climber_ = null ;
         }
     }
+    
+    @Override
+    public void init(LoopType prev, LoopType next) {
+        super.init(prev, next);
+
+        if (prev == LoopType.Disabled && next == LoopType.Autonomous && !getRobot().isTestMode()) {
+            is_.setHoldingNote(true);
+        }
+    }    
 
     public IntakeShooterSubsystem getIntakeShooter() {
         return is_;

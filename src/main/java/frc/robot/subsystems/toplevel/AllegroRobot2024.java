@@ -1,5 +1,6 @@
 package frc.robot.subsystems.toplevel;
 
+import org.xero1425.base.LoopType;
 import org.xero1425.base.XeroRobot;
 import org.xero1425.base.subsystems.RobotSubsystem;
 import org.xero1425.base.subsystems.swerve.SDSSwerveDriveSubsystem;
@@ -46,6 +47,11 @@ public class AllegroRobot2024 extends RobotSubsystem {
         db_.setVision(ll_);
 
         ll_.setLedMode(LedMode.ForceOff);
+    }
+
+    @Override
+    public  void init(LoopType prev, LoopType next) {
+        super.init(prev, next) ;
     }
 
     public SuperStructureSubsystem getSuperStructure() {

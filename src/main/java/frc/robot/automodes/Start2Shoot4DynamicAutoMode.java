@@ -11,7 +11,7 @@ public class Start2Shoot4DynamicAutoMode extends AllegroGameAutoMode {
         super(ctrl, "FourNote-Dynamic") ;
 
         AllegroRobot2024 robot = (AllegroRobot2024)ctrl.getRobot().getRobotSubsystem() ;
-        Action action = new Start2Shoot4DynamicAction(robot, mirror, mvalue, FinishStrategy.NearSide) ;
+        Action action = new Start2Shoot4DynamicAction(robot, mirror, mvalue, FinishStrategy.Stop) ;
         addSubActionPair(robot, action, true);
     }    
 }

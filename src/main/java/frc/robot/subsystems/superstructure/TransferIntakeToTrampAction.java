@@ -1,5 +1,6 @@
 package frc.robot.subsystems.superstructure;
 
+import org.xero1425.base.LoopType;
 import org.xero1425.base.actions.Action;
 import org.xero1425.misc.MessageType;
 
@@ -55,7 +56,6 @@ public class TransferIntakeToTrampAction extends Action {
 
         xfer_length_ = sub_.getSettingsValue("actions:xfer:shooter-length").getDouble() ;
         cont_length_ = sub_.getSettingsValue("actions:xfer:cont-length").getDouble() ;
-
     }
 
     @Override
@@ -128,7 +128,6 @@ public class TransferIntakeToTrampAction extends Action {
             sub_.getRobot().getMessageLogger().add(state_.toString()) ;            
             sub_.getRobot().getMessageLogger().endMessage();            
         }
-
     }
 
     @Override

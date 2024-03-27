@@ -39,6 +39,8 @@ public class TurtleAction extends Action {
     public void start() throws Exception {
         super.start();
         sub_.getClimber().setAction(climb_, true);
+        sub_.getAmpTrap().setAction(elevator_, true);     
+        sub_.getIntakeShooter().setAction(intake_, true);           
         state_ = State.Climber;
     }
 
