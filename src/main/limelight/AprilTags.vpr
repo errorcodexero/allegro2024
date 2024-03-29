@@ -3,6 +3,7 @@ area_min:0.07059117610000001
 area_similarity:0
 aspect_max:20.000000
 aspect_min:0.000000
+barcode_type:qrzx
 black_level:11
 blue_balance:1975
 botfloorsnap:0
@@ -79,6 +80,7 @@ rsyaw:180
 sat_max:255
 sat_min:70
 send_corners:0
+send_json:1
 send_raw_contours:0
 solve3d:0
 solve3d_algo:0
