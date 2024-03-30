@@ -541,16 +541,16 @@ public class Allegro2024OISubsystem extends OISubsystem {
                 robot.getAmpTrap().setAction(goto_trap_place_pos_action_, true) ;
                 robot.getSuperStructure().getClimber().setAction(hooks_up_action_, true) ;                
             }
-
-            //
-            // While we are doing this, also stow the intake shooter
-            //
-            robot.getIntakeShooter().setAction(stow_intake_action_, true) ;
         }
     }
 
     private void noteGoingToAmpPositonState() {
         if (amp_prep_pos_action_.isDone()) {
+            //
+            // While we are doing this, also stow the intake shooter
+            //
+            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;                
+            robot.getIntakeShooter().setAction(stow_intake_action_, true) ;            
             state_ = OIState.NoteInAmpPosition ;
         }
     }
@@ -562,9 +562,10 @@ public class Allegro2024OISubsystem extends OISubsystem {
     }
 
     private void noteGoingToTrapPositionState() {
-        if (goto_trap_place_pos_action_.isDone() && stow_intake_action_.isDone()) {
+        if (goto_trap_place_pos_action_.isDone()) {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;            
             robot.getAmpTrap().setAction(move_note_action_, true) ;
+            robot.getIntakeShooter().setAction(stow_intake_action_, true) ;            
             state_ = OIState.MoveNoteToBack ;
 
         }

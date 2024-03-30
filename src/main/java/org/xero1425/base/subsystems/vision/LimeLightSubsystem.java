@@ -400,6 +400,12 @@ public class LimeLightSubsystem extends Subsystem implements IVisionLocalization
             Object obj = JSONValue.parse(json);
             if (obj instanceof JSONObject) {
                 parseLimelightJsonObject((JSONObject)obj) ;
+
+                //
+                // Correct the blue pose for the limelight error
+                //
+                Translation2d sz = getRobot().getFieldSize() ;
+                wpiblue_ = new Pose3d(botpose_.getX() + sz.getX() / 2, botpose_.getY() + sz.getY() / 2, botpose_.getZ(), wpiblue_.getRotation()) ;
             }
         }
 

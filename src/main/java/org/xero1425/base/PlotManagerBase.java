@@ -3,6 +3,9 @@ package org.xero1425.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
+
 public abstract class PlotManagerBase {
 
     private List<String> enabled_plots_ ;
@@ -34,6 +37,13 @@ public abstract class PlotManagerBase {
             if (enabled_ == true && enabled_plots_.size() > 0) {
                 if (enabled_plots_.contains(name))
                     ret = true ;
+                else {
+                    MessageLogger logger = robot_.getMessageLogger() ;
+                    logger.startMessage(MessageType.Info) ;
+                    logger.add("plot ignored due to selective plot list") ;
+                    logger.add("plot name", name) ;
+                    logger.endMessage() ;
+                }
             }
             else if (enabled_ == true) {
                 ret = true ;

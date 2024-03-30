@@ -17,13 +17,12 @@ public class Start3Shoot3Action extends Action {
     private enum State {
         Idle,
         Shoot1,
+        Lob1,
+        Lob2,
         Shoot2,
-        Shoot3,
         Path1,
         Path2,
-        Path2WaitCollect,
         Path3,
-        Path4WaitCollect,
         Path4,
         MissedCollect,
         MissedStow,
@@ -38,8 +37,9 @@ public class Start3Shoot3Action extends Action {
     private SwerveHolonomicPathFollowerAction p1_ ;    
     private SwerveHolonomicPathFollowerAction p2_ ;    
     private SwerveHolonomicPathFollowerAction p3_ ;
-    private SwerveHolonomicPathFollowerAction p4_ ;
-    private IntakeManualShootAction manual_shoot_ ;    
+    private SwerveHolonomicPathFollowerAction p4_ ;    
+    private IntakeManualShootAction manual_shoot_ ;
+    private IntakeManualShootAction lob_shoot_ ;
     private SwerveTrackAngle rotate_ ;
     private IntakeAutoShootAction shoot_ ;    
     private StartCollectAltAction start_collect_ ;
@@ -72,10 +72,12 @@ public class Start3Shoot3Action extends Action {
             manual_shoot_ = new IntakeManualShootAction(robot_.getIntakeShooter(), "subwoofer-right") ;        
         }
 
-        p1_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P1", true, 0.2, mirror_, mvalue_);
+        lob_shoot_ = new IntakeManualShootAction(robot_.getIntakeShooter(), "lob") ;  
+
+        p1_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P1", false, 0.2, mirror_, mvalue_);
         p2_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P2", false, 0.2, mirror_, mvalue_); 
         p3_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P3", false, 0.2, mirror_, mvalue_);
-        p4_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P4", false, 0.2, mirror_, mvalue_);        
+        p4_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P4", false, 0.2, mirror_, mvalue_);
     }
 
     @Override
@@ -93,13 +95,18 @@ public class Start3Shoot3Action extends Action {
     }
 
     private void path1State() {
-        if (p1_.isDone()) {
-            //
-            // We got the note, drive back
-            //
-            robot_.getSwerve().setAction(p2_, true) ;
-            state_ = State.Path2 ;
+        if (p1_.isDone() && start_collect_.isDone()) {
+            robot_.getIntakeShooter().setAction(lob_shoot_, true) ;
+            state_ = State.Lob1 ;
         }
+    }
+
+    private void lob1State() {
+        if (lob_shoot_.isDone()) {
+            robot_.getSwerve().setAction(p2_, true) ;
+            robot_.getIntakeShooter().setAction(start_collect_, true) ;            
+            state_ = State.Path2 ;
+        }        
     }
 
     private void path2State() {
@@ -107,21 +114,28 @@ public class Start3Shoot3Action extends Action {
             //
             // We have arrived, shoot the note
             //
-            robot_.getIntakeShooter().setAction(shoot_, true) ;             
-            robot_.getSwerve().setAction(rotate_, true) ;
-            state_ = State.Shoot2 ;
+            robot_.getIntakeShooter().setAction(lob_shoot_, true) ;
+            state_ = State.Lob2 ;
         }
+    }
+
+    private void lob2State() {
+        if (lob_shoot_.isDone()) {
+            robot_.getSwerve().setAction(p3_, true) ;
+            robot_.getIntakeShooter().setAction(start_collect_, true) ;            
+            state_ = State.Path3 ;   
+        }     
     }
 
     private void shoot2State() {
         if (shoot_.isDone()) {
-            robot_.getSwerve().setAction(p3_, true) ;
-            state_ = State.Path3 ;
+            robot_.getIntakeShooter().setAction(stow_, true) ;
+            state_ = State.MissedStow ;
         }
     }
 
     private void path3State() {
-        if (p3_.isDone()) {
+        if (p3_.isDone() && start_collect_.isDone()) {
             //
             // We got the note, drive back
             //
@@ -132,7 +146,9 @@ public class Start3Shoot3Action extends Action {
 
     private void path4State() {
         if (p4_.isDone()) {
-            state_ = State.Done ;
+            robot_.getIntakeShooter().setAction(shoot_, true) ;             
+            robot_.getSwerve().setAction(rotate_, true) ;            
+            state_ = State.Shoot2 ;
         }        
     }
 
@@ -187,6 +203,14 @@ public class Start3Shoot3Action extends Action {
             case Path4:
                 path4State() ;
                 break ;     
+
+            case Lob1:
+                lob1State() ;
+                break ;
+
+            case Lob2:
+                lob2State() ;
+                break ;
                 
             case MissedCollect:
                 missedCollect1State();

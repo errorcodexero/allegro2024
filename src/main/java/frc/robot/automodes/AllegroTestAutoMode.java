@@ -8,7 +8,11 @@ import org.xero1425.base.subsystems.motorsubsystem.MCVelocityAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorPowerSequenceAction;
+import org.xero1425.base.subsystems.swerve.SwerveBaseSubsystem;
+import org.xero1425.base.subsystems.swerve.SwerveHolonomicDynamicPathAction;
+import org.xero1425.base.utils.Pose2dWithRotation;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import frc.robot.subsystems.amp_trap.AmpTrapMoveNote;
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
@@ -35,6 +39,7 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
         MotorEncoderSubsystem updown = intakeshooter.getUpDown();
         AmpTrapSubsystem amptrap = robot.getAmpTrap();
         MotorEncoderSubsystem climber = superstructure.getClimber();
+        SwerveBaseSubsystem swerve = robot.getSwerve() ;
 
         if (createTest()) {
             //
@@ -460,6 +465,16 @@ public class AllegroTestAutoMode extends SwerveTestAutoMode {
                 addSubActionPair(intakeshooter, new IntakeGotoNamedPositionAction(intakeshooter, 100, -55), true) ;
                 addAction(new DelayAction(superstructure.getRobot(), 2.0));
                 addSubActionPair(intakeshooter, new IntakeGotoNamedPositionAction(intakeshooter, -5, 50), true) ;
+                break ;
+
+            case 150:
+                {
+                    Pose2dWithRotation pts[] = new Pose2dWithRotation[2] ;
+                    pts[0] = new Pose2dWithRotation(15.081, 5.517, Rotation2d.fromDegrees(180.0), Rotation2d.fromDegrees(180.0)) ;
+                    pts[1] = new Pose2dWithRotation(14.041, 6.32, Rotation2d.fromDegrees(-135.0), Rotation2d.fromDegrees(135.0)) ;
+                    SwerveHolonomicDynamicPathAction act = new SwerveHolonomicDynamicPathAction(swerve, "TestPath", 2.0, 1.5, 0.2, pts) ;
+                    addSubActionPair(swerve, act, true);
+                }
                 break ;
         }
     }

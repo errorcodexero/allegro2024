@@ -155,6 +155,12 @@ public class IntakeShooterSubsystem extends Subsystem {
         super.computeMyState();
         
         is_note_present_ = noteSensor_.get() ^ noteSensorInverted_;
+
+        MessageLogger logger = getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Info) ;
+        logger.add("sensor") ;
+        logger.add("state", is_note_present_) ;
+        logger.endMessage();
         
         double eval = absoluteEncoder_.getVoltage();
         angle_ = encoderMapper_.toRobot(eval);
@@ -165,19 +171,6 @@ public class IntakeShooterSubsystem extends Subsystem {
         putDashboard("hasnote", DisplayType.Always, note_present_);
         putDashboard("shooter1", DisplayType.Always, getShooter1().getVelocity());
         putDashboard("shooter2", DisplayType.Always, getShooter2().getVelocity());
-
-        // double tpos = tilt_.getPosition() ;
-        // double delta = tpos - getAbsEncoderAngle() ;
-        // if (Math.abs(delta) > kMaxTiltDifference) {
-        //     double absval = syncEncoders();
-
-        //     MessageLogger logger = getRobot().getMessageLogger() ;
-        //     logger.startMessage(MessageType.Info) ;
-        //     logger.add("resynced tilt angle") ;
-        //     logger.add("motor", tpos) ;
-        //     logger.add("encoder", absval) ;
-        //     logger.endMessage();
-        // }
     }
     
     @Override

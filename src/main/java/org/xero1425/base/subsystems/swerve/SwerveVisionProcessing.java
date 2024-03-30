@@ -11,9 +11,13 @@ import org.xero1425.misc.MissingParameterException;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.numbers.N3;
 
 public class SwerveVisionProcessing {
+
+    private static final double kZeroPosThreshold = 0.2 ;
+
     private enum VisionParamsType {
         SingleNear,
         SingleFar,
@@ -22,6 +26,7 @@ public class SwerveVisionProcessing {
     };
 
     private int logger_id_ ;
+    private int forced_cycles_ ;
 
     private SwerveBaseSubsystem sub_ ;
     private IVisionLocalization vision_ ;
@@ -80,27 +85,28 @@ public class SwerveVisionProcessing {
         if (lc != null) {
             vision_pose_ = lc.location.toPose2d();
 
-            //
-            // There are two strategies for rejection vision samples if they do not seem to be valid.  The simple
-            // strategy is that if the samples are more than 1 meter from the current pose of the robot, we ignore
-            // them.  The advanced strategy is that if we see more than one april tag, we always trust the vision
-            // sample data.  If we see only one april tag, it must be within a given distance (single_tag_distance_threshold_).
-            //
-            double dist = vision_pose_.getTranslation().getDistance(sub_.getPose().getTranslation());
-            if (dist >= vision_reject_threshold_) {
-                ignore = true ;
+            Translation2d rpose = sub_.getPose().getTranslation() ;
+            if (Math.abs(rpose.getX()) < kZeroPosThreshold && Math.abs(rpose.getY()) < kZeroPosThreshold) {
+                forced_cycles_ = 50 ;
+            }
+            else if (forced_cycles_ > 0) {
+                forced_cycles_-- ;
+            }
+            else {
+                //
+                // There are two strategies for rejection vision samples if they do not seem to be valid.  The simple
+                // strategy is that if the samples are more than 1 meter from the current pose of the robot, we ignore
+                // them.  The advanced strategy is that if we see more than one april tag, we always trust the vision
+                // sample data.  If we see only one april tag, it must be within a given distance (single_tag_distance_threshold_).
+                //
+                double dist = vision_pose_.getTranslation().getDistance(sub_.getPose().getTranslation());
+                if (dist >= vision_reject_threshold_) {
+                    ignore = true ;
+                }
             }
 
             if (!ignore) {
                 sub_.getEstimator().addVisionMeasurement(vision_pose_, lc.when) ; 
-            }
-            else {
-                logger.startMessage(MessageType.Debug, logger_id_);
-                logger.add("Ignoring vision sample");
-                logger.add("dbpose", sub_.getPose());
-                logger.add("vision", vision_pose_);
-                logger.add("dist", dist);
-                logger.endMessage(); 
             }
         }      
 

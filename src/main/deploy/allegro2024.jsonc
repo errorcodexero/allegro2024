@@ -104,7 +104,7 @@
                 "keepout-zone" : {
                     "min" : 5.0,
                     "max" : 75.0,
-                    "elevator-height" : 0.19
+                    "elevator-height" : 0.21
                 }
             },
             "actions" : {
@@ -419,6 +419,18 @@
 
                         "shooter-velocity" : 70.0,
                         "shooter-velocity-threshold" : 5.0
+                    },
+                    "lob" : {
+                        "tilt" : -67.0,
+                        "tilt-pos-threshold" : 5.0,
+                        "tilt-velocity-threshold" : 5.0,
+
+                        "updown" : 118.0,
+                        "up-down-pos-threshold" : 5.0,
+                        "up-down-velocity-threshold" : 5.0,
+
+                        "shooter-velocity" : 50.0,
+                        "shooter-velocity-threshold" : 5.0                        
                     }
                 },
                 "auto-shoot" : {
@@ -617,7 +629,7 @@
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m":   0.002663352,
+                    "m":   0.003551136,
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -631,16 +643,16 @@
             },
             "pids" : {
                 "position" : {
-                    "kp" : 10,
+                    "kp" : 8.0,
                     "ki" : 0.0,
                     "kd" : 0.0,
-                    "kv" : 0.056,
+                    "kv" : 0.4,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 270,                   // 270
-                    "maxa" : 270,                   // 270
+                    "maxv" : 700,                   // 270
+                    "maxa" : 700,                   // 270
                     "jerk" : 0.0
                 }                
             }
@@ -663,7 +675,7 @@
                     // Units are degrees
                     //
                     "type" : "motor",
-                    "m": 0.007965088,
+                    "m": 0.009765625,
                     "b" : 0,
                     "posunits" : "deg",
                     "velunits" : "deg/s",
@@ -677,26 +689,17 @@
             },
             "pids" : {
                 "position" : {
-                    "kp" : 3.25,
+                    "kp" : 3.0,
                     "ki" : 0.0,
                     "kd" : 0.0,
-                    "kv" : 0.03,
+                    "kv" : 0.1,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 270,
-                    "maxa" : 270,
+                    "maxv" : 700,
+                    "maxa" : 700,
                     "jerk" : 0.0
-                },
-                "abs-position" : {
-                    "kp" : 0.0,
-                    "ki" : 0.0,
-                    "kd" : 0.0,
-                    "kf" : 0.0,
-                    "max" : 12.0,
-                    "min" : -12.0,
-                    "imax" : 0.0
                 }
             }
         },
@@ -952,8 +955,8 @@
                     "maxv" : 2.0,
                     "maxa" : 2.0
                 },
-                "max-angular-speed": 100,
-                "max-angular-accel": 100
+                "max-angular-speed": 60,
+                "max-angular-accel": 60
             },
 
             //
@@ -961,7 +964,7 @@
             //
             "estimator" : {
                 "advanced-rejection" : false,                   // If true, the advanced rejection of vision samples is used, see the code for more details
-                "vision-reject-threshold" : 7.0,                // Reject vision samples that are more than this distance from the current robot pose
+                "vision-reject-threshold" : 5.0,                // Reject vision samples that are more than this distance from the current robot pose
                 "single-threshold" : 2.0,                       // When we see a single target, and we are greater than this distance, use the single-far std devs
                                                                 // Otherwise use the single-near std devs
                 "multi-threshold" : 4.0,                        // When we see multiple targets, and we are greater than this distance, use the multi-far std devs
@@ -1051,17 +1054,17 @@
                 "xy-tolerance": 0.05,
                 "angle-tolerance": 2.0,
                 "xctrl": {
-                    "kp": 11.0,         // 6
+                    "kp": 2.0,
                     "ki": 0,
                     "kd": 0
                 },
                 "yctrl": {
-                    "kp": 11.0,         // 6
+                    "kp": 2.0,
                     "ki": 0,
                     "kd": 0
                 },
                 "rotation": {
-                    "kp": 8.0,         // 8
+                    "kp": 18.0,
                     "ki": 0,
                     "kd": 1.0
                 }
@@ -1111,7 +1114,7 @@
         }
     },
     "testmode" : {
-        "enabled": true,
+        "enabled": false,
         "which": 1,
         "0": {
             "angle": 0,
@@ -1120,7 +1123,7 @@
         },
         "1": {
             "angle": 0.0,
-            "speed": 1.0,
+            "speed": 1.5,
             "duration" : 3.0        // optional, if missing will run forever
         },
         "2" : {
@@ -1156,7 +1159,7 @@
             "duration": 2.0
         },
         "20" : {
-            "power" : -0.1,
+            "power" : 0.3,
             "duration" : 0.5
         },
         "22" : {
@@ -1188,7 +1191,7 @@
             "duration" : 3.0
         },
         "52": {
-            "target" : 0
+            "target" : -35
         },
         "53" : {
             "target1" : 0.0,

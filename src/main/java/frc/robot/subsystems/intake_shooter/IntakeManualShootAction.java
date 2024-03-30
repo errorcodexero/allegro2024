@@ -103,20 +103,10 @@ public class IntakeManualShootAction extends Action {
 
             if (up_down_action_.isDone()) {
                 updown_ready_ = true ;
-            }
-
-            MessageLogger logger = intake_.getRobot().getMessageLogger() ;
-            logger.startMessage(MessageType.Info) ;
-            logger.add("shot: ") ;
-            logger.add("tilt", intake_.getTilt().getPosition()) ;
-            logger.add("tiltabs", intake_.getAbsEncoderAngle());
-            logger.add("updown", intake_.getUpDown().getPosition()) ;
-            logger.add("shooter1", intake_.getShooter1().getVelocity()) ;
-            logger.add("shooter2", intake_.getShooter2().getVelocity()) ;
-            logger.endMessage();            
+            }           
 
             if (shooter1_action_.isAtVelocity() && shooter2_action_.isAtVelocity() && tilt_ready_ && updown_ready_) {
-                // MessageLogger logger = intake_.getRobot().getMessageLogger() ;
+                MessageLogger logger = intake_.getRobot().getMessageLogger() ;
                 logger.startMessage(MessageType.Info) ;
                 logger.add("shot: ") ;
                 logger.add("tilt", intake_.getTilt().getPosition()) ;

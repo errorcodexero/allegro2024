@@ -67,10 +67,20 @@ Wilsonville
 - Transition automode initial shots to ManualShots                                                    Done
 - Four note auto mode                                                                                 Done
 - Wide side three note automode all at center                                                         Tune
-- Investigate april tag based shooting vs pose based shooting                                         
+- Investigate april tag based shooting vs pose based shooting                                         Defer
 - Speed up elevator more                                                                              Done
 - Speed up arm more                                                                                   Done
-- Normal climb - climb down
-- Trap climb - climb down
-- Look at # 39
+- Normal climb - climb down                                                                           Defer
+- Trap climb - climb down                                                                             Defer
+----------------------------------------------------------------------------------------------------------
+
+Districts
+----------------------------------------------------------------------------------------------------------
+- Retune up/down to new gear ratio (faster collect)
+- Bring up hooks while bringing up elevator for trap                                                  Done
+- New four note auto based on dynamic paths                                                           Done
+- Two note auto
+- Make trap more tolerant to being bumped without losing note                                         Done
+- Tilt oscillation issues                                                             Cannot Reproduce Now
+- Three note auto on far side
 ----------------------------------------------------------------------------------------------------------

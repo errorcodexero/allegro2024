@@ -74,6 +74,13 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
         Pose2d start = new Pose2d(pts[0].getTranslation(), Rotation2d.fromRadians(h)) ;
         pts[0] = new Pose2dWithRotation(start, pts[0].getRobotRotation()) ;
 
+        MessageLogger logger = sub.getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Info) ;
+        logger.add("SwerveHolonomicDynamicPathAction(start/end)") ;
+        logger.add("start", pts[0]) ;
+        logger.add("end", pts[pts.length - 1]) ;
+        logger.endMessage();
+
         List<Pose2d> poses = Arrays.asList(pts) ;
         traj_ = TrajectoryGenerator.generateTrajectory(poses, config_) ;
         pathname_ = pathname ;
@@ -178,15 +185,15 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
 
         Pose2d actual = getSubsystem().getPose() ;
         MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
-        // logger.startMessage(MessageType.Info) ;
-        // logger.add("SwerveHolonomicPathFollower Target:") ;
-        // logger.add("time", elapsed) ;
-        // logger.add("target ", target.poseMeters) ;
-        // logger.add("actual", actual) ;
-        // logger.add("stangle", rot_start_) ;
-        // logger.add("enangle", rot_start_ + rot_travel_) ;
-        // logger.add("rotangle", rot) ;
-        // logger.endMessage();
+        logger.startMessage(MessageType.Info) ;
+        logger.add("SwerveHolonomicPathFollower Target:") ;
+        logger.add("time", elapsed) ;
+        logger.add("target ", target.poseMeters) ;
+        logger.add("actual", actual) ;
+        logger.add("stangle", rot_start_) ;
+        logger.add("enangle", rot_start_ + rot_travel_) ;
+        logger.add("rotangle", rot) ;
+        logger.endMessage();
 
         int i = 0 ;
         plot_data_[i++] = getSubsystem().getRobot().getTime() - start_ ;

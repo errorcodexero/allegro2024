@@ -55,6 +55,8 @@ public class SwerveHolonomicPathFollowerAction extends SwerveHolonomicController
     private boolean mirror_ ;
     private double mvalue_ ;
 
+    private String method_ ;
+
     private static final String [] columns_ = {
         "time", "index",
         "tx (m)", "ty (m)", "ta (deg)",
@@ -68,6 +70,8 @@ public class SwerveHolonomicPathFollowerAction extends SwerveHolonomicController
         setpose_ = setpose ;
         mirror_ = mirror ;
         mvalue_ = mvalue ;
+
+        method_ = "NONE" ;
 
         plot_data_ = new Double[columns_.length] ;
         plot_id_ = getSubsystem().initPlot(pathname_) ;
@@ -207,6 +211,7 @@ public class SwerveHolonomicPathFollowerAction extends SwerveHolonomicController
         plot_data_[i++] = actual.getRotation().getDegrees() ;
         getSubsystem().addPlotData(plot_id_, plot_data_) ;   
         
+        
         if (index_ < path_.getTrajectoryEntryCount()) {
             index_++ ;            
         }
@@ -217,6 +222,11 @@ public class SwerveHolonomicPathFollowerAction extends SwerveHolonomicController
             }
 
             if (index_ == path_.getTrajectoryEntryCount() && (controller().atReference() || end_timer_.isExpired())) {
+                if (controller().atReference())
+                    method_ = "endpath" ;
+                else
+                    method_ = "timer" ;
+
                 getSubsystem().endPlot(plot_id_);
                 getSubsystem().drive(new ChassisSpeeds()) ;
                 getSubsystem().enableVision(true);
@@ -226,6 +236,7 @@ public class SwerveHolonomicPathFollowerAction extends SwerveHolonomicController
                 logger.add("finished path") ;
                 logger.addQuoted(pathname_);
                 logger.add("pose", actual);
+                logger.add("method", method_) ;
                 logger.endMessage();
             }
         }
