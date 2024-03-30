@@ -156,12 +156,6 @@ public class IntakeShooterSubsystem extends Subsystem {
         
         is_note_present_ = noteSensor_.get() ^ noteSensorInverted_;
 
-        MessageLogger logger = getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Info) ;
-        logger.add("sensor") ;
-        logger.add("state", is_note_present_) ;
-        logger.endMessage();
-        
         double eval = absoluteEncoder_.getVoltage();
         angle_ = encoderMapper_.toRobot(eval);
 

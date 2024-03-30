@@ -185,7 +185,7 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
 
         Pose2d actual = getSubsystem().getPose() ;
         MessageLogger logger = getSubsystem().getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Info) ;
+        logger.startMessage(MessageType.Debug, getSubsystem().getLoggerID()) ;
         logger.add("SwerveHolonomicPathFollower Target:") ;
         logger.add("time", elapsed) ;
         logger.add("target ", target.poseMeters) ;

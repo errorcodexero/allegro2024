@@ -354,7 +354,7 @@
                     "tilt-down-threshold" : -75.0,
                     "updown-up-threshold" : 30,
                     "delay-time" : 0.1,
-                    "feeder-power" : 0.4
+                    "feeder-power" : 0.5
                 },
                 "butch-stop-collect" : {
                     "updown-threshold" : 45.0
@@ -362,7 +362,7 @@
                 "manual-shoot" : {
                     "subwoofer-center" : {
                         "tilt" : -65.0,
-                        "tilt-pos-threshold" : 5.0,
+                        "tilt-pos-threshold" : 1.0,
                         "tilt-velocity-threshold" : 5.0,
 
                         "updown" : 100.0,
@@ -373,9 +373,9 @@
                         "shooter-velocity-threshold" : 5.0
                     },
                     "subwoofer-center-low" : {
-                        "tilt" : 5,
-                        "tilt-pos-threshold" : 5.0,
-                        "tilt-velocity-threshold" : 5.0,
+                        "tilt" : 3,
+                        "tilt-pos-threshold" : 2.0,
+                        "tilt-velocity-threshold" : 2.0,
 
                         "updown" : 35.0,
                         "up-down-pos-threshold" : 5.0,
@@ -386,7 +386,7 @@
                     },                    
                     "subwoofer-left" : {
                         "tilt" : -65.0,
-                        "tilt-pos-threshold" : 5.0,
+                        "tilt-pos-threshold" : 1.0,
                         "tilt-velocity-threshold" : 5.0,
 
                         "updown" : 100.0,
@@ -398,7 +398,7 @@
                     },
                     "subwoofer-right" : {
                         "tilt" : -65.0,
-                        "tilt-pos-threshold" : 5.0,
+                        "tilt-pos-threshold" : 1.0,
                         "tilt-velocity-threshold" : 5.0,
 
                         "updown" : 100.0,
@@ -410,7 +410,7 @@
                     },                    
                     "podium" : {
                         "tilt" : -67.0,
-                        "tilt-pos-threshold" : 5.0,
+                        "tilt-pos-threshold" : 1.0,
                         "tilt-velocity-threshold" : 5.0,
 
                         "updown" : 118.0,
@@ -443,10 +443,10 @@
                                         
                     "updown-pos-threshold" : 2.0,
                     "updown-velocity-threshold" : 2.0,
-                    "tilt-pos-threshold" : 2.0,
+                    "tilt-pos-threshold" : 1.0,
                     "tilt-velocity-threshold" : 2.0,
                     "feeder-power" : 1.0,
-                    "feeder-time" : 0.3
+                    "feeder-time" : 0.4
                 }
             },
             "pwls" : {
@@ -483,7 +483,7 @@
                     },
                     "4" : {
                         "x" : 2.119,
-                        "y" : -49
+                        "y" : -55
                     },
                     "5" : {
                         "x" : 2.12,
@@ -651,7 +651,7 @@
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 700,                   // 270
+                    "maxv" : 200,                   // 270
                     "maxa" : 700,                   // 270
                     "jerk" : 0.0
                 }                
@@ -697,7 +697,7 @@
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 700,
+                    "maxv" : 200,
                     "maxa" : 700,
                     "jerk" : 0.0
                 }
@@ -934,7 +934,7 @@
                     "p" : 7.0
                 },
                 "track" : {
-                    "p" : 7.0
+                    "p" : 5.0
                 }
             },
 
@@ -1064,7 +1064,7 @@
                     "kd": 0
                 },
                 "rotation": {
-                    "kp": 18.0,
+                    "kp": 14.0,
                     "ki": 0,
                     "kd": 1.0
                 }

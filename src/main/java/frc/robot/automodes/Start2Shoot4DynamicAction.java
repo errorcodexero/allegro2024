@@ -16,7 +16,7 @@ public class Start2Shoot4DynamicAction extends AllegroAutoModeAction {
         FarSide
     }
 
-    private static final double kDelayForIntakeDownTime = 0.2 ;
+    private static final double kDelayForIntakeDownTime = 0.4 ;
     private static final double kDistToShoot = 0.50 ;
 
     private static final double [] kPathMaxVelocity = { 3.0, 3.0, 1.25, 1.5, 1.25, 1.5, 4.0 } ;
@@ -24,14 +24,14 @@ public class Start2Shoot4DynamicAction extends AllegroAutoModeAction {
 
     private static final Pose2dWithRotation kShootPoseConst = new Pose2dWithRotation(new Pose2d(1.50, 5.55, Rotation2d.fromDegrees(180.0)), Rotation2d.fromDegrees(0.0)) ;
     private static final Pose2dWithRotation kCollect1PoseConst = new Pose2dWithRotation(new Pose2d(2.40, 5.55, Rotation2d.fromDegrees(0.0)), Rotation2d.fromDegrees(0.0)) ;
-    private static final Pose2dWithRotation kBlueCollect2PoseConst = new Pose2dWithRotation(new Pose2d(2.50, 6.42, Rotation2d.fromDegrees(45.0)), Rotation2d.fromDegrees(45.0)) ;
+    private static final Pose2dWithRotation kBlueCollect2PoseConst = new Pose2dWithRotation(new Pose2d(2.50, 6.32, Rotation2d.fromDegrees(45.0)), Rotation2d.fromDegrees(45.0)) ;
     private static final Pose2dWithRotation kBlueCollect3PoseConst = new Pose2dWithRotation(new Pose2d(2.30, 4.55, Rotation2d.fromDegrees(-45.0)), Rotation2d.fromDegrees(-45.0)) ;
     private static final Pose2dWithRotation kRedCollect2PoseConst = new Pose2dWithRotation(new Pose2d(2.50, 6.72, Rotation2d.fromDegrees(45.0)), Rotation2d.fromDegrees(45.0)) ;
     private static final Pose2dWithRotation kRedCollect3PoseConst = new Pose2dWithRotation(new Pose2d(2.25, 4.9, Rotation2d.fromDegrees(-45.0)), Rotation2d.fromDegrees(-45.0)) ;
     private static final Pose2dWithRotation kNearSidePoseConst = new Pose2dWithRotation(new Pose2d(7.42, 7.37, Rotation2d.fromDegrees(0.0)), Rotation2d.fromDegrees(0.0)) ;
     private static final Pose2dWithRotation kFarSidePose1Const = new Pose2dWithRotation(new Pose2d(2.84, 2.63, Rotation2d.fromDegrees(0.0)), Rotation2d.fromDegrees(0.0)) ;
     private static final Pose2dWithRotation kFarSidePose2Const = new Pose2dWithRotation(new Pose2d(7.42, 0.86, Rotation2d.fromDegrees(0.0)), Rotation2d.fromDegrees(0.0)) ;
-    
+
     private enum State {
         Idle,
         Shoot1,
@@ -82,13 +82,13 @@ public class Start2Shoot4DynamicAction extends AllegroAutoModeAction {
     public void start() throws Exception {
         super.start();
 
-        getRobot().getPlotManager().enable("S2S4D-P1") ;
-        getRobot().getPlotManager().enable("S2S4D-P2") ;
-        getRobot().getPlotManager().enable("S2S4D-P3") ;               
-        getRobot().getPlotManager().enable("S2S4D-P4") ;
-        getRobot().getPlotManager().enable("S2S4D-P5") ;
-        getRobot().getPlotManager().enable("S2S4D-P6") ;
-        getRobot().getPlotManager().enable("S2S4D-P7") ;
+        // getRobot().getPlotManager().enable("S2S4D-P1") ;
+        // getRobot().getPlotManager().enable("S2S4D-P2") ;
+        // getRobot().getPlotManager().enable("S2S4D-P3") ;               
+        // getRobot().getPlotManager().enable("S2S4D-P4") ;
+        // getRobot().getPlotManager().enable("S2S4D-P5") ;
+        // getRobot().getPlotManager().enable("S2S4D-P6") ;
+        // getRobot().getPlotManager().enable("S2S4D-P7") ;
 
         state_ = State.Shoot1 ;
         state_start_time_ = getRobot().getTime() ;

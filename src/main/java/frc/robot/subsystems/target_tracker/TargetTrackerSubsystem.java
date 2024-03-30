@@ -82,14 +82,20 @@ public class TargetTrackerSubsystem extends Subsystem {
     }
 
     private double getTargetAngle() {
-        if (target_pos_ == null)
-            return 0.0 ;
+        double ret = 0.0 ;
 
-        AllegroRobot2024 robotSubsystem = (AllegroRobot2024) getRobot().getRobotSubsystem();        
-        robot_pos_ = robotSubsystem.getSwerve().getPose();
+        if (target_pos_ != null) {
+            AllegroRobot2024 robotSubsystem = (AllegroRobot2024) getRobot().getRobotSubsystem();        
+            robot_pos_ = robotSubsystem.getSwerve().getPose();            
 
-        double angle = Math.atan2(target_pos_.getY() - robot_pos_.getY(), target_pos_.getX() - robot_pos_.getX()) ;
-        return XeroMath.normalizeAngleDegrees(Math.toDegrees(angle) + 180) ;
+            if (target_number_ == AprilTags.RED_SPEAKER_CENTER) {
+            }
+            else {
+                double angle = Math.atan2(target_pos_.getY() - robot_pos_.getY(), target_pos_.getX() - robot_pos_.getX()) ;
+                ret = XeroMath.normalizeAngleDegrees(Math.toDegrees(angle) + 180) ;
+            }
+        }
+        return ret ;
     }
 
     public boolean setOffset() {
@@ -101,53 +107,28 @@ public class TargetTrackerSubsystem extends Subsystem {
         double effective = getTargetAngle() ;
 
         logger.startMessage(MessageType.Info) ;
-        if (target_number_ == AprilTags.BLUE_SPEAKER_CENTER) {
-            if (effective <= 20 && effective >= -20) {
-                logger.add("case 1") ;
-                offset_ = 0 ;
-            }
-            else if (effective < -20 && effective >= -40) {
-                logger.add("case 2") ;                
-                offset_ = -5.0 ;
-            }
-            else if (effective < -40 && effective >= -60) {
-                logger.add("case 3") ;
-                offset_ = -5.0 ;
-            }
-            else if (effective > 20 && effective <= 40) {
-                logger.add("case 4") ;                
-                offset_ = 0 ;
-            }
-            else {
-                logger.add("case 5") ;                
-                offset_ = 0 ;
-            }
+        if (effective <= 20 && effective >= -20) {
+            logger.add(" case 1") ;
+            offset_ = 0 ;
         }
-        else {
-            if (effective >= 160 || effective <= -160) {
-                logger.add("case 6") ;                
-                offset_ = 0 ;
-            }
-            else if (effective < 160 && effective >= 140) {
-                // Checked
-                logger.add("case 7") ;                
-                offset_ = -5 ;
-            }
-            else if (effective > -160 && effective <= -140) {
-                // Checked
-                logger.add("case 8") ;                
-                offset_ = 0 ;
-            }            
-            else if (effective < 140 && effective >= 120) {
-                // Checked
-                logger.add("case 9") ;
-                offset_ = -5 ;
-            }
-            else {
-                //  Checked
-                logger.add("case 10") ;   
-                offset_ = 5 ;
-            }
+        else if (effective < -20 && effective >= -40) {
+            logger.add(" case 2") ;                
+            offset_ = -5.0 ;
+        }
+        else if (effective < -40 && effective >= -60) {
+            logger.add(" case 3") ;
+            offset_ = -5.0 ;
+        }
+        else if (effective > 20 && effective <= 40) {
+            logger.add(" case 4") ;                
+            offset_ = 0.0 ;
+        }
+        else if (effective > 40 && effective <= 60) { 
+            logger.add(" case 5") ;                
+            offset_ = -15 ;
+        } else {
+            logger.add(" case 6") ;                
+            offset_ = -7.5 ;
         }
 
         logger.add("effective", effective) ;
@@ -181,7 +162,11 @@ public class TargetTrackerSubsystem extends Subsystem {
                 logger.add("pose", false) ;
                 distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos_, target_pos_) ;
 
-                angle_to_target_ = calculateAngleBetweenPoses(robot_pos_, target_pos_);
+                if (distance_between_robot_and_target_ < 3.0) {
+                    sees_target_ = true ;
+                }
+
+                angle_to_target_ = calculateAngleBetweenPoses(robot_pos_, target_pos_) + offset_ ;
             }
             logger.add("distance", distance_between_robot_and_target_) ;
             logger.add("angle", angle_to_target_) ;
