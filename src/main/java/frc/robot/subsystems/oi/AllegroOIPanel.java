@@ -83,7 +83,7 @@ public class AllegroOIPanel extends OIPanel {
         climb_up_exec_enabled_led_.setState(st) ;
     }
 
-    public void setClimbDownLED(OILed.LEDState st) {
+    public void setAutoTrapLED(OILed.LEDState st) {
         climb_down_exec_enabled_led_.setState(st) ;
     }
 

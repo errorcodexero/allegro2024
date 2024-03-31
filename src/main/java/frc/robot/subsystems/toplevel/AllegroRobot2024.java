@@ -7,6 +7,10 @@ import org.xero1425.base.subsystems.swerve.SDSSwerveDriveSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem.LedMode;
 
+import edu.wpi.first.apriltag.AprilTagFieldLayout;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.DriverStation;
+import frc.robot.AprilTags;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.lidar.LidarSubsystem;
@@ -84,5 +88,38 @@ public class AllegroRobot2024 extends RobotSubsystem {
 
     public TargetTrackerSubsystem getTargetTracker() {
         return tt_ ;
+    }
+
+    public Pose2d getStagePose() {
+        Pose2d pose = null ;
+
+        var alliance = DriverStation.getAlliance() ;
+        if (alliance.isPresent()) {
+            AprilTagFieldLayout tags = getRobot().getAprilTags() ;
+            if (alliance.get() == DriverStation.Alliance.Blue) {
+                if (ll_.hasAprilTag(AprilTags.BLUE_STAGE_LEFT)) {
+                    pose = tags.getTagPose(AprilTags.BLUE_STAGE_LEFT).get().toPose2d() ;
+                }
+                else if (ll_.hasAprilTag(AprilTags.BLUE_STAGE_RIGHT)) {
+                    pose = tags.getTagPose(AprilTags.BLUE_STAGE_RIGHT).get().toPose2d() ; ;
+                }
+                else if (ll_.hasAprilTag(AprilTags.BLUE_CENTER_STAGE)) {
+                    pose = tags.getTagPose(AprilTags.BLUE_CENTER_STAGE).get().toPose2d() ; ;
+                }
+            }
+            else {
+                if (ll_.hasAprilTag(AprilTags.RED_STAGE_LEFT)) {
+                    pose = tags.getTagPose(AprilTags.RED_STAGE_LEFT).get().toPose2d() ;
+                }
+                else if (ll_.hasAprilTag(AprilTags.RED_STAGE_RIGHT)) {
+                    pose = tags.getTagPose(AprilTags.RED_STAGE_RIGHT).get().toPose2d() ; ;
+                }
+                else if (ll_.hasAprilTag(AprilTags.RED_CENTER_STAGE)) {
+                    pose = tags.getTagPose(AprilTags.RED_CENTER_STAGE).get().toPose2d() ; ;
+                }
+            }
+        }
+
+        return pose ;
     }
 }

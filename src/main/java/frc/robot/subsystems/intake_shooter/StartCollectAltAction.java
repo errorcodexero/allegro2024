@@ -1,7 +1,6 @@
 package frc.robot.subsystems.intake_shooter;
 
 import org.xero1425.base.misc.XeroTimer;
-import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.base.subsystems.oi.Gamepad;
 import org.xero1425.misc.MessageLogger;
@@ -10,8 +9,7 @@ import org.xero1425.misc.MessageType;
 public class StartCollectAltAction extends CollectBaseAltAction {
     private enum CollectState {
         Idle,
-        MovingTilt,
-        Moving,
+        Lowering,
         WaitingForNote,
         WaitingForCollect,
         Stowing
@@ -19,16 +17,11 @@ public class StartCollectAltAction extends CollectBaseAltAction {
 
     private CollectState state_ ;
     private double feeder_power_ ;
-    private double updown_target_ ;
-    private double tilt_target_ ;
 
     private boolean collecting_note_ ;
 
     private XeroTimer timer_ ;
 
-    private MCMotionMagicAction updown_action_ ;
-    private MCMotionMagicAction tilt_only_action_ ;
-    private MCMotionMagicAction tilt_action_ ;
     private MotorEncoderPowerAction spinner_feeder_on_ ;
     private MotorEncoderPowerAction spinner_feeder_off_ ;
 
@@ -39,12 +32,6 @@ public class StartCollectAltAction extends CollectBaseAltAction {
 
         spinner_feeder_on_ = new MotorEncoderPowerAction(getSubsystem().getFeeder(), feeder_power_) ;
         spinner_feeder_off_ = new MotorEncoderPowerAction(getSubsystem().getFeeder(), 0.0) ;
-
-        updown_target_ = sub.getUpDown().getSettingsValue("targets:collect").getDouble() ;
-        tilt_target_ = sub.getTilt().getSettingsValue("targets:collect").getDouble() ;
-
-        updown_action_ = new MCMotionMagicAction(sub.getUpDown(), "pids:position" , updown_target_, 3.0 , 1);
-        tilt_action_ = new MCMotionMagicAction(sub.getTilt(), "pids:position" , tilt_target_, 3.0 , 1);
 
         double t = sub.getSettingsValue("actions:butch-start-collect:delay-time").getDouble() ;
         timer_ = new XeroTimer(sub.getRobot(), "collect-timer", t) ;
@@ -72,40 +59,10 @@ public class StartCollectAltAction extends CollectBaseAltAction {
         }
         else {
             collecting_note_ = false ;
+
             getSubsystem().getFeeder().setAction(spinner_feeder_on_, true) ;
-
-            double updownpos = getSubsystem().getUpDown().getPosition() ;
-            double updownstow = getSubsystem().getUpDown().getSettingsValue("targets:stow").getDouble() ;
-            double tiltstow = getSubsystem().getTilt().getSettingsValue("targets:stow").getDouble() ;
-
-            if (updownpos < updownstow && updown_target_ < updownpos) {
-                MessageLogger logger = getSubsystem().getRobot().getMessageLogger();
-                logger.startMessage(MessageType.Info).add("pos < stow").add("pos", updownpos).add("stow", updownstow) ;
-                logger.add("target", updown_target_) ;
-                logger.endMessage() ;
-
-                //
-                // The updown is not in the stowed position, we must move the tilt to a compatible
-                // position, before we start the synchronous movement.
-                //
-                double ttarget = tiltstow + updownstow - updownpos ;
-                if (ttarget > 50)
-                    ttarget = 50 ;
-                tilt_only_action_ = new MCMotionMagicAction(getSubsystem().getTilt(), "pids:position", ttarget, 3.0, 1.0) ;
-                getSubsystem().getTilt().setAction(tilt_only_action_, true) ;
-                state_ = CollectState.MovingTilt ;
-            }
-            else 
-            {
-                getSubsystem().getUpDown().setAction(updown_action_, true);
-                getSubsystem().getTilt().setAction(tilt_action_, true);
-                state_ = CollectState.Moving ;
-            }
-            getSubsystem().getRobot().getMessageLogger().startMessage(MessageType.Debug) ;
-            getSubsystem().getRobot().getMessageLogger().add("start state ");
-            getSubsystem().getRobot().getMessageLogger().add(state_.toString()) ;            
-            getSubsystem().getRobot().getMessageLogger().endMessage();
-
+            gotoPosition("targets:collect", "targets:collect") ;
+            state_ = CollectState.Lowering ;
         }
     }
 
@@ -120,21 +77,15 @@ public class StartCollectAltAction extends CollectBaseAltAction {
     public void run() throws Exception {
         super.run() ;
 
+        runGoto();
+
         CollectState prev = state_ ;
 
         switch(state_) {
             case Idle:
                 break ;
 
-            case MovingTilt:
-                if (tilt_only_action_.isDone()) {
-                    getSubsystem().getUpDown().setAction(updown_action_, true);
-                    getSubsystem().getTilt().setAction(tilt_action_, true);
-                    state_ = CollectState.Moving ;
-                }
-                break ;
-
-            case Moving:
+            case Lowering:
                 if (getSubsystem().isNoteCurrentlyDetected()) {
                     getSubsystem().setHoldingNote(true);                    
                     rumbleGamepad() ;
@@ -142,7 +93,7 @@ public class StartCollectAltAction extends CollectBaseAltAction {
                     timer_.start();
                     state_ = CollectState.WaitingForCollect;
                 }
-                else if (updown_action_.isDone() && tilt_action_.isDone()) {
+                else if (isAtTarget()) {
                     state_ = CollectState.WaitingForNote ;
                 }
                 break ;
@@ -186,6 +137,7 @@ public class StartCollectAltAction extends CollectBaseAltAction {
     @Override
     public void cancel() {
         super.cancel() ;
+        cancelGoto();
     }
 
     public String toString(int indent) {

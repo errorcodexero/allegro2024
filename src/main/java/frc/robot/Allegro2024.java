@@ -4,9 +4,6 @@
 
 package frc.robot;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.xero1425.base.XeroRobot;
 import org.xero1425.base.controllers.AutoController;
 import org.xero1425.misc.BadParameterTypeException;
@@ -16,11 +13,6 @@ import org.xero1425.misc.XeroPathType;
 import org.xero1425.simulator.engine.ModelFactory;
 import org.xero1425.simulator.engine.SimulationEngine;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import frc.robot.automodes.AllegroRobotAutoController;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
