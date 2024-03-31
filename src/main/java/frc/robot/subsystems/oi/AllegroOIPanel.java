@@ -22,7 +22,6 @@ public class AllegroOIPanel extends OIPanel {
         ManualSubwoofer
     } ;
 
-
     //
     // Panel gadgets
     //
@@ -34,6 +33,7 @@ public class AllegroOIPanel extends OIPanel {
     private int abort_gadget_ ;                             // Abort mode
     private int auto_manual1_gadget_ ;
     private int auto_manual2_gadget_ ;
+    private int collect_gadget_ ;
 
     private int climb_down_gadget_ ;                        // Prepare to climb down
     private int eject_gadget_ ;                             // Eject the note
@@ -126,6 +126,9 @@ public class AllegroOIPanel extends OIPanel {
         super.initializeGadgets();
         int num ;
 
+        num = getSubsystem().getSettingsValue("panel:gadgets:collect").getInteger() ;
+        collect_gadget_ = mapButton(num, ButtonType.Level) ;        
+
         num = getSubsystem().getSettingsValue("panel:gadgets:target_toggle1").getInteger() ;
         target_toggle1_gadget_ = mapButton(num, ButtonType.Level) ;
 
@@ -158,6 +161,10 @@ public class AllegroOIPanel extends OIPanel {
         
         num = getSubsystem().getSettingsValue("panel:gadgets:eject").getInteger() ;
         eject_gadget_ = mapButton(num, ButtonType.LowToHigh) ;
+    }
+
+    public boolean getCollectState() {
+        return getValue(collect_gadget_) == 1 ;
     }
 
     public AutoManualMode getAutoManualMode() {

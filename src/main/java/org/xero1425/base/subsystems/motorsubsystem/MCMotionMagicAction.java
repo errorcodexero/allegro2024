@@ -158,10 +158,13 @@ public class MCMotionMagicAction extends MotorAction {
     public String toString(int indent) {
         String ret ;
 
+        MotorEncoderSubsystem me = (MotorEncoderSubsystem)getSubsystem();        
+
         ret = spaces(indent) + "MCMotionMagicAction (" + getSubsystem().getName() + ")";
         ret += " target=" + target_ ;
         ret += " posthresh=" + pos_threshold_ ;
         ret += " velthresh=" + vel_threshold_ ;
+        ret += " pos=" + Double.toString(me.getPosition()) ;
 
         return ret ;
     }

@@ -30,8 +30,8 @@ public abstract class CollectBaseAltAction extends Action {
         tilt = sub_.getTilt().getSettingsValue("targets:stow").getDouble() ;
         updown = sub_.getUpDown().getSettingsValue("targets:stow").getDouble() ;
 
-        tilt_action_stow_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", tilt, 1, 1) ;
-        updown_action_stow_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", updown, 1, 1) ;
+        tilt_action_stow_ = new MCMotionMagicAction(sub_.getTilt(), "pids:position", tilt, 5, 5) ;
+        updown_action_stow_ = new MCMotionMagicAction(sub_.getUpDown(), "pids:position", updown, 5, 5) ;
     }
 
     protected IntakeShooterSubsystem getSubsystem() {

@@ -162,7 +162,7 @@ public class TargetTrackerSubsystem extends Subsystem {
                 logger.add("pose", false) ;
                 distance_between_robot_and_target_ = calculateDistanceBetweenPoses(robot_pos_, target_pos_) ;
 
-                if (distance_between_robot_and_target_ < 3.0) {
+                if (distance_between_robot_and_target_ < 4.0) {
                     sees_target_ = true ;
                 }
 

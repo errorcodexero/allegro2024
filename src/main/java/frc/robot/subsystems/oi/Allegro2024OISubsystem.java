@@ -370,6 +370,11 @@ public class Allegro2024OISubsystem extends OISubsystem {
         }
     }
 
+    private boolean startCollect() {
+        SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;
+        return gp.isRBackButtonPressed() || oipanel_.getCollectState() ;
+    }
+
     private void idleState() {
         AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
         SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;
@@ -377,7 +382,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
         oipanel_.setClimbUpPrepLED(LEDState.ON);        
 
         if (gp != null) {
-            if (gp.isRBackButtonPressed()) {
+            if (startCollect()) {
                 robot.getIntakeShooter().setAction(startCollectAction_) ;
                 state_ = OIState.Collect ;
             }
@@ -392,11 +397,10 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     private boolean isRButtonReleased() {
         SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;        
-
         if (gp == null)
             return true ;
 
-        return !gp.isRBackButtonPressed() ;
+        return !gp.isRBackButtonPressed() && !oipanel_.getCollectState() ;  
     }
 
     private void collectState() {
