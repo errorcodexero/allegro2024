@@ -97,6 +97,8 @@ public class MCMotionMagicAction extends MotorAction {
         MotorEncoderSubsystem sub = (MotorEncoderSubsystem)getSubsystem() ;
         double ticks = sub.getEncoder().mapPhysicalToMotor(target) ;
         getSubsystem().getMotorController().set(XeroPidType.MotionMagic, ticks) ;
+        
+        target_ = target ;
     }    
 
     @Override

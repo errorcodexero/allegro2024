@@ -682,11 +682,14 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     private void drivingToTrapState() {
         if (trappath_.isDone()) {
-            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;            
             enableGamepad();
-            oipanel_.setClimbUpExecLED(LEDState.BLINK_FAST);
-            robot.getSuperStructure().getClimber().setAction(hooks_down_with_robot_action_, true) ;
-            state_ = OIState.ClimbingUp ;            
+            state_ = OIState.Idle ;
+
+           // AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;            
+            // enableGamepad();
+            // oipanel_.setClimbUpExecLED(LEDState.BLINK_FAST);
+            // robot.getSuperStructure().getClimber().setAction(hooks_down_with_robot_action_, true) ;
+            // state_ = OIState.ClimbingUp ;            
         }
     }
 

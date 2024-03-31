@@ -637,6 +637,10 @@
                 "shoot" : 118.0,
                 "stow" : 118.0
             },
+            "props" : {
+                "minpos" : -10.0,
+                "maxpos" : 118
+            },            
             "pids" : {
                 "position" : {
                     "kp" : 8.0,
@@ -647,8 +651,21 @@
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 200,                   // 270
-                    "maxa" : 700,                   // 270
+                    "maxv" : 300,
+                    "maxa" : 400,
+                    "jerk" : 0.0
+                },
+                "position-up" : {
+                    "kp" : 8.0,
+                    "ki" : 0.0,
+                    "kd" : 0.0,
+                    "kv" : 0.4,
+                    "ka" : 0.0,
+                    "kg" : 0.0,
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 200,
+                    "maxa" : 200,
                     "jerk" : 0.0
                 }                
             }
@@ -683,20 +700,50 @@
                 "shoot" : -50,
                 "collect" : 50.0
             },
+            "props" : {
+                "minpos" : -73.0,
+                "maxpos" : 60
+            },             
             "pids" : {
                 "position" : {
                     "kp" : 2.8,
                     "ki" : 0.0,
                     "kd" : 0.0,
-                    "kv" : 0.1,
+                    "kv" : 0.5,
                     "ka" : 0.0,
                     "kg" : 0.0,
                     "ks" : 0.0,
                     "outmax" : 12.0,
-                    "maxv" : 200,
-                    "maxa" : 700,
+                    "maxv" : 300,
+                    "maxa" : 400,
                     "jerk" : 0.0
-                }
+                },
+                "position-track-down" : {
+                    "kp" : 3.0,
+                    "ki" : 0.0,
+                    "kd" : 0.0,
+                    "kv" : 0.8,
+                    "ka" : 0.0,
+                    "kg" : 0.0,
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 300,
+                    "maxa" : 400,
+                    "jerk" : 0.0
+                },
+                "position-track-up" : {
+                    "kp" : 2.2,
+                    "ki" : 0.0,
+                    "kd" : 0.0,
+                    "kv" : 0.5,
+                    "ka" : 0.0,
+                    "kg" : 0.0,
+                    "ks" : 0.0,
+                    "outmax" : 12.0,
+                    "maxv" : 300,
+                    "maxa" : 400,
+                    "jerk" : 0.0
+                }                
             }
         },
         "intake-shooter1" : {

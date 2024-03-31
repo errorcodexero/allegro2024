@@ -4,6 +4,9 @@ import org.xero1425.base.motors.BadMotorRequestException;
 import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.motors.IMotorController.XeroPidType;
 
+import frc.robot.Allegro2024;
+import frc.robot.subsystems.toplevel.AllegroRobot2024;
+
 public class MCTrackPosAction extends MotorAction {
 
     // The plot ID for the action
@@ -17,11 +20,11 @@ public class MCTrackPosAction extends MotorAction {
         "time", 
         "target (%%posunits%%)", 
         "actual (%%posunits%%)",
-        "mctarget (%%posunits%%)",
         "velocity (%%velunits%%)",
         "voltage (v)",
         "error (percent)",
-        "isAtTarget"
+        "isAtTarget",
+        "hack (%%posunits%%)"
     } ;    
 
     private double start_ ;
@@ -130,15 +133,19 @@ public class MCTrackPosAction extends MotorAction {
         double mctarget = me.getMotorController().getClosedLoopTarget() ;
         mctarget = me.getEncoder().mapMotorToPhysical(mctarget) ;
 
+        Allegro2024 robot = (Allegro2024)getSubsystem().getRobot() ;
+        AllegroRobot2024 top = (AllegroRobot2024)robot.getRobotSubsystem() ;
+        double hack = top.getIntakeShooter().getAbsEncoderAngle() ;
+
         if (plot_id_ != -1) {
             data_[0] = getSubsystem().getRobot().getTime() - start_ ;
             data_[1] = target_ ;
             data_[2] = pos ;
-            data_[3] = mctarget ;
-            data_[4] = vel ;
-            data_[5] = me.getMotorController().getVoltage() ;
-            data_[6] = error ;
-            data_[7] = is_at_target_ ? 1.0 : 0.0 ;
+            data_[3] = vel ;
+            data_[4] = me.getMotorController().getVoltage() ;
+            data_[5] = error ;
+            data_[6] = is_at_target_ ? 1.0 : 0.0 ;
+            data_[7] = hack ;
             getSubsystem().addPlotData(plot_id_, data_);
         }
 
