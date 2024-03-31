@@ -11,6 +11,7 @@ import org.xero1425.misc.MessageType;
 import org.xero1425.misc.MissingParameterException;
 
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import frc.robot.automodes.back.Start3Shoot3AutoMode;
 
 public class AllegroRobotAutoController extends AutoController {
 

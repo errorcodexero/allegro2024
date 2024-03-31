@@ -1,8 +1,11 @@
-package frc.robot.automodes;
+package frc.robot.automodes.back;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.controllers.AutoController;
 
+import frc.robot.automodes.AllegroGameAutoMode;
+import frc.robot.automodes.actions.Start2Shoot4Action;
+import frc.robot.automodes.actions.Start2Shoot4ActionFast;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class Start2Shoot4AutoMode extends AllegroGameAutoMode {

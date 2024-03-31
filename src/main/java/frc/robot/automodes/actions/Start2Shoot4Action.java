@@ -1,4 +1,4 @@
-package frc.robot.automodes;
+package frc.robot.automodes.actions;
 
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.misc.XeroTimer;

@@ -1,4 +1,4 @@
-package frc.robot.automodes;
+package frc.robot.automodes.actions;
 
 import org.xero1425.base.utils.Pose2dWithRotation;
 import org.xero1425.misc.MessageLogger;

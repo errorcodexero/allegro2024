@@ -9,10 +9,15 @@ import org.xero1425.base.controllers.AutoController;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MissingParameterException;
 import org.xero1425.misc.SimArgs;
+import org.xero1425.misc.XeroMath;
 import org.xero1425.misc.XeroPathType;
 import org.xero1425.simulator.engine.ModelFactory;
 import org.xero1425.simulator.engine.SimulationEngine;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Transform2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import frc.robot.automodes.AllegroRobotAutoController;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
@@ -27,6 +32,7 @@ public class Allegro2024 extends XeroRobot {
   public Allegro2024() {
     super(0.02);
   }
+
 
   public String getPracticeSerialNumber() {
     return "032414C9" ;

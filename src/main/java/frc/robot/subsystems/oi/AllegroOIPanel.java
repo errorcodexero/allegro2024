@@ -35,7 +35,7 @@ public class AllegroOIPanel extends OIPanel {
     private int auto_manual2_gadget_ ;
     private int collect_gadget_ ;
 
-    private int climb_down_gadget_ ;                        // Prepare to climb down
+    private int auto_trap_gadget_ ;                         // Run auto trap sequence
     private int eject_gadget_ ;                             // Eject the note
     private int turtle_gadget_ ;                            // Turtle mode
 
@@ -49,7 +49,7 @@ public class AllegroOIPanel extends OIPanel {
 
     private OILed climb_up_prep_enabled_led_ ;
     private OILed climb_up_exec_enabled_led_ ;
-    private OILed climb_down_exec_enabled_led_ ;
+    private OILed auto_trap_enabled_led_ ;
 
     //////////////////////////////////////////////////////////////////////
     // Actions
@@ -84,7 +84,7 @@ public class AllegroOIPanel extends OIPanel {
     }
 
     public void setAutoTrapLED(OILed.LEDState st) {
-        climb_down_exec_enabled_led_.setState(st) ;
+        auto_trap_enabled_led_.setState(st) ;
     }
 
     @Override
@@ -116,9 +116,9 @@ public class AllegroOIPanel extends OIPanel {
         climb_up_exec_enabled_led_ = createLED(num, false) ;
         climb_up_exec_enabled_led_.setState(LEDState.OFF);
 
-        num = getSubsystem().getSettingsValue("panel:leds:climb-down-exec-enabled").getInteger() ;
-        climb_down_exec_enabled_led_ = createLED(num, false) ;
-        climb_down_exec_enabled_led_.setState(LEDState.OFF);        
+        num = getSubsystem().getSettingsValue("panel:leds:auto-trap-exec-enabled").getInteger() ;
+        auto_trap_enabled_led_ = createLED(num, false) ;
+        auto_trap_enabled_led_.setState(LEDState.OFF);        
     }
 
     @Override
@@ -148,7 +148,7 @@ public class AllegroOIPanel extends OIPanel {
         climb_up_exec_gadget_ = mapButton(num, ButtonType.LowToHigh) ;
 
         num = getSubsystem().getSettingsValue("panel:gadgets:climb_down").getInteger() ;
-        climb_down_gadget_ = mapButton(num, ButtonType.LowToHigh) ;
+        auto_trap_gadget_ = mapButton(num, ButtonType.LowToHigh) ;
 
         num = getSubsystem().getSettingsValue("panel:gadgets:shoot").getInteger() ;
         shoot_gadget_ = mapButton(num, ButtonType.LowToHigh) ;
@@ -208,8 +208,8 @@ public class AllegroOIPanel extends OIPanel {
         return getValue(climb_up_exec_gadget_) == 1 ;
     }
 
-    public boolean isClimbDownPressed() {
-        return getValue(climb_down_gadget_) == 1 ;
+    public boolean isAutoTrapPressed() {
+        return getValue(auto_trap_gadget_) == 1 ;
     }
 
     public boolean isShootPressed() {

@@ -1,4 +1,4 @@
-package frc.robot.automodes;
+package frc.robot.automodes.actions;
 
 import org.xero1425.base.XeroRobot;
 import org.xero1425.base.actions.Action;
@@ -115,11 +115,6 @@ public abstract class AllegroAutoModeAction extends Action {
 
     private Pose2dWithRotation getCurrentRobotPose() {
         Pose2d p = robot_.getSwerve().getPose() ;
-        MessageLogger logger = getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Info) ;
-        logger.add("getCurrentPose for path") ;
-        logger.add("pose", p.toString()) ;
-        logger.endMessage();
         return new Pose2dWithRotation(p.getX(), p.getY(), p.getRotation(), p.getRotation());
     }
 

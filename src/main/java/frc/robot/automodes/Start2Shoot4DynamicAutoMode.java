@@ -3,7 +3,8 @@ package frc.robot.automodes;
 import org.xero1425.base.actions.Action;
 import org.xero1425.base.controllers.AutoController;
 
-import frc.robot.automodes.Start2Shoot4DynamicAction.FinishStrategy;
+import frc.robot.automodes.actions.Start2Shoot4DynamicAction;
+import frc.robot.automodes.actions.Start2Shoot4DynamicAction.FinishStrategy;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class Start2Shoot4DynamicAutoMode extends AllegroGameAutoMode {
