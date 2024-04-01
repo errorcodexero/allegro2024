@@ -1064,7 +1064,26 @@
                     "ki": 0,
                     "kd": 1.0
                 }
-            }
+            },
+            "path-following-trap" : {
+                "xy-tolerance": 0.025,
+                "angle-tolerance": 1.0,
+                "xctrl": {
+                    "kp": 2.0,
+                    "ki": 0,
+                    "kd": 0
+                },
+                "yctrl": {
+                    "kp": 2.0,
+                    "ki": 0,
+                    "kd": 0
+                },
+                "rotation": {
+                    "kp": 14.0,
+                    "ki": 0,
+                    "kd": 1.0
+                }
+            }            
         },
         "allegro2024oi" : {
             "swerve_gamepad": {

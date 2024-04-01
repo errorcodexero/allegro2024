@@ -668,7 +668,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
             try {
                 Pose2dWithRotation[] pts = new Pose2dWithRotation[] { start, firstpt } ;
                 trappath_ = new SwerveHolonomicDynamicPathAction(robot.getSwerve(), "trap", 1.0, 1.0, 3.0, 0.0, 1.0, pts, "-trap") ;
-                trappath_.setTolerance(0.05, 0.5);
             }
             catch(Exception ex) {
                 trappath_ = null ;
@@ -695,7 +694,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
             try {
                 Pose2dWithRotation[] pts = new Pose2dWithRotation[] { start, firstpt } ;
                 trappath_ = new SwerveHolonomicDynamicPathAction(robot.getSwerve(), "trap", 1.0, 1.0, 3.0, 0.0, 1.0, pts, "-trap") ;
-                trappath_.setTolerance(0.05, 0.5);
             }
             catch(Exception ex) {
                 trappath_ = null ;

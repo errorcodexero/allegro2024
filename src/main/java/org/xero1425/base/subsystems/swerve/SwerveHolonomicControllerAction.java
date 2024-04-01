@@ -1,7 +1,6 @@
 package org.xero1425.base.subsystems.swerve;
 
 import org.xero1425.misc.BadParameterTypeException;
-import org.xero1425.misc.ISettingsSupplier;
 import org.xero1425.misc.MissingParameterException;
 
 import edu.wpi.first.math.controller.HolonomicDriveController;
@@ -27,10 +26,6 @@ public abstract class SwerveHolonomicControllerAction extends SwerveDriveAction 
 
         swerve_ = sub ;
         ctrl_ = createDriveController(suffix) ;
-    }
-
-    public void setTolerance(double xytol, double angletol) {
-        ctrl_.setTolerance(new Pose2d(xytol, xytol, Rotation2d.fromDegrees(angletol))) ;
     }
 
     protected HolonomicDriveController controller() {
@@ -66,10 +61,8 @@ public abstract class SwerveHolonomicControllerAction extends SwerveDriveAction 
         ctrl = new HolonomicDriveController(xctrl, yctrl, thetactrl) ;
         ctrl.setEnabled(true);
         
-        ISettingsSupplier settings = getSubsystem().getRobot().getSettingsSupplier() ;
-        String s = getSubsystem().getName() ;
-        double xytol = settings.get("subsystems:" + s + ":path-following:xy-tolerance").getDouble() ;
-        double angletol = settings.get("subsystems:" + s + ":path-following:angle-tolerance").getDouble() ;
+        double xytol = swerve_.getSettingsValue(prefix + ":xy-tolerance").getDouble() ;
+        double angletol = swerve_.getSettingsValue(prefix + "angle-tolerance").getDouble() ;
         ctrl.setTolerance(new Pose2d(xytol, xytol, Rotation2d.fromDegrees(angletol))) ;
 
         return ctrl ;
