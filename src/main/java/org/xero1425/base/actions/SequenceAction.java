@@ -3,8 +3,8 @@ package org.xero1425.base.actions ;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.xero1425.base.XeroRobot;
 import org.xero1425.base.subsystems.Subsystem;
-import org.xero1425.misc.MessageLogger;
 
 /// \file
 
@@ -26,8 +26,8 @@ public class SequenceAction extends ActionGroup
 
     /// \brief create a new SequenceAction
     /// \param logger the message logger for the robot
-    public SequenceAction(MessageLogger logger) {
-        super(logger) ;
+    public SequenceAction(XeroRobot robot) {
+        super(robot) ;
 
         actions_ = new ArrayList<Action>() ;
         running_ = false ;

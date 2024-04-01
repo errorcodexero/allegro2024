@@ -18,7 +18,7 @@ public class DelayAction extends Action {
     /// \param robot the robot object
     /// \param delay the amount of the delay in seconds
     public DelayAction(XeroRobot robot, double delay) {
-        super(robot.getMessageLogger());
+        super(robot);
 
         timer_ = new XeroTimer(robot, "delay-action", delay) ;
     }
@@ -27,7 +27,7 @@ public class DelayAction extends Action {
     /// \param robot the robot object
     /// \param delay a string specifying a delay value to look up in the settings file
     public DelayAction(XeroRobot robot, String delay) throws BadParameterTypeException, MissingParameterException {
-        super(robot.getMessageLogger()) ;
+        super(robot) ;
         double delayval = robot.getSettingsSupplier().get(delay).getDouble() ;
         timer_ = new XeroTimer(robot, "delay-action", delayval) ;
     }
@@ -36,7 +36,7 @@ public class DelayAction extends Action {
     /// \param robot the robot object
     /// \param delay a string specifying a delay value to look up in the settings file
     public DelayAction(Subsystem sub, String delay) throws BadParameterTypeException, MissingParameterException {
-        super(sub.getRobot().getMessageLogger()) ;
+        super(sub.getRobot()) ;
         double delayval = sub.getSettingsValue(delay).getDouble() ;
         timer_ = new XeroTimer(sub.getRobot(), "delay-action", delayval) ;
     }

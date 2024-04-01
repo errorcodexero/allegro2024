@@ -1,7 +1,8 @@
 package org.xero1425.base.actions;
 
 import java.util.List;
-import org.xero1425.misc.MessageLogger;
+
+import org.xero1425.base.XeroRobot;
 
 /// \file
 
@@ -9,8 +10,8 @@ import org.xero1425.misc.MessageLogger;
 public abstract class ActionGroup extends Action {
     /// \brief create a new ActionGroup object
     /// \param logger the message logger for the robot
-    public ActionGroup(MessageLogger logger) {
-        super(logger) ;
+    public ActionGroup(XeroRobot robot) {
+        super(robot) ;
     }
 
     /// \brief return all of the child actions that are contained by this ActionGroup

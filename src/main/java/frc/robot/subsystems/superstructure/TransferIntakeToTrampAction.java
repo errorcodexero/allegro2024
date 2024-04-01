@@ -32,7 +32,7 @@ public class TransferIntakeToTrampAction extends Action {
     private State state_ ;
 
     public TransferIntakeToTrampAction(SuperStructureSubsystem sub) throws Exception {
-        super(sub.getRobot().getMessageLogger());
+        super(sub.getRobot());
         
         double v1, v2 ;
 

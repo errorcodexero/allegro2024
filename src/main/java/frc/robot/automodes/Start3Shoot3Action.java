@@ -47,7 +47,7 @@ public class Start3Shoot3Action extends Action {
     private IntakeGotoNamedPositionAction stow_ ;
 
     public Start3Shoot3Action(AllegroRobot2024 robot, boolean mirror, double mvalue) throws Exception {
-        super(robot.getRobot().getMessageLogger()) ;
+        super(robot.getRobot()) ;
 
         robot_ = robot ;
         mirror_ = mirror ;

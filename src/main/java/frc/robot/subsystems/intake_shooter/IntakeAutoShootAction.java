@@ -96,7 +96,7 @@ public class IntakeAutoShootAction extends Action {
     } ;
 
     public IntakeAutoShootAction(IntakeShooterSubsystem intake, TargetTrackerSubsystem tracker, boolean initialDriveTeamReady, SwerveTrackAngle rotate) throws Exception {
-        super(intake.getRobot().getMessageLogger());
+        super(intake.getRobot());
 
         sub_ = intake ;
         tracker_ = tracker ;

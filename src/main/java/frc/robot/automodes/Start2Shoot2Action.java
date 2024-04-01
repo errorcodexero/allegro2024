@@ -33,7 +33,7 @@ public class Start2Shoot2Action extends Action {
     private IntakeGotoNamedPositionAction stow_ ;    
 
     public Start2Shoot2Action(AllegroRobot2024 robot, boolean mirror, double mvalue) throws Exception {
-        super(robot.getRobot().getMessageLogger()) ;
+        super(robot.getRobot()) ;
         robot_ = robot ;
         state_ = State.Idle ;
 

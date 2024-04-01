@@ -16,7 +16,7 @@ public class ClimbAction extends Action {
     private double power_ ;
 
     public ClimbAction(MotorEncoderSubsystem climb, ClimbType type) throws Exception {
-        super(climb.getRobot().getMessageLogger());
+        super(climb.getRobot());
         climb_ = climb;
         type_ = type ;
 

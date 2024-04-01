@@ -34,7 +34,7 @@ public class AmpTrapPositionAction extends Action {
     private State state_ ;
 
     public AmpTrapPositionAction(AmpTrapSubsystem sub, double angle, double height) throws Exception {
-        super(sub.getRobot().getMessageLogger()) ;
+        super(sub.getRobot()) ;
 
         sub_ = sub ;
         keep_out_height_ = sub_.getSettingsValue("props:keepout-zone:elevator-height").getDouble() ;

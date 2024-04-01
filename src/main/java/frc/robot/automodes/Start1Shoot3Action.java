@@ -41,7 +41,7 @@ public class Start1Shoot3Action extends Action {
     private SwerveHolonomicPathFollowerAction p3_ ;
 
     public Start1Shoot3Action(AllegroRobot2024 robot, boolean mirror, double mvalue) throws Exception {
-        super(robot.getRobot().getMessageLogger()) ;
+        super(robot.getRobot()) ;
 
         robot_ = robot ;
         state_ = State.Idle ;

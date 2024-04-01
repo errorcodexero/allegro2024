@@ -1,13 +1,13 @@
 package org.xero1425.base.actions;
 
-import org.xero1425.misc.MessageLogger;
+import org.xero1425.base.XeroRobot;
 
 public class RobotLoopCountAction extends Action {
     private int count_ ;
     private int current_ ;
 
-    public RobotLoopCountAction(MessageLogger logger, int count) {
-        super(logger) ;
+    public RobotLoopCountAction(XeroRobot robot, int count) {
+        super(robot) ;
 
         count_ = count ;
     }    

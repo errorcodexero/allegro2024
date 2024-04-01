@@ -13,7 +13,7 @@ public abstract class MotorAction extends Action
     /// \brief Create the MotorAction
     /// \param subsystem the subsystem for the action
     public MotorAction(final MotorSubsystem subsystem) {
-        super(subsystem.getRobot().getMessageLogger());
+        super(subsystem.getRobot());
         motor_subsystem_ = subsystem;
     }
 

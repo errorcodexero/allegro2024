@@ -21,7 +21,7 @@ public class AutoMode extends SequenceAction {
     /// \param ctrl the automode controller that manages this auto mode
     /// \param name the name of the automode
     public AutoMode(AutoController ctrl, String name) {
-        super(ctrl.getRobot().getMessageLogger()); 
+        super(ctrl.getRobot()); 
 
         ctrl_ = ctrl ;
         name_ = name ;

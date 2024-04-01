@@ -8,7 +8,7 @@ public class AmpTrapXferAction extends Action {
     private MotorEncoderPowerAction power_ ;
 
     public AmpTrapXferAction(AmpTrapSubsystem sub) throws Exception {
-        super(sub.getRobot().getMessageLogger());
+        super(sub.getRobot());
 
         sub_ = sub ;
         double p = sub.getSettingsValue("actions:xfer:power").getDouble() ;

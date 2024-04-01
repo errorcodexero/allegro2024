@@ -1,7 +1,8 @@
 package org.xero1425.base.actions;
 
 import java.util.function.Supplier;
-import org.xero1425.misc.MessageLogger;
+
+import org.xero1425.base.XeroRobot;
 
 public class ConditionalAction extends Action {
     private Supplier<Boolean> condition_ ;
@@ -9,8 +10,8 @@ public class ConditionalAction extends Action {
     private Action iffalse_ ;
     private boolean state_ ;
 
-    public ConditionalAction(MessageLogger logger, Supplier<Boolean> condition, Action iftrue, Action iffalse) {
-        super(logger);
+    public ConditionalAction(XeroRobot robot, Supplier<Boolean> condition, Action iftrue, Action iffalse) {
+        super(robot);
 
         state_ = false ;
         condition_ = condition ;

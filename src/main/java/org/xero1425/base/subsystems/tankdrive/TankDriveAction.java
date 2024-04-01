@@ -10,7 +10,7 @@ public abstract class TankDriveAction extends Action
     /// \brief Create the object holding a reference to the subsystem
     /// \param drive the tankdrive subsystem
     public TankDriveAction(TankDriveSubsystem drive) {
-        super(drive.getRobot().getMessageLogger()) ;
+        super(drive.getRobot()) ;
         tankdrive_ = drive ;
     }
 

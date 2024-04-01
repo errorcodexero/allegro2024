@@ -25,7 +25,7 @@ public class StowAction extends Action {
     private State state_ ;
 
     public StowAction(SuperStructureSubsystem sub) throws Exception {
-        super(sub.getRobot().getMessageLogger());
+        super(sub.getRobot());
 
         double v1, v2 ;
 

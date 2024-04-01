@@ -9,7 +9,7 @@ public class OIOutputAction extends Action {
     private boolean value_ ;
 
     public OIOutputAction(OISubsystem sub, int device, int output, boolean value) {
-        super(sub.getRobot().getMessageLogger());
+        super(sub.getRobot());
 
         sub_ = sub ;
         device_ = device ;

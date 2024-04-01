@@ -74,7 +74,7 @@ public class ShooterTuningAction extends Action {
     } ;    
 
     public ShooterTuningAction(IntakeShooterSubsystem sub, double updown, double init) throws Exception {
-        super(sub.getRobot().getMessageLogger()) ;
+        super(sub.getRobot()) ;
         sub_ = sub ;
         updown_ = updown ;
 

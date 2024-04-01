@@ -17,7 +17,7 @@ public class TiltTrackTargetAction extends Action {
     private boolean is_at_target_ ;
 
     public TiltTrackTargetAction(IntakeShooterSubsystem intake, double target, double ptol, double vtol) throws MissingParameterException, BadParameterTypeException {
-        super(intake.getRobot().getMessageLogger());
+        super(intake.getRobot());
         intake_ = intake;
         target_ = target ;
         ptol_ = ptol ;

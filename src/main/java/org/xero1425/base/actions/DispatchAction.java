@@ -24,7 +24,7 @@ public class DispatchAction extends ActionGroup {
     /// \param act the child action to assign
     /// \param block if true, this action blocks until the child action is complete
     public DispatchAction(Subsystem sub, Action act, boolean block) {
-        super(sub.getRobot().getMessageLogger());
+        super(sub.getRobot());
 
         sub_ = sub;
         act_ = act;

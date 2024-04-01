@@ -16,7 +16,7 @@ public abstract class CollectBaseAltAction extends Action {
     private MCMotionMagicAction updown_act_ ;
 
     public CollectBaseAltAction(IntakeShooterSubsystem sub, double updown, double tilt) throws Exception {
-        super(sub.getRobot().getMessageLogger());
+        super(sub.getRobot());
 
         sub_ = sub;
 

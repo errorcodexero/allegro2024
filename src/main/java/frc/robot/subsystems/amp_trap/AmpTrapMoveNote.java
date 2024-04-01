@@ -19,7 +19,8 @@ public class AmpTrapMoveNote extends Action {
     }
 
     public AmpTrapMoveNote(AmpTrapSubsystem sub, double dist) throws BadParameterTypeException, MissingParameterException {
-        super(sub.getRobot().getMessageLogger()) ;
+        super(sub.getRobot()) ;
+        
         sub_ = sub ;
         dist_ = dist ;
         power_ = sub_.getManipulator().getSettingsValue("actions:move-note:power").getDouble();

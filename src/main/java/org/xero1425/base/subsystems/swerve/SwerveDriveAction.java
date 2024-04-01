@@ -13,7 +13,7 @@ public abstract class SwerveDriveAction extends Action {
     /// \brief Create the object holding a reference to the subsystem
     /// \param drive the tankdrive subsystem
     public SwerveDriveAction(SwerveBaseSubsystem drive) {
-        super(drive.getRobot().getMessageLogger()) ;
+        super(drive.getRobot()) ;
         swerve_drive_ = drive ;
 
         //

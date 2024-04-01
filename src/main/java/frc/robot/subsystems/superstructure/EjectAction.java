@@ -23,7 +23,7 @@ public class EjectAction extends Action {
     private AmpTrapEjectAction amp_eject_ ;
 
     public EjectAction(SuperStructureSubsystem sub) throws Exception {
-        super(sub.getRobot().getMessageLogger());
+        super(sub.getRobot());
         sub_ = sub;
         state_ = State.Idle;
 

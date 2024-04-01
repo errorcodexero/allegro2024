@@ -3,8 +3,8 @@ package org.xero1425.base.actions;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.xero1425.base.XeroRobot;
 import org.xero1425.base.subsystems.Subsystem;
-import org.xero1425.misc.MessageLogger;
 
 /// \file
 
@@ -31,8 +31,8 @@ public class ParallelAction extends ActionGroup
     /// \brief create a parallel action
     /// \param logger the message logger for the robot
     /// \param done the done policy for this parallel method
-    public ParallelAction(MessageLogger logger, DonePolicy done) {
-        super(logger) ;
+    public ParallelAction(XeroRobot robot, DonePolicy done) {
+        super(robot) ;
 
         actions_ = new ArrayList<Action>() ;
         running_ = false ;

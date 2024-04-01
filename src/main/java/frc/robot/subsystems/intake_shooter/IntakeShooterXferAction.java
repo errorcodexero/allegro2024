@@ -10,7 +10,7 @@ public class IntakeShooterXferAction extends Action {
     private MCVelocityAction shooter2_;        
 
     public IntakeShooterXferAction(IntakeShooterSubsystem sub, double feeder, double shooter) throws Exception {
-        super(sub.getRobot().getMessageLogger());
+        super(sub.getRobot());
 
         sub_ = sub;
         feeder_ = new MotorEncoderPowerAction(sub_.getFeeder(), feeder) ;

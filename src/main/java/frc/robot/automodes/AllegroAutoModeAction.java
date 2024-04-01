@@ -33,7 +33,7 @@ public abstract class AllegroAutoModeAction extends Action {
     private double mvalue_ ;
     
     public AllegroAutoModeAction(AllegroRobot2024 robot, boolean mirror, double mvalue) throws Exception {
-        super(robot.getRobot().getMessageLogger()) ;
+        super(robot.getRobot()) ;
 
         mirror_ = mirror ;
         mvalue_ = mvalue ;

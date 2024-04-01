@@ -17,7 +17,7 @@ public class IntakeShooterStowAction  extends Action{
     private MotorEncoderPowerAction stow_shooter2_;
 
     public IntakeShooterStowAction(IntakeShooterSubsystem sub) throws Exception {
-        super(sub.getRobot().getMessageLogger());
+        super(sub.getRobot());
 
         sub_ = sub;
         stow_updown_ = new MCMotionMagicAction(sub.getUpDown(), "pids:position", "targets:stow", 1, 1);

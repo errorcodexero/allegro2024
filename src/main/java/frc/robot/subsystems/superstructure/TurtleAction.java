@@ -23,7 +23,7 @@ public class TurtleAction extends Action {
     private IntakeGotoNamedPositionAction intake_ ;
 
     public TurtleAction(SuperStructureSubsystem sub) throws Exception {
-        super(sub.getRobot().getMessageLogger());
+        super(sub.getRobot());
         sub_ = sub;
         state_ = State.Idle;
 

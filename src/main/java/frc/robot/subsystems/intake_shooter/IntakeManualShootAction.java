@@ -39,7 +39,7 @@ public class IntakeManualShootAction extends Action {
     }
 
     public IntakeManualShootAction(IntakeShooterSubsystem intake, String location, boolean force) throws Exception {
-        super(intake.getRobot().getMessageLogger());
+        super(intake.getRobot());
 
         intake_ = intake;
         location_ = location ;

@@ -1,5 +1,6 @@
 package org.xero1425.base.actions ;
 
+import org.xero1425.base.XeroRobot;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType; 
 
@@ -18,10 +19,12 @@ public abstract class Action
     private boolean canceled_ ;
 
     // A reference to the message logger
-    private MessageLogger logger_ ;
+    private XeroRobot robot_ ;
     
     // The unique ID for the action
     private int id_ ;
+
+    private double start_ ;
 
     // The ID for the next action created
     private static int current_id_ = 0 ;
@@ -31,10 +34,10 @@ public abstract class Action
 
     /// \brief create a new action
     /// \param logger the message logger for printing messages about the action lifecycle
-    public Action(MessageLogger logger) {
-        logger_ = logger ;
+    public Action(XeroRobot robot) {
+        robot_ = robot ;
         id_ = current_id_++ ;
-        logger_id_ = getLoggerID(logger) ;
+        logger_id_ = getLoggerID(robot.getMessageLogger()) ;
 
         done_ = false ;
         canceled_ = false ;
@@ -44,12 +47,13 @@ public abstract class Action
     /// This method is typically overridden by any derived class.  The derived version
     /// this method should call the base class method.
     public void start() throws Exception {
-        logger_.startMessage(MessageType.Debug, logger_id_) ;
-        logger_.add(getID()).add(":");
-        logger_.add("starting action: ") ;
+        robot_.getMessageLogger().startMessage(MessageType.Debug, logger_id_) ;
+        robot_.getMessageLogger().add(getID()).add(":");
+        robot_.getMessageLogger().add("starting action: ") ;
         addActionToMessage() ;
-        logger_.endMessage();
+        robot_.getMessageLogger().endMessage();
 
+        start_ = robot_.getTime() ;
         done_ = false ;
         canceled_ = false ;
     }
@@ -87,7 +91,7 @@ public abstract class Action
     /// \brief return the message logger object
     /// \returns the message logger object
     public MessageLogger getMessageLogger() {
-        return logger_ ;
+        return robot_.getMessageLogger() ;
     }
 
     /// \brief cancel the current action.
@@ -95,11 +99,12 @@ public abstract class Action
     /// this method should call the base class method.
     public void cancel() {
         if (!isDone()) {
-            logger_.startMessage(MessageType.Debug, logger_id_) ;
-            logger_.add(getID()).add(":");            
-            logger_.add("canceling action: ") ;
+            robot_.getMessageLogger().startMessage(MessageType.Debug, logger_id_) ;
+            robot_.getMessageLogger().add(getID()).add(":");
+            robot_.getMessageLogger().add("duration", robot_.getTime() - start_) ;       
+            robot_.getMessageLogger().add("canceling action: ") ;
             addActionToMessage() ;
-            logger_.endMessage();
+            robot_.getMessageLogger().endMessage();
             done_ = true ;
             canceled_ = true ;
         }
@@ -121,11 +126,12 @@ public abstract class Action
     /// Called from a derived class when the action is complete.  This sets the
     /// action done state to true.
     protected void setDone() {
-        logger_.startMessage(MessageType.Debug, logger_id_) ;
-        logger_.add(getID()).add(":");        
-        logger_.add("completing action: ") ;
+        robot_.getMessageLogger().startMessage(MessageType.Debug, logger_id_) ;
+        robot_.getMessageLogger().add(getID()).add(":");      
+        robot_.getMessageLogger().add("duration", robot_.getTime() - start_) ;          
+        robot_.getMessageLogger().add("completing action: ") ;
         addActionToMessage() ;   
-        logger_.endMessage();
+        robot_.getMessageLogger().endMessage();
         done_ = true ;
     }
 
@@ -151,9 +157,9 @@ public abstract class Action
     private void addActionToMessage() {
         String msg = toString(0) ;
         if (msg.indexOf('\n') != -1) {
-            logger_.add("\n") ;
+            robot_.getMessageLogger().add("\n") ;
         }
 
-        logger_.add(toString(0)) ;
+        robot_.getMessageLogger().add(toString(0)) ;
     }    
 }

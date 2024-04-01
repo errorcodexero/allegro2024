@@ -52,7 +52,7 @@ public class Start2Shoot4ActionFast extends Action {
     private SwerveHolonomicPathFollowerAction p7_ ;                 
     
     public Start2Shoot4ActionFast(AllegroRobot2024 robot, boolean mirror, double mvalue) throws Exception {
-        super(robot.getRobot().getMessageLogger()) ;
+        super(robot.getRobot()) ;
 
         robot_ = robot ;
 

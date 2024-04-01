@@ -24,7 +24,7 @@ public class IntakeGotoNamedPositionAction extends Action {
     private State state_ ;
 
     public IntakeGotoNamedPositionAction(IntakeShooterSubsystem sub, double updown, double tilt) throws Exception{
-        super(sub.getRobot().getMessageLogger());
+        super(sub.getRobot());
 
         sub_ = sub;
 

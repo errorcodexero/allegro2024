@@ -37,7 +37,7 @@ public class IntakeEjectAction extends Action {
     private State state_ ;
 
     public IntakeEjectAction(IntakeShooterSubsystem sub) throws MissingParameterException, BadParameterTypeException, BadMotorRequestException, MotorRequestFailedException {
-        super(sub.getRobot().getMessageLogger()) ;
+        super(sub.getRobot()) ;
 
         sub_ = sub ;
         start_ = new MotorEncoderPowerAction(sub_.getFeeder(), -0.5) ;

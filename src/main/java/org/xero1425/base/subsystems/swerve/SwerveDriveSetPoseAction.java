@@ -10,7 +10,7 @@ public class SwerveDriveSetPoseAction extends Action {
     private Pose2d pose_ ;
 
     public SwerveDriveSetPoseAction(SwerveBaseSubsystem sub, Pose2d pose) {
-        super(sub.getRobot().getMessageLogger());
+        super(sub.getRobot());
 
         sub_ = sub ;
         pose_ = pose ;

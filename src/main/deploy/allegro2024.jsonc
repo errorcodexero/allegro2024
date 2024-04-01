@@ -634,8 +634,8 @@
             },
             "targets" : {
                 "collect" : -11,
-                "shoot" : 118.0,
-                "stow" : 118.0
+                "shoot" : 117.0,
+                "stow" : 117.0
             },
             "pids" : {
                 "position" : {
@@ -679,7 +679,7 @@
                 }
             },
             "targets" : {
-                "stow" : -73,
+                "stow" : -71,
                 "shoot" : -50,
                 "collect" : 50.0
             },

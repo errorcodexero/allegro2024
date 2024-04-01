@@ -10,7 +10,7 @@ public class AmpTrapEjectAction extends Action {
     private XeroTimer timer_ ;
 
     public AmpTrapEjectAction(AmpTrapSubsystem sub) {
-        super(sub.getRobot().getMessageLogger()) ;
+        super(sub.getRobot()) ;
 
         sub_ = sub ;
         start_ = new MotorEncoderPowerAction(sub_.getManipulator(), -0.5) ;
