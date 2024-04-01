@@ -7,6 +7,10 @@ import org.xero1425.base.subsystems.swerve.SDSSwerveDriveSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem.LedMode;
 
+import edu.wpi.first.apriltag.AprilTagFieldLayout;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.DriverStation;
+import frc.robot.AprilTags;
 import frc.robot.subsystems.amp_trap.AmpTrapSubsystem;
 import frc.robot.subsystems.intake_shooter.IntakeShooterSubsystem;
 import frc.robot.subsystems.lidar.LidarSubsystem;
@@ -15,6 +19,18 @@ import frc.robot.subsystems.superstructure.SuperStructureSubsystem;
 import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
 
 public class AllegroRobot2024 extends RobotSubsystem {
+
+    public class StageTag {
+        public final int id_ ;
+        public final Pose2d pose_ ;
+        public final double distance_ ;
+
+        public StageTag(int id, Pose2d p, double dist) {
+            id_ = id ;
+            pose_ = p ;
+            distance_ = dist ;
+        }
+    }
 
     private SDSSwerveDriveSubsystem db_;
     private Allegro2024OISubsystem oi_;
@@ -84,5 +100,52 @@ public class AllegroRobot2024 extends RobotSubsystem {
 
     public TargetTrackerSubsystem getTargetTracker() {
         return tt_ ;
+    }
+
+    public StageTag getStagePose() {
+        StageTag tag = null ;
+        Pose2d pose = null ;
+        double dist = 0.0 ;
+        int id = -1 ;
+
+        var alliance = DriverStation.getAlliance() ;
+        if (alliance.isPresent()) {
+            AprilTagFieldLayout tags = getRobot().getAprilTags() ;
+            if (alliance.get() == DriverStation.Alliance.Blue) {
+                if (ll_.hasAprilTag(AprilTags.BLUE_STAGE_LEFT)) {
+                    id = AprilTags.BLUE_STAGE_LEFT ;
+                    pose = tags.getTagPose(AprilTags.BLUE_STAGE_LEFT).get().toPose2d() ;
+                }
+                else if (ll_.hasAprilTag(AprilTags.BLUE_STAGE_RIGHT)) {
+                    id = AprilTags.BLUE_STAGE_RIGHT ;
+                    pose = tags.getTagPose(AprilTags.BLUE_STAGE_RIGHT).get().toPose2d() ; ;
+                }
+                else if (ll_.hasAprilTag(AprilTags.BLUE_CENTER_STAGE)) {
+                    id = AprilTags.BLUE_CENTER_STAGE ;
+                    pose = tags.getTagPose(AprilTags.BLUE_CENTER_STAGE).get().toPose2d() ; ;
+                }
+            }
+            else {
+                if (ll_.hasAprilTag(AprilTags.RED_STAGE_LEFT)) {
+                    id = AprilTags.RED_STAGE_LEFT ;
+                    pose = tags.getTagPose(AprilTags.RED_STAGE_LEFT).get().toPose2d() ;
+                }
+                else if (ll_.hasAprilTag(AprilTags.RED_STAGE_RIGHT)) {
+                    id = AprilTags.RED_STAGE_RIGHT ;
+                    pose = tags.getTagPose(AprilTags.RED_STAGE_RIGHT).get().toPose2d() ; ;
+                }
+                else if (ll_.hasAprilTag(AprilTags.RED_CENTER_STAGE)) {
+                    id = AprilTags.RED_CENTER_STAGE ;
+                    pose = tags.getTagPose(AprilTags.RED_CENTER_STAGE).get().toPose2d() ; ;
+                }
+            }
+        }
+
+        if (pose != null) {
+            dist = db_.getPose().getTranslation().getDistance(pose.getTranslation()) ;
+            tag = new StageTag(id, pose, dist);
+        }
+
+        return tag ;
     }
 }

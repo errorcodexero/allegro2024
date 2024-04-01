@@ -9,12 +9,17 @@ import org.xero1425.base.subsystems.oi.OILed;
 import org.xero1425.base.subsystems.oi.OILed.LEDState;
 import org.xero1425.base.subsystems.oi.OISubsystem;
 import org.xero1425.base.subsystems.oi.SwerveDriveGamepad;
+import org.xero1425.base.subsystems.swerve.SwerveHolonomicDynamicPathAction;
 import org.xero1425.base.subsystems.swerve.SwerveTrackAngle;
+import org.xero1425.base.utils.Pose2dWithRotation;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 import org.xero1425.misc.MissingParameterException;
+import org.xero1425.misc.XeroMath;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import frc.robot.subsystems.amp_trap.AmpTrapMoveNote;
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
 import frc.robot.subsystems.intake_shooter.IntakeAutoShootAction;
@@ -34,6 +39,8 @@ import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class Allegro2024OISubsystem extends OISubsystem {
     private final static String OIHIDIndexName = "panel:index" ;
+    private final static double kImdTrapProjection = 2.0 ;
+    private final static double kFinalTrapProjection = -0.1 ;
 
     enum OIState {
         Idle,
@@ -56,6 +63,8 @@ public class Allegro2024OISubsystem extends OISubsystem {
         WaitForHooksUp,
         WaitForHooksDown,
         WaitForClimbButton,
+        DrivingToTrap1,
+        DrivingToTrap2,
         WaitForHooksResetUp,
         WaitForHooksResetDown,
         ClimbingUp,
@@ -73,11 +82,19 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     private AllegroOIPanel oipanel_ ;
 
+    // The pose of any stage april tag that is visible
+    private AllegroRobot2024.StageTag stage_pose_ ;
+
+    // The distance to the april tag that is the stage
+    private double trap_distance_ ;
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //
     // Actions
     //
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private SwerveHolonomicDynamicPathAction trappath_ ;
 
     //
     // This action is used to start the collect sequence
@@ -194,7 +211,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
     //
     // Current OI state
     //
-    private OIState state_ ;    
+    private OIState state_ ;
 
     public Allegro2024OISubsystem(Subsystem parent, DriveBaseSubsystem db, IntakeShooterSubsystem intake) throws Exception {
         super (parent,"allegro2024oi",GamePadType.Swerve, db, true);
@@ -589,11 +606,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
             robot.getAmpTrap().setAction(stow_amp_trap_action_, true) ; 
 
             state_ = OIState.Idle ;
-            //
-            // As soon as we start to stow the amp, we are done with the amp action and
-            // can allow for collect
-            //
-            // state_ = OIState.StowingAmpTrap ;
         }
     }
 
@@ -631,18 +643,76 @@ public class Allegro2024OISubsystem extends OISubsystem {
     }
 
     private void waitForClimbButtonState() {
+        AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
+
         if (oipanel_.isAbortPressed()) {
             oipanel_.setClimbUpExecLED(LEDState.OFF);
-            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
             robot.getSuperStructure().getClimber().setAction(hooks_down_action_, true) ;
             state_ = OIState.WaitForHooksDown ;
             climb_only_ = false ;
         }
         else if (oipanel_.isClimbUpExecPressed()) {
             oipanel_.setClimbUpExecLED(LEDState.BLINK_FAST);
-            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;  
             robot.getSuperStructure().getClimber().setAction(hooks_down_with_robot_action_, true) ;
             state_ = OIState.ClimbingUp ;
+        }
+        else if (oipanel_.isAutoTrapPressed() && stage_pose_ != null && trap_distance_ < 3.0) {
+            oipanel_.setAutoTrapLED(LEDState.BLINK_FAST);
+
+            Pose2d p = robot.getSwerve().getPose() ;
+            Pose2dWithRotation start = new Pose2dWithRotation(p.getX(), p.getY(), p.getRotation(), p.getRotation());
+
+            Pose2d firstptp = computeProjectedTrapPoint(stage_pose_.pose_, kImdTrapProjection) ;
+            Pose2dWithRotation firstpt = new Pose2dWithRotation(firstptp, firstptp.getRotation()) ;
+
+            try {
+                Pose2dWithRotation[] pts = new Pose2dWithRotation[] { start, firstpt } ;
+                trappath_ = new SwerveHolonomicDynamicPathAction(robot.getSwerve(), "trap", 1.0, 1.0, 3.0, 0.0, 1.0, pts, "-trap") ;
+                trappath_.setTolerance(0.05, 0.5);
+            }
+            catch(Exception ex) {
+                trappath_ = null ;
+            }
+
+            if (trappath_ != null) {
+                disableGamepad();
+                robot.getSwerve().setAction(trappath_, true) ;
+                state_ = OIState.DrivingToTrap1 ;
+            }
+        }
+    }
+
+    private void drivingToTrap1State() {
+        if (trappath_.isDone()) {
+            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
+
+            Pose2d p = robot.getSwerve().getPose() ;
+            Pose2dWithRotation start = new Pose2dWithRotation(p.getX(), p.getY(), p.getRotation(), p.getRotation());
+
+            Pose2d firstptp = computeProjectedTrapPoint(stage_pose_.pose_, kFinalTrapProjection) ;
+            Pose2dWithRotation firstpt = new Pose2dWithRotation(firstptp, firstptp.getRotation()) ;
+
+            try {
+                Pose2dWithRotation[] pts = new Pose2dWithRotation[] { start, firstpt } ;
+                trappath_ = new SwerveHolonomicDynamicPathAction(robot.getSwerve(), "trap", 1.0, 1.0, 3.0, 0.0, 1.0, pts, "-trap") ;
+                trappath_.setTolerance(0.05, 0.5);
+            }
+            catch(Exception ex) {
+                trappath_ = null ;
+            }
+
+            if (trappath_ != null) {
+                robot.getSwerve().setAction(trappath_, true) ;
+                state_ = OIState.DrivingToTrap2 ;
+            }
+
+        }
+    }
+
+    private void drivingToTrap2State() {
+        if (trappath_.isDone()) {
+            enableGamepad();
+            state_ = OIState.Idle ;        
         }
     }
 
@@ -651,7 +721,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
 
             if (climb_only_) {
-                oipanel_.setClimbDownLED(LEDState.ON);
+                oipanel_.setAutoTrapLED(LEDState.ON);
                 state_ = OIState.Climbed ;
             }
             else {
@@ -671,7 +741,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
             oipanel_.setClimbUpExecLED(LEDState.OFF);
 
             if (climb_only_) {
-                oipanel_.setClimbDownLED(LEDState.ON);
+                oipanel_.setAutoTrapLED(LEDState.ON);
                 state_ = OIState.Climbed ;
             }
             else {            
@@ -730,13 +800,13 @@ public class Allegro2024OISubsystem extends OISubsystem {
         if (goto_bend_back2_action_.isDone()) {
             state_ = OIState.Climbed ;
             oipanel_.setClimbUpExecLED(LEDState.OFF);
-            oipanel_.setClimbDownLED(LEDState.ON);
+            oipanel_.setAutoTrapLED(LEDState.ON);
         }
     }    
 
     private void climbedState() {
-        if (oipanel_.isClimbDownPressed()) {
-            oipanel_.setClimbDownLED(OILed.LEDState.BLINK_FAST);
+        if (oipanel_.isAutoTrapPressed()) {
+            oipanel_.setAutoTrapLED(OILed.LEDState.BLINK_FAST);
 
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;  
             robot.getAmpTrap().setAction(goto_climb_down_pos_action_, true) ;            
@@ -758,14 +828,27 @@ public class Allegro2024OISubsystem extends OISubsystem {
         }
     }
 
+    Pose2d computeProjectedTrapPoint(Pose2d p, double projection) {
+        double dx = Math.cos(p.getRotation().getRadians()) * projection ;
+        double dy = Math.sin(p.getRotation().getRadians()) * projection ;
+        double angle = XeroMath.normalizeAngleDegrees(p.getRotation().getDegrees() + 180.0) ;
+        return new Pose2d(p.getX() + dx, p.getY() + dy, Rotation2d.fromDegrees(angle)) ;
+    }    
+
     @Override
     public void run() throws Exception {
         super.run();
+        AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
+        OIState prev = state_ ;
 
-        OIState prev = state_ ;        
+        if (state_ == OIState.WaitForClimbButton) {
+            stage_pose_ = robot.getStagePose() ;
+            if(stage_pose_ != null) {
+                oipanel_.setAutoTrapLED(LEDState.ON);
+            }
+        }
 
         if (oipanel_.isEjectPressed() && state_ != OIState.Eject) {
-            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
             robot.cancelAction();
 
             if (getGamePad() != null) {
@@ -776,7 +859,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
             state_ = OIState.Eject ;
         }
         else if (oipanel_.isTurtlePressed() && state_ != OIState.Turtle && state_ != OIState.Eject) {
-            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
             robot.cancelAction();
 
             if (getGamePad() != null) {
@@ -874,6 +956,14 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
         case WaitForHooksUp:
             waitForHooksUpState() ;
+            break ;
+
+        case DrivingToTrap1:
+            drivingToTrap1State() ;
+            break ;
+
+        case DrivingToTrap2:
+            drivingToTrap2State() ;
             break ;
 
         case WaitForHooksDown:

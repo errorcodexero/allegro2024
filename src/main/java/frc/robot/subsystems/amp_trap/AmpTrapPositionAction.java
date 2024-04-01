@@ -1,13 +1,10 @@
 package frc.robot.subsystems.amp_trap;
 
 import org.xero1425.base.actions.Action;
-import org.xero1425.base.motors.TalonFXMotorController;
 import org.xero1425.base.subsystems.motorsubsystem.MCMotionMagicAction;
 import org.xero1425.base.subsystems.motorsubsystem.RioHoldAction;
 import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
-
-import com.ctre.phoenix6.hardware.TalonFX;
 
 public class AmpTrapPositionAction extends Action {
     private enum State {

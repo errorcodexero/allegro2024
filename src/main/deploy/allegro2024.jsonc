@@ -633,7 +633,7 @@
                 }
             },
             "targets" : {
-                "collect" : -10,
+                "collect" : -11,
                 "shoot" : 118.0,
                 "stow" : 118.0
             },
@@ -1089,7 +1089,7 @@
                     "target_toggle2" : 2,
                     "climb_up_prep" : 3,
                     "climb_up_exec" : 4,
-                    "climb_down" : 6,
+                    "auto_trap" : 6,
                     "shoot" : 7,
                     "turtle" : 8,
                     "abort" : 9,
@@ -1105,7 +1105,7 @@
                     "shooter-april-tag" : 4,
                     "climb-up-prep-enabled" : 5,
                     "climb-up-exec-enabled" : 6,
-                    "climb-down-exec-enabled" : 8
+                    "auto-trap-exec-enabled" : 8
                 }
             }
         }

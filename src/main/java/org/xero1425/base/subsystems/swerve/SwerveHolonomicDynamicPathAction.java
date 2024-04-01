@@ -62,11 +62,19 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
     private List<LocationBasedAction> actions_ ;
 
     public SwerveHolonomicDynamicPathAction(SwerveBaseSubsystem sub, String pathname, double maxv, double maxa, double to, Pose2dWithRotation pts[]) throws Exception {
-        this(sub, pathname, maxv, maxa, to, 0.0, 0.0, pts) ;
+        this(sub, pathname, maxv, maxa, to, 0.0, 0.0, pts, "") ;
     }    
 
+    public SwerveHolonomicDynamicPathAction(SwerveBaseSubsystem sub, String pathname, double maxv, double maxa, double to, Pose2dWithRotation pts[], String suffix) throws Exception {
+        this(sub, pathname, maxv, maxa, to, 0.0, 0.0, pts, suffix) ;
+    }
+
     public SwerveHolonomicDynamicPathAction(SwerveBaseSubsystem sub, String pathname, double maxv, double maxa, double to, double rotpre, double rotpost, Pose2dWithRotation pts[]) throws Exception {
-        super(sub);
+        this(sub, pathname, maxv, maxa, to, rotpre, rotpost, pts, "") ;
+    }
+
+    public SwerveHolonomicDynamicPathAction(SwerveBaseSubsystem sub, String pathname, double maxv, double maxa, double to, double rotpre, double rotpost, Pose2dWithRotation pts[], String suffix) throws Exception {
+        super(sub, suffix);
 
         config_ = new TrajectoryConfig(maxv, maxa) ;
 

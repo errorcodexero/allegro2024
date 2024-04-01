@@ -1,6 +1,5 @@
 package frc.robot.subsystems.superstructure;
 
-import org.xero1425.base.LoopType;
 import org.xero1425.base.actions.Action;
 import org.xero1425.misc.MessageType;
 

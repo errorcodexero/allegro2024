@@ -19,33 +19,46 @@ public abstract class SwerveHolonomicControllerAction extends SwerveDriveAction 
         super(sub) ;
 
         swerve_ = sub ;
-        ctrl_ = createDriveController() ;
+        ctrl_ = createDriveController("") ;
+    }    
+
+    public SwerveHolonomicControllerAction(SwerveBaseSubsystem sub, String suffix) throws BadParameterTypeException, MissingParameterException {
+        super(sub) ;
+
+        swerve_ = sub ;
+        ctrl_ = createDriveController(suffix) ;
+    }
+
+    public void setTolerance(double xytol, double angletol) {
+        ctrl_.setTolerance(new Pose2d(xytol, xytol, Rotation2d.fromDegrees(angletol))) ;
     }
 
     protected HolonomicDriveController controller() {
         return ctrl_ ;
     }
 
-    protected HolonomicDriveController createDriveController() throws BadParameterTypeException, MissingParameterException {
+    protected HolonomicDriveController createDriveController(String suffix) throws BadParameterTypeException, MissingParameterException {
         HolonomicDriveController ctrl = null ;
         double kp, ki, kd ;
 
         double maxv = swerve_.getSettingsValue("physical:max-angular-speed").getDouble() ;
         double maxa = swerve_.getSettingsValue("physical:max-angular-accel").getDouble() ;
 
-        kp = swerve_.getSettingsValue("path-following:xctrl:kp").getDouble() ;
-        ki = swerve_.getSettingsValue("path-following:xctrl:ki").getDouble() ;
-        kd = swerve_.getSettingsValue("path-following:xctrl:kd").getDouble() ;
+        String prefix = "path-following" + suffix ;
+
+        kp = swerve_.getSettingsValue(prefix + ":xctrl:kp").getDouble() ;
+        ki = swerve_.getSettingsValue(prefix + ":xctrl:ki").getDouble() ;
+        kd = swerve_.getSettingsValue(prefix + ":xctrl:kd").getDouble() ;
         PIDController xctrl = new PIDController(kp, ki, kd) ;
 
-        kp = swerve_.getSettingsValue("path-following:yctrl:kp").getDouble() ;
-        ki = swerve_.getSettingsValue("path-following:yctrl:ki").getDouble() ;
-        kd = swerve_.getSettingsValue("path-following:yctrl:kd").getDouble() ;
+        kp = swerve_.getSettingsValue(prefix + ":yctrl:kp").getDouble() ;
+        ki = swerve_.getSettingsValue(prefix + ":yctrl:ki").getDouble() ;
+        kd = swerve_.getSettingsValue(prefix + ":yctrl:kd").getDouble() ;
         PIDController yctrl = new PIDController(kp, ki, kd) ;
 
-        kp = swerve_.getSettingsValue("path-following:rotation:kp").getDouble() ;
-        ki = swerve_.getSettingsValue("path-following:rotation:ki").getDouble() ;
-        kd = swerve_.getSettingsValue("path-following:rotation:kd").getDouble() ;
+        kp = swerve_.getSettingsValue(prefix + ":rotation:kp").getDouble() ;
+        ki = swerve_.getSettingsValue(prefix + ":rotation:ki").getDouble() ;
+        kd = swerve_.getSettingsValue(prefix + ":rotation:kd").getDouble() ;
         TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(maxv, maxa) ;
         ProfiledPIDController thetactrl = new ProfiledPIDController(kp, ki, kd, constraints) ;
         thetactrl.enableContinuousInput(-Math.PI, Math.PI);
