@@ -22,7 +22,6 @@ import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class IntakeAutoShootAction extends Action {
-    private final static boolean kUseAbsoluteEncodersForPID = false ;
     private final static double kVelocityStart = 45.0 ;
     private final static double kUpDownStart = 123.5 ;
     private final static double kTiltStart = -40.0 ;   
@@ -43,7 +42,6 @@ public class IntakeAutoShootAction extends Action {
     private MCTrackPosAction tilt_mc_ ;
     // private TiltTrackTargetAction tilt_abs_ ;
     private MotorEncoderPowerAction feeder_on_ ;
-    private boolean absenc_ ;
     private BooleanSupplier at_target_supplier_ ;
 
     private boolean drive_team_ready_ ;
@@ -87,7 +85,8 @@ public class IntakeAutoShootAction extends Action {
         "updown-target (deg)",
         "updown (deg)",
         "tilt-target (deg)",
-        "tilt (deg)",
+        "tilt-mc (deg)",
+        "tilt-abs (deg)",
         "dbready (bool)",
         "april-tag (bool)",
         "oiready (bool)",
@@ -103,7 +102,6 @@ public class IntakeAutoShootAction extends Action {
         initial_drive_team_ready_ = initialDriveTeamReady ;
         rotate_ = rotate ;
         verbose_ = false ;
-        absenc_ = kUseAbsoluteEncodersForPID ;
 
         ISettingsSupplier settings = sub_.getRobot().getSettingsSupplier() ;
         if (settings.isDefined("system:verbose:auto-shoot")) {
@@ -171,7 +169,7 @@ public class IntakeAutoShootAction extends Action {
 
         if (!sub_.isHoldingNote()) {
             MessageLogger logger = sub_.getRobot().getMessageLogger() ;
-            logger.startMessage(MessageType.Error).add("ManualShootAction started with no note in intake").endMessage();
+            logger.startMessage(MessageType.Error).add("IntakeAutoShootAction started with no note in intake").endMessage();
             setDone() ;
         }
         else {
@@ -185,14 +183,8 @@ public class IntakeAutoShootAction extends Action {
             db_ready_ = false ;
 
             sub_.getUpDown().setAction(updown_, true);
-            if (absenc_) {
-                // sub_.getTilt().setAction(tilt_abs_, true);
-                // at_target_supplier_ = () -> tilt_abs_.isAtTarget() ;
-            }
-            else {
-                sub_.getTilt().setAction(tilt_mc_, true);
-                at_target_supplier_ = () -> tilt_mc_.isAtTarget() ;
-            }
+            sub_.getTilt().setAction(tilt_mc_, true);
+            at_target_supplier_ = () -> tilt_mc_.isAtTarget() ;
             sub_.getShooter1().setAction(shooter1_, true);
             sub_.getShooter2().setAction(shooter2_, true);
 
@@ -279,12 +271,7 @@ public class IntakeAutoShootAction extends Action {
 
             AllegroOIPanel oi = robot.getOI().getPanel() ;
             updown_.setTarget(current_updown_);
-            if (absenc_) {
-                // tilt_abs_.setTarget(current_tilt_);
-            }
-            else {              
-                tilt_mc_.setTarget(current_tilt_);
-            }
+            tilt_mc_.setTarget(current_tilt_);
             shooter1_.setTarget(current_velocity_);
             shooter2_.setTarget(current_velocity_);
 
@@ -307,11 +294,12 @@ public class IntakeAutoShootAction extends Action {
                 data_[5] = sub_.getUpDown().getPosition() ;
                 data_[6] = current_tilt_ ;
                 data_[7] = sub_.getTilt().getPosition() ;
-                data_[8] = db_ready_ ? 1.0 : 0.0 ;
-                data_[9] = aprilTagTest() ? 0.5 : 0.0 ;
-                data_[10] = drive_team_ready_ ? 1.5 : 0.0 ;
-                data_[11] = robot.getTargetTracker().getDistance() ;
-                data_[12] = robot.getTargetTracker().getOffset() ;
+                data_[8] = sub_.getAbsEncoderAngle() ;
+                data_[9] = db_ready_ ? 1.0 : 0.0 ;
+                data_[10] = aprilTagTest() ? 0.5 : 0.0 ;
+                data_[11] = drive_team_ready_ ? 1.5 : 0.0 ;
+                data_[12] = robot.getTargetTracker().getDistance() ;
+                data_[13] = robot.getTargetTracker().getOffset() ;
                 sub_.addPlotData(plot_id_, data_);
             }
 
@@ -331,12 +319,6 @@ public class IntakeAutoShootAction extends Action {
 
         swerve_stopped_ = robot.getSwerve().isStopped() ;
         gyro_stopped_ =  Math.abs(gyro.getRate()) < rotational_velocity_threshold_ ;
-
-        // MessageLogger logger = robot.getRobot().getMessageLogger() ;
-        // logger.startMessage(MessageType.Info).add("gyroinfo");
-        // logger.add("rate", gyro.getRate()) ;
-        // logger.add("ratelimit", rotational_velocity_threshold_) ;
-        // logger.endMessage();
 
         return  db_ready_ && swerve_stopped_ && gyro_stopped_ ;
     }

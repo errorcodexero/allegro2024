@@ -102,7 +102,7 @@ public abstract class Action
             robot_.getMessageLogger().startMessage(MessageType.Debug, logger_id_) ;
             robot_.getMessageLogger().add(getID()).add(":");
             robot_.getMessageLogger().add("duration", robot_.getTime() - start_) ;       
-            robot_.getMessageLogger().add("canceling action: ") ;
+            robot_.getMessageLogger().add(": canceling action: ") ;
             addActionToMessage() ;
             robot_.getMessageLogger().endMessage();
             done_ = true ;
@@ -129,7 +129,7 @@ public abstract class Action
         robot_.getMessageLogger().startMessage(MessageType.Debug, logger_id_) ;
         robot_.getMessageLogger().add(getID()).add(":");      
         robot_.getMessageLogger().add("duration", robot_.getTime() - start_) ;          
-        robot_.getMessageLogger().add("completing action: ") ;
+        robot_.getMessageLogger().add(": completing action: ") ;
         addActionToMessage() ;   
         robot_.getMessageLogger().endMessage();
         done_ = true ;

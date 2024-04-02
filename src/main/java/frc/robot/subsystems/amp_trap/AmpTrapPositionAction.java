@@ -64,14 +64,6 @@ public class AmpTrapPositionAction extends Action {
     public void start() throws Exception {
         super.start() ;
         double current = sub_.getArm().getPosition() ;
-        MessageLogger logger = sub_.getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Error) ;
-        logger.add("armpos") ;
-        logger.add("current", current) ;
-        logger.add("keepoutmax", keep_out_max_) ;
-        logger.add("keepoutmin", keep_out_min_) ;
-        logger.add("target", target_angle_) ;
-        logger.endMessage();
 
         if (sub_.isHoldingNote()) {
             sub_.getManipulator().setAction(hold_game_piece_action_, true) ;

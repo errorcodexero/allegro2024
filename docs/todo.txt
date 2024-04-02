@@ -76,11 +76,16 @@ Wilsonville
 
 Districts
 ----------------------------------------------------------------------------------------------------------
-- Retune up/down to new gear ratio (faster collect)
+- Retune up/down to new gear ratio (faster collect)                                                   Done
 - Bring up hooks while bringing up elevator for trap                                                  Done
 - New four note auto based on dynamic paths                                                           Done
-- Two note auto
+
 - Make trap more tolerant to being bumped without losing note                                         Done
-- Tilt oscillation issues                                                             Cannot Reproduce Now
-- Three note auto on far side
+- Return shooter, test with zones                                                                     Done
+- Test four note with skipped outside note                                                            Done
+- Auto trap test                                                                                      Done
+- Two note auto
+- Auto trap tune
+- Run 3 test matches (auto, amp, speaker, trap)
 ----------------------------------------------------------------------------------------------------------
+

@@ -38,7 +38,7 @@ public class AmpTrapMoveNote extends Action {
         sub_.getManipulator().setAction(action_, true) ;
 
         MessageLogger logger = sub_.getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Debug) ;
+        logger.startMessage(MessageType.Debug, sub_.getLoggerID());
         logger.add("start", sub_.getManipulator().getPosition()) ;
         logger.add("dist", dist_) ;
         logger.add("target", target_) ;
@@ -48,7 +48,7 @@ public class AmpTrapMoveNote extends Action {
     @Override
     public void run() throws Exception {
         MessageLogger logger = sub_.getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Debug) ;
+        logger.startMessage(MessageType.Debug, sub_.getLoggerID()) ;
         logger.add("current", sub_.getManipulator().getPosition()) ;
         logger.add("target", target_) ;
         logger.endMessage();
@@ -57,7 +57,7 @@ public class AmpTrapMoveNote extends Action {
             sub_.getManipulator().setPower(0.0);
             setDone() ;
 
-            logger.startMessage(MessageType.Debug) ;
+            logger.startMessage(MessageType.Debug, sub_.getLoggerID()) ;
             logger.add("AmpTrapMoveNote Done dist_ > 0") ;
             logger.endMessage();            
         }
@@ -65,7 +65,7 @@ public class AmpTrapMoveNote extends Action {
             sub_.getManipulator().setPower(0.0);
             setDone() ;            
 
-            logger.startMessage(MessageType.Debug) ;
+            logger.startMessage(MessageType.Debug, sub_.getLoggerID()) ;
             logger.add("AmpTrapMoveNote Done dist_ < 0") ;
             logger.endMessage();               
         }

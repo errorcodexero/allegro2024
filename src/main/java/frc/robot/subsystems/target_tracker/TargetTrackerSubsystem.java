@@ -39,6 +39,8 @@ public class TargetTrackerSubsystem extends Subsystem {
     private double target_height_ ;
 
     private double offset_ ;
+    private double tmp_offset_ ;
+    private int zone_ ;
 
     public TargetTrackerSubsystem(Subsystem parent, LimeLightSubsystem ll) throws BadParameterTypeException, MissingParameterException {
         super(parent, "targettracker");
@@ -89,6 +91,8 @@ public class TargetTrackerSubsystem extends Subsystem {
             robot_pos_ = robotSubsystem.getSwerve().getPose();            
 
             if (target_number_ == AprilTags.RED_SPEAKER_CENTER) {
+                double angle = Math.atan2(target_pos_.getY() - robot_pos_.getY(), target_pos_.getX() - robot_pos_.getX()) ;
+                ret = XeroMath.normalizeAngleDegrees(Math.toDegrees(angle)) ;                
             }
             else {
                 double angle = Math.atan2(target_pos_.getY() - robot_pos_.getY(), target_pos_.getX() - robot_pos_.getX()) ;
@@ -99,41 +103,52 @@ public class TargetTrackerSubsystem extends Subsystem {
     }
 
     public boolean setOffset() {
+        boolean ret = setOffsetInternal() ;
+        offset_ = tmp_offset_ ;
+        return ret ;
+    }
+
+    public boolean setOffsetInternal() { 
         if (!ll_.validTargets() || !ll_.hasAprilTag(target_number_))
             return false;
 
         MessageLogger logger = getRobot().getMessageLogger() ;
-
         double effective = getTargetAngle() ;
 
-        logger.startMessage(MessageType.Info) ;
+        logger.startMessage(MessageType.Debug, getLoggerID()) ;
         if (effective <= 20 && effective >= -20) {
-            logger.add(" case 1") ;
-            offset_ = 0 ;
+            zone_ = 1 ;
+            tmp_offset_ = 0 ;
         }
         else if (effective < -20 && effective >= -40) {
-            logger.add(" case 2") ;                
-            offset_ = -5.0 ;
+            zone_ = 2 ;
+            tmp_offset_ = -5.0 ;
         }
-        else if (effective < -40 && effective >= -60) {
-            logger.add(" case 3") ;
-            offset_ = -5.0 ;
+        else if (effective < -40 && effective >= -70) {
+            zone_ = 3 ;
+            tmp_offset_ = -7.5 ;
         }
         else if (effective > 20 && effective <= 40) {
-            logger.add(" case 4") ;                
-            offset_ = 0.0 ;
+            zone_ = 4 ;
+            tmp_offset_ = 5.0 ;
         }
-        else if (effective > 40 && effective <= 60) { 
-            logger.add(" case 5") ;                
-            offset_ = -15 ;
-        } else {
-            logger.add(" case 6") ;                
-            offset_ = -7.5 ;
+        else if (effective > 40 && effective <= 70) { 
+            zone_ = 5 ;
+            tmp_offset_ = 7.5 ;
+        } 
+        else {
+            zone_ = 6 ;
+            tmp_offset_ = -7.5 ;
         }
 
+        logger.add("zone", zone_) ;
         logger.add("effective", effective) ;
-        logger.add("offset", offset_) ;
+        logger.add("offset", tmp_offset_) ;
         logger.endMessage();
+
+        putDashboard("zone", DisplayType.Always, zone_) ;
+        putDashboard("effective", DisplayType.Always, effective);
+        putDashboard("soffset", DisplayType.Always, tmp_offset_);
         
         return true ;
     }
@@ -182,6 +197,8 @@ public class TargetTrackerSubsystem extends Subsystem {
             catch(Exception ex) {
             }
         }
+
+        setOffsetInternal() ;
     }
 
     public boolean seesTarget() {

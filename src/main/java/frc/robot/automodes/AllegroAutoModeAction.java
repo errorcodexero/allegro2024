@@ -116,7 +116,7 @@ public abstract class AllegroAutoModeAction extends Action {
     private Pose2dWithRotation getCurrentRobotPose() {
         Pose2d p = robot_.getSwerve().getPose() ;
         MessageLogger logger = getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Info) ;
+        logger.startMessage(MessageType.Info, robot_.getSwerve().getLoggerID()) ;
         logger.add("getCurrentPose for path") ;
         logger.add("pose", p.toString()) ;
         logger.endMessage();

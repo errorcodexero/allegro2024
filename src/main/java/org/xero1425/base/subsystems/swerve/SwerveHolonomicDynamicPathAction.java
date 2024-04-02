@@ -33,6 +33,8 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
     private double rot_pre_ ;
     private double rot_post_ ;
 
+    private String params_ ;
+
     private int plot_id_ ;
     private Double[] plot_data_ ;    
     private static final String [] columns_ = {
@@ -77,6 +79,7 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
         super(sub, suffix);
 
         config_ = new TrajectoryConfig(maxv, maxa) ;
+        params_ = suffix ;
 
         double h = Math.atan2(pts[1].getY() - pts[0].getY(), pts[1].getX() - pts[0].getX()) ;
         Pose2d start = new Pose2d(pts[0].getTranslation(), Rotation2d.fromRadians(h)) ;
@@ -237,6 +240,6 @@ public class SwerveHolonomicDynamicPathAction extends SwerveHolonomicControllerA
 
     @Override
     public String toString(int indent) {
-        return spaces(indent) + "SwerveHolonomicDynamicPathAction";
+        return spaces(indent) + "SwerveHolonomicDynamicPathAction/" + params_;
     }
 }

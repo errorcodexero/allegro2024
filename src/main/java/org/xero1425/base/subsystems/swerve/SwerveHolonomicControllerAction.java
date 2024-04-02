@@ -62,7 +62,7 @@ public abstract class SwerveHolonomicControllerAction extends SwerveDriveAction 
         ctrl.setEnabled(true);
         
         double xytol = swerve_.getSettingsValue(prefix + ":xy-tolerance").getDouble() ;
-        double angletol = swerve_.getSettingsValue(prefix + "angle-tolerance").getDouble() ;
+        double angletol = swerve_.getSettingsValue(prefix + ":angle-tolerance").getDouble() ;
         ctrl.setTolerance(new Pose2d(xytol, xytol, Rotation2d.fromDegrees(angletol))) ;
 
         return ctrl ;

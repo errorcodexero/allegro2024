@@ -6,6 +6,8 @@ import org.xero1425.base.subsystems.RobotSubsystem;
 import org.xero1425.base.subsystems.swerve.SDSSwerveDriveSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem;
 import org.xero1425.base.subsystems.vision.LimeLightSubsystem.LedMode;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -141,10 +143,23 @@ public class AllegroRobot2024 extends RobotSubsystem {
             }
         }
 
+        MessageLogger logger = getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Debug, getLoggerID()) ;     
+
         if (pose != null) {
             dist = db_.getPose().getTranslation().getDistance(pose.getTranslation()) ;
             tag = new StageTag(id, pose, dist);
+
+            logger.add("stage tag found ") ;
+            logger.add("id", id) ;
+            logger.add("distance", dist) ;
+            logger.add("tagpose", pose.toString());
+            logger.add("dbpose", db_.getPose().toString()) ;
         }
+        else {
+            logger.add("no stage tag found") ;
+        }
+        logger.endMessage();
 
         return tag ;
     }

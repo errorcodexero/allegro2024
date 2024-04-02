@@ -62,6 +62,8 @@ public class TransferIntakeToTrampAction extends Action {
         super.start();
 
         state_ = State.MovingToPosition ;
+        sub_.getAmpTrap().getManipulator().cancelAction();
+        sub_.getAmpTrap().getManipulator().setPower(0.0);
         start_pos_ = sub_.getIntakeShooter().getShooter1().getPosition() ;
         sub_.getAmpTrap().setAction(amp_trap_position_action_, true);
         sub_.getIntakeShooter().setAction(intake_shooter_position_action_, true);
@@ -76,9 +78,10 @@ public class TransferIntakeToTrampAction extends Action {
         switch(state_) {
         case MovingToPosition:
             if (amp_trap_position_action_.isDone() && intake_shooter_position_action_.isDone()) {
-                start_pos_ = sub_.getIntakeShooter().getShooter1().getPosition() ;
+                start_pos_ = sub_.getIntakeShooter().getShooter1().getPosition() ;                
                 sub_.getAmpTrap().setAction(amp_trap_xfer_action_, true);
                 sub_.getIntakeShooter().setAction(intake_shooter_xfer_action_, true);
+
                 state_ = State.WaitingOnSensorNone1 ;
             }
             break ;

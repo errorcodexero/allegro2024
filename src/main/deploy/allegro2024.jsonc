@@ -11,13 +11,14 @@
             "pathfollowing": false,
 
             // Subsystem related messages
+            "Allegro2024RobotSubsystem" : true,
             "vision": false,
             "swerve" : false,
             "limelight" : false,
             "allegro2024oi": false,
             "limelight-edgar" : false,
             "oibuttons" : false,
-            "intake-shooter" : true,
+            "intake-shooter" : false,
             "superstructure" : false,
             "swerve-gamepad" : false,
             "targettracker" : false,
@@ -487,35 +488,35 @@
                     },
                     "5" : {
                         "x" : 2.12,
-                        "y" : -72
+                        "y" : -74
                     },
                     "6" : {
                         "x" : 2.43,
-                        "y" : -67
+                        "y" : -66
                     },
                     "7" : {
                         "x" : 2.73,
-                        "y" : -65
+                        "y" : -64
                     },
                     "8" : {
                         "x" : 3.04,
-                        "y" : -64
+                        "y" : -62
                     }, 
                     "9" : {
                         "x" : 3.34,
                         "y" : -61
                     },
                     "10" : {
-                        "x" : 3.64,
-                        "y" : -67
-                    },
+                        "x" : 3.6399,
+                        "y" : -59
+                    },                    
                     "11" : {
                         "x" : 3.64,
                         "y" : -59
-                    },                    
+                    },                 
                     "12" : {
                         "x" : 4.0,
-                        "y" : -58.0
+                        "y" : -57.0
                     }
                 },
                 "shooter" : {
@@ -556,12 +557,16 @@
                         "y" : 80
                     },
                     "10" : {
-                        "x" : 3.64,
+                        "x" : 3.6399,
                         "y" : 80
                     },
                     "11" : {
-                        "x" : 3.94,
-                        "y" : 80
+                        "x" : 3.64,
+                        "y" : 84
+                    },                    
+                    "12" : {
+                        "x" : 4.0,
+                        "y" : 84
                     }
                 }
             }
@@ -1066,15 +1071,15 @@
                 }
             },
             "path-following-trap" : {
-                "xy-tolerance": 0.025,
+                "xy-tolerance": 0.02,
                 "angle-tolerance": 1.0,
                 "xctrl": {
-                    "kp": 2.0,
+                    "kp": 4.0,
                     "ki": 0,
                     "kd": 0
                 },
                 "yctrl": {
-                    "kp": 2.0,
+                    "kp": 4.0,
                     "ki": 0,
                     "kd": 0
                 },

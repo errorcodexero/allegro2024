@@ -603,8 +603,8 @@ public class Allegro2024OISubsystem extends OISubsystem {
     private void shootingAmpState() {
         if (amp_shoot_action_.isDone()) {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
+            robot.getAmpTrap().setHoldingNote(false);            
             robot.getAmpTrap().setAction(stow_amp_trap_action_, true) ; 
-
             state_ = OIState.Idle ;
         }
     }
@@ -645,6 +645,11 @@ public class Allegro2024OISubsystem extends OISubsystem {
     private void waitForClimbButtonState() {
         AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
 
+        stage_pose_ = robot.getStagePose() ;
+        if(stage_pose_ != null) {
+            oipanel_.setAutoTrapLED(LEDState.ON);
+        }        
+
         if (oipanel_.isAbortPressed()) {
             oipanel_.setClimbUpExecLED(LEDState.OFF);
             robot.getSuperStructure().getClimber().setAction(hooks_down_action_, true) ;
@@ -667,7 +672,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
             try {
                 Pose2dWithRotation[] pts = new Pose2dWithRotation[] { start, firstpt } ;
-                trappath_ = new SwerveHolonomicDynamicPathAction(robot.getSwerve(), "trap", 1.0, 1.0, 3.0, 0.0, 1.0, pts, "-trap") ;
+                trappath_ = new SwerveHolonomicDynamicPathAction(robot.getSwerve(), "trap", 0.75, 0.75, 3.0, 0.0, 0.0, pts, "-trap") ;
             }
             catch(Exception ex) {
                 trappath_ = null ;
@@ -693,7 +698,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
             try {
                 Pose2dWithRotation[] pts = new Pose2dWithRotation[] { start, firstpt } ;
-                trappath_ = new SwerveHolonomicDynamicPathAction(robot.getSwerve(), "trap", 1.0, 1.0, 3.0, 0.0, 1.0, pts, "-trap") ;
+                trappath_ = new SwerveHolonomicDynamicPathAction(robot.getSwerve(), "trap", 0.75, 0.75, 3.0, 0.0, 1.0, pts, "-trap") ;
             }
             catch(Exception ex) {
                 trappath_ = null ;
@@ -709,8 +714,9 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     private void drivingToTrap2State() {
         if (trappath_.isDone()) {
+            oipanel_.setClimbUpExecLED(LEDState.ON);            
             enableGamepad();
-            state_ = OIState.Idle ;        
+            state_ = OIState.WaitForClimbButton;
         }
     }
 
@@ -789,7 +795,8 @@ public class Allegro2024OISubsystem extends OISubsystem {
     private void bendBack1State() {
         if (goto_bend_back1_action_.isDone()) {
             AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;             
-            robot.getAmpTrap().setAction(goto_bend_back2_action_, true) ;            
+            robot.getAmpTrap().setHoldingNote(false);            
+            robot.getAmpTrap().setAction(goto_bend_back2_action_, true) ;  
             state_ = OIState.BendBack2;
         }
     }
@@ -838,13 +845,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
         super.run();
         AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
         OIState prev = state_ ;
-
-        if (state_ == OIState.WaitForClimbButton) {
-            stage_pose_ = robot.getStagePose() ;
-            if(stage_pose_ != null) {
-                oipanel_.setAutoTrapLED(LEDState.ON);
-            }
-        }
 
         if (oipanel_.isEjectPressed() && state_ != OIState.Eject) {
             robot.cancelAction();
@@ -1040,7 +1040,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
         rotate_action_ = new SwerveTrackAngle(robot.getSwerve(), () -> robot.getTargetTracker().getRotation(), postol) ;
         shoot_action_ = new IntakeAutoShootAction(intake, tracker, false, rotate_action_) ;
         manual_shoot_podium_action_ = new IntakeManualShootAction(intake, "podium") ;
-        manual_shoot_subwoofer_center_action_ = new IntakeManualShootAction(intake, "subwoofer-center-low") ;
+        manual_shoot_subwoofer_center_action_ = new IntakeManualShootAction(intake, "subwoofer-center") ;
                
 
         fwd_transfer_action_ = new TransferIntakeToTrampAction(robot.getSuperStructure()) ;
