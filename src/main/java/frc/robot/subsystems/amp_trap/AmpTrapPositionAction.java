@@ -138,25 +138,12 @@ public class AmpTrapPositionAction extends Action {
 
         State prev = state_ ;
 
-        // TalonFXMotorController tfx = (TalonFXMotorController)sub_.getArm().getMotorController() ;
-        // double pos = sub_.getArm().getPosition() ;
-        // if (pos >= 0.0 && pos <= 180.0) {
-        //     // tfx.setPIDv(1.6);
-        //     // tfx.setPIDp(2.8) ;
-        //     tfx.setPIDv(0.2);
-        //     tfx.setPIDp(2.3) ;            
-        // }
-        // else if (pos > 180.0) {
-        //     tfx.setPIDv(0.2);
-        //     tfx.setPIDp(2.3) ;
-        // }
-
         if (state_ == State.CrossMinToMax) {
             //
             // We are going from the min to max position, we need to wait for the elevator to be above the keepout
             // height before we can move the arm to the target position
             //
-            if (sub_.getElevator().getPosition() >= keep_out_height_ - 0.1) {
+            if (sub_.getElevator().getPosition() >= keep_out_height_ - 0.05) {
                 sub_.getArm().setAction(arm_goto_target_action_, true) ;
 
                 if (target_height_ > keep_out_height_) {
@@ -171,7 +158,7 @@ public class AmpTrapPositionAction extends Action {
             // We are going from the max to min position, we need to wait for the elevator to be above the keepout
             // height before we can move the arm to the target position
             //
-            if (sub_.getElevator().getPosition() >= keep_out_height_) {
+            if (sub_.getElevator().getPosition() >= keep_out_height_ - 0.05) {
                 sub_.getArm().setAction(arm_goto_target_action_, true) ;
             }
 

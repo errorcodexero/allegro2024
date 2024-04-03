@@ -164,10 +164,10 @@ public class IntakeShooterSubsystem extends Subsystem {
         putDashboard("shooter1", DisplayType.Always, getShooter1().getVelocity());
         putDashboard("shooter2", DisplayType.Always, getShooter2().getVelocity());
 
-        MessageLogger logger = getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Info) ;
-        logger.add("sensor", isNoteCurrentlyDetected()) ;
-        logger.endMessage();        
+        // MessageLogger logger = getRobot().getMessageLogger() ;
+        // logger.startMessage(MessageType.Info) ;
+        // logger.add("sensor", isNoteCurrentlyDetected()) ;
+        // logger.endMessage();        
     }
     
     @Override

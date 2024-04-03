@@ -22,7 +22,7 @@
             "superstructure" : false,
             "swerve-gamepad" : false,
             "targettracker" : false,
-            "amp-trap" : false,
+            "amp-trap" : true,
             "manual-shoot" : false,
             "elevator" : false            
         },
@@ -87,7 +87,7 @@
                     // distance to move the feeder wheels.
                     //
                     "feeder-power" : 0.3,
-                    "shooter-velocity" : 28,
+                    "shooter-velocity" : 56,
                     "shooter-length" : 0.85,        // 1.15
                     "cont-length" : 12
                 }
