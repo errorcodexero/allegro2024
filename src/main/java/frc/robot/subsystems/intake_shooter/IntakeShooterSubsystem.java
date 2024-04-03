@@ -1,7 +1,5 @@
 package frc.robot.subsystems.intake_shooter;
 
-import java.util.function.BiConsumer;
-
 import org.xero1425.base.motors.BadMotorRequestException;
 import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.Subsystem;
@@ -61,6 +59,13 @@ public class IntakeShooterSubsystem extends Subsystem {
     public IntakeShooterSubsystem(Subsystem parent) throws Exception {
         super(parent, "intake-shooter");
 
+        if (kUseInterrupt && kUseSensorThread) {
+            //
+            // Protection against bad configuration
+            //
+            throw new Exception("Cannot use both interrupt and sensor thread") ;
+        }
+
         note_present_ = false ;
 
         updown_ = new MotorEncoderSubsystem(this,"intake-updown", false);
@@ -119,13 +124,15 @@ public class IntakeShooterSubsystem extends Subsystem {
         }
         else if (kUseInterrupt) {
             interrupt_ = new AsynchronousInterrupt(noteSensor_, (rising, falling) -> { interruptHandler(rising, falling); }) ;
+            interrupt_.setInterruptEdges(true, false);            
             interrupt_.enable();
-            interrupt_.setInterruptEdges(true, false);
         }
     }
 
     private void interruptHandler(Boolean rising, Boolean falling) {
-        sensor_edge_seen_ = true ;
+        if (rising) {
+            sensor_edge_seen_ = true ;
+        }
     }
 
     public MotorEncoderSubsystem getUpDown() {
