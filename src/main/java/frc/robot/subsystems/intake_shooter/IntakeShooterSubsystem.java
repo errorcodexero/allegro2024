@@ -1,5 +1,7 @@
 package frc.robot.subsystems.intake_shooter;
 
+import java.util.function.BiConsumer;
+
 import org.xero1425.base.motors.BadMotorRequestException;
 import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.Subsystem;
@@ -9,14 +11,22 @@ import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AsynchronousInterrupt;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class IntakeShooterSubsystem extends Subsystem {
 
-    private static final boolean kUseSensorThread = true ;
+    //
+    // Either zero or one of these two can be true
+    //
+    private static final boolean kUseSensorThread = false ;
+    private static final boolean kUseInterrupt = true ;
 
     // This thread monitors the sensor
     private IntakeSensorThread sensor_thread_ ;
+
+    private AsynchronousInterrupt interrupt_ ;
+    private boolean sensor_edge_seen_ ;
 
     // moves the intake roller straight up (0 degrees) to flat to the ground (90 degrees), actual range 15-75 degrees   
     private MotorEncoderSubsystem updown_;
@@ -107,6 +117,15 @@ public class IntakeShooterSubsystem extends Subsystem {
             sensor_thread_ = new IntakeSensorThread(this) ;
             sensor_thread_.start() ;
         }
+        else if (kUseInterrupt) {
+            interrupt_ = new AsynchronousInterrupt(noteSensor_, (rising, falling) -> { interruptHandler(rising, falling); }) ;
+            interrupt_.enable();
+            interrupt_.setInterruptEdges(true, false);
+        }
+    }
+
+    private void interruptHandler(Boolean rising, Boolean falling) {
+        sensor_edge_seen_ = true ;
     }
 
     public MotorEncoderSubsystem getUpDown() {
@@ -164,6 +183,10 @@ public class IntakeShooterSubsystem extends Subsystem {
         
         if (kUseSensorThread) {
             is_note_present_ = sensor_thread_.didSeeNote() ;
+        }
+        else if (kUseInterrupt) {
+            is_note_present_ = sensor_edge_seen_ ;
+            sensor_edge_seen_ = false ;
         }
         else {
             is_note_present_ = getSensorRawState() ;
