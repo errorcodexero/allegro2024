@@ -13,6 +13,11 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 public class IntakeShooterSubsystem extends Subsystem {
 
+    private static final boolean kUseSensorThread = true ;
+
+    // This thread monitors the sensor
+    private IntakeSensorThread sensor_thread_ ;
+
     // moves the intake roller straight up (0 degrees) to flat to the ground (90 degrees), actual range 15-75 degrees   
     private MotorEncoderSubsystem updown_;
 
@@ -97,6 +102,11 @@ public class IntakeShooterSubsystem extends Subsystem {
         // Set the motor position in ticks
         //
         updown_.getMotorController().setPosition(initpos);
+
+        if (kUseSensorThread) {
+            sensor_thread_ = new IntakeSensorThread(this) ;
+            sensor_thread_.start() ;
+        }
     }
 
     public MotorEncoderSubsystem getUpDown() {
@@ -152,7 +162,12 @@ public class IntakeShooterSubsystem extends Subsystem {
     public void computeMyState() throws Exception {
         super.computeMyState();
         
-        is_note_present_ = noteSensor_.get() ^ noteSensorInverted_;
+        if (kUseSensorThread) {
+            is_note_present_ = sensor_thread_.didSeeNote() ;
+        }
+        else {
+            is_note_present_ = getSensorRawState() ;
+        }
 
         double eval = absoluteEncoder_.getVoltage();
         angle_ = encoderMapper_.toRobot(eval);
@@ -164,15 +179,19 @@ public class IntakeShooterSubsystem extends Subsystem {
         putDashboard("shooter1", DisplayType.Always, getShooter1().getVelocity());
         putDashboard("shooter2", DisplayType.Always, getShooter2().getVelocity());
 
-        // MessageLogger logger = getRobot().getMessageLogger() ;
-        // logger.startMessage(MessageType.Info) ;
-        // logger.add("sensor", isNoteCurrentlyDetected()) ;
-        // logger.endMessage();        
+        MessageLogger logger = getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Info) ;
+        logger.add("sensor", isNoteCurrentlyDetected()) ;
+        logger.endMessage();        
     }
     
     @Override
     public void postHWInit() throws BadMotorRequestException, MotorRequestFailedException {
         updateMotorPosition();
+    }
+
+    public boolean getSensorRawState() {
+        return noteSensor_.get() ^ noteSensorInverted_ ;
     }
 
     public double getAbsEncoderAngle() {

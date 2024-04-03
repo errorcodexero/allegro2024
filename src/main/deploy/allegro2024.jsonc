@@ -87,8 +87,8 @@
                     // distance to move the feeder wheels.
                     //
                     "feeder-power" : 0.3,
-                    "shooter-velocity" : 56,
-                    "shooter-length" : 0.85,        // 1.15
+                    "shooter-velocity" : 24,
+                    "shooter-length" : 1.0,        // 1.15
                     "cont-length" : 12
                 }
             }

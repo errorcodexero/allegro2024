@@ -7,9 +7,6 @@ import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderPowerAction;
 import org.xero1425.misc.BadParameterTypeException;
 import org.xero1425.misc.MissingParameterException;
 
-import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
-import com.ctre.phoenix6.hardware.TalonFX;
-
 public class IntakeEjectAction extends Action {
 
     private final double kPeriod1 = 1.0 ;
@@ -23,8 +20,6 @@ public class IntakeEjectAction extends Action {
         Reverse
     } ;
 
-    private TalonFX motor1_ ;
-    private TalonFX motor2_ ;    
     private IntakeShooterSubsystem sub_ ;
     private MotorEncoderPowerAction start_ ;
     private MotorEncoderPowerAction power1f_ ;
@@ -49,9 +44,6 @@ public class IntakeEjectAction extends Action {
 
         curlim1_ = sub_.getShooter1().getMotorController().getCurrentLimit() ;
         curlim2_ = sub_.getShooter2().getMotorController().getCurrentLimit() ;
-
-        motor1_ = (TalonFX)sub_.getShooter1().getMotorController().getNativeController() ;
-        motor2_ = (TalonFX)sub_.getShooter2().getMotorController().getNativeController() ;        
     }
 
     @Override
@@ -61,14 +53,6 @@ public class IntakeEjectAction extends Action {
         sub_.getFeeder().setAction(start_, true) ;
         start_time_ = sub_.getRobot().getTime() ;
         state_ = State.Forward ;
-
-        CurrentLimitsConfigs cfg = new CurrentLimitsConfigs() ;
-        cfg.SupplyCurrentLimit = 60.0 ;
-        cfg.SupplyCurrentLimitEnable = true ;
-        cfg.SupplyCurrentThreshold = 160.0 ;
-        cfg.SupplyTimeThreshold = 2.0 ;        
-        motor1_.getConfigurator().apply(cfg) ;
-        motor2_.getConfigurator().apply(cfg) ;
 
         sub_.getShooter1().setAction(power1f_, true) ;
         sub_.getShooter2().setAction(power2f_, true) ;

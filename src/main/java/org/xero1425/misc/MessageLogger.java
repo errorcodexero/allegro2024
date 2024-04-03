@@ -54,7 +54,7 @@ public final class MessageLogger
     private int subsystem_index_ ;
 
     // The lock for the serial number
-    // private Object lock_ ;
+    private Object lock_ ;
 
     // the list of subsystem to be enabled if ethey are created
     private List<String> to_be_enabled_ ;
@@ -90,7 +90,7 @@ public final class MessageLogger
         enabled_subsystems_ = new ArrayList<Integer>() ;
         to_be_enabled_ = new ArrayList<String>() ;
 
-        // lock_ = new Object() ;
+        lock_ = new Object() ;
 
         format_ = new DecimalFormat("000.0000") ;
 
@@ -640,17 +640,19 @@ public final class MessageLogger
     private ThreadData getPerThreadData() {
         ThreadData per = null;
 
-        final long id = Thread.currentThread().getId();
-        if (per_thread_data_.containsKey(id))
-        {
-            per = per_thread_data_.get(id) ;
-        }
-        else
-        {
-            per = new ThreadData() ;
-            per.id_ = id ;
-            per.in_message_ = false ;
-            per_thread_data_.put(id, per) ;
+        synchronized(lock_) {
+            final long id = Thread.currentThread().getId();
+            if (per_thread_data_.containsKey(id))
+            {
+                per = per_thread_data_.get(id) ;
+            }
+            else
+            {
+                per = new ThreadData() ;
+                per.id_ = id ;
+                per.in_message_ = false ;
+                per_thread_data_.put(id, per) ;
+            }
         }
 
         return per ;

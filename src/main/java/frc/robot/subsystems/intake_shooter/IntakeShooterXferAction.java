@@ -32,7 +32,7 @@ public class IntakeShooterXferAction extends Action {
 
     @Override
     public void run() throws Exception {
-        if (!feeders_running_ && sub_.getRobot().getTime() - start_ > 0.0) {
+        if (!feeders_running_ && sub_.getRobot().getTime() - start_ > 0.4) {
             sub_.getFeeder().setAction(feeder_, true);
             feeders_running_ = true ;
         }
