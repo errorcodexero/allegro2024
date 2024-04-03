@@ -75,8 +75,6 @@ public class PieceWiseLinear {
             double m = ((high.getY() - low.getY()) / (high.getX() - low.getX()));
             double b = high.getY() - (high.getX() * m);
 
-            System.out.println("x " + x + ", which " + which_x + " " + low.toString() + "  " + high.toString()) ;
-
             ret = (m * x) + b;
 
         }

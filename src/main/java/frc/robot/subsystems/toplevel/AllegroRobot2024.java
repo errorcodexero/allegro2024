@@ -72,6 +72,11 @@ public class AllegroRobot2024 extends RobotSubsystem {
         super.init(prev, next) ;
     }
 
+    @Override
+    public void computeMyState() throws Exception {
+        getStagePose() ;
+    }
+
     public SuperStructureSubsystem getSuperStructure() {
         return ss_ ;
     }
@@ -120,7 +125,7 @@ public class AllegroRobot2024 extends RobotSubsystem {
                 }
                 else if (ll_.hasAprilTag(AprilTags.BLUE_STAGE_RIGHT)) {
                     id = AprilTags.BLUE_STAGE_RIGHT ;
-                    pose = tags.getTagPose(AprilTags.BLUE_STAGE_RIGHT).get().toPose2d() ; ;
+                    pose = tags.getTagPose(AprilTags.BLUE_STAGE_RIGHT).get().toPose2d() ;
                 }
                 else if (ll_.hasAprilTag(AprilTags.BLUE_CENTER_STAGE)) {
                     id = AprilTags.BLUE_CENTER_STAGE ;

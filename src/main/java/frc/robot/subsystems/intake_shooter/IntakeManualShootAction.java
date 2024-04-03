@@ -99,7 +99,7 @@ public class IntakeManualShootAction extends Action {
         if (!shooting_) {
 
             MessageLogger logger = getMessageLogger() ;
-            logger.startMessage(MessageType.Info) ;
+            logger.startMessage(MessageType.Info, intake_.getLoggerID()) ;
             logger.add("tilt-during-manual") ;
             logger.add("mtilt", intake_.getTilt().getPosition()) ;
             logger.add("atilt", intake_.getAbsEncoderAngle()) ;

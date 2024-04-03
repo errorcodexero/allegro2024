@@ -1042,7 +1042,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
         manual_shoot_podium_action_ = new IntakeManualShootAction(intake, "podium") ;
         manual_shoot_subwoofer_center_action_ = new IntakeManualShootAction(intake, "subwoofer-center") ;
                
-
         fwd_transfer_action_ = new TransferIntakeToTrampAction(robot.getSuperStructure()) ;
 
         double v1, v2 ;

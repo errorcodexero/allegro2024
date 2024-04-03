@@ -7,7 +7,9 @@ public class IntakeShooterXferAction extends Action {
     private IntakeShooterSubsystem sub_;
     private MotorEncoderPowerAction feeder_;
     private MCVelocityAction shooter1_;
-    private MCVelocityAction shooter2_;        
+    private MCVelocityAction shooter2_;   
+    private double start_ ;     
+    private boolean feeders_running_ ;
 
     public IntakeShooterXferAction(IntakeShooterSubsystem sub, double feeder, double shooter) throws Exception {
         super(sub.getRobot());
@@ -21,9 +23,19 @@ public class IntakeShooterXferAction extends Action {
     @Override
     public void start() throws Exception {
         super.start();
-        sub_.getFeeder().setAction(feeder_, true);
+        start_ = sub_.getRobot().getTime() ;
+        feeders_running_ = false ;
+
         sub_.getShooter1().setAction(shooter1_, true);
         sub_.getShooter2().setAction(shooter2_, true);
+    }
+
+    @Override
+    public void run() throws Exception {
+        if (!feeders_running_ && sub_.getRobot().getTime() - start_ > 0.0) {
+            sub_.getFeeder().setAction(feeder_, true);
+            feeders_running_ = true ;
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package frc.robot.subsystems.superstructure;
 
 import org.xero1425.base.actions.Action;
+import org.xero1425.misc.MessageLogger;
 import org.xero1425.misc.MessageType;
 
 import frc.robot.subsystems.amp_trap.AmpTrapPositionAction;
@@ -74,6 +75,7 @@ public class TransferIntakeToTrampAction extends Action {
         super.run() ;
 
         State prev = state_ ;
+
         
         switch(state_) {
         case MovingToPosition:
@@ -123,7 +125,7 @@ public class TransferIntakeToTrampAction extends Action {
         }
 
         if (state_ != prev) {
-            sub_.getRobot().getMessageLogger().startMessage(MessageType.Debug, sub_.getLoggerID()) ;
+            sub_.getRobot().getMessageLogger().startMessage(MessageType.Debug) ;
             sub_.getRobot().getMessageLogger().add("transfer note state changed: ");
             sub_.getRobot().getMessageLogger().add(prev.toString()) ;
             sub_.getRobot().getMessageLogger().add(" ->");            

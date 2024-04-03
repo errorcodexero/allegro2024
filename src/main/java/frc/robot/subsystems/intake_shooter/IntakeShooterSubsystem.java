@@ -5,6 +5,8 @@ import org.xero1425.base.motors.MotorRequestFailedException;
 import org.xero1425.base.subsystems.Subsystem;
 import org.xero1425.base.subsystems.motorsubsystem.MotorEncoderSubsystem;
 import org.xero1425.misc.EncoderMapper;
+import org.xero1425.misc.MessageLogger;
+import org.xero1425.misc.MessageType;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -161,6 +163,11 @@ public class IntakeShooterSubsystem extends Subsystem {
         putDashboard("hasnote", DisplayType.Always, note_present_);
         putDashboard("shooter1", DisplayType.Always, getShooter1().getVelocity());
         putDashboard("shooter2", DisplayType.Always, getShooter2().getVelocity());
+
+        MessageLogger logger = getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Info) ;
+        logger.add("sensor", isNoteCurrentlyDetected()) ;
+        logger.endMessage();        
     }
     
     @Override

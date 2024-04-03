@@ -38,8 +38,8 @@ public class TargetTrackerSubsystem extends Subsystem {
     private double camera_height_ ;
     private double target_height_ ;
 
-    private double offset_ ;
-    private double tmp_offset_ ;
+    private double angle_offset_ ;
+    private double angle_tmp_offset_ ;
     private int zone_ ;
 
     public TargetTrackerSubsystem(Subsystem parent, LimeLightSubsystem ll) throws BadParameterTypeException, MissingParameterException {
@@ -76,11 +76,11 @@ public class TargetTrackerSubsystem extends Subsystem {
     }
 
     public double getOffset() {
-        return offset_ ;
+        return angle_offset_ ;
     }
 
     public void clearOffset() {
-        offset_ = 0 ;
+        angle_offset_ = 0 ;
     }
 
     private double getTargetAngle() {
@@ -104,7 +104,7 @@ public class TargetTrackerSubsystem extends Subsystem {
 
     public boolean setOffset() {
         boolean ret = setOffsetInternal() ;
-        offset_ = tmp_offset_ ;
+        angle_offset_ = angle_tmp_offset_ ;
         return ret ;
     }
 
@@ -116,39 +116,69 @@ public class TargetTrackerSubsystem extends Subsystem {
         double effective = getTargetAngle() ;
 
         logger.startMessage(MessageType.Debug, getLoggerID()) ;
-        if (effective <= 20 && effective >= -20) {
-            zone_ = 1 ;
-            tmp_offset_ = 0 ;
+        if (target_number_ == AprilTags.BLUE_SPEAKER_CENTER) {
+            if (effective <= 20 && effective >= -20) {
+                zone_ = 1 ;
+                angle_tmp_offset_ = 0 ;
+            }
+            else if (effective < -20 && effective >= -40) {
+                zone_ = 2 ;
+                angle_tmp_offset_ = -5.0 ;
+            }
+            else if (effective < -40 && effective >= -70) {
+                zone_ = 3 ;
+                angle_tmp_offset_ = -7.5 ;
+            }
+            else if (effective > 20 && effective <= 40) {
+                zone_ = 4 ;
+                angle_tmp_offset_ = 5.0 ;
+            }
+            else if (effective > 40 && effective <= 70) { 
+                zone_ = 5 ;
+                angle_tmp_offset_ = 7.5 ;
+            } 
+            else {
+                zone_ = 6 ;
+                angle_tmp_offset_ = -7.5 ;
+            }
         }
-        else if (effective < -20 && effective >= -40) {
-            zone_ = 2 ;
-            tmp_offset_ = -5.0 ;
-        }
-        else if (effective < -40 && effective >= -70) {
-            zone_ = 3 ;
-            tmp_offset_ = -7.5 ;
-        }
-        else if (effective > 20 && effective <= 40) {
-            zone_ = 4 ;
-            tmp_offset_ = 5.0 ;
-        }
-        else if (effective > 40 && effective <= 70) { 
-            zone_ = 5 ;
-            tmp_offset_ = 7.5 ;
-        } 
         else {
-            zone_ = 6 ;
-            tmp_offset_ = -7.5 ;
+            if (effective <= 20 && effective >= -20) {
+                zone_ = 1 ;
+                angle_tmp_offset_ = 0 ;
+            }
+            else if (effective < -20 && effective >= -40) {
+                zone_ = 2 ;
+                angle_tmp_offset_ = -15 ;
+            }
+            else if (effective < -40 && effective >= -70) {
+                zone_ = 3 ;
+                angle_tmp_offset_ = -7.5 ;
+            }
+            else if (effective > 20 && effective <= 40) {
+                zone_ = 4 ;
+                angle_tmp_offset_ = 0.0 ;
+            }
+            else if (effective > 40 && effective <= 70) { 
+                zone_ = 5 ;
+                angle_tmp_offset_ = 0.0 ;
+            } 
+            else {
+                zone_ = 6 ;
+                angle_tmp_offset_ = -7.5 ;
+            }            
         }
 
         logger.add("zone", zone_) ;
         logger.add("effective", effective) ;
-        logger.add("offset", tmp_offset_) ;
+        logger.add("tmpoffset", angle_tmp_offset_) ;
+        logger.add("offset", angle_offset_) ;        
         logger.endMessage();
 
         putDashboard("zone", DisplayType.Always, zone_) ;
         putDashboard("effective", DisplayType.Always, effective);
-        putDashboard("soffset", DisplayType.Always, tmp_offset_);
+        putDashboard("soffset", DisplayType.Always, angle_tmp_offset_);
+        putDashboard("stoffset", DisplayType.Always, angle_offset_);        
         
         return true ;
     }
@@ -169,8 +199,8 @@ public class TargetTrackerSubsystem extends Subsystem {
             if (ll_.validTargets() && ll_.hasAprilTag(target_number_)) {
                 logger.add("apriltag", true) ;
                 sees_target_ = true ;
-                angle_to_target_ = -ll_.getTX(target_number_) + offset_ ;
-                distance_between_robot_and_target_ = (target_height_ - camera_height_) / Math.tan(Math.toRadians(camera_angle_ + ll_.getTY(target_number_))) + kCameraOffset ;
+                angle_to_target_ = -ll_.getTX(target_number_) + angle_offset_ ;
+                distance_between_robot_and_target_ = (target_height_ - camera_height_) / Math.tan(Math.toRadians(camera_angle_ + ll_.getTY(target_number_))) + kCameraOffset  ;
             }
             else {
                 sees_target_ = false ;                
@@ -181,7 +211,7 @@ public class TargetTrackerSubsystem extends Subsystem {
                     sees_target_ = true ;
                 }
 
-                angle_to_target_ = calculateAngleBetweenPoses(robot_pos_, target_pos_) + offset_ ;
+                angle_to_target_ = calculateAngleBetweenPoses(robot_pos_, target_pos_) + angle_offset_ ;
             }
             logger.add("distance", distance_between_robot_and_target_) ;
             logger.add("angle", angle_to_target_) ;

@@ -6,8 +6,8 @@ import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class Start3Shoot2AutoMode extends AllegroGameAutoMode {
     static final String[] titles = new String[] { 
-        "Source Side Shoot Two Edge Note",
-        "Source Side Shoot Two Inner Note"
+        "Source Side Shoot Two Edge",
+        "Source Side Shoot Two Inner"
     } ;
 
     public Start3Shoot2AutoMode(AutoController ctrl, int which, boolean mirror, double mvalue) throws Exception {

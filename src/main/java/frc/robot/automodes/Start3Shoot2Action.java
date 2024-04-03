@@ -54,20 +54,15 @@ public class Start3Shoot2Action extends AllegroAutoModeAction {
         double v2 = robot_.getIntakeShooter().getTilt().getSettingsValue("targets:stow").getDouble() ; 
         stow_ = new IntakeGotoNamedPositionAction(robot_.getIntakeShooter(), v1, v2) ;     
         
-        if (mirror) {
-            manual_shoot_ = new IntakeManualShootAction(robot.getIntakeShooter(), "subwoofer-left") ;             
-        }
-        else {
-            manual_shoot_ = new IntakeManualShootAction(robot_.getIntakeShooter(), "subwoofer-right") ;        
-        }
+        manual_shoot_ = new IntakeManualShootAction(robot.getIntakeShooter(), "subwoofer-center-auto") ;             
 
         if (which == 0) {
-            p1_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P1a", false, 0.2, mirror_, mvalue_);
-            p2_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P2a", false, 0.2, mirror_, mvalue_);
+            p1_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S2-P1a", false, 0.2, mirror_, mvalue_);
+            p2_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S2-P2a", false, 0.2, mirror_, mvalue_);
         }
         else {
-            p1_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P1b", false, 0.2, mirror_, mvalue_);
-            p2_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S3-P2b", false, 0.2, mirror_, mvalue_);            
+            p1_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S2-P1b", false, 0.2, mirror_, mvalue_);
+            p2_ = new SwerveHolonomicPathFollowerAction(robot.getSwerve(), "S3S2-P2b", false, 0.2, mirror_, mvalue_);            
         }
     }
 
@@ -89,7 +84,8 @@ public class Start3Shoot2Action extends AllegroAutoModeAction {
         if (p1_.isDone()) {
             if (hasNote()) {
                 robot_.getSwerve().setAction(p2_, true) ;
-                robot_.getIntakeShooter().setAction(shoot_, true) ;                   
+                robot_.getIntakeShooter().setAction(shoot_, true) ;
+                state_ = State.Path2 ;                 
             }
             else {
                 state_ = State.Idle ;

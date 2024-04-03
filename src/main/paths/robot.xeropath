@@ -9,8 +9,8 @@
                     "constraints": [
                     ],
                     "endvelocity": 0,
-                    "maxacceleration": 3,
-                    "maxvelocity": 3,
+                    "maxacceleration": 2.5,
+                    "maxvelocity": 2.5,
                     "name": "P1a",
                     "points": [
                         {
@@ -24,15 +24,15 @@
                             "heading": -22.500000000000004,
                             "swrot": -22.500000000000004,
                             "swrotvel": 0,
-                            "x": 5.013163602820144,
-                            "y": 1.4806162866151356
+                            "x": 5.106577528058967,
+                            "y": 1.7816787176078028
                         },
                         {
                             "heading": -10,
                             "swrot": -10,
                             "swrotvel": 0,
-                            "x": 7.798478398157329,
-                            "y": 1.0219566646284726
+                            "x": 8.506828687118068,
+                            "y": 0.93593096738498
                         }
                     ],
                     "startvelocity": 0
@@ -41,23 +41,30 @@
                     "constraints": [
                     ],
                     "endvelocity": 0,
-                    "maxacceleration": 1,
-                    "maxvelocity": 1,
+                    "maxacceleration": 2.5,
+                    "maxvelocity": 2.5,
                     "name": "P2a",
                     "points": [
                         {
                             "heading": 170,
                             "swrot": -10,
                             "swrotvel": 0,
-                            "x": 7.79848,
-                            "y": 1.02196
+                            "x": 8.50683,
+                            "y": 0.935931
                         },
                         {
-                            "heading": 140,
-                            "swrot": -50,
+                            "heading": 154.99999999999997,
+                            "swrot": -10,
                             "swrotvel": 0,
-                            "x": 2.611455036780895,
-                            "y": 2.4312925940056713
+                            "x": 2.82823664990769,
+                            "y": 1.5227763450906124
+                        },
+                        {
+                            "heading": 130,
+                            "swrot": -60,
+                            "swrotvel": 0,
+                            "x": 0.9468794096161055,
+                            "y": 3.939198488584391
                         }
                     ],
                     "startvelocity": 0
@@ -66,8 +73,8 @@
                     "constraints": [
                     ],
                     "endvelocity": 0,
-                    "maxacceleration": 3,
-                    "maxvelocity": 3,
+                    "maxacceleration": 2.5,
+                    "maxvelocity": 2.5,
                     "name": "P1b",
                     "points": [
                         {
@@ -79,17 +86,17 @@
                         },
                         {
                             "heading": -22.500000000000004,
-                            "swrot": -60,
+                            "swrot": 0,
                             "swrotvel": 0,
-                            "x": 3.81230931980052,
-                            "y": 1.730794262244224
+                            "x": 4.10548835432583,
+                            "y": 1.7989388757756153
                         },
                         {
                             "heading": 22.500000000000004,
                             "swrot": 22.500000000000004,
                             "swrotvel": 0,
-                            "x": 7.731764271322906,
-                            "y": 2.1477575549593713
+                            "x": 8.679430268796196,
+                            "y": 2.592906151495
                         }
                     ],
                     "startvelocity": 0
@@ -98,23 +105,23 @@
                     "constraints": [
                     ],
                     "endvelocity": 0,
-                    "maxacceleration": 3,
-                    "maxvelocity": 3,
+                    "maxacceleration": 2.5,
+                    "maxvelocity": 2.5,
                     "name": "P2b",
                     "points": [
                         {
                             "heading": -157.50000000000003,
                             "swrot": 22.500000000000004,
                             "swrotvel": 0,
-                            "x": 7.73176,
-                            "y": 2.14776
+                            "x": 8.67943,
+                            "y": 2.59291
                         },
                         {
                             "heading": 140,
                             "swrot": -50,
                             "swrotvel": 0,
-                            "x": 2.5030445806749566,
-                            "y": 2.639774240363245
+                            "x": 1.205781782133296,
+                            "y": 4.24988133560502
                         }
                     ],
                     "startvelocity": 0

@@ -11,14 +11,14 @@
             "pathfollowing": false,
 
             // Subsystem related messages
-            "Allegro2024RobotSubsystem" : true,
+            "Allegro2024RobotSubsystem" : false,
             "vision": false,
             "swerve" : false,
             "limelight" : false,
             "allegro2024oi": false,
             "limelight-edgar" : false,
             "oibuttons" : false,
-            "intake-shooter" : false,
+            "intake-shooter" : true,
             "superstructure" : false,
             "swerve-gamepad" : false,
             "targettracker" : false,
@@ -87,8 +87,8 @@
                     // distance to move the feeder wheels.
                     //
                     "feeder-power" : 0.3,
-                    "shooter-velocity" : 14,
-                    "shooter-length" : 1.15,
+                    "shooter-velocity" : 28,
+                    "shooter-length" : 0.85,        // 1.15
                     "cont-length" : 12
                 }
             }
@@ -373,6 +373,18 @@
                         "shooter-velocity" : 65.0,
                         "shooter-velocity-threshold" : 5.0
                     },
+                    "subwoofer-center-auto" : {
+                        "tilt" : -66.0,
+                        "tilt-pos-threshold" : 1.0,
+                        "tilt-velocity-threshold" : 5.0,
+
+                        "updown" : 100.0,
+                        "up-down-pos-threshold" : 5.0,
+                        "up-down-velocity-threshold" : 5.0,
+
+                        "shooter-velocity" : 65.0,
+                        "shooter-velocity-threshold" : 5.0
+                    },                    
                     "subwoofer-center-low" : {
                         "tilt" : 3,
                         "tilt-pos-threshold" : 2.0,
@@ -644,7 +656,7 @@
             },
             "pids" : {
                 "position" : {
-                    "kp" : 8.0,
+                    "kp" : 7.0,
                     "ki" : 0.0,
                     "kd" : 0.0,
                     "kv" : 0.4,
@@ -712,7 +724,7 @@
                     "canid" : 3,
                     "inverted" : false,
                     "neutral-mode" : "brake",
-                    "current-limit" : 60,
+                    "current-limit" : 80,
                     "position-important" : "High",
                     "velocity-important" : "High",
                     "acceleration-imporant" : "high"
@@ -750,7 +762,7 @@
                     "canid" : 4,
                     "inverted" : false,
                     "neutral-mode" : "brake",
-                    "current-limit" : 60,
+                    "current-limit" : 80,
                     "position-important" : "High",
                     "velocity-important" : "High",
                     "acceleration-imporant" : "high"

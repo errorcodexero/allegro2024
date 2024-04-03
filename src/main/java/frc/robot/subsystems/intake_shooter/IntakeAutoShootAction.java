@@ -1,5 +1,7 @@
 package frc.robot.subsystems.intake_shooter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BooleanSupplier;
 
 import org.xero1425.base.actions.Action;
@@ -22,6 +24,9 @@ import frc.robot.subsystems.target_tracker.TargetTrackerSubsystem;
 import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class IntakeAutoShootAction extends Action {
+    private final static int kNumberTiltSamples = 5 ;
+    private final static double kAbsTiltTolerance = 3.0 ;
+
     private final static double kVelocityStart = 45.0 ;
     private final static double kUpDownStart = 123.5 ;
     private final static double kTiltStart = -40.0 ;   
@@ -40,7 +45,6 @@ public class IntakeAutoShootAction extends Action {
     private MCVelocityAction shooter2_ ;
     private MCTrackPosAction updown_ ;
     private MCTrackPosAction tilt_mc_ ;
-    // private TiltTrackTargetAction tilt_abs_ ;
     private MotorEncoderPowerAction feeder_on_ ;
     private BooleanSupplier at_target_supplier_ ;
 
@@ -55,6 +59,7 @@ public class IntakeAutoShootAction extends Action {
 
     private boolean verbose_ ;
     private boolean db_ready_ ;
+    private boolean abs_enc_ready_ ;
 
     private boolean swerve_stopped_ ;
     private boolean gyro_stopped_ ;
@@ -64,6 +69,8 @@ public class IntakeAutoShootAction extends Action {
     private double tilt_stow_value_ ;
 
     private double rotational_velocity_threshold_ ;
+
+    private List<Double> abs_enc_samples_ ;
 
     private SwerveTrackAngle rotate_ ;
 
@@ -91,7 +98,13 @@ public class IntakeAutoShootAction extends Action {
         "april-tag (bool)",
         "oiready (bool)",
         "distance (m)",
-        "offset (deg)"
+        "offset (deg)",
+        "swerve (bool)",
+        "gyro (bool)",
+        "absenc (bool)",
+        "updown (bool)",
+        "tilt (bool)",
+        "shooter (bool)"
     } ;
 
     public IntakeAutoShootAction(IntakeShooterSubsystem intake, TargetTrackerSubsystem tracker, boolean initialDriveTeamReady, SwerveTrackAngle rotate) throws Exception {
@@ -119,7 +132,7 @@ public class IntakeAutoShootAction extends Action {
         double tilt_pos_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-pos-threshold").getDouble() ;
         double tilt_vel_threshold = sub_.getSettingsValue("actions:auto-shoot:tilt-velocity-threshold").getDouble() ;
 
-        wait_timer_ = new XeroTimer(intake.getRobot(), "wait-timer", 0.6);
+        wait_timer_ = new XeroTimer(intake.getRobot(), "wait-timer", 0.02);
 
         if (RobotBase.isSimulation()) {
             velthresh = 10.0 ;  
@@ -137,7 +150,6 @@ public class IntakeAutoShootAction extends Action {
         shooter2_ = new MCVelocityAction(sub_.getShooter2(), "pids:velocity", kVelocityStart, velthresh, false) ;
         updown_ = new MCTrackPosAction(sub_.getUpDown(), "pids:position", kUpDownStart, updown_pos_threshold, updown_vel_threshold, false) ;      
         tilt_mc_ = new MCTrackPosAction(sub_.getTilt(), "pids:position", kTiltStart, tilt_pos_threshold, tilt_vel_threshold ,true) ;
-        // tilt_abs_ = new TiltTrackTargetAction(sub_, kTiltStart, tilt_pos_threshold, tilt_vel_threshold) ;
 
         double feedpower = sub_.getSettingsValue("actions:auto-shoot:feeder-power").getDouble() ;
         double feedtime = sub_.getSettingsValue("actions:auto-shoot:feeder-time").getDouble() ;
@@ -149,6 +161,8 @@ public class IntakeAutoShootAction extends Action {
         } else {
             plot_id_ = -1 ;
         }
+
+        abs_enc_samples_ = new ArrayList<Double>() ;
     }
 
     public boolean isShooting() {
@@ -163,6 +177,25 @@ public class IntakeAutoShootAction extends Action {
         db_ready_ = ready ;
     }
 
+    private boolean isAbsEncReady() {
+        boolean ret = true ;
+        MessageLogger logger = sub_.getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Debug) ;
+        logger.add("absenc:") ;
+        logger.add("tilt", current_tilt_) ;
+        logger.add("samples ") ;
+        for(Double d : abs_enc_samples_) {
+            double diff = Math.abs(d - current_tilt_) ;
+            logger.add(" " + Double.toString(diff)) ;
+            if (diff > kAbsTiltTolerance) {
+                ret = false ;
+            }
+        }
+
+        logger.endMessage();        
+        return abs_enc_samples_.size() == 5 && ret ;
+    }
+    
     @Override
     public void start() throws Exception {
         super.start();
@@ -176,11 +209,18 @@ public class IntakeAutoShootAction extends Action {
             AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;
             robot.getLimelight().setLedMode(LedMode.ForceOn);
 
+            abs_enc_samples_.clear() ;
+
             offset_set_ = false ;
             shooting_ = false ;
             waiting_ = false ;
             drive_team_ready_ = initial_drive_team_ready_ ;
             db_ready_ = false ;
+
+            MessageLogger logger = getMessageLogger() ;
+            logger.startMessage(MessageType.Debug) ;
+            logger.add("dtready", drive_team_ready_) ;
+            logger.endMessage();
 
             sub_.getUpDown().setAction(updown_, true);
             sub_.getTilt().setAction(tilt_mc_, true);
@@ -206,6 +246,13 @@ public class IntakeAutoShootAction extends Action {
     @Override
     public void run() throws Exception {
         super.run();
+
+        abs_enc_samples_.add(sub_.getAbsEncoderAngle()) ;
+        if (abs_enc_samples_.size() == kNumberTiltSamples + 1) {
+            abs_enc_samples_.remove(0) ;
+        }
+
+        abs_enc_ready_ = isAbsEncReady() ;
 
         AllegroRobot2024 robot = (AllegroRobot2024)sub_.getRobot().getRobotSubsystem() ;        
 
@@ -300,6 +347,12 @@ public class IntakeAutoShootAction extends Action {
                 data_[11] = drive_team_ready_ ? 1.5 : 0.0 ;
                 data_[12] = robot.getTargetTracker().getDistance() ;
                 data_[13] = robot.getTargetTracker().getOffset() ;
+                data_[14] = swerve_stopped_ ? 2.0 : 0.0 ;
+                data_[15] = gyro_stopped_ ? 2.5 : 0.0 ;
+                data_[16] = abs_enc_ready_ ? 3.0 : 0.0 ;
+                data_[17] = updown_.isAtTarget() ? 3.5 : 0.0 ; 
+                data_[18] = at_target_supplier_.getAsBoolean() ? 4.0 : 0.0 ;
+                data_[19] = (shooter1_.isAtVelocity() && shooter2_.isAtVelocity()) ? 4.5 : 0.0 ; 
                 sub_.addPlotData(plot_id_, data_);
             }
 
@@ -329,6 +382,7 @@ public class IntakeAutoShootAction extends Action {
         logger.startMessage(MessageType.Debug, sub_.getLoggerID()) ;
         logger.add("updown", updown_.isAtTarget()) ;
         logger.add("tilt", at_target_supplier_.getAsBoolean()) ;
+        logger.add("abstilt", abs_enc_ready_) ;
         logger.add("shooter1", shooter1_.isAtVelocity());
         logger.add("shooter2", shooter2_.isAtVelocity());
         logger.add("april", aprilTagTest());
@@ -345,7 +399,8 @@ public class IntakeAutoShootAction extends Action {
                 shooter2_.isAtVelocity() && 
                 aprilTagTest() && 
                 drive_team_ready_ &&
-                dbReadyToShoot() ;
+                dbReadyToShoot() &&
+                abs_enc_ready_ ;
     }
 
     @Override
