@@ -25,7 +25,7 @@ import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class IntakeAutoShootAction extends Action {
     private final static int kNumberTiltSamples = 5 ;
-    private final static double kAbsTiltTolerance = 3.0 ;
+    private final static double kAbsTiltTolerance = 2.0 ;
 
     private final static double kVelocityStart = 45.0 ;
     private final static double kUpDownStart = 123.5 ;
@@ -179,21 +179,37 @@ public class IntakeAutoShootAction extends Action {
 
     private boolean isAbsEncReady() {
         boolean ret = true ;
+
         MessageLogger logger = sub_.getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Debug) ;
-        logger.add("absenc:") ;
-        logger.add("tilt", current_tilt_) ;
-        logger.add("samples ") ;
-        for(Double d : abs_enc_samples_) {
-            double diff = Math.abs(d - current_tilt_) ;
-            logger.add(" " + Double.toString(diff)) ;
-            if (diff > kAbsTiltTolerance) {
-                ret = false ;
+        logger.startMessage(MessageType.Info) ;
+        logger.add("isAbsEncReady ") ;
+
+        if (abs_enc_samples_.size() < kNumberTiltSamples) {
+            logger.add("too few samples") ;
+            ret = false ;
+        }
+        else {
+
+            logger.add("samples: ") ;
+            double sum = 0.0 ;
+            for(Double d : abs_enc_samples_) {
+                logger.add(" " + d.toString()) ;
+                sum += d ;
+            }
+            double avg = sum / abs_enc_samples_.size() ;
+            logger.add(" average", avg) ;
+
+            for(Double d : abs_enc_samples_) {
+                double diff = Math.abs(d - avg) ;
+                if (diff > kAbsTiltTolerance) {
+                    logger.add(": set to false") ;
+                    ret = false ;
+                }
             }
         }
 
-        logger.endMessage();        
-        return abs_enc_samples_.size() == 5 && ret ;
+        logger.endMessage();
+        return ret ;
     }
     
     @Override
@@ -292,6 +308,7 @@ public class IntakeAutoShootAction extends Action {
         }
         else {
             double dist = tracker_.getDistance() ;
+            String src = tracker_.getSource() ;
 
             if (dist > aim_threshold_) {
                 current_updown_ = updown_pwl_.getValue(0.0) ;
@@ -310,6 +327,7 @@ public class IntakeAutoShootAction extends Action {
             logger.startMessage(MessageType.Debug) ;
             logger.add("shooting") ;
             logger.add("distance", dist) ;
+            logger.add("source", src) ;
             logger.add("updown", current_updown_).add("tilt", current_tilt_).add("velocity", current_velocity_) ;
             logger.add("pose", robot.getSwerve().getPose().toString()) ;
             logger.add("offset", robot.getTargetTracker().getOffset());

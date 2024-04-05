@@ -39,7 +39,7 @@ import frc.robot.subsystems.toplevel.AllegroRobot2024;
 
 public class Allegro2024OISubsystem extends OISubsystem {
     private final static String OIHIDIndexName = "panel:index" ;
-    private final static double kImdTrapProjection = 2.0 ;
+    // private final static double kImdTrapProjection = 2.0 ;
     private final static double kFinalTrapProjection = -0.1 ;
 
     enum OIState {
@@ -661,29 +661,29 @@ public class Allegro2024OISubsystem extends OISubsystem {
             robot.getSuperStructure().getClimber().setAction(hooks_down_with_robot_action_, true) ;
             state_ = OIState.ClimbingUp ;
         }
-        else if (oipanel_.isAutoTrapPressed() && stage_pose_ != null && trap_distance_ < 3.0) {
-            oipanel_.setAutoTrapLED(LEDState.BLINK_FAST);
+        // else if (oipanel_.isAutoTrapPressed() && stage_pose_ != null && trap_distance_ < 3.0) {
+        //     oipanel_.setAutoTrapLED(LEDState.BLINK_FAST);
 
-            Pose2d p = robot.getSwerve().getPose() ;
-            Pose2dWithRotation start = new Pose2dWithRotation(p.getX(), p.getY(), p.getRotation(), p.getRotation());
+        //     Pose2d p = robot.getSwerve().getPose() ;
+        //     Pose2dWithRotation start = new Pose2dWithRotation(p.getX(), p.getY(), p.getRotation(), p.getRotation());
 
-            Pose2d firstptp = computeProjectedTrapPoint(stage_pose_.pose_, kImdTrapProjection) ;
-            Pose2dWithRotation firstpt = new Pose2dWithRotation(firstptp, firstptp.getRotation()) ;
+        //     Pose2d firstptp = computeProjectedTrapPoint(stage_pose_.pose_, kImdTrapProjection) ;
+        //     Pose2dWithRotation firstpt = new Pose2dWithRotation(firstptp, firstptp.getRotation()) ;
 
-            try {
-                Pose2dWithRotation[] pts = new Pose2dWithRotation[] { start, firstpt } ;
-                trappath_ = new SwerveHolonomicDynamicPathAction(robot.getSwerve(), "trap", 0.75, 0.75, 3.0, 0.0, 0.0, pts, "-trap") ;
-            }
-            catch(Exception ex) {
-                trappath_ = null ;
-            }
+        //     try {
+        //         Pose2dWithRotation[] pts = new Pose2dWithRotation[] { start, firstpt } ;
+        //         trappath_ = new SwerveHolonomicDynamicPathAction(robot.getSwerve(), "trap", 0.75, 0.75, 3.0, 0.0, 0.0, pts, "-trap") ;
+        //     }
+        //     catch(Exception ex) {
+        //         trappath_ = null ;
+        //     }
 
-            if (trappath_ != null) {
-                disableGamepad();
-                robot.getSwerve().setAction(trappath_, true) ;
-                state_ = OIState.DrivingToTrap1 ;
-            }
-        }
+        //     if (trappath_ != null) {
+        //         disableGamepad();
+        //         robot.getSwerve().setAction(trappath_, true) ;
+        //         state_ = OIState.DrivingToTrap1 ;
+        //     }
+        // }
     }
 
     private void drivingToTrap1State() {
@@ -1074,6 +1074,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
         startCollectAction_ = new StartCollectAltAction(intake);
         stopCollectAction_ = new StopCollectAltAction(intake);
 
-        move_note_action_ = new AmpTrapMoveNote(robot.getAmpTrap(), 0.8);
+        move_note_action_ = new AmpTrapMoveNote(robot.getAmpTrap(), 0.7);
     }
 }

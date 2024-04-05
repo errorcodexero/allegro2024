@@ -42,6 +42,8 @@ public class TargetTrackerSubsystem extends Subsystem {
     private double angle_tmp_offset_ ;
     private int zone_ ;
 
+    private String source_ ;
+
     public TargetTrackerSubsystem(Subsystem parent, LimeLightSubsystem ll) throws BadParameterTypeException, MissingParameterException {
         super(parent, "targettracker");
         sees_target_ = false ;
@@ -52,9 +54,17 @@ public class TargetTrackerSubsystem extends Subsystem {
         target_height_ = getSettingsValue("target-height").getDouble() ;
     }
 
+    public String getSource() {
+        return source_ ;
+    }
+
     @Override
     public void init(LoopType prev, LoopType current) {
         super.init(prev, current);
+
+        MessageLogger logger = getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Debug, getLoggerID()) ;
+        logger.add("computing target location ") ;
 
         AprilTagFieldLayout field_layout = getRobot().getAprilTags();
 
@@ -62,17 +72,27 @@ public class TargetTrackerSubsystem extends Subsystem {
         Optional<Alliance> value = DriverStation.getAlliance() ;
         if (value.isPresent()) {
             if (value.get() == Alliance.Red) {
+                logger.add("alliance is red ") ;
                 target_number_ = AprilTags.RED_SPEAKER_CENTER ;
                 target_pos_3d = field_layout.getTagPose(target_number_).orElse(null);
             } else if (value.get() == Alliance.Blue) {
+                logger.add("alliance is blue ") ;
                 target_number_ = AprilTags.BLUE_SPEAKER_CENTER ;
                 target_pos_3d = field_layout.getTagPose(target_number_).orElse(null);
+            }
+            else {
+                logger.add("something is really wrong") ;
             }
 
             if (target_pos_3d != null) {
                 target_pos_ = target_pos_3d.toPose2d();
             }
         }
+        else {
+            logger.add("alliance is not present") ;
+        }
+
+        logger.endMessage();
     }
 
     public double getOffset() {
@@ -201,6 +221,7 @@ public class TargetTrackerSubsystem extends Subsystem {
                 sees_target_ = true ;
                 angle_to_target_ = -ll_.getTX(target_number_) + angle_offset_ ;
                 distance_between_robot_and_target_ = (target_height_ - camera_height_) / Math.tan(Math.toRadians(camera_angle_ + ll_.getTY(target_number_))) + kCameraOffset  ;
+                source_ = "AprilTag" ;
             }
             else {
                 sees_target_ = false ;                
@@ -212,6 +233,13 @@ public class TargetTrackerSubsystem extends Subsystem {
                 }
 
                 angle_to_target_ = calculateAngleBetweenPoses(robot_pos_, target_pos_) + angle_offset_ ;
+                source_ = "Pose" ;
+            }
+            if (target_pos_ == null) {
+                logger.add("target is null") ;
+            }
+            else {
+                logger.add("target", target_pos_.toString()) ;
             }
             logger.add("distance", distance_between_robot_and_target_) ;
             logger.add("angle", angle_to_target_) ;

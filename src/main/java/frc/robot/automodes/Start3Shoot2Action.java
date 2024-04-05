@@ -36,8 +36,12 @@ public class Start3Shoot2Action extends AllegroAutoModeAction {
     private StartCollectAltAction start_collect_ ;
     private IntakeGotoNamedPositionAction stow_ ;
 
+    private String where_ ;
+
     public Start3Shoot2Action(AllegroRobot2024 robot, int which, boolean mirror, double mvalue) throws Exception {
         super(robot, mirror, mvalue) ;
+
+        where_ = (which == 0 ? "outer" : "inner") ;
 
         robot_ = robot ;
         mirror_ = mirror ;
@@ -157,6 +161,6 @@ public class Start3Shoot2Action extends AllegroAutoModeAction {
 
     @Override
     public String toString(int indent) {
-        return spaces(indent) + "Start3Shoot3Action" ;
+        return spaces(indent) + "Start3Shoot2Action(" + where_ + ")"  ;
     }
 }

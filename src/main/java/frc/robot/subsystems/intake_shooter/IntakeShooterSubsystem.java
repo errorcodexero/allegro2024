@@ -124,13 +124,21 @@ public class IntakeShooterSubsystem extends Subsystem {
         }
         else if (kUseInterrupt) {
             interrupt_ = new AsynchronousInterrupt(noteSensor_, (rising, falling) -> { interruptHandler(rising, falling); }) ;
-            interrupt_.setInterruptEdges(true, false);            
+            interrupt_.setInterruptEdges(true, true);            
             interrupt_.enable();
         }
     }
 
     private void interruptHandler(Boolean rising, Boolean falling) {
-        if (rising) {
+
+        MessageLogger logger = getRobot().getMessageLogger() ;
+        logger.startMessage(MessageType.Info) ;
+        logger.add("sensor interrupt: ") ;
+        logger.add("rising",rising) ;
+        logger.add("falling", falling) ;
+        logger.endMessage();
+
+        if (falling) {
             sensor_edge_seen_ = true ;
         }
     }
@@ -209,10 +217,10 @@ public class IntakeShooterSubsystem extends Subsystem {
         putDashboard("shooter1", DisplayType.Always, getShooter1().getVelocity());
         putDashboard("shooter2", DisplayType.Always, getShooter2().getVelocity());
 
-        MessageLogger logger = getRobot().getMessageLogger() ;
-        logger.startMessage(MessageType.Info) ;
-        logger.add("sensor", isNoteCurrentlyDetected()) ;
-        logger.endMessage();        
+        // MessageLogger logger = getRobot().getMessageLogger() ;
+        // logger.startMessage(MessageType.Info) ;
+        // logger.add("sensor", isNoteCurrentlyDetected()) ;
+        // logger.endMessage();        
     }
     
     @Override

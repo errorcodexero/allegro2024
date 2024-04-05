@@ -21,8 +21,8 @@
             "intake-shooter" : true,
             "superstructure" : false,
             "swerve-gamepad" : false,
-            "targettracker" : false,
-            "amp-trap" : true,
+            "targettracker" : true,
+            "amp-trap" : false,
             "manual-shoot" : false,
             "elevator" : false            
         },
@@ -87,8 +87,8 @@
                     // distance to move the feeder wheels.
                     //
                     "feeder-power" : 0.3,
-                    "shooter-velocity" : 24,
-                    "shooter-length" : 1.0,        // 1.15
+                    "shooter-velocity" : 58,
+                    "shooter-length" : 0.6,       // 1.15
                     "cont-length" : 12
                 }
             }
@@ -258,9 +258,9 @@
             },
             "pids" : {
                 "position" : {
-                    "kp" : 0.0035,
+                    "kp" : 0.0015,
                     "ki" : 0.0,
-                    "kd" : 0.004,
+                    "kd" : 0.0,
                     "kv" : 0.000312,
                     "ka" : 0.0,
                     "kg" : 0.0,
