@@ -79,21 +79,27 @@ public class StartCollectAltAction extends CollectBaseAltAction {
             double tiltstow = getSubsystem().getTilt().getSettingsValue("targets:stow").getDouble() ;
 
             if (updownpos < updownstow && updown_target_ < updownpos) {
-                MessageLogger logger = getSubsystem().getRobot().getMessageLogger();
-                logger.startMessage(MessageType.Info).add("pos < stow").add("pos", updownpos).add("stow", updownstow) ;
-                logger.add("target", updown_target_) ;
-                logger.endMessage() ;
-
                 //
                 // The updown is not in the stowed position, we must move the tilt to a compatible
                 // position, before we start the synchronous movement.
                 //
-                double ttarget = tiltstow + updownstow - updownpos ;
+                double tmptarget = tiltstow + updownstow - updownpos ;
+                double ttarget = tmptarget ;
                 if (ttarget > 50)
                     ttarget = 50 ;
+                else if (ttarget < -70)
+                    ttarget = -70 ;
+
                 tilt_only_action_ = new MCMotionMagicAction(getSubsystem().getTilt(), "pids:position", ttarget, 3.0, 1.0) ;
                 getSubsystem().getTilt().setAction(tilt_only_action_, true) ;
                 state_ = CollectState.MovingTilt ;
+
+                MessageLogger logger = getSubsystem().getRobot().getMessageLogger();
+                logger.startMessage(MessageType.Info).add("pos < stow").add("pos", updownpos).add("stow", updownstow) ;
+                logger.add("target", updown_target_) ;
+                logger.add("pre", tmptarget) ;
+                logger.add("post", ttarget) ;
+                logger.endMessage() ;
             }
             else 
             {
