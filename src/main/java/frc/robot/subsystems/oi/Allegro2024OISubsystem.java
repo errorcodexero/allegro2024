@@ -338,7 +338,6 @@ public class Allegro2024OISubsystem extends OISubsystem {
             state_ = OIState.WaitingToShoot ;
         }
         else if (target == NoteTarget.Speaker) {
-            state_ = OIState.ManualShoot ;
             if (oipanel_.getAutoManualMode() == AutoManualMode.ManualPodium) {
                 manual_shoot_current_ = manual_shoot_podium_action_ ;
             }
@@ -355,17 +354,21 @@ public class Allegro2024OISubsystem extends OISubsystem {
 
     private boolean isShootPressed() {
         SwerveDriveGamepad gp = (SwerveDriveGamepad)getGamePad() ;
-
-        // return oipanel_.isShootPressed() || (gp != null && gp.isAPressed()) ;        
         return (gp != null && gp.isAPressed()) ;
     }
 
     private void manualShootState() {
-        if (oipanel_.getAutoManualMode() == AutoManualMode.Auto || oipanel_.isAbortPressed()) {
+        NoteTarget target = oipanel_.getNoteTarget() ;         
+        AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
+
+        if (target == NoteTarget.Amp || target == NoteTarget.Trap) {
+            robot.getSuperStructure().setAction(fwd_transfer_action_) ;
+            state_ = OIState.TransferToAmpTrap;
+        }     
+        else if (oipanel_.getAutoManualMode() == AutoManualMode.Auto || oipanel_.isAbortPressed()) {
             dispositionNoteInIntake() ;
         }
         else if (isShootPressed()) {
-            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
             robot.getIntakeShooter().setAction(manual_shoot_current_, true) ;
             state_ = OIState.ManualShooting ;
         }
