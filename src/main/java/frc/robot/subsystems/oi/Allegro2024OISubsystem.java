@@ -78,6 +78,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
         ClimbingDown,
         Eject,
         Turtle,
+        PrepTrapAndPrepClimb,
     }    
 
     private AllegroOIPanel oipanel_ ;
@@ -591,9 +592,25 @@ public class Allegro2024OISubsystem extends OISubsystem {
             robot.getAmpTrap().setAction(move_note_action_, true) ;
             robot.getIntakeShooter().setAction(stow_intake_action_, true) ;            
             state_ = OIState.MoveNoteToBack ;
-
+        }else if(oipanel_.isClimbUpPrepPressed()){
+            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;
+            robot.getSuperStructure().getClimber().setAction(hooks_up_action_, true) ;
+            state_ = OIState.PrepTrapAndPrepClimb;
         }
-    }   
+        
+    }  
+    
+    private void prepTrapAndPrepClimbState(){
+        if (goto_trap_place_pos_action_.isDone() && stow_intake_action_.isDone()) {
+            AllegroRobot2024 robot = (AllegroRobot2024)getRobot().getRobotSubsystem() ;            
+            robot.getAmpTrap().setAction(move_note_action_, true) ;
+        }
+        if (hooks_up_action_.isDone() && move_note_action_.isDone()) {
+            oipanel_.setClimbUpPrepLED(LEDState.OFF);
+            oipanel_.setClimbUpExecLED(LEDState.ON) ;
+            state_ = OIState.WaitForClimbButton ;
+        }
+    }
 
     private void noteInAmpPositonState() {
         if (isShootPressed()) {
@@ -734,6 +751,7 @@ public class Allegro2024OISubsystem extends OISubsystem {
             else {
                 state_ = OIState.NoteGoingToTrapPosition ;
                 robot.getAmpTrap().setAction(goto_trap_place_pos_action_, true) ;
+                oipanel_.setClimbUpPrepLED(LEDState.ON);
             }
         }
     }
@@ -1026,6 +1044,10 @@ public class Allegro2024OISubsystem extends OISubsystem {
         case ManualShooting:
             manualShootingState() ;
             break ;
+            
+        case PrepTrapAndPrepClimb:
+            prepTrapAndPrepClimbState();
+            break;
         }
     }
     
