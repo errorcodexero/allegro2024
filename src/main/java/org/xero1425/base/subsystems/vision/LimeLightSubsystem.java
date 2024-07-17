@@ -671,16 +671,7 @@ public class LimeLightSubsystem extends Subsystem implements IVisionLocalization
         }
     }
 
-    private void parseLimelightJsonObject(JSONObject tobj) {
-        Object temp ;
-
-        temp = tobj.get("Results") ;
-        if (!(temp instanceof JSONObject)) {
-            found_ = false ;
-            return ;
-        }
-
-        JSONObject obj = (JSONObject)temp ;
+    private void parseLimelightJsonObject(JSONObject obj) {
         botpose_ = getPose3dFromObject(obj, "botpose", new Pose3d());
         wpired_ = getPose3dFromObject(obj, "botpose_wpired", new Pose3d());
         wpiblue_ = getPose3dFromObject(obj, "botpose_wpiblue", new Pose3d());
@@ -702,6 +693,8 @@ public class LimeLightSubsystem extends Subsystem implements IVisionLocalization
             return ;
         }
     
+        Object temp ;
+
         temp = obj.get("Classifier") ;
         if (temp instanceof JSONArray) {
             parseClassifier((JSONArray)temp) ;
