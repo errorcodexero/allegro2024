@@ -29,7 +29,7 @@ public class SwerveDriveGamepad extends Gamepad {
     private SwerveDriveChassisSpeedAction action_;
     private SwerveDriveXPatternAction x_action_;
     private double ysign_ = 1.0 ;
-    private double scale_amount_ = 1.0 ;
+    private double scale_amount_ = 0.3 ;
     private double tracking_angle_ ;
     private boolean driving_straight_ ;
     private DoubleSupplier tracking_supplier_ ;
